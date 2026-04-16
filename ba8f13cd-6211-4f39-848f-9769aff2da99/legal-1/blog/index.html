@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  :root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
+
+  /* Navigation */
+  .mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+  .mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+  .mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+  .mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+  .hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+  .hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+  .sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+  .sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+  .sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+  .sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+  .sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+  .sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+  .sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+  .sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+  .sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+  .mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+  .mobile-nav-overlay.active {
+  display: block;
+}
+
+  .sidebar.active {
+  display: flex;
+}
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: calc(96px + 60px) var(--space-lg) var(--space-3xl);
+    background: var(--text-primary);
+    color: #ffffff;
+  }
+
+  .page-title-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-title-area h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  /* Content Area */
+  .content-area {
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .content-area h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .content-area p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area ul, .content-area ol {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-lg);
+    color: var(--text-muted);
+  }
+
+  .content-area li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  .content-area img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    font-weight: 500;
+  }
+
+  .content-area a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  .blog-posts-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-3xl);
+  }
+
+  .blog-post-card {
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+  }
+
+  .blog-post-card:hover {
+    border-color: var(--text-muted);
+  }
+
+  .blog-post-image {
+    width: 100%;
+    height: 200px;
+    background: var(--bg-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-dim);
+    font-size: 3rem;
+  }
+
+  .blog-post-content {
+    padding: var(--space-lg);
+  }
+
+  .blog-post-date {
+    font-size: 0.875rem;
+    color: var(--text-dim);
+    margin-bottom: var(--space-sm);
+  }
+
+  .blog-post-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+    line-height: 1.3;
+  }
+
+  .blog-post-excerpt {
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+  }
+
+  .blog-post-link {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    transition: color 0.3s ease;
+  }
+
+  .blog-post-link:hover {
+    color: var(--text-muted);
+  }
+
+  .blog-post-link::after {
+    content: '→';
+  }
+
+  /* Services Section */
+  .services-section {
+    padding: var(--space-3xl) var(--space-lg);
+    border-top: 1px solid var(--border-color);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .service-card {
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: var(--space-lg);
+    transition: border-color 0.3s ease;
+  }
+
+  .service-card:hover {
+    border-color: var(--text-muted);
+  }
+
+  .service-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+  }
+
+  .service-description {
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* Team Section */
+  .team-section {
+    padding: var(--space-3xl) var(--space-lg);
+    border-top: 1px solid var(--border-color);
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .team-card {
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: var(--space-lg);
+    transition: border-color 0.3s ease;
+  }
+
+  .team-card:hover {
+    border-color: var(--text-muted);
+  }
+
+  .team-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-xs);
+  }
+
+  .team-role {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  .team-bio {
+    color: var(--text-muted);
+    line-height: 1.6;
+    font-size: 0.9rem;
+  }
+
+  /* Stats Section */
+  .stats-section {
+    padding: var(--space-3xl) var(--space-lg);
+    border-top: 1px solid var(--border-color);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .stat-card {
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: var(--space-lg);
+    text-align: center;
+    transition: border-color 0.3s ease;
+  }
+
+  .stat-card:hover {
+    border-color: var(--text-muted);
+  }
+
+  .stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+  }
+
+  .stat-label {
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+  }
+
+  /* Footer */
+  .footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+  .footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+  .footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+  .footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+  .footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+  .footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+  .footer-links a:hover {
+  color: var(--text-primary);
+}
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  /* Responsive */
+  @media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:last-child {
+    border-right: none;
+  }
+
+  .trust-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-metrics {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+  @media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .features {
+    /* already 3-col from tablet */
+  }
+
+  .feature-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .trust-section {
+    /* already 2-col from tablet */
+  }
+
+  .trust-metrics {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-clients {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-number {
+    font-size: 120px;
+  }
+
+  .client-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+  @media (min-width: 768px) {
+    .page-title-area { padding: calc(96px + 60px) var(--space-2xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl) var(--space-2xl); }
+    .blog-posts-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (min-width: 1024px) {
+    .page-title-area { padding: calc(96px + 80px) var(--space-3xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl); }
+    .blog-posts-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">Blog</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">Blog</span>
+    </a>
+    <nav>
+      <a href="#">Platform</a>
+      <a href="#">Solutions</a>
+      <a href="#">Documentation</a>
+      <a href="#">Enterprise</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">All Systems Operational</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">API v4.2 Active</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Blog</h1>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+  <div class="blog-posts-grid">
+    <article class="blog-post-card">
+      <div class="blog-post-image">
+        <i class="fas fa-newspaper"></i>
+      </div>
+      <div class="blog-post-content">
+        <time class="blog-post-date">Apr 7, 2026</time>
+        <h2 class="blog-post-title">When is a divorce in California considered completed?</h2>
+        <p class="blog-post-excerpt">San Diego, CA – National news reports gave details regarding a celebrity divorce that was recently finalized. The stars of the TLC reality series Welcome to Plathville have officially ended their marriage.</p>
+        <a href="/blog/2026/04/when-is-a-divorce-in-california-considered-completed" class="blog-post-link">Read More</a>
+      </div>
+    </article>
+
+    <article class="blog-post-card">
+      <div class="blog-post-image">
+        <i class="fas fa-newspaper"></i>
+      </div>
+      <div class="blog-post-content">
+        <time class="blog-post-date">Apr 7, 2026</time>
+        <h2 class="blog-post-title">Why is assistance from a family lawyer in California important during the process to create a prenup?</h2>
+        <p class="blog-post-excerpt">San Diego, CA – A recent article focused on why prenuptial agreements may be important for some couples who are about to get married.</p>
+        <a href="/blog/2026/04/why-is-assistance-from-a-family-lawyer-in-california-important-during-the-process-to-create-a-prenup" class="blog-post-link">Read More</a>
+      </div>
+    </article>
+
+    <article class="blog-post-card">
+      <div class="blog-post-image">
+        <i class="fas fa-newspaper"></i>
+      </div>
+      <div class="blog-post-content">
+        <time class="blog-post-date">Apr 7, 2026</time>
+        <h2 class="blog-post-title">Is it possible that a divorcing couple in California will need multiple attempts to end their marriage?</h2>
+        <p class="blog-post-excerpt">San Diego, CA – A recent documentary highlighted why a California based celebrity couple needed to file for divorce multiple times.</p>
+        <a href="/blog/2026/04/is-it-possible-that-a-divorcing-couple-in-california-will-need-multiple-attempts-to-end-their-marriage" class="blog-post-link">Read More</a>
+      </div>
+    </article>
+
+    <article class="blog-post-card">
+      <div class="blog-post-image">
+        <i class="fas fa-newspaper"></i>
+      </div>
+      <div class="blog-post-content">
+        <time class="blog-post-date">Mar 23, 2026</time>
+        <h2 class="blog-post-title">Is substance abuse by a spouse relevant in a California divorce?</h2>
+        <p class="blog-post-excerpt">In a heated divorce proceeding at Fresno County Superior Court on March 17, 2026, a California Democratic assemblyman representing a district of roughly 500,000 residents in the Fresno area appeared alongside his parents as he confronted his estranged wife over custody of their three young daughters and financial support issues.</p>
+        <a href="/blog/2026/03/is-substance-abuse-by-a-spouse-relevant-in-a-california-divorce" class="blog-post-link">Read More</a>
+      </div>
+    </article>
+
+    <article class="blog-post-card">
+      <div class="blog-post-image">
+        <i class="fas fa-newspaper"></i>
+      </div>
+      <div class="blog-post-content">
+        <time class="blog-post-date">Mar 16, 2026</time>
+        <h2 class="blog-post-title">When is a couple in California able to change their child custody agreement?</h2>
+        <p class="blog-post-excerpt">San Diego, CA – There were updates that a celebrity couple based in California was attempting to modify their child custody arrangements. Couples in California who want changes in custody must meet certain requirements.</p>
+        <a href="/blog/2026/03/when-is-a-couple-in-california-able-to-change-their-child-custody-agreement" class="blog-post-link">Read More</a>
+      </div>
+    </article>
+
+    <article class="blog-post-card">
+      <div class="blog-post-image">
+        <i class="fas fa-newspaper"></i>
+      </div>
+      <div class="blog-post-content">
+        <time class="blog-post-date">Mar 2, 2026</time>
+        <h2 class="blog-post-title">Why do some couples experience issues related to parenting years following a divorce in California?</h2>
+        <p class="blog-post-excerpt">San Diego, CA – There were news reports related to ongoing child custody and parenting issues involving a celebrity couple. Some families in California experience similar problems when dealing with custody cases following a divorce.</p>
+        <a href="/blog/2026/03/why-do-some-couples-experience-issues-related-to-parenting-years-following-a-divorce-in-california" class="blog-post-link">Read More</a>
+      </div>
+    </article>
+
+    <article class="blog-post-card">
+      <div class="blog-post-image">
+        <i class="fas fa-newspaper"></i>
+      </div>
+      <div class="blog-post-content">
+        <time class="blog-post-date">Mar 2, 2026</time>
+        <h2 class="blog-post-title">Why are some spouses in California ordered to pay large amounts of alimony during or after their divorce case?</h2>
+        <p class="blog-post-excerpt">San Diego, CA – There were national news reports that a celebrity divorce in California will result in one of the spouses paying thousands per month in alimony during the proceedings. Large alimony payments can happen when one or both spouses had significant income and other factors are met.</p>
+        <a href="/blog/2026/03/why-are-some-spouses-in-california-ordered-to-pay-large-amounts-of-alimony-during-or-after-their-divorce-case" class="blog-post-link">Read More</a>
+      </div>
+    </article>
+
+    <article class="blog-post-card">
+      <div class="blog-post-image">
+        <i class="fas fa-newspaper"></i>
+      </div>
+      <div class="blog-post-content">
+        <time class="blog-post-date">Feb 23, 2026</time>
+        <h2 class="blog-post-title">Why are some couples in California choosing new arrangements for custody after divorce?</h2>
+        <p class="blog-post-excerpt">San Diego, CA – A recent news report focused on potential solutions that divorced parents may have while trying to raise their children.</p>
+        <a href="/blog/2026/02/why-are-some-couples-in-california-choosing-new-arrangements-for-custody-after-divorce" class="blog-post-link">Read More</a>
+      </div>
+    </article>
+
+    <article class="blog-post-card">
+      <div class="blog-post-image">
+        <i class="fas fa-newspaper"></i>
+      </div>
+      <div class="blog-post-content">
+        <time class="blog-post-date">Feb 23, 2026</time>
+        <h2 class="blog-post-title">Why do some couples in California separate before filing their divorce paperwork?</h2>
+        <p class="blog-post-excerpt">San Diego, CA – There were national reports that a celebrity couple may have been separated for quite some time before formally getting divorced.</p>
+        <a href="/blog/2026/02/why-do-some-couples-in-california-separate-before-filing-their-divorce-paperwork" class="blog-post-link">Read More</a>
+      </div>
+    </article>
+
+    <article class="blog-post-card">
+      <div class="blog-post-image">
+        <i class="fas fa-newspaper"></i>
+      </div>
+      <div class="blog-post-content">
+        <time class="blog-post-date">Jan 22, 2026</time>
+        <h2 class="blog-post-title">Why do famous couples often avoid disclosing divorce details in California?</h2>
+        <p class="blog-post-excerpt">San Diego, CA – There were news reports that the star of a reality show had previously gotten divorced but kept the news private while getting engaged to another person.</p>
+        <a href="/blog/2026/01/why-do-famous-couples-often-avoid-disclosing-divorce-details-in-california" class="blog-post-link">Read More</a>
+      </div>
+    </article>
+
+    <article class="blog-post-card">
+      <div class="blog-post-image">
+        <i class="fas fa-newspaper"></i>
+      </div>
+      <div class="blog-post-content">
+        <time class="blog-post-date">Jan 22, 2026</time>
+        <h2 class="blog-post-title">Who receives custody of the children while a divorce is pending in California?</h2>
+        <p class="blog-post-excerpt">San Diego, CA – There were reports that a celebrity couple was dealing with the custody issues caused by an ongoing divorce in California.</p>
+        <a href="/blog/2026/01/who-receives-custody-of-the-children-while-a-divorce-is-pending-in-california" class="blog-post-link">Read More</a>
+      </div>
+    </article>
+
+    <article class="blog-post-card">
+      <div class="blog-post-image">
+        <i class="fas fa-newspaper"></i>
+      </div>
+      <div class="blog-post-content">
+        <time class="blog-post-date">Jan 20, 2026</time>
+        <h2 class="blog-post-title">What potential changes may be coming to domestic violence laws in California?</h2>
+        <p class="blog-post-excerpt">San Diego, CA – There were reports that a new bill in California could reshape the state's domestic violence penalties.</p>
+        <a href="/blog/2026/01/what-potential-changes-may-be-coming-to-domestic-violence-laws-in-california" class="blog-post-link">Read More</a>
+      </div>
+    </article>
+
+    <article class="blog-post-card">
+      <div class="blog-post-image">
+        <i class="fas fa-newspaper"></i>
+      </div>
+      <div class="blog-post-content">
+        <time class="blog-post-date">Jan 14, 2026</time>
+        <h2 class="blog-post-title">How does financial mismanagement during divorce cost couples large amounts in California?</h2>
+        <p class="blog-post-excerpt">San Diego, CA – There were news reports that financial mismanagement during a divorce likely cost a celebrity couple millions.</p>
+        <a href="/blog/2026/01/how-does-financial-mismanagement-during-divorce-cost-couples-large-amounts-in-california" class="blog-post-link">Read More</a>
+      </div>
+    </article>
+
+    <article class="blog-post-card">
+      <div class="blog-post-image">
+        <i class="fas fa-newspaper"></i>
+      </div>
+      <div class="blog-post-content">
+        <time class="blog-post-date">Jan 7, 2026</time>
+        <h2 class="blog-post-title">Why were fees attached to child support ruled illegal in California?</h2>
+        <p class="blog-post-excerpt">San Diego, CA – A recent court ruling determined that certain fees attached to child support payments are now illegal and members of the class will be eligible for compensation.</p>
+        <a href="/blog/2026/01/why-were-fees-attached-to-child-support-ruled-illegal-in-california" class="blog-post-link">Read More</a>
+      </div>
+    </article>
+
+    <article class="blog-post-card">
+      <div class="blog-post-image">
+        <i class="fas fa-newspaper"></i>
+      </div>
+      <div class="blog-post-content">
+        <time class="blog-post-date">Jan 7, 2026</time>
+        <h2 class="blog-post-title">How will people filing for divorce in California benefit from recent changes in state law?</h2>
+        <p class="blog-post-excerpt">San Diego, CA – There were recent news reports that California was changing divorce procedures statewide.</p>
+        <a href="/blog/2026/01/how-will-people-filing-for-divorce-in-california-benefit-from-recent-changes-in-state-law" class="blog-post-link">Read More</a>
+      </div>
+    </article>
+
+    <article class="blog-post-card">
+      <div class="blog-post-image">
+        <i class="fas fa-newspaper"></i>
+      </div>
+      <div class="blog-post-content">
+        <time class="blog-post-date">Jan 7, 2026</time>
+        <h2 class="blog-post-title">Is it true that half of all marriages in California end in divorce?</h2>
+        <p class="blog-post-excerpt">San Diego, CA – There were reports from local news in San Diego that the statistics about half of marriages ending in divorce may no longer be accurate.</p>
+        <a href="/blog/2026/01/is-it-true-that-half-of-all-marriages-in-california-end-in-divorce" class="blog-post-link">Read More</a>
+      </div>
+    </article>
+  </div>
+</div>
+
+<!-- Services Section -->
+<section class="services-section">
+  <div class="content-area">
+    <h2>Our Services</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <h3 class="service-name">[Agreements](https://www.smithfamilylaw.com/agreements/)</h3>
+        <p class="service-description">Marital Settlement Agreements, Postnuptial Agreements, Prenuptial Agreements</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">[Child & Spousal Support](https://www.smithfamilylaw.com/family-law/child-spousal-support/)</h3>
+        <p class="service-description">California child support and spousal support services</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">[Custody](https://www.smithfamilylaw.com/family-law/custody/)</h3>
+        <p class="service-description">Child custody and visitation arrangements</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">[Divorce](https://www.smithfamilylaw.com/family-law/divorce/)</h3>
+        <p class="service-description">California divorce and dissolution of marriage services</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">[Domestic Violence](https://www.smithfamilylaw.com/family-law/domestic-violence/)</h3>
+        <p class="service-description">Domestic violence restraining orders and legal protection</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">[Mediation](https://www.smithfamilylaw.com/mediation/)</h3>
+        <p class="service-description">Family law mediation services to resolve disputes outside of court</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">[Uncontested Divorce](https://www.smithfamilylaw.com/family-law/uncontested-divorce/)</h3>
+        <p class="service-description">Streamlined divorce process for amicable separations</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Property Division</h3>
+        <p class="service-description">Division of marital assets and debts in California community property cases</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">High-Asset Division</h3>
+        <p class="service-description">Complex property division for high net worth individuals</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team Section -->
+<section class="team-section">
+  <div class="content-area">
+    <h2>Our Team</h2>
+    <div class="team-grid">
+      <div class="team-card">
+        <h3 class="team-name">Stephen Smith</h3>
+        <p class="team-role">Managing Partner</p>
+        <p class="team-bio">Former member of the United States Navy and founder of Smith Family Law, APC. Has practiced family law for more than a decade, helping clients navigate complex legal disputes. His experience going through a contentious divorce himself led him to take up the practice of family law.</p>
+      </div>
+      <div class="team-card">
+        <h3 class="team-name">Heather Catron</h3>
+        <p class="team-role">Partner</p>
+      </div>
+      <div class="team-card">
+        <h3 class="team-name">Caroline Plemmons</h3>
+        <p class="team-role">Senior Associate Attorney, Certified Family Law Specialist</p>
+      </div>
+      <div class="team-card">
+        <h3 class="team-name">Vanessa Lopez-Pastenes</h3>
+        <p class="team-role">Associate Attorney</p>
+      </div>
+      <div class="team-card">
+        <h3 class="team-name">Rekedra Franklin</h3>
+        <p class="team-role">Staff Member</p>
+      </div>
+      <div class="team-card">
+        <h3 class="team-name">Talia Reyes</h3>
+        <p class="team-role">Staff Member</p>
+      </div>
+      <div class="team-card">
+        <h3 class="team-name">Sydney Spears</h3>
+        <p class="team-role">Staff Member</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section">
+  <div class="content-area">
+    <h2>About Our Firm</h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value">2017</div>
+        <div class="stat-label">year founded</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">Over 20 Years</div>
+        <div class="stat-label">combined experience</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Blog</span>
+      <span class="footer-copyright">© 2024 Blog Systems, Inc. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+      <a href="#">Platform</a>
+      <a href="#">Solutions</a>
+      <a href="#">Documentation</a>
+      <a href="#">Enterprise</a>
+  </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
