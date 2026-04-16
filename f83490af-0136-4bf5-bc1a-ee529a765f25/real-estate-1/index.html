@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blue Wave Plumbing — Portfolio Index</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-primary: #b8c4a8;
+  --bg-secondary: rgba(162, 176, 144, 0.85);
+  --text-primary: #1a1a1a;
+  --border-color: #1a1a1a;
+  --hover-bg: rgba(0, 0, 0, 0.03);
+  --focus-bg: rgba(0, 0, 0, 0.05);
+  --btn-bg: #1a1a1a;
+  --btn-text: #b8c4a8;
+  --text-muted: rgba(26, 26, 26, 0.8);
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-lg: 40px;
+  --spacing-xl: 60px;
+  --font-mono: 'Space Mono', 'Courier New', Monaco, monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+body {
+  font-family: var(--font-mono);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Header */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 50px;
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.header-breadcrumb,
+.header-status,
+.header-clock {
+  padding: 0 var(--spacing-sm);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.header-status,
+.header-clock {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .header {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+
+  .header-status,
+  .header-clock {
+    display: flex;
+    border-left: 1px solid var(--border-color);
+  }
+
+  .header-status {
+    justify-content: center;
+  }
+
+  .header-clock {
+    justify-content: flex-end;
+  }
+}
+
+/* Main */
+.main-content {
+  flex: 1;
+  padding-bottom: 40px;
+}
+
+/* Folder Accordion */
+.folder {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.folder-header {
+  height: 60px;
+  display: grid;
+  grid-template-columns: 60px 1fr 60px;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  user-select: none;
+}
+
+.folder-header:hover {
+  background-color: var(--hover-bg);
+}
+
+.folder-index {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid var(--border-color);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.folder-title {
+  padding: 0 var(--spacing-md);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.folder-chevron {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid var(--border-color);
+}
+
+.chevron-arrow {
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--border-color);
+  border-bottom: 2px solid var(--border-color);
+  transform: rotate(45deg);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  top: -2px;
+}
+
+.folder.active .chevron-arrow {
+  transform: rotate(-135deg);
+  top: 2px;
+}
+
+.folder-content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+}
+
+.folder.active .folder-content {
+  max-height: 3000px;
+  opacity: 1;
+}
+
+.folder-inner {
+  border-top: 1px solid var(--border-color);
+  padding: var(--spacing-md);
+}
+
+@media (min-width: 768px) {
+  .folder-inner {
+    padding: var(--spacing-lg);
+  }
+}
+
+/* Folder 1: Manifest / Profile */
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+}
+
+@media (min-width: 768px) {
+  .profile-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+  }
+}
+
+.profile-bio p {
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-primary);
+}
+
+.profile-bio p:last-child {
+  margin-bottom: 0;
+}
+
+.profile-meta {
+  border: 1px solid var(--border-color);
+}
+
+.meta-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 12px;
+}
+
+.meta-row:last-child {
+  border-bottom: none;
+}
+
+.meta-label {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  border-right: 1px solid var(--border-color);
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+}
+
+.meta-value {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+}
+
+/* Folder 2: Contact */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+}
+
+@media (min-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+  }
+}
+
+.contact-info {
+  border: 1px solid var(--border-color);
+}
+
+.contact-link {
+  display: block;
+  padding: 12px var(--spacing-sm);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.2s ease;
+}
+
+.contact-link:last-child {
+  border-bottom: none;
+}
+
+.contact-link:hover {
+  background-color: var(--hover-bg);
+}
+
+.contact-link-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contact-link-arrow {
+  font-size: 14px;
+}
+
+/* Folder 3: Pages */
+.pages-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+}
+
+@media (min-width: 768px) {
+  .pages-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+  }
+}
+
+.page-card {
+  border: 1px solid var(--border-color);
+  padding: var(--spacing-md);
+}
+
+.page-title {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: var(--spacing-sm);
+}
+
+.page-url {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: var(--spacing-sm);
+  word-break: break-all;
+}
+
+.page-type {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background-color: var(--bg-secondary);
+  padding: 4px 8px;
+  border: 1px solid var(--border-color);
+  display: inline-block;
+  margin-bottom: var(--spacing-sm);
+}
+
+.page-excerpt {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+/* Footer */
+.footer {
+  height: 40px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--spacing-sm);
+  font-size: 11px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  background-color: var(--bg-primary);
+}
+
+.footer-version,
+.footer-copyright {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 767px) {
+  .footer-copyright {
+    display: none;
+  }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-breadcrumb">PORTFOLIO &gt; BLUE WAVE PLUMBING &gt; INDEX</div>
+  <div class="header-status">STATUS: AVAILABLE</div>
+  <div class="header-clock" id="utcClock">UTC 00:00:00</div>
+</header>
+
+<main class="main-content">
+  <!-- Folder 1: Manifest / Profile -->
+  <div class="folder active" data-folder="1">
+    <div class="folder-header" onclick="toggleFolder(1)">
+      <div class="folder-index">01</div>
+      <div class="folder-title">Manifest / Profile</div>
+      <div class="folder-chevron">
+        <div class="chevron-arrow"></div>
+      </div>
+    </div>
+    <div class="folder-content">
+      <div class="folder-inner">
+        <div class="profile-grid">
+          <div class="profile-bio">
+            <p>bluewaveplumbing.com is for sale!</p>
+          </div>
+          <div class="profile-meta">
+            <div class="meta-row">
+              <div class="meta-label">Domain</div>
+              <div class="meta-value">bluewaveplumbing.com</div>
+            </div>
+            <div class="meta-row">
+              <div class="meta-label">Price</div>
+              <div class="meta-value">$6,000</div>
+            </div>
+            <div class="meta-row">
+              <div class="meta-label">Features</div>
+              <div class="meta-value">Safe & secure transactions</div>
+            </div>
+            <div class="meta-row">
+              <div class="meta-label">Transfer</div>
+              <div class="meta-value">Fast & easy transfers</div>
+            </div>
+            <div class="meta-row">
+              <div class="meta-label">Payment</div>
+              <div class="meta-value">Hassle free payments</div>
+            </div>
+            <div class="meta-row">
+              <div class="meta-label">Support</div>
+              <div class="meta-value">24/7 dedicated support</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Folder 2: Transmission / Contact -->
+  <div class="folder" data-folder="2">
+    <div class="folder-header" onclick="toggleFolder(2)">
+      <div class="folder-index">02</div>
+      <div class="folder-title">Transmission / Contact</div>
+      <div class="folder-chevron">
+        <div class="chevron-arrow"></div>
+      </div>
+    </div>
+    <div class="folder-content">
+      <div class="folder-inner">
+        <div class="contact-grid">
+          <div class="contact-info">
+            <a href="tel:480-651-9741" class="contact-link">
+              <span class="contact-link-inner">
+                <span>Phone — 480-651-9741</span>
+                <span class="contact-link-arrow">→</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Folder 3: Archive / Pages -->
+  <div class="folder" data-folder="3">
+    <div class="folder-header" onclick="toggleFolder(3)">
+      <div class="folder-index">03</div>
+      <div class="folder-title">Archive / Pages</div>
+      <div class="folder-chevron">
+        <div class="chevron-arrow"></div>
+      </div>
+    </div>
+    <div class="folder-content">
+      <div class="folder-inner">
+        <div class="pages-grid">
+          <div class="page-card">
+            <div class="page-title">Home</div>
+            <div class="page-url">https://www.bluewaveplumbing.com</div>
+            <div class="page-type">Home</div>
+            <div class="page-excerpt">The domain name bluewaveplumbing.com is for sale! Get this domain. Own it today for $6,000 and make it yours. Need help? Give us a call. 480-651-9741. Safe & secure transactions. Fast & easy transfers. Hassle free payments.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-version">SYS v3.2.1 — BUILD 2025.01</div>
+  <div class="footer-copyright">© 2026 GODADDY OPERATING COMPANY, LLC — ALL RIGHTS RESERVED</div>
+</footer>
+
+<script>
+function toggleFolder(index) {
+  var folders = document.querySelectorAll('.folder');
+  folders.forEach(function(folder) {
+    var folderIndex = parseInt(folder.getAttribute('data-folder'));
+    if (folderIndex === index) {
+      folder.classList.toggle('active');
+    } else {
+      folder.classList.remove('active');
+    }
+  });
+}
+
+function updateClock() {
+  var now = new Date();
+  var hours = String(now.getUTCHours()).padStart(2, '0');
+  var minutes = String(now.getUTCMinutes()).padStart(2, '0');
+  var seconds = String(now.getUTCSeconds()).padStart(2, '0');
+  document.getElementById('utcClock').textContent = 'UTC ' + hours + ':' + minutes + ':' + seconds;
+}
+
+updateClock();
+setInterval(updateClock, 1000);
+</script>
+</body>
+</html>
