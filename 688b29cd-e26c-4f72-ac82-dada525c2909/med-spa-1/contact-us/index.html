@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Philosophy Section */
+.philosophy {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.philosophy-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.philosophy-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.philosophy-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Project Grid */
+.projects {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.projects-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.project-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.project-cell:last-child {
+  border-bottom: none;
+}
+
+.project-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.project-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.project-cell:hover .project-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: var(--space-xs);
+}
+
+.project-number {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.project-name {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+/* Inquiry Section */
+.inquiry {
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.inquiry-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.inquiry-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.inquiry-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.form-field {
+  position: relative;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  padding: var(--space-sm) 0;
+  color: var(--text-black);
+  outline: none;
+  border-radius: 0;
+  transition: border-bottom-width 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: var(--placeholder-gray);
+  font-style: italic;
+  font-family: var(--font-serif);
+  font-weight: 300;
+}
+
+.form-field select {
+  cursor: pointer;
+  color: var(--placeholder-gray);
+  font-style: italic;
+}
+
+.form-field select.has-value {
+  color: var(--text-black);
+  font-style: normal;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-bottom-width: 2px;
+}
+
+.form-submit {
+  align-self: flex-start;
+}
+
+.form-submit button {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.form-submit button:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .philosophy-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .project-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .project-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .project-cell:nth-child(1),
+  .project-cell:nth-child(2) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .inquiry-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .philosophy {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .projects {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .inquiry {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: 160px var(--pad-x, 1.5rem) 60px;
+    background: var(--text-black, var(--text-primary, var(--bg-primary, #1a1a1a)));
+    color: var(--bg-cream, var(--nav-text, #ffffff));
+  }
+  .page-title-inner { max-width: 1200px; margin: 0 auto; }
+  .page-title-area h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 600; line-height: 1.1; letter-spacing: -0.03em; }
+
+  /* Content Area */
+  .content-area { padding: 64px var(--pad-x, 1.5rem); max-width: 1200px; margin: 0 auto; }
+  .content-area h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600; line-height: 1.15; margin-bottom: 24px; }
+  .content-area h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 16px; }
+  .content-area p { font-size: 1rem; line-height: 1.7; margin-bottom: 24px; }
+  .content-area ul, .content-area ol { margin-bottom: 24px; padding-left: 24px; }
+  .content-area li { margin-bottom: 8px; line-height: 1.7; }
+  .content-area img { max-width: 100%; height: auto; border-radius: 12px; margin-bottom: 24px; }
+
+  /* Contact Information */
+  .contact-info { 
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    margin-bottom: 48px;
+  }
+
+  .contact-item h3 {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 400;
+    text-transform: lowercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+  }
+
+  .contact-item a {
+    text-decoration: underline;
+  }
+
+  .contact-form {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 8px;
+    border: 1px solid var(--border-black);
+  }
+
+  .contact-form h3 {
+    margin-bottom: 24px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+
+  .form-field label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 400;
+    text-transform: lowercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .form-field input,
+  .form-field textarea {
+    width: 100%;
+    border: 1px solid var(--border-black);
+    padding: 12px;
+    font-family: var(--font-serif);
+    font-size: 16px;
+    background: #ffffff;
+    border-radius: 4px;
+  }
+
+  .form-field textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .form-submit button {
+    background: var(--text-black);
+    color: #ffffff;
+    border: none;
+    padding: 16px 32px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 400;
+    text-transform: lowercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: opacity 0.3s ease;
+  }
+
+  .form-submit button:hover {
+    opacity: 0.8;
+  }
+
+  @media (min-width: 768px) {
+    .contact-info {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .form-row {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .form-field.full-width {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .contact-info {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Contact Us</a>
+  <ul class="nav-links">
+    <li><a href="/about-us">about us</a></li>
+    <li><a href="/services">services</a></li>
+    <li><a href="/contact-us">contact us</a></li>
+  </ul>
+</nav>
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Contact Us</h1>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+  <div class="contact-info">
+    <div class="contact-item">
+      <h3>Phone</h3>
+      <p><a href="tel:8555893772">(855) 589-3772</a></p>
+      <p>Have a Question? Call Us!</p>
+    </div>
+
+    <div class="contact-item">
+      <h3>Email</h3>
+      <p><a href="mailto:info@luxemedspa.com">info@luxemedspa.com</a></p>
+    </div>
+
+    <div class="contact-item">
+      <h3>Address</h3>
+      <p><a href="https://www.google.com/maps/dir//2900+Bristol+St+B203+Costa+Mesa,+CA+92626/@33.6761639,-117.8868684,13z/data=!4m5!4m4!1m0!1m2!1m1!1s0x80dcdf1a52a7c791:0x3299b41aed05e9fc">2900 Bristol Street, B203<br>Costa Mesa, CA 92626</a></p>
+    </div>
+  </div>
+
+  <div class="contact-form">
+    <h3>Schedule a Consultation Today!</h3>
+    <p>Please fill out the info below and one of our staff members will get back to you.</p>
+
+    <form>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="firstName">First Name *</label>
+          <input type="text" id="firstName" name="firstName" required>
+        </div>
+        <div class="form-field">
+          <label for="lastName">Last Name *</label>
+          <input type="text" id="lastName" name="lastName" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label for="phone">Phone *</label>
+          <input type="tel" id="phone" name="phone" required>
+        </div>
+        <div class="form-field">
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field full-width">
+          <label for="message">Message *</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+      </div>
+
+      <div class="form-submit">
+        <button type="submit">send</button>
+      </div>
+    </form>
+  </div>
+
+  <h2>How Do I Prepare For My Appointment?</h2>
+  <p>Here are a few essential points to remember before your scheduled time: Our premises are situated at 1530 Baker St, Ste A, Costa Mesa. There is ample free parking available at the front. We advise that you abstain from alcohol and caffeine, hydrate adequately, and consume a nutritious meal before your appointment. Additionally, please ensure you go through our Pre-Care & Aftercare Guidelines relevant to your particular procedure. We are excited to help you shine!</p>
+
+  <h2>Cancellation & No-Show Policy</h2>
+  <p>All appointments necessitate a valid credit card on record for confirmation. Rest assured, your credit card details will be securely stored in our database. We respectfully ask for a minimum of 24 hours' notice if you need to cancel or shift your appointment. Failing to comply with this or not showing up for your appointment incurs a fee.</p>
+
+  <p>If you cancel or reschedule within the 24-hour window, or if you do not attend your appointment, a non-refundable fee ranging from $50 (for appointments less than an hour) to $150 (for appointments over an hour) will be charged. Please be aware that if you do not cover these mandatory charges, future bookings with us will not be possible. Your cooperation and understanding regarding this are much appreciated.</p>
+</div>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Contact Us</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>

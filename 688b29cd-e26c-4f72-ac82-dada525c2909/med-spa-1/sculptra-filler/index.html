@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sculptra Filler</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Philosophy Section */
+.philosophy {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.philosophy-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.philosophy-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.philosophy-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Project Grid */
+.projects {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.projects-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.project-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.project-cell:last-child {
+  border-bottom: none;
+}
+
+.project-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.project-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.project-cell:hover .project-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: var(--space-xs);
+}
+
+.project-number {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.project-name {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+/* Inquiry Section */
+.inquiry {
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.inquiry-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.inquiry-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.inquiry-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.form-field {
+  position: relative;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  padding: var(--space-sm) 0;
+  color: var(--text-black);
+  outline: none;
+  border-radius: 0;
+  transition: border-bottom-width 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: var(--placeholder-gray);
+  font-style: italic;
+  font-family: var(--font-serif);
+  font-weight: 300;
+}
+
+.form-field select {
+  cursor: pointer;
+  color: var(--placeholder-gray);
+  font-style: italic;
+}
+
+.form-field select.has-value {
+  color: var(--text-black);
+  font-style: normal;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-bottom-width: 2px;
+}
+
+.form-submit {
+  align-self: flex-start;
+}
+
+.form-submit button {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.form-submit button:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .philosophy-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .project-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .project-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .project-cell:nth-child(1),
+  .project-cell:nth-child(2) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .inquiry-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .philosophy {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .projects {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .inquiry {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: 160px var(--pad-x, 1.5rem) 60px;
+    background: var(--text-black, var(--text-primary, var(--bg-primary, #1a1a1a)));
+    color: var(--bg-cream, var(--nav-text, #ffffff));
+  }
+  .page-title-inner { max-width: 1200px; margin: 0 auto; }
+  .page-title-area h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 600; line-height: 1.1; letter-spacing: -0.03em; }
+
+  /* Content Area */
+  .content-area { padding: 64px var(--pad-x, 1.5rem); max-width: 1200px; margin: 0 auto; }
+  .content-area h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600; line-height: 1.15; margin-bottom: 24px; }
+  .content-area h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 16px; }
+  .content-area p { font-size: 1rem; line-height: 1.7; margin-bottom: 24px; }
+  .content-area ul, .content-area ol { margin-bottom: 24px; padding-left: 24px; }
+  .content-area li { margin-bottom: 8px; line-height: 1.7; }
+  .content-area img { max-width: 100%; height: auto; border-radius: 12px; margin-bottom: 24px; }
+
+  /* Service Grid */
+  .services-section { padding: var(--space-xl) var(--pad-x); background: var(--bg-cream); }
+  .services-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: var(--space-sm); border: 1px solid var(--border-black); }
+  .service-card { border-bottom: 1px solid var(--border-black); padding: var(--space-md); }
+  .service-card:last-child { border-bottom: none; }
+  .service-card h4 { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 400; text-transform: lowercase; letter-spacing: 0.03em; margin-bottom: var(--space-xs); }
+  .service-card p { font-family: var(--font-serif); font-size: 0.95rem; line-height: 1.5; color: var(--text-black); }
+  
+  @media (min-width: 768px) { 
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .service-card { border-right: 1px solid var(--border-black); border-bottom: none; }
+    .service-card:nth-child(2n) { border-right: none; }
+    .service-card:nth-child(-n+2) { border-bottom: 1px solid var(--border-black); }
+  }
+  
+  @media (min-width: 1024px) { 
+    .services-grid { grid-template-columns: repeat(3, 1fr); }
+    .service-card:nth-child(3n) { border-right: none; }
+    .service-card:nth-child(-n+3) { border-bottom: 1px solid var(--border-black); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Sculptra Filler</a>
+  <ul class="nav-links">
+    <li><a href="/about-us">about us</a></li>
+    <li><a href="/services">services</a></li>
+    <li><a href="/contact-us">contact us</a></li>
+  </ul>
+</nav>
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Sculptra Filler</h1>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+  <h3>Restoring your youthful appearance</h3>
+
+<h2>GET A FREE CONSULTATION! CALL OUR OFFICE TODAY!</h2>
+
+<p>Let one of our experienced doctors customize a solution that's right for you.</p>
+
+<p><a href="tel:8555893772">Call (855) 589-3772</a></p>
+
+<p>Sculptra Filler is a revolutionary treatment that can restore volume, smooth wrinkles, and rejuvenate your overall appearance.</p>
+
+<h2>Benefits of Sculptra Filler</h2>
+
+<p>Sculptra filler is an innovative dermal filler that provides a range of benefits for those looking to enhance their appearance. Here are some key advantages of Sculptra:</p>
+
+<ul>
+<li><strong>Restores Volume:</strong> Sculptra effectively replenishes lost volume in the face, filling in hollow areas and reducing the appearance of wrinkles and fine lines.</li>
+<li><strong>Stimulates Collagen Production:</strong> Sculptra works by stimulating the production of collagen, a protein that helps maintain skin elasticity and firmness. This results in long-lasting, natural-looking results.</li>
+<li><strong>Gradual and Subtle:</strong> Sculptra provides gradual and subtle improvements, ensuring that your friends and family will notice your refreshed appearance without realizing you've had any work done.</li>
+<li><strong>Long-lasting Results:</strong> Unlike traditional fillers, Sculptra can last up to two years, making it a cost-effective solution for achieving youthful, radiant skin.</li>
+</ul>
+
+<h2>Sculptra Treatment Type</h2>
+
+<p>Sculptra is a non-surgical cosmetic procedure that involves the injection of poly-L-lactic acid (PLLA) into targeted areas of the face. PLLA is a biocompatible substance that helps to stimulate collagen production, restoring volume and improving skin texture over time. Sculptra is typically administered in a series of treatments spaced a few weeks apart to achieve optimal results.</p>
+
+<img src="https://www.luxemedspa.com/wp-content/uploads/2023/06/Sculptra-Filler.jpg" alt="Sculptra Filler">
+
+<h2>Who's a good candidate?</h2>
+
+<p>Sculptra fillers are suitable for individuals who are looking to address volume loss, wrinkles, and fine lines in their face. Good candidates for Sculptra may exhibit the following characteristics:</p>
+
+<ul>
+<li><strong>Age-related Volume Loss:</strong> Sculptra can help individuals experiencing volume loss due to aging, resulting in a sunken or hollow appearance.</li>
+<li><strong>Wrinkles and Fine Lines:</strong> Sculptra is effective in reducing the appearance of wrinkles and fine lines, including nasolabial folds, marionette lines, and smile lines.</li>
+<li><strong>Good Overall Health:</strong> Candidates should be in good general health and have realistic expectations about the outcomes of the treatment.</li>
+</ul>
+
+<p>To determine if Sculptra is the right option for you, it is best to consult with a qualified healthcare provider who can evaluate your individual needs and goals.</p>
+
+<h2>What to expect during the procedure</h2>
+
+<p>During your Sculptra treatment, you can expect the following steps:</p>
+
+<ul>
+<li><strong>Consultation:</strong> Your healthcare provider will assess your facial structure, discuss your goals, and create a personalized treatment plan.</li>
+<li><strong>Preparation:</strong> The treatment area will be cleaned, and a local anesthetic or numbing cream may be applied to ensure your comfort throughout the procedure.</li>
+<li><strong>Injections:</strong> Using a fine needle, Sculptra will be injected into specific areas of your face, targeting the desired areas for volume restoration.</li>
+<li><strong>Massage</strong>: After the injections, your healthcare provider may perform a gentle massage to evenly distribute the product and prevent the formation of nodules.</li>
+<li><strong>Post-Treatment Care:</strong> You will receive instructions on how to care for the treated area and any potential side effects to watch out for.</li>
+</ul>
+
+<img src="https://www.luxemedspa.com/wp-content/uploads/2023/06/Sculptra-Filler-Injection.jpg">
+
+<h2>What to expect after the treatment</h2>
+
+<p>After your Sculptra treatment, it's important to understand the recovery process and manage your expectations. Here's what you can expect:</p>
+
+<ul>
+<li><strong>Immediate Effects:</strong> You may experience mild swelling, redness, or bruising at the injection sites, but these side effects typically subside within a few days.</li>
+<li><strong>Gradual Results:</strong> Unlike traditional fillers, the results of Sculptra are not immediate. It takes time for collagen production to increase and for your skin to gradually improve over several weeks.</li>
+<li><strong>Multiple Sessions:</strong> Most individuals require a series of Sculptra treatments spaced several weeks apart to achieve the desired outcome. Your healthcare provider will determine the ideal number of sessions for you.</li>
+<li><strong>Long-lasting Results:</strong> The effects of Sculptra can last up to two years. However, individual results may vary based on factors such as age, lifestyle, and overall health.</li>
+</ul>
+
+<h2>GET A FREE CONSULTATION! CALL OUR OFFICE TODAY!</h2>
+
+<p>Let one of our experienced doctors customize a solution that's right for you.</p>
+
+<p><a href="tel:8555893772">Call (855) 589-3772</a></p>
+
+<h2>RECOVERY TIME AND DO'S AND DON'TS:</h2>
+
+<p>Here are some important guidelines to follow before and after your Sculptra treatment:</p>
+
+<p><strong>Before the procedure:</strong></p>
+
+<ul>
+<li><strong>Consultation:</strong> Schedule a consultation with a qualified healthcare provider to discuss your medical history, expectations, and any concerns you may have.</li>
+<li><strong>Avoid Blood-Thinning Medications:</strong> Discontinue the use of blood-thinning medications, such as aspirin or ibuprofen, as they can increase the risk of bruising.</li>
+<li><strong>Stay Hydrated:</strong> Drink plenty of water before your treatment to ensure optimal hydration.</li>
+</ul>
+
+<p><strong>After the procedure:</strong></p>
+
+<ul>
+<li><strong>Follow Instructions:</strong> Adhere to the post-treatment instructions provided by your healthcare provider, including any prescribed medications or skincare products.</li>
+<li><strong>Avoid Sun Exposure:</strong> Protect your skin from excessive sun exposure and use sunscreen with a high SPF to minimize the risk of hyperpigmentation.</li>
+<li><strong>Avoid Strenuous Activities:</strong> Refrain from engaging in strenuous exercise or activities that may cause excessive sweating for a few days following treatment.</li>
+<li><strong>Be Patient:</strong> Understand that the results of Sculptra take time to develop. Trust the process and allow your skin to gradually improve over the course of several weeks.</li>
+</ul>
+</div>
+
+<!-- Services Section -->
+<section class="services-section">
+  <div class="services-grid">
+    <div class="service-card">
+      <h4>Butt Cupping</h4>
+      <p>Vacuum butt lift cupping therapy</p>
+    </div>
+    <div class="service-card">
+      <h4>Cavitation & Radio Frequency</h4>
+      <p>Transform your body with advanced aesthetic treatments</p>
+    </div>
+    <div class="service-card">
+      <h4>Lymphatic Massage</h4>
+      <p>Lymphatic massage therapy</p>
+    </div>
+    <div class="service-card">
+      <h4>Juvederm Ultra 4</h4>
+      <p>Restore youthful volume & smooth out wrinkles</p>
+    </div>
+    <div class="service-card">
+      <h4>Radiesse Filler</h4>
+      <p>Natural, youthful skin</p>
+    </div>
+    <div class="service-card">
+      <h4>Restylane Filler</h4>
+      <p>Soften facial lines, restore volume, and rejuvenate your skin's appearance</p>
+    </div>
+    <div class="service-card">
+      <h4>Voluma Filler</h4>
+      <p>Enhance and add volume to the cheek area, creating a more youthful and contoured facial profile</p>
+    </div>
+    <div class="service-card">
+      <h4>Botox</h4>
+      <p>Turn back the clock on fine lines and wrinkles with targeted injections</p>
+    </div>
+    <div class="service-card">
+      <h4>Microneedling</h4>
+      <p>Revitalize your skin</p>
+    </div>
+    <div class="service-card">
+      <h4>High-Frequency Acne Facial</h4>
+      <p>Rejuvenate your skin and combat acne</p>
+    </div>
+    <div class="service-card">
+      <h4>Radio Frequency Facial</h4>
+      <p>Lift, firm and tighten skin</p>
+    </div>
+    <div class="service-card">
+      <h4>HydraFacial</h4>
+      <p>Deeply cleanses, exfoliates, extracts, and hydrates the skin</p>
+    </div>
+    <div class="service-card">
+      <h4>Chemical Peels</h4>
+      <p>Revitalize your skin with chemical peel facials</p>
+    </div>
+    <div class="service-card">
+      <h4>Brazilian Laser Treatment</h4>
+      <p>Brazilian laser hair removal treatment</p>
+    </div>
+    <div class="service-card">
+      <h4>Full Body Laser Hair Removal</h4>
+      <p>Complete laser hair removal treatment</p>
+    </div>
+    <div class="service-card">
+      <h4>Buttocks Laser Treatment</h4>
+      <p>Enhance your natural curves</p>
+    </div>
+    <div class="service-card">
+      <h4>Fractional Laser Facial Treatment</h4>
+      <p>Achieve smoother, more youthful-looking skin</p>
+    </div>
+    <div class="service-card">
+      <h4>PDO Thread Lift</h4>
+      <p>Lift and tighten sagging skin without surgery</p>
+    </div>
+    <div class="service-card">
+      <h4>PDO Under Eye Treatment</h4>
+      <p>Refresh and rejuvenate tired eyes with fine threads</p>
+    </div>
+    <div class="service-card">
+      <h4>PDO Sugar Thread Lift</h4>
+      <p>Rejuvenate your skin naturally with absorbable sutures</p>
+    </div>
+    <div class="service-card">
+      <h4>IV Therapy</h4>
+      <p>Direct nutrient infusion for boosted energy, immunity & wellness</p>
+    </div>
+    <div class="service-card">
+      <h4>HiFU Facial Treatment</h4>
+      <p>For youthful and radiant skin</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Sculptra Filler</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Radiesse Filler</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Philosophy Section */
+.philosophy {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.philosophy-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.philosophy-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.philosophy-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Project Grid */
+.projects {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.projects-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.project-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.project-cell:last-child {
+  border-bottom: none;
+}
+
+.project-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.project-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.project-cell:hover .project-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: var(--space-xs);
+}
+
+.project-number {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.project-name {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+/* Services Section */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.service-card {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-2px);
+}
+
+.service-name {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: var(--space-xs);
+  letter-spacing: 0.02em;
+}
+
+.service-description {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  color: var(--text-black);
+  opacity: 0.8;
+}
+
+/* Inquiry Section */
+.inquiry {
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.inquiry-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.inquiry-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.inquiry-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.form-field {
+  position: relative;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  padding: var(--space-sm) 0;
+  color: var(--text-black);
+  outline: none;
+  border-radius: 0;
+  transition: border-bottom-width 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: var(--placeholder-gray);
+  font-style: italic;
+  font-family: var(--font-serif);
+  font-weight: 300;
+}
+
+.form-field select {
+  cursor: pointer;
+  color: var(--placeholder-gray);
+  font-style: italic;
+}
+
+.form-field select.has-value {
+  color: var(--text-black);
+  font-style: normal;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-bottom-width: 2px;
+}
+
+.form-submit {
+  align-self: flex-start;
+}
+
+.form-submit button {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.form-submit button:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .philosophy-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .project-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .project-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .project-cell:nth-child(1),
+  .project-cell:nth-child(2) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .inquiry-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .philosophy {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .projects {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .inquiry {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: 160px var(--pad-x, 1.5rem) 60px;
+    background: var(--text-black, var(--text-primary, var(--bg-primary, #1a1a1a)));
+    color: var(--bg-cream, var(--nav-text, #ffffff));
+  }
+  .page-title-inner { max-width: 1200px; margin: 0 auto; }
+  .page-title-area h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 600; line-height: 1.1; letter-spacing: -0.03em; }
+
+  /* Content Area */
+  .content-area { padding: 64px var(--pad-x, 1.5rem); max-width: 1200px; margin: 0 auto; }
+  .content-area h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600; line-height: 1.15; margin-bottom: 24px; }
+  .content-area h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 16px; }
+  .content-area p { font-size: 1rem; line-height: 1.7; margin-bottom: 24px; }
+  .content-area ul, .content-area ol { margin-bottom: 24px; padding-left: 24px; }
+  .content-area li { margin-bottom: 8px; line-height: 1.7; }
+  .content-area img { max-width: 100%; height: auto; border-radius: 12px; margin-bottom: 24px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Radiesse Filler</a>
+  <div class="nav-links">
+    <a href="/">home</a>
+    <a href="/about">about</a>
+    <a href="/services">services</a>
+    <a href="/contact">contact</a>
+  </div>
+</nav>
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Radiesse Filler</h1>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+  <h3>Natural, youthful skin</h3>
+
+  <h2>GET A FREE CONSULTATION! CALL OUR OFFICE TODAY!</h2>
+
+  <p>Let one of our experienced doctors customize a solution that's right for you.</p>
+
+  <p><a href="tel:(855)589-3772">Call (855) 589-3772</a></p>
+
+  <p>Safe and effective solution to restore youthful volume and rejuvenate your skin. Radiesse is an innovative dermal filler that can help you turn back the clock on aging, delivering natural-looking results that will leave you feeling confident and refreshed.</p>
+
+  <h2>Benefits of Radiesse Filler</h2>
+
+  <ul>
+    <li>Radiesse filler offers numerous benefits that make it a popular choice for individuals seeking facial rejuvenation.</li>
+    <li>Restores Volume: As we age, our skin gradually loses volume, leading to sagging and wrinkles. Radiesse filler helps replenish lost volume, giving you a more youthful appearance.</li>
+    <li>Stimulates Collagen Production: Radiesse contains Calcium Hydroxylapatite microspheres that stimulate collagen production, further enhancing the skin's firmness and elasticity.</li>
+    <li>Long-Lasting Results: Unlike some other dermal fillers, Radiesse provides long-lasting results. The effects can typically be enjoyed for up to 18 months, reducing the need for frequent touch-ups.</li>
+    <li>Natural-Looking Results: Radiesse filler is designed to blend seamlessly with your natural features, providing subtle and natural-looking results. Your friends will notice your refreshed appearance, but they won't be able to pinpoint exactly what you've done.</li>
+    <li>Non-Surgical Solution: Radiesse treatment is a non-surgical procedure, meaning you can achieve fantastic results without the need for incisions, anesthesia, or extensive downtime.</li>
+  </ul>
+
+  <h2>Treatment Type</h2>
+
+  <p>Radiesse is primarily used for facial volumization and contouring. It is commonly employed to address the following concerns:</p>
+
+  <ul>
+    <li>Smile Lines (Nasolabial Folds): Radiesse can help smooth out the lines that run from the sides of the nose to the corners of the mouth, reducing the appearance of deep smile lines.</li>
+    <li>Marionette Lines: These lines extend from the corners of the mouth downwards, giving the face a downturned appearance. Radiesse can help soften these lines and restore a more youthful contour.</li>
+    <li>Jawline Contouring: Radiesse can be used to enhance the definition of the jawline, resulting in a more sculpted and balanced facial profile.</li>
+    <li>Chin Augmentation: If you desire a more pronounced chin or wish to improve its shape, Radiesse filler can be used to add volume and enhance the contours of the chin.</li>
+  </ul>
+
+  <img src="https://www.luxemedspa.com/wp-content/uploads/2023/06/Radiesse-Dermal-Filler.jpg" alt="Radiesse Dermal Filler">
+
+  <h2>Ideal Candidates</h2>
+
+  <p>Radiesse filler is suitable for a wide range of individuals who are seeking facial rejuvenation and improvement. Good candidates for Radiesse treatment typically exhibit the following characteristics:</p>
+
+  <ul>
+    <li>Aged 35-60: Radiesse is commonly used to address signs of aging in individuals between the ages of 35 and 60. However, suitability can vary depending on individual circumstances, so a consultation with a qualified professional is essential.</li>
+    <li>Desire for Non-Surgical Rejuvenation: Candidates should prefer non-surgical solutions over more invasive procedures like facelifts, but still desire noticeable and long-lasting results.</li>
+    <li>Good General Health: Candidates should be in good overall health with no uncontrolled medical conditions or allergies that may interfere with the treatment.</li>
+    <li>Realistic Expectations: It's important for candidates to have realistic expectations about the results of Radiesse treatment and understand the limitations of the procedure.</li>
+  </ul>
+
+  <h2>During the Procedure</h2>
+
+  <p>Your Radiesse treatment will typically involve the following steps:</p>
+
+  <ul>
+    <li>Consultation: Your journey will begin with a consultation where a qualified healthcare professional will assess your concerns, evaluate your candidacy, and develop a personalized treatment plan.</li>
+    <li>Preparation: The treatment area will be cleansed, and a topical anesthetic or numbing cream may be applied to ensure your comfort during the procedure.</li>
+    <li>Injection Process: Using a fine needle, your healthcare professional will carefully administer Radiesse beneath the skin's surface at strategic points to achieve the desired volume and contouring effects.</li>
+    <li>Monitoring: Throughout the procedure, your healthcare professional will monitor your comfort and ensure that the desired results are being achieved.</li>
+    <li>Completion and Recovery: Once the injections are complete, your healthcare professional may massage the treated area to ensure optimal distribution of the filler. You can typically resume your daily activities immediately after the procedure.</li>
+  </ul>
+
+  <img src="https://www.luxemedspa.com/wp-content/uploads/2023/06/Radiesse.jpg">
+
+  <h2>GET A FREE CONSULTATION! CALL OUR OFFICE TODAY!</h2>
+
+  <p>Let one of our experienced doctors customize a solution that's right for you.</p>
+
+  <p><a href="tel:855-589-3772">Call (855) 589-3772</a></p>
+
+  <img src="https://www.luxemedspa.com/wp-content/uploads/2023/06/Radiesse-Results.jpg">
+
+  <h2>After the Treatment</h2>
+
+  <p>Following your Radiesse treatment, you can expect the following:</p>
+
+  <ul>
+    <li>Immediate Results: You will notice an immediate improvement in volume and contours in the treated areas. However, some swelling or redness may be present initially, which will subside within a few days.</li>
+    <li>Recovery Time: Radiesse filler requires minimal downtime, allowing you to return to your daily routine immediately. However, it is recommended to avoid strenuous exercise and excessive sun exposure for 24-48 hours post-treatment.</li>
+    <li>Temporary Side Effects: Mild bruising, redness, or swelling may occur at the injection sites but should resolve quickly. Applying cold compresses can help alleviate these temporary side effects.</li>
+    <li>Long-Lasting Results: The effects of Radiesse can last up to 18 months or longer, depending on individual factors. Periodic touch-up treatments can help maintain your desired results.</li>
+  </ul>
+
+  <h2>Do's and Don'ts Before and After the Procedure</h2>
+
+  <p>To ensure the best possible outcome and minimize any potential risks, please keep the following do's and don'ts in mind:</p>
+
+  <p><strong>Before the procedure</strong></p>
+
+  <p><strong>Do's:</strong></p>
+
+  <ul>
+    <li>Follow any pre-procedure instructions provided by your healthcare professional, such as avoiding blood-thinning medications and supplements. Stay well-hydrated before the procedure.</li>
+  </ul>
+
+  <p><strong>Don't:</strong></p>
+
+  <ul>
+    <li>Schedule your treatment shortly before any important events or special occasions to allow for potential minor side effects to subside.</li>
+  </ul>
+
+  <p><strong>After the procedure</strong></p>
+
+  <p><strong>Do's:</strong></p>
+
+  <ul>
+    <li>Apply cold compresses to reduce swelling or discomfort.</li>
+    <li>Protect your skin from excessive sun exposure by wearing sunscreen and a wide-brimmed hat.</li>
+    <li>Follow any post-treatment care instructions provided by your healthcare professional to ensure optimal healing and results.</li>
+  </ul>
+
+  <p><strong>Don't:</strong></p>
+
+  <ul>
+    <li>Engage in vigorous exercise or physical activities for 24-48 hours after treatment.</li>
+    <li>Touch, rub, or massage the treated area excessively unless instructed by your healthcare professional.</li>
+  </ul>
+
+  <h2>A safe and effective solution</h2>
+
+  <p>Unveil your youthful allure with a Radiesse Filler treatment, your key to refreshed radiance. Contact us today to experience this journey to natural elegance.</p>
+
+  <p><a href="tel:855-589-3772">Call (855) 589-3772</a></p>
+</div>
+
+<!-- Services Section -->
+<section class="services">
+  <div class="services-grid">
+    <div class="service-card">
+      <h3 class="service-name">Butt Cupping</h3>
+      <p class="service-description">Vacuum butt lift cupping therapy</p>
+    </div>
+    
+    <div class="service-card">
+      <h3 class="service-name">Cavitation & Radio Frequency</h3>
+      <p class="service-description">Transform your body with advanced aesthetic treatments</p>
+    </div>
+    
+    <div class="service-card">
+      <h3 class="service-name">Lymphatic Massage</h3>
+      <p class="service-description">Lymphatic massage therapy</p>
+    </div>
+    
+    <div class="service-card">
+      <h3 class="service-name">Juvederm Ultra 4</h3>
+      <p class="service-description">Restore youthful volume & smooth out wrinkles</p>
+    </div>
+    
+    <div class="service-card">
+      <h3 class="service-name">Restylane Filler</h3>
+      <p class="service-description">Soften facial lines, restore volume, and rejuvenate your skin's appearance</p>
+    </div>
+    
+    <div class="service-card">
+      <h3 class="service-name">Sculptra Filler</h3>
+      <p class="service-description">Restoring your youthful appearance</p>
+    </div>
+    
+    <div class="service-card">
+      <h3 class="service-name">Voluma Filler</h3>
+      <p class="service-description">Enhance and add volume to the cheek area, creating a more youthful and contoured facial profile</p>
+    </div>
+    
+    <div class="service-card">
+      <h3 class="service-name">Botox</h3>
+      <p class="service-description">Turn back the clock on fine lines and wrinkles with targeted injections</p>
+    </div>
+    
+    <div class="service-card">
+      <h3 class="service-name">Microneedling</h3>
+      <p class="service-description">Revitalize your skin</p>
+    </div>
+    
+    <div class="service-card">
+      <h3 class="service-name">High-Frequency Acne Facial</h3>
+      <p class="service-description">Rejuvenate your skin and combat acne</p>
+    </div>
+    
+    <div class="service-card">
+      <h3 class="service-name">Radio Frequency Facial</h3>
+      <p class="service-description">Lift, firm and tighten skin</p>
+    </div>
+    
+    <div class="service-card">
+      <h3 class="service-name">HydraFacial</h3>
+      <p class="service-description">Deeply cleanses, exfoliates, extracts, and hydrates the skin</p>
+    </div>
+    
+    <div class="service-card">
+      <h3 class="service-name">Chemical Peels</h3>
+      <p class="service-description">Revitalize your skin with chemical peel facials</p>
+    </div>
+    
+    <div class="service-card">
+      <h3 class="service-name">Brazilian Laser Treatment</h3>
+      <p class="service-description">Brazilian laser hair removal treatment</p>
+    </div>
+    
+    <div class="service-card">
+      <h3 class="service-name">Full Body Laser Hair Removal</h3>
+      <p class="service-description">Complete laser hair removal treatment</p>
+    </div>
+    
+    <div class="service-card">
+      <h3 class="service-name">Buttocks Laser Treatment</h3>
+      <p class="service-description">Enhance your natural curves</p>
+    </div>
+    
+    <div class="service-card">
+      <h3 class="service-name">Fractional Laser Facial Treatment</h3>
+      <p class="service-description">Achieve smoother, more youthful-looking skin</p>
+    </div>
+    
+    <div class="service-card">
+      <h3 class="service-name">PDO Thread Lift</h3>
+      <p class="service-description">Lift and tighten sagging skin without surgery</p>
+    </div>
+    
+    <div class="service-card">
+      <h3 class="service-name">PDO Under Eye Treatment</h3>
+      <p class="service-description">Refresh and rejuvenate tired eyes with fine threads</p>
+    </div>
+    
+    <div class="service-card">
+      <h3 class="service-name">PDO Sugar Thread Lift</h3>
+      <p class="service-description">Rejuvenate your skin naturally with absorbable sutures</p>
+    </div>
+    
+    <div class="service-card">
+      <h3 class="service-name">IV Therapy</h3>
+      <p class="service-description">Direct nutrient infusion for boosted energy, immunity & wellness</p>
+    </div>
+    
+    <div class="service-card">
+      <h3 class="service-name">HiFU Facial Treatment</h3>
+      <p class="service-description">For youthful and radiant skin</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Radiesse Filler</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>

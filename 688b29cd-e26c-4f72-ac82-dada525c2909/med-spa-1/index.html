@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Philosophy Section */
+.philosophy {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.philosophy-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.philosophy-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.philosophy-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.service-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.service-cell:last-child {
+  border-bottom: none;
+}
+
+.service-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.service-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.service-cell:hover .service-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+.service-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: var(--space-xs);
+}
+
+.service-name {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.service-description {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--placeholder-gray);
+  margin-top: var(--space-xs);
+  font-style: italic;
+}
+
+/* Team Section */
+.team {
+  padding: var(--space-lg) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.team-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.team-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.team-member {
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--border-black);
+}
+
+.team-member:last-child {
+  border-bottom: none;
+}
+
+.member-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.member-name {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.member-role {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  color: var(--placeholder-gray);
+}
+
+/* Inquiry Section */
+.inquiry {
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.inquiry-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.inquiry-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.inquiry-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.form-field {
+  position: relative;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  padding: var(--space-sm) 0;
+  color: var(--text-black);
+  outline: none;
+  border-radius: 0;
+  transition: border-bottom-width 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: var(--placeholder-gray);
+  font-style: italic;
+  font-family: var(--font-serif);
+  font-weight: 300;
+}
+
+.form-field select {
+  cursor: pointer;
+  color: var(--placeholder-gray);
+  font-style: italic;
+}
+
+.form-field select.has-value {
+  color: var(--text-black);
+  font-style: normal;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-bottom-width: 2px;
+}
+
+.form-submit {
+  align-self: flex-start;
+}
+
+.form-submit button {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.form-submit button:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.footer-contact {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  margin-top: var(--space-sm);
+}
+
+.footer-contact a {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .philosophy-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .service-cell:nth-child(odd) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .inquiry-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .philosophy {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .inquiry {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">luxe med spa</a>
+  <ul class="nav-links">
+    <li><a href="#services">services</a></li>
+    <li><a href="#philosophy">philosophy</a></li>
+    <li><a href="#inquiry">inquire</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <h1 class="hero-headline">REDEFINE BEAUTY<br>AT LUXE MED SPA</h1>
+  <p class="hero-subtitle">001 — YOUR PREMIER DESTINATION FOR SKIN & BODY WELLNESS</p>
+</section>
+
+<!-- Philosophy Section -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">002 — approach</span>
+    <div class="philosophy-text">
+      <p>Welcome to Luxe Med Spa, your ultimate sanctuary in the heart of Costa Mesa. As Orange County's premier aesthetic med spa destination, we specialize in the art of beauty and the science of skin care. Through our innovative cosmetic procedures and advanced technology, we offer a comprehensive suite of services designed to rejuvenate, renew, and redefine your appearance.</p>
+      <p>At Luxe Med Spa, we understand that each individual is unique. We provide personalized treatments tailored to meet your specific aesthetic goals and skincare needs. Our team comprises highly experienced and certified skincare professionals who combine their expertise with advanced technology to deliver best-in-class services.</p>
+      <p>We stay abreast of the latest advancements in aesthetic medicine. Our state-of-the-art technology ensures effective, safe, and lasting results. Your safety is our utmost priority. We strictly adhere to stringent health and safety standards, ensuring all treatments are administered with utmost care and precision.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Services Grid -->
+<section class="services" id="services">
+  <div class="services-grid">
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://www.luxemedspa.com/wp-content/uploads/2023/06/body-sculpting-procedures-costa-mesa-orange-county.jpg" alt="Body contouring treatments">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">body contouring</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://www.luxemedspa.com/wp-content/uploads/2023/06/botox-injections-costa-mesa-orange-county.jpg" alt="Botox and skin fillers">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">skin fillers / botox</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://www.luxemedspa.com/wp-content/uploads/2023/06/skin-laser-treatments-costa-mesa-orange-county.jpg" alt="Laser treatments">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">laser treatments</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://www.luxemedspa.com/wp-content/uploads/2023/06/facial-microneedling-treatments-costa-mesa-orange-county-ca.jpg" alt="Facial and microneedling treatments">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">facials / microneedling</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://www.luxemedspa.com/wp-content/uploads/2023/07/pdo-thread-facial-treatments-costa-mesa-orange-county-oc.jpg" alt="PDO thread treatments">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">pdo treatments</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://www.luxemedspa.com/wp-content/uploads/2021/07/iv-therapy-encino-ca.jpg" alt="IV therapy treatments">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">iv therapy</span>
+      </div>
+      <div class="service-description">Direct nutrient infusion for boosted energy, immunity & wellness</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://www.luxemedspa.com/wp-content/uploads/2023/06/body-sculpting-procedures-costa-mesa-orange-county.jpg" alt="Butt Cupping">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">butt cupping</span>
+      </div>
+      <div class="service-description">Vacuum butt lift cupping therapy</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://www.luxemedspa.com/wp-content/uploads/2023/06/body-sculpting-procedures-costa-mesa-orange-county.jpg" alt="Cavitation & Radio Frequency">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">cavitation & radio frequency</span>
+      </div>
+      <div class="service-description">Transform your body with advanced aesthetic treatments</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://www.luxemedspa.com/wp-content/uploads/2023/06/body-sculpting-procedures-costa-mesa-orange-county.jpg" alt="Lymphatic Massage">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">lymphatic massage</span>
+      </div>
+      <div class="service-description">Lymphatic massage therapy</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://www.luxemedspa.com/wp-content/uploads/2023/06/botox-injections-costa-mesa-orange-county.jpg" alt="Juvederm Ultra 4">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">juvederm ultra 4</span>
+      </div>
+      <div class="service-description">Restore youthful volume & smooth out wrinkles</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://www.luxemedspa.com/wp-content/uploads/2023/06/botox-injections-costa-mesa-orange-county.jpg" alt="Radiesse Filler">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">radiesse filler</span>
+      </div>
+      <div class="service-description">Natural, youthful skin</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://www.luxemedspa.com/wp-content/uploads/2023/06/botox-injections-costa-mesa-orange-county.jpg" alt="Restylane Filler">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">restylane filler</span>
+      </div>
+      <div class="service-description">Soften facial lines, restore volume, and rejuvenate your skin's appearance</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://www.luxemedspa.com/wp-content/uploads/2023/06/botox-injections-costa-mesa-orange-county.jpg" alt="Sculptra Filler">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">sculptra filler</span>
+      </div>
+      <div class="service-description">Restoring your youthful appearance</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://www.luxemedspa.com/wp-content/uploads/2023/06/botox-injections-costa-mesa-orange-county.jpg" alt="Voluma Filler">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">voluma filler</span>
+      </div>
+      <div class="service-description">Enhance and add volume to the cheek area, creating a more youthful and contoured facial profile</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://www.luxemedspa.com/wp-content/uploads/2023/06/botox-injections-costa-mesa-orange-county.jpg" alt="Botox">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">botox</span>
+      </div>
+      <div class="service-description">Turn back the clock on fine lines and wrinkles with targeted injections</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://www.luxemedspa.com/wp-content/uploads/2023/06/facial-microneedling-treatments-costa-mesa-orange-county-ca.jpg" alt="Microneedling">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">microneedling</span>
+      </div>
+      <div class="service-description">Revitalize your skin</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://www.luxemedspa.com/wp-content/uploads/2023/06/facial-microneedling-treatments-costa-mesa-orange-county-ca.jpg" alt="High-Frequency Acne Facial">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">high-frequency acne facial</span>
+      </div>
+      <div class="service-description">Rejuvenate your skin and combat acne</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://www.luxemedspa.com/wp-content/uploads/2023/06/facial-microneedling-treatments-costa-mesa-orange-county-ca.jpg" alt="Radio Frequency Facial">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">radio frequency facial</span>
+      </div>
+      <div class="service-description">Lift, firm and tighten skin</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://www.luxemedspa.com/wp-content/uploads/2023/06/facial-microneedling-treatments-costa-mesa-orange-county-ca.jpg" alt="HydraFacial">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">hydrafacial</span>
+      </div>
+      <div class="service-description">Deeply cleanses, exfoliates, extracts, and hydrates the skin</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://www.luxemedspa.com/wp-content/uploads/2023/06/facial-microneedling-treatments-costa-mesa-orange-county-ca.jpg" alt="Chemical Peels">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">chemical peels</span>
+      </div>
+      <div class="service-description">Revitalize your skin with chemical peel facials</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://www.luxemedspa.com/wp-content/uploads/2023/06/skin-laser-treatments-costa-mesa-orange-county.jpg" alt="Brazilian Laser Treatment">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">brazilian laser treatment</span>
+      </div>
+      <div class="service-description">Brazilian laser hair removal treatment</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://www.luxemedspa.com/wp-content/uploads/2023/06/skin-laser-treatments-costa-mesa-orange-county.jpg" alt="Full Body Laser Hair Removal">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">full body laser hair removal</span>
+      </div>
+      <div class="service-description">Complete laser hair removal treatment</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://www.luxemedspa.com/wp-content/uploads/2023/06/skin-laser-treatments-costa-mesa-orange-county.jpg" alt="Buttocks Laser Treatment">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">buttocks laser treatment</span>
+      </div>
+      <div class="service-description">Enhance your natural curves</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://www.luxemedspa.com/wp-content/uploads/2023/06/skin-laser-treatments-costa-mesa-orange-county.jpg" alt="Fractional Laser Facial Treatment">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">fractional laser facial treatment</span>
+      </div>
+      <div class="service-description">Achieve smoother, more youthful-looking skin</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://www.luxemedspa.com/wp-content/uploads/2023/07/pdo-thread-facial-treatments-costa-mesa-orange-county-oc.jpg" alt="PDO Thread Lift">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">pdo thread lift</span>
+      </div>
+      <div class="service-description">Lift and tighten sagging skin without surgery</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://www.luxemedspa.com/wp-content/uploads/2023/07/pdo-thread-facial-treatments-costa-mesa-orange-county-oc.jpg" alt="PDO Under Eye Treatment">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">pdo under eye treatment</span>
+      </div>
+      <div class="service-description">Refresh and rejuvenate tired eyes with fine threads</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://www.luxemedspa.com/wp-content/uploads/2023/07/pdo-thread-facial-treatments-costa-mesa-orange-county-oc.jpg" alt="PDO Sugar Thread Lift">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">pdo sugar thread lift</span>
+      </div>
+      <div class="service-description">Rejuvenate your skin naturally with absorbable sutures</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://www.luxemedspa.com/wp-content/uploads/2023/06/facial-microneedling-treatments-costa-mesa-orange-county-ca.jpg" alt="HiFU Facial Treatment">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">hifu facial treatment</span>
+      </div>
+      <div class="service-description">For youthful and radiant skin</div>
+    </div>
+  </div>
+</section>
+
+<!-- Team Section -->
+<section class="team" id="team">
+  <div class="team-inner">
+    <h2 class="team-heading">Meet Our<br>Skilled Team</h2>
+    <div class="team-member">
+      <div class="member-info">
+        <span class="member-name">monica alamillo</span>
+        <span class="member-role">skin therapist</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Inquiry Section -->
+<section class="inquiry" id="inquiry">
+  <div class="inquiry-inner">
+    <h2 class="inquiry-heading">Schedule Your<br>Consultation<br>Today</h2>
+    <form class="inquiry-form" onsubmit="event.preventDefault();">
+      <div class="form-field">
+        <input type="text" placeholder="Full name">
+      </div>
+      <div class="form-field">
+        <input type="email" placeholder="Email address">
+      </div>
+      <div class="form-field">
+        <input type="tel" placeholder="Phone number">
+      </div>
+      <div class="form-field">
+        <select onchange="this.classList.toggle('has-value', this.value !== '')">
+          <option value="">Service interested in</option>
+          <option value="body-contouring">Body Contouring</option>
+          <option value="skin-fillers-botox">Skin Fillers / Botox</option>
+          <option value="facials-microneedling">Facials / Microneedling</option>
+          <option value="laser-treatments">Laser Treatments</option>
+          <option value="pdo-treatments">PDO Treatments</option>
+          <option value="iv-therapy">IV Therapy</option>
+          <option value="butt-cupping">Butt Cupping</option>
+          <option value="cavitation-radio-frequency">Cavitation & Radio Frequency</option>
+          <option value="lymphatic-massage">Lymphatic Massage</option>
+          <option value="juvederm-ultra-4">Juvederm Ultra 4</option>
+          <option value="radiesse-filler">Radiesse Filler</option>
+          <option value="restylane-filler">Restylane Filler</option>
+          <option value="sculptra-filler">Sculptra Filler</option>
+          <option value="voluma-filler">Voluma Filler</option>
+          <option value="botox">Botox</option>
+          <option value="microneedling">Microneedling</option>
+          <option value="high-frequency-acne-facial">High-Frequency Acne Facial</option>
+          <option value="radio-frequency-facial">Radio Frequency Facial</option>
+          <option value="hydrafacial">HydraFacial</option>
+          <option value="chemical-peels">Chemical Peels</option>
+          <option value="brazilian-laser-treatment">Brazilian Laser Treatment</option>
+          <option value="full-body-laser-hair-removal">Full Body Laser Hair Removal</option>
+          <option value="buttocks-laser-treatment">Buttocks Laser Treatment</option>
+          <option value="fractional-laser-facial-treatment">Fractional Laser Facial Treatment</option>
+          <option value="pdo-thread-lift">PDO Thread Lift</option>
+          <option value="pdo-under-eye-treatment">PDO Under Eye Treatment</option>
+          <option value="pdo-sugar-thread-lift">PDO Sugar Thread Lift</option>
+          <option value="hifu-facial-treatment">HiFU Facial Treatment</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <textarea placeholder="Message" rows="4"></textarea>
+      </div>
+      <div class="form-submit">
+        <button type="submit">submit inquiry</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 luxe med spa</div>
+  <div class="footer-contact">
+    <a href="tel:(855) 589-3772">(855) 589-3772</a>
+    <a href="mailto:info@luxemedspa.com">info@luxemedspa.com</a>
+    <a href="https://www.google.com/maps/dir//2900+Bristol+St+B203+Costa+Mesa,+CA+92626/@33.6761639,-117.8868684,13z/data=!4m5!4m4!1m0!1m2!1m1!1s0x80dcdf1a52a7c791:0x3299b41aed05e9fc">google business</a>
+  </div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>

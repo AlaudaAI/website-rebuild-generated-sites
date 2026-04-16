@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Juvederm Ultra 4</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Philosophy Section */
+.philosophy {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.philosophy-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.philosophy-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.philosophy-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Project Grid */
+.projects {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.projects-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.project-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.project-cell:last-child {
+  border-bottom: none;
+}
+
+.project-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.project-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.project-cell:hover .project-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: var(--space-xs);
+}
+
+.project-number {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.project-name {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+/* Inquiry Section */
+.inquiry {
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.inquiry-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.inquiry-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.inquiry-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.form-field {
+  position: relative;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  padding: var(--space-sm) 0;
+  color: var(--text-black);
+  outline: none;
+  border-radius: 0;
+  transition: border-bottom-width 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: var(--placeholder-gray);
+  font-style: italic;
+  font-family: var(--font-serif);
+  font-weight: 300;
+}
+
+.form-field select {
+  cursor: pointer;
+  color: var(--placeholder-gray);
+  font-style: italic;
+}
+
+.form-field select.has-value {
+  color: var(--text-black);
+  font-style: normal;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-bottom-width: 2px;
+}
+
+.form-submit {
+  align-self: flex-start;
+}
+
+.form-submit button {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.form-submit button:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .philosophy-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .project-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .project-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .project-cell:nth-child(1),
+  .project-cell:nth-child(2) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .inquiry-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .philosophy {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .projects {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .inquiry {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: 160px var(--pad-x, 1.5rem) 60px;
+    background: var(--text-black, var(--text-primary, var(--bg-primary, #1a1a1a)));
+    color: var(--bg-cream, var(--nav-text, #ffffff));
+  }
+  .page-title-inner { max-width: 1200px; margin: 0 auto; }
+  .page-title-area h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 600; line-height: 1.1; letter-spacing: -0.03em; }
+
+  /* Content Area */
+  .content-area { padding: 64px var(--pad-x, 1.5rem); max-width: 1200px; margin: 0 auto; }
+  .content-area h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600; line-height: 1.15; margin-bottom: 24px; }
+  .content-area h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 16px; }
+  .content-area p { font-size: 1rem; line-height: 1.7; margin-bottom: 24px; }
+  .content-area ul, .content-area ol { margin-bottom: 24px; padding-left: 24px; }
+  .content-area li { margin-bottom: 8px; line-height: 1.7; }
+  .content-area img { max-width: 100%; height: auto; border-radius: 12px; margin-bottom: 24px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Juvederm Ultra 4</a>
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/services">Services</a></li>
+    <li><a href="/contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Juvederm Ultra 4</h1>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+  <h3>Restore youthful volume & smooth out wrinkles</h3>
+
+  <h2>GET A FREE CONSULTATION! CALL OUR OFFICE TODAY!</h2>
+  <p>Let one of our experienced doctors customize a solution that's right for you.</p>
+  <p><a href="tel:8555893772">Call (855) 589-3772</a></p>
+
+  <p>Experience the rejuvenating touch of Juvederm Ultra 4. This unique, non-surgical filler revitalizes your features, softly smoothing wrinkles and bringing back the plush fullness of youth to your lips and cheeks. Step into the realm of timeless elegance with Juvederm Ultra 4 – because you deserve the luxury of looking as vibrant as you feel.</p>
+
+  <h2>Benefits of Juvederm Ultra 4</h2>
+  <p>Juvederm Ultra 4 can provide numerous benefits, including:</p>
+  <ul>
+    <li>Smoothing out deep wrinkles and folds</li>
+    <li>Restoring lost volume in areas such as the cheeks, temples, and chin</li>
+    <li>Enhancing facial contours and definition</li>
+    <li>Providing a more youthful, refreshed appearance</li>
+    <li>Long-lasting results that can last up to 12-18 months</li>
+  </ul>
+
+  <h2>Treatment Type</h2>
+  <p>Juvederm Ultra 4 is a non-surgical cosmetic treatment that injects a smooth gel into the skin. The gel is made of hyaluronic acid, a naturally occurring substance that helps hydrate and plump up the skin. The treatment is minimally invasive and typically takes around 30 minutes to complete.</p>
+
+  <img src="https://www.luxemedspa.com/wp-content/uploads/2023/05/Juvederm.png">
+
+  <h2>Who's a good candidate?</h2>
+  <p>Good candidates for Juvederm Ultra 4 treatment include those looking to add volume and fullness to their cheeks, chin, or temples or those who want to fill in deep wrinkles and folds around the mouth, nose, and forehead. It is important to consult with a licensed and experienced healthcare provider to determine if Juvederm Ultra 4 is the right treatment for your specific concerns and goals. Pregnant and/or breastfeeding patients should not receive Juvederm Ultra 4 injections.</p>
+
+  <h2>What to expect during the procedure</h2>
+  <p>During the Juvederm Ultra 4 procedure, a trained medical professional will use a fine needle to inject the gel into the targeted areas of your face. The procedure is generally well-tolerated and relatively painless, but a local anesthetic cream or injection may be used to minimize any discomfort.</p>
+
+  <h2>What to expect after the treatment</h2>
+  <p>After the Juvederm Ultra 4 procedure, patients can expect some swelling, bruising, and redness around the injection site. These side effects are usually mild and should resolve within a few days. Patients can resume their normal activities immediately after treatment, but it is recommended to avoid strenuous exercise, sun exposure, and alcohol consumption for 24-48 hours after the procedure.</p>
+
+  <h2>Recovery time</h2>
+  <p>Following the Juvederm Ultra 4 treatment, you may experience some redness, swelling, or bruising at the injection sites. These side effects are typically mild and should subside within a few days. Most people are able to resume their normal activities immediately after the procedure.</p>
+
+  <img src="https://www.luxemedspa.com/wp-content/uploads/2023/05/Juvederm-4.png">
+
+  <h2>GET A FREE CONSULTATION! CALL OUR OFFICE TODAY!</h2>
+  <p>Let one of our experienced doctors customize a solution that's right for you.</p>
+  <p><a href="tel:8555893772">Call (855) 589-3772</a></p>
+
+  <h2>Do's and Don'ts Before and After the Procedure</h2>
+  <p>To ensure the best possible results and minimize any potential complications, there are some important do's and don'ts to keep in mind before and after your Juvederm Ultra 4 treatment:</p>
+
+  <p><strong>Before the procedure:</strong></p>
+  <ul>
+    <li>Avoid taking aspirin, ibuprofen, or any other blood-thinning medications for at least a week before the procedure</li>
+    <li>Avoid alcohol and smoking for at least 24 hours before the treatment</li>
+    <li>Inform your medical professional if you have any allergies, medical conditions, or are taking any medications</li>
+  </ul>
+
+  <p><strong>After the procedure:</strong></p>
+  <ul>
+    <li>Avoid touching or massaging the treated areas for at least 24 hours after the procedure</li>
+    <li>Avoid strenuous exercise, exposure to extreme heat or cold, and excessive sun exposure for at least 24 hours after the treatment</li>
+    <li>Use a cold compress to reduce swelling and bruising if necessary</li>
+    <li>Follow any additional instructions provided by your medical professional</li>
+  </ul>
+
+  <h2>Our Other Services</h2>
+  <p>Discover our comprehensive range of aesthetic treatments:</p>
+
+  <h3>Butt Cupping</h3>
+  <p>Vacuum butt lift cupping therapy</p>
+
+  <h3>Cavitation & Radio Frequency</h3>
+  <p>Transform your body with advanced aesthetic treatments</p>
+
+  <h3>Lymphatic Massage</h3>
+  <p>Lymphatic massage therapy</p>
+
+  <h3>Radiesse Filler</h3>
+  <p>Natural, youthful skin</p>
+
+  <h3>Restylane Filler</h3>
+  <p>Soften facial lines, restore volume, and rejuvenate your skin's appearance</p>
+
+  <h3>Sculptra Filler</h3>
+  <p>Restoring your youthful appearance</p>
+
+  <h3>Voluma Filler</h3>
+  <p>Enhance and add volume to the cheek area, creating a more youthful and contoured facial profile</p>
+
+  <h3>Botox</h3>
+  <p>Turn back the clock on fine lines and wrinkles with targeted injections</p>
+
+  <h3>Microneedling</h3>
+  <p>Revitalize your skin</p>
+
+  <h3>High-Frequency Acne Facial</h3>
+  <p>Rejuvenate your skin and combat acne</p>
+
+  <h3>Radio Frequency Facial</h3>
+  <p>Lift, firm and tighten skin</p>
+
+  <h3>HydraFacial</h3>
+  <p>Deeply cleanses, exfoliates, extracts, and hydrates the skin</p>
+
+  <h3>Chemical Peels</h3>
+  <p>Revitalize your skin with chemical peel facials</p>
+
+  <h3>Brazilian Laser Treatment</h3>
+  <p>Brazilian laser hair removal treatment</p>
+
+  <h3>Full Body Laser Hair Removal</h3>
+  <p>Complete laser hair removal treatment</p>
+
+  <h3>Buttocks Laser Treatment</h3>
+  <p>Enhance your natural curves</p>
+
+  <h3>Fractional Laser Facial Treatment</h3>
+  <p>Achieve smoother, more youthful-looking skin</p>
+
+  <h3>PDO Thread Lift</h3>
+  <p>Lift and tighten sagging skin without surgery</p>
+
+  <h3>PDO Under Eye Treatment</h3>
+  <p>Refresh and rejuvenate tired eyes with fine threads</p>
+
+  <h3>PDO Sugar Thread Lift</h3>
+  <p>Rejuvenate your skin naturally with absorbable sutures</p>
+
+  <h3>IV Therapy</h3>
+  <p>Direct nutrient infusion for boosted energy, immunity & wellness</p>
+
+  <h3>HiFU Facial Treatment</h3>
+  <p>For youthful and radiant skin</p>
+
+  <h2>Reclaim Your Youthful Radiance</h2>
+  <p>Rejuvenate your appearance with Juvederm Ultra 4. Embrace a youthful vibrancy and transform your beauty narrative. Connect with us today.</p>
+  <p><a href="tel:8555893772">Call (855) 589-3772</a></p>
+</div>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Juvederm Ultra 4</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
