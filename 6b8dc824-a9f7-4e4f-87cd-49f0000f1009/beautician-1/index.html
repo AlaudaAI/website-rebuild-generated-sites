@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home — Creative Pixel Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f0eb;
+    --text: #1a1a1a;
+    --border: #1a1a1a;
+    --placeholder: rgba(26, 26, 26, 0.25);
+    --hover-bg: #1a1a1a;
+    --hover-text: #f5f0eb;
+    --spacing-base: 2rem;
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+    --font-mono: 'Space Mono', 'Courier New', monospace;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-serif);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ==================== NAVIGATION ==================== */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    mix-blend-mode: difference;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: none;
+    list-style: none;
+    gap: 2.5rem;
+  }
+
+  .nav-links li a {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: lowercase;
+    color: #fff;
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 4px;
+  }
+
+  .nav-links li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #fff;
+    transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .nav-links li a:hover::after {
+    width: 100%;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+    mix-blend-mode: normal;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 1px;
+    background: #fff;
+    transition: all 0.3s ease;
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(4px, 4px);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(4px, -4px);
+  }
+
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--text);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+
+  .mobile-menu.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .mobile-menu a {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    text-transform: lowercase;
+    color: var(--bg);
+    text-decoration: none;
+    padding: 0.5rem 0;
+    position: relative;
+  }
+
+  .mobile-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--bg);
+    transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .mobile-menu a:hover::after {
+    width: 100%;
+  }
+
+  /* ==================== HERO ==================== */
+  .hero {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 6rem 2rem;
+  }
+
+  .hero-content {
+    animation: fadeInUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hero h1 {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: clamp(3rem, 10vw, 5.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 2rem;
+  }
+
+  .hero-subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    line-height: 1.8;
+    text-transform: lowercase;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  /* ==================== FOOTER ==================== */
+  footer {
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: lowercase;
+  }
+
+  .footer-copyright {
+    opacity: 0.7;
+  }
+
+  .footer-locations {
+    opacity: 0.7;
+  }
+
+  /* ==================== TABLET (768px) ==================== */
+  @media (min-width: 768px) {
+    nav {
+      padding: 2rem 3rem;
+    }
+
+    .nav-links {
+      display: flex;
+    }
+
+    .hamburger {
+      display: none;
+    }
+
+    .hero {
+      padding: 8rem 4rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(4rem, 9vw, 6rem);
+    }
+
+    footer {
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 2rem 3rem;
+    }
+  }
+
+  /* ==================== DESKTOP (1024px) ==================== */
+  @media (min-width: 1024px) {
+    nav {
+      padding: 2rem 4rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(5rem, 8vw, 7.5rem);
+    }
+
+    .hero-subtitle {
+      font-size: 0.7rem;
+    }
+
+    footer {
+      padding: 2rem 4rem;
+    }
+  }
+
+  /* ==================== LARGE DESKTOP (1440px+) ==================== */
+  @media (min-width: 1440px) {
+    nav {
+      padding: 2.5rem 6rem;
+    }
+
+    .hero {
+      padding: 10rem 6rem;
+    }
+
+    footer {
+      padding: 2.5rem 6rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav>
+  <a href="#" class="nav-logo">{{title}}</a>
+  <ul class="nav-links">
+      {{nav}}
+    </ul>
+  <button class="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+</div>
+
+<!-- Hero Header -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Creative<br>Pixel Studio</h1>
+    <p class="hero-subtitle">/00 — digital craft meets<br>creative vision</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-copyright">© 2024 {{title}}</div>
+  <div class="footer-locations">london — new york — tokyo</div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
+    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+  }
+
+  function closeMenu() {
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.classList.remove('active');
+    mobileMenu.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+</script>
+
+</body>
+</html>
