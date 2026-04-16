@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Example Domain</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  :root {
+    --bg-cream: #f7f3ee;
+    --bg-white: #ffffff;
+    --text-dark: #1a1a1f;
+    --text-grey: #6b6b76;
+    --text-light-grey: #9a9aa6;
+    --accent-orange: #e8603c;
+    --accent-orange-dark: #d14e2c;
+    --accent-lavender: #b8a9e8;
+    --accent-lavender-bg: #eee8fb;
+    --success-green: #3cc28a;
+    --border-light: rgba(0,0,0,0.08);
+    --shadow-card: 0 12px 40px rgba(0,0,0,0.1);
+    --shadow-small: 0 4px 16px rgba(0,0,0,0.06);
+    --radius-pill: 100px;
+    --radius-card: 16px;
+    --radius-sm: 10px;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 40px;
+    --space-2xl: 64px;
+    --space-3xl: 96px;
+    --container-max: 1280px;
+    --transition: 0.25s ease;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--bg-cream);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3 {
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+    line-height: 1.15;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+  }
+
+  /* ===== NAVIGATION ===== */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--bg-cream);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .nav-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md) var(--space-lg);
+    height: 64px;
+  }
+
+  .nav-logo {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent-orange);
+  }
+
+  .nav-links {
+    display: none;
+    list-style: none;
+    gap: var(--space-xl);
+    align-items: center;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-grey);
+    transition: color var(--transition);
+  }
+
+  .nav-links a:hover {
+    color: var(--text-dark);
+  }
+
+  .nav-cta {
+    background-color: var(--text-dark);
+    color: var(--bg-white);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 24px;
+    border-radius: var(--radius-pill);
+    transition: background-color var(--transition), transform var(--transition);
+  }
+
+  .nav-cta:hover {
+    background-color: #2d2d35;
+    transform: translateY(-1px);
+  }
+
+  /* ===== HERO SECTION ===== */
+  .hero {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: var(--space-xl) var(--space-lg) var(--space-2xl);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    align-items: center;
+    min-height: calc(100vh - 64px);
+  }
+
+  .hero-content {
+    max-width: 560px;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(36px, 6vw, 64px);
+    letter-spacing: -0.5px;
+    color: var(--text-dark);
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero-content h1 span {
+    display: inline;
+  }
+
+  .hero-content p {
+    font-size: clamp(15px, 1.2vw, 17px);
+    color: var(--text-grey);
+    line-height: 1.7;
+    margin-bottom: var(--space-xl);
+    max-width: 440px;
+  }
+
+  .hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 14px 32px;
+    border: 1.5px solid var(--text-dark);
+    border-radius: var(--radius-pill);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-dark);
+    background: transparent;
+    transition: all var(--transition);
+  }
+
+  .hero-btn:hover {
+    background-color: var(--text-dark);
+    color: var(--bg-white);
+    transform: translateY(-2px);
+  }
+
+  .hero-btn i {
+    font-size: 12px;
+    transition: transform var(--transition);
+  }
+
+  .hero-btn:hover i {
+    transform: translateX(3px);
+  }
+
+  /* ===== HERO VISUAL (Floating Cards) ===== */
+  .hero-visual {
+    position: relative;
+    width: 100%;
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .float-card {
+    position: absolute;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  /* Purple Insurance Card */
+  .card-insurance {
+    background: var(--accent-lavender-bg);
+    padding: var(--space-lg);
+    width: clamp(200px, 52%, 260px);
+    top: 0;
+    left: 5%;
+    animation: floatA 5s ease-in-out infinite;
+    z-index: 2;
+  }
+
+  .card-insurance-star {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 28px;
+    height: 28px;
+    background: var(--accent-lavender);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+  }
+
+  .card-insurance-label {
+    font-size: 12px;
+    color: var(--text-grey);
+    font-weight: 500;
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .card-insurance-value {
+    font-size: clamp(36px, 4vw, 48px);
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1;
+    margin-bottom: var(--space-xs);
+  }
+
+  .card-insurance-sub {
+    font-size: 13px;
+    color: var(--text-grey);
+  }
+
+  /* White Appointment Card */
+  .card-appointments {
+    background: var(--bg-white);
+    padding: var(--space-lg);
+    width: clamp(220px, 58%, 300px);
+    bottom: 0;
+    right: 2%;
+    animation: floatB 6.5s ease-in-out infinite;
+    z-index: 3;
+  }
+
+  .card-appointments-header {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: var(--space-md);
+  }
+
+  .appointment-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .appointment-item:last-child {
+    border-bottom: none;
+  }
+
+  .appointment-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #e2e2e8;
+    flex-shrink: 0;
+  }
+
+  .appointment-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-dark);
+  }
+
+  .appointment-type {
+    font-size: 11px;
+    color: var(--text-grey);
+  }
+
+  .appointment-price {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dark);
+  }
+
+  /* Status Badge Card */
+  .card-status {
+    background: var(--bg-white);
+    padding: 12px 18px;
+    width: auto;
+    white-space: nowrap;
+    top: 55%;
+    left: 0;
+    animation: floatC 4.5s ease-in-out infinite;
+    z-index: 4;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-small);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--success-green);
+    flex-shrink: 0;
+  }
+
+  .card-status span {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-dark);
+  }
+
+  @keyframes floatA {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+  }
+
+  @keyframes floatB {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes floatC {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  /* ===== SPLIT FINANCING SECTION ===== */
+  .split-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .split-left {
+    background: var(--bg-white);
+    padding: var(--space-2xl) var(--space-lg);
+  }
+
+  .split-left-inner {
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .split-left h2 {
+    font-size: clamp(28px, 4vw, 44px);
+    color: var(--text-dark);
+    margin-bottom: var(--space-lg);
+    line-height: 1.2;
+  }
+
+  .split-left p {
+    font-size: 15px;
+    color: var(--text-grey);
+    line-height: 1.7;
+    margin-bottom: var(--space-xl);
+    max-width: 420px;
+  }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border-light);
+    margin-bottom: var(--space-xl);
+  }
+
+  .savings-metric {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .savings-label {
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-light-grey);
+  }
+
+  .savings-value {
+    font-size: clamp(36px, 5vw, 52px);
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1;
+  }
+
+  .savings-note {
+    font-size: 13px;
+    color: var(--text-grey);
+    margin-top: var(--space-xs);
+  }
+
+  /* Split Right - Calculator */
+  .split-right {
+    background: var(--accent-orange);
+    padding: var(--space-2xl) var(--space-lg);
+    color: var(--bg-white);
+  }
+
+  .split-right-inner {
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .calc-label {
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    opacity: 0.8;
+    margin-bottom: var(--space-md);
+  }
+
+  .calc-amount {
+    font-size: clamp(48px, 7vw, 72px);
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: var(--space-xl);
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  /* Slider */
+  .slider-container {
+    position: relative;
+    margin-bottom: var(--space-xl);
+    padding: var(--space-md) 0;
+  }
+
+  .slider-track {
+    width: 100%;
+    height: 3px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 2px;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .slider-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: var(--bg-white);
+    border-radius: 2px;
+    pointer-events: none;
+    transition: width 0.05s;
+  }
+
+  .slider-handle {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 28px;
+    height: 28px;
+    background: var(--text-dark);
+    cursor: grab;
+    z-index: 2;
+    clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+    transition: none;
+  }
+
+  .slider-handle:active {
+    cursor: grabbing;
+  }
+
+  .slider-range {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    opacity: 0.7;
+    margin-top: var(--space-sm);
+  }
+
+  /* Payment Grid */
+  .payment-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+  }
+
+  .payment-item {
+    background: rgba(255,255,255,0.12);
+    border-radius: var(--radius-sm);
+    padding: var(--space-md);
+  }
+
+  .payment-item-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    opacity: 0.7;
+    margin-bottom: var(--space-xs);
+  }
+
+  .payment-item-value {
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  .calc-cta {
+    display: block;
+    width: 100%;
+    background: var(--bg-white);
+    color: var(--accent-orange);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 16px;
+    border-radius: var(--radius-pill);
+    text-align: center;
+    transition: all var(--transition);
+  }
+
+  .calc-cta:hover {
+    background: var(--bg-cream);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  }
+
+  /* ===== CHAT WIDGET ===== */
+  .chat-widget {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 56px;
+    height: 56px;
+    background: var(--text-dark);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 22px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    cursor: pointer;
+    z-index: 999;
+    transition: all var(--transition);
+  }
+
+  .chat-widget:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (min-width: 768px) {
+    .nav-inner {
+      padding: var(--space-md) var(--space-xl);
+      height: 72px;
+    }
+
+    .nav-links {
+      display: flex;
+    }
+
+    .hero {
+      padding: var(--space-2xl) var(--space-xl) var(--space-3xl);
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2xl);
+    }
+
+    .hero-visual {
+      min-height: 480px;
+    }
+
+    .split-section {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .split-left {
+      padding: var(--space-3xl) var(--space-2xl);
+    }
+
+    .split-right {
+      padding: var(--space-3xl) var(--space-2xl);
+    }
+
+    .split-left-inner,
+    .split-right-inner {
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .nav-inner {
+      padding: var(--space-md) var(--space-2xl);
+    }
+
+    .hero {
+      padding: var(--space-3xl) var(--space-2xl);
+    }
+
+    .hero-visual {
+      min-height: 520px;
+    }
+
+    .card-insurance {
+      left: 10%;
+    }
+
+    .card-appointments {
+      right: 5%;
+    }
+
+    .card-status {
+      left: 2%;
+    }
+
+    .split-left {
+      padding: var(--space-3xl) var(--space-3xl);
+    }
+
+    .split-right {
+      padding: var(--space-3xl) var(--space-3xl);
+    }
+
+    .split-left-inner {
+      margin-left: auto;
+      margin-right: var(--space-2xl);
+    }
+
+    .split-right-inner {
+      margin-right: auto;
+      margin-left: var(--space-2xl);
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<!-- Navigation -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">{{title}}</a>
+    <ul class="nav-links">
+    {{nav}}
+  </ul>
+    <button class="nav-cta">Get Started</button>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>This domain is for use in documentation examples without needing permission</h1>
+    <p>Avoid use in operations.</p>
+    <a href="https://iana.org/domains/example" class="hero-btn">
+      Learn more <i class="fas fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="hero-visual">
+    <!-- Purple Insurance Card -->
+    <div class="float-card card-insurance">
+      <div class="card-insurance-star">
+        <i class="fas fa-star"></i>
+      </div>
+      <div class="card-insurance-label">Documentation</div>
+      <div class="card-insurance-value">100%</div>
+      <div class="card-insurance-sub">Verified example</div>
+    </div>
+
+    <!-- White Appointment Card -->
+    <div class="float-card card-appointments">
+      <div class="card-appointments-header">Example Use Cases</div>
+      <div class="appointment-item">
+        <div class="appointment-left">
+          <div class="avatar"></div>
+          <div>
+            <div class="appointment-name">Documentation</div>
+            <div class="appointment-type">Example — Testing</div>
+          </div>
+        </div>
+        <div class="appointment-price">Free</div>
+      </div>
+      <div class="appointment-item">
+        <div class="appointment-left">
+          <div class="avatar"></div>
+          <div>
+            <div class="appointment-name">Tutorials</div>
+            <div class="appointment-type">Example — Learning</div>
+          </div>
+        </div>
+        <div class="appointment-price">Free</div>
+      </div>
+    </div>
+
+    <!-- Status Badge -->
+    <div class="float-card card-status">
+      <div class="status-dot"></div>
+      <span>Domain Available</span>
+    </div>
+  </div>
+</section>
+
+<!-- Split Section -->
+<section class="split-section">
+  <div class="split-left">
+    <div class="split-left-inner">
+      <h2>Example Domain for documentation purposes</h2>
+      <p>This domain is established to be used for illustrative examples in documents. You may use this domain in literature without prior coordination or asking for permission.</p>
+      <div class="divider"></div>
+      <div class="savings-metric">
+        <span class="savings-label">Available Since</span>
+        <span class="savings-value">1999</span>
+        <span class="savings-note">Reserved for documentation use</span>
+      </div>
+    </div>
+  </div>
+  <div class="split-right">
+    <div class="split-right-inner">
+      <div class="calc-label">Domain Example</div>
+      <div class="calc-amount" id="calcAmount">example.com</div>
+
+      <div class="slider-container">
+        <div class="slider-track" id="sliderTrack">
+          <div class="slider-fill" id="sliderFill" style="width: 50%;"></div>
+          <div class="slider-handle" id="sliderHandle" style="left: 50%;"></div>
+        </div>
+        <div class="slider-range">
+          <span>Simple</span>
+          <span>Complex</span>
+        </div>
+      </div>
+
+      <div class="payment-grid">
+        <div class="payment-item">
+          <div class="payment-item-label">Documentation</div>
+          <div class="payment-item-value" id="monthlyPayment">Free</div>
+        </div>
+        <div class="payment-item">
+          <div class="payment-item-label">Examples</div>
+          <div class="payment-item-value" id="duration">Unlimited</div>
+        </div>
+        <div class="payment-item">
+          <div class="payment-item-label">Permission</div>
+          <div class="payment-item-value">Not Required</div>
+        </div>
+        <div class="payment-item">
+          <div class="payment-item-label">Usage</div>
+          <div class="payment-item-value" id="downPayment">Open</div>
+        </div>
+      </div>
+
+      <a href="https://iana.org/domains/example" class="calc-cta">Learn More</a>
+    </div>
+  </div>
+</section>
+
+<!-- Chat Widget -->
+<div class="chat-widget" title="Chat with us">
+  <i class="far fa-comment-dots"></i>
+</div>
+
+<script>
+  // Slider logic
+  const sliderTrack = document.getElementById('sliderTrack');
+  const sliderFill = document.getElementById('sliderFill');
+  const sliderHandle = document.getElementById('sliderHandle');
+  const calcAmount = document.getElementById('calcAmount');
+
+  let isDragging = false;
+
+  function updateSlider(percent) {
+    percent = Math.max(0, Math.min(1, percent));
+
+    sliderFill.style.width = (percent * 100) + '%';
+    sliderHandle.style.left = (percent * 100) + '%';
+  }
+
+  function getPercent(e) {
+    const rect = sliderTrack.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    return (clientX - rect.left) / rect.width;
+  }
+
+  sliderHandle.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    e.preventDefault();
+  });
+
+  sliderHandle.addEventListener('touchstart', (e) => {
+    isDragging = true;
+  }, { passive: true });
+
+  document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    updateSlider(getPercent(e));
+  });
+
+  document.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    updateSlider(getPercent(e));
+  }, { passive: true });
+
+  document.addEventListener('mouseup', () => { isDragging = false; });
+  document.addEventListener('touchend', () => { isDragging = false; });
+
+  sliderTrack.addEventListener('click', (e) => {
+    updateSlider(getPercent(e));
+  });
+
+  // Initialize
+  updateSlider(0.5);
+</script>
+
+</body>
+</html>
