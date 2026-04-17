@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Royal Bliss Day Spa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background: url('https://images.squarespace-cdn.com/content/v1/621faf6f39af57794d4cda3d/1646416783800-2M66FAGKYDIGE6XMLWL4/dana-devolk-x2cNcfz_xXU-unsplash.jpg') center center/cover no-repeat;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(244, 240, 234, 0.85);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Philosophy Section */
+.philosophy {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.philosophy-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.philosophy-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.philosophy-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.service-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.service-cell:last-child {
+  border-bottom: none;
+}
+
+.service-meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.service-name {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.service-description {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: rgba(26, 26, 26, 0.8);
+  line-height: 1.5;
+}
+
+/* Team Section */
+.team {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.team-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.team-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.team-member {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.member-name {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+}
+
+.member-role {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 300;
+  font-style: italic;
+  margin-bottom: var(--space-sm);
+}
+
+.member-bio {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* Contact Section */
+.contact {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.contact-info {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 2;
+}
+
+.contact-info a {
+  text-decoration: underline;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 767px) {
+  .nav-links {
+    display: none;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .philosophy-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .service-cell:nth-child(odd):nth-last-child(-n+2) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .philosophy {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .team {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .contact {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Royal Bliss Day Spa</a>
+  <ul class="nav-links">
+    <li><a href="#services">treatments</a></li>
+    <li><a href="#team">team</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">Your home town spa.</h1>
+    <p class="hero-subtitle">001 — welcome to royal bliss day spa where we help you restore, retouch, and relax through every season of life</p>
+  </div>
+</section>
+
+<!-- Philosophy Section -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">002 — our mission</span>
+    <div class="philosophy-text">
+      <p>Welcome to Royal Bliss Day Spa - your hometown spa.</p>
+      <p>We have a passion to help women and men of all ages to take the best care of their skin by educating them through the different seasons of life. Many factors can change the way our skin behaves. Stress. Weather. Pregnancy. Age.</p>
+      <p>Do yourself a favor and make an appointment to visit us for a luscious and relaxing treatment. We can then teach you techniques and show you products that will help maintain your natural glow and beauty.</p>
+      <p>We all need to: Restore. Retouch. Relax.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="services" id="services">
+  <div class="services-grid">
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">Hydrafacials</span>
+        <span class="service-description">The most effective facial treatment available today utilizing specially designed HydroPeel tip and patented vacuum technology</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">Royal Deluxe Facial</span>
+        <span class="service-description">Luxurious head, neck & face massage with the ultimate facial geared towards your skin's specific needs - $110</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">Dermaplaning</span>
+        <span class="service-description">Safe, non-invasive treatment that exfoliates skin while removing fine hairs - $130</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">LED Light Facial</span>
+        <span class="service-description">Specialized, noninvasive facial treats different skin concerns with LED light therapy - $105</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">Flow & Glow Cupping</span>
+        <span class="service-description">Promotes nutrient-rich blood flow and microcirculation for healthier skin - $105</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">o2 Derm Oxygen Infusion</span>
+        <span class="service-description">Perfect facial before special events using 90% oxygen for healthy glow - $115</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">Microcurrent Facial</span>
+        <span class="service-description">Facelift with no needles using microcurrents to plump and lift the skin - $105</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">Head Spa Basic</span>
+        <span class="service-description">Multi-step scalp treatment with analysis, massage, cleanse, and nourishing mask - $135</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">Head Spa Deluxe</span>
+        <span class="service-description">Enhanced scalp treatment with aromatherapy steam and hydrating hair treatment - $165</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">Swedish Massage</span>
+        <span class="service-description">Relaxing massage to increase oxygen levels and improve circulation</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">Deep Tissue Massage</span>
+        <span class="service-description">Improves circulation, reduces minor aches and pain, increases range of motion</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">Hot Stone Massage</span>
+        <span class="service-description">Swedish massage with heated stones to promote muscle relaxation - 60 min $135</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">Reflexology</span>
+        <span class="service-description">Focuses on specific pressure points within feet to correct energy flows - $100</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">Cupping Massage</span>
+        <span class="service-description">Uses suction cups to increase circulation and help muscle tension - 60 min $135</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">Gua Sha</span>
+        <span class="service-description">Traditional Chinese healing method using smooth-edged tool to increase circulation - 60 min $135</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">Manual Lymphatic Drainage</span>
+        <span class="service-description">Gentle massage to encourage natural drainage of the lymph - 60 min $135</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">Pre-natal Massage</span>
+        <span class="service-description">Specially designed for expecting women with cushions and side-lying postures - 60 min $135</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">Eyelash Lift</span>
+        <span class="service-description">Beautiful curl for appearance of long, full lashes - $75</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">Eyelash Tint</span>
+        <span class="service-description">Perfect for darker lashes all the time - $20</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">Eyebrow Tint</span>
+        <span class="service-description">Obtain dark and bolder brows - $23</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">Eyebrow Lamination</span>
+        <span class="service-description">Straighten hairs to last long time period, no more eyebrow gel - $50</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">Eyes of Royalty</span>
+        <span class="service-description">Eyebrow Lamination, Tint & Wax followed by Eyelash Lift and Tint - $165</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">Medical Weight Loss</span>
+        <span class="service-description">GLP-1 weight loss treatment starting at $400/month with included Hydrafacial</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">Wellness Injections</span>
+        <span class="service-description">Various injections including B12, Glutathione, Beauty, Fitness, Immunity - $20-40</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">Chemical Peels</span>
+        <span class="service-description">Professional-grade solution to exfoliate and reveal fresher skin - starting at $130</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">Micro-Needling</span>
+        <span class="service-description">Stimulates collagen production to smooth fine lines and improve texture - $350</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">Sculptra</span>
+        <span class="service-description">Dermal filler that stimulates natural collagen production for facial contouring</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">Dysport</span>
+        <span class="service-description">FDA-approved neuromodulator that relaxes facial muscles to smooth wrinkles</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">LaseMD Ultra</span>
+        <span class="service-description">Innovative laser technology for comprehensive skin rejuvenation</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">Waxing Services</span>
+        <span class="service-description">Full range of waxing services for face and body</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">Makeup Services</span>
+        <span class="service-description">Event makeup, wedding makeup, and makeup instruction</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-name">Men's Services</span>
+        <span class="service-description">Beard facials, back facials, and waxing services for men</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team Section -->
+<section class="team" id="team">
+  <div class="team-inner">
+    <h2 class="team-heading">Our<br>Expert<br>Team</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <div class="member-name">brylee horinka</div>
+        <div class="member-role">Esthetician & Massage Therapist</div>
+        <div class="member-bio">Managing esthetician, massage therapist and owner of Royal Bliss Day Spa with a true passion for skincare and helping others. Graduated top of her class from Ann Webb Skin Institute in 2019.</div>
+      </div>
+      <div class="team-member">
+        <div class="member-name">briana grimes</div>
+        <div class="member-role">Massage Therapist</div>
+        <div class="member-bio">Licensed massage therapist who specializes in Swedish massage, deep-tissue work, cupping, and scraping. Passionate about helping clients relax, reduce pain, and reconnect with their bodies.</div>
+      </div>
+      <div class="team-member">
+        <div class="member-name">kylie funk</div>
+        <div class="member-role">Esthetician</div>
+        <div class="member-bio">Graduated at the top of her class from Ann Webb in May of 2022. Loves helping people feel relaxed while tending to their skincare needs and goals.</div>
+      </div>
+      <div class="team-member">
+        <div class="member-name">sydney gray</div>
+        <div class="member-role">Esthetician</div>
+        <div class="member-bio">Skin specialist passionate about advanced treatments like microneedling, facials, chemical peels, laser services. Originally from Arizona and a former athlete.</div>
+      </div>
+      <div class="team-member">
+        <div class="member-name">eva huddleston</div>
+        <div class="member-role">Esthetician</div>
+        <div class="member-bio">Licensed esthetician with 16 years as a Radiation Therapist background. Specializes in microneedling, dermaplaning, laser treatments, and customized facials.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-heading">Visit<br>Your<br>Hometown<br>Spa</h2>
+    <div class="contact-info">
+      <p><a href="tel:16464167838">(646) 416-7838</a></p>
+      <p><a href="mailto:royalblissdayspa@yahoo.com">royalblissdayspa@yahoo.com</a></p>
+      <p>12701 hwy 29 w, ste 5<br>liberty hill, texas 78642</p>
+      <br>
+      <p>monday 9:00 am - 5:00 pm</p>
+      <p>tuesday 9:00 am - 7:00 pm</p>
+      <p>wednesday 9:00 am - 5:00 pm</p>
+      <p>thursday 9:00 am - 7:00 pm</p>
+      <p>friday 9:00 am - 5:00 pm</p>
+      <p>saturday 9:00 am - 3:00 pm</p>
+      <br>
+      <p><a href="https://www.facebook.com/Royalblissdayspallc">facebook</a></p>
+      <p><a href="https://www.instagram.com/royal.bliss.med.spa/?hl=en">instagram</a></p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Royal Bliss Day Spa</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
