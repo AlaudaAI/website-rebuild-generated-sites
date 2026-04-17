@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beauty Revival Barn — refreshed, radiant, and confidently yourself.</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f0eb;
+  --text: #1a1a1a;
+  --border: #1a1a1a;
+  --placeholder: rgba(26, 26, 26, 0.25);
+  --hover-bg: #1a1a1a;
+  --hover-text: #f5f0eb;
+  --spacing-base: 2rem;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-serif);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==================== NAVIGATION ==================== */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  mix-blend-mode: difference;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: none;
+  list-style: none;
+  gap: 2.5rem;
+}
+
+.nav-links li a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: lowercase;
+  color: #fff;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.nav-links li a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #fff;
+  transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.nav-links li a:hover::after {
+  width: 100%;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+  mix-blend-mode: normal;
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: #fff;
+  transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(4px, 4px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(4px, -4px);
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: var(--text);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.mobile-menu.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.mobile-menu a {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.15em;
+  text-transform: lowercase;
+  color: var(--bg);
+  text-decoration: none;
+  padding: 0.5rem 0;
+  position: relative;
+}
+
+.mobile-menu a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--bg);
+  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.mobile-menu a:hover::after {
+  width: 100%;
+}
+
+/* ==================== HERO ==================== */
+.hero {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 6rem 2rem;
+  position: relative;
+}
+
+.hero-content {
+  animation: fadeInUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero h1 {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(3rem, 10vw, 5.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  line-height: 1.8;
+  text-transform: lowercase;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+/* ==================== ABOUT ==================== */
+.about {
+  padding: 5rem 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.about-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: lowercase;
+  margin-bottom: 2.5rem;
+}
+
+.about-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.4rem, 3.5vw, 2.4rem);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  max-width: 100%;
+}
+
+.about-text p {
+  margin-bottom: 1.5rem;
+}
+
+.about-emphasis {
+  display: block;
+  margin-top: 2rem;
+  font-style: italic;
+}
+
+/* ==================== SERVICES GRID ==================== */
+.services {
+  padding: 5rem 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.services-title {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: lowercase;
+  margin-bottom: 3rem;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+.service-category {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.service-category h3 {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.8rem;
+  font-style: italic;
+  letter-spacing: -0.02em;
+}
+
+.service-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.service-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+}
+
+.service-name {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+}
+
+.service-description {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  opacity: 0.7;
+  line-height: 1.5;
+}
+
+/* ==================== TEAM ==================== */
+.team {
+  padding: 5rem 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.team-title {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: lowercase;
+  margin-bottom: 3rem;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.team-name {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.4rem;
+  font-style: italic;
+  letter-spacing: -0.02em;
+}
+
+.team-role {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: lowercase;
+  opacity: 0.7;
+}
+
+.team-bio {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+/* ==================== CONTACT ==================== */
+.contact {
+  padding: 5rem 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.contact-title {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 3rem;
+  font-style: italic;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.contact-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: lowercase;
+  opacity: 0.7;
+}
+
+.contact-value {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+}
+
+.contact-value a {
+  color: var(--text);
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.contact-value a:hover {
+  opacity: 0.7;
+}
+
+.social-links {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.social-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: lowercase;
+  color: var(--text);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.social-links a:hover {
+  border-color: var(--text);
+}
+
+/* ==================== FOOTER ==================== */
+footer {
+  padding: 2rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: lowercase;
+}
+
+.footer-copyright {
+  opacity: 0.7;
+}
+
+.footer-locations {
+  opacity: 0.7;
+}
+
+/* ==================== TABLET (768px) ==================== */
+@media (min-width: 768px) {
+  nav {
+    padding: 2rem 3rem;
+  }
+
+  .nav-links {
+    display: flex;
+  }
+
+  .hamburger {
+    display: none;
+  }
+
+  .hero {
+    padding: 8rem 4rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(4rem, 9vw, 6rem);
+  }
+
+  .about {
+    padding: 6rem 3rem;
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 3rem;
+  }
+
+  .about-label {
+    margin-bottom: 0;
+    padding-top: 0.5rem;
+  }
+
+  .services {
+    padding: 6rem 3rem;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+
+  .service-list {
+    grid-template-columns: 1fr;
+  }
+
+  .team {
+    padding: 6rem 3rem;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+
+  .contact {
+    padding: 6rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .contact-title {
+    margin-bottom: 0;
+  }
+
+  footer {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem 3rem;
+  }
+}
+
+/* ==================== DESKTOP (1024px) ==================== */
+@media (min-width: 1024px) {
+  nav {
+    padding: 2rem 4rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(5rem, 8vw, 7.5rem);
+  }
+
+  .hero-subtitle {
+    font-size: 0.7rem;
+  }
+
+  .about {
+    padding: 8rem 4rem;
+    grid-template-columns: 220px 1fr;
+    gap: 4rem;
+  }
+
+  .about-text {
+    max-width: 700px;
+  }
+
+  .services {
+    padding: 8rem 4rem;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .team {
+    padding: 8rem 4rem;
+  }
+
+  .contact {
+    padding: 8rem 4rem;
+    gap: 6rem;
+  }
+
+  footer {
+    padding: 2rem 4rem;
+  }
+}
+
+/* ==================== LARGE DESKTOP (1440px+) ==================== */
+@media (min-width: 1440px) {
+  nav {
+    padding: 2.5rem 6rem;
+  }
+
+  .hero {
+    padding: 10rem 6rem;
+  }
+
+  .about {
+    padding: 10rem 6rem;
+    grid-template-columns: 280px 1fr;
+  }
+
+  .services {
+    padding: 10rem 6rem;
+  }
+
+  .team {
+    padding: 10rem 6rem;
+  }
+
+  .contact {
+    padding: 10rem 6rem;
+  }
+
+  footer {
+    padding: 2.5rem 6rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav>
+  <a href="#" class="nav-logo">Beauty Revival Barn</a>
+  <ul class="nav-links">
+    <li><a href="#services">services</a></li>
+    <li><a href="#team">team</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+  <button class="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="closeMenu()">services</a>
+  <a href="#team" onclick="closeMenu()">team</a>
+  <a href="#contact" onclick="closeMenu()">contact</a>
+</div>
+
+<!-- Hero Header -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>refreshed, radiant, and confidently yourself.</h1>
+    <p class="hero-subtitle">luxury boutique med spa<br>liberty hill, texas</p>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="about" id="about">
+  <div class="about-label">/ about</div>
+  <div class="about-text">
+    <p>Beauty Revival Barn is a luxury boutique med spa in Liberty Hill, Texas specializing in natural-looking injectables, facial balancing, and advanced skin rejuvenation. Every treatment is performed by a Registered Nurse and certified aesthetic injector, blending medical expertise with an artistic eye for subtle, beautiful results.</p>
+    <p>We combine expert, nurse-led care with a warm, Texas-chic atmosphere so you can look refreshed, radiant, and confidently yourself — never frozen or overdone.</p>
+    <p class="about-emphasis">Our clients come to us for personalized treatment plans, honest education, and long-term aesthetic care that puts safety, artistry, and natural beauty first.</p>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="services" id="services">
+  <div class="services-title">/ services</div>
+  <div class="services-grid">
+    <div class="service-category">
+      <h3>Injectables & Contouring</h3>
+      <div class="service-list">
+        <div class="service-item">
+          <div class="service-name">Neurotoxins</div>
+          <div class="service-description">Reduces the appearance of lines and wrinkles, resulting in a smoother and more youthful look</div>
+        </div>
+        <div class="service-item">
+          <div class="service-name">Dermal Fillers</div>
+          <div class="service-description">A non-surgical option that may help restore volume and smooth fine lines and wrinkles</div>
+        </div>
+        <div class="service-item">
+          <div class="service-name">Lip Enhancement</div>
+          <div class="service-description">Lip fillers are a non-surgical cosmetic treatment designed to enhance lip volume, improve symmetry, and refine lip contours</div>
+        </div>
+        <div class="service-item">
+          <div class="service-name">Facial Balancing</div>
+          <div class="service-description">Facial balancing uses non-surgical techniques to enhance facial symmetry and proportion</div>
+        </div>
+        <div class="service-item">
+          <div class="service-name">Cheek, Jawline & Chin Contouring</div>
+          <div class="service-description">Enhance your natural beauty with face contouring treatments designed to improve facial harmony and definition</div>
+        </div>
+        <div class="service-item">
+          <div class="service-name">Biostimulators</div>
+          <div class="service-description">Advanced cosmetic treatments that stimulate your body's natural collagen production, providing a non-surgical solution for skin rejuvenation and volume restoration</div>
+        </div>
+        <div class="service-item">
+          <div class="service-name">EZ-Gel PRP Filler</div>
+          <div class="service-description">PRP filler is a regenerative skin treatment using the body's own platelets and growth factors to promote collagen production</div>
+        </div>
+        <div class="service-item">
+          <div class="service-name">Kybella</div>
+        </div>
+        <div class="service-item">
+          <div class="service-name">Microntox</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="service-category">
+      <h3>Skin Rejuvenation</h3>
+      <div class="service-list">
+        <div class="service-item">
+          <div class="service-name">Medical Microneedling</div>
+          <div class="service-description">A versatile, minimally invasive treatment that harnesses the body's natural healing abilities to stimulate collagen and elastin production</div>
+        </div>
+        <div class="service-item">
+          <div class="service-name">Microneedling with PRP</div>
+          <div class="service-description">Microneedling with PRP combines the benefits of microneedling with the regenerative properties of your own platelet-rich plasma</div>
+        </div>
+        <div class="service-item">
+          <div class="service-name">Microneedling with PRF</div>
+          <div class="service-description">A revolutionary skin rejuvenation treatment that combines microneedling with platelet-rich fibrin derived from your blood</div>
+        </div>
+        <div class="service-item">
+          <div class="service-name">Microneedling with Exosome</div>
+          <div class="service-description">Combines innovative microneedling techniques with exosome application to improve the skin's appearance and texture</div>
+        </div>
+        <div class="service-item">
+          <div class="service-name">Chemical Peels</div>
+          <div class="service-description">Chemical peels exfoliate dead skin cells, revealing a more youthful and vibrant complexion</div>
+        </div>
+        <div class="service-item">
+          <div class="service-name">Medical-Grade Facials</div>
+          <div class="service-description">Professional treatments designed to support skin health and address specific concerns such as acne, uneven skin tone, and signs of aging</div>
+        </div>
+        <div class="service-item">
+          <div class="service-name">Skin Boosters & PRP Treatments</div>
+          <div class="service-description">Platelet-Rich Plasma treatment is a natural, minimally invasive solution for skin rejuvenation and hair restoration</div>
+        </div>
+        <div class="service-item">
+          <div class="service-name">Medical-Grade Skincare</div>
+          <div class="service-description">Medical-grade skincare offers clinically-backed, potent solutions for a variety of skin concerns, including anti-aging, pigmentation, and skin sensitivity</div>
+        </div>
+        <div class="service-item">
+          <div class="service-name">Medical Microneedling with Boosters</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="service-category">
+      <h3>Wellness & Weight Management</h3>
+      <div class="service-list">
+        <div class="service-item">
+          <div class="service-name">GLP-1 Medical Weight Loss</div>
+          <div class="service-description">GLP-1 weight loss treatments are prescription-based medications that may help support weight management by influencing appetite regulation and metabolism</div>
+        </div>
+        <div class="service-item">
+          <div class="service-name">IV Vitamin Therapy</div>
+          <div class="service-description">IV Hydration Therapy is a wellness approach that may help provide relief from symptoms such as fatigue, stress, and occasional weakened immunity</div>
+        </div>
+        <div class="service-item">
+          <div class="service-name">NAD+ Therapy</div>
+          <div class="service-description">A wellness treatment designed to support cellular health, energy levels, and mental clarity through an infusion of NAD+</div>
+        </div>
+        <div class="service-item">
+          <div class="service-name">Peptide Therapy</div>
+          <div class="service-description">Peptide therapy utilizes naturally occurring peptides to support various aspects of health and wellness</div>
+        </div>
+        <div class="service-item">
+          <div class="service-name">B12 & Wellness Shots</div>
+          <div class="service-description">Vitamin B12 injections are a quick and effective way to support energy levels, metabolism, and overall wellness</div>
+        </div>
+        <div class="service-item">
+          <div class="service-name">Lipolean®️ Fat-Burning Injections</div>
+          <div class="service-description">Lipotropic injections are a combination of nutrients and amino acids that may assist in supporting weight management and promoting energy</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team Section -->
+<section class="team" id="team">
+  <div class="team-title">/ team</div>
+  <div class="team-grid">
+    <div class="team-member">
+      <div class="team-name">Cecilia Wheeler</div>
+      <div class="team-role">BSN, RN</div>
+      <div class="team-bio">Cici Wheeler created Beauty Revival Barn because she believes aesthetics should feel personal, honest, and empowering. She is known for her conservative, artistic approach, always prioritizing facial balance, natural movement, and long-term skin health.</div>
+    </div>
+    <div class="team-member">
+      <div class="team-name">Nauman Rashid</div>
+      <div class="team-role">Medical Director</div>
+      <div class="team-bio">Dr. Nauman Rashid is a board-certified Emergency Medicine physician who brings over a decade of clinical expertise into the world of aesthetic medicine. He believes aesthetic medicine is more than beauty — it's a form of self-care.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <h2 class="contact-title">Connect<br>with us</h2>
+  <div class="contact-info">
+    <div class="contact-item">
+      <div class="contact-label">phone</div>
+      <div class="contact-value"><a href="tel:6157621999">(615) 762-1999</a></div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-label">email</div>
+      <div class="contact-value"><a href="mailto:cici@beautyrevivalbarn.com">cici@beautyrevivalbarn.com</a></div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-label">follow</div>
+      <div class="social-links">
+        <a href="https://www.facebook.com/people/TXBotoxBootsBeauty/61576219995246/#">facebook</a>
+        <a href="https://www.instagram.com/txbotoxbootsandbeauty/">instagram</a>
+        <a href="https://www.tiktok.com/@txbotoxbootsandbeauty?lang=en">tiktok</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-copyright">© 2024 Beauty Revival Barn</div>
+  <div class="footer-locations">london — new york — tokyo</div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
+    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+  }
+
+  function closeMenu() {
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.classList.remove('active');
+    mobileMenu.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+</script>
+
+</body>
+</html>
