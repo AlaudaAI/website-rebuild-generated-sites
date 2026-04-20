@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  :root {
+    --bg-primary: #111115;
+    --bg-secondary: #1a1a20;
+    --bg-hover: #22222a;
+    --bg-card: #16161c;
+    --text-primary: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.5);
+    --text-dim: rgba(255, 255, 255, 0.35);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-light: rgba(255, 255, 255, 0.06);
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Inter', -apple-system, sans-serif;
+    --sidebar-width: 280px;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 32px;
+    --space-xl: 48px;
+    --space-2xl: 64px;
+    --space-3xl: 96px;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
+
+  /* Navigation */
+  .mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+  .mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+  .mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+  .mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+  .hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+  .hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+  .sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+  .sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+  .sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+  .sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+  .sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+  .sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+  .sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+  .sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+  .sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+  .mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+  .mobile-nav-overlay.active {
+  display: block;
+}
+
+  .sidebar.active {
+  display: flex;
+}
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: calc(96px + 60px) var(--space-lg) var(--space-3xl);
+    background: var(--text-primary);
+    color: #ffffff;
+  }
+
+  .page-title-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-title-area h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  /* Content Area */
+  .content-area {
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .content-area h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .content-area h4 {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: var(--space-md);
+  }
+
+  .content-area p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area ul, .content-area ol {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-lg);
+    color: var(--text-muted);
+  }
+
+  .content-area li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  .content-area img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    font-weight: 500;
+  }
+
+  .content-area a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  .content-area table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: var(--space-lg);
+    font-size: 0.9rem;
+  }
+
+  .content-area th,
+  .content-area td {
+    padding: var(--space-md);
+    text-align: left;
+    border: 1px solid var(--border-color);
+  }
+
+  .content-area th {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .content-area td {
+    color: var(--text-muted);
+  }
+
+  .content-area blockquote {
+    border-left: 4px solid var(--text-primary);
+    padding: var(--space-md) var(--space-lg);
+    margin: var(--space-lg) 0;
+    background: var(--bg-secondary);
+    font-style: italic;
+    color: var(--text-muted);
+  }
+
+  /* Services Section */
+  .services-section {
+    margin: var(--space-3xl) 0;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+  }
+
+  .service-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: var(--space-lg);
+    transition: background-color 0.3s ease;
+  }
+
+  .service-card:hover {
+    background: var(--bg-hover);
+  }
+
+  .service-card h3 {
+    margin-bottom: var(--space-md);
+  }
+
+  .service-card p {
+    margin-bottom: 0;
+  }
+
+  /* Stats Section */
+  .stats-section {
+    margin: var(--space-3xl) 0;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    margin-top: var(--space-lg);
+  }
+
+  .stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: var(--space-lg);
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+
+  /* Footer */
+  .footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+  .footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+  .footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+  .footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+  .footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+  .footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+  .footer-links a:hover {
+  color: var(--text-primary);
+}
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  /* Responsive */
+  @media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:last-child {
+    border-right: none;
+  }
+
+  .trust-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-metrics {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+  @media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .features {
+    /* already 3-col from tablet */
+  }
+
+  .feature-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .trust-section {
+    /* already 2-col from tablet */
+  }
+
+  .trust-metrics {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-clients {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-number {
+    font-size: 120px;
+  }
+
+  .client-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+  @media (min-width: 768px) {
+    .page-title-area { padding: calc(96px + 60px) var(--space-2xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl) var(--space-2xl); }
+  }
+
+  @media (min-width: 1024px) {
+    .page-title-area { padding: calc(96px + 80px) var(--space-3xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">Case Study</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">Case Study</span>
+    </a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/services">Services</a>
+      <a href="/case-study">Case Study</a>
+      <a href="/contact">Contact</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">All Systems Operational</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">API v4.2 Active</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Divorce Financial Planning Case Study</h1>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+  <p>This case study illustrates the value of divorce financial mediation as a means of attaining a truly equitable and fair TN divorce settlement. Most Tennessee divorces lack these types of financial insights. Studies have shown that the financial ramifications of divorce are the fourth most frequent reason cited for bankruptcy in this country. Don't become a statistic. Take the time to understand the numbers before you sign your divorce papers. Secure your future and your children's future. Don't just get a TN divorce. Get a financially smart TN divorce.</p>
+
+  <h3>David</h3>
+  <img src="https://getasmartdivorce.com/wp-content/uploads/david.png" alt="Man experiencing divorce">
+  <p>45 years old.</p>
+
+  <h3>Susan</h3>
+  <img src="https://getasmartdivorce.com/wp-content/uploads/susan.png" alt="A professional woman experiencing divorce">
+  <p>45 years old.</p>
+
+  <h3>Children</h3>
+  <img src="https://getasmartdivorce.com/wp-content/uploads/children.png" alt="Children experiencing effects of divorce">
+  <p>Two kids.</p>
+
+  <!-- Services Section -->
+  <div class="services-section">
+    <h2>Our Services</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <h3>Divorce Financial Mediation</h3>
+        <p>Collaborative financial mediation services that provide clarity to divorcing couples so they understand their options and get divorced without destroying their family or finances</p>
+      </div>
+      <div class="service-card">
+        <h3>Divorce Financial Planning</h3>
+        <p>Financial counseling, planning, and analysis throughout the divorce process to help clients make informed decisions about their future</p>
+      </div>
+      <div class="service-card">
+        <h3>Asset Division Analysis</h3>
+        <p>Comprehensive analysis of marital assets to ensure fair and equitable division, including evaluation of homes, retirement accounts, and investments</p>
+      </div>
+      <div class="service-card">
+        <h3>Budget and Cash Flow Analysis</h3>
+        <p>Creation of detailed monthly budgets with up to 140+ line items to accurately assess post-divorce financial needs</p>
+      </div>
+      <div class="service-card">
+        <h3>Alimony and Child Support Calculations</h3>
+        <p>Professional calculation and analysis of alimony and child support obligations based on Tennessee guidelines</p>
+      </div>
+      <div class="service-card">
+        <h3>Tax Planning for Divorce</h3>
+        <p>Education about tax implications of divorce settlements including alimony taxation and asset transfers</p>
+      </div>
+      <div class="service-card">
+        <h3>Parenting Plan Development</h3>
+        <p>Assistance in drafting comprehensive parenting plans that address custody, support, and children's needs</p>
+      </div>
+      <div class="service-card">
+        <h3>Collaborative Divorce Services</h3>
+        <p>Alternative to traditional collaborative law that reduces professional fees while maintaining the collaborative approach</p>
+      </div>
+      <div class="service-card">
+        <h3>Retirement Account Analysis</h3>
+        <p>Evaluation of pensions, 401(k)s, IRAs and other retirement benefits to understand division options and restrictions</p>
+      </div>
+    </div>
+  </div>
+
+  <h2>Dividing Assets Case Study</h2>
+
+  <p>If a spouse put their career on hold or left the career world to care for children, this should be considered during settlement discussions. What is their earning potential? How long will they need to work at their first job post-divorce before they can expect to receive a raise or be eligible for a higher-paying position? Career counseling helps create realistic expectations.</p>
+
+  <p>Typically, it is not possible for an individual to transition from being a stay-at-home parent to becoming financially independent overnight. If minor children are at home, the work schedules for both parents may be impacted, reducing their ability to earn income.</p>
+
+  <p>Additionally, the settlement needs to ensure that both spouses understand the long-term implications of the proposed settlement and the potential impact on the family. Refer to the case study on this page to understand why a 50/50 division of assets is not always fair and equitable.</p>
+
+  <p>David and Susan are 45 years old and have two children. They own a Nashville home worth $360,000 with $180,000 of equity. David earns $90,000-per-year and Susan has a part-time job where she earns $20,000-per-year. Their retirement plans have a total of $250,000 in value. In addition, they have cash and investments (stocks) worth $130,000.</p>
+
+  <h3>Divorce Does Not Have to Be a Battle</h3>
+  <img src="https://getasmartdivorce.com/wp-content/uploads/battle.png" alt="Plastic toy army men">
+
+  <h3>Unsure Footing?</h3>
+  <img src="https://getasmartdivorce.com/wp-content/uploads/foundation.png" alt="Building a house foundation">
+
+  <h3>Do You Know How Much You Will Need in the Future?</h3>
+  <img src="https://getasmartdivorce.com/wp-content/uploads/piggy-bank.png" alt="Piggy bank and coins">
+
+  <h2>Assets</h2>
+  <img src="https://getasmartdivorce.com/wp-content/uploads/assets.png" alt="House, investments and income">
+
+  <!-- Key Statistics Section -->
+  <div class="stats-section">
+    <h2>Key Statistics</h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">95%</div>
+        <div class="stat-label">of all divorce cases are settled outside of court</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">37%</div>
+        <div class="stat-label">of divorced female retirees live in poverty</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">140</div>
+        <div class="stat-label">items in comprehensive monthly budget</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">$900</div>
+        <div class="stat-label">per hour combined attorney fees</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">7%</div>
+        <div class="stat-label">annual tuition expense increases</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Proposed Divorce Settlement — 50/50</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Assets</th>
+        <th>Susan</th>
+        <th>David</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>House Equity</td>
+        <td>$180,000</td>
+        <td>$0</td>
+        <td>$180,000</td>
+      </tr>
+      <tr>
+        <td>Cash/Investments</td>
+        <td>$50,000</td>
+        <td>$80,000</td>
+        <td>$130,000</td>
+      </tr>
+      <tr>
+        <td>Retirement Accts</td>
+        <td>$50,000</td>
+        <td>$200,000</td>
+        <td>$250,000</td>
+      </tr>
+      <tr>
+        <td>Total</td>
+        <td>$280,000</td>
+        <td>$280,000</td>
+        <td>$560,000</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>David proposes that Susan keep the house with $180,000 equity, $50,000 in cash/investments, and $50,000 of David's retirement account. David will keep $80,000 of the cash/investments and $200,000 of his retirement account. David will pay $1,500-a-month alimony for 3 years and $750-a-month in child support. All assets are equally divided, and this appears to be a fair and equitable TN settlement. However, a financial analysis creates the financial future illustrated in the graph below.</p>
+
+  <h2>Effect of Initial Offer On The Net Worth of Each Spouse</h2>
+
+  <img src="https://getasmartdivorce.com/wp-content/uploads/chart-1.png" alt="Chart showing diverging net worth">
+
+  <p>After viewing the simulation, Susan and David understood the long-term financial impact of the proposed divorce settlement. Keeping the house would be financially devastating for Susan. The large mortgage payment, utilities, and maintenance costs would keep her monthly living expenses so high that even with alimony and child support, she would still spend more than she makes every month. Susan understood that keeping the house would require her to sell her investments, use her retirement funds, and borrow money to make ends meet. The simulation illustrates that if Susan keeps the marital residence, ten years after her divorce, she will have spent all her investments and retirement funds, and will have a net worth of $0. Susan understood why she could not afford to stay in the marital home and why she should sell the house and purchase a more affordable one.</p>
+
+  <p>Susan also realized that she needed to have a long-term plan to increase her income. She needed a career, not just a job, to achieve financial independence after divorce. After some soul-searching and research, Susan decided that she would need two years of education to enter the job market with the essential skills.</p>
+
+  <p>After viewing the computer model, Susan and David could make informed choices. They realized that a different 50/50 division of the assets, as illustrated below, provided a win-win solution.</p>
+
+  <h2>Final Offer — A Financially Smart Divorce</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Assets</th>
+        <th>Susan</th>
+        <th>David</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>House Equity</td>
+        <td>$90,000</td>
+        <td>$90,000</td>
+        <td>$180,000</td>
+      </tr>
+      <tr>
+        <td>Cash/Investments</td>
+        <td>$65,000</td>
+        <td>$65,000</td>
+        <td>$130,000</td>
+      </tr>
+      <tr>
+        <td>Retirement Accts</td>
+        <td>$125,000</td>
+        <td>$125,000</td>
+        <td>$250,000</td>
+      </tr>
+      <tr>
+        <td>TOTAL</td>
+        <td>$280,000</td>
+        <td>$280,000</td>
+        <td>$560,000</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>With this division of assets, Susan will be able to purchase a home she can afford and also add to her retirement funds. Her future is more secure. The computer model also helped David understand how Susan could benefit from an extension of alimony for two years and why such an extension was necessary.</p>
+
+  <p>Chart 2 below shows how the final offer provides a better solution for Susan, David, and their children.</p>
+
+  <h2>Effect of Final Offer on the Net Worth of Each Spouse</h2>
+
+  <img src="https://getasmartdivorce.com/wp-content/uploads/chart-2.png" alt="Chart showing divergent net worths">
+
+  <p>This simulation helped David understand that extending his alimony payments for two years would not significantly impact his net worth. There are three reasons for this:</p>
+
+  <ol>
+    <li>David's alimony payments will be tax-deductible, so his real cost is $1,125 per month. Understanding this fact made the payments acceptable to David.</li>
+    <li>During the marriage, David was able to focus on his career while Susan took care of the children. This increase in David's earning potential will allow him to recoup his alimony payments over time.</li>
+    <li>David will still have a monthly surplus, which he can save. If he stays on budget and invests wisely, his investments have the capacity to grow to $1.6 million by the time he retires.</li>
+  </ol>
+
+  <p>Because Susan and David understood the financial impact of the proposed settlements, they each realized why a compromise from the initial settlement was necessary. This knowledge reduced arguing. Less arguing resulted in less stress for the family and lower legal fees.</p>
+
+  <p>Arons & Associates Divorce Planning would like to show you the potential short- and long-term impacts of the proposed division of marital assets you may be considering (including the effect of alimony/child support payments). Contact us if you'd like more information on how we can help you obtain a fair settlement and a financially sound Tennessee divorce.</p>
+
+  <blockquote>
+    While we don't agree on everything, we do agree that Sandy's assistance during our divorce process was invaluable. Despite the fact that we both had an attorney, we did not feel comfortable moving forward with the proposed divorce settlement until Sandy had reviewed it and given us feedback. She consistently brought issues to our attention that we had not considered and saved us from making some potentially dreadful financial mistakes. Her ability to speak candidly regarding divorce financial issues helped us both realize when were being stubborn and needed to compromise. If divorce is in your future, see Sandy before you begin the legal process. You'll get more value from your legal fees and minimize unnecessary emotional stress for you and your kids.
+  </blockquote>
+  <p>Rick and Donna Marley, Brentwood</p>
+
+  <h3>A 50/50 Settlement Is Not Always Fair</h3>
+
+  <p>If a spouse put their career on hold or left the career world to care for children, this should be considered during settlement discussions. What is their earning potential? How long will they need to work at their first job post-divorce before they can expect to receive a raise or be eligible for a higher-paying position? Career counseling helps create realistic expectations.</p>
+
+  <p>Typically, it is not possible for an individual to transition from being a stay-at-home parent to financial independence overnight. If minor children are at home, the work schedules for both parents may be impacted, reducing their ability to earn income.</p>
+
+  <p>Additionally, the settlement needs to ensure that both spouses understand the long-term implications of the proposed settlement and the potential impact on the family. Refer to the case study on this page to understand why a 50/50 division of assets is not always fair and equitable.</p>
+
+  <img src="https://getasmartdivorce.com/wp-content/uploads/help-next-exit.png" alt="Help Next Exit road sign">
+
+  <p>Lost your way on the Divorce Interstate? Take the next exit and stop by our office.</p>
+
+  <p>We can help.</p>
+
+  <blockquote>
+    Thank you, Arons and Associates, for helping my family get a financially smart divorce. Your services reduced conflict, unneccessary attorney fees, and gave us confidence we were making smart choices.
+  </blockquote>
+  <p>Bryan Pearson – McMinnville, TN</p>
+
+  <img src="https://getasmartdivorce.com/wp-content/uploads/train-tracks.png" alt="Train tracks">
+
+  <p>Does your financial plan provide sufficient funding so you are on track today AND tomorrow?</p>
+
+  <h2>Recommended Reading</h2>
+
+  <img src="https://getasmartdivorce.com/wp-content/uploads/difficult-questions-kids-ask.png" alt="Difficult Questions Kids Ask book cover">
+
+  <h3>Difficult Questions Kids Ask [And Are Afraid to Ask] About Divorce</h3>
+
+  <h4>Meg F. Schneider and Joan Zuckerberg</h4>
+
+  <img src="https://getasmartdivorce.com/wp-content/uploads/paperwork.png" alt="Man staring at stacks of paperwork">
+
+  <p>Feeling overwhelmed with divorce paperwork?</p>
+
+  <p>We can help.</p>
+
+  <h2>Counseling Resources</h2>
+
+  <img src="https://getasmartdivorce.com/wp-content/uploads/divorce-care-logo.png" alt="Divorce Care logo">
+
+  <p>DivorceCare groups are designed so you can begin attending on any week. The classes are free and offered by a number of local churches. They provide very useful information.</p>
+
+  <p>Public and private schools also offer free counseling for your children.</p>
+
+  <img src="https://getasmartdivorce.com/wp-content/uploads/abacus.png" alt="Abacus">
+
+  <p>Do you think that financial matters are as mysterious as an abacus?</p>
+
+  <p>We can explain the issues so you understand the financials and make INFORMED decisions.</p>
+</div>
+
+<footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Case Study</span>
+      <span class="footer-copyright">©2026 Arons & Associates. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/services">Services</a>
+      <a href="/case-study">Case Study</a>
+      <a href="/contact">Contact</a>
+    </div>
+</footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>

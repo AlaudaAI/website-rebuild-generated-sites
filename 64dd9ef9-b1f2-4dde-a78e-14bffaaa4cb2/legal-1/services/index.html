@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  :root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
+
+  /* Navigation */
+  .mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+  .mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+  .mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+  .mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+  .hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+  .hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+  .sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+  .sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+  .sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+  .sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+  .sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+  .sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+  .sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+  .sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+  .sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+  .mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+  .mobile-nav-overlay.active {
+  display: block;
+}
+
+  .sidebar.active {
+  display: flex;
+}
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: calc(96px + 60px) var(--space-lg) var(--space-3xl);
+    background: var(--text-primary);
+    color: #ffffff;
+  }
+
+  .page-title-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-title-area h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  /* Content Area */
+  .content-area {
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .content-area h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .content-area p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area ul, .content-area ol {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-lg);
+    color: var(--text-muted);
+  }
+
+  .content-area li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  .content-area img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    font-weight: 500;
+  }
+
+  .content-area a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  /* Service Card Styles */
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .service-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: var(--space-xl);
+    transition: border-color 0.3s ease;
+  }
+
+  .service-card:hover {
+    border-color: var(--border-color);
+  }
+
+  .service-card h3 {
+    color: var(--text-primary);
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: var(--space-md);
+  }
+
+  .service-card p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 0;
+  }
+
+  /* Stats Grid */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-lg);
+    margin: var(--space-2xl) 0;
+    padding: var(--space-2xl);
+    background: var(--bg-card);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1;
+    margin-bottom: var(--space-sm);
+  }
+
+  .stat-label {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  /* Footer */
+  .footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+  .footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+  .footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+  .footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+  .footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+  .footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+  .footer-links a:hover {
+  color: var(--text-primary);
+}
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  /* Responsive */
+  @media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:last-child {
+    border-right: none;
+  }
+
+  .trust-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-metrics {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+  @media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .features {
+    /* already 3-col from tablet */
+  }
+
+  .feature-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .trust-section {
+    /* already 2-col from tablet */
+  }
+
+  .trust-metrics {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-clients {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-number {
+    font-size: 120px;
+  }
+
+  .client-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+  @media (min-width: 768px) {
+    .page-title-area { padding: calc(96px + 60px) var(--space-2xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl) var(--space-2xl); }
+  }
+
+  @media (min-width: 1024px) {
+    .page-title-area { padding: calc(96px + 80px) var(--space-3xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">Services</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">Services</span>
+    </a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/services">Services</a>
+      <a href="/case-study">Case Study</a>
+      <a href="/divorce-financial-mediation">Financial Mediation</a>
+      <a href="/our-founder">Our Founder</a>
+      <a href="/collaborative-law-divorce">Collaborative Divorce</a>
+      <a href="/blog">Blog</a>
+      <a href="/contact">Contact</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">All Systems Operational</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">API v4.2 Active</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Our Services</h1>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+  <p>Arons & Associates Divorce Mediation is here to help you with the financial issues of your divorce. Our services give you the information you need to answer critical financial questions like <em>"Can I keep the house?"</em>, <em>"Do I need alimony, and is my spouse able to pay?"</em>, and <em>"What is a fair divorce settlement?"</em> You will have peace of mind knowing you have avoided common financial mistakes unique to TN divorce that can lead to foreclosure or bankruptcy. Our services help you secure your future as you deal with the complex financial issues of your divorce.</p>
+
+  <h2>Our Services</h2>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <h3>Divorce Financial Mediation</h3>
+      <p>Collaborative financial mediation services that provide clarity to divorcing couples so they understand their options and get divorced without destroying their family or finances</p>
+    </div>
+
+    <div class="service-card">
+      <h3>Divorce Financial Planning</h3>
+      <p>Financial counseling, planning, and analysis throughout the divorce process to help clients make informed decisions about their future</p>
+    </div>
+
+    <div class="service-card">
+      <h3>Asset Division Analysis</h3>
+      <p>Comprehensive analysis of marital assets to ensure fair and equitable division, including evaluation of homes, retirement accounts, and investments</p>
+    </div>
+
+    <div class="service-card">
+      <h3>Budget and Cash Flow Analysis</h3>
+      <p>Creation of detailed monthly budgets with up to 140+ line items to accurately assess post-divorce financial needs</p>
+    </div>
+
+    <div class="service-card">
+      <h3>Alimony and Child Support Calculations</h3>
+      <p>Professional calculation and analysis of alimony and child support obligations based on Tennessee guidelines</p>
+    </div>
+
+    <div class="service-card">
+      <h3>Tax Planning for Divorce</h3>
+      <p>Education about tax implications of divorce settlements including alimony taxation and asset transfers</p>
+    </div>
+
+    <div class="service-card">
+      <h3>Parenting Plan Development</h3>
+      <p>Assistance in drafting comprehensive parenting plans that address custody, support, and children's needs</p>
+    </div>
+
+    <div class="service-card">
+      <h3>Collaborative Divorce Services</h3>
+      <p>Alternative to traditional collaborative law that reduces professional fees while maintaining the collaborative approach</p>
+    </div>
+
+    <div class="service-card">
+      <h3>Retirement Account Analysis</h3>
+      <p>Evaluation of pensions, 401(k)s, IRAs and other retirement benefits to understand division options and restrictions</p>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-value">95%</div>
+      <div class="stat-label">of all divorce cases are settled outside of court</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">37%</div>
+      <div class="stat-label">of divorced female retirees live in poverty</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">140</div>
+      <div class="stat-label">items in comprehensive monthly budget</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">$900</div>
+      <div class="stat-label">per hour combined attorney fees</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">7%</div>
+      <div class="stat-label">annual tuition expense increases</div>
+    </div>
+  </div>
+
+  <h3>Divorce Does Not Have to Be a Battle</h3>
+  <img src="https://getasmartdivorce.com/wp-content/uploads/battle.png" alt="Plastic toy army men">
+  <p>Our process REDUCES conflict and stress</p>
+
+  <h3>Unsure Footing?</h3>
+  <img src="https://getasmartdivorce.com/wp-content/uploads/foundation.png" alt="Building a house foundation">
+  <p>Divorce Settlements need a solid financial foundation.</p>
+
+  <h3>Do You Know How Much You Will Need in the Future?</h3>
+  <img src="https://getasmartdivorce.com/wp-content/uploads/piggy-bank.png" alt="Piggy bank and coins">
+  <p>We can answer your questions.</p>
+
+  <h2>Our 7-Step Process</h2>
+
+  <img src="https://getasmartdivorce.com/wp-content/uploads/meet.png" alt="Divorce professional meeting">
+
+  <h2>Step 1 : Meet</h2>
+
+  <p>Regardless of your level of knowledge in financial matters, we provide financial counseling from our initial meeting through to our final follow-up session. The services we provide are the "missing link" in the divorce process.</p>
+
+  <blockquote>If the financial issues of a divorce are left unaddressed, or, as is more often the case, attended to incompletely, it spells trouble for one or both ex-spouses down the road. Arons & Associates offers a unique and invaluable service to those divorcing, especially helpful for the less financially savvy spouse.</blockquote>
+
+  <p>Joel Cherry, Attorney—San Francisco, CA</p>
+
+  <img src="https://getasmartdivorce.com/wp-content/uploads/discover.png" alt="Insurance and medical files">
+
+  <h2>Step 2 : Discover</h2>
+
+  <p>Our efficient process gathers your financial information. When this step is complete, you and your spouse will know the assets, debts, income and expenses for each of you. We'll use this information to help you avoid common money mistakes during a TN divorce — divorce traps and pitfalls that could lead to future financial troubles.</p>
+
+  <p>Sandy and our staff will examine financial details frequently overlooked during the divorce process including depreciation of assets and the effect of inflation on potential settlements. We'll provide thorough financial discovery and educate both spouses on the financial details. This is missing in typical divorces and mediation.</p>
+
+  <img src="https://getasmartdivorce.com/wp-content/uploads/analyze.png" alt="Pen and paper divorce financial analysis">
+
+  <h2>Step 3 : Analyze</h2>
+
+  <p>Sandy and our staff will translate complex financial data into a clear picture of your marital estate. We use personalized reports to project your net worth and long-term cash flow needs after the divorce. Finally, we will create scenarios of property division, alimony, and child support for you and your spouse.</p>
+
+  <h4>Need Sherlock Holmes?</h4>
+
+  <p>Is the analysis simply not making sense? Do you think that your spouse is concealing income or inappropriate conduct? Are you aware of changes in your spouse's behavior, increased secrecy, illicit computer usage, or obsessive grooming habits? If so, we can refer you to associates who specialize in forensic accounting and can review financial documents and tax returns for evidence of:</p>
+
+  <ul>
+    <li>Hidden assets</li>
+    <li>Salary deferrals</li>
+    <li>Excessive spending of marital funds while the TN marriage is dissolving</li>
+    <li>Transfer of cash or TN property to others</li>
+    <li>Acquiring or paying off large debts without your knowledge</li>
+  </ul>
+
+  <img src="https://getasmartdivorce.com/wp-content/uploads/communicate.png" alt="Divorce financial professional on telephone">
+
+  <h2>Step 4 : Problem Solve</h2>
+
+  <p>Creative problem solving is required when crafting settlements that meet your objectives. We can propose different scenarios for the division of assets / debt and create net worth projections for those options. Refer to our case study for more information. You'll understand what your short- and long-term financial future could resemble if you chose settlement option "A" versus "B". Accepting a divorce settlement does not have to resemble a game of "Pin the Tail on the Donkey".</p>
+
+  <img src="https://getasmartdivorce.com/wp-content/uploads/review.png" alt="Professionals reviewing a divorce settlement">
+
+  <h2>Step 5 : Review</h2>
+
+  <p>Our review sessions educate and prepare you to make smart financial decisions. We meet with you to explain the findings in our financial reports and answer questions in language you can understand. Our clients and their attorneys find review sessions to be particularly helpful before divorce mediation or court appearances.</p>
+
+  <img src="https://getasmartdivorce.com/wp-content/uploads/participate.png" alt="Two professional women talking">
+
+  <h2>Step 6 : Participate</h2>
+
+  <p>Arons & Associates is an active participant as we guide you through the financial issues of your divorce. We frequently accompany clients and their attorneys at their divorce mediation sessions to provide on-the-spot analysis of proposed settlements. Our participation ensures clients and their divorce attorneys understand the financial ramifications and tax implications before agreeing to any proposed divorce settlement. We will also appear in court, if necessary, to explain our financial analysis.</p>
+
+  <p>Divorce does not have to be a battle. We can demonstrate ways to reduce conflict and stress for both spouses and your children. Reducing conflict during divorce encourages a better working relationship post-divorce.</p>
+
+  <h4>Common Client Questions We Can Answer</h4>
+
+  <ul>
+    <li>How much money do I need each month to maintain my standard of living?</li>
+    <li>Will I need to return to work after the divorce?</li>
+    <li>Who will pay for my health insurance?</li>
+    <li>Who will pay for our kid's health insurance, braces and college?</li>
+    <li>Does Tennessee divorce law require the father to pay for the child's college education?</li>
+    <li>How is child support calculated?</li>
+    <li>Is a 50/50 division of assets and debt required by Tennessee divorce law? Can I get more or less?</li>
+    <li>My spouse had an attorney draft this divorce agreement. Is this a fair division of our assets?</li>
+    <li>Will I have to pay taxes, or will I receive a tax deduction for alimony?</li>
+    <li>Can I afford to keep the house?</li>
+    <li>What should I do about paying federal taxes?</li>
+    <li>How much money do I need in my IRA to retire?</li>
+    <li>I have never paid the bills. Can you help me make a monthly budget?</li>
+    <li>I don't understand the financial statements. Can you help me sort through the mountain of paperwork?</li>
+  </ul>
+
+  <img src="https://getasmartdivorce.com/wp-content/uploads/participate.png" alt="Two professional women talking">
+
+  <h2>Step 7 : Follow Up</h2>
+
+  <p>After your divorce is final, there is still work to be done. Some tasks are obvious, but you may be unaware of others. Arons & Associates helps by monitoring the transfer of assets to make sure they abide by the terms in your divorce settlement agreement. We also provide information on the estate planning issues you should address after the divorce is finalized.</p>
+
+  <blockquote>After my divorce was over, I didn't realize I needed to create a new 'Living Will' or 'Health Care Proxy' assigning someone other than my ex-spouse to make medical decisions for me if I was in an accident. My divorce attorney never mentioned these issues. The After-Divorce Financial Survival Guide I received from Arons & Associates included this and other invaluable information, too. I'd recommend it to every divorcé.</blockquote>
+
+  <p>Paul King, Divorcé — Nashville, TN</p>
+
+  <p>With the downturn in the economy and housing market, it is critical for men and women in the midst of a divorce to pay attention to the financial issues of their divorce. You cannot afford to ignore the finances and just hope for the best. Perhaps you are feeling overwhelmed or experiencing "divorce paralysis." That is why we are here to help you and your Tennessee attorney. You don't have to do it alone. The ostrich that puts its head in the sand because it is scared is not any safer. It is just avoiding reality and allowing itself to be a potential victim. Have the courage to face the challenges ahead and make informed decisions now rather than dealing with the consequences of "divorce paralysis" for the rest of your life.</p>
+
+  <blockquote>Sandy helped my wife and I clearly understand the money issues of our divorce. Her financial planning, analysis and counseling abilities are the reason we were able to understand complex financial issues and achieve an amiable divorce with a settlement that was fair for both of us. Her thorough work and communication with our attorneys also helped us minimize the legal expenses. I highly recommend her unique abilities and services.</blockquote>
+
+  <p>Greg Page, Divorcé — Hermitage, TN</p>
+
+  <h2>Why Focus on Finances?</h2>
+
+  <h3>Secure Your Future</h3>
+
+  <p>During a divorce, you will make the most important financial decisions of your life. Take the time now to understand the numbers before you sign your final Tennessee divorce settlement. Secure your future and your children's future. Contact Arons & Associates at our Nashville or Brentwood office to learn how we can help you achieve a financially smart divorce.</p>
+
+  <p>Everyone's financial needs and goals during divorce are different. Every divorce is unique. We offer a range of services tailored to meet the diverse needs of our clients. We will work with one spouse or serve as a "financial neutral," working with both spouses to help gather information, educate, and evaluate the financial information you need to consider to get a financially smart TN divorce.</p>
+
+  <blockquote>Divorced women who are also single parents comprise the group most likely to file for bankruptcy.</blockquote>
+
+  <p>Price Waterhouse Cooper</p>
+
+  <h2>Contact Us</h2>
+
+  <a href="tel:615-376-8204">615-376-8204</a>
+
+  <blockquote>Sandy's ability to remain objective throughout our divorce process while explaining the financial issues allowed us to get a settlement that met the unique needs of our family… She provided insights that helped us think more clearly, minimize arguing, and unnecessary professional fees. We highly recommend you call Sandy if you are considering divorce.</blockquote>
+
+  <p>Dr. Jane Siegel and Hugh McSharry – Nashville</p>
+
+  <img src="https://getasmartdivorce.com/wp-content/uploads/paperwork.png" alt="Man staring at stacks of paperwork">
+
+  <p>Feeling overwhelmed with divorce paperwork?</p>
+
+  <p>We can help.</p>
+
+  <h3>We Provide Divorce Financial Guidance</h3>
+
+  <p>Arons & Associates Divorce Mediation helps you get a financially smart divorce by providing ongoing, practical financial counseling, planning, and analysis throughout your divorce process. We accomplish this by analyzing and explaining the financial aspects of your Tennessee divorce in clear, concise, and layman's terms. Everyone involved—you, and your soon-to-be ex-spouse can easily understand the short- and long-term impact of possible divorce settlement options. More importantly, all parties will be able to recognize what constitutes a reasonable settlement offer.</p>
+
+  <blockquote>Divorcing clients need to make important economic decisions as they go through the process. If they make bad decisions, they will more than likely have to live with the consequences of those decisions and these can be financially and emotionally devastating.</blockquote>
+
+  <p>Carl Palatnik, as quoted in the New York Family Law Monthly Newsletter</p>
+
+  <h3>Make Informed Decisions</h3>
+
+  <p>We provide you with the financial information and education you and your spouse need to make informed decisions about your future.</p>
+
+  <p>Clients tell us our confidential divorce services are efficient, decrease arguing between spouses, and therefore decrease attorney fees. Less arguing during divorce also fosters a better post-divorce working relationship between ex-spouses. This is critical if you have children and will be seeing your ex-spouse at graduations, weddings, etc., for the rest of your life.</p>
+
+  <blockquote>Arons & Associates is not in the business of selling or managing financial investments for clients. There's never a 'conflict of interest' in the financial guidance we provide our clients.</blockquote>
+
+  <p>Sandy Arons, President–Arons & Associates, Nashville, TN</p>
+
+  <h3>Reduce Conflict and Stress</h3>
+
+  <p>Divorce does not have to be a battle. Our unique process strives to reduce conflict and stress for both spouses and their children. We focus on the financial issues of your divorce so your divorce attorney can focus on what they do best: advocate for their client in our legal system.</p>
+
+  <p>We will gladly answer the questions you have concerning the financial/tax issues of separation, divorce, property settlements, alimony, child support, and Parenting Plans. Call our office to schedule an initial consultation or submit your inquiry to our Nashville, TN divorce planning team.</p>
+
+  <h4>Communication Is Key to Our Success</h4>
+
+  <p>Effective communication is the key to our success as divorce financial mediators. From our first meeting until our final follow-up session, Arons & Associates strives to keep you and your spouse fully informed and equipped with the financial information needed to help you get a financially smart divorce. Our communication strives to help clients understand, at all times, where they are in the divorce process and what remains to be done to facilitate their desired outcome.</p>
+
+  <p>We consult with our clients, their attorneys and other advisors as we evaluate financial reports and proposed divorce settlements, answer questions and provide the information and financial guidance clients need to move through the divorce process. We assist in problem solving the financial issues related to your divorce including:</p>
+
+  <ul>
+    <li>Budgets</li>
+    <li>Cash flow analysis</li>
+    <li>Children's education/special needs</li>
+    <li>Debt pay-off</li>
+    <li>Health Care insurance</li>
+    <li>Investments/stock options</li>
+    <li>Property Division</li>
+    <li>Property and business interests</li>
+    <li>Retirement and pension plans</li>
+    <li>Sell vs. keep the marital residence</li>
+    <li>Separate vs. marital property</li>
+    <li>Pre-marital assets and debts</li>
+    <li>Social Security benefits</li>
+    <li>Spousal and child support</li>
+    <li>Tax Issues</li>
+  </ul>
+
+  <blockquote>Sandy helped me understand what amount of money I needed to receive from my divorce settlement so I could afford to get my nursing degree and pay for my living expenses while in school. Her guidance allowed me to feel confident that I knew what I needed to ask for in my settlement. She is very easy to talk to and felt that she was genuinely concerned about the welfare of me and my children.</blockquote>
+
+  <p>Meghan Carlson, Divorcée — Nashville, TN</p>
+
+  <a href="tel:615-376-8204">615-376-8204</a>
+</div>
+
+<footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Services</span>
+      <span class="footer-copyright">© 2024 Services Systems, Inc. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/services">Services</a>
+    <a href="/case-study">Case Study</a>
+    <a href="/divorce-financial-mediation">Financial Mediation</a>
+    <a href="/our-founder">Our Founder</a>
+    <a href="/collaborative-law-divorce">Collaborative Divorce</a>
+    <a href="/blog">Blog</a>
+    <a href="/contact">Contact</a>
+  </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>

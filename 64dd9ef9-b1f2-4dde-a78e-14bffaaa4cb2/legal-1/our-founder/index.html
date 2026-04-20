@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Founder</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  :root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
+
+  /* Navigation */
+  .mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+  .mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+  .mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+  .mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+  .hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+  .hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+  .sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+  .sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+  .sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+  .sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+  .sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+  .sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+  .sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+  .sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+  .sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+  .mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+  .mobile-nav-overlay.active {
+  display: block;
+}
+
+  .sidebar.active {
+  display: flex;
+}
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: calc(96px + 60px) var(--space-lg) var(--space-3xl);
+    background: var(--text-primary);
+    color: #ffffff;
+  }
+
+  .page-title-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-title-area h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  /* Content Area */
+  .content-area {
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .content-area h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .content-area p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area ul, .content-area ol {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-lg);
+    color: var(--text-muted);
+  }
+
+  .content-area li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  .content-area img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    font-weight: 500;
+  }
+
+  .content-area a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  .content-area blockquote {
+    margin: var(--space-lg) 0;
+    padding: var(--space-lg);
+    border-left: 3px solid var(--text-primary);
+    background: var(--bg-card);
+    font-style: italic;
+  }
+
+  /* Services Section */
+  .services-section {
+    margin: var(--space-2xl) 0;
+  }
+
+  .service-card {
+    margin-bottom: var(--space-xl);
+    padding: var(--space-lg);
+    background: var(--bg-card);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+  }
+
+  .service-card h3 {
+    margin-bottom: var(--space-md);
+  }
+
+  .service-card p {
+    margin-bottom: 0;
+  }
+
+  /* Footer */
+  .footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+  .footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+  .footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+  .footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+  .footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+  .footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+  .footer-links a:hover {
+  color: var(--text-primary);
+}
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  /* Responsive */
+  @media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:last-child {
+    border-right: none;
+  }
+
+  .trust-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-metrics {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+  @media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .features {
+    /* already 3-col from tablet */
+  }
+
+  .feature-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .trust-section {
+    /* already 2-col from tablet */
+  }
+
+  .trust-metrics {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-clients {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-number {
+    font-size: 120px;
+  }
+
+  .client-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+  @media (min-width: 768px) {
+    .page-title-area { padding: calc(96px + 60px) var(--space-2xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl) var(--space-2xl); }
+  }
+
+  @media (min-width: 1024px) {
+    .page-title-area { padding: calc(96px + 80px) var(--space-3xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">Our Founder</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">Our Founder</span>
+    </a>
+    <nav>
+      <a href="/services/">Services</a>
+      <a href="/case-study/">Case Study</a>
+      <a href="/divorce-financial-mediation/">Financial Mediation</a>
+      <a href="/collaborative-law-divorce/">Collaborative Divorce</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">All Systems Operational</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">API v4.2 Active</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Our Founder</h1>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+  <h2>About Our Founder</h2>
+  
+  <p>At Arons & Associates, we credit our success to our founder's business, management, and financial expertise. Forty-plus years of business experience have made Sandy Arons a well-rounded financial professional. Her employers have included Bridgestone Firestone, Epson America, and Johnson & Murphy. Regardless of the industry or job title, Ms. Arons consistently excelled and was repeatedly recognized at the national level. Smart divorcing couples benefit from Sandy's unique qualifications and ability to help them understand the complicated financial and tax issues of divorce. Because she is a divorced person, she can relate to what her clients are experiencing and will modify the mediation process to meet the unique needs of each client.</p>
+  
+  <h2>Education</h2>
+  
+  <img src="https://getasmartdivorce.com/wp-content/uploads/rutgers-logo.png" alt="Rutgers University logo">
+  
+  <h3>Rutgers University (1986)</h3>
+  <p>B.S. Cum Laude Economics major</p>
+  <p>Marketing minor with emphasis in Finance</p>
+  
+  <img src="https://getasmartdivorce.com/wp-content/uploads/vanderbilt-logo.png" alt="Vanderbilt University acorn logo">
+  
+  <h3>Vanderbilt University (1994)</h3>
+  <p>MBA</p>
+  <p>Owen Graduate School of Management</p>
+  
+  <img src="https://getasmartdivorce.com/wp-content/uploads/vanderbilt-shield.png" alt="Vanderbilt University shield logo">
+  
+  <h3>Flournoy A. Coles, Jr. Prize</h3>
+  <p>For academic excellence</p>
+  
+  <h2>A Letter From Our Founder</h2>
+  
+  <p>Dear Potential Client,</p>
+  
+  <p>When I was going through the divorce process, I was frustrated there was no one available to help me with the financial aspects of my divorce. My attorney was helpful but this was not her area of expertise. My accountant explained his expertise was completing my tax return, not evaluating potential divorce settlements. My financial planner explained his expertise was managing my investments, not working with divorce settlements. My brother is super smart, but he had not been divorced. While he did sympathize with me, he did not really understand my situation and could give budgeting or financial advice. I kept thinking "Why isn't there someone to help me with this financial mess?"</p>
+  
+  <p>My 20+ years of financial and business management experience allowed me to approach my divorce differently than most divorcing spouses. I saw my settlement as a "product" my divorce attorney and I were presenting to my husband and his attorney. I needed to give them enough of the "right" information so they would understand and accept my "product" / settlement proposal. The reports I created contained my monthly budget information, analysis of our retirement funds and projected net worth for myself and my husband. These reports substantiated the basis for my requests and educated my spouse. Ultimately, I got the settlement package I requested and needed.</p>
+  
+  <p>More good news is that because the data was so conclusive, arguing and conflict was minimal. Both my husband and his divorce attorney could easily understand the reports and follow the calculations / logic. When we did have areas of disagreement, the reports and graphs allowed me to educate without hostility. I wanted to defuse arguments with my husband as much as possible. We have two children together and it was important to me to have a decent working relationship for the many years ahead.</p>
+  
+  <p>I started Arons & Associates Divorce Mediation because I saw a need for our services. We provide the "missing link" in divorce. I see this company as an opportunity for me to put my experience to compassionate use and help others through one of the most difficult times in their lives.</p>
+  
+  <p>We plan for our wedding very well, and at that point we have few assets. After 10 or 20 years of marriage, we have accumulated some assets, so we need to plan for divorce equally well. Yes, marriage is a wonderful celebration. Divorce is not. However, if divorce occurs, the financial issues must be dealt with if we want to plan intelligently for our future.</p>
+  
+  <p>Unless one is a parent, the demands of parenting can't really be understood. Unless you have experienced divorce, you can't really understand the emotional roller coaster, or relate to being overwhelmed with nonstop attorney requests for financial information and paperwork. I understand what you are going through. Arons &Associates divorce Mediation wants to help you get the settlement package that you want and deserve. Don't just get a TN divorce, get a financially smart TN divorce.</p>
+  
+  <img src="https://getasmartdivorce.com/wp-content/uploads/sandy-signature.png" alt="Sandy Arons signature">
+  
+  <p>Sandy Arons, President, Arons & Associates Divorce Planning</p>
+  
+  <blockquote>
+    <p>Humor can help us get through life's most difficult times.</p>
+  </blockquote>
+  
+  <p>Sandy Arons, President — Arons & Associates Divorce Mediation</p>
+  
+  <img src="https://getasmartdivorce.com/wp-content/uploads/smiley.png" alt="Smiley face">
+  
+  <h2>Divorce Financial Planning Credentials</h2>
+  
+  <h3>Education</h3>
+  <ul>
+    <li>Divorce Financial Analyst (DFA)</li>
+    <li>Certified Financial Divorce Specialist (CFDS)</li>
+    <li>Accredited Financial Counselor (AFC)</li>
+    <li>Approved by Tennessee courts to testify as a Divorce Financial Planning expert witness</li>
+    <li>Served as Financial Neutral representing both spouses in first Middle Tennessee Collaborative Law Divorce case</li>
+    <li>Certified Real Estate Divorce Specialist</li>
+    <li>Family Mediator, Specially Trained In Domestic Violence Issues</li>
+    <li>Certified Financial Education Instructor</li>
+    <li>Instructor: "Get A Financially Smart Divorce," Nashville Bar Association and evening classes at University School of Nashville</li>
+    <li>Instructor How to Talk with Your Honey About Money - University School of Nashville Evening Classes</li>
+  </ul>
+  
+  <h3>Awards</h3>
+  <ul>
+    <li>2012 Included in the Cambridge "Who's Who Registry Among Executive and Professional Women" and "Who's Who In North American Law and Litigation"</li>
+    <li>2013 Selected as a woman of outstanding leadership in consulting by The International Women's Leadership Association</li>
+    <li>2015 -AI LEGAL AWARDS – Best for divorce planning in Tennessee</li>
+    <li>2016 - Corporate LiveWire Global Award – Divorce Financial Planning</li>
+    <li>2016 - USA Financial Services Top 100 Almanac</li>
+    <li>2017 - Corporate LiveWire Global Awards - Excellence in Divorce Law Services</li>
+    <li>2018 National Association of Professional Women - Outstanding Leadership Award</li>
+    <li>2019 - AFCPE - Financial Counselor of the Year nominee</li>
+    <li>2020 - WCR Awards - World CEO of the Year nominee</li>
+    <li>2021 - Marquis Who's Who in America</li>
+    <li>2021 - Divorce Mediator of the Year - Corporate Live Wire Awards</li>
+    <li>2022 - Top 10 Emerging Leaders - Era Magazine</li>
+    <li>2022 - Business Excellence Award - The BIZZ Awards</li>
+    <li>2023 - Top 100 Inspiring Leaders - Iconic Express Magazine</li>
+    <li>2024 - Top 10 Influential leaders of 2024 - Iconic Express Magazine</li>
+    <li>2024 - Excellence in financial education - World Wide Finance Awards</li>
+    <li>2024 - Winner of The BIZZ Award</li>
+    <li>2024 - Top 10 Admired Leaders of 2024 - Era Magazine</li>
+    <li>2024 - Best Specialist Divorce Financial Mediation Experts 2024 - USA - World Wide Finance Awards</li>
+    <li>2025 - Top 10 Inspiring Leaders of 2025 in IE Magazine</li>
+    <li>2025 - Winner of The BIZZ Award</li>
+    <li>2025 - Nominated Best of TN Awards - Mediators</li>
+  </ul>
+  
+  <h2>Our Services</h2>
+  
+  <div class="services-section">
+    
+    <div class="service-card">
+      <h3>Divorce Does Not Have to Be a Battle</h3>
+      <img src="https://getasmartdivorce.com/wp-content/uploads/battle.png" alt="Plastic toy army men">
+    </div>
+    
+    <div class="service-card">
+      <h3>Unsure Footing?</h3>
+      <img src="https://getasmartdivorce.com/wp-content/uploads/foundation.png" alt="Building a house foundation">
+    </div>
+    
+    <div class="service-card">
+      <h3>Do You Know How Much You Will Need in the Future?</h3>
+      <img src="https://getasmartdivorce.com/wp-content/uploads/piggy-bank.png" alt="Piggy bank and coins">
+    </div>
+    
+    <div class="service-card">
+      <h3>Divorce Financial Mediation</h3>
+      <p>Collaborative financial mediation services that provide clarity to divorcing couples so they understand their options and get divorced without destroying their family or finances</p>
+    </div>
+    
+    <div class="service-card">
+      <h3>Divorce Financial Planning</h3>
+      <p>Financial counseling, planning, and analysis throughout the divorce process to help clients make informed decisions about their future</p>
+    </div>
+    
+    <div class="service-card">
+      <h3>Asset Division Analysis</h3>
+      <p>Comprehensive analysis of marital assets to ensure fair and equitable division, including evaluation of homes, retirement accounts, and investments</p>
+    </div>
+    
+    <div class="service-card">
+      <h3>Budget and Cash Flow Analysis</h3>
+      <p>Creation of detailed monthly budgets with up to 140+ line items to accurately assess post-divorce financial needs</p>
+    </div>
+    
+    <div class="service-card">
+      <h3>Alimony and Child Support Calculations</h3>
+      <p>Professional calculation and analysis of alimony and child support obligations based on Tennessee guidelines</p>
+    </div>
+    
+    <div class="service-card">
+      <h3>Tax Planning for Divorce</h3>
+      <p>Education about tax implications of divorce settlements including alimony taxation and asset transfers</p>
+    </div>
+    
+    <div class="service-card">
+      <h3>Parenting Plan Development</h3>
+      <p>Assistance in drafting comprehensive parenting plans that address custody, support, and children's needs</p>
+    </div>
+    
+    <div class="service-card">
+      <h3>Collaborative Divorce Services</h3>
+      <p>Alternative to traditional collaborative law that reduces professional fees while maintaining the collaborative approach</p>
+    </div>
+    
+    <div class="service-card">
+      <h3>Retirement Account Analysis</h3>
+      <p>Evaluation of pensions, 401(k)s, IRAs and other retirement benefits to understand division options and restrictions</p>
+    </div>
+    
+  </div>
+  
+  <h2>Professional Memberships</h2>
+  
+  <img src="https://getasmartdivorce.com/wp-content/uploads/adfp.svg">
+  <h3>Association of Divorce Financial Planners</h3>
+  <p>Founding Member</p>
+  
+  <img src="https://getasmartdivorce.com/wp-content/uploads/idfa-logo.png">
+  <h3>Institute for Divorce Financial Analysts</h3>
+  <p>Member</p>
+  
+  <img src="https://getasmartdivorce.com/wp-content/uploads/tapm.webp">
+  <h3>Tennessee Association of Professional Mediators</h3>
+  <p>Member</p>
+  
+  <img src="https://getasmartdivorce.com/wp-content/uploads/ncrc-logomark.png">
+  <h3>Nashville Conflict Resolution Center</h3>
+  <p>Member</p>
+</div>
+
+<footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Our Founder</span>
+      <span class="footer-copyright">©2026 Arons & Associates. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/services/">Services</a>
+    <a href="/case-study/">Case Study</a>
+    <a href="/divorce-financial-mediation/">Financial Mediation</a>
+    <a href="/our-founder/">Our Founder</a>
+    <a href="/collaborative-law-divorce/">Collaborative Divorce</a>
+    <a href="/blog/">Blog</a>
+    <a href="/contact/">Contact</a>
+  </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
