@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Royal Bliss Day Spa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://images.squarespace-cdn.com/content/v1/621faf6f39af57794d4cda3d/1646416783800-2M66FAGKYDIGE6XMLWL4/dana-devolk-x2cNcfz_xXU-unsplash.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(26, 26, 26, 0.3);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  color: white;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Philosophy Section */
+.philosophy {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.philosophy-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.philosophy-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.philosophy-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.service-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.service-cell:last-child {
+  border-bottom: none;
+}
+
+.service-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: var(--space-xs);
+}
+
+.service-number {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.service-name {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.service-description {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-top: var(--space-sm);
+  color: rgba(26, 26, 26, 0.8);
+}
+
+/* Stats Section */
+.stats {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.stats-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-value {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1;
+  margin-bottom: var(--space-sm);
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.4;
+}
+
+/* Team Section */
+.team {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.team-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.team-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.team-member {
+  text-align: center;
+}
+
+.member-name {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+}
+
+.member-role {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: rgba(26, 26, 26, 0.7);
+}
+
+/* Contact Section */
+.contact {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-item {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+}
+
+.contact-item a {
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.contact-item a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--text-black);
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.contact-item a:hover::after {
+  width: 100%;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .philosophy-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .service-cell:nth-child(-n+10) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(11),
+  .service-cell:nth-child(12) {
+    border-bottom: none;
+  }
+
+  .stats-inner {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .philosophy {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .stats {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .team {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .contact {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Royal Bliss Day Spa</a>
+  <ul class="nav-links">
+    <li><a href="#services">treatments</a></li>
+    <li><a href="#philosophy">about</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">Your home town spa.</h1>
+    <p class="hero-subtitle">restore. retouch. relax.</p>
+  </div>
+</section>
+
+<!-- Philosophy Section -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">001 — about</span>
+    <div class="philosophy-text">
+      <p>Welcome to Royal Bliss Day Spa - your hometown spa.</p>
+      <p>We have a passion to help women and men of all ages to take the best care of their skin by educating them through the different seasons of life. Many factors can change the way our skin behaves. Stress. Weather. Pregnancy. Age.</p>
+      <p>Do yourself a favor and make an appointment to visit us for a luscious and relaxing treatment. We can then teach you techniques and show you products that will help maintain your natural glow and beauty.</p>
+      <p>We all need to: Restore. Retouch. Relax.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Services Grid -->
+<section class="services" id="services">
+  <div class="services-grid">
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-number">001</span>
+        <span class="service-name">hydrafacials</span>
+      </div>
+      <div class="service-description">Effective facial treatment that removes impurities while delivering deep hydration</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-number">002</span>
+        <span class="service-name">facials</span>
+      </div>
+      <div class="service-description">Customized treatments including Royal Deluxe, Dermaplaning, and SkinCeuticals options</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-number">003</span>
+        <span class="service-name">head spa</span>
+      </div>
+      <div class="service-description">Multi-step treatment with scalp analysis, massage, and nourishing masks</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-number">004</span>
+        <span class="service-name">massage therapy</span>
+      </div>
+      <div class="service-description">Swedish, deep tissue, hot stone, and specialty massage treatments</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-number">005</span>
+        <span class="service-name">lash & brow</span>
+      </div>
+      <div class="service-description">Eyelash lifts, tints, eyebrow lamination and tinting services</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-number">006</span>
+        <span class="service-name">waxing</span>
+      </div>
+      <div class="service-description">Hair removal services for various body areas</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-number">007</span>
+        <span class="service-name">medical weight loss</span>
+      </div>
+      <div class="service-description">GLP-1 weight loss injections with monthly membership including Hydrafacial</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-number">008</span>
+        <span class="service-name">wellness injections</span>
+      </div>
+      <div class="service-description">B12, glutathione, immunity and other vitamin injections</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-number">009</span>
+        <span class="service-name">medical treatments</span>
+      </div>
+      <div class="service-description">Chemical peels, micro-needling, Dysport, Sculptra, and laser treatments</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-number">010</span>
+        <span class="service-name">makeup</span>
+      </div>
+      <div class="service-description">Event makeup, wedding makeup, and makeup instruction</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-number">011</span>
+        <span class="service-name">men's services</span>
+      </div>
+      <div class="service-description">Beard facials, back treatments, and waxing services for men</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-number">012</span>
+        <span class="service-name">enhancements</span>
+      </div>
+      <div class="service-description">Add-on treatments to enhance spa services</div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-value">$100</div>
+      <div class="stat-label">off GLP-1 weight loss treatments for new clients</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">90%</div>
+      <div class="stat-label">of skin damage is caused by sun exposure</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">1%</div>
+      <div class="stat-label">less collagen produced each year after age 20</div>
+    </div>
+  </div>
+</section>
+
+<!-- Team Section -->
+<section class="team">
+  <div class="team-inner">
+    <h2 class="team-heading">Meet Our Team</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <div class="member-name">brylee horinka</div>
+        <div class="member-role">Managing Esthetician, Massage Therapist & Owner</div>
+      </div>
+      <div class="team-member">
+        <div class="member-name">briana grimes</div>
+        <div class="member-role">Massage Therapist</div>
+      </div>
+      <div class="team-member">
+        <div class="member-name">kylie funk</div>
+        <div class="member-role">Esthetician</div>
+      </div>
+      <div class="team-member">
+        <div class="member-name">sydney gray</div>
+        <div class="member-role">Esthetician</div>
+      </div>
+      <div class="team-member">
+        <div class="member-name">eva huddleston</div>
+        <div class="member-role">Esthetician</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-heading">Visit<br>Your Hometown<br>Spa</h2>
+    <div class="contact-details">
+      <div class="contact-item">
+        phone: <a href="tel:16464167838">(512) 548-6733</a>
+      </div>
+      <div class="contact-item">
+        email: <a href="mailto:royalblissdayspa@yahoo.com">royalblissdayspa@yahoo.com</a>
+      </div>
+      <div class="contact-item">
+        address: 12701 Hwy 29 W, Ste 5<br>Liberty Hill, Texas 78642
+      </div>
+      <div class="contact-item">
+        hours:<br>
+        monday 9:00 am - 5:00 pm<br>
+        tuesday 9:00 am - 7:00 pm<br>
+        wednesday 9:00 am - 5:00 pm<br>
+        thursday 9:00 am - 7:00 pm<br>
+        friday 9:00 am - 5:00 pm<br>
+        saturday 9:00 am - 3:00 pm
+      </div>
+      <div class="contact-item">
+        social: <a href="https://www.facebook.com/Royalblissdayspallc">facebook</a> / <a href="https://www.instagram.com/royal.bliss.med.spa/?hl=en">instagram</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Royal Bliss Day Spa</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
