@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beauty Revival Barn</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f0eb;
+    --text: #1a1a1a;
+    --border: #1a1a1a;
+    --placeholder: rgba(26, 26, 26, 0.25);
+    --hover-bg: #1a1a1a;
+    --hover-text: #f5f0eb;
+    --spacing-base: 2rem;
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+    --font-mono: 'Space Mono', 'Courier New', monospace;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-serif);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ==================== NAVIGATION ==================== */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    mix-blend-mode: difference;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: none;
+    list-style: none;
+    gap: 2.5rem;
+  }
+
+  .nav-links li a {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: lowercase;
+    color: #fff;
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 4px;
+  }
+
+  .nav-links li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #fff;
+    transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .nav-links li a:hover::after {
+    width: 100%;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+    mix-blend-mode: normal;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 1px;
+    background: #fff;
+    transition: all 0.3s ease;
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(4px, 4px);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(4px, -4px);
+  }
+
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--text);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+
+  .mobile-menu.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .mobile-menu a {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    text-transform: lowercase;
+    color: var(--bg);
+    text-decoration: none;
+    padding: 0.5rem 0;
+    position: relative;
+  }
+
+  .mobile-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--bg);
+    transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .mobile-menu a:hover::after {
+    width: 100%;
+  }
+
+  /* ==================== HERO ==================== */
+  .hero {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 6rem 2rem;
+    background-image: url('https://images.squarespace-cdn.com/content/v1/6957d4aacb3c0a66f27925cc/491764bc-f4e0-4b02-8056-bdcb748a45b0/Tx+Botox+Boots+and+Beauty+PLLC++Medspa+in+Liberty+Hill%2C+TX%2C+78642++Botox%2C+Fillers%2C+Weight+Loss+%281%29.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(245, 240, 235, 0.8);
+    z-index: 1;
+  }
+
+  .hero-content {
+    animation: fadeInUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    opacity: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hero h1 {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: clamp(3rem, 10vw, 5.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 2rem;
+    font-style: italic;
+  }
+
+  .hero-subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    line-height: 1.8;
+    text-transform: lowercase;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  /* ==================== PHILOSOPHY ==================== */
+  .philosophy {
+    padding: 5rem 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .philosophy-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: lowercase;
+    margin-bottom: 2.5rem;
+  }
+
+  .philosophy-text {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: clamp(1.4rem, 3.5vw, 2.4rem);
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    max-width: 100%;
+  }
+
+  .philosophy-text p {
+    margin-bottom: 1.5rem;
+  }
+
+  .philosophy-emphasis {
+    display: block;
+    margin-top: 2rem;
+    font-style: italic;
+  }
+
+  /* ==================== SERVICES SECTION ==================== */
+  .services-section {
+    padding: 5rem 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .services-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: lowercase;
+    margin-bottom: 3rem;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .service-item {
+    border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+    padding-bottom: 1.5rem;
+  }
+
+  .service-item h3 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 1.3;
+    margin-bottom: 0.8rem;
+  }
+
+  .service-item p {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(26, 26, 26, 0.8);
+  }
+
+  .coming-soon {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: lowercase;
+    color: rgba(26, 26, 26, 0.6);
+    font-style: italic;
+  }
+
+  /* ==================== TEAM SECTION ==================== */
+  .team-section {
+    padding: 5rem 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .team-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: lowercase;
+    margin-bottom: 3rem;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .team-member {
+    text-align: center;
+  }
+
+  .team-member h3 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 1.8rem;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+    font-style: italic;
+  }
+
+  .team-member .role {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: lowercase;
+    margin-bottom: 1.5rem;
+    color: rgba(26, 26, 26, 0.7);
+  }
+
+  .team-member p {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  /* ==================== CONTACT SECTION ==================== */
+  .contact-section {
+    padding: 5rem 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .contact-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: lowercase;
+    margin-bottom: 3rem;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .contact-item {
+    text-align: center;
+  }
+
+  .contact-item h3 {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: lowercase;
+    margin-bottom: 1rem;
+    color: rgba(26, 26, 26, 0.7);
+  }
+
+  .contact-item p {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .contact-item a {
+    color: var(--text);
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .contact-item a:hover {
+    opacity: 0.7;
+  }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .social-links a {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: lowercase;
+    color: var(--text);
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 4px;
+  }
+
+  .social-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--text);
+    transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .social-links a:hover::after {
+    width: 100%;
+  }
+
+  /* ==================== FOOTER ==================== */
+  footer {
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: lowercase;
+  }
+
+  .footer-copyright {
+    opacity: 0.7;
+  }
+
+  .footer-locations {
+    opacity: 0.7;
+  }
+
+  /* ==================== TABLET (768px) ==================== */
+  @media (min-width: 768px) {
+    nav {
+      padding: 2rem 3rem;
+    }
+
+    .nav-links {
+      display: flex;
+    }
+
+    .hamburger {
+      display: none;
+    }
+
+    .hero {
+      padding: 8rem 4rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(4rem, 9vw, 6rem);
+    }
+
+    .philosophy {
+      padding: 6rem 3rem;
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 3rem;
+    }
+
+    .philosophy-label {
+      margin-bottom: 0;
+      padding-top: 0.5rem;
+    }
+
+    .services-section {
+      padding: 6rem 3rem;
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 3rem;
+    }
+
+    .services-label {
+      margin-bottom: 0;
+      padding-top: 0.5rem;
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .team-section {
+      padding: 6rem 3rem;
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 3rem;
+    }
+
+    .team-label {
+      margin-bottom: 0;
+      padding-top: 0.5rem;
+    }
+
+    .team-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+
+    .contact-section {
+      padding: 6rem 3rem;
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 3rem;
+    }
+
+    .contact-label {
+      margin-bottom: 0;
+      padding-top: 0.5rem;
+    }
+
+    .contact-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+    }
+
+    footer {
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 2rem 3rem;
+    }
+  }
+
+  /* ==================== DESKTOP (1024px) ==================== */
+  @media (min-width: 1024px) {
+    nav {
+      padding: 2rem 4rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(5rem, 8vw, 7.5rem);
+    }
+
+    .hero-subtitle {
+      font-size: 0.7rem;
+    }
+
+    .philosophy {
+      padding: 8rem 4rem;
+      grid-template-columns: 220px 1fr;
+      gap: 4rem;
+    }
+
+    .philosophy-text {
+      max-width: 700px;
+    }
+
+    .services-section {
+      padding: 8rem 4rem;
+      grid-template-columns: 220px 1fr;
+      gap: 4rem;
+    }
+
+    .team-section {
+      padding: 8rem 4rem;
+      grid-template-columns: 220px 1fr;
+      gap: 4rem;
+    }
+
+    .contact-section {
+      padding: 8rem 4rem;
+      grid-template-columns: 220px 1fr;
+      gap: 4rem;
+    }
+
+    footer {
+      padding: 2rem 4rem;
+    }
+  }
+
+  /* ==================== LARGE DESKTOP (1440px+) ==================== */
+  @media (min-width: 1440px) {
+    nav {
+      padding: 2.5rem 6rem;
+    }
+
+    .hero {
+      padding: 10rem 6rem;
+    }
+
+    .philosophy {
+      padding: 10rem 6rem;
+      grid-template-columns: 280px 1fr;
+    }
+
+    .services-section {
+      padding: 10rem 6rem;
+      grid-template-columns: 280px 1fr;
+    }
+
+    .team-section {
+      padding: 10rem 6rem;
+      grid-template-columns: 280px 1fr;
+    }
+
+    .contact-section {
+      padding: 10rem 6rem;
+      grid-template-columns: 280px 1fr;
+    }
+
+    footer {
+      padding: 2.5rem 6rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav>
+  <a href="#" class="nav-logo">Beauty Revival Barn</a>
+  <ul class="nav-links">
+    <li><a href="#services">services</a></li>
+    <li><a href="#team">team</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+  <button class="hamburger" aria-label="Toggle menu" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="closeMenu()">services</a>
+  <a href="#team" onclick="closeMenu()">team</a>
+  <a href="#contact" onclick="closeMenu()">contact</a>
+</div>
+
+<!-- Hero Header -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>refreshed, radiant, and<br>confidently yourself.</h1>
+    <p class="hero-subtitle">luxury boutique med spa<br>in liberty hill, texas</p>
+  </div>
+</section>
+
+<!-- Philosophy Section -->
+<section class="philosophy" id="about">
+  <div class="philosophy-label">/ about</div>
+  <div class="philosophy-text">
+    <p>Beauty Revival Barn is a luxury boutique med spa in Liberty Hill, Texas specializing in natural-looking injectables, facial balancing, and advanced skin rejuvenation. Every treatment is performed by a Registered Nurse and certified aesthetic injector, blending medical expertise with an artistic eye for subtle, beautiful results.</p>
+    <p>We combine expert, nurse-led care with a warm, Texas-chic atmosphere so you can look refreshed, radiant, and confidently yourself — never frozen or overdone.</p>
+    <p class="philosophy-emphasis">Our clients come to us for personalized treatment plans, honest education, and long-term aesthetic care that puts safety, artistry, and natural beauty first.</p>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="services-section" id="services">
+  <div class="services-label">/ services</div>
+  <div class="services-grid">
+    <div class="service-item">
+      <h3>Neurotoxins</h3>
+      <p>Reduces the appearance of lines and wrinkles, resulting in a smoother and more youthful look.</p>
+    </div>
+    <div class="service-item">
+      <h3>Dermal Fillers</h3>
+      <p>A non-surgical option that may help restore volume and smooth fine lines and wrinkles.</p>
+    </div>
+    <div class="service-item">
+      <h3>Microntox</h3>
+    </div>
+    <div class="service-item">
+      <h3>Kybella</h3>
+    </div>
+    <div class="service-item">
+      <h3>Lip Enhancement</h3>
+      <p>Lip fillers are a non-surgical cosmetic treatment designed to enhance lip volume, improve symmetry, and refine lip contours.</p>
+    </div>
+    <div class="service-item">
+      <h3>Facial Balancing</h3>
+      <p>Facial balancing uses non-surgical techniques to enhance facial symmetry and proportion.</p>
+    </div>
+    <div class="service-item">
+      <h3>Cheek, Jawline & Chin Contouring</h3>
+      <p>Enhance your natural beauty with face contouring treatments designed to improve facial harmony and definition.</p>
+    </div>
+    <div class="service-item">
+      <h3>EZ-Gel PRP Filler</h3>
+      <p>PRP filler is a regenerative skin treatment using the body's own platelets and growth factors to promote collagen production.</p>
+    </div>
+    <div class="service-item">
+      <h3>Biostimulators</h3>
+      <p>Advanced cosmetic treatments that stimulate your body's natural collagen production, providing a non-surgical solution for skin rejuvenation and volume restoration.</p>
+    </div>
+    <div class="service-item">
+      <h3>Medical Microneedling</h3>
+      <p>Microneedling is a versatile, minimally invasive treatment that harnesses the body's natural healing abilities to stimulate collagen and elastin production.</p>
+    </div>
+    <div class="service-item">
+      <h3>Microneedling with PRP</h3>
+      <p>Microneedling with PRP combines the benefits of microneedling with the regenerative properties of your own platelet-rich plasma (PRP).</p>
+    </div>
+    <div class="service-item">
+      <h3>Microneedling with PRF</h3>
+      <p>A revolutionary skin rejuvenation treatment that combines microneedling with platelet-rich fibrin (PRF) derived from your blood.</p>
+    </div>
+    <div class="service-item">
+      <h3>Microneedling with Exosome</h3>
+      <p>Microneedling with exosomes combines innovative microneedling techniques with exosome application to improve the skin's appearance and texture.</p>
+    </div>
+    <div class="service-item">
+      <h3>Medical Microneedling with Boosters</h3>
+    </div>
+    <div class="service-item">
+      <h3>Chemical Peels</h3>
+      <p>Chemical peels exfoliate dead skin cells, revealing a more youthful and vibrant complexion.</p>
+    </div>
+    <div class="service-item">
+      <h3>Skin Boosters & PRP Treatments</h3>
+      <p>Platelet-Rich Plasma (PRP) treatment is a natural, minimally invasive solution for skin rejuvenation and hair restoration.</p>
+    </div>
+    <div class="service-item">
+      <h3>Medical-Grade Facials</h3>
+      <p>Professional treatments designed to support skin health and address specific concerns such as acne, uneven skin tone, and signs of aging.</p>
+    </div>
+    <div class="service-item">
+      <h3>Medical-Grade Skincare</h3>
+      <p>Medical-grade skincare offers clinically-backed, potent solutions for a variety of skin concerns, including anti-aging, pigmentation, and skin sensitivity.</p>
+    </div>
+    <div class="service-item">
+      <h3>Jan Marini Skin Solutions</h3>
+      <p class="coming-soon">coming soon</p>
+    </div>
+    <div class="service-item">
+      <h3>Korean Medical-Grade Skincare</h3>
+      <p class="coming-soon">coming soon</p>
+    </div>
+    <div class="service-item">
+      <h3>GLP-1 Medical Weight Loss</h3>
+      <p>GLP-1 weight loss treatments are prescription-based medications that may help support weight management by influencing appetite regulation and metabolism.</p>
+    </div>
+    <div class="service-item">
+      <h3>Peptide Therapy</h3>
+      <p>Peptide therapy utilizes naturally occurring peptides to support various aspects of health and wellness.</p>
+    </div>
+    <div class="service-item">
+      <h3>NAD+ Therapy</h3>
+      <p>A wellness treatment designed to support cellular health, energy levels, and mental clarity through an infusion of NAD+.</p>
+    </div>
+    <div class="service-item">
+      <h3>IV Vitamin Therapy</h3>
+      <p>IV Hydration Therapy is a wellness approach that may help provide relief from symptoms such as fatigue, stress, and occasional weakened immunity.</p>
+    </div>
+    <div class="service-item">
+      <h3>Vitamin C</h3>
+      <p class="coming-soon">coming soon</p>
+    </div>
+    <div class="service-item">
+      <h3>Glutathione</h3>
+      <p class="coming-soon">coming soon</p>
+    </div>
+    <div class="service-item">
+      <h3>Myers' Cocktail</h3>
+      <p class="coming-soon">coming soon</p>
+    </div>
+    <div class="service-item">
+      <h3>Migraine Relief Cocktail</h3>
+      <p class="coming-soon">coming soon</p>
+    </div>
+    <div class="service-item">
+      <h3>Hangover Recovery Drip</h3>
+      <p class="coming-soon">coming soon</p>
+    </div>
+    <div class="service-item">
+      <h3>Hydration & Energy Drips</h3>
+      <p class="coming-soon">coming soon</p>
+    </div>
+    <div class="service-item">
+      <h3>Lipolean®️ Fat-Burning Injections</h3>
+      <p>Lipotropic injections are a combination of nutrients and amino acids that may assist in supporting weight management and promoting energy.</p>
+    </div>
+    <div class="service-item">
+      <h3>B12 & Wellness Shots</h3>
+      <p>Vitamin B12 injections are a quick and effective way to support energy levels, metabolism, and overall wellness.</p>
+    </div>
+    <div class="service-item">
+      <h3>Sculptra</h3>
+      <p>Sculptra restores facial volume lost due to aging and stimulates collagen production, offering a gradual and natural correction of wrinkles and folds.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Team Section -->
+<section class="team-section" id="team">
+  <div class="team-label">/ team</div>
+  <div class="team-grid">
+    <div class="team-member">
+      <h3>Cecilia Wheeler</h3>
+      <p class="role">BSN, RN</p>
+      <p>Cici Wheeler created Beauty Revival Barn because she believes aesthetics should feel personal, honest, and empowering — not rushed, salesy, or intimidating. She specializes in subtle, confidence-boosting treatments that help women look like the best version of themselves, not someone else.</p>
+    </div>
+    <div class="team-member">
+      <h3>Nauman Rashid</h3>
+      <p class="role">Medical Director, MD</p>
+      <p>Dr. Nauman Rashid is a board-certified Emergency Medicine physician who brings over a decade of clinical expertise into the world of aesthetic medicine. He believes aesthetic medicine is more than beauty — it's a form of self-care.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-section" id="contact">
+  <div class="contact-label">/ contact</div>
+  <div class="contact-grid">
+    <div class="contact-item">
+      <h3>phone</h3>
+      <p><a href="tel:6157621999">(615) 762-1999</a></p>
+    </div>
+    <div class="contact-item">
+      <h3>email</h3>
+      <p><a href="mailto:cici@beautyrevivalbarn.com">cici@beautyrevivalbarn.com</a></p>
+    </div>
+    <div class="contact-item">
+      <h3>location</h3>
+      <p>12 injections are a quick and effective way to support energy levels, me</p>
+    </div>
+  </div>
+  <div class="social-links">
+    <a href="https://www.facebook.com/people/TXBotoxBootsBeauty/61576219995246/#" target="_blank">facebook</a>
+    <a href="https://www.instagram.com/txbotoxbootsandbeauty/" target="_blank">instagram</a>
+    <a href="https://www.tiktok.com/@txbotoxbootsandbeauty?lang=en" target="_blank">tiktok</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-copyright">© 2024 Beauty Revival Barn</div>
+  <div class="footer-locations">london — new york — tokyo</div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
+    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+  }
+
+  function closeMenu() {
+    const hamburger = document.querySelector('.hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.classList.remove('active');
+    mobileMenu.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+</script>
+
+</body>
+</html>
