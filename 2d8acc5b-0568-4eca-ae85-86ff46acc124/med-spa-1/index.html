@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arthur Direct Care</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Philosophy Section */
+.philosophy {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.philosophy-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.philosophy-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.philosophy-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.service-cell {
+  border-bottom: 1px solid var(--border-black);
+  border-right: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.service-cell:nth-child(2n) {
+  border-right: none;
+}
+
+.service-cell:nth-last-child(-n+2) {
+  border-bottom: none;
+}
+
+.service-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.service-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.service-cell:hover .service-image img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+.service-name {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.2rem;
+  margin-bottom: var(--space-xs);
+}
+
+.service-description {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: rgba(26, 26, 26, 0.8);
+}
+
+/* Team Section */
+.team {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.team-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.team-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.team-member {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  border: 1px solid var(--border-black);
+}
+
+.team-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.team-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.team-info h3 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.4rem;
+  margin-bottom: var(--space-xs);
+}
+
+.team-info .role {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: rgba(26, 26, 26, 0.7);
+}
+
+/* Insurance Section */
+.insurance {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.insurance-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.insurance-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.insurance-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Patients Section */
+.patients {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.patients-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.patients-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.patients-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* App Section */
+.app {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.app-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.app-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.app-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Testimonials Section */
+.testimonials {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.testimonials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonials-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.testimonial-card {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.testimonial-quote {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  font-style: italic;
+  margin-bottom: var(--space-sm);
+}
+
+.testimonial-author {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: rgba(26, 26, 26, 0.7);
+}
+
+/* Maps Section */
+.maps {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.maps-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.maps-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.maps-iframe {
+  width: 100%;
+  height: 300px;
+  border: 1px solid var(--border-black);
+}
+
+/* Contact Info */
+.contact-info {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.contact-info-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-info-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.contact-item {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  line-height: 1.6;
+}
+
+.contact-item a {
+  text-decoration: underline;
+}
+
+.social-links {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: var(--space-md);
+}
+
+.social-links a {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  padding: var(--space-xs) var(--space-sm);
+  border: 1px solid var(--border-black);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.social-links a:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Inquiry Section */
+.inquiry {
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.inquiry-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.inquiry-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.inquiry-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.form-field {
+  position: relative;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  padding: var(--space-sm) 0;
+  color: var(--text-black);
+  outline: none;
+  border-radius: 0;
+  transition: border-bottom-width 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: var(--placeholder-gray);
+  font-style: italic;
+  font-family: var(--font-serif);
+  font-weight: 300;
+}
+
+.form-field select {
+  cursor: pointer;
+  color: var(--placeholder-gray);
+  font-style: italic;
+}
+
+.form-field select.has-value {
+  color: var(--text-black);
+  font-style: normal;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-bottom-width: 2px;
+}
+
+.form-submit {
+  align-self: flex-start;
+}
+
+.form-submit button {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.form-submit button:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1rem;
+    --space-lg: 3rem;
+    --space-xl: 4rem;
+    --space-xxl: 6rem;
+  }
+
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-sm);
+  }
+
+  .nav-links a {
+    font-size: 0.6rem;
+  }
+
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+    min-height: 90vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(1.8rem, 8vw, 3rem);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-cell {
+    border-right: none;
+  }
+
+  .service-cell:nth-child(n) {
+    border-right: none;
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .service-cell:last-child {
+    border-bottom: none;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .team-member {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-details {
+    gap: var(--space-sm);
+  }
+
+  .social-links {
+    gap: var(--space-xs);
+  }
+
+  .social-links a {
+    font-size: 0.7rem;
+    padding: var(--space-xs);
+  }
+
+  .inquiry-inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .philosophy-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  .service-cell {
+    border-right: 1px solid var(--border-black);
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(4n) {
+    border-right: none;
+  }
+
+  .service-cell:nth-last-child(-n+4) {
+    border-bottom: none;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .inquiry-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .philosophy {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .team {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .insurance {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .patients {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .app {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .testimonials {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .maps {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .contact-info {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .inquiry {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Arthur Direct Care</a>
+  <ul class="nav-links">
+    <li><a href="https://www.arthurdirectcare.com/direct-primary-care/">about</a></li>
+    <li><a href="https://www.arthurdirectcare.com/meet-dr-arthur/">meet dr. arthur</a></li>
+    <li><a href="https://www.arthurdirectcare.com/member-benefits/">benefits</a></li>
+    <li><a href="https://www.arthurdirectcare.com/contact/">contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <h1 class="hero-headline">Best Primary Care, Urgent Care<br>and ED Treatment in Hutto</h1>
+  <p class="hero-subtitle">001 — comprehensive healthcare services for patients of all ages, dedicated to delivering compassionate care and ensuring your well-being at every step</p>
+</section>
+
+<!-- Philosophy Section -->
+<section class="philosophy" id="about">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">002 — our approach</span>
+    <div class="philosophy-text">
+      <p>Primary care, is an essential component of the healthcare system, as it provides the foundation for maintaining individuals' overall well-being and managing their healthcare. It is the first point of contact for people seeking medical assistance, with a focus on preventive care, early intervention, and comprehensive health maintenance.</p>
+      <p>We take pride in offering a diverse range of comprehensive healthcare services for patients of all ages. Our dedicated team of healthcare professionals is committed to delivering compassionate care, ensuring your well-being at every step. Beyond addressing illnesses and injuries, our primary care doctors in Hutto/Pflugerville prioritize comprehensive preventive healthcare services.</p>
+      <p>For individuals managing chronic conditions such as diabetes, high blood pressure, or high cholesterol, our dedicated team offers continuous monitoring and acts as a reliable advocate, ensuring a consistent and personalized approach to your care.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Services Grid -->
+<section class="services" id="services">
+  <div class="services-grid">
+    <div class="service-cell">
+      <div class="service-image">
+        <img src="https://www.arthurdirectcare.com/wp-content/uploads/2023/12/Best-Primary-Care-in-Hutto-Arthur-Direct-Care-150x150.jpg.webp" alt="Family getting the Primary Care at Arthur Direct Care">
+      </div>
+      <h3 class="service-name">Primary Care</h3>
+      <p class="service-description">Comprehensive healthcare services including routine check-ups, chronic disease management, annual physicals, pediatric care, women's health, men's health</p>
+    </div>
+    
+    <div class="service-cell">
+      <div class="service-image">
+        <img src="https://www.arthurdirectcare.com/wp-content/uploads/2024/03/Female-Urgent-Care-Provider-attending-to-a-kid-Arthur-Direct-Care-Hutto-Urgent-Care-150x150.jpg.webp" alt="Female Urgent Care Provider attending to a kid">
+      </div>
+      <h3 class="service-name">Urgent Care</h3>
+      <p class="service-description">Treatment for minor injuries, cuts, burns, sprains, flu symptoms, infections, and other non-emergency medical needs</p>
+    </div>
+    
+    <div class="service-cell">
+      <div class="service-image">
+        <img src="https://www.arthurdirectcare.com/wp-content/uploads/2023/05/ArthurDirectCare-Immigration-Exam-150x150.jpeg.webp" alt="U.S. flag with the USCIS logo overlay">
+      </div>
+      <h3 class="service-name">Immigration Medical Exam</h3>
+      <p class="service-description">Green Card medical exams conducted by certified civil surgeons</p>
+    </div>
+    
+    <div class="service-cell">
+      <div class="service-image">
+        <img src="https://www.arthurdirectcare.com/wp-content/uploads/2024/03/Dr.-Arthur-with-Focused-Shockwave-Therapy-For-ED-Machine-at-Arthur-Direct-Care-Clinic-e1711233803758-150x150.png.webp" alt="Dr. Arthur with Focused Shockwave Therapy For ED Machine">
+      </div>
+      <h3 class="service-name">Shockwave Therapy for ED</h3>
+      <p class="service-description">Focused Shockwave Therapy for erectile dysfunction treatment</p>
+    </div>
+    
+    <div class="service-cell">
+      <div class="service-image">
+        <img src="https://www.arthurdirectcare.com/wp-content/uploads/2024/03/Truk-Drive-Needing-DOT-Physical-at-Arthur-Direct-Care-150x150.jpg.webp" alt="Female Truck Driver Needing DOT Physical">
+      </div>
+      <h3 class="service-name">DOT Physicals</h3>
+      <p class="service-description">Department of Transportation physical examinations for commercial drivers</p>
+    </div>
+    
+    <div class="service-cell">
+      <div class="service-image">
+        <img src="https://www.arthurdirectcare.com/wp-content/uploads/2024/03/Travel-Clinic-Arthur-Direct-Care-150x150.png.webp" alt="Travel Clinic - Arthur Direct Care">
+      </div>
+      <h3 class="service-name">Travel Medicine</h3>
+      <p class="service-description">Travel health consultations and immunizations for international travel</p>
+    </div>
+    
+    <div class="service-cell">
+      <div class="service-image">
+        <img src="https://www.arthurdirectcare.com/wp-content/uploads/2023/12/Patient-in-the-Weight-Loss-Program-at-Arthur-Direct-Care-Hutto-150x150.jpg.webp" alt="Patient in the Weight Loss Program">
+      </div>
+      <h3 class="service-name">Weight Loss</h3>
+      <p class="service-description">Weight management and obesity treatment programs</p>
+    </div>
+    
+    <div class="service-cell">
+      <div class="service-image">
+        <img src="https://www.arthurdirectcare.com/wp-content/uploads/2024/03/IV-infusion-at-Arthur-Direct-Care-Clinic-150x150.jpg.webp" alt="A nurse at Arthur Direct Care Hutto with IV drip">
+      </div>
+      <h3 class="service-name">IV Infusion Therapy</h3>
+      <p class="service-description">Intravenous therapy services</p>
+    </div>
+  </div>
+</section>
+
+<!-- Team Section -->
+<section class="team" id="team">
+  <div class="team-inner">
+    <h2 class="team-heading">Meet Our Providers<br>And Director</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <div class="team-photo">
+          <img src="https://www.arthurdirectcare.com/wp-content/uploads/2024/02/IMG_2721-300x300.png.webp" alt="Dr. Arthur - Albert Arthur, MD">
+        </div>
+        <div class="team-info">
+          <h3>Albert Arthur, MD</h3>
+          <p class="role">physician</p>
+        </div>
+      </div>
+      
+      <div class="team-member">
+        <div class="team-photo">
+          <img src="https://www.arthurdirectcare.com/wp-content/uploads/2024/03/Physician-at-Arthur-Direct-Care-Best-Primary-Care-Provider-in-Hutto-and-Pflugerville-Area-300x300.png.webp" alt="Female Provider at Arthur Direct Care Hutto">
+        </div>
+        <div class="team-info">
+          <h3>Chelsea Lopez, FNP</h3>
+          <p class="role">provider</p>
+        </div>
+      </div>
+      
+      <div class="team-member">
+        <div class="team-photo">
+          <img src="https://www.arthurdirectcare.com/wp-content/uploads/2024/02/Rachel-Arthur_Practice-Manager-at-Arthur-Direct-Care-Clinic-300x300.png.webp" alt="Arthur Direct Care Practice Manager">
+        </div>
+        <div class="team-info">
+          <h3>Rachel Arthur</h3>
+          <p class="role">director of operations</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Insurance Section -->
+<section class="insurance">
+  <div class="insurance-inner">
+    <h2 class="insurance-heading">Don't Have Insurance?</h2>
+    <div class="insurance-text">
+      <p>Don't worry! We offer affordable healthcare options for uninsured patients. Our direct pay services provide quality care without the need for insurance.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Patients Section -->
+<section class="patients">
+  <div class="patients-inner">
+    <h2 class="patients-heading">We Are Accepting New Patients!</h2>
+    <div class="patients-text">
+      <p>Arthur Direct Care is currently welcoming new patients. Schedule your appointment today and experience our comprehensive healthcare services.</p>
+    </div>
+  </div>
+</section>
+
+<!-- App Section -->
+<section class="app">
+  <div class="app-inner">
+    <h2 class="app-heading">Download the Healow App</h2>
+    <div class="app-text">
+      <p>Stay connected with your healthcare team through the Healow app. Schedule appointments, access medical records, and communicate with your providers easily.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <h2 class="testimonials-heading">What Our Patients Say</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-quote">Maps (opens in new tab)...</p>
+        <p class="testimonial-author">Reviewer 1</p>
+      </div>
+      
+      <div class="testimonial-card">
+        <p class="testimonial-quote">Report errors in the road map or imagery to Google...</p>
+        <p class="testimonial-author">US</p>
+      </div>
+      
+      <div class="testimonial-card">
+        <p class="testimonial-quote">Maps (opens in new tab)...</p>
+        <p class="testimonial-author">Reviewer 3</p>
+      </div>
+      
+      <div class="testimonial-card">
+        <p class="testimonial-quote">Report errors in the road map or imagery to Google...</p>
+        <p class="testimonial-author">Arthur Direct Care Primary</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Maps Section -->
+<section class="maps">
+  <div class="maps-inner">
+    <h2 class="maps-heading">Find Us</h2>
+    <iframe src="https://maps.google.com/maps?ll=30.501951,-97.577161&amp;z=10&amp;t=m&amp;hl=en-US&amp;gl=US&amp;mapclient=embed&amp;cid=10286761626100383519" width="100%" height="300" style="border:0" allowfullscreen loading="lazy" class="maps-iframe"></iframe>
+  </div>
+</section>
+
+<!-- Contact Info Section -->
+<section class="contact-info">
+  <div class="contact-info-inner">
+    <h2 class="contact-info-heading">Contact Information</h2>
+    <div class="contact-details">
+      <div class="contact-item">
+        <a href="tel:(512) 551-0792">(512) 551-0792</a>
+      </div>
+      <div class="contact-item">
+        <a href="mailto:contact@arthurdirectcare.com">contact@arthurdirectcare.com</a>
+      </div>
+      <div class="contact-item">
+        201 E Wilco Hwy STE 100, Hutto, TX 78634
+      </div>
+    </div>
+    <div class="social-links">
+      <a href="https://www.facebook.com/arthurdirectcare.Hutto/" target="_blank">facebook</a>
+      <a href="https://www.instagram.com/arthurdirectcare/" target="_blank">instagram</a>
+      <a href="https://twitter.com/arthur_direct" target="_blank">twitter</a>
+      <a href="https://www.youtube.com/@arthurdirectcareclinic" target="_blank">youtube</a>
+      <a href="https://www.yelp.com/biz/arthur-direct-care-hutto" target="_blank">yelp</a>
+      <a href="https://maps.google.com/maps?ll=30.501951,-97.577161&z=10&t=m&hl=en-US&gl=US&mapclient=embed&cid=10286761626100383519" target="_blank">google business</a>
+    </div>
+  </div>
+</section>
+
+<!-- Inquiry Section -->
+<section class="inquiry" id="contact">
+  <div class="inquiry-inner">
+    <h2 class="inquiry-heading">Begin a<br>Conversation<br>About Your Care</h2>
+    <form class="inquiry-form" onsubmit="event.preventDefault();">
+      <div class="form-field">
+        <input type="text" placeholder="Your name">
+      </div>
+      <div class="form-field">
+        <input type="email" placeholder="Email address">
+      </div>
+      <div class="form-field">
+        <input type="tel" placeholder="Phone number">
+      </div>
+      <div class="form-field">
+        <select onchange="this.classList.toggle('has-value', this.value !== '')">
+          <option value="">How did you hear about us?</option>
+          <option value="google">Google Search</option>
+          <option value="facebook">Facebook</option>
+          <option value="instagram">Instagram</option>
+          <option value="ad">Google AD</option>
+          <option value="friend">Friend</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <textarea rows="4" placeholder="Message"></textarea>
+      </div>
+      <div class="form-submit">
+        <button type="submit">submit inquiry</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Arthur Direct Care</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
