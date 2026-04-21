@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personique On The Spot</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://personiqueonthespot.com/wp-content/themes/personiqueonthespot_com/images/welcome-model.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(244, 240, 234, 0.8);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Philosophy Section */
+.philosophy {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.philosophy-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.philosophy-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.philosophy-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Stats */
+.stats {
+  padding: var(--space-lg) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+  text-align: center;
+}
+
+.stats-grid {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.stat {
+  padding: var(--space-md);
+}
+
+.stat-number {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 1;
+  margin-bottom: var(--space-xs);
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.service-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.service-cell:last-child {
+  border-bottom: none;
+}
+
+.service-image-wrapper {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+  border-radius: 4px;
+}
+
+.service-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(20%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.service-cell:hover .service-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(1.02);
+}
+
+.service-meta {
+  padding-top: var(--space-xs);
+}
+
+.service-name {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-xs);
+}
+
+.service-description {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+/* Testimonials */
+.testimonials {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.testimonials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonials-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.testimonial {
+  padding: var(--space-md);
+  border: 1px solid var(--border-black);
+  text-align: center;
+}
+
+.testimonial-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  font-style: italic;
+  margin-bottom: var(--space-md);
+}
+
+.testimonial-author {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* Video Section */
+.video-section {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.video-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.video-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.video-embed {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--border-black);
+}
+
+/* FAQ Section */
+.faq {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.faq-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md) 0;
+}
+
+.faq-question {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-sm);
+}
+
+.faq-answer {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Inquiry Section */
+.inquiry {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.inquiry-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.inquiry-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.inquiry-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.form-field {
+  position: relative;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  padding: var(--space-sm) 0;
+  color: var(--text-black);
+  outline: none;
+  border-radius: 0;
+  transition: border-bottom-width 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: var(--placeholder-gray);
+  font-style: italic;
+  font-family: var(--font-serif);
+  font-weight: 300;
+}
+
+.form-field select {
+  cursor: pointer;
+  color: var(--placeholder-gray);
+  font-style: italic;
+}
+
+.form-field select.has-value {
+  color: var(--text-black);
+  font-style: normal;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-bottom-width: 2px;
+}
+
+.form-submit {
+  align-self: flex-start;
+}
+
+.form-submit button {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.form-submit button:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Contact Section */
+.contact {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-item {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 300;
+}
+
+.contact-item a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.contact-item a:hover {
+  text-decoration: underline;
+}
+
+.social-links {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.social-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: var(--text-black);
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition: border-bottom-color 0.3s ease;
+}
+
+.social-links a:hover {
+  border-bottom-color: var(--text-black);
+}
+
+.map-embed {
+  width: 100%;
+  height: 300px;
+  border: 1px solid var(--border-black);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1rem;
+    --space-lg: 3rem;
+    --space-xl: 4rem;
+    --space-xxl: 6rem;
+  }
+
+  .nav {
+    padding: 1rem var(--pad-x);
+  }
+
+  .nav-logo {
+    font-size: 0.65rem;
+  }
+
+  .nav-links {
+    gap: 1rem;
+  }
+
+  .nav-links a {
+    font-size: 0.6rem;
+  }
+
+  .hero {
+    min-height: 90vh;
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .hero-headline {
+    font-size: clamp(1.8rem, 8vw, 3rem);
+    margin-bottom: var(--space-md);
+  }
+
+  .hero-subtitle {
+    font-size: 0.6rem;
+    line-height: 1.6;
+  }
+
+  .philosophy-text {
+    font-size: clamp(1rem, 4vw, 1.25rem);
+  }
+
+  .service-cell {
+    padding: var(--space-sm);
+  }
+
+  .service-image-wrapper {
+    aspect-ratio: 4 / 3;
+  }
+
+  .testimonials-grid {
+    gap: var(--space-md);
+  }
+
+  .testimonial {
+    padding: var(--space-sm);
+  }
+
+  .testimonial-text {
+    font-size: 1rem;
+  }
+
+  .contact-inner {
+    gap: var(--space-md);
+  }
+
+  .social-links {
+    gap: var(--space-sm);
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .philosophy-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .service-cell:nth-child(odd):nth-last-child(-n+2) {
+    border-bottom: none;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .inquiry-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .philosophy {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .inquiry {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .service-cell:nth-child(2n) {
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(3n) {
+    border-right: none;
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Personique On The Spot</a>
+  <ul class="nav-links">
+    <li><a href="https://personiqueonthespot.com/about-us/">about</a></li>
+    <li><a href="https://personiqueonthespot.com/procedures/injectables/">injectables</a></li>
+    <li><a href="https://personiqueonthespot.com/before-after-gallery/">gallery</a></li>
+    <li><a href="https://personiqueonthespot.com/contact-us/">contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">Welcome to our<br>Austin, TX Medical Spa</h1>
+    <p class="hero-subtitle">Non Invasive Treatments for Minimal Downtime</p>
+  </div>
+</section>
+
+<!-- Philosophy Section -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">002 — about</span>
+    <div class="philosophy-text">
+      <p>Personique On The Spot is a Med Spa in Austin Texas. Designed with convenience and comfort in mind, Personique On The Spot is the one-stop destination for all your aesthetic needs. Whether you are looking for Botox in Austin, Chemical Peels fillers or other treatments to help you look younger, we can help.</p>
+      <p>Our Austin medical spa offers a diverse range of beauty and anti-aging treatments to help you reach your cosmetic goals and maintain vibrant, healthy skin.</p>
+      <p>Personique On The Spot is a satellite location for Personique Surgery Center, offering our patients a convenient and accessible approach to skin care maintenance and non-surgical body contouring.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section class="stats">
+  <div class="stats-grid">
+    <div class="stat">
+      <div class="stat-number">20</div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+  </div>
+</section>
+
+<!-- Services Grid -->
+<section class="services" id="services">
+  <div class="services-grid">
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://personiqueonthespot.com/wp-content/themes/personiqueonthespot_com/images/thumb_client-reviews-01.webp" alt="Customer Reviews">
+      </div>
+      <div class="service-meta">
+        <div class="service-name">Customer Reviews</div>
+        <div class="service-description">See what our patients love about their experience at both our medspa, Personique on the Spot, and our plastic surgery center, Personique Surgery Centers. Two convenient locations in Austin, TX.</div>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://personiqueonthespot.com/wp-content/themes/personiqueonthespot_com/images/thumb_special-offers-01.webp" alt="Special Offers">
+      </div>
+      <div class="service-meta">
+        <div class="service-name">Special Offers</div>
+        <div class="service-description">View our current promotions! Personique on the Spot offers special promotions every month for our patients to ensure you get the best deal on our services. VIP promotions are available as well.</div>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://personiqueonthespot.com/wp-content/themes/personiqueonthespot_com/images/injectable-fillers.webp" alt="BOTOX">
+      </div>
+      <div class="service-meta">
+        <div class="service-name">BOTOX</div>
+        <div class="service-description">FDA-approved neuromodulator used for cosmetic treatment that utilizes botulinum neurotoxins to reduce the appearance of fine lines and wrinkles</div>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://personiqueonthespot.com/wp-content/themes/personiqueonthespot_com/images/injectable-fillers.webp" alt="Dermal Fillers">
+      </div>
+      <div class="service-meta">
+        <div class="service-name">Dermal Fillers</div>
+        <div class="service-description">Injectable treatments to add volume and definition to your face using popular fillers like Juvederm, Restylane, Voluma, and Radiesse</div>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://personiqueonthespot.com/wp-content/themes/personiqueonthespot_com/images/injectable-fillers.webp" alt="Lip Fillers">
+      </div>
+      <div class="service-meta">
+        <div class="service-name">Lip Fillers</div>
+        <div class="service-description">Injectable treatments to add volume to the lips, typically using Restylane</div>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://personiqueonthespot.com/wp-content/themes/personiqueonthespot_com/images/injectable-fillers.webp" alt="Kybella">
+      </div>
+      <div class="service-meta">
+        <div class="service-name">Kybella</div>
+        <div class="service-description">Injectable treatment for reducing submental fat</div>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://personiqueonthespot.com/wp-content/themes/personiqueonthespot_com/images/body-contouring.webp" alt="Non-Surgical Butt Lift">
+      </div>
+      <div class="service-meta">
+        <div class="service-name">Non-Surgical Butt Lift (Sculptra)</div>
+        <div class="service-description">Body contouring treatment using Sculptra for buttock enhancement</div>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://personiqueonthespot.com/wp-content/themes/personiqueonthespot_com/images/injectable-fillers.webp" alt="BOTOX For Men">
+      </div>
+      <div class="service-meta">
+        <div class="service-name">BOTOX For Men</div>
+        <div class="service-description">Specialized BOTOX treatments designed for male patients</div>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://personiqueonthespot.com/wp-content/themes/personiqueonthespot_com/images/body-contouring.webp" alt="SculpSure Body">
+      </div>
+      <div class="service-meta">
+        <div class="service-name">SculpSure Body</div>
+        <div class="service-description">Non-surgical body contouring to reduce stubborn fat</div>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://personiqueonthespot.com/wp-content/themes/personiqueonthespot_com/images/body-contouring.webp" alt="VelaShape">
+      </div>
+      <div class="service-meta">
+        <div class="service-name">VelaShape</div>
+        <div class="service-description">Body contouring treatment for sculpting and fat reduction</div>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://personiqueonthespot.com/wp-content/themes/personiqueonthespot_com/images/body-contouring.webp" alt="Semaglutide">
+      </div>
+      <div class="service-meta">
+        <div class="service-name">Semaglutide</div>
+        <div class="service-description">Weight management treatment option</div>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://personiqueonthespot.com/wp-content/themes/personiqueonthespot_com/images/laser-treatments.webp" alt="IPL Photofacial">
+      </div>
+      <div class="service-meta">
+        <div class="service-name">IPL Photofacial</div>
+        <div class="service-description">Laser treatment for skin rejuvenation and addressing various skin conditions</div>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://personiqueonthespot.com/wp-content/themes/personiqueonthespot_com/images/laser-treatments.webp" alt="Laser Acne Treatments">
+      </div>
+      <div class="service-meta">
+        <div class="service-name">Laser Acne Treatments</div>
+        <div class="service-description">Specialized laser treatments for acne and acne scarring</div>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://personiqueonthespot.com/wp-content/themes/personiqueonthespot_com/images/laser-treatments.webp" alt="Laser Hair Removal">
+      </div>
+      <div class="service-meta">
+        <div class="service-name">Laser Hair Removal</div>
+        <div class="service-description">Permanent hair reduction using advanced laser technology</div>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://personiqueonthespot.com/wp-content/themes/personiqueonthespot_com/images/laser-treatments.webp" alt="Laser Vein Therapy">
+      </div>
+      <div class="service-meta">
+        <div class="service-name">Laser Vein Therapy</div>
+        <div class="service-description">Laser treatment for removing unwanted veins</div>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://personiqueonthespot.com/wp-content/themes/personiqueonthespot_com/images/laser-treatments.webp" alt="Triniti Skin Series">
+      </div>
+      <div class="service-meta">
+        <div class="service-name">Triniti Skin Series</div>
+        <div class="service-description">Advanced skin treatment series using laser technology</div>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://personiqueonthespot.com/wp-content/themes/personiqueonthespot_com/images/laser-treatments.webp" alt="Votiva Vaginal Rejuvenation">
+      </div>
+      <div class="service-meta">
+        <div class="service-name">Votiva Vaginal Rejuvenation</div>
+        <div class="service-description">Specialized treatment for vaginal rejuvenation and wellness</div>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://personiqueonthespot.com/wp-content/themes/personiqueonthespot_com/images/state-of-the-art.webp" alt="Morpheus8">
+      </div>
+      <div class="service-meta">
+        <div class="service-name">Morpheus8</div>
+        <div class="service-description">Advanced skin rejuvenation treatment combining microneedling with radiofrequency</div>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://personiqueonthespot.com/wp-content/themes/personiqueonthespot_com/images/chemical-peels.webp" alt="Chemical Peels">
+      </div>
+      <div class="service-meta">
+        <div class="service-name">Chemical Peels</div>
+        <div class="service-description">Medical-grade chemical peels to rejuvenate the skin and address various skin concerns</div>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://personiqueonthespot.com/wp-content/themes/personiqueonthespot_com/images/state-of-the-art.webp" alt="Wrinkle Therapy">
+      </div>
+      <div class="service-meta">
+        <div class="service-name">Wrinkle Therapy</div>
+        <div class="service-description">Specialized treatments for reducing fine lines and wrinkles</div>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://personiqueonthespot.com/wp-content/themes/personiqueonthespot_com/images/state-of-the-art.webp" alt="eMatrix Sublative">
+      </div>
+      <div class="service-meta">
+        <div class="service-name">eMatrix Sublative</div>
+        <div class="service-description">Skin rejuvenation treatment using sublative technology</div>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://personiqueonthespot.com/wp-content/themes/personiqueonthespot_com/images/state-of-the-art.webp" alt="Microdermabrasion">
+      </div>
+      <div class="service-meta">
+        <div class="service-name">Microdermabrasion</div>
+        <div class="service-description">Exfoliating treatment for skin texture improvement</div>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://personiqueonthespot.com/wp-content/themes/personiqueonthespot_com/images/state-of-the-art.webp" alt="SkinPen Microneedling">
+      </div>
+      <div class="service-meta">
+        <div class="service-name">SkinPen Microneedling</div>
+        <div class="service-description">Collagen induction therapy using precise microneedling technology</div>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://personiqueonthespot.com/wp-content/themes/personiqueonthespot_com/images/state-of-the-art.webp" alt="ReFirme Skin Tightening">
+      </div>
+      <div class="service-meta">
+        <div class="service-name">ReFirme Skin Tightening</div>
+        <div class="service-description">Non-surgical skin tightening treatment</div>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://personiqueonthespot.com/wp-content/themes/personiqueonthespot_com/images/welcome.webp" alt="Epionce">
+      </div>
+      <div class="service-meta">
+        <div class="service-name">Epionce</div>
+        <div class="service-description">Professional skin care products for maintaining healthy skin</div>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://personiqueonthespot.com/wp-content/themes/personiqueonthespot_com/images/welcome.webp" alt="PCA Skin">
+      </div>
+      <div class="service-meta">
+        <div class="service-name">PCA Skin</div>
+        <div class="service-description">Professional skin care product line for various skin concerns</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Video Section -->
+<section class="video-section">
+  <div class="video-inner">
+    <h2 class="video-heading">Interviews with Personique About Our Med Spa</h2>
+    <iframe class="video-embed" src="https://www.youtube.com/embed/OuFABntDAh0" title="Personique Interviews" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <h2 class="testimonials-heading">What Our Patients Say</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <div class="testimonial-text">"I wanted to send you a quick note and say thank you for your and Dr. Sheridan's services earlier! I am very happy with the results, in fact the best I have ever have! Thank you again and be sure to tell Dr. Sheridan as well!"</div>
+        <div class="testimonial-author">— Arum Haslani</div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-text">"Dr. Sheridan, I just wanted to take the time to "thank you" for the wonderful job you did on my, nasal laugh lines. I have to admit, before I went in, I was very skeptical that the Juvederm would not remove my laugh lines. But low in behold to my surprise, they are gone! I was also scared to death of the pain, and there was no pain at all. You made me feel very comfortable, and answered all my questions."</div>
+        <div class="testimonial-author">— Sadie Frances</div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-text">"I've been to this location three times now. Once for a peel, another time for lip injections and Botox, and then again today for fillers. THEY ARE AMAZING! Friendly. Professional. Knowledgeable. Just amazing. I'm treated with the utmost respect when I go in and the injectionist listens to what I want and offers her advice."</div>
+        <div class="testimonial-author">— Charlotte Sophia</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="faq">
+  <div class="faq-inner">
+    <h2 class="faq-heading">Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <div class="faq-question">Why Choose Personique On The Spot for a Medical Spa?</div>
+      <div class="faq-answer">Personique on The Spot is an extension of the world-famous PERSONIQUE Plastic Surgery Center, which has provided aesthetic services for over 50,000 patients. Patients often find our medical spa by searching Medical Spa near me or by patient referrals. Personique on The Spot strives to make each patient feel like part of the Personique family and not just a number. Every treatment starts with a consultation, where our providers will learn your goals, answer questions, and provide expert recommendations.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">What Exactly does BOTOX do?</div>
+      <div class="faq-answer">BOTOX is an FDA-approved neuromodulator used for cosmetic treatment that utilizes botulinum neurotoxins to reduce the appearance of fine lines and wrinkles. Our Austin BOTOX treatment is among one of the most popular aesthetic treatments in Austin, TX. With over 4 million Americans getting BOTOX every year, it's the leading cosmetic treatment in the world. BOTOX has many uses, but it's most popular for reducing fine lines & wrinkles on the forehead, crow's feet, and between the eyebrows.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">What type of Dermal Filler should I receive?</div>
+      <div class="faq-answer">The type of dermal filler you should use greatly depends on where you want to add volume. The most popular dermal fillers include Juvederm, Restylane, Voluma, and Radiesse. Many of our Austin Lip Fillers patients desire more volume in the lips. For lip injections, we typically use Restylane. Juvederm is another very popular filler for our patients, sometimes used in the lips and other times in the cheeks and jawline.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-question">What's the Best Treatment in Austin for Wrinkles?</div>
+      <div class="faq-answer">Depending on where the wrinkles are and the severity of the wrinkles, we'll likely have different recommendations. The best way to get the most accurate information is to schedule a consultation at our Austin, TX Medical Spa. With multiple locations around Austin, our team will sit down with you and give you the benefits of each treatment. Popular non-surgical procedures for wrinkles include BOTOX, Morpheus8, and IPL PhotoFacial.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Inquiry Section -->
+<section class="inquiry" id="inquiry">
+  <div class="inquiry-inner">
+    <h2 class="inquiry-heading">Request an<br>Appointment</h2>
+    <form class="inquiry-form" onsubmit="event.preventDefault();">
+      <div class="form-field">
+        <input type="text" placeholder="Your name">
+      </div>
+      <div class="form-field">
+        <input type="email" placeholder="Email address">
+      </div>
+      <div class="form-field">
+        <input type="tel" placeholder="Phone number">
+      </div>
+      <div class="form-field">
+        <textarea rows="5" placeholder="Tell us about your aesthetic goals"></textarea>
+      </div>
+      <div class="form-submit">
+        <button type="submit">schedule consultation</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact">
+  <div class="contact-inner">
+    <div>
+      <h2 class="contact-heading">Contact & Location</h2>
+      <div class="contact-info">
+        <div class="contact-item">
+          <strong>Phone:</strong> <a href="tel:(512) 306-1217">(512) 306-1217</a>
+        </div>
+        <div class="contact-item">
+          <strong>Email:</strong> <a href="mailto:logo_personique-on-the-spot@2x.webp">logo_personique-on-the-spot@2x.webp</a>
+        </div>
+        <div class="contact-item">
+          <strong>Address:</strong> 630 West 34th St, Suite
+        </div>
+      </div>
+      <div class="social-links">
+        <a href="https://www.facebook.com/PersoniqueOnTheSpot/" target="_blank">facebook</a>
+        <a href="https://www.instagram.com/personiqueonthespot/" target="_blank">instagram</a>
+        <a href="https://www.youtube.com/channel/UCH9DKvNrA99uz_Ydu4BlzuA" target="_blank">youtube</a>
+        <a href="https://www.google.com/maps/search/Perssonique+on+the+Spot/@30.327613,-97.8372053,12z/data=!3m1!4b1" target="_blank">google business</a>
+      </div>
+    </div>
+    <div>
+      <iframe class="map-embed" src="https://www.google.com/maps/search/Perssonique+on+the+Spot/@30.327613,-97.8372053,12z/data=!3m1!4b1" width="100%" height="300" style="border:0" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Personique On The Spot</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
