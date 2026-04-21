@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spa at the Lake</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://spaatthelake.com/wp-content/uploads/2025/03/Spring_Specials-1024x1024.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(244, 240, 234, 0.7);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+.hero-button {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: var(--text-black);
+  color: var(--bg-cream);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--border-black);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+}
+
+.hero-button:hover {
+  background-color: transparent;
+  color: var(--text-black);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Services Section */
+.services {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.services-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.services-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-md);
+}
+
+.service-category {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+  text-align: center;
+}
+
+.service-category h3 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+.service-list {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  list-style: none;
+}
+
+.service-list li {
+  margin-bottom: var(--space-xs);
+}
+
+/* Anniversary Section */
+.anniversary {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.anniversary-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+.anniversary-text h2 {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.2;
+  margin-bottom: var(--space-md);
+}
+
+.anniversary-text p {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+}
+
+.anniversary-image {
+  width: 100%;
+  border: 1px solid var(--border-black);
+}
+
+/* Testimonials Section */
+.testimonials {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.testimonials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonials-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.testimonial {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+  text-align: center;
+}
+
+.testimonial-text {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-style: italic;
+  margin-bottom: var(--space-sm);
+}
+
+.testimonial-author {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+/* Gallery Section */
+.gallery {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.gallery-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-sm);
+}
+
+.gallery-item {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 1px solid var(--border-black);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(20%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.gallery-item:hover img {
+  filter: grayscale(0%);
+  transform: scale(1.02);
+}
+
+/* Contact Section */
+.contact {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-info h2 {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-md);
+}
+
+.contact-details {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-md);
+}
+
+.contact-details a {
+  color: var(--text-black);
+  text-decoration: underline;
+}
+
+.hours-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-sm) var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.hours-day {
+  font-weight: 700;
+}
+
+.social-links {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.social-links a {
+  color: var(--text-black);
+  text-decoration: underline;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-sm);
+  }
+
+  .nav-links a {
+    font-size: 0.6rem;
+  }
+
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .hero-button {
+    width: 200px;
+    text-align: center;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .anniversary-text h2 {
+    font-size: 1.8rem;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .social-links {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .anniversary-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .services {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .anniversary {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .testimonials {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .contact {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Spa at the Lake</a>
+  <ul class="nav-links">
+    <li><a href="https://spaatthelake.com/#">about us</a></li>
+    <li><a href="https://spaatthelake.com/#">services</a></li>
+    <li><a href="https://spaatthelake.com/groups/">groups</a></li>
+    <li><a href="https://spaatthelake.com/specials/">specials</a></li>
+    <li><a href="https://spaatthelake.com/gift-cards/">gift cards</a></li>
+    <li><a href="https://spaatthelake.com/shop-now/">shop now</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">Let your transformation begin</h1>
+    <div class="hero-buttons">
+      <a href="tel:512-263-7611" class="hero-button">Call Now</a>
+      <a href="https://spaatthelake.com/book-appointment/" class="hero-button">Book Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="services" id="services">
+  <div class="services-inner">
+    <h2 class="services-heading">Our Services</h2>
+    <div class="services-grid">
+      <div class="service-category">
+        <h3>Hair</h3>
+        <ul class="service-list">
+          <li>Hair Cuts</li>
+          <li>Hair Color</li>
+          <li>Hair Styling</li>
+          <li>Hair Treatments</li>
+        </ul>
+      </div>
+      <div class="service-category">
+        <h3>Skin</h3>
+        <ul class="service-list">
+          <li>Facials</li>
+          <li>Advanced Skin Treatments</li>
+          <li>Waxing & Threading</li>
+          <li>Brows & Lashes</li>
+        </ul>
+      </div>
+      <div class="service-category">
+        <h3>Body</h3>
+        <ul class="service-list">
+          <li>Massages</li>
+          <li>Body Treatments</li>
+        </ul>
+      </div>
+      <div class="service-category">
+        <h3>Nails</h3>
+        <ul class="service-list">
+          <li>Manicure</li>
+          <li>Pedicure</li>
+          <li>Packages</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Anniversary Section -->
+<section class="anniversary">
+  <div class="anniversary-inner">
+    <div class="anniversary-text">
+      <h2>Celebrating over 25 years of serving the Lake Travis area!</h2>
+      <p>We are honored to have been in business since 1999 and appreciate all of our loyal customers that have helped us reach this tremendous milestone!</p>
+      <p>Looking forward to continuing to serve you for many more years to come!</p>
+    </div>
+    <img src="https://spaatthelake.com/wp-content/uploads/2025/02/25th_anniversary-1.jpg" alt="25th Anniversary" class="anniversary-image">
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <h2 class="testimonials-heading">What People Say</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <p class="testimonial-text">There's a reason why I keep going back!! Amazing as always.</p>
+        <p class="testimonial-author">— Moira J.</p>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-text">Absolutely top notch. My facial was amazing. My hair was shiny and stunning – still getting compliments. I love this spa! Can't wait to go back!</p>
+        <p class="testimonial-author">— Denise H.</p>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-text">Spa at the Lake is one of my favorite treats I give myself. With the beautiful environment and the great people that work there it can't be beat! And I think I should know since I've been going there for 15-20 years and it has been very consistent</p>
+        <p class="testimonial-author">— Janet C.</p>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-text">We recently visited Spa at the Lake celebrating a 21st birthday. There were 5 of us for massages and facials. The staff took such good care of us. We were able to bring champagne and snacks so we could just relax and visit. Thanks to all the staff for making it such a great day.</p>
+        <p class="testimonial-author">— Stephanie B.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery Section -->
+<section class="gallery">
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="https://spaatthelake.com/wp-content/uploads/2024/07/ELYqR910.jpeg" alt="Spa Interior">
+    </div>
+    <div class="gallery-item">
+      <img src="https://spaatthelake.com/wp-content/uploads/2024/07/lockerroom-2048x1365.jpg" alt="Locker Room">
+    </div>
+    <div class="gallery-item">
+      <img src="https://spaatthelake.com/wp-content/uploads/2024/07/nails-2048x1365.jpg" alt="Nail Services">
+    </div>
+    <div class="gallery-item">
+      <img src="https://spaatthelake.com/wp-content/uploads/2024/07/couplesrm-2048x1365.jpg" alt="Couples Room">
+    </div>
+    <div class="gallery-item">
+      <img src="https://spaatthelake.com/wp-content/uploads/2024/07/spalounge-2048x1365.jpg" alt="Spa Lounge">
+    </div>
+    <div class="gallery-item">
+      <img src="https://spaatthelake.com/wp-content/uploads/2024/07/hair_salon-2048x1365.jpg" alt="Hair Salon">
+    </div>
+    <div class="gallery-item">
+      <img src="https://spaatthelake.com/wp-content/uploads/2024/07/deck.jpg" alt="Spa Deck">
+    </div>
+    <div class="gallery-item">
+      <img src="https://spaatthelake.com/wp-content/uploads/2024/07/massage_closeup.jpg" alt="Massage Services">
+    </div>
+    <div class="gallery-item">
+      <img src="https://spaatthelake.com/wp-content/uploads/2024/07/pedi-2048x1365.jpg" alt="Pedicure Services">
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <h2>Visit Us</h2>
+      <div class="contact-details">
+        <p><a href="tel:512-263-7611">Call/Text: 512-263-7611</a></p>
+        <p><a href="mailto:info@spaatthelake.com">Email: info@spaatthelake.com</a></p>
+      </div>
+    </div>
+    <div class="hours-section">
+      <h3>Hours</h3>
+      <div class="hours-grid">
+        <span class="hours-day">Mon:</span>
+        <span>8:45am – 5:30pm</span>
+        <span class="hours-day">Tue:</span>
+        <span>8:45am – 7:00pm</span>
+        <span class="hours-day">Wed:</span>
+        <span>8:45am – 7:00pm</span>
+        <span class="hours-day">Thu:</span>
+        <span>8:45am – 8:00pm</span>
+        <span class="hours-day">Fri:</span>
+        <span>8:45am – 7:00pm</span>
+        <span class="hours-day">Sat:</span>
+        <span>8:45am – 7:00pm</span>
+        <span class="hours-day">Sun:</span>
+        <span>10:00am – 7:00pm</span>
+      </div>
+      <div class="social-links">
+        <a href="https://www.facebook.com/spaatthelake">Facebook</a>
+        <a href="http://twitter.com/spaatthelake">Twitter</a>
+        <a href="https://www.pinterest.com/spaatthelake/">Pinterest</a>
+        <a href="https://www.instagram.com/spaatthelake/">Instagram</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Spa at the Lake</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
