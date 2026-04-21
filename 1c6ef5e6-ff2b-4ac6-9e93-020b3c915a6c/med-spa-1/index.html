@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bestlaser</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.nav-logo img {
+  height: 30px;
+  width: auto;
+  filter: invert(1);
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Philosophy Section */
+.philosophy {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.philosophy-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.philosophy-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.philosophy-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Features Grid */
+.features {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.features-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.feature-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.feature-cell:last-child {
+  border-bottom: none;
+}
+
+.feature-title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  margin-bottom: var(--space-sm);
+}
+
+.feature-description {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+}
+
+/* Results Gallery */
+.results-gallery {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.results-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-sm);
+  border: 1px solid var(--border-black);
+}
+
+.result-image {
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid var(--border-black);
+}
+
+.result-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(20%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.result-image:hover img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+/* Services List */
+.services {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.services-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.services-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.service-item {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md) 0;
+}
+
+.service-item:last-child {
+  border-bottom: none;
+}
+
+.service-name {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  margin-bottom: var(--space-sm);
+}
+
+.service-description {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  color: var(--placeholder-gray);
+}
+
+/* Stats Section */
+.stats {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.stats-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.stat-item {
+  text-align: center;
+  padding: var(--space-md);
+  border: 1px solid var(--border-black);
+}
+
+.stat-value {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.1;
+  margin-bottom: var(--space-sm);
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* Testimonials Section */
+.testimonials {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.testimonials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.testimonial-item {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md) 0;
+}
+
+.testimonial-item:last-child {
+  border-bottom: none;
+}
+
+.testimonial-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+  font-style: italic;
+}
+
+.testimonial-author {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* Team Section */
+.team {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.team-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.team-member {
+  margin-bottom: var(--space-lg);
+}
+
+.team-name {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin-bottom: var(--space-xs);
+}
+
+.team-role {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.team-bio {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Inquiry Section */
+.inquiry {
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.inquiry-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.inquiry-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.inquiry-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.form-field {
+  position: relative;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  padding: var(--space-sm) 0;
+  color: var(--text-black);
+  outline: none;
+  border-radius: 0;
+  transition: border-bottom-width 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: var(--placeholder-gray);
+  font-style: italic;
+  font-family: var(--font-serif);
+  font-weight: 300;
+}
+
+.form-field select {
+  cursor: pointer;
+  color: var(--placeholder-gray);
+  font-style: italic;
+}
+
+.form-field select.has-value {
+  color: var(--text-black);
+  font-style: normal;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-bottom-width: 2px;
+}
+
+.form-submit {
+  align-self: flex-start;
+}
+
+.form-submit button {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.form-submit button:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Contact Section */
+.contact {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-info {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+}
+
+.contact-info a {
+  color: var(--text-black);
+  text-decoration: underline;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.footer-social {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.footer-social a {
+  text-decoration: underline;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1rem;
+    --space-xl: 3rem;
+    --space-lg: 2.5rem;
+    --space-md: 1.5rem;
+  }
+
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-sm);
+  }
+
+  .nav-logo {
+    font-size: 0.7rem;
+  }
+
+  .nav-links a {
+    font-size: 0.65rem;
+  }
+
+  .hero-headline {
+    font-size: 2.2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.6rem;
+  }
+
+  .philosophy-text {
+    font-size: 1.25rem;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .results-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.5rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .testimonials-inner {
+    gap: var(--space-md);
+  }
+
+  .testimonial-text {
+    font-size: 1.1rem;
+  }
+
+  .inquiry-inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .philosophy-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .feature-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .feature-cell:last-child {
+    border-right: none;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .testimonials-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .inquiry-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .philosophy {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .features {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .inquiry {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+
+  .testimonials-inner {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Bestlaser</a>
+  <ul class="nav-links">
+    <li><a href="https://bestlaserusa.site/">home</a></li>
+    <li><a href="https://bestlaserusa.site/#benefits">benefits</a></li>
+    <li><a href="https://bestlaserusa.site/#howworks">how it works</a></li>
+    <li><a href="https://bestlaserusa.site/#results">results</a></li>
+    <li><a href="https://bestlaserusa.site/#aboutus">about us</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <h1 class="hero-headline">Laser Hair Removal.<br>Designed for real life.</h1>
+  <p class="hero-subtitle">001 — Advanced laser technology. Safe, effective, and designed around your routine.</p>
+</section>
+
+<!-- Philosophy Section -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">002 — our approach</span>
+    <div class="philosophy-text">
+      <p>Hair-free isn't luxury. It's intelligence. We use the Candela Alexandrite laser, a world reference in laser hair removal, providing long-lasting hair reduction with visible improvement over the course of sessions.</p>
+      <p>The treatment is simple and designed to fit into your routine. The sessions are quick, safe, and performed with advanced technology that provides cooling during application, making the procedure much more comfortable.</p>
+      <p>Everything is done in a personalized way, respecting your skin and providing a comfortable experience with less discomfort and more confidence.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Features Grid -->
+<section class="features" id="benefits">
+  <div class="features-grid">
+    <div class="feature-cell">
+      <h3 class="feature-title">Advanced Laser Technology</h3>
+      <p class="feature-description">We use the Candela Alexandrite laser, a world reference in laser hair removal.</p>
+    </div>
+    <div class="feature-cell">
+      <h3 class="feature-title">Real Results</h3>
+      <p class="feature-description">Long-lasting hair reduction, with visible improvement over the course of the sessions.</p>
+    </div>
+    <div class="feature-cell">
+      <h3 class="feature-title">Designed for Real Life</h3>
+      <p class="feature-description">Quick, efficient sessions with personalized service.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Long-term economy Section -->
+<section class="philosophy">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">004 — long-term economy</span>
+    <div class="philosophy-text">
+      <p>Beyond aesthetics, laser hair removal is an investment that pays for itself. Say goodbye to razors, waxes, and creams that accumulate costs over time. Our treatments offer lasting results, with significantly reduced regrowth.</p>
+      <p>Calculate how much you spend per year on traditional hair removal methods. Now multiply by 10, 20 years. Laser hair removal becomes not only the most effective choice, but also the most economical in the long term.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Reduces and prevents ingrown hairs Section -->
+<section class="philosophy">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">005 — reduces and prevents ingrown hairs</span>
+    <div class="philosophy-text">
+      <p>Ingrown hairs cause discomfort, inflammation and dark spots. Laser hair removal acts directly on the hair follicle, eliminating the root cause of the problem.</p>
+      <p>Unlike shaving or waxing, which can worsen ingrown hairs, laser treatment progressively reduces hair growth while smoothing the skin and preventing future inflammation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="philosophy" id="howworks">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">003 — how it works</span>
+    <div class="philosophy-text">
+      <p>Laser hair removal is an advanced treatment that acts directly on the hair follicle, progressively reducing growth and providing smoother, more even, and longer-lasting skin, safely and effectively.</p>
+      <p>The laser targets the hair follicle. Energy weakens growth. The fur grows back thinner or doesn't grow back at all.</p>
+      <p>It's precise - Targets the hair follicle accurately without affecting the surrounding skin. It's fast - Quick sessions designed to fit easily into your routine. Built-in cooling for greater comfort. Works at the ideal wavelength to target hair follicles.</p>
+    </div>
+  </div>
+</section>
+
+<!-- See Some Patient Results Section -->
+<section class="philosophy">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">006 — see some patient results</span>
+    <div class="philosophy-text">
+      <p>Real results from real patients. Each case is unique, but the pattern is consistent: progressive reduction, smoother skin, and lasting results that get better with each session.</p>
+      <p>The before and after photos show the effectiveness of our treatments in different areas of the body and skin types. Results that speak for themselves.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Results Gallery -->
+<section class="results-gallery" id="results">
+  <div class="results-grid">
+    <div class="result-image">
+      <img src="https://bestlaserusa.site/wp-content/uploads/2026/01/1.png" alt="Before treatment">
+    </div>
+    <div class="result-image">
+      <img src="https://bestlaserusa.site/wp-content/uploads/2026/01/2.png" alt="After treatment">
+    </div>
+    <div class="result-image">
+      <img src="https://bestlaserusa.site/wp-content/uploads/2026/01/1-11.png" alt="Before treatment">
+    </div>
+    <div class="result-image">
+      <img src="https://bestlaserusa.site/wp-content/uploads/2026/01/2-9.png" alt="After treatment">
+    </div>
+    <div class="result-image">
+      <img src="https://bestlaserusa.site/wp-content/uploads/2026/01/1-10.png" alt="Before treatment">
+    </div>
+    <div class="result-image">
+      <img src="https://bestlaserusa.site/wp-content/uploads/2026/01/2-8.png" alt="After treatment">
+    </div>
+    <div class="result-image">
+      <img src="https://bestlaserusa.site/wp-content/uploads/2026/01/1-3.png" alt="Before treatment">
+    </div>
+    <div class="result-image">
+      <img src="https://bestlaserusa.site/wp-content/uploads/2026/01/2-3.png" alt="After treatment">
+    </div>
+    <div class="result-image">
+      <img src="https://bestlaserusa.site/wp-content/uploads/2026/01/4-1.png" alt="Treatment results">
+    </div>
+    <div class="result-image">
+      <img src="https://bestlaserusa.site/wp-content/uploads/2026/01/2-6.png" alt="Treatment results">
+    </div>
+    <div class="result-image">
+      <img src="https://bestlaserusa.site/wp-content/uploads/2026/01/3-2.png" alt="Treatment results">
+    </div>
+    <div class="result-image">
+      <img src="https://bestlaserusa.site/wp-content/uploads/2026/01/ARMPITS-1.png" alt="Armpit treatment before">
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <div class="testimonial-item">
+      <p class="testimonial-text">"It's not about changing your skin. It's about revealing the best version of it...."</p>
+      <p class="testimonial-author">— THE RESULT</p>
+    </div>
+    <div class="testimonial-item">
+      <p class="testimonial-text">" **NOW, THIS IS ME**...."</p>
+      <p class="testimonial-author">— Reviewer 2</p>
+    </div>
+    <div class="testimonial-item">
+      <p class="testimonial-text">"Does it really work?..."</p>
+      <p class="testimonial-author">— Reviewer 3</p>
+    </div>
+    <div class="testimonial-item">
+      <p class="testimonial-text">"Is it safe for my skin?..."</p>
+      <p class="testimonial-author">— Reviewer 4</p>
+    </div>
+    <div class="testimonial-item">
+      <p class="testimonial-text">"Can it cause dark spots?..."</p>
+      <p class="testimonial-author">— Reviewer 5</p>
+    </div>
+    <div class="testimonial-item">
+      <p class="testimonial-text">"What if it's not worth the investment?..."</p>
+      <p class="testimonial-author">— Reviewer 6</p>
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="services">
+  <div class="services-inner">
+    <h2 class="services-heading">Our Services</h2>
+    <div class="service-item">
+      <h3 class="service-name">Laser Hair Removal</h3>
+      <p class="service-description">Advanced laser treatment using Candela Alexandrite laser for long-lasting hair reduction</p>
+    </div>
+    <div class="service-item">
+      <h3 class="service-name">Free Consultation</h3>
+      <p class="service-description">Personalized evaluation and treatment planning</p>
+    </div>
+    <div class="service-item">
+      <h3 class="service-name">+1 737-530-8138</h3>
+    </div>
+    <div class="service-item">
+      <h3 class="service-name">+1 512-877-9525</h3>
+    </div>
+    <div class="service-item">
+      <h3 class="service-name">store022f-sales@semperlaser.com</h3>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-value">thousands</div>
+      <div class="stat-label">treatments performed</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">6 to 8</div>
+      <div class="stat-label">sessions for visible results</div>
+    </div>
+  </div>
+</section>
+
+<!-- Team Section -->
+<section class="team" id="aboutus">
+  <div class="team-inner">
+    <div class="team-member">
+      <h3 class="team-name">Dr Diogo Américo</h3>
+      <p class="team-role">medical professional</p>
+      <p class="team-bio">Medical professional associated with Bestlaser's philosophy and approach to aesthetic treatments.</p>
+    </div>
+    <div class="philosophy-text">
+      <p>Bestlaser is an international laser hair removal brand built on technology, expertise, and real results. With years of experience and thousands of treatments performed, we combine advanced equipment, highly trained professionals, and a welcoming environment to deliver safe, effective, and long-lasting results.</p>
+      <p>Today, Bestlaser operates across Brazil, Portugal, and the United States, expanding its presence while maintaining the same standard of excellence in every clinic.</p>
+      <p>"Our mission is to help you see yourself with more affection, more lightness—without molds, without exaggeration. Just you, in your best version." – Dr Diogo Américo</p>
+    </div>
+  </div>
+</section>
+
+<!-- Inquiry Section -->
+<section class="inquiry">
+  <div class="inquiry-inner">
+    <h2 class="inquiry-heading">Get a Free<br>Consultation<br>Today</h2>
+    <form class="inquiry-form" onsubmit="event.preventDefault();">
+      <div class="form-field">
+        <input type="text" placeholder="Your name">
+      </div>
+      <div class="form-field">
+        <input type="email" placeholder="Email address">
+      </div>
+      <div class="form-field">
+        <input type="tel" placeholder="Phone number">
+      </div>
+      <div class="form-field">
+        <textarea placeholder="Message" rows="4"></textarea>
+      </div>
+      <div class="form-submit">
+        <button type="submit">send message</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <h3>BESTLASER THE GATEWAY</h3>
+      <p>9503 Research Blvd suite 530, Austin, TX 78759, United States</p>
+      <p><a href="tel:+17375308138">+1 737-530-8138</a></p>
+      <p><a href="mailto:gateway@bestlaserusa.com">gateway@bestlaserusa.com</a></p>
+    </div>
+    <div class="contact-info">
+      <h3>BESTLASER ARBOR TRAILS</h3>
+      <p>4301 W William Cannon Dr E220, Austin, TX 78749, United States</p>
+      <p><a href="tel:+15128779525">+1 512-877-9525</a></p>
+      <p><a href="mailto:arbortrails@bestlaserusa.com">arbortrails@bestlaserusa.com</a></p>
+      <br>
+      <p>Service hours: 8:00 AM to 6:00 PM</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Bestlaser</div>
+  <div class="footer-right">
+    <div class="footer-social">
+      <a href="https://www.instagram.com/bestlaserusa/">instagram</a>
+    </div>
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
