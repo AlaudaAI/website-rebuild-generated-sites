@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spa Sway</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://cdn.shopify.com/s/files/1/0924/0831/6218/files/attachment.png?v=1748446618&width=2048');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 600px;
+  margin: 0 auto var(--space-lg);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+.hero-button {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 1.3s forwards;
+}
+
+.hero-button:hover {
+  background-color: white;
+  color: var(--text-black);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Services Section */
+.services {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.services-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-md);
+}
+
+.section-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.service-category {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.category-title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.3;
+  margin-bottom: var(--space-sm);
+}
+
+.category-description {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.55;
+  margin-bottom: var(--space-md);
+  color: rgba(26, 26, 26, 0.8);
+}
+
+.service-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-sm);
+}
+
+.service-item {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  border: 1px solid rgba(26, 26, 26, 0.3);
+  padding: var(--space-xs) var(--space-sm);
+}
+
+.category-link {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: var(--text-black);
+  position: relative;
+  padding-bottom: 2px;
+  display: inline-block;
+  margin-top: var(--space-sm);
+}
+
+.category-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--text-black);
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.category-link:hover::after {
+  width: 100%;
+}
+
+/* Cart Section */
+.cart-section {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+  text-align: center;
+}
+
+.cart-section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.cart-title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin-bottom: var(--space-md);
+}
+
+.cart-link {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: var(--text-black);
+  position: relative;
+  padding-bottom: 2px;
+  display: inline-block;
+  margin-bottom: var(--space-md);
+}
+
+.cart-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--text-black);
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.cart-link:hover::after {
+  width: 100%;
+}
+
+.cart-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.55;
+  margin-bottom: var(--space-md);
+  color: rgba(26, 26, 26, 0.8);
+}
+
+.estimated-total {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-md);
+}
+
+/* Blog Section */
+.blog-section {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.blog-section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.blog-article {
+  border: 1px solid var(--border-black);
+}
+
+.blog-image-wrapper {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.blog-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.blog-article:hover .blog-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(1.02);
+}
+
+.blog-info {
+  padding: var(--space-md);
+}
+
+.blog-title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.25rem;
+  margin-bottom: var(--space-sm);
+}
+
+.blog-date {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-xs);
+}
+
+.blog-author {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+/* Membership Section */
+.membership {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.membership-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.membership-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.1rem, 2vw, 1.25rem);
+  line-height: 1.55;
+  max-width: 800px;
+  margin: 0 auto var(--space-lg);
+  color: rgba(26, 26, 26, 0.9);
+}
+
+.membership-button {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.membership-button:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Shop Section */
+.shop {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.shop-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.shop-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.product-card {
+  border: 1px solid var(--border-black);
+}
+
+.product-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.product-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.product-card:hover .product-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+.product-info {
+  padding: var(--space-md);
+}
+
+.product-name {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.1rem;
+  margin-bottom: var(--space-xs);
+}
+
+.product-price {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+/* Contact Section */
+.contact {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-info {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.contact-heading {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.25rem;
+  margin-bottom: var(--space-sm);
+}
+
+.contact-link {
+  color: var(--text-black);
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.contact-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--text-black);
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.contact-link:hover::after {
+  width: 100%;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1rem;
+    --space-md: 1.5rem;
+    --space-lg: 3rem;
+    --space-xl: 4rem;
+  }
+
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-sm);
+  }
+
+  .nav-links a {
+    font-size: 0.65rem;
+  }
+
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .hero-headline {
+    font-size: clamp(1.8rem, 8vw, 3rem);
+    margin-bottom: var(--space-md);
+  }
+
+  .hero-subtitle {
+    margin-bottom: var(--space-md);
+  }
+
+  .services {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .cart-section {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .blog-section {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .membership {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .shop {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .contact {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .service-category {
+    padding: var(--space-sm);
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .shop-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .blog-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .services {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .shop-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .blog-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .cart-section {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .blog-section {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .membership {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .shop {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .contact {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Spa Sway</a>
+  <ul class="nav-links">
+    <li><a href="https://spasway.com/pages/our-services">services</a></li>
+    <li><a href="https://spasway.com/pages/med-spa-services">medspa</a></li>
+    <li><a href="https://spasway.com/pages/memberships">memberships</a></li>
+    <li><a href="https://spasway.com/collections/all">shop</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">UNWIND, REJUVENATE, AND REDISCOVER YOUR BEST SELF WITH OUR SIGNATURE TOUCH OF LUXURY.</h1>
+    <p class="hero-subtitle">At Spa Sway, wellness is reimagined to encompass the best of both worlds. Whether you're indulging in soothing massages and rejuvenating facials at our day spa or sculpting your body and turning back the clock with transformative med spa treatments, this is your space to unwind, recharge, and glow.</p>
+    <a href="https://spasway.com/pages/our-services" class="hero-button">Indulge in the Experience</a>
+  </div>
+</section>
+
+<!-- Cart Section -->
+<section class="cart-section">
+  <div class="cart-section-inner">
+    <h2 class="cart-title">Your cart is empty</h2>
+    <a href="https://spasway.com/collections/all" class="cart-link">Continue shopping</a>
+    <p class="cart-text">Have an account?</p>
+    <a href="https://spasway.com/customer_authentication/redirect?locale=en&region_country=US" class="cart-link">Log in</a>
+    <p class="cart-text">to check out faster.</p>
+    <div class="estimated-total">
+      <h3>Estimated total</h3>
+      <p>$0.00 USD</p>
+      <p>Taxes, discounts and <a href="https://spasway.com/policies/shipping-policy" class="contact-link">shipping</a> calculated at checkout.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="services" id="services">
+  <div class="services-inner">
+    <span class="section-label">001 — treatments</span>
+    
+    <div class="services-grid">
+      <div class="service-category">
+        <h2 class="category-title">MASSAGE Treatments</h2>
+        <p class="category-description">Your body deserves the best. From the targeted relief of our Deep Tissue Massage to the calming flow of our Signature Swedish Massage, every treatment is designed to restore, rebalance, and rejuvenate.</p>
+        <div class="service-list">
+          <span class="service-item">signature sway massage</span>
+          <span class="service-item">deep tissue massage</span>
+          <span class="service-item">swedish massage</span>
+          <span class="service-item">hot stone massage</span>
+          <span class="service-item">himalayan salt stone massage</span>
+          <span class="service-item">sports massage</span>
+          <span class="service-item">cbd therapeutic massage</span>
+          <span class="service-item">lymphatic drainage massage</span>
+          <span class="service-item">couples massage</span>
+          <span class="service-item">prenatal massage</span>
+          <span class="service-item">express massage</span>
+        </div>
+        <a href="https://spasway.com/pages/massage-treatments" class="category-link">Unwind with MASSAGE Treatments</a>
+      </div>
+
+      <div class="service-category">
+        <h2 class="category-title">Skin & Facial Enhancements</h2>
+        <p class="category-description">It's time to take your skin to the next level. Our advanced facial enhancements deliver undeniable, visible results. The brightening magic of our chemical peel or the deep exfoliation of dermaplaning transforms skin.</p>
+        <div class="service-list">
+          <span class="service-item">hydrafacial md</span>
+          <span class="service-item">anti-aging facial</span>
+          <span class="service-item">custom facial</span>
+          <span class="service-item">deep pore cleansing facial</span>
+          <span class="service-item">european face sculpting & buccal face massage</span>
+          <span class="service-item">express facial</span>
+          <span class="service-item">gentlemen's facial</span>
+          <span class="service-item">microneedling</span>
+          <span class="service-item">signature sway facial</span>
+        </div>
+        <a href="https://spasway.com/pages/facial-enhancements" class="category-link">Glow with Skin Enhancements</a>
+      </div>
+
+      <div class="service-category">
+        <h2 class="category-title">Lasers & Injectables</h2>
+        <p class="category-description">At Spa Sway, beauty isn't just skin-deep— it's a science. Our med spa treatments, from Botox and dermal fillers to cutting-edge BBL Hero laser therapy, are designed for those who demand visible, long-lasting results.</p>
+        <div class="service-list">
+          <span class="service-item">bbl hero laser</span>
+          <span class="service-item">moxi laser</span>
+          <span class="service-item">skinpen microneedling</span>
+          <span class="service-item">chemical peels</span>
+          <span class="service-item">dysport/botox/daxxify</span>
+          <span class="service-item">dermal fillers</span>
+          <span class="service-item">kysse, rha, defyne</span>
+          <span class="service-item">sculptra</span>
+          <span class="service-item">kybella</span>
+          <span class="service-item">growth factors</span>
+          <span class="service-item">sofwave</span>
+          <span class="service-item">pure impact</span>
+        </div>
+        <a href="https://spasway.com/pages/med-spa-services" class="category-link">Explore Med Spa Services</a>
+      </div>
+      
+      <div class="service-category">
+        <h2 class="category-title">Body Treatments</h2>
+        <p class="category-description">Non-invasive body skin tightening and contouring</p>
+        <div class="service-list">
+          <span class="service-item">pure impact</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Blog Section -->
+<section class="blog-section">
+  <div class="blog-section-inner">
+    <span class="section-label">blog — articles</span>
+    <div class="blog-grid">
+      <div class="blog-article">
+        <div class="blog-image-wrapper">
+          <img src="https://spasway.com/cdn/shop/articles/Untitled_design_11.jpg?v=1771957072&width=2048" alt="Massage in Austin: How to Choose the Right Type for Your Body">
+        </div>
+        <div class="blog-info">
+          <h3 class="blog-title"><a href="https://spasway.com/blogs/news/massage-in-austin-how-to-choose-the-right-type-for-your-body">Massage in Austin: How to Choose the Right Type for Your Body</a></h3>
+          <p class="blog-date">Feb 24, 2026</p>
+          <p class="blog-author">by hi@shelbyjonsson.com User</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Membership Section -->
+<section class="membership" id="membership">
+  <div class="membership-inner">
+    <span class="section-label">002 — membership</span>
+    <h2 class="section-heading">Austin's Number One Spa Membership Club</h2>
+    <p class="membership-text">Elevate your self-care routine with the ultimate membership experience. The Sway Club is your all-access pass to exclusive wellness, offering monthly massages, facials, and med spa treatments designed to keep you glowing year-round. Members enjoy exclusive discounted rates on all services, priority booking, and special perks available only to our club.</p>
+    <a href="https://spasway.zenoti.com/webstoreNew/sales/membership/c38f70e5-dace-4a1d-ae17-78b23cd1c39b" class="membership-button">JOIN THE SWAY CLUB</a>
+  </div>
+</section>
+
+<!-- Shop Section -->
+<section class="shop" id="shop">
+  <div class="shop-inner">
+    <span class="section-label">003 — shop</span>
+    <h2 class="section-heading">SHOP OUR BEST SELLING PRODUCTS</h2>
+    <div class="shop-grid">
+      <div class="product-card">
+        <div class="product-image-wrapper">
+          <img src="https://spasway.com/cdn/shop/files/MystroREVIVE-Image01.jpg?v=1770137117&width=2048" alt="Mystro REVIVE">
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Mystro REVIVE</h3>
+          <span class="product-price">$245.00</span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-image-wrapper">
+          <img src="https://spasway.com/cdn/shop/files/SKINBETTER-MystroActiveBalance-Image01.jpg?v=1752690157&width=2048" alt="Skin Better Mystro Active Balance">
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Mystro Active Balance</h3>
+          <span class="product-price">$225.00</span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-image-wrapper">
+          <img src="https://spasway.com/cdn/shop/files/SKINBETTER-AltoADVANCEDDefenseSerum-Image01.jpg?v=1752689021&width=2048" alt="Skin Better Alto Advanced Defense Serum">
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Alto Advanced Defense Serum</h3>
+          <span class="product-price">$195.00</span>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-image-wrapper">
+          <img src="https://spasway.com/cdn/shop/files/IntensiveEvenToneCorrectingSerum-Image01.jpg?v=1769963330&width=2048" alt="Intensive Even Tone Correcting Serum">
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">Intensive Even Tone Correcting Serum</h3>
+          <span class="product-price">$190.00</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <h2 class="section-heading">Visit Our Locations</h2>
+      <div class="contact-heading">SPA SWAY DOMAIN</div>
+      <p>11011 Domain Dr #124, Austin, TX 78758<br>
+      <a href="tel:512-873-0999" class="contact-link">512-873-0999</a></p>
+      
+      <div class="contact-heading">SPA SWAY WESTLAKE</div>
+      <p>701 S Capital of Texas Hwy Suite E-500, Rollingwood, TX 78746<br>
+      <a href="tel:1743808231" class="contact-link">1743808231</a></p>
+      
+      <p><a href="mailto:hi@shelbyjonsson.com" class="contact-link">hi@shelbyjonsson.com</a></p>
+      
+      <p><a href="https://spasway.zenoti.com/webstoreNew/services/" class="contact-link">BOOK NOW</a></p>
+      
+      <iframe src="https://www.google.com/maps/place//data=!4m2!3m1!1s0x8644cc76bbaa95d3:0xb385f499c5f58cb5?sa=X&amp;ved=1t:8290&amp;ictx=111" width="100%" height="300" style="border:0" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="contact-info">
+      <h2 class="section-heading">Stay Connected</h2>
+      <p>Your treatment is just the beginning. Stay connected with Spa Sway for VIP offers, exclusive treatments, and the latest in all things Spa Sway.</p>
+      <p><a href="https://spasway.zenoti.com/webstoreNew/giftcards/c38f70e5-dace-4a1d-ae17-78b23cd1c39b" class="contact-link">GIVE THE GIFT OF LUXURY</a></p>
+      <p><a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x8644cc76bbaa95d3:0xb385f499c5f58cb5?sa=X&ved=1t:8290&ictx=111" class="contact-link">Google Business</a></p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Spa Sway</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
