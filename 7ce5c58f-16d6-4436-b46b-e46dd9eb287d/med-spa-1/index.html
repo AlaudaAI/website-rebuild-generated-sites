@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portrait — Medical Wellness Platform</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  position: relative;
+  background-image: url('https://cdn.prod.website-files.com/67902e6f96838ec15f04ceec/68f94b30aba6f0793fa6ea39_Scheduling.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(244, 240, 234, 0.85);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Philosophy Section */
+.philosophy {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.philosophy-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.philosophy-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.philosophy-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Stats */
+.stats-section {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.stats-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  text-align: center;
+}
+
+.stat-item {
+  border: 1px solid var(--border-black);
+  padding: var(--space-lg);
+}
+
+.stat-value {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1;
+  margin-bottom: var(--space-sm);
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.service-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.service-cell:last-child {
+  border-bottom: none;
+}
+
+.service-name {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-xs);
+}
+
+.service-description {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: rgba(26, 26, 26, 0.8);
+}
+
+.service-featured {
+  background-color: rgba(255, 90, 37, 0.05);
+  border-left: 4px solid rgb(255, 90, 37);
+}
+
+.services-compact {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xs);
+  margin-top: var(--space-md);
+}
+
+.service-compact {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  padding: var(--space-xs);
+  border: 1px solid var(--border-black);
+}
+
+/* Testimonials */
+.testimonials {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.testimonials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonials-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.testimonial {
+  border: 1px solid var(--border-black);
+  padding: var(--space-lg);
+  position: relative;
+}
+
+.testimonial-quote {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.6;
+  margin-bottom: var(--space-md);
+  font-style: italic;
+}
+
+.testimonial-author {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.testimonial-featured {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.testimonial-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.testimonial-text {
+  flex: 1;
+}
+
+/* Platform Overview */
+.platform-overview {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.platform-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+
+.platform-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.platform-features {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.platform-feature {
+  border: 1px solid var(--border-black);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.feature-image {
+  width: 100%;
+  aspect-ratio: 3/2;
+  object-fit: cover;
+}
+
+.feature-title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.2;
+}
+
+.feature-description {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+/* CTA Section */
+.cta {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+  text-align: center;
+}
+
+.cta-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.cta-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.cta-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.cta-button {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+.cta-button.primary {
+  background-color: rgb(255, 90, 37);
+  border-color: rgb(255, 90, 37);
+  color: white;
+}
+
+.cta-button.primary:hover {
+  background-color: var(--text-black);
+}
+
+/* Social Links */
+.social-links {
+  display: flex;
+  gap: var(--space-sm);
+  justify-content: center;
+  margin-top: var(--space-md);
+}
+
+.social-link {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  padding: var(--space-xs) var(--space-sm);
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.social-link:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+  }
+
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+    min-height: 90vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+  }
+
+  .testimonial-featured {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .testimonial-image {
+    width: 60px;
+    height: 60px;
+  }
+
+  .social-links {
+    flex-wrap: wrap;
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .philosophy-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .services-compact {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .platform-features {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .platform-inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .cta-buttons {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .philosophy {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .testimonials {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .services-compact {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Portrait</a>
+  <ul class="nav-links">
+    <li><a href="https://www.portraitcare.com/services/functional-medicine">functional medicine</a></li>
+    <li><a href="https://www.portraitcare.com/services/medical-weight-loss">weight loss & glps</a></li>
+    <li><a href="https://www.portraitcare.com/services/wrinkle-relaxer">neurotoxins</a></li>
+    <li><a href="https://www.portraitcare.com/services/injectables">fillers</a></li>
+    <li><a href="https://www.portraitcare.com/services/hrt">hrt & peptides</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 class="hero-headline">Modern Medical Wellness<br>Runs on Portrait</h1>
+    <p class="hero-subtitle">001 — the all-in-one platform with software, services, and up to 60%+ supply savings built in.</p>
+  </div>
+</section>
+
+<!-- Philosophy Section -->
+<section class="philosophy" id="platform">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">002 — overview</span>
+    <div class="philosophy-text">
+      <p>One Platform. Everything You Need.</p>
+      <p>Portrait combines the technology, support, and savings to run and scale your modern medical wellness business. End-to-end software for seamless operations and growth. Essential services for medical oversight, compliance, and marketing. National pricing power with up to 60%+ savings.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section class="stats-section">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-value">60%+</div>
+      <div class="stat-label">supply savings</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">1,000+</div>
+      <div class="stat-label">clinics nationwide</div>
+    </div>
+  </div>
+</section>
+
+<!-- Platform Features -->
+<section class="platform-overview">
+  <div class="platform-inner">
+    <h2 class="platform-heading">Software. Services. Savings.</h2>
+    <div class="platform-features">
+      <div class="platform-feature">
+        <img src="https://cdn.prod.website-files.com/67902e6f96838ec15f04ceec/68f94b30aba6f0793fa6ea39_Scheduling.png" alt="Software Platform" class="feature-image">
+        <h3 class="feature-title">Software</h3>
+        <p class="feature-description">EHR, scheduling, payment processing, CRM, and inventory — available through one tool.</p>
+      </div>
+      <div class="platform-feature">
+        <img src="https://cdn.prod.website-files.com/67902e6f96838ec15f04ceec/67a29d7f59603084bfbd44e2_676af9b7a7c0ee93458cd0bb_Manage-p-800.jpg" alt="Services" class="feature-image">
+        <h3 class="feature-title">Services</h3>
+        <p class="feature-description">Comprehensive medical oversight, compliance, marketing, launch support, and expert coaching.</p>
+      </div>
+      <div class="platform-feature">
+        <img src="https://cdn.prod.website-files.com/67902e6f96838ec15f04ceec/67a29d7fdb029080bf87bbc1_676af9b7159480e63411e2e8_Grow-p-800.jpg" alt="Savings" class="feature-image">
+        <h3 class="feature-title">Savings</h3>
+        <p class="feature-description">Exclusive national pricing access with savings of up to 60%+ on essential products and equipment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services Grid -->
+<section class="services" id="services">
+  <div class="services-grid">
+    <div class="service-cell service-featured">
+      <span class="service-name">marketing</span>
+      <p class="service-description">Leverage cutting-edge performance marketing strategies and growth-focused services to elevate your business.</p>
+    </div>
+    <div class="service-cell service-featured">
+      <span class="service-name">medical</span>
+      <p class="service-description">Access all the tools and resources you need to run a compliant and safe business in one place.</p>
+    </div>
+    <div class="service-cell service-featured">
+      <span class="service-name">operations</span>
+      <p class="service-description">Get the operational support you need to efficiently manage all aspects of your business with Portrait.</p>
+    </div>
+    <div class="service-cell service-featured">
+      <span class="service-name">technology</span>
+      <p class="service-description">Access the essential software and tools to fuel your success with Portrait.</p>
+    </div>
+  </div>
+  
+  <div class="services-compact">
+    <div class="service-compact">functional medicine</div>
+    <div class="service-compact">medical weight loss & glps</div>
+    <div class="service-compact">neurotoxins</div>
+    <div class="service-compact">fillers</div>
+    <div class="service-compact">biostimulators</div>
+    <div class="service-compact">hrt & peptides</div>
+    <div class="service-compact">hair restoration</div>
+    <div class="service-compact">sexual wellness</div>
+    <div class="service-compact">microneedling & rf microneedling</div>
+    <div class="service-compact">chemical peels</div>
+    <div class="service-compact">pdo threads</div>
+    <div class="service-compact">skincare</div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <h2 class="testimonials-heading">Your Competitive Advantage To Succeed</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial testimonial-featured">
+        <img src="https://cdn.prod.website-files.com/67902e6f96838ec15f04ceec/67980c53519f56550b4e0caa_StacyDriver.avif" alt="Stacy Driver" class="testimonial-image">
+        <div class="testimonial-text">
+          <p class="testimonial-quote">"Portrait has done a lot for my career. I feel like they helped me achieve the highest level of being a business owner."</p>
+          <span class="testimonial-author">stacy driver</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta">
+  <div class="cta-inner">
+    <h2 class="cta-heading">Your Entire Business.<br>One Intuitive Platform.</h2>
+    <div class="cta-buttons">
+      <a href="tel:5252707594" class="cta-button primary">book intro call</a>
+      <a href="https://www.portraitcare.com/platform" class="cta-button">explore platform</a>
+    </div>
+    <div class="social-links">
+      <a href="https://www.facebook.com/portraitcare" class="social-link">facebook</a>
+      <a href="https://www.instagram.com/portraitproviders/" class="social-link">instagram</a>
+      <a href="https://www.linkedin.com/company/portraitcare/" class="social-link">linkedin</a>
+      <a href="https://www.youtube.com/@portrait5555" class="social-link">youtube</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Portrait</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
