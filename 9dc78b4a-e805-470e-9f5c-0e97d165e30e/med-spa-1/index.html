@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stacey K. Esthetics</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://images.squarespace-cdn.com/content/v1/6628a3e8059486240b88e7fc/681059ae-b7f4-4db9-aee4-578e8f315514/IMG_0392.JPG');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(244, 240, 234, 0.3);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+  margin-bottom: var(--space-md);
+}
+
+.hero-cta {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 1.2s forwards;
+}
+
+.hero-cta:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* About Section */
+.about {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.about-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.about-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.about-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.services-header {
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.services-title {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-sm);
+}
+
+.services-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-md);
+}
+
+.services-cta {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+}
+
+.services-cta:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.service-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.service-cell:last-child {
+  border-bottom: none;
+}
+
+.service-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.service-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.service-cell:hover .service-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+.service-meta {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  padding-top: var(--space-xs);
+}
+
+.service-name {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  text-align: center;
+}
+
+/* Virtual Consultations Section */
+.virtual-consult {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.virtual-consult-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+.virtual-consult-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.virtual-consult-title {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.virtual-consult-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+}
+
+.virtual-consult-image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+/* Together Section */
+.together {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.together-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.together-title {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-md);
+}
+
+.together-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 800px;
+  margin: 0 auto var(--space-lg);
+}
+
+.together-images {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.together-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.together-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.together-link {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+}
+
+.together-link:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1rem;
+    --space-sm: 0.75rem;
+    --space-md: 1.5rem;
+    --space-lg: 2.5rem;
+  }
+
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-sm);
+  }
+
+  .nav-links a {
+    font-size: 0.65rem;
+  }
+
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .hero-headline {
+    font-size: 2.2rem;
+    margin-bottom: var(--space-md);
+  }
+
+  .hero-subtitle {
+    font-size: 0.6rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  .hero-cta {
+    font-size: 0.65rem;
+    padding: calc(var(--space-sm) * 0.8) var(--space-sm);
+  }
+
+  .about {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .about-inner {
+    gap: var(--space-sm);
+  }
+
+  .about-image {
+    height: 250px;
+  }
+
+  .services {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .services-header {
+    margin-bottom: var(--space-md);
+  }
+
+  .service-cell {
+    padding: var(--space-sm);
+  }
+
+  .virtual-consult {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .virtual-consult-inner {
+    gap: var(--space-md);
+  }
+
+  .virtual-consult-image {
+    height: 300px;
+  }
+
+  .together {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .together-links {
+    gap: var(--space-sm);
+  }
+
+  .together-link {
+    font-size: 0.65rem;
+    padding: calc(var(--space-sm) * 0.8) var(--space-sm);
+  }
+
+  .footer {
+    padding: var(--space-sm) var(--pad-x);
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .about-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .service-cell:nth-child(1),
+  .service-cell:nth-child(2),
+  .service-cell:nth-child(3),
+  .service-cell:nth-child(4) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(5),
+  .service-cell:nth-child(6) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .virtual-consult-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .together-images {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .about {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .virtual-consult {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .together {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .service-cell:nth-child(3n) {
+    border-right: none;
+  }
+
+  .service-cell:nth-child(1),
+  .service-cell:nth-child(2),
+  .service-cell:nth-child(3) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(4),
+  .service-cell:nth-child(5),
+  .service-cell:nth-child(6) {
+    border-bottom: 1px solid var(--border-black);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <a href="https://www.staceykesthetics.com/" class="nav-logo">Stacey K. Esthetics</a>
+  <ul class="nav-links">
+    <li><a href="https://www.staceykesthetics.com/book-an-appointment">book</a></li>
+    <li><a href="https://www.staceykesthetics.com/shop">shop</a></li>
+    <li><a href="https://www.staceykesthetics.com/get-in-touch">get in touch</a></li>
+    <li><a href="https://www.staceykesthetics.com/about">about</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">Small town vibes<br><em>Big city Skincare</em></h1>
+    <p class="hero-subtitle">001 — discover your best skin through customized treatments, expert care, and honest guidance in a space designed for your comfort and confidence</p>
+    <a href="https://www.staceykesthetics.com/shop" class="hero-cta">Shop Skincare</a>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <img src="https://images.squarespace-cdn.com/content/v1/624b503a3a6154640a151782/1649102907934-UI72U7JZPNIJ7DT52C6Q/Frame+16.png" alt="Black background with a white line drawing of a bouquet of flowers." class="about-image">
+    <div class="about-content">
+      <div class="about-text">
+        <p>At Stacey K. Esthetics, I believe every woman deserves to feel comfortable and confident in her skin. With a focus on integrity and results-driven care, I offer customized skincare treatments, facials, acne solutions, brow styling, and all-natural sugar hair removal designed just for you. Step into a space where honesty, expertise, and self-care come together—because when your skin thrives, so do you.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="services" id="services">
+  <div class="services-inner">
+    <div class="services-header">
+      <h2 class="services-title">Services</h2>
+      <p class="services-subtitle">Whether you're looking for a relaxing facial, acne support, smooth sugar hair removal, or perfect brows, I'm here to care for your skin with integrity and attention to detail.</p>
+      <a href="https://www.staceykesthetics.com/book-an-appointment" class="services-cta">All Services</a>
+    </div>
+    <div class="services-grid">
+      <div class="service-cell">
+        <div class="service-image-wrapper">
+          <img src="https://images.squarespace-cdn.com/content/v1/6628a3e8059486240b88e7fc/6dec8bb2-1ed0-40d6-b97b-9376bbf68b6e/unsplash-image-tVgjf-Jd-IU.jpg" alt="Spa Facials">
+        </div>
+        <div class="service-meta">
+          <span class="service-name">Spa Facials</span>
+        </div>
+      </div>
+      <div class="service-cell">
+        <div class="service-image-wrapper">
+          <img src="https://images.squarespace-cdn.com/content/v1/6628a3e8059486240b88e7fc/8a2b4cdb-abb5-4f6c-95c3-5334d89d446c/IMG_0550.png" alt="Brow Tinting & Styling">
+        </div>
+        <div class="service-meta">
+          <span class="service-name">Brow Tinting & Styling</span>
+        </div>
+      </div>
+      <div class="service-cell">
+        <div class="service-image-wrapper">
+          <img src="https://images.squarespace-cdn.com/content/v1/6628a3e8059486240b88e7fc/b550b029-e3bd-48da-aee9-a5c6320aa8b1/unsplash-image-NXEi84bhtq0.jpg" alt="Acne Bootcamp">
+        </div>
+        <div class="service-meta">
+          <span class="service-name">Acne Bootcamp</span>
+        </div>
+      </div>
+      <div class="service-cell">
+        <div class="service-image-wrapper">
+          <img src="https://images.squarespace-cdn.com/content/v1/6628a3e8059486240b88e7fc/1764133263933-P0LRMSOWB6E41QMNK6VF/unsplash-image-WBv8dqQ02b0.jpg" alt="Corrective Facial Treatments">
+        </div>
+        <div class="service-meta">
+          <span class="service-name">Corrective Facial Treatments</span>
+        </div>
+      </div>
+      <div class="service-cell">
+        <div class="service-image-wrapper">
+          <img src="https://images.squarespace-cdn.com/content/v1/6628a3e8059486240b88e7fc/7a28afb8-6c6e-49d9-a5c1-705e5892b0f1/IMG_0432.png" alt="Sugar Hair Removal">
+        </div>
+        <div class="service-meta">
+          <span class="service-name">Sugar Hair Removal</span>
+        </div>
+      </div>
+      <div class="service-cell">
+        <div class="service-image-wrapper">
+          <img src="https://images.squarespace-cdn.com/content/v1/6628a3e8059486240b88e7fc/c6f051d5-0e93-4231-98c9-b6d2642c7515/rn-image_picker_lib_temp_568054c8-0b25-4bc3-bd6c-8c5598f48436.jpg.png" alt="Chemical Peels">
+        </div>
+        <div class="service-meta">
+          <span class="service-name">Chemical Peels</span>
+        </div>
+      </div>
+      <div class="service-cell">
+        <div class="service-image-wrapper">
+          <img src="https://images.squarespace-cdn.com/content/v1/6628a3e8059486240b88e7fc/42169be2-469f-46ca-a25f-c7fa64c297c3/IMG_0431.JPG" alt="A smiling woman with blonde, wavy hair sitting on a beige tufted sofa using a laptop in a bright, modern office or lounge area with large windows, a tall green plant, and shelves with products.">
+        </div>
+        <div class="service-meta">
+          <span class="service-name">Virtual Consultations</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Virtual Consultations Section -->
+<section class="virtual-consult">
+  <div class="virtual-consult-inner">
+    <div class="virtual-consult-content">
+      <h2 class="virtual-consult-title">Virtual Consultations</h2>
+      <div class="virtual-consult-text">
+        <p>Beautiful, healthy skin starts with understanding it—and that's exactly what my virtual skincare consultations are designed to do. Whether you're struggling with acne, dullness, or just want a fresh routine, I'll guide you step-by-step to uncover what your skin really needs. No guesswork, no confusion—just professional, personalized care and honest advice you can trust from the comfort of your home.</p>
+      </div>
+    </div>
+    <img src="https://images.squarespace-cdn.com/content/v1/6628a3e8059486240b88e7fc/42169be2-469f-46ca-a25f-c7fa64c297c3/IMG_0431.JPG" alt="A smiling woman with blonde, wavy hair sitting on a beige tufted sofa using a laptop in a bright, modern office or lounge area with large windows, a tall green plant, and shelves with products." class="virtual-consult-image">
+  </div>
+</section>
+
+<!-- Together Section -->
+<section class="together">
+  <div class="together-inner">
+    <h2 class="together-title">What we do, we do together.</h2>
+    <div class="together-text">
+      <p>Whether you're looking for a relaxing facial, acne support, smooth sugar hair removal, or perfect brows, I'm here to care for your skin with integrity and attention to detail.</p>
+    </div>
+    <div class="together-images">
+      <img src="https://images.squarespace-cdn.com/content/v1/6628a3e8059486240b88e7fc/cda21cd1-6180-43af-9ea1-8d0cb76f27bd/IMG_0543.JPG" alt="Manicure tools on a paper towel, including scissors, cuticle nippers, brushes, and a wooden stick, with a potted plant above and bottles of nail polish to the right." class="together-image">
+      <img src="https://images.squarespace-cdn.com/content/v1/6628a3e8059486240b88e7fc/6d1a02a3-43f8-40af-a4ae-5848015da7e7/IMG_0390.JPG" alt="A woman lying on her back with eyes closed, having her eyebrows shaped by a beauty technician wearing gloves, using tweezers and an eyebrow brush in a salon setting." class="together-image">
+    </div>
+    <div class="together-links">
+      <a href="tel:8059486240" class="together-link">Call</a>
+      <a href="https://www.instagram.com/stacey_k_esthetics/" class="together-link">Instagram</a>
+      <a href="https://www.facebook.com/profile.php?id=100063557863783" class="together-link">Facebook</a>
+      <a href="https://www.staceykesthetics.com/shop" class="together-link">Shop</a>
+      <a href="https://www.staceykesthetics.com/about" class="together-link">Our Story</a>
+      <a href="https://www.staceykesthetics.com/get-in-touch" class="together-link">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-left">© 2024 Stacey K. Esthetics</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
