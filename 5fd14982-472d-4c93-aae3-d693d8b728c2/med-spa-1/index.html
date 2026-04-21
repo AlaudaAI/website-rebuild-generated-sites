@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Royal Bliss Day Spa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://images.squarespace-cdn.com/content/v1/621faf6f39af57794d4cda3d/1646416783800-2M66FAGKYDIGE6XMLWL4/dana-devolk-x2cNcfz_xXU-unsplash.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: #ffffff;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Promotion Banner */
+.promotion {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+  padding: var(--space-sm);
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.promotion-scroll {
+  white-space: nowrap;
+  animation: scrollText 15s linear infinite;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+@keyframes scrollText {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Philosophy Section */
+.philosophy {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.philosophy-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.philosophy-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.philosophy-text p + p {
+  margin-top: var(--space-md);
+}
+
+.philosophy-image {
+  margin-top: var(--space-md);
+  width: 100%;
+}
+
+.philosophy-image img {
+  width: 100%;
+  height: auto;
+  filter: grayscale(20%);
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.service-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.service-cell:last-child {
+  border-bottom: none;
+}
+
+.service-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.service-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.service-cell:hover .service-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+.service-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: var(--space-xs);
+}
+
+.service-name {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.service-list {
+  background-color: white;
+  border: 1px solid var(--border-black);
+  padding: var(--space-lg) var(--pad-x);
+  text-align: center;
+}
+
+.service-list h2 {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.service-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-md);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.service-item {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  padding: var(--space-sm);
+  border: 1px solid var(--border-black);
+  transition: background-color 0.3s ease;
+}
+
+.service-item:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* What to Expect */
+.expectations {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.expectations-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.expectations-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.expectations-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.expectation-item {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.expectation-item h3 {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.expectation-item p {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Quote Section */
+.quote-section {
+  padding: var(--space-xl) var(--pad-x);
+  text-align: center;
+  background-image: url('https://images.squarespace-cdn.com/content/v1/621faf6f39af57794d4cda3d/1684852272057-N65NPD6ZBBSB271XCIOM/image-asset.jpeg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.quote-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(244, 240, 234, 0.9);
+  z-index: 1;
+}
+
+.quote-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.quote-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  font-style: italic;
+  margin-bottom: var(--space-sm);
+}
+
+.quote-author {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+/* Reviews Section */
+.reviews {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.reviews-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.reviews-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.review-item {
+  border: 1px solid var(--border-black);
+  padding: var(--space-lg);
+}
+
+.review-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: var(--space-md);
+  font-style: italic;
+}
+
+.review-author {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+/* Team Section */
+.team {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.team-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.team-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.team-member {
+  border: 1px solid var(--border-black);
+  padding: var(--space-lg);
+  text-align: center;
+}
+
+.team-member h3 {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+}
+
+.team-member .role {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: var(--placeholder-gray);
+  margin-bottom: var(--space-sm);
+}
+
+.team-member .bio {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Contact Section */
+.contact {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.contact-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-section {
+  text-align: center;
+}
+
+.contact-section h3 {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.contact-section p {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.contact-section a {
+  text-decoration: underline;
+}
+
+.hours-list {
+  list-style: none;
+}
+
+.hours-list li {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: var(--space-xs);
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.social-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  border: 1px solid var(--border-black);
+  padding: var(--space-sm) var(--space-md);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.social-links a:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .nav-logo {
+    font-size: 0.7rem;
+  }
+
+  .service-items {
+    grid-template-columns: 1fr;
+  }
+
+  .social-links {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .hero-subtitle {
+    font-size: 0.65rem;
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .philosophy-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .service-cell:nth-child(1),
+  .service-cell:nth-child(2) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .service-items {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .expectations-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .reviews-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .contact-info {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .philosophy {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .expectations {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+
+  .expectations-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Royal Bliss Day Spa</a>
+  <ul class="nav-links">
+    <li><a href="https://www.royalblissdayspa.com/hydrafacials">hydrafacials</a></li>
+    <li><a href="https://www.royalblissdayspa.com/facials">facials</a></li>
+    <li><a href="https://www.royalblissdayspa.com/headspa">head spa</a></li>
+    <li><a href="https://www.royalblissdayspa.com/waxing">waxing</a></li>
+    <li><a href="https://www.royalblissdayspa.com/lash-brow">lash & brow</a></li>
+    <li><a href="https://www.royalblissdayspa.com/medicaltreatments">medical treatments</a></li>
+    <li><a href="https://www.royalblissdayspa.com/makeup">makeup</a></li>
+    <li><a href="https://www.royalblissdayspa.com/men">men</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">Your home town spa.</h1>
+    <p class="hero-subtitle">001 — restore. retouch. relax.</p>
+  </div>
+</section>
+
+<!-- Promotion Banner -->
+<section class="promotion">
+  <div class="promotion-scroll">
+    New clients receive $100 off GLP-1 weight loss treatments 〰️ New clients receive $100 off GLP-1 weight loss treatments 〰️ New clients receive $100 off GLP-1 weight loss treatments 〰️
+  </div>
+</section>
+
+<!-- Philosophy Section -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">002 — approach</span>
+    <div class="philosophy-text">
+      <p>Welcome to Royal Bliss Day Spa - your hometown spa.</p>
+      <p>We have a passion to help women and men of all ages to take the best care of their skin by educating them through the different seasons of life. Many factors can change the way our skin behaves. Stress. Weather. Pregnancy. Age.</p>
+      <p>Do yourself a favor and make an appointment to visit us for a luscious and relaxing treatment. We can then teach you techniques and show you products that will help maintain your natural glow and beauty.</p>
+      <p>We all need to: Restore. Retouch. Relax.</p>
+    </div>
+  </div>
+  <div class="philosophy-image">
+    <img src="https://images.squarespace-cdn.com/content/v1/621faf6f39af57794d4cda3d/d7eb4b08-e8b5-4b1f-b632-df0303144093/2O2A9678.jpg" alt="Spa interior">
+  </div>
+</section>
+
+<!-- Relaxing Spa Treatments -->
+<section class="service-list">
+  <h2>Relaxing Spa Treatments</h2>
+  <div class="service-items">
+    <div class="service-item">Hydrafacials</div>
+    <div class="service-item">Facials</div>
+    <div class="service-item">Head Spa</div>
+    <div class="service-item">Massage Therapy</div>
+    <div class="service-item">Tox & Fillers</div>
+    <div class="service-item">Lash & Brow</div>
+    <div class="service-item">Waxing</div>
+    <div class="service-item">Men</div>
+    <div class="service-item">Makeup</div>
+    <div class="service-item">Enhancements</div>
+    <div class="service-item">Medical Treatments</div>
+    <div class="service-item">Wellness Injections</div>
+    <div class="service-item">Medical Weight Loss</div>
+  </div>
+</section>
+
+<!-- Services Grid -->
+<section class="services" id="services">
+  <div class="services-grid">
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/621faf6f39af57794d4cda3d/4d31fb2c-c74c-450e-aa47-3376a54728cb/Front+cover+room.JPEG" alt="A treatment room with a massage bed covered with a white sheet and a black blanket, a towel on top, a chair with a gray pillow that reads 'Relax,' a side table with a lamp, and a rolling cart with skincare products. Two framed art pieces are hung on the wall.">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">relaxing spa treatments</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/621faf6f39af57794d4cda3d/5ae330f5-ff4a-4450-b713-be3d60d92811/Front+cover+room+3.JPEG" alt="A treatment room with a massage table covered in a beige blanket and a pillow, a chair with a towel draped over it, a bedside table with a lamp, and various supplies on a shelf against a purple and floral-patterned wall.">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">beneficial wellness treatments</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- What to Expect -->
+<section class="expectations" id="expectations">
+  <div class="expectations-inner">
+    <h2 class="expectations-heading">What to Expect</h2>
+    <div class="expectations-grid">
+      <div class="expectation-item">
+        <h3>therapists</h3>
+        <p>Our therapists are here to make you feel welcome and comfortable. We don't mind questions so if there is something you need or don't see, please let us know.</p>
+      </div>
+      <div class="expectation-item">
+        <h3>appointments</h3>
+        <p>You may make an appointment up to three (3) months prior and before two (2) hours before the preferred time. Please note our cancellation policy.</p>
+      </div>
+      <div class="expectation-item">
+        <h3>dress</h3>
+        <p>At Royal Bliss, your comfort is our mission. We recommend wearing loose-fitting, comfortable clothes or just wearing what you feel the most relaxed in. We will provide a terry cloth wrap for Facial services.</p>
+      </div>
+      <div class="expectation-item">
+        <h3>gratuity</h3>
+        <p>We believe that a gratuity is a gesture of thanks for excellent service. You may add a percentage of choice at the end of the session or cash.</p>
+      </div>
+      <div class="expectation-item">
+        <h3>cancellations</h3>
+        <p>To serve all of our wonderful clients promptly at affordable prices, we reserve the right to charge 50% for appointments not canceled or rescheduled 24 hours in advance.</p>
+      </div>
+      <div class="expectation-item">
+        <h3>location</h3>
+        <p>We are located in Liberty Hill, Texas, right off Hwy 29 in a strip mall, next to a Bridal Shop. We have plenty of parking, so please stop by to make an appointment, shop the boutique, or just say hello!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quote Section -->
+<section class="quote-section">
+  <div class="quote-content">
+    <h2 class="quote-text">"Be good to your skin. You'll wear it every day for the rest of your life."</h2>
+    <p class="quote-author">~ Renee Rouleau</p>
+  </div>
+</section>
+
+<!-- Reviews Section -->
+<section class="reviews">
+  <div class="reviews-inner">
+    <h2 class="reviews-heading">Reviews</h2>
+    <div class="reviews-grid">
+      <div class="review-item">
+        <p class="review-text">I've gone here twice already. And have booked a 3rd appointment for next month. Very nice place and the women working there are all fantastic. I feel very pampered every time.</p>
+        <p class="review-author">Allison E.</p>
+      </div>
+      <div class="review-item">
+        <p class="review-text">Wanted to start my skincare/facial journey again after years of not really doing much for my skin, called to inquire about services and decided to book and got booked with Kylie, she was absolutely amazing and made me feel super comfortable through the whole process and was able to customize my facial to my needs.</p>
+        <p class="review-author">Laura B.</p>
+      </div>
+      <div class="review-item">
+        <p class="review-text">I just had my first hydro facial and lash lift today at Royal Bliss and it was so relaxing! I feel completely refreshed and beautiful! I wish I could have stayed all day. I highly recommend Royal Bliss for your wellness needs!</p>
+        <p class="review-author">Brandy H.</p>
+      </div>
+      <div class="review-item">
+        <p class="review-text">Bestie and I had a wonderful morning at Royal Bliss getting massages and facials for Mother's Day. Both were amazing and very relaxing. They were ready for us upon arrival and coordinated us both well. Would highly recommend 👌</p>
+        <p class="review-author">Adrienne L.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team Section -->
+<section class="team">
+  <div class="team-inner">
+    <h2 class="team-heading">Our Team</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <h3>kylie</h3>
+        <p class="role">esthetician</p>
+        <p class="bio">Provides facials and skin care treatments, described by clients as knowledgeable about products and making clients feel comfortable.</p>
+      </div>
+      <div class="team-member">
+        <h3>brylee</h3>
+        <p class="role">therapist</p>
+        <p class="bio">Provides facials and massage therapy, noted for being attentive, kind, and accommodating to client allergies and special needs.</p>
+      </div>
+      <div class="team-member">
+        <h3>bethany</h3>
+        <p class="role">massage therapist</p>
+        <p class="bio">Provides massage therapy services with focus on communication about client needs and comfort.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact">
+  <div class="contact-inner">
+    <h2 class="contact-heading">Connect with us on Instagram!</h2>
+    <div class="contact-info">
+      <div class="contact-section">
+        <h3>location</h3>
+        <p>12701 Hwy 29 W, Ste 5<br>
+        Liberty Hill, Texas 78642<br>
+        <a href="tel:+15125486733">(512) 548-6733</a></p>
+      </div>
+      <div class="contact-section">
+        <h3>hours</h3>
+        <ul class="hours-list">
+          <li>Monday 9:00 am - 5:00 pm</li>
+          <li>Tuesday 9:00 am - 7:00 pm</li>
+          <li>Wednesday 9:00 am - 5:00 pm</li>
+          <li>Thursday 9:00 am - 7:00 pm</li>
+          <li>Friday 9:00 am - 5:00 pm</li>
+          <li>Saturday 9:00 am - 3:00 pm</li>
+        </ul>
+      </div>
+      <div class="contact-section">
+        <h3>contact</h3>
+        <p><a href="mailto:royalblissdayspa@yahoo.com">royalblissdayspa@yahoo.com</a></p>
+        <div class="social-links">
+          <a href="https://www.facebook.com/Royalblissdayspallc">facebook</a>
+          <a href="https://www.instagram.com/royal.bliss.med.spa/?hl=en">instagram</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Royal Bliss Day Spa</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
