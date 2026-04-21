@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arizona Biltmore Dentistry</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  :root {
+    --bg-cream: #f7f3ee;
+    --bg-white: #ffffff;
+    --text-dark: #1a1a1f;
+    --text-grey: #6b6b76;
+    --text-light-grey: #9a9aa6;
+    --accent-orange: #e8603c;
+    --accent-orange-dark: #d14e2c;
+    --accent-lavender: #b8a9e8;
+    --accent-lavender-bg: #eee8fb;
+    --success-green: #3cc28a;
+    --border-light: rgba(0,0,0,0.08);
+    --shadow-card: 0 12px 40px rgba(0,0,0,0.1);
+    --shadow-small: 0 4px 16px rgba(0,0,0,0.06);
+    --radius-pill: 100px;
+    --radius-card: 16px;
+    --radius-sm: 10px;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 40px;
+    --space-2xl: 64px;
+    --space-3xl: 96px;
+    --container-max: 1280px;
+    --transition: 0.25s ease;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--bg-cream);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3 {
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+    line-height: 1.15;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+  }
+
+  /* ===== NAVIGATION ===== */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--bg-cream);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .nav-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md) var(--space-lg);
+    height: 64px;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-logo img {
+    height: 40px;
+    width: auto;
+  }
+
+  .nav-links {
+    display: none;
+    list-style: none;
+    gap: var(--space-xl);
+    align-items: center;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-grey);
+    transition: color var(--transition);
+  }
+
+  .nav-links a:hover {
+    color: var(--text-dark);
+  }
+
+  .nav-cta {
+    background-color: var(--text-dark);
+    color: var(--bg-white);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 24px;
+    border-radius: var(--radius-pill);
+    transition: background-color var(--transition), transform var(--transition);
+  }
+
+  .nav-cta:hover {
+    background-color: #2d2d35;
+    transform: translateY(-1px);
+  }
+
+  /* ===== HERO SECTION ===== */
+  .hero {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: var(--space-xl) var(--space-lg) var(--space-2xl);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    align-items: center;
+    min-height: calc(100vh - 64px);
+  }
+
+  .hero-content {
+    max-width: 560px;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(36px, 6vw, 64px);
+    letter-spacing: -0.5px;
+    color: var(--text-dark);
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero-content p {
+    font-size: clamp(15px, 1.2vw, 17px);
+    color: var(--text-grey);
+    line-height: 1.7;
+    margin-bottom: var(--space-xl);
+    max-width: 440px;
+  }
+
+  .hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 14px 32px;
+    border: 1.5px solid var(--text-dark);
+    border-radius: var(--radius-pill);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-dark);
+    background: transparent;
+    transition: all var(--transition);
+  }
+
+  .hero-btn:hover {
+    background-color: var(--text-dark);
+    color: var(--bg-white);
+    transform: translateY(-2px);
+  }
+
+  .hero-btn i {
+    font-size: 12px;
+    transition: transform var(--transition);
+  }
+
+  .hero-btn:hover i {
+    transform: translateX(3px);
+  }
+
+  .hero-visual {
+    position: relative;
+    width: 100%;
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-visual img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  /* ===== CONTENT SECTIONS ===== */
+  .section {
+    padding: var(--space-2xl) var(--space-lg);
+    background: var(--bg-white);
+    margin-bottom: var(--space-lg);
+  }
+
+  .section:nth-child(even) {
+    background: var(--bg-cream);
+  }
+
+  .section-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+
+  .section h2 {
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: var(--space-lg);
+    text-align: center;
+  }
+
+  /* ===== HOURS & CONTACT ===== */
+  .hours-contact {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    text-align: center;
+  }
+
+  .hours-item {
+    padding: var(--space-lg);
+    background: var(--bg-white);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-small);
+  }
+
+  .hours-item h3 {
+    font-size: 18px;
+    margin-bottom: var(--space-md);
+  }
+
+  .phone-number {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--accent-orange);
+    text-decoration: none;
+  }
+
+  /* ===== TEAM SECTION ===== */
+  .team-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .team-member {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: var(--space-xl);
+    background: var(--bg-white);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-small);
+  }
+
+  .team-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: var(--space-md);
+  }
+
+  .team-name {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: var(--space-xs);
+  }
+
+  .team-role {
+    color: var(--text-grey);
+    margin-bottom: var(--space-md);
+  }
+
+  .team-bio {
+    color: var(--text-grey);
+    line-height: 1.6;
+  }
+
+  /* ===== SERVICES GRID ===== */
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .service-card {
+    padding: var(--space-xl);
+    background: var(--bg-white);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-small);
+    transition: transform var(--transition);
+  }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .service-name {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+  }
+
+  .service-description {
+    color: var(--text-grey);
+  }
+
+  /* Services without descriptions - compact list */
+  .services-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-sm);
+    margin-top: var(--space-lg);
+  }
+
+  .service-item {
+    padding: var(--space-md);
+    background: var(--bg-white);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-light);
+    text-align: center;
+    font-weight: 500;
+  }
+
+  /* ===== STATS ===== */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    text-align: center;
+  }
+
+  .stat-card {
+    padding: var(--space-xl);
+    background: var(--accent-orange);
+    color: var(--bg-white);
+    border-radius: var(--radius-card);
+  }
+
+  .stat-value {
+    font-size: clamp(36px, 5vw, 52px);
+    font-weight: 700;
+    margin-bottom: var(--space-xs);
+  }
+
+  .stat-label {
+    font-size: 16px;
+    opacity: 0.9;
+  }
+
+  /* ===== TESTIMONIALS ===== */
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .testimonial {
+    padding: var(--space-xl);
+    background: var(--bg-white);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-small);
+  }
+
+  .testimonial-quote {
+    font-style: italic;
+    margin-bottom: var(--space-md);
+    color: var(--text-grey);
+  }
+
+  .testimonial-author {
+    font-weight: 600;
+    color: var(--text-dark);
+  }
+
+  /* ===== SPECIAL OFFER ===== */
+  .special-offer {
+    padding: var(--space-xl);
+    background: linear-gradient(135deg, var(--accent-orange), var(--accent-orange-dark));
+    color: var(--bg-white);
+    border-radius: var(--radius-card);
+    text-align: center;
+    margin: var(--space-xl) 0;
+  }
+
+  .special-offer h3 {
+    font-size: 24px;
+    margin-bottom: var(--space-md);
+  }
+
+  /* ===== MAPS ===== */
+  .maps-container {
+    margin: var(--space-xl) 0;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+  }
+
+  .maps-container iframe {
+    width: 100%;
+    height: 400px;
+    border: none;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    background: var(--text-dark);
+    color: var(--bg-white);
+    padding: var(--space-2xl) var(--space-lg) var(--space-lg);
+  }
+
+  .footer-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+
+  .footer-logo {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+  }
+
+  .footer-logo img {
+    height: 60px;
+    width: auto;
+  }
+
+  .footer-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    text-align: center;
+  }
+
+  .footer-section h4 {
+    font-size: 16px;
+    margin-bottom: var(--space-md);
+    color: var(--bg-white);
+  }
+
+  .footer-links {
+    list-style: none;
+  }
+
+  .footer-links a {
+    color: var(--text-light-grey);
+    font-size: 14px;
+    transition: color var(--transition);
+  }
+
+  .footer-links a:hover {
+    color: var(--bg-white);
+  }
+
+  .copyright {
+    text-align: center;
+    margin-top: var(--space-xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    color: var(--text-light-grey);
+    font-size: 14px;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (min-width: 768px) {
+    .nav-links {
+      display: flex;
+    }
+
+    .hero {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2xl);
+    }
+
+    .hours-contact {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .team-grid {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    .services-grid {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    .testimonial-grid {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .footer-content {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      text-align: left;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .nav-inner {
+      padding: var(--space-sm) var(--space-md);
+    }
+
+    .nav-cta {
+      font-size: 12px;
+      padding: 8px 16px;
+    }
+
+    .hero {
+      padding: var(--space-lg) var(--space-md) var(--space-xl);
+      min-height: calc(100vh - 56px);
+    }
+
+    .section {
+      padding: var(--space-xl) var(--space-md);
+    }
+
+    .services-list {
+      grid-template-columns: 1fr;
+    }
+
+    .team-member {
+      padding: var(--space-lg);
+    }
+
+    .special-offer {
+      padding: var(--space-lg);
+    }
+
+    .footer {
+      padding: var(--space-xl) var(--space-md) var(--space-md);
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<!-- Navigation -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Arizona Biltmore Dentistry</a>
+    <ul class="nav-links">
+      <li><a href="https://www.arizonabiltmoredentistry.com/">Home</a></li>
+      <li><a href="https://www.arizonabiltmoredentistry.com/phoenix-dentists/">About</a></li>
+      <li><a href="https://www.arizonabiltmoredentistry.com/phoenix-dental-care/">Services</a></li>
+      <li><a href="https://www.arizonabiltmoredentistry.com/emergency-dental-service/">Emergencies</a></li>
+      <li><a href="https://www.arizonabiltmoredentistry.com/financial/">Financial</a></li>
+      <li><a href="https://www.arizonabiltmoredentistry.com/contact/">Contact</a></li>
+  </ul>
+    <button class="nav-cta">Call Now</button>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>#1 Rated Dentist in Phoenix, AZ</h1>
+    <p>Welcome to Arizona Biltmore Dentistry - Privately owned by a lifelong Arizona native dedicated to exceptional patient care. We understand that going to the dentist may not be your favorite activity, but we're also not your average dental office.</p>
+    <a href="tel:6029578200" class="hero-btn">
+      Make an Appointment <i class="fas fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="hero-visual">
+    <img src="https://www.arizonabiltmoredentistry.com/wp-content/uploads/2021/07/az-biltmore.png" alt="Arizona Biltmore Dentistry">
+  </div>
+</section>
+
+<!-- Opening Hours & Contact -->
+<section class="section">
+  <div class="section-inner">
+    <div class="hours-contact">
+      <div class="hours-item">
+        <h3>Opening Hours</h3>
+        <p><strong>Monday to Thursday:</strong> 7 AM - 5 PM</p>
+        <p><strong>Friday:</strong> 7 AM - 4 PM</p>
+        <p><strong>Saturday:</strong> 7 AM - 2 PM</p>
+      </div>
+      <div class="hours-item">
+        <h3>Phone Numbers</h3>
+        <p><a href="tel:6029578200" class="phone-number">(602) 957-8200</a></p>
+        <p><a href="tel:6025627096" class="phone-number">(602) 562-7096</a></p>
+        <p>Fax: (602) 957-6198</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Meet the Team -->
+<section class="section">
+  <div class="section-inner">
+    <h2>Meet the Team</h2>
+    <p style="text-align: center; margin-bottom: 40px;">Get to know the people behind your smile.</p>
+    <div class="team-grid">
+      <div class="team-member">
+        <img src="https://www.arizonabiltmoredentistry.com/wp-content/uploads/2018/02/dr-jeziorski.jpg" alt="Dr. Aaron Jeziorski" class="team-photo">
+        <div class="team-name">Dr. Aaron Jeziorski</div>
+        <div class="team-role">Doctor</div>
+        <div class="team-bio">Arizona native Dr. Aaron Jeziorski is a passionate dentist dedicated to exceptional patient care. He mentors dental students at the Central Arizona Shelter Services Clinic and is a dedicated family man with four children.</div>
+      </div>
+      <div class="team-member">
+        <div class="team-name">Dr. Michael Hood</div>
+        <div class="team-role">Doctor</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Emergency Exam Special -->
+<section class="section">
+  <div class="section-inner">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value">$99</div>
+        <div class="stat-label">Emergency Exam</div>
+      </div>
+    </div>
+    <div class="special-offer">
+      <h3>Our Current Patient Special!</h3>
+      <p><strong>BOGO Implant Special</strong></p>
+      <p>Limited time enjoy Buy-One-Get-One offer on dental implant treatment! Schedule your free consultation to determine your candidacy.</p>
+      <p><em>Valid through 04/30/26</em></p>
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="section">
+  <div class="section-inner">
+    <h2>Our Services</h2>
+    
+    <!-- Services with descriptions -->
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-name">Cosmetic Dentistry</div>
+        <div class="service-description">Affordable in-office cosmetic dentistry procedures including porcelain veneers, orthodontics and teeth whitening designed to make your dream smile come true</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Root Canal Therapy</div>
+        <div class="service-description">Remove damaged tissue from tooth infection, deep decay, or dental trauma to save your natural tooth and relieve pain</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Family Dentistry</div>
+        <div class="service-description">Dental care for children and families - kids should visit a dentist when their first tooth comes in or no later than their first birthday</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Dental Implants</div>
+        <div class="service-description">Treatment option for patients with missing teeth due to tooth decay, periodontal disease or injury</div>
+      </div>
+    </div>
+
+    <!-- Services without descriptions - compact list -->
+    <div class="services-list">
+      <div class="service-item">Teeth Whitening</div>
+      <div class="service-item">General Dentistry</div>
+      <div class="service-item">Restorative Dentistry</div>
+      <div class="service-item">Dentures</div>
+      <div class="service-item">All-on-4</div>
+      <div class="service-item">Single-Tooth Implants</div>
+      <div class="service-item">Teeth Straightening</div>
+      <div class="service-item">Clear Aligners</div>
+      <div class="service-item">ClearCorrect</div>
+      <div class="service-item">CandidPro</div>
+      <div class="service-item">Emergency Dental Service</div>
+      <div class="service-item">Sleep Apnea Services</div>
+      <div class="service-item">Sedation Dentistry</div>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="section">
+  <div class="section-inner">
+    <h2>Welcome to Arizona Biltmore Dentistry in Phoenix</h2>
+    <p>We understand that going to the dentist may not be your favorite activity, but we're also not your average dental office. At Arizona Biltmore Dentistry, we're raising the bar when it comes to the patient experience. We focus on the connection between your oral health and overall health for a complete wellness approach, and we work hard to create a warm, welcoming environment. From our advanced technology, including digital X-rays and laser gum therapy, to our comfortable patient amenities, like WiFi and comfortable pillows, we aim to help you feel at home. Schedule an appointment today to come see the difference!</p>
+    
+    <h3 style="margin-top: 40px;">Affordable Dental Care Made Simple</h3>
+    <p><strong>Most Insurances Accepted · 3rd-Party Financing Available · Dental Loyalty Program</strong></p>
+    <p>We believe everyone deserves access to high-quality dental care without financial stress. Our flexible options make it easy to get the care you need—whether you're using insurance, financing, or joining our in-house savings program.</p>
+    <p>Part of serving the Phoenix community means providing affordable dental care to our patients. Cost concerns should never keep you from having a healthy mouth and smile. We offer affordable fees, accept dental insurance and third-party financing, and have in-house plans to help you save big on your care. We also never begin treatment without going over your expected out-of-pocket costs. Not sure what is best for your needs and budget? Speak with one of our friendly team members to go over your options.</p>
+  </div>
+</section>
+
+<!-- Special Promotion -->
+<section class="section">
+  <div class="section-inner">
+    <div class="special-offer">
+      <h2>Set Sail to Paradise with Arizona Biltmore Dentistry!</h2>
+      <p>Your passage to relaxation awaits! Arizona Biltmore Dentistry is thrilled to give our wonderful patients the chance to win an all-expenses-paid 3-night Carnival Cruise to Ensenada, Mexico for two. It's our way of saying thank you for trusting us with your smiles—and now we want to send you somewhere you can show yours off in style.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Patient Testimonials -->
+<section class="section">
+  <div class="section-inner">
+    <h2>Five-Star Patient Experience</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial">
+        <div class="testimonial-quote">" The staff has been very kind to me. Relaxed atmosphere and funny! They keep me relaxed. "</div>
+        <div class="testimonial-author">Katherine Cohner</div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-quote">" I can walk to six dental offices, but I drive here. It's a neat, clean, place. It's got good vibes."</div>
+        <div class="testimonial-author">Jeff Goodrich</div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-quote">" I highly recommend this office. I drive well over an hour to get here, and I find the atmosphere of the office to be tremendous."</div>
+        <div class="testimonial-author">Dave Waibel</div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-quote">" My kids are excited to come to the dentist again. When can anybody say that? "</div>
+        <div class="testimonial-author">Sarah Ragnoli</div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-quote">"Dr. J and his staff are very thoughtful and want to make sure I have a good experience"</div>
+        <div class="testimonial-author">William Irwin</div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-quote">"I really felt like home when I came to Arizona Biltmore "</div>
+        <div class="testimonial-author">Beau Jeppesen</div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-quote">"Dr. J is fabulous. They make you feel at ease. I appreciate and value the service and care"</div>
+        <div class="testimonial-author">Marchelle Franklin</div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-quote">"I was a little nervous but coming in and having the gentle care that Dr. J provides puts me at ease. Now my entire family comes to AZ Biltmore."</div>
+        <div class="testimonial-author">Mark Patten</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Location & Maps -->
+<section class="section">
+  <div class="section-inner">
+    <h2>Our Location</h2>
+    <div style="text-align: center; margin-bottom: 20px;">
+      <p><strong>Arizona Biltmore Dentistry</strong></p>
+      <p>2777 E Camelback Rd #101, Phoenix, AZ 85016</p>
+      <p><a href="tel:6029578200" class="phone-number">(602) 957-8200</a></p>
+    </div>
+    <div class="maps-container">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.7644444444444!2d-112.0220205!3d33.5088619!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x872b0d7d7d7d7d7d%3A0x1234567890abcdef!2sArizona%20Biltmore%20Dentistry!5e0!3m2!1sen!2sus!4v1234567890123" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- Video Section -->
+<section class="section">
+  <div class="section-inner">
+    <h2>Learn More About Us</h2>
+    <div style="text-align: center;">
+      <iframe width="100%" height="400" src="https://www.youtube.com/embed/BXNRVrv8GVg" frameborder="0" allowfullscreen style="border-radius: 16px; max-width: 800px;"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="https://www.arizonabiltmoredentistry.com/wp-content/uploads/2018/02/logo-footer.png" alt="Arizona Biltmore Dentistry">
+    </div>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Contact</h4>
+        <ul class="footer-links">
+          <li><a href="tel:6029578200">(602) 957-8200</a></li>
+          <li>2777 E Camelback Rd #101</li>
+          <li>Phoenix, AZ 85016</li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Services</h4>
+        <ul class="footer-links">
+          <li><a href="https://www.arizonabiltmoredentistry.com/cosmetic-dentist/">Cosmetic Dentistry</a></li>
+          <li><a href="https://www.arizonabiltmoredentistry.com/dentist/">General Dentistry</a></li>
+          <li><a href="https://www.arizonabiltmoredentistry.com/dental-implants/">Dental Implants</a></li>
+          <li><a href="https://www.arizonabiltmoredentistry.com/emergency-dental-service/">Emergency Services</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>About</h4>
+        <ul class="footer-links">
+          <li><a href="https://www.arizonabiltmoredentistry.com/phoenix-dentists/">Our Team</a></li>
+          <li><a href="https://www.arizonabiltmoredentistry.com/patient-testimonial/">Testimonials</a></li>
+          <li><a href="https://www.arizonabiltmoredentistry.com/financial/">Financial Options</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Follow Us</h4>
+        <ul class="footer-links">
+          <li><a href="https://www.facebook.com/arizonabiltmoredentistry?fref=ts">Facebook</a></li>
+          <li><a href="https://twitter.com/AZBiltmore">Twitter</a></li>
+          <li><a href="https://www.youtube.com/channel/UC3jj0nOhAv1mMHxlWFN49AQ">YouTube</a></li>
+          <li><a href="https://www.yelp.com/biz/arizona-biltmore-dentistry-phoenix">Yelp</a></li>
+          <li><a href="https://maps.google.com/maps/contrib/116414302573151413814">Google Business</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      © 2026 Arizona Biltmore Dentistry | Powered by
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
