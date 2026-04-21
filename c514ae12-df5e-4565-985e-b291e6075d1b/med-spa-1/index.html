@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aqua Luna Aesthetics</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://aqualunaatx.com/wp-content/uploads/aqua-luna-aesthetics-facial-austin-spa-beauty-skincare-1.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(244, 240, 234, 0.3);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+  margin-bottom: var(--space-md);
+}
+
+.hero-cta {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 1.2s forwards;
+}
+
+.hero-cta a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: inline-block;
+}
+
+.hero-cta a:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Promotion Section */
+.promotion {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+  text-align: center;
+  background: linear-gradient(135deg, #85cec4 0%, rgba(133, 206, 196, 0.1) 100%);
+}
+
+.promotion-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-sm);
+}
+
+.promotion-text {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  margin-bottom: var(--space-md);
+}
+
+.promotion-cta a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: inline-block;
+}
+
+.promotion-cta a:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Service Promotion Cards */
+.service-promo-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.service-promo {
+  border: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+  text-align: center;
+}
+
+.service-promo-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-sm);
+}
+
+.service-promo-text {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  margin-bottom: var(--space-md);
+}
+
+.service-promo-cta a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: inline-block;
+}
+
+.service-promo-cta a:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.services-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-md);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.service-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.service-cell:last-child {
+  border-bottom: none;
+}
+
+.service-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.service-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.service-cell:hover .service-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+.service-name {
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-weight: 300;
+  line-height: 1.2;
+  margin-bottom: var(--space-xs);
+}
+
+.service-description {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: var(--placeholder-gray);
+}
+
+/* Compact Services List */
+.services-compact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-sm);
+  list-style: none;
+  margin-top: var(--space-md);
+}
+
+.services-compact li {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  padding: var(--space-sm);
+  border: 1px solid var(--border-black);
+}
+
+/* Testimonials Section */
+.testimonials {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.testimonials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonials-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.testimonial {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.testimonial-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+  font-style: italic;
+}
+
+.testimonial-author {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.testimonials-cta {
+  text-align: center;
+  margin-top: var(--space-lg);
+}
+
+.testimonials-cta p {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.testimonials-cta a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: inline-block;
+}
+
+.testimonials-cta a:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Booking Section */
+.booking {
+  padding: var(--space-xl) var(--pad-x);
+  text-align: center;
+}
+
+.booking-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-md);
+}
+
+.booking-cta a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-md) var(--space-lg);
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: inline-block;
+}
+
+.booking-cta a:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Contact Section */
+.contact {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.contact-info div {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.contact-info a {
+  color: var(--text-black);
+  text-decoration: none;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
+}
+
+.contact-map {
+  width: 100%;
+  height: 400px;
+  border: 1px solid var(--border-black);
+}
+
+.contact-map iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.footer-social {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.footer-social a {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+}
+
+.footer-social a:hover {
+  text-decoration: underline;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  .nav-links {
+    gap: var(--space-sm);
+  }
+
+  .nav-links a {
+    font-size: 0.6rem;
+  }
+
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .promotion {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-md) var(--pad-x);
+  }
+
+  .testimonials {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .booking {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .contact {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .footer {
+    padding: var(--space-sm) var(--pad-x);
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .service-promo-container {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .service-cell:nth-child(1),
+  .service-cell:nth-child(2) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .service-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(3n) {
+    border-right: none;
+  }
+
+  .service-cell:nth-child(1),
+  .service-cell:nth-child(2),
+  .service-cell:nth-child(3) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Aqua Luna Aesthetics</a>
+  <ul class="nav-links">
+    <li><a href="https://aqualunaatx.com/#">beauty services</a></li>
+    <li><a href="https://aqualunaatx.com/about-aqualuna/">about</a></li>
+    <li><a href="https://aqualunaatx.com/contact-us/">contact</a></li>
+    <li><a href="https://square.site/book/6415PNMKWEJS8/aqua-luna-aesthetics-llc-austin-tx">book now</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">look better, feel younger</h1>
+    <p class="hero-subtitle">visit our intimate, boutique studio in austin, texas</p>
+    <div class="hero-cta">
+      <a href="https://aqualunaatx.com/beauty-services">book now</a>
+    </div>
+  </div>
+</section>
+
+<!-- Promotion Section -->
+<section class="promotion">
+  <h2 class="promotion-heading">15% off</h2>
+  <p class="promotion-text">get that summer glow and enjoy 15% off your first service!</p>
+  <div class="promotion-cta">
+    <a href="https://aqualunaatx.com/beauty-services">book today</a>
+  </div>
+</section>
+
+<!-- Service Promotion Cards -->
+<section class="services">
+  <div class="services-inner">
+    <div class="service-promo-container">
+      <div class="service-promo">
+        <h2 class="service-promo-heading">brows on fleek</h2>
+        <p class="service-promo-text">beautiful, natural looking brows</p>
+        <div class="service-promo-cta">
+          <a href="https://aqualunaatx.com/microbladed-brows/">book now</a>
+        </div>
+      </div>
+      <div class="service-promo">
+        <h2 class="service-promo-heading">Lash Lift</h2>
+        <p class="service-promo-text">get darker and fuller natural eyelashes</p>
+        <div class="service-promo-cta">
+          <a href="https://aqualunaatx.com/microbladed-brows/">book now</a>
+        </div>
+      </div>
+    </div>
+    
+    <span class="services-label">our services</span>
+    <div class="services-grid">
+      <div class="service-cell">
+        <div class="service-image-wrapper">
+          <img src="https://aqualunaatx.com/wp-content/uploads/fibroblast-skin-tightening-plasmalift-aqua-luna-spa.png" alt="Fibroblast Skin Tightening">
+        </div>
+        <h3 class="service-name">Microbladed Brows</h3>
+        <p class="service-description">beautiful, natural looking brows</p>
+      </div>
+      <div class="service-cell">
+        <div class="service-image-wrapper">
+          <img src="https://aqualunaatx.com/wp-content/uploads/beauty-skin-tightening-facial-aqua-luna-spa.png" alt="Beauty Skin Tightening Facial">
+        </div>
+        <h3 class="service-name">lash lift</h3>
+        <p class="service-description">get darker and fuller natural eyelashes</p>
+      </div>
+      <div class="service-cell">
+        <div class="service-image-wrapper">
+          <img src="https://aqualunaatx.com/wp-content/uploads/body-treatments-aqua-luna-aesthetics.png" alt="Body Treatments">
+        </div>
+        <h3 class="service-name">fibroblast skin tightening</h3>
+      </div>
+    </div>
+    
+    <ul class="services-compact">
+      <li>clinical facials</li>
+      <li>skincare</li>
+      <li>dmk skin revision</li>
+      <li>body treatments</li>
+      <li>organic facial</li>
+      <li>dermaplaning</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <h2 class="testimonials-heading">client love</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <p class="testimonial-text">"I've never particularly cared for facials in the past – they're *nice*, but nothing I thought worth writing home about. But my experience at Aqua Luna was fantastic, and I'll not only be back – I'll buy some gift certificates for friends as well!"</p>
+        <p class="testimonial-author">- katherine fern</p>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-text">"I got my eyebrows Microbladed by Ashley two weeks ago & I can not be happier with the color & shape of my brows. They are still healing, but I'm very pleased so far. Can not wait for my second session! Thank you Ashley!!!"</p>
+        <p class="testimonial-author">- marina flores via facebook</p>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-text">"Such a relaxing experience at Aqua Luna. Ashley knows her stuff and worked with me to find the best treatments for my skin type. I highly recommend checking out this boutique studio. I got the organic facial as well as dermaplaning at and my skin feels and looks amazing."</p>
+        <p class="testimonial-author">- claire shaug</p>
+      </div>
+    </div>
+    
+    <div class="testimonials-cta">
+      <p>we want to hear from you!</p>
+      <p>leave us a review and get $10 off your next facial!</p>
+      <a href="https://www.yelp.com/biz/aqua-luna-aesthetics-austin">leave a review</a>
+    </div>
+  </div>
+</section>
+
+<!-- Booking Section -->
+<section class="booking">
+  <h2 class="booking-heading">Schedule your next visit</h2>
+  <div class="booking-cta">
+    <a href="https://square.site/book/6415PNMKWEJS8/aqua-luna-aesthetics-llc-austin-tx">book now</a>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <div><a href="https://goo.gl/maps/H1LYBxVL2eB7JVZFA">2700 west anderson lane bldg. 3 ste. 306<br>austin, texas 78757</a></div>
+      <div><a href="tel:5125181876">512-518-1876</a></div>
+      <div><a href="mailto:ashley@aqualunaatx.com">ashley@aqualunaatx.com</a></div>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/aqualunaatx/">instagram</a>
+        <a href="https://www.facebook.com/AquaLunaATX/">facebook</a>
+        <a href="https://twitter.com/aqualunaatx">twitter</a>
+        <a href="https://www.youtube.com/channel/UCxEANp9xeXOPoHcATl9Wq1A">youtube</a>
+      </div>
+    </div>
+    <div class="contact-map">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3443.7123456789!2d-97.7123456!3d30.3123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8644b5123456789%3A0x123456789abcdef!2s2700%20W%20Anderson%20Ln%2C%20Austin%2C%20TX%2078757!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Aqua Luna Aesthetics</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
