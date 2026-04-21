@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hands On Healing Spa & Boutique</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  position: relative;
+  background: url('https://handsonhealingspa.com/wp-content/uploads/2021/10/Logo.jpg') center center / cover;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(244, 240, 234, 0.85);
+  z-index: 1;
+}
+
+.hero > * {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Video Section */
+.video-section {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.video-container {
+  max-width: 800px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  position: relative;
+}
+
+.video-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Philosophy Section */
+.philosophy {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.philosophy-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.philosophy-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.philosophy-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Project Grid */
+.projects {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.projects-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.project-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.project-cell:last-child {
+  border-bottom: none;
+}
+
+.project-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.project-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.project-cell:hover .project-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: var(--space-xs);
+}
+
+.project-number {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.project-name {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.project-description {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-weight: 300;
+  margin-top: var(--space-xs);
+  color: var(--placeholder-gray);
+}
+
+/* Services List */
+.services-list {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.services-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.services-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-md);
+}
+
+.service-item {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  border-bottom: 1px solid var(--placeholder-gray);
+  padding-bottom: var(--space-xs);
+}
+
+/* Mission Section */
+.mission {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.mission-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.mission-heading {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.mission-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+/* Promise Section */
+.promise {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+  text-align: center;
+}
+
+.promise-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.promise-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-md);
+}
+
+.promise-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  line-height: 1.55;
+  font-style: italic;
+}
+
+/* Testimonials Section */
+.testimonials {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.testimonials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonials-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.testimonial-item {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.testimonial-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+  font-style: italic;
+}
+
+.testimonial-author {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+/* Gallery Grid */
+.gallery {
+  padding: var(--space-lg) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.gallery-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-sm);
+}
+
+.gallery-item {
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid var(--border-black);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(30%);
+  transition: filter 0.5s ease;
+}
+
+.gallery-item:hover img {
+  filter: grayscale(0%);
+}
+
+/* Contact Section */
+.contact {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-md);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-item {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.contact-item a {
+  transition: opacity 0.3s ease;
+}
+
+.contact-item a:hover {
+  opacity: 0.7;
+}
+
+/* Hours Section */
+.hours {
+  padding: var(--space-lg) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.hours-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.hours-section {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.hours-title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.2rem;
+  margin-bottom: var(--space-sm);
+}
+
+.hours-list {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1.8;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+  
+  .nav-links {
+    gap: var(--space-sm);
+  }
+  
+  .nav-links a {
+    font-size: 0.6rem;
+  }
+  
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+  }
+  
+  .hero-headline {
+    font-size: 2rem;
+  }
+  
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .philosophy-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .mission-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .project-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .project-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .project-cell:nth-child(1),
+  .project-cell:nth-child(2) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .hours-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .philosophy {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .projects {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .contact {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Hands On Healing Spa & Boutique</a>
+  <ul class="nav-links">
+    <li><a href="https://handsonhealingspa.com/">Home</a></li>
+    <li><a href="https://handsonhealingspa.com/membership-2/">Membership</a></li>
+    <li><a href="https://handsonhealingspa.com/packages/">Packages | Specials</a></li>
+    <li><a href="https://handsonhealingspa.com/services/">Services</a></li>
+    <li><a href="https://handsonhealingspa.com/contact/">Contact Us</a></li>
+    <li><a href="https://handsonhealingspa.com/shop/">SHOP</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <h1 class="hero-headline">Help our clients to<br>love the way they look!</h1>
+  <p class="hero-subtitle">We are nice, knowleadgeable and clean! We offer high quality services and products!</p>
+</section>
+
+<!-- Video Section -->
+<section class="video-section">
+  <div class="video-container">
+    <iframe src="https://www.youtube.com/embed/Y-php15Ftsw" allowfullscreen></iframe>
+  </div>
+</section>
+
+<!-- Philosophy Section -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">Med Spa & Boutique</span>
+    <div class="philosophy-text">
+      <p>You deserve to feel your best, and Hands On Healing is here to help. Our locally owned and operated Med Spa and Boutique offers a wide variety of services and products to meet your Health and Beauty needs.</p>
+      <p>Are you ready to look and feel younger, increase your energy, improve your skin, and get rid of unwanted hair? Let us guide you on your journey to self-care. Our Laser Med Spa Services, Injectables, Facials, Acne Treatments, Peels, Body Sculpting Services, and Skincare products can help you achieve your goals.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Services -->
+<section class="projects" id="featured-services">
+  <div class="projects-grid">
+    <div class="project-cell">
+      <div class="project-image-wrapper">
+        <img src="https://handsonhealingspa.com/wp-content/uploads/elementor/thumbs/Microcurrent-pg4axyw8crcblp9afkwptgd5crbc83hmqtcm3ynfqo.jpg" alt="Microcurrent treatment">
+      </div>
+      <div class="project-meta">
+        <span class="project-number">001</span>
+        <span class="project-name">Microcurrent</span>
+      </div>
+      <p class="project-description">Facial Lift and Body Sculpt.</p>
+    </div>
+    <div class="project-cell">
+      <div class="project-image-wrapper">
+        <img src="https://handsonhealingspa.com/wp-content/uploads/elementor/thumbs/Laser-Hair-removal-body-sculpt-pg4axd9xzkiq6o4oxtkaq3tjow9wb23szucg2ljhps.jpg" alt="Laser hair removal">
+      </div>
+      <div class="project-meta">
+        <span class="project-number">002</span>
+        <span class="project-name">Laser</span>
+      </div>
+      <p class="project-description">Say goodbye to unwanted hair!</p>
+    </div>
+    <div class="project-cell">
+      <div class="project-image-wrapper">
+        <img src="https://handsonhealingspa.com/wp-content/uploads/elementor/thumbs/IPL-pgw4vjqb6hvjtq6kfcrn5x6y3yya9i7tinke63xdgw.png" alt="IPL treatment">
+      </div>
+      <div class="project-meta">
+        <span class="project-number">003</span>
+        <span class="project-name">IPLs</span>
+      </div>
+      <p class="project-description">Photofacial to treat age spots, sun damage, freckles and rosacea.</p>
+    </div>
+    <div class="project-cell">
+      <div class="project-image-wrapper">
+        <img src="https://handsonhealingspa.com/wp-content/uploads/elementor/thumbs/sublative-pgw4w4ercunux5cj2lpforz36g4cyuhwxhx2q72po0.png" alt="Sublative treatment">
+      </div>
+      <div class="project-meta">
+        <span class="project-number">004</span>
+        <span class="project-name">Sublative</span>
+      </div>
+      <p class="project-description">Facial Rejuvenation to treat fine lines and wrinkles, acne scars, and tighten skin.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Services List -->
+<section class="services-list" id="services">
+  <div class="services-inner">
+    <h2 class="services-heading">Our Services</h2>
+    <div class="services-grid">
+      <div class="service-item">[Policies & Procedures](https://handsonhealingspa.com/policy-and-procedures/)</div>
+      <div class="service-item">[Online Boutique](https://handsonhealingstore.com/ "Opens in a new window")</div>
+      <div class="service-item">[Shop Alastin Skincare](http://www.alastin.com/handsonhealing "Opens in a new window")</div>
+      <div class="service-item">[Services](https://handsonhealingspa.com/services/)</div>
+      <div class="service-item">[POST CARE](https://handsonhealingspa.com/post-care/)</div>
+      <div class="service-item">[Chemical Peels](https://handsonhealingspa.com/med-spa/peels/)</div>
+      <div class="service-item">[Laser Treatments](https://handsonhealingspa.com/#)</div>
+      <div class="service-item">[Laser Hair Removal](https://handsonhealingspa.com/laser-hair-removal/)</div>
+      <div class="service-item">[IPL and Laser Genesis](https://handsonhealingspa.com/med-spa/ipl-laser-genesis/)</div>
+      <div class="service-item">[Facial Studio](https://handsonhealingspa.com/facial/)</div>
+      <div class="service-item">[Microcurrent](https://handsonhealingspa.com/microcurrent/)</div>
+      <div class="service-item">[Acne Treatment](https://handsonhealingspa.com/acne-treatment/)</div>
+      <div class="service-item">[LED Light Therapy](https://handsonhealingspa.com/led-light-therapy/)</div>
+      <div class="service-item">[Body Treatment Services](https://handsonhealingspa.com/body-treatment-services/)</div>
+      <div class="service-item">[Weight Loss](https://handsonhealingspa.com/weight-loss/)</div>
+      <div class="service-item">[Med Spa](https://handsonhealingspa.com/med-spa/)</div>
+      <div class="service-item">[Microneedling](https://handsonhealingspa.com/microneedling/)</div>
+      <div class="service-item">[Skin Irregularities Treatment](https://handsonhealingspa.com/skin-irregularities-treatment/)</div>
+      <div class="service-item">[Skin & Facial Rejuvenation](https://handsonhealingspa.com/facial-rejuvenation/)</div>
+      <div class="service-item">[Fillers & Injectables](https://handsonhealingspa.com/filler-and-injector-boutique/)</div>
+      <div class="service-item">[Sculptra](https://handsonhealingspa.com/med-spa/sculptra/)</div>
+      <div class="service-item">[Massage Therapy](https://handsonhealingspa.com/massage-therapy/)</div>
+      <div class="service-item">[Upgrade Your Service](https://handsonhealingspa.com/facial/upgrades/)</div>
+      <div class="service-item">[Waxing Studio](https://handsonhealingspa.com/waxing-studio/)</div>
+      <div class="service-item">[Brows, Lashes & Bright Eyes](https://handsonhealingspa.com/brows-lashes-bright-eyes/)</div>
+      <div class="service-item">[Semi-Permanent Make-Up](https://handsonhealingspa.com/?page_id=1011)</div>
+      <div class="service-item">[Blog](https://handsonhealingspa.com/#)</div>
+      <div class="service-item">[Let's Talk About Collagen](https://handsonhealingspa.com/lets-talk-about-collagen/)</div>
+      <div class="service-item">[Did someone say serum?](https://handsonhealingspa.com/did-someone-say-serum/)</div>
+      <div class="service-item">[It's My First Massage!](https://handsonhealingspa.com/its-my-first-massage/)</div>
+      <div class="service-item">[9 Tips to Younger Looking Skin](https://handsonhealingspa.com/9-tips-to-younger-looking-skin/)</div>
+      <div class="service-item">[What's New in 2022](https://handsonhealingspa.com/whats-new-in-2022/)</div>
+    </div>
+  </div>
+</section>
+
+<!-- Our Brand Section -->
+<section class="philosophy">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">Our Brand</span>
+    <div class="philosophy-text">
+      <p>Hands On Healing blends the art of touch with the science of advanced aesthetic treatments. We are dedicated to providing a holistic approach to beauty and wellness by combining our expertise in traditional healing therapies with innovative technologies like Botox, Dermal fillers, microneedling, Bodicurrent, and Lasers. Our goal is to enhance natural beauty, restore confidence, and promote overall well-being, ensuring our clients feel rejuvenated from the inside out. Unveil a new you, radiating confidence and embracing the beauty that lies within. Discover the art of healing reimagined.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Our Mission Section -->
+<section class="mission">
+  <div class="mission-inner">
+    <span class="mission-heading">Our Mission</span>
+    <div class="mission-text">
+      <p>Our mission is to restore balance to clients' lives through the power of our professional touch, advice, and care. We strive to make every session amazing and customized to the individual needs of the clients. It is the mission of this spa to provide a workplace where service providers and staff are valued and respected and where clients can come and be treated with dignity, kindness, and discreteness.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Our Promise Section -->
+<section class="promise">
+  <div class="promise-inner">
+    <h2 class="promise-heading">OUR BIG PROMISE</h2>
+    <p class="promise-text">"Help our clients to love the way they look! We are nice, knowleadgeable and clean! We offer high quality services and products! "</p>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <h2 class="testimonials-heading">What Our Clients Say</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-item">
+        <p class="testimonial-text">"Opens in a new window..."</p>
+        <p class="testimonial-author">— Reviewer 1</p>
+      </div>
+      <div class="testimonial-item">
+        <p class="testimonial-text">"Opens in a new window..."</p>
+        <p class="testimonial-author">— Reviewer 2</p>
+      </div>
+      <div class="testimonial-item">
+        <p class="testimonial-text">"Opens in a new window..."</p>
+        <p class="testimonial-author">— ViHoFA</p>
+      </div>
+      <div class="testimonial-item">
+        <p class="testimonial-text">"Opens in a new window..."</p>
+        <p class="testimonial-author">— Reviewer 4</p>
+      </div>
+      <div class="testimonial-item">
+        <p class="testimonial-text">"Help our clients to love the way they look! We are nice, knowleadgeable and clean! We offer high qua..."</p>
+        <p class="testimonial-author">— Reviewer 5</p>
+      </div>
+      <div class="testimonial-item">
+        <p class="testimonial-text">"Opens in a new window..."</p>
+        <p class="testimonial-author">— Reviewer 6</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section class="gallery">
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="https://handsonhealingspa.com/wp-content/uploads/2026/02/IMG_9302-768x512.jpg" alt="Customer Service">
+    </div>
+    <div class="gallery-item">
+      <img src="https://handsonhealingspa.com/wp-content/uploads/2026/02/IMG_9319-768x512.jpg" alt="Skincare Boutique">
+    </div>
+    <div class="gallery-item">
+      <img src="https://handsonhealingspa.com/wp-content/uploads/2026/02/IMG_9344-768x512.jpg" alt="Botox">
+    </div>
+    <div class="gallery-item">
+      <img src="https://handsonhealingspa.com/wp-content/uploads/2023/10/1-768x768.png" alt="Spa Boutique">
+    </div>
+    <div class="gallery-item">
+      <img src="https://handsonhealingspa.com/wp-content/uploads/2023/10/3-768x768.png" alt="Collagen Alastin Facial">
+    </div>
+    <div class="gallery-item">
+      <img src="https://handsonhealingspa.com/wp-content/uploads/2023/10/4-768x768.png" alt="Butterfly Room">
+    </div>
+    <div class="gallery-item">
+      <img src="https://handsonhealingspa.com/wp-content/uploads/2023/10/5-768x768.png" alt="Lobby">
+    </div>
+    <div class="gallery-item">
+      <img src="https://handsonhealingspa.com/wp-content/uploads/2023/10/15-768x768.png" alt="LED">
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-heading">Visit Our<br>Med Spa &<br>Boutique</h2>
+    <div class="contact-info">
+      <div class="contact-item">
+        <a href="tel:512-796-6399">512-796-6399</a>
+      </div>
+      <div class="contact-item">
+        <a href="mailto:info@handsonhealingspa.com">info@handsonhealingspa.com</a>
+      </div>
+      <div class="contact-item">
+        147 Elmhurst Ste 600,<br>Kyle, Texas 78640
+      </div>
+      <div class="contact-item">
+        <a href="https://www.facebook.com/handsonhealing.tx">Facebook</a> /
+        <a href="https://www.instagram.com/handsonhealingspa/">Instagram</a> /
+        <a href="https://www.youtube.com/channel/UCTYbzTomzheVx92q-ViHoFA">YouTube</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Hours Section -->
+<section class="hours">
+  <div class="hours-inner">
+    <div class="hours-section">
+      <h3 class="hours-title">Lobby & Boutique Open</h3>
+      <div class="hours-list">
+        Monday- Friday 9am-6:00pm<br>
+        Saturday 9am-2pm<br>
+        Sunday Closed<br><br>
+        (Please check Facebook for daily updates on our hours)
+      </div>
+    </div>
+    <div class="hours-section">
+      <h3 class="hours-title">Service Hours</h3>
+      <div class="hours-list">
+        Monday-Friday 9am-7:00pm<br>
+        Saturday 9am-2:00pm<br>
+        Sunday Closed
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Hands On Healing Spa & Boutique</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
