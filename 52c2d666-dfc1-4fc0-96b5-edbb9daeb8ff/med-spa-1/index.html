@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exclusive Massage & Spa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://images.squarespace-cdn.com/content/v1/671eba17d87f8b70f986cfaf/1738699574297-9S82PLN40FGVY0WV0DA0/unsplash-image-cEmvoXALGQQ.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  margin-bottom: var(--space-md);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 1.2s forwards;
+}
+
+.hero-button {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.hero-button:hover {
+  background-color: white;
+  color: var(--text-black);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Services Section */
+.services {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.services-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.services-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.services-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.service-card {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.service-name {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.service-description {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Gift Cards Section */
+.giftcards {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.giftcards-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.giftcards-heading {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-md);
+}
+
+.giftcards-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.6;
+  margin-bottom: var(--space-lg);
+}
+
+.giftcards-button {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.giftcards-button:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Find Businesses Section */
+.businesses {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.businesses-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.businesses-heading {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-md);
+}
+
+.businesses-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.6;
+  margin-bottom: var(--space-lg);
+}
+
+.businesses-button {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.businesses-button:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Company Section */
+.company {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.company-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.company-heading {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-md);
+}
+
+.company-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+  text-align: left;
+}
+
+.company-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.company-links a {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: var(--text-black);
+  text-decoration: underline;
+  transition: text-decoration 0.3s ease;
+}
+
+.company-links a:hover {
+  text-decoration: none;
+}
+
+/* Resources Section */
+.resources {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.resources-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.resources-heading {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-md);
+}
+
+.resources-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+  text-align: left;
+}
+
+.resources-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.resources-links a {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: var(--text-black);
+  text-decoration: underline;
+  transition: text-decoration 0.3s ease;
+}
+
+.resources-links a:hover {
+  text-decoration: none;
+}
+
+/* Spa'rty Section */
+.sparty {
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://images.squarespace-cdn.com/content/v1/671eba17d87f8b70f986cfaf/1740083072685-CO7CB1COM8RC2B9C0JMJ/unsplash-image-cEmvoXALGQQ.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.sparty::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(244, 240, 234, 0.9);
+}
+
+.sparty-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.sparty-heading {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-md);
+}
+
+.sparty-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.6;
+  margin-bottom: var(--space-lg);
+}
+
+.sparty-button {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.sparty-button:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Locations Section */
+.locations {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.locations-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.locations-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.locations-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+
+.location-card {
+  text-align: center;
+}
+
+.location-name {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.location-address {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+}
+
+.location-button {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.location-button:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+.location-map {
+  margin-top: var(--space-md);
+}
+
+/* Social Section */
+.social {
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://images.squarespace-cdn.com/content/v1/671eba17d87f8b70f986cfaf/1740083178386-PVVSSMPDW8ZT1A02YNZR/unsplash-image-cEmvoXALGQQ.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  text-align: center;
+}
+
+.social::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.social-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.social-heading {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+  color: white;
+}
+
+.social-links {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.social-link {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.social-link:hover {
+  background-color: white;
+  color: var(--text-black);
+}
+
+/* Payment Section */
+.payment {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.payment-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.payment-heading {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-sm);
+}
+
+.payment-subheading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-md);
+}
+
+.payment-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.6;
+  margin-bottom: var(--space-lg);
+}
+
+.payment-logos {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.payment-logo {
+  max-width: 120px;
+  height: auto;
+}
+
+/* Contact Section */
+.contact {
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://images.squarespace-cdn.com/content/v1/671eba17d87f8b70f986cfaf/1738871977972-G1016QBZWBQ1OM8I16GO/unsplash-image-cEmvoXALGQQ.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.contact::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(244, 240, 234, 0.9);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.contact-section h3 {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.contact-section p {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: var(--space-xs);
+}
+
+.contact-section a {
+  color: var(--text-black);
+  text-decoration: underline;
+}
+
+.contact-section a:hover {
+  text-decoration: none;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1rem;
+  }
+
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-sm);
+  }
+
+  .nav-links a {
+    font-size: 0.6rem;
+  }
+
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .services,
+  .sparty,
+  .locations,
+  .social,
+  .payment,
+  .contact,
+  .giftcards,
+  .businesses,
+  .company,
+  .resources {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .social-links {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .payment-logos {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .services-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .company-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .resources-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .locations-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .contact-info {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .services {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .sparty {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .locations {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .social {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .payment {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .contact {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .giftcards {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .businesses {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .company {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .resources {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+
+  .contact-info {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Exclusive Massage & Spa</a>
+  <ul class="nav-links">
+    <li><a href="https://exclusivemassageandspas.com/">home</a></li>
+    <li><a href="https://exclusivemassageandspas.com/spa-services">spa services</a></li>
+    <li><a href="https://exclusivemassageandspas.com/memberships">memberships</a></li>
+    <li><a href="https://exclusivemassageandspas.com/contact">contact</a></li>
+    <li><a href="https://exclusivemassageandspas.com/contact-1">about</a></li>
+    <li><a href="https://exclusivemassageandspas.com/careers">careers</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">Your Exclusive Massage<br>Spa Destination</h1>
+    <p class="hero-subtitle">An Exclusive Massage Spa dedicated to meeting all your relaxation and wellness needs. Experience the perfect blend of luxury and tranquility.</p>
+    <div class="hero-buttons">
+      <a href="https://www.vagaro.com/exclusivemassageandspas" class="hero-button">book now round rock</a>
+      <a href="https://www.vagaro.com/exclusivemassageandspageorgetown" class="hero-button">book now georgetown</a>
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="services" id="services">
+  <div class="services-inner">
+    <span class="services-label">002 — our services</span>
+    <div class="services-text">
+      <p>We offer exceptional massage and spa services designed to restore your well-being and provide a sanctuary from the demands of daily life. Our expert therapists create personalized experiences that address your unique needs for relaxation, healing, and rejuvenation.</p>
+    </div>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <h3 class="service-name">Massage Services</h3>
+      <p class="service-description">Therapeutic massage services available with HSA, FSA, and CareCredit payment options</p>
+    </div>
+    <div class="service-card">
+      <h3 class="service-name">Spa'rty Packages</h3>
+      <p class="service-description">Group spa experiences for birthdays, bridal showers, or special occasions</p>
+    </div>
+  </div>
+</section>
+
+<!-- Gift Cards Section -->
+<section class="giftcards">
+  <div class="giftcards-inner">
+    <h2 class="giftcards-heading">Purchase Gift Cards</h2>
+    <p class="giftcards-text">Give the gift of relaxation and wellness with Exclusive Massage & Spa gift cards. Perfect for any occasion, our gift cards allow your loved ones to experience our premium spa services at their convenience.</p>
+    <a href="https://exclusivemassageandspas.com/giftcards" class="giftcards-button">purchase a gift card online now</a>
+  </div>
+</section>
+
+<!-- Find Businesses Section -->
+<section class="businesses">
+  <div class="businesses-inner">
+    <h2 class="businesses-heading">Find Businesses</h2>
+    <p class="businesses-text">Discover exceptional spa and wellness businesses in your area. Connect with professionals who share our commitment to providing outstanding massage and spa experiences.</p>
+    <a href="https://exclusivemassageandspas.com/directory" class="businesses-button">find businesses near you</a>
+  </div>
+</section>
+
+<!-- Company Section -->
+<section class="company">
+  <div class="company-inner">
+    <h2 class="company-heading">Company</h2>
+    <div class="company-grid">
+      <div class="company-links">
+        <a href="https://www.vagaro.com/pro/about-us">About Us</a>
+        <a href="https://www.vagaro.com/pro/careers">Careers</a>
+        <a href="https://www.vagaro.com/pro/contact">Contact Us</a>
+        <a href="https://www.vagaro.com/pro/vagaro-cares">Vagaro Cares</a>
+      </div>
+      <div class="company-links">
+        <a href="https://www.vagaro.com/pro/updates">Updates</a>
+        <a href="https://www.vagaro.com/pro/partners">Partnerships</a>
+        <a href="https://www.vagaro.com/pro/mysite-updates">MySite Updates</a>
+        <a href="https://mysite.vagaro.com/iconic25">iconic.25</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Resources Section -->
+<section class="resources">
+  <div class="resources-inner">
+    <h2 class="resources-heading">Resources</h2>
+    <div class="resources-grid">
+      <div class="resources-links">
+        <a href="https://status.vagaro.com/">Status</a>
+        <a href="https://support.vagaro.com/">Support</a>
+        <a href="https://www.vagaro.com/learn">Blog</a>
+      </div>
+      <div class="resources-links">
+        <a href="https://www.vagaro.com/news">Newsroom</a>
+        <a href="https://www.vagaro.com/pro/compare">Compare Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Spa'rty Section -->
+<section class="sparty">
+  <div class="sparty-inner">
+    <h2 class="sparty-heading">Host Your Next Spa'rty at Exclusive Massage & Spa!</h2>
+    <p class="sparty-text">Gather your friends, family, or coworkers for a one-of-a-kind relaxation experience with a Spa'rty at Exclusive Massage & Spa. Whether you're celebrating a birthday, bridal shower, girls' day out, or just need an excuse to unwind, our Spa'rty packages offer the perfect way to enjoy massages, relaxation, and quality time together. Let us handle the details while you and your guests indulge in self-care and serenity.</p>
+    <a href="https://exclusivemassageandspas.com/contact" class="sparty-button">book your spa'rty today</a>
+  </div>
+</section>
+
+<!-- Locations Section -->
+<section class="locations">
+  <div class="locations-inner">
+    <h2 class="locations-heading">Come<br>See<br>Us!</h2>
+    <div class="locations-grid">
+      <div class="location-card">
+        <h3 class="location-name">Round Rock Location</h3>
+        <p class="location-address">2631 Gattis School Rd Suite 110, Round Rock, TX 78664</p>
+        <a href="https://maps.app.goo.gl/bCL9Z29rVabQQV9J7" class="location-button">get directions</a>
+      </div>
+      <div class="location-card">
+        <h3 class="location-name">Georgetown Location</h3>
+        <p class="location-address">2029 Kauffman Lp Suite 430, Georgetown, TX 78628</p>
+        <a href="https://www.google.com/maps/place/2029+Kauffman+Lp+%23430,+Georgetown,+TX+78628/@30.6386528,-97.8177207,16z/data=!3m1!4b1!4m5!3m4!1s0x865b2a92a9f83421:0x318f4bc87ea2da37!8m2!3d30.6386528!4d-97.8177207?entry=ttu&g_ep=EgoyMDI1MTExMi4wIKXMDSoASAFQAw%3D%3D" class="location-button">get directions</a>
+        <div class="location-map">
+          <iframe src="https://www.google.com/maps/place/2029+Kauffman+Lp+%23430,+Georgetown,+TX+78628/@30.6386528,-97.8177207,16z/data=!3m1!4b1!4m5!3m4!1s0x865b2a92a9f83421:0x318f4bc87ea2da37!8m2!3d30.6386528!4d-97.8177207?entry=ttu&g_ep=EgoyMDI1MTExMi4wIKXMDSoASAFQAw%3D%3D" width="100%" height="300" style="border:0" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Social Section -->
+<section class="social">
+  <div class="social-inner">
+    <h2 class="social-heading">Check Out Our Socials!</h2>
+    <div class="social-links">
+      <a href="https://www.google.com/search?q=elevations+massage&oq=elevations+massage&gs_lcrp=EgZjaHJvbWUqDwgAECMYJxjjAhiABBiKBTIPCAAQIxgnGOMCGIAEGIoFMhUIARAuGCcYrwEYxwEYgAQYigUYjgUyBwgCEAAYgAQyDQgDEC4YrwEYxwEYgAQyBwgEEAAYgAQyBggFEEUYPDIGCAYQRRg8MgYIBxBFGD3SAQgzMjQ5ajBqN6gCALACAA&sourceid=chrome&ie=UTF-8#lrd=0x8644d1d69070ca61:0x68533cafda2622a4,1,,,," class="social-link">check out our reviews</a>
+      <a href="https://www.instagram.com/vagaropro/" class="social-link">instagram</a>
+      <a href="https://www.facebook.com/vagaropro" class="social-link">facebook</a>
+      <a href="https://x.com/Vagaro" class="social-link">twitter</a>
+      <a href="https://www.pinterest.com/VagaroPins/" class="social-link">pinterest</a>
+      <a href="https://www.youtube.com/user/VagaroSupport" class="social-link">youtube</a>
+    </div>
+  </div>
+</section>
+
+<!-- Payment Section -->
+<section class="payment">
+  <div class="payment-inner">
+    <h2 class="payment-heading">Flexible Payment Options:</h2>
+    <h3 class="payment-subheading">We Accept HSA, FSA, and CareCredit</h3>
+    <p class="payment-text">At Exclusive Massage & Spa, we believe that wellness is essential, not just a luxury. That's why we accept HSA (Health Savings Account), FSA (Flexible Spending Account), and CareCredit as payment options for our therapeutic massage services. Investing in your health has never been easier—use your pre-tax dollars or healthcare financing to prioritize stress relief, pain management, and overall well-being.</p>
+    <div class="payment-logos">
+      <img src="https://images.squarespace-cdn.com/content/v1/671eba17d87f8b70f986cfaf/83a0fbfe-9f72-4109-9995-068c3a6a0ac2/HSA-1.png" alt="HSA" class="payment-logo">
+      <img src="https://images.squarespace-cdn.com/content/v1/671eba17d87f8b70f986cfaf/251fb102-5764-4040-95a8-198b8d283677/fsa.png" alt="FSA" class="payment-logo">
+      <img src="https://images.squarespace-cdn.com/content/v1/671eba17d87f8b70f986cfaf/5d5d05bb-f24e-4d09-b496-eb82fa415600/carecredit-logo-vector.png" alt="CareCredit" class="payment-logo">
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <div class="contact-section">
+        <h3>Locations:</h3>
+        <p><strong>Round Rock</strong><br>2631 Gattis School Rd Suite 110, Round Rock, TX 78664</p>
+        <p><strong>Georgetown</strong><br>2029 Kauffman Lp Suite 430, Georgetown, TX 78628</p>
+      </div>
+      <div class="contact-section">
+        <h3>Hours</h3>
+        <p>Monday - Friday: 9:00 am to 9:00pm</p>
+        <p>Saturday: 9:00 am to 7:00pm</p>
+        <p>Sunday: 11:00am to 7:00pm</p>
+      </div>
+      <div class="contact-section">
+        <h3>Contact</h3>
+        <p><a href="tel:5129870194">(512) 987-0194</a></p>
+      </div>
+      <div class="contact-section">
+        <h3>Cancelation policy :</h3>
+        <p>A valid credit card is necessary to confirm all reservations. In order to prevent a full service charge, kindly give a minimum of 48-hour notice for any cancellations or rescheduling.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Exclusive Massage & Spa</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
