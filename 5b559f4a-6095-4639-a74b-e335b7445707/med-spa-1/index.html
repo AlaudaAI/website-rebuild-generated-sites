@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joslin Medical Spa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://f982afab4601f6a6f6bf-18fd2ffde9251b82dd66bb3205a3996d.ssl.cf2.rackcdn.com/Websitebuilder/20250212201058.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(244, 240, 234, 0.8);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Welcome Section */
+.welcome {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+  text-align: center;
+  background-color: var(--bg-cream);
+}
+
+.welcome-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.welcome-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.welcome-logo {
+  max-width: 200px;
+  margin: 0 auto var(--space-lg);
+}
+
+.welcome-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* About Section */
+.about {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.about-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.about-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.about-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.about-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.service-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.service-cell:last-child {
+  border-bottom: none;
+}
+
+.service-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.service-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.service-cell:hover .service-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+.service-name {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-bottom: var(--space-xs);
+}
+
+.service-description {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1.6;
+  color: var(--placeholder-gray);
+}
+
+/* Stats Section */
+.stats {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.stats-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.stat-item {
+  margin-bottom: var(--space-md);
+}
+
+.stat-value {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 300;
+  line-height: 1;
+  margin-bottom: var(--space-xs);
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* Contact Section */
+.contact {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-item {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+.contact-phone,
+.contact-email {
+  color: var(--text-black);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.contact-phone:hover,
+.contact-email:hover {
+  text-decoration-color: var(--placeholder-gray);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .about-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .service-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(3n) {
+    border-right: none;
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .about {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .contact {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .nav-links {
+    display: none;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Joslin Medical Spa</a>
+  <ul class="nav-links">
+    <li><a href="https://joslinmedicalspa.com/about-us">about us</a></li>
+    <li><a href="https://joslinmedicalspa.com/reviews">reviews</a></li>
+    <li><a href="https://joslinmedicalspa.com/gallery">gallery</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">Good Skin, Good People,<br>& Natural Results</h1>
+    <p class="hero-subtitle">Georgetown TX's Favorite Boutique Medical Spa — we offer a range of aesthetic services curated by experienced industry professionals</p>
+  </div>
+</section>
+
+<!-- Welcome Section -->
+<section class="welcome">
+  <div class="welcome-inner">
+    <h2 class="welcome-headline">WELCOME TO</h2>
+    <div class="welcome-logo">
+      <img src="https://f982afab4601f6a6f6bf-18fd2ffde9251b82dd66bb3205a3996d.ssl.cf2.rackcdn.com/Websitebuilder/20250212201307.png" alt="unnamed image">
+    </div>
+    <div class="welcome-text">
+      <p><strong>Georgetown TX's Favorite Boutique Medical Spa</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <span class="about-label">002 — about</span>
+    <div class="about-text">
+      <p>Joslin Medical Spa offers a range of aesthetic services curated by experienced industry professionals. With 80+ years of combined aesthetic experience, our passion is customizing treatments to your unique skin and anatomy. We pride ourselves on the ability to refine our patients' skin and achieve natural injectable outcomes. Experience what makes Joslin Medical Spa the premier medical spa destination in Georgetown.</p>
+      <p>From neuromodulators like BOTOX ® to dermal fillers, laser skin resurfacing, and RF microneedling, our aesthetic services target fine lines, restore volume, and improve skin texture. Each treatment is tailored to your individual needs to ensure the best results. Additionally, we offer photofacials, SkinPen® microneedling, chemical peels, Sculptra®, and MotusAZ ® for pain-free skin improvements. All of these aesthetic treatments work harmoniously with our wellness services to promote overall vitality and well-being, ensuring you look and feel your best.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="services" id="services">
+  <div class="services-label">003 — our medspa services</div>
+  <div class="services-grid">
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.unsplash.com/photo-1525304937537-4d586f394674?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NjIzNDR8MHwxfHNlYXJjaHwxM3x8YmVhdXR5fGVufDB8fHx8MTc0MTcyNDI2MXww&ixlib=rb-4.0.3&q=80&w=1080" alt="youthful wrinkle free skin with botox and dysport and neuromodulators at Joslin Medical Spa">
+      </div>
+      <div class="service-name">Neuromodulators</div>
+      <div class="service-description">Neuromodulators relax your muscles to reduce wrinkles, fine lines, and crows feet. It blocks the signals to the nerves and muscles...</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://f982afab4601f6a6f6bf-18fd2ffde9251b82dd66bb3205a3996d.ssl.cf2.rackcdn.com/Websitebuilder/20250311214203.jpg" alt="patients recieve facial balancing for all ages using filler at Joslin Medical Spa">
+      </div>
+      <div class="service-name">Dermal Fillers</div>
+      <div class="service-description">Dermal Fillers are made from hyaluronic acid and typically last 12-24 months depending on filler type and treatment area...</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://f982afab4601f6a6f6bf-18fd2ffde9251b82dd66bb3205a3996d.ssl.cf2.rackcdn.com/Websitebuilder/20250311213402.jpg" alt="person removed fine lines and wrinkles with Secret F microneedling offered at Joslin Medical Spa">
+      </div>
+      <div class="service-name">RF Microneedling</div>
+      <div class="service-description">Secret RF Microneedling is indicated for fine lines, wrinkles. scars, skin laxity (sagging), stretch marks, and overall rejuvenation...</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">What Makes Us the Best Med Spa in Texas:</div>
+      <div class="service-description">01. High-quality, FDA-approved injectables and treatments</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Why Choose Joslin Medical Aesthetics in Georgetown, TX?</div>
+      <div class="service-description">Joslin Medical Spa is your go-to destination for high-quality, customized aesthetic care. We focus on highlighting your natural features to create a polished look that complements you perfectly. Our expert team uses the latest non-surgical techniques to ensure beautiful, natural-looking results. Whether you're refreshing your look or addressing specific concerns, every treatment is personalized to your needs, boosting your confidence and radiance.</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">What Makes Us the Best Med Spa in Georgetown, Texas:</div>
+      <div class="service-description">**Consultation** – Meet with one of our expert practitioners to discuss your goals and concerns.</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">SkinBetter™, SkinMedica®, & Hydrinity™</div>
+      <div class="service-description">We offer top-tier skincare solutions with products from SkinBetter™, SkinMedica®, Hydrinity™, SkinCeuticals, Colorscience, Revision and Elta MD. SkinBetter's advanced formulas target aging and skin health, while SkinMedica's treatments rejuvenate and restore. Hydrinity provides hydration-focused skincare products that nourish and protect your skin. These premium brands are carefully selected to complement our aesthetic treatments, ensuring optimal results and glowing, healthy skin.</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Ready to Reveal Your Best Self?</div>
+      <div class="service-description">Imagine looking in the mirror and seeing a refreshed, more youthful version of yourself—confident, glowing, and truly you. At Joslin Medical Spa, we're here to make that vision a reality. Our experts are here to guide you with personalized aesthetic treatments that highlight your natural beauty and boost your confidence. Start your journey to a more radiant, youthful you—schedule your consultation today and unlock your true potential.</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Collagen Biostimulators</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Regenerative Aesthetic T</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Kybella</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Diamond Glow Facial</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Laser Skin Revitalization</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Laser Hair / Vein Removal</div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-value">80+</div>
+      <div class="stat-label">years of combined aesthetic experience</div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-heading">Ready to Schedule<br>Your Appointment?</h2>
+    <div class="contact-details">
+      <div class="contact-item">
+        <a href="tel:2025021220" class="contact-phone">202.502.1220</a>
+      </div>
+      <div class="contact-item">
+        100 River Hills Drive, Suite 100, Georgetown, TX 78628
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Joslin Medical Spa</div>
+  <div class="footer-right">
+    <a href="https://www.facebook.com/heatherthebotoxinjector/?_rdr">facebook</a>
+    <a href="https://www.instagram.com/heathertheinjector/">instagram</a>
+    <a href="https://www.tiktok.com/@joslin.medspa">tiktok</a>
+  </div>
+</footer>
+
+</body>
+</html>
