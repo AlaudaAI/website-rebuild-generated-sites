@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Truly Lifted MedSpa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  position: relative;
+  background: url('https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/shutterstock_2042719763-1920w.jpg') center/cover no-repeat;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(26, 26, 26, 0.4);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Philosophy Section */
+.philosophy {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.philosophy-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.philosophy-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.philosophy-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.service-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.service-cell:last-child {
+  border-bottom: none;
+}
+
+.service-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.service-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.service-cell:hover .service-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+.service-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: var(--space-xs);
+}
+
+.service-number {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.service-name {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.service-description {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--placeholder-gray);
+  margin-top: var(--space-xs);
+}
+
+/* Specials Section */
+.specials {
+  padding: var(--space-lg) var(--pad-x);
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+.specials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.specials-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.specials-image {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Team Section */
+.team {
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.team-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.team-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.team-photo {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 50%;
+  filter: grayscale(20%);
+}
+
+.team-name {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+}
+
+.team-role {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--placeholder-gray);
+  text-transform: lowercase;
+}
+
+.team-bio {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Testimonials Section */
+.testimonials {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.testimonials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonials-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.testimonials-stats {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.stat-number {
+  font-family: var(--font-serif);
+  font-size: 4rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-top: var(--space-xs);
+}
+
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.testimonial-card {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.testimonial-text {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+}
+
+.testimonial-author {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+}
+
+/* Contact Section */
+.contact {
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-item {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+}
+
+.contact-item a {
+  transition: opacity 0.3s ease;
+}
+
+.contact-item a:hover {
+  opacity: 0.7;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  .nav-links {
+    gap: var(--space-sm);
+  }
+  
+  .nav-links a {
+    font-size: 0.6rem;
+  }
+  
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+  }
+  
+  .hero-headline {
+    font-size: 2.5rem;
+  }
+  
+  .philosophy-text {
+    font-size: 1.25rem;
+  }
+  
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .service-cell {
+    padding: var(--space-sm);
+  }
+  
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .testimonial-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .philosophy-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .testimonial-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .philosophy {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .team {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .testimonials {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .contact {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+
+  .testimonial-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Truly Lifted MedSpa</a>
+  <ul class="nav-links">
+    <li><a href="https://www.trulyliftedmedspa.com/about">about us</a></li>
+    <li><a href="https://www.trulyliftedmedspa.com/#">services</a></li>
+    <li><a href="https://www.trulyliftedmedspa.com/#">wellness</a></li>
+    <li><a href="https://www.trulyliftedmedspa.com/conditions-we-treat">conditions we treat</a></li>
+    <li><a href="https://www.trulyliftedmedspa.com/#">resources</a></li>
+    <li><a href="https://www.trulyliftedmedspa.com/contact">contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">Truly Lifted MedSpa</h1>
+    <p class="hero-subtitle">Enhancing Skin Health & Beauty With Advanced Treatments</p>
+  </div>
+</section>
+
+<!-- Philosophy Section -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">our mission</span>
+    <div class="philosophy-text">
+      <p>Experience the pinnacle of advanced aesthetic and wellness care at Truly Lifted Medspa. Our expert team is dedicated to elevating your journey, offering a fusion of advanced aesthetics and holistic wellness services. Located in Georgetown, close to the city of Round Rock, TX, our state-of-the-art spa provides a sanctuary where you can indulge in personalized, cutting-edge treatments designed to enhance both your skin health and beauty.</p>
+      <p>With a commitment to excellence and innovation, we tailor each visit to your unique needs, ensuring exceptional results that leave you feeling truly uplifted. Discover the transformative power of our services and embark on a journey to rejuvenation and renewal with Truly Lifted Medspa.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Services Grid -->
+<section class="services" id="services">
+  <div class="services-grid">
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/shutterstock_2330335471-1920w.jpg" alt="Facial treatments">
+      </div>
+      <div class="service-meta">
+        <span class="service-number">001</span>
+        <span class="service-name"><a href="https://www.trulyliftedmedspa.com/facial-treatments">facials</a></span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/8-b6bdc4d0-1920w.jpg" alt="Chemical peels">
+      </div>
+      <div class="service-meta">
+        <span class="service-number">002</span>
+        <span class="service-name"><a href="https://www.trulyliftedmedspa.com/chemical-peels">chemical peels</a></span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/6-4ea7bf7f-1920w.jpg" alt="Microneedling treatments">
+      </div>
+      <div class="service-meta">
+        <span class="service-number">003</span>
+        <span class="service-name"><a href="https://www.trulyliftedmedspa.com/microneedling-treatments">microneedling</a></span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/2-2651c922-1920w.jpg" alt="AnteAGE exosome treatment">
+      </div>
+      <div class="service-meta">
+        <span class="service-number">004</span>
+        <span class="service-name"><a href="https://www.trulyliftedmedspa.com/anteage-exosomes">anteage exosomes</a></span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/9-faace876-1920w.jpg" alt="PRF and EZ Gel treatments">
+      </div>
+      <div class="service-meta">
+        <span class="service-number">005</span>
+        <span class="service-name"><a href="https://www.trulyliftedmedspa.com/anteage-exosomes">prf & ez gel</a></span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/5-b300791b-1920w.jpg" alt="Dermal filler treatments">
+      </div>
+      <div class="service-meta">
+        <span class="service-number">006</span>
+        <span class="service-name"><a href="https://www.trulyliftedmedspa.com/dermal-filler-treatments">dermal filler</a></span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/shutterstock_2165963211-1920w.jpg" alt="Neuromodulator injections">
+      </div>
+      <div class="service-meta">
+        <span class="service-number">007</span>
+        <span class="service-name"><a href="https://www.trulyliftedmedspa.com/neuromodulator-injectables">neuromodulator</a></span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/10-70fdb6ce-1920w.jpg" alt="Bioidentical hormone therapy">
+      </div>
+      <div class="service-meta">
+        <span class="service-number">008</span>
+        <span class="service-name"><a href="https://www.trulyliftedmedspa.com/bioidentical-hormones">bioidentical hormones</a></span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/1-1bed0091-1920w.jpg" alt="Laser skin tightening">
+      </div>
+      <div class="service-meta">
+        <span class="service-number">009</span>
+        <span class="service-name">laser skin tightening</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/4-62252333-1920w.jpg" alt="NAD+ therapy">
+      </div>
+      <div class="service-meta">
+        <span class="service-number">010</span>
+        <span class="service-name">nad+</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/4-62252333-1920w.jpg" alt="Weight loss treatments">
+      </div>
+      <div class="service-meta">
+        <span class="service-number">011</span>
+        <span class="service-name">weight loss</span>
+      </div>
+      <div class="service-description">Medical weight loss treatments including Semaglutide and Tirzepatide</div>
+    </div>
+  </div>
+</section>
+
+<!-- Specials Section -->
+<section class="specials">
+  <div class="specials-inner">
+    <h2 class="specials-heading">Our April Specials!</h2>
+    <div class="specials-image">
+      <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/1-40488ccb-1920w.png" alt="Promotional graphic for February specials: deals on Jeuveau, skin tightening, lip filler, and Skinbetter Science products. Pink floral background.">
+    </div>
+  </div>
+</section>
+
+<!-- Team Section -->
+<section class="team" id="team">
+  <div class="team-inner">
+    <h2 class="team-heading">Meet Our Expert Team</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/Truly-lifted-Tico-Mendoza---6-1920w.jpg" alt="Charisse Lin" class="team-photo">
+        <div class="team-name">Charisse Lin</div>
+        <div class="team-role">Owner and Nurse Practitioner</div>
+        <div class="team-bio">Skilled and knowledgeable injector and treatment provider who takes time to explain procedures and creates personalized treatment plans for clients.</div>
+      </div>
+      <div class="team-member">
+        <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/Truly-lifted-Tico-Mendoza---2-1920w.jpg" alt="Thea" class="team-photo">
+        <div class="team-name">Thea</div>
+        <div class="team-role">Front Desk</div>
+        <div class="team-bio">Welcoming front desk staff member who makes clients feel like family and goes above and beyond to explain procedures and create a comfortable atmosphere.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials" id="testimonials">
+  <div class="testimonials-inner">
+    <h2 class="testimonials-heading">Client Reviews</h2>
+    <div class="testimonials-stats">
+      <div class="stat-number">5</div>
+      <div class="stat-label">star rating</div>
+      <div class="stat-number" style="margin-top: var(--space-md);">74</div>
+      <div class="stat-label">reviews</div>
+    </div>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-text">From the moment you walk in Thea makes you feel Welcomed like family. Cherrise is very skilled and knowledgeable and has a great bedside manor! They also offer specials every month. I would definitely recommend Truly Lifted Med Spa to everyone. Stop by and be treated like royalty.</div>
+        <div class="testimonial-author">Joanna Bullock</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-text">Simply Amazing!!! It's been 4 weeks since my visit to Truly Lifted. My life is crazy busy and chaotic and it was apparent to Charisse that I was in need of her help!!! After substantial weight loss my face and neck needed rejuvenation and that's what they got!</div>
+        <div class="testimonial-author">Karen C.</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-text">Amazing spa with the sweetest people!! I swear it was the most painless Botox I've ever received. Will be a regular customer from now on!!</div>
+        <div class="testimonial-author">Melissa Edwards</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-heading">Unveil Your Best Self with Truly Lifted Medspa</h2>
+    <div class="contact-details">
+      <div class="contact-item">
+        <strong>Phone:</strong> <a href="tel:(512) 763-5149">(512) 763-5149</a>
+      </div>
+      <div class="contact-item">
+        <strong>Email:</strong> <a href="mailto:tlc@trulyliftedmedspa.com">tlc@trulyliftedmedspa.com</a>
+      </div>
+      <div class="contact-item">
+        <strong>Address:</strong> 2951 FM 1460, Unit #204 Georgetown, TX 78626
+      </div>
+      <div class="contact-item">
+        <strong>Hours:</strong><br>
+        Mon - Fri: 9:00 am - 5:00 pm<br>
+        Saturday: 9:00 am - 3:00 pm<br>
+        Sunday: Closed
+      </div>
+      <div class="contact-item">
+        <a href="https://instagram.com/trulyliftedmedspa">Follow us on Instagram</a>
+      </div>
+      <div class="contact-item">
+        <iframe src="https://maps.app.goo.gl/53r5XdkN2uhkjeUd8" width="100%" height="300" style="border:0" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Truly Lifted MedSpa</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
