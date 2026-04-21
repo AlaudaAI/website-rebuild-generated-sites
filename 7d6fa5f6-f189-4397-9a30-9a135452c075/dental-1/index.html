@@ -204,7 +204,7 @@
     transform: translateX(3px);
   }
 
-  /* ===== HERO VISUAL ===== */
+  /* ===== HERO VISUAL (Floating Cards) ===== */
   .hero-visual {
     position: relative;
     width: 100%;
@@ -214,10 +214,165 @@
     justify-content: center;
   }
 
-  .hero-image {
-    max-width: 100%;
+  .float-card {
+    position: absolute;
     border-radius: var(--radius-card);
     box-shadow: var(--shadow-card);
+  }
+
+  /* Purple Insurance Card */
+  .card-insurance {
+    background: var(--accent-lavender-bg);
+    padding: var(--space-lg);
+    width: clamp(200px, 52%, 260px);
+    top: 0;
+    left: 5%;
+    animation: floatA 5s ease-in-out infinite;
+    z-index: 2;
+  }
+
+  .card-insurance-star {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 28px;
+    height: 28px;
+    background: var(--accent-lavender);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+  }
+
+  .card-insurance-label {
+    font-size: 12px;
+    color: var(--text-grey);
+    font-weight: 500;
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .card-insurance-value {
+    font-size: clamp(36px, 4vw, 48px);
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1;
+    margin-bottom: var(--space-xs);
+  }
+
+  .card-insurance-sub {
+    font-size: 13px;
+    color: var(--text-grey);
+  }
+
+  /* White Appointment Card */
+  .card-appointments {
+    background: var(--bg-white);
+    padding: var(--space-lg);
+    width: clamp(220px, 58%, 300px);
+    bottom: 0;
+    right: 2%;
+    animation: floatB 6.5s ease-in-out infinite;
+    z-index: 3;
+  }
+
+  .card-appointments-header {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: var(--space-md);
+  }
+
+  .appointment-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .appointment-item:last-child {
+    border-bottom: none;
+  }
+
+  .appointment-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #e2e2e8;
+    flex-shrink: 0;
+  }
+
+  .appointment-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-dark);
+  }
+
+  .appointment-type {
+    font-size: 11px;
+    color: var(--text-grey);
+  }
+
+  .appointment-price {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dark);
+  }
+
+  /* Status Badge Card */
+  .card-status {
+    background: var(--bg-white);
+    padding: 12px 18px;
+    width: auto;
+    white-space: nowrap;
+    top: 55%;
+    left: 0;
+    animation: floatC 4.5s ease-in-out infinite;
+    z-index: 4;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-small);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--success-green);
+    flex-shrink: 0;
+  }
+
+  .card-status span {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-dark);
+  }
+
+  @keyframes floatA {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+  }
+
+  @keyframes floatB {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes floatC {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
   }
 
   /* ===== ABOUT SECTION ===== */
@@ -226,52 +381,86 @@
     padding: var(--space-3xl) var(--space-lg);
   }
 
-  .about-content {
+  .about-inner {
     max-width: var(--container-max);
     margin: 0 auto;
-    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
   }
 
   .about-content h2 {
     font-size: clamp(28px, 4vw, 44px);
     color: var(--text-dark);
     margin-bottom: var(--space-lg);
+    line-height: 1.2;
   }
 
   .about-content p {
-    font-size: 17px;
+    font-size: 15px;
     color: var(--text-grey);
     line-height: 1.7;
     margin-bottom: var(--space-lg);
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+  }
+
+  .about-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 14px 32px;
+    background-color: var(--accent-orange);
+    color: var(--bg-white);
+    border-radius: var(--radius-pill);
+    font-size: 15px;
+    font-weight: 500;
+    transition: all var(--transition);
+  }
+
+  .about-btn:hover {
+    background-color: var(--accent-orange-dark);
+    transform: translateY(-2px);
+  }
+
+  .about-image {
+    border-radius: var(--radius-card);
+    overflow: hidden;
+  }
+
+  .about-image img {
+    width: 100%;
+    height: auto;
   }
 
   /* ===== VIDEO SECTION ===== */
   .video-section {
+    background: var(--bg-cream);
     padding: var(--space-3xl) var(--space-lg);
   }
 
-  .video-content {
+  .video-inner {
     max-width: var(--container-max);
     margin: 0 auto;
     text-align: center;
   }
 
-  .video-content h2 {
-    font-size: clamp(28px, 4vw, 44px);
-    color: var(--text-dark);
+  .video-header {
     margin-bottom: var(--space-2xl);
   }
 
+  .video-header h2 {
+    font-size: clamp(28px, 4vw, 44px);
+    color: var(--text-dark);
+    margin-bottom: var(--space-lg);
+    line-height: 1.2;
+  }
+
   .video-embed {
-    max-width: 800px;
-    margin: 0 auto;
     position: relative;
     width: 100%;
-    height: 0;
-    padding-bottom: 56.25%;
+    max-width: 800px;
+    margin: 0 auto;
+    aspect-ratio: 16 / 9;
     border-radius: var(--radius-card);
     overflow: hidden;
     box-shadow: var(--shadow-card);
@@ -283,43 +472,48 @@
     left: 0;
     width: 100%;
     height: 100%;
-    border: 0;
   }
 
   /* ===== SERVICES SECTION ===== */
   .services-section {
+    background: var(--bg-white);
     padding: var(--space-3xl) var(--space-lg);
   }
 
-  .services-content {
+  .services-inner {
     max-width: var(--container-max);
     margin: 0 auto;
   }
 
-  .services-content h2 {
+  .services-header {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .services-header h2 {
     font-size: clamp(28px, 4vw, 44px);
     color: var(--text-dark);
-    margin-bottom: var(--space-2xl);
-    text-align: center;
+    margin-bottom: var(--space-lg);
+    line-height: 1.2;
   }
 
   .services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: var(--space-xl);
-    margin-bottom: var(--space-xl);
   }
 
   .service-card {
-    background: var(--bg-white);
+    background: var(--bg-cream);
     padding: var(--space-xl);
     border-radius: var(--radius-card);
-    box-shadow: var(--shadow-card);
-    transition: transform var(--transition);
+    box-shadow: var(--shadow-small);
+    transition: all var(--transition);
   }
 
   .service-card:hover {
     transform: translateY(-4px);
+    box-shadow: var(--shadow-card);
   }
 
   .service-card h3 {
@@ -329,43 +523,56 @@
   }
 
   .service-card p {
+    font-size: 14px;
     color: var(--text-grey);
     line-height: 1.6;
   }
 
   .services-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--space-sm);
-    margin-top: var(--space-xl);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-2xl);
   }
 
   .service-item {
     background: var(--bg-white);
     padding: var(--space-md);
     border-radius: var(--radius-sm);
-    box-shadow: var(--shadow-small);
     font-size: 14px;
     font-weight: 500;
     color: var(--text-dark);
+    text-align: center;
+    border: 1px solid var(--border-light);
+    transition: all var(--transition);
+  }
+
+  .service-item:hover {
+    background: var(--accent-orange);
+    color: var(--bg-white);
   }
 
   /* ===== TEAM SECTION ===== */
   .team-section {
-    background: var(--bg-white);
+    background: var(--bg-cream);
     padding: var(--space-3xl) var(--space-lg);
   }
 
-  .team-content {
+  .team-inner {
     max-width: var(--container-max);
     margin: 0 auto;
   }
 
-  .team-content h2 {
+  .team-header {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .team-header h2 {
     font-size: clamp(28px, 4vw, 44px);
     color: var(--text-dark);
-    margin-bottom: var(--space-2xl);
-    text-align: center;
+    margin-bottom: var(--space-lg);
+    line-height: 1.2;
   }
 
   .team-grid {
@@ -375,20 +582,29 @@
   }
 
   .team-card {
-    background: var(--bg-cream);
+    background: var(--bg-white);
     padding: var(--space-xl);
     border-radius: var(--radius-card);
-    box-shadow: var(--shadow-card);
     text-align: center;
+    transition: all var(--transition);
   }
 
-  .team-card img {
+  .team-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .team-avatar {
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    object-fit: cover;
-    margin: 0 auto var(--space-lg);
-    border: 4px solid var(--accent-orange);
+    background: var(--accent-lavender);
+    margin: 0 auto var(--space-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--bg-white);
   }
 
   .team-card h3 {
@@ -401,265 +617,291 @@
     font-size: 14px;
     color: var(--accent-orange);
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
     margin-bottom: var(--space-md);
   }
 
   .team-card p {
+    font-size: 14px;
     color: var(--text-grey);
     line-height: 1.6;
   }
 
-  /* ===== STATS SECTION ===== */
-  .stats-section {
-    padding: var(--space-2xl) var(--space-lg);
-    background: var(--accent-lavender-bg);
+  /* ===== EMERGENCY SECTION ===== */
+  .emergency-section {
+    background: var(--accent-orange);
+    color: var(--bg-white);
+    padding: var(--space-3xl) var(--space-lg);
   }
 
-  .stats-content {
+  .emergency-inner {
     max-width: var(--container-max);
     margin: 0 auto;
     text-align: center;
   }
 
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--space-xl);
+  .emergency-inner h2 {
+    font-size: clamp(28px, 4vw, 44px);
+    margin-bottom: var(--space-lg);
+    color: var(--bg-white);
   }
 
-  .stat-card {
-    background: var(--bg-white);
-    padding: var(--space-xl);
-    border-radius: var(--radius-card);
-    box-shadow: var(--shadow-card);
+  .emergency-inner p {
+    font-size: 17px;
+    line-height: 1.7;
+    margin-bottom: var(--space-xl);
+    opacity: 0.9;
   }
 
-  .stat-value {
-    font-size: clamp(36px, 5vw, 52px);
-    font-weight: 700;
+  .emergency-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 14px 32px;
+    background-color: var(--bg-white);
     color: var(--accent-orange);
-    line-height: 1;
-    margin-bottom: var(--space-xs);
+    border-radius: var(--radius-pill);
+    font-size: 15px;
+    font-weight: 600;
+    transition: all var(--transition);
   }
 
-  .stat-label {
-    font-size: 16px;
-    color: var(--text-grey);
-    font-weight: 500;
+  .emergency-btn:hover {
+    background-color: var(--bg-cream);
+    transform: translateY(-2px);
   }
 
-  /* ===== TESTIMONIALS SECTION ===== */
-  .testimonials-section {
+  /* ===== CONTACT SECTION ===== */
+  .contact-section {
     background: var(--bg-white);
     padding: var(--space-3xl) var(--space-lg);
   }
 
-  .testimonials-content {
+  .contact-inner {
     max-width: var(--container-max);
     margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  .contact-header {
     text-align: center;
   }
 
-  .testimonials-content h2 {
+  .contact-header h2 {
     font-size: clamp(28px, 4vw, 44px);
     color: var(--text-dark);
-    margin-bottom: var(--space-2xl);
+    margin-bottom: var(--space-lg);
+    line-height: 1.2;
   }
 
-  .testimonial-grid {
+  .contact-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: var(--space-xl);
   }
 
-  .testimonial-card {
+  .contact-card {
     background: var(--bg-cream);
     padding: var(--space-xl);
     border-radius: var(--radius-card);
-    box-shadow: var(--shadow-card);
-    position: relative;
+    box-shadow: var(--shadow-small);
+    text-align: center;
   }
 
-  .testimonial-card::before {
-    content: '"';
-    position: absolute;
-    top: var(--space-lg);
-    left: var(--space-lg);
-    font-size: 48px;
-    color: var(--accent-orange);
-    font-family: serif;
-    line-height: 1;
-  }
-
-  .testimonial-text {
-    font-style: italic;
-    color: var(--text-grey);
-    margin-bottom: var(--space-lg);
-    padding-top: var(--space-lg);
-  }
-
-  .testimonial-author {
-    font-weight: 600;
+  .contact-card h3 {
+    font-size: 20px;
     color: var(--text-dark);
+    margin-bottom: var(--space-md);
   }
 
-  /* ===== CONTACT SECTION ===== */
-  .contact-section {
+  .contact-card p {
+    font-size: 14px;
+    color: var(--text-grey);
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+  }
+
+  .contact-card a {
+    color: var(--accent-orange);
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .contact-card a:hover {
+    text-decoration: underline;
+  }
+
+  /* ===== SOCIAL SECTION ===== */
+  .social-section {
+    background: var(--bg-cream);
     padding: var(--space-3xl) var(--space-lg);
-    background: var(--text-dark);
-    color: var(--bg-white);
   }
 
-  .contact-content {
+  .social-inner {
     max-width: var(--container-max);
     margin: 0 auto;
     text-align: center;
   }
 
-  .contact-content h2 {
-    font-size: clamp(28px, 4vw, 44px);
-    color: var(--bg-white);
+  .social-header {
     margin-bottom: var(--space-2xl);
   }
 
-  .contact-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--space-xl);
+  .social-header h2 {
+    font-size: clamp(28px, 4vw, 44px);
+    color: var(--text-dark);
+    margin-bottom: var(--space-lg);
+    line-height: 1.2;
   }
 
-  .contact-item {
-    padding: var(--space-lg);
-  }
-
-  .contact-item h3 {
-    font-size: 18px;
-    color: var(--accent-orange);
-    margin-bottom: var(--space-md);
-  }
-
-  .contact-item a {
-    color: var(--bg-white);
-    font-size: 16px;
-    transition: color var(--transition);
-  }
-
-  .contact-item a:hover {
-    color: var(--accent-orange);
-  }
-
-  /* ===== SOCIAL LINKS ===== */
   .social-links {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: var(--space-lg);
-    margin-top: var(--space-xl);
   }
 
   .social-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background-color: var(--accent-orange);
-    color: var(--bg-white);
-    font-size: 20px;
+    background: var(--bg-white);
+    padding: var(--space-lg);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-small);
     transition: all var(--transition);
+    text-decoration: none;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    justify-content: center;
   }
 
   .social-link:hover {
-    background-color: var(--accent-orange-dark);
-    transform: translateY(-2px);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card);
+  }
+
+  .social-link i {
+    font-size: 24px;
+    color: var(--accent-orange);
+  }
+
+  .social-link span {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    background: var(--text-dark);
+    color: var(--bg-white);
+    padding: var(--space-2xl) var(--space-lg) var(--space-lg);
+  }
+
+  .footer-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .footer-inner p {
+    font-size: 14px;
+    color: var(--text-light-grey);
+    margin-bottom: var(--space-md);
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-md);
+  }
+
+  .footer-links a {
+    font-size: 14px;
+    color: var(--text-light-grey);
+    text-decoration: none;
+    transition: color var(--transition);
+  }
+
+  .footer-links a:hover {
+    color: var(--bg-white);
+  }
+
+  .footer-copyright {
+    font-size: 12px;
+    color: var(--text-light-grey);
+    opacity: 0.7;
   }
 
   /* ===== RESPONSIVE ===== */
   @media (max-width: 768px) {
     .nav-inner {
       padding: var(--space-sm) var(--space-md);
-      height: 56px;
     }
 
     .nav-logo {
       font-size: 16px;
-      letter-spacing: 1px;
+    }
+
+    .nav-cta {
+      font-size: 12px;
+      padding: 8px 16px;
     }
 
     .hero {
       padding: var(--space-lg) var(--space-md) var(--space-xl);
-      min-height: calc(100vh - 56px);
-    }
-
-    .hero-content {
-      text-align: center;
+      min-height: auto;
     }
 
     .hero-visual {
-      min-height: 280px;
+      min-height: 300px;
     }
 
-    .about-section {
+    .card-insurance,
+    .card-appointments {
+      width: 85%;
+      position: relative;
+      top: auto;
+      left: auto;
+      right: auto;
+      bottom: auto;
+      margin-bottom: var(--space-md);
+    }
+
+    .card-status {
+      position: relative;
+      top: auto;
+      left: auto;
+      margin: 0 auto;
+    }
+
+    .about-section,
+    .services-section,
+    .team-section,
+    .emergency-section,
+    .contact-section,
+    .video-section,
+    .social-section {
       padding: var(--space-xl) var(--space-md);
     }
 
-    .video-section {
-      padding: var(--space-xl) var(--space-md);
-    }
-
-    .services-section {
-      padding: var(--space-xl) var(--space-md);
-    }
-
-    .services-grid {
+    .services-grid,
+    .team-grid,
+    .contact-grid,
+    .social-links {
       grid-template-columns: 1fr;
       gap: var(--space-lg);
     }
 
     .services-list {
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    }
-
-    .team-section {
-      padding: var(--space-xl) var(--space-md);
-    }
-
-    .team-grid {
       grid-template-columns: 1fr;
-      gap: var(--space-lg);
+      gap: var(--space-sm);
     }
 
-    .stats-section {
-      padding: var(--space-xl) var(--space-md);
-    }
-
-    .stats-grid {
-      grid-template-columns: 1fr;
-      gap: var(--space-lg);
-    }
-
-    .testimonials-section {
-      padding: var(--space-xl) var(--space-md);
-    }
-
-    .testimonial-grid {
-      grid-template-columns: 1fr;
-      gap: var(--space-lg);
-    }
-
-    .contact-section {
-      padding: var(--space-xl) var(--space-md);
-    }
-
-    .contact-grid {
-      grid-template-columns: 1fr;
-      gap: var(--space-lg);
-    }
-
-    .social-links {
-      gap: var(--space-md);
+    .footer-links {
+      flex-direction: column;
+      gap: var(--space-sm);
     }
   }
 
@@ -683,32 +925,12 @@
       min-height: 480px;
     }
 
-    .about-section {
-      padding: var(--space-3xl) var(--space-xl);
+    .about-inner {
+      grid-template-columns: 1fr 1fr;
     }
 
-    .video-section {
-      padding: var(--space-3xl) var(--space-xl);
-    }
-
-    .services-section {
-      padding: var(--space-3xl) var(--space-xl);
-    }
-
-    .team-section {
-      padding: var(--space-3xl) var(--space-xl);
-    }
-
-    .stats-section {
-      padding: var(--space-2xl) var(--space-xl);
-    }
-
-    .testimonials-section {
-      padding: var(--space-3xl) var(--space-xl);
-    }
-
-    .contact-section {
-      padding: var(--space-3xl) var(--space-xl);
+    .contact-inner {
+      grid-template-columns: 1fr;
     }
   }
 
@@ -725,32 +947,16 @@
       min-height: 520px;
     }
 
-    .about-section {
-      padding: var(--space-3xl) var(--space-2xl);
+    .card-insurance {
+      left: 10%;
     }
 
-    .video-section {
-      padding: var(--space-3xl) var(--space-2xl);
+    .card-appointments {
+      right: 5%;
     }
 
-    .services-section {
-      padding: var(--space-3xl) var(--space-2xl);
-    }
-
-    .team-section {
-      padding: var(--space-3xl) var(--space-2xl);
-    }
-
-    .stats-section {
-      padding: var(--space-2xl) var(--space-2xl);
-    }
-
-    .testimonials-section {
-      padding: var(--space-3xl) var(--space-2xl);
-    }
-
-    .contact-section {
-      padding: var(--space-3xl) var(--space-2xl);
+    .card-status {
+      left: 2%;
     }
   }
 </style>
@@ -769,7 +975,8 @@
       <li><a href="https://www.arizonabiltmoredentistry.com/emergency-dental-service/">Emergencies</a></li>
       <li><a href="https://www.arizonabiltmoredentistry.com/financial/">Financial</a></li>
       <li><a href="https://www.arizonabiltmoredentistry.com/contact/">Contact</a></li>
-  </ul>
+    </ul>
+    <button class="nav-cta">Make an Appointment</button>
   </div>
 </nav>
 
@@ -783,54 +990,129 @@
     </button>
   </div>
   <div class="hero-visual">
-    <img src="https://www.arizonabiltmoredentistry.com/wp-content/uploads/2021/07/az-biltmore.png" alt="Arizona Biltmore Dentistry" class="hero-image">
+    <!-- Purple Insurance Card -->
+    <div class="float-card card-insurance">
+      <div class="card-insurance-star">
+        <i class="fas fa-star"></i>
+      </div>
+      <div class="card-insurance-label">Rating</div>
+      <div class="card-insurance-value">#1</div>
+      <div class="card-insurance-sub">Phoenix Dentist</div>
+    </div>
+
+    <!-- White Appointment Card -->
+    <div class="float-card card-appointments">
+      <div class="card-appointments-header">Our Services</div>
+      <div class="appointment-item">
+        <div class="appointment-left">
+          <div class="avatar"></div>
+          <div>
+            <div class="appointment-name">Cosmetic Dentistry</div>
+            <div class="appointment-type">Veneers & Whitening</div>
+          </div>
+        </div>
+        <div class="appointment-price">✓</div>
+      </div>
+      <div class="appointment-item">
+        <div class="appointment-left">
+          <div class="avatar"></div>
+          <div>
+            <div class="appointment-name">Dental Implants</div>
+            <div class="appointment-type">All-on-4 & Single</div>
+          </div>
+        </div>
+        <div class="appointment-price">✓</div>
+      </div>
+      <div class="appointment-item">
+        <div class="appointment-left">
+          <div class="avatar"></div>
+          <div>
+            <div class="appointment-name">Family Care</div>
+            <div class="appointment-type">Kids & Adults</div>
+          </div>
+        </div>
+        <div class="appointment-price">✓</div>
+      </div>
+    </div>
+
+    <!-- Status Badge -->
+    <div class="float-card card-status">
+      <div class="status-dot"></div>
+      <span>Emergency Care Available</span>
+    </div>
   </div>
 </section>
 
 <!-- About Section -->
 <section class="about-section">
-  <div class="about-content">
-    <h2>Welcome to Arizona Biltmore Dentistry in Phoenix</h2>
-    <p>We understand that going to the dentist may not be your favorite activity, but we're also not your average dental office. At Arizona Biltmore Dentistry, we're raising the bar when it comes to the patient experience. We focus on the connection between your oral health and overall health for a complete wellness approach, and we work hard to create a warm, welcoming environment.</p>
-    <p>From our advanced technology, including digital X-rays and laser gum therapy, to our comfortable patient amenities, like WiFi and comfortable pillows, we aim to help you feel at home. Schedule an appointment today to come see the difference!</p>
+  <div class="about-inner">
+    <div class="about-content">
+      <h2>Welcome to Arizona Biltmore Dentistry in Phoenix</h2>
+      <p>We understand that going to the dentist may not be your favorite activity, but we're also not your average dental office. At Arizona Biltmore Dentistry, we're raising the bar when it comes to the patient experience.</p>
+      <p>We focus on the connection between your oral health and overall health for a complete wellness approach, and we work hard to create a warm, welcoming environment. From our advanced technology, including digital X-rays and laser gum therapy, to our comfortable patient amenities, like WiFi and comfortable pillows, we aim to help you feel at home.</p>
+      <button class="about-btn">
+        Learn More <i class="fas fa-arrow-right"></i>
+      </button>
+    </div>
+    <div class="about-image">
+      <img src="https://www.arizonabiltmoredentistry.com/wp-content/uploads/2021/07/az-biltmore.png" alt="Arizona Biltmore Dentistry office">
+    </div>
   </div>
 </section>
 
 <!-- Video Section -->
 <section class="video-section">
-  <div class="video-content">
-    <h2>Learn More About Our Practice</h2>
+  <div class="video-inner">
+    <div class="video-header">
+      <h2>See Our Office</h2>
+    </div>
     <div class="video-embed">
-      <iframe src="https://www.youtube.com/embed/BXNRVrv8GVg" title="Arizona Biltmore Dentistry Video" allowfullscreen></iframe>
+      <iframe 
+        src="https://www.youtube.com/embed/BXNRVrv8GVg" 
+        title="Arizona Biltmore Dentistry Video"
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+      </iframe>
     </div>
   </div>
 </section>
 
 <!-- Services Section -->
 <section class="services-section">
-  <div class="services-content">
-    <h2>Our Dental Services</h2>
+  <div class="services-inner">
+    <div class="services-header">
+      <h2>Our Dental Services</h2>
+    </div>
     
     <!-- Featured Services with Descriptions -->
     <div class="services-grid">
       <div class="service-card">
         <h3>Cosmetic Dentistry</h3>
-        <p>Affordable in-office cosmetic dentistry procedures including porcelain veneers, orthodontics and teeth whitening designed to make your dream smile come true</p>
+        <p>Affordable in-office cosmetic dentistry procedures designed to make your dream smile come true. From porcelain veneers, to orthodontics and teeth whitening.</p>
       </div>
+      
       <div class="service-card">
         <h3>Root Canal Therapy</h3>
-        <p>Root canal therapy to remove damaged tissue from tooth infection, deep decay, or dental trauma to save your natural tooth and relieve pain</p>
+        <p>A tooth infection, deep decay, or even dental trauma can cause a problem deep within the tooth that leaves you in pain. In an effort to save your natural tooth and relieve your pain, our team can perform root canal therapy to remove the damaged tissue.</p>
       </div>
+      
       <div class="service-card">
         <h3>Family Dentistry</h3>
-        <p>Family dental care for children, with visits recommended when their first tooth comes in or no later than their first birthday</p>
+        <p>According to the American Academy of Pediatric Dentistry, kids should visit a dentist when their first tooth comes in or no later than their first birthday.</p>
       </div>
+      
       <div class="service-card">
         <h3>Dental Implants</h3>
-        <p>Treatment for patients missing one or more natural teeth due to tooth decay, periodontal disease or injury</p>
+        <p>Treatment options available for patients with missing teeth because of tooth decay, periodontal disease or an injury.</p>
+      </div>
+      
+      <div class="service-card">
+        <h3>Emergency Dental Service</h3>
+        <p>$99 Emergency Exam</p>
       </div>
     </div>
-
+    
     <!-- Additional Services -->
     <div class="services-list">
       <div class="service-item">Teeth Whitening</div>
@@ -843,7 +1125,6 @@
       <div class="service-item">Clear Aligners</div>
       <div class="service-item">ClearCorrect</div>
       <div class="service-item">CandidPro</div>
-      <div class="service-item">Emergency Dental Service</div>
       <div class="service-item">Sleep Apnea Services</div>
       <div class="service-item">Sedation Dentistry</div>
     </div>
@@ -852,16 +1133,22 @@
 
 <!-- Team Section -->
 <section class="team-section">
-  <div class="team-content">
-    <h2>Meet the Team</h2>
+  <div class="team-inner">
+    <div class="team-header">
+      <h2>Meet the Team</h2>
+      <p>Get to know the people behind your smile.</p>
+    </div>
+    
     <div class="team-grid">
       <div class="team-card">
-        <img src="https://www.arizonabiltmoredentistry.com/wp-content/uploads/2018/02/dr-jeziorski.jpg" alt="Dr. Aaron Jeziorski">
+        <div class="team-avatar">AJ</div>
         <h3>Dr. Aaron Jeziorski</h3>
         <div class="role">Doctor</div>
-        <p>Arizona native Dr. Aaron Jeziorski is a passionate dentist dedicated to exceptional patient care. With a Doctor of Dental Medicine from A.T. Still University, Dr. Jeziorski stays at the forefront of dental innovation through continuous education.</p>
+        <p>Arizona native Dr. Aaron Jeziorski is a passionate dentist dedicated to exceptional patient care. He mentors dental students at the Central Arizona Shelter Services Clinic and is a dedicated family man with four children.</p>
       </div>
+      
       <div class="team-card">
+        <div class="team-avatar">MH</div>
         <h3>Dr. Michael Hood</h3>
         <div class="role">Doctor</div>
       </div>
@@ -869,99 +1156,95 @@
   </div>
 </section>
 
-<!-- Stats Section -->
-<section class="stats-section">
-  <div class="stats-content">
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-value">$99</div>
-        <div class="stat-label">Emergency Exam</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Testimonials Section -->
-<section class="testimonials-section">
-  <div class="testimonials-content">
-    <h2>Five-Star Patient Experience</h2>
-    <div class="testimonial-grid">
-      <div class="testimonial-card">
-        <div class="testimonial-text"> The staff has been very kind to me. Relaxed atmosphere and funny! They keep me relaxed. </div>
-        <div class="testimonial-author">Katherine Cohner</div>
-      </div>
-      <div class="testimonial-card">
-        <div class="testimonial-text"> I can walk to six dental offices, but I drive here. It's a neat, clean, place. It's got good vibes.</div>
-        <div class="testimonial-author">Jeff Goodrich</div>
-      </div>
-      <div class="testimonial-card">
-        <div class="testimonial-text"> I highly recommend this office. I drive well over an hour to get here, and I find the atmosphere of the office to be tremendous.</div>
-        <div class="testimonial-author">Dave Waibel</div>
-      </div>
-      <div class="testimonial-card">
-        <div class="testimonial-text"> My kids are excited to come to the dentist again. When can anybody say that? </div>
-        <div class="testimonial-author">Sarah Ragnoli</div>
-      </div>
-      <div class="testimonial-card">
-        <div class="testimonial-text">Dr. J and his staff are very thoughtful and want to make sure I have a good experience</div>
-        <div class="testimonial-author">William Irwin</div>
-      </div>
-      <div class="testimonial-card">
-        <div class="testimonial-text">I really felt like home when I came to Arizona Biltmore </div>
-        <div class="testimonial-author">Beau Jeppesen</div>
-      </div>
-      <div class="testimonial-card">
-        <div class="testimonial-text">Dr. J is fabulous. They make you feel at ease. I appreciate and value the service and care</div>
-        <div class="testimonial-author">Marchelle Franklin</div>
-      </div>
-      <div class="testimonial-card">
-        <div class="testimonial-text">I was a little nervous but coming in and having the gentle care that Dr. J provides puts me at ease. Now my entire family comes to AZ Biltmore.</div>
-        <div class="testimonial-author">Mark Patten</div>
-      </div>
-    </div>
+<!-- Emergency Section -->
+<section class="emergency-section">
+  <div class="emergency-inner">
+    <h2>$99 Emergency Exam</h2>
+    <p>Part of serving the Phoenix community means providing affordable dental care to our patients. Cost concerns should never keep you from having a healthy mouth and smile. We offer affordable fees, accept dental insurance and third-party financing, and have in-house plans to help you save big on your care.</p>
+    <button class="emergency-btn">
+      Book Your Visit <i class="fas fa-phone"></i>
+    </button>
   </div>
 </section>
 
 <!-- Contact Section -->
 <section class="contact-section">
-  <div class="contact-content">
-    <h2>Visit Us in Phoenix</h2>
+  <div class="contact-inner">
+    <div class="contact-header">
+      <h2>Contact Us</h2>
+    </div>
+    
     <div class="contact-grid">
-      <div class="contact-item">
+      <div class="contact-card">
         <h3>Phone</h3>
-        <a href="tel:(602) 957-8200">(602) 957-8200</a>
+        <p><a href="tel:602-957-8200">(602) 957-8200</a></p>
       </div>
-      <div class="contact-item">
+      
+      <div class="contact-card">
         <h3>Address</h3>
-        <p>2777 E Camelback Rd #101, Phoenix, AZ 85016</p>
+        <p>2777 E Camelback Rd #101<br>Phoenix, AZ 85016</p>
       </div>
-      <div class="contact-item">
+      
+      <div class="contact-card">
         <h3>Hours</h3>
         <p>Monday to Thursday: 7 AM - 5 PM<br>
         Friday: 7 AM - 4 PM<br>
         Saturday: 7 AM - 2 PM</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- Social Section -->
+<section class="social-section">
+  <div class="social-inner">
+    <div class="social-header">
+      <h2>Follow Us</h2>
+    </div>
     
     <div class="social-links">
-      <a href="https://maps.google.com/maps/contrib/116414302573151413814" class="social-link" target="_blank">
+      <a href="https://maps.google.com/maps/contrib/116414302573151413814" class="social-link" target="_blank" rel="noopener">
         <i class="fab fa-google"></i>
+        <span>Google Business</span>
       </a>
-      <a href="https://www.facebook.com/arizonabiltmoredentistry?fref=ts" class="social-link" target="_blank">
+      
+      <a href="https://www.facebook.com/arizonabiltmoredentistry?fref=ts" class="social-link" target="_blank" rel="noopener">
         <i class="fab fa-facebook"></i>
+        <span>Facebook</span>
       </a>
-      <a href="https://www.yelp.com/biz/arizona-biltmore-dentistry-phoenix" class="social-link" target="_blank">
+      
+      <a href="https://www.yelp.com/biz/arizona-biltmore-dentistry-phoenix" class="social-link" target="_blank" rel="noopener">
         <i class="fab fa-yelp"></i>
+        <span>Yelp</span>
       </a>
-      <a href="https://twitter.com/AZBiltmore" class="social-link" target="_blank">
+      
+      <a href="https://twitter.com/AZBiltmore" class="social-link" target="_blank" rel="noopener">
         <i class="fab fa-twitter"></i>
+        <span>Twitter</span>
       </a>
-      <a href="https://www.youtube.com/channel/UC3jj0nOhAv1mMHxlWFN49AQ" class="social-link" target="_blank">
+      
+      <a href="https://www.youtube.com/channel/UC3jj0nOhAv1mMHxlWFN49AQ" class="social-link" target="_blank" rel="noopener">
         <i class="fab fa-youtube"></i>
+        <span>YouTube</span>
       </a>
     </div>
   </div>
 </section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <p>Arizona Biltmore Dentistry - Your trusted dental care in Phoenix, AZ</p>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Contact Us</a>
+    </div>
+    <div class="footer-copyright">
+      © 2024 Arizona Biltmore Dentistry. All rights reserved.
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>
