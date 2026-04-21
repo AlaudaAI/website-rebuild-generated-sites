@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Lovely Med Spa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  position: relative;
+}
+
+.hero-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.3;
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* About Section */
+.about {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.about-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.about-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.about-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.about-text p + p {
+  margin-top: var(--space-md);
+}
+
+.about-cta {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  margin-top: var(--space-md);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.about-cta:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.service-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.service-cell:last-child {
+  border-bottom: none;
+}
+
+.service-name {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.service-description {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Team Section */
+.team {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.team-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.team-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.team-member {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.member-name {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+}
+
+.member-role {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  color: var(--placeholder-gray);
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-sm);
+}
+
+.member-bio {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Testimonials Section */
+.testimonials {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.testimonials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonial {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.testimonial-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  line-height: 1.6;
+  font-style: italic;
+  margin-bottom: var(--space-md);
+}
+
+.testimonial-author {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Gift Card Section */
+.gift-card {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+  text-align: center;
+}
+
+.gift-card-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.gift-card-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  line-height: 1.3;
+  margin-bottom: var(--space-lg);
+}
+
+.gift-card-cta {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.gift-card-cta:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Contact Section */
+.contact {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.contact-section h3 {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.contact-section p,
+.contact-section a {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.contact-section a {
+  text-decoration: underline;
+}
+
+.map-container {
+  width: 100%;
+  height: 300px;
+  border: 1px solid var(--border-black);
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.footer-right a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .hero-headline {
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+  }
+
+  .hero-subtitle {
+    font-size: 0.7rem;
+  }
+
+  .about {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .team {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .testimonials {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .gift-card {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .contact {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .contact-info {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+
+  .nav-links {
+    gap: var(--space-sm);
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .about-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .service-cell:nth-child(1),
+  .service-cell:nth-child(2) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .team-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .about {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .team {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .testimonials {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .gift-card {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .contact {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Live Lovely Med Spa</a>
+  <ul class="nav-links">
+    <li><a href="http://livelovelymedspa.com/#">more</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-image">
+    <img src="https://livelovelymedspa.com/wp-content/uploads/2021/10/goldpinkaccessories-768x512.jpeg" alt="Live Lovely Med Spa">
+  </div>
+  <h1 class="hero-headline">RELAX, NOURISH & RESTORE</h1>
+  <p class="hero-subtitle">001 — personalized facial treatments that cater to your specific skin care needs</p>
+</section>
+
+<!-- About Section -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <span class="about-label">002 — approach</span>
+    <div class="about-text">
+      <p>At Live Lovely Spa, we are dedicated to providing personalized facial treatments that cater to your specific skin care needs. Corina utilizes a variety of modalities and treatments, as well as science-based skincare products, to help you achieve the most radiant, healthy skin possible. Our ultimate goal is to help you feel and look your best, so you can live as beautifully as you deserve. To begin your journey towards gorgeous, radiant skin, simply book an appointment at Live Lovely Spa today.</p>
+      <p><strong>Ask about our Cold Plasma treatment today!</strong></p>
+      <a href="https://squareup.com/appointments/book/plouwyr6xfhy6c/LHR0N0KQAMFMF/start" class="about-cta">Make an Appointment</a>
+    </div>
+  </div>
+</section>
+
+<!-- Services Grid -->
+<section class="services" id="services">
+  <div class="services-grid">
+    <div class="service-cell">
+      <div class="service-name">Facials & Peels</div>
+      <div class="service-description">Personalized facial treatments that cater to your specific skin care needs</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Cold Plasma Treatment</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Waxing & Brows</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Lashes</div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery Section -->
+<section class="gallery">
+  <img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i17!2i29928!3i53879!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2scategorical-search-results-injection!5i1!3m13!2sen-US!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m33!299174093m32!2zQmx1ZSBMaW9uIFNhbG9uIFN0dWRpb3MsIDExMDY2IFBlY2FuIFBhcmsgQmx2ZMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIENlZGFyIFBhcmssIFRYwqAgNzg2MTM!5m8!1m2!1y9681388772719097355!2y3682640941430775687!2s%2Fg%2F11fk8hl788!4m2!1x304705720!2x3316952882!15sgcid%3Ahair_salon!5m8!1m2!1y9681387506483106213!2y9627172214462078007!2s%2Fg%2F11g69gjn21!4m2!1x304686555!2x3316956817!15sgcid%3Abeauty_salon!6e2!8e1!13m9!1m6!1m2!1sbeauty_salon!3f0.6489967703819275!1m2!1shair_salon!3f0.3034548163414001!2f0.6489967703819275!3f0.117070272564888!17b1&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=88214" alt="Live Lovely Med Spa location">
+  <img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i17!2i29927!3i53879!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2scategorical-search-results-injection!5i1!3m13!2sen-US!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m33!299174093m32!2zQmx1ZSBMaW9uIFNhbG9uIFN0dWRpb3MsIDExMDY2IFBlY2FuIFBhcmsgQmx2ZMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIENlZGFyIFBhcmssIFRYwqAgNzg2MTM!5m8!1m2!1y9681388772719097355!2y3682640941430775687!2s%2Fg%2F11fk8hl788!4m2!1x304705720!2x3316952882!15sgcid%3Ahair_salon!5m8!1m2!1y9681387506483106213!2y9627172214462078007!2s%2Fg%2F11g69gjn21!4m2!1x304686555!2x3316956817!15sgcid%3Abeauty_salon!6e2!8e1!13m9!1m6!1m2!1sbeauty_salon!3f0.6489967703819275!1m2!1shair_salon!3f0.3034548163414001!2f0.6489967703819275!3f0.117070272564888!17b1&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=109998" alt="Live Lovely Med Spa area">
+  <img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i17!2i29927!3i53878!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2scategorical-search-results-injection!5i1!3m13!2sen-US!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m33!299174093m32!2zQmx1ZSBMaW9uIFNhbG9uIFN0dWRpb3MsIDExMDY2IFBlY2FuIFBhcmsgQmx2ZMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIENlZGFyIFBhcmssIFRYwqAgNzg2MTM!5m8!1m2!1y9681388772719097355!2y3682640941430775687!2s%2Fg%2F11fk8hl788!4m2!1x304705720!2x3316952882!15sgcid%3Ahair_salon!5m8!1m2!1y9681387506483106213!2y9627172214462078007!2s%2Fg%2F11g69gjn21!4m2!1x304686555!2x3316956817!15sgcid%3Abeauty_salon!6e2!8e1!13m9!1m6!1m2!1sbeauty_salon!3f0.6489967703819275!1m2!1shair_salon!3f0.3034548163414001!2f0.6489967703819275!3f0.117070272564888!17b1&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=122987" alt="Live Lovely Med Spa vicinity">
+  <img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i17!2i29928!3i53878!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2scategorical-search-results-injection!5i1!3m13!2sen-US!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m33!299174093m32!2zQmx1ZSBMaW9uIFNhbG9uIFN0dWRpb3MsIDExMDY2IFBlY2FuIFBhcmsgQmx2ZMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKgIENlZGFyIFBhcmssIFRYwqAgNzg2MTM!5m8!1m2!1y9681388772719097355!2y3682640941430775687!2s%2Fg%2F11fk8hl788!4m2!1x304705720!2x3316952882!15sgcid%3Ahair_salon!5m8!1m2!1y9681387506483106213!2y9627172214462078007!2s%2Fg%2F11g69gjn21!4m2!1x304686555!2x3316956817!15sgcid%3Abeauty_salon!6e2!8e1!13m9!1m6!1m2!1sbeauty_salon!3f0.6489967703819275!1m2!1shair_salon!3f0.3034548163414001!2f0.6489967703819275!3f0.117070272564888!17b1&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=101203" alt="Live Lovely Med Spa surroundings">
+</section>
+
+<!-- Team Section -->
+<section class="team" id="team">
+  <div class="team-inner">
+    <span class="team-label">003 — team</span>
+    <div class="team-member">
+      <div class="member-name">Corina Warmerdam</div>
+      <div class="member-role">Esthetician</div>
+      <div class="member-bio">Utilizes a variety of modalities and treatments, as well as science-based skincare products, to help you achieve the most radiant, healthy skin possible. Extremely knowledgeable about skin care and goes above and beyond to make skin look radiant.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <div class="testimonial">
+      <p class="testimonial-text">I've received various spa treatments from Corina. She is extremely knowledgeable about skin care and goes above and beyond to make my skin look radiant. Her calm yet cheerful personality always makes a trip to her spa a relaxing experience.</p>
+      <div class="testimonial-author">JENNY PATTON</div>
+    </div>
+  </div>
+</section>
+
+<!-- Gift Card Section -->
+<section class="gift-card">
+  <div class="gift-card-inner">
+    <h2 class="gift-card-heading">Looking for a Gift Card? Give the Perfect Gift this Holiday Season...</h2>
+    <a href="https://squareup.com/gift/MLCG8YV8BVRKK/order" class="gift-card-cta">buy gift card</a>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <div class="contact-section">
+        <h3>Location</h3>
+        <p>Salon Lofts Cedar Park<br>11066 Pecan Park Blvd<br>Suite #303 Spa 4<br>Cedar Park, TX 78613</p>
+      </div>
+      <div class="contact-section">
+        <h3>Contact Us</h3>
+        <p>Phone: <a href="tel:-1015032322">-1015032322</a></p>
+        <p>Email: <a href="mailto:corinawarmerdam@gmail.com">corinawarmerdam@gmail.com</a></p>
+      </div>
+      <div class="contact-section">
+        <h3>Our Hours</h3>
+        <p>FRIDAY 09:00 – 05:00<br>SATURDAY 12:00 – 05:00<br>SUNDAY 12:00 – 05:00</p>
+      </div>
+      <div class="contact-section">
+        <h3>Follow Us</h3>
+        <p><a href="https://www.facebook.com/Live-Lovely-Med-Spa-101503232268337">Facebook</a> | <a href="https://www.instagram.com/livelovelymed/">Instagram</a> | <a href="https://maps.google.com/maps?ll=30.469614,-97.801245&z=17&t=m&hl=en-US&gl=US&mapclient=embed&q=Blue%20Lion%20Salon%20Studios%2C%2011066%20Pecan%20Park%20Blvd%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20Cedar%20Park%2C%20TX%C2%A0%2078613">Google Business</a></p>
+      </div>
+    </div>
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3443.5678!2d-97.8012446!3d30.4696137!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDI4JzEwLjciTiA5N8KwNDgnMDQuNSJX!5e0!3m2!1sen!2sus!4v1234567890" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Live Lovely Med Spa</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
