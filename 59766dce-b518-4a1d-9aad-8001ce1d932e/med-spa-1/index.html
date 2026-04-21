@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>San Marcos Dermatology</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background: url('https://sanmarcosderm.com/wp-content/uploads/2021/06/IZ4A5451.jpg') center/cover;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+  color: #ffffff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Philosophy Section */
+.philosophy {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.philosophy-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.philosophy-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.philosophy-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.service-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.service-cell:last-child {
+  border-bottom: none;
+}
+
+.service-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: var(--space-xs);
+  margin-bottom: var(--space-sm);
+}
+
+.service-number {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.service-name {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.service-description {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  line-height: 1.55;
+}
+
+/* Notice Section */
+.notice {
+  padding: var(--space-lg) var(--pad-x);
+  background-color: rgba(26, 26, 26, 0.05);
+  text-align: center;
+}
+
+.notice-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+}
+
+/* Insurance Section */
+.insurance {
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.insurance-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.insurance-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.insurance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--space-md);
+  align-items: center;
+  justify-items: center;
+  margin-bottom: var(--space-lg);
+}
+
+.insurance-logo {
+  max-height: 60px;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.insurance-logo:hover {
+  opacity: 1;
+}
+
+.insurance-link {
+  text-align: center;
+}
+
+.insurance-link a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  border: 1px solid var(--border-black);
+  padding: var(--space-sm) var(--space-md);
+  display: inline-block;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.insurance-link a:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Stats Section */
+.stats {
+  padding: var(--space-lg) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.stats-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.stat-item {
+  margin-bottom: var(--space-md);
+}
+
+.stat-value {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  display: block;
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* Call to Action Section */
+.cta {
+  padding: var(--space-xl) var(--pad-x);
+  text-align: center;
+}
+
+.cta-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.cta-button {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+}
+
+.cta-button:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Contact Section */
+.contact {
+  padding: var(--space-lg) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+  background-color: rgba(26, 26, 26, 0.05);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  text-align: center;
+}
+
+.contact-phone {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.contact-phone a {
+  border: 1px solid var(--border-black);
+  padding: var(--space-sm) var(--space-md);
+  display: inline-block;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.contact-phone a:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+.contact-social {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.contact-social a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  border: 1px solid var(--border-black);
+  padding: var(--space-sm) var(--space-md);
+  display: inline-block;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.contact-social a:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1rem;
+  }
+
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-sm);
+  }
+
+  .nav-links a {
+    font-size: 0.6rem;
+  }
+
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .philosophy {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .philosophy-inner {
+    gap: var(--space-sm);
+  }
+
+  .service-cell {
+    padding: var(--space-sm);
+  }
+
+  .contact-social {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-social a {
+    width: 100%;
+    text-align: center;
+    max-width: 200px;
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .philosophy-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .service-cell:nth-child(1),
+  .service-cell:nth-child(2) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .insurance-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr 2fr;
+    text-align: left;
+  }
+
+  .contact-social {
+    justify-content: flex-start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .philosophy {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .insurance {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .cta {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">San Marcos Dermatology</a>
+  <ul class="nav-links">
+    <li><a href="https://sanmarcosderm.com/about/">about</a></li>
+    <li><a href="https://sanmarcosderm.com/services/">services</a></li>
+    <li><a href="https://sanmarcosderm.com/patient-resources/">patient resources</a></li>
+    <li><a href="https://sanmarcosderm.com/careers/">careers</a></li>
+    <li><a href="https://sanmarcosderm.com/bill-pay/">bill pay</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <h1 class="hero-headline">The Best Dermatology Clinic<br>in San Marcos, Texas</h1>
+  <p class="hero-subtitle">Accepting New Patients in April 2026!</p>
+</section>
+
+<!-- Philosophy Section -->
+<section class="philosophy">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">welcome</span>
+    <div class="philosophy-text">
+      <p>Formerly known as Dermatology Laser Center & Spa, San Marcos Dermatology was established in 1987 and located in San Marcos, Texas. We have developed a distinctive philosophy for offering exceptional dermatological care, fusing aesthetics and medicine.</p>
+      <p>We provide the latest and most advanced technology for individuals who desire customized treatments and high quality dermatological care. From our cosmetic treatments to our medical procedures, we aim to keep our patients looking great and feeling even better.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Services Grid -->
+<section class="services">
+  <div class="services-grid">
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-number">001</span>
+        <span class="service-name">medical dermatology</span>
+      </div>
+      <div class="service-description">
+        Skin cancer is the most common form of cancer. Request a consultation for a full body skin exam or other services like Acne or Mole removals.
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-number">002</span>
+        <span class="service-name">cosmetic dermatology</span>
+      </div>
+      <div class="service-description">
+        The one stop shop to get your skin looking young and beautiful. Turn back the years with some of our state-of-the art treatments.
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-number">003</span>
+        <span class="service-name">mohs micrographic surgery</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-number">004</span>
+        <span class="service-name">skin cancer</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <span class="stat-value">1987</span>
+      <span class="stat-label">established</span>
+    </div>
+  </div>
+</section>
+
+<!-- Insurance Section -->
+<section class="insurance">
+  <div class="insurance-inner">
+    <h2 class="insurance-heading">Insurances Accepted</h2>
+    <div class="insurance-grid">
+      <img src="https://sanmarcosderm.com/wp-content/uploads/2020/11/Aetna-Logo.png" alt="Aetna Logo" class="insurance-logo">
+      <img src="https://sanmarcosderm.com/wp-content/uploads/2020/11/UnitedHealthcare-Logo.png" alt="UnitedHealthcare-Logo" class="insurance-logo">
+      <img src="https://sanmarcosderm.com/wp-content/uploads/2020/11/TRICARE_Logo_png-300x150.png" alt="TRICARE_Logo_png" class="insurance-logo">
+      <img src="https://sanmarcosderm.com/wp-content/uploads/2020/11/Cigna-Logo-300x117.png" alt="Cigna Logo" class="insurance-logo">
+      <img src="https://sanmarcosderm.com/wp-content/uploads/2020/11/Humana-Logo.png" alt="Humana Logo" class="insurance-logo">
+      <img src="https://sanmarcosderm.com/wp-content/uploads/2020/11/bcbstx-logo.png" alt="bcbstx-logo" class="insurance-logo">
+    </div>
+    <div class="insurance-link">
+      <a href="https://sanmarcosderm.com/insurance-providers/">See Full Accepted Insurance List</a>
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="cta">
+  <h2 class="cta-heading">Ready for a new<br>YOU?</h2>
+  <a href="https://sanmarcosderm.com/contact/" class="cta-button">book an appointment</a>
+</section>
+
+<!-- Contact Section -->
+<section class="contact">
+  <div class="contact-inner">
+    <div class="contact-phone">
+      <a href="tel:-1479816504">-1479816504</a>
+    </div>
+    <div class="contact-social">
+      <a href="https://www.facebook.com/Dermatology-Laser-Center-Spa-147981650444/">facebook</a>
+      <a href="https://www.instagram.com/sanmarcosderm/">instagram</a>
+      <a href="https://www.dermsouthtx.com/">twitter</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 San Marcos Dermatology</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
