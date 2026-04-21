@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beauty Eternal</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  position: relative;
+  background-image: url('https://static.wixstatic.com/media/11062b_62f0356712544a87b392417662c4658df000.jpg/v1/fill/w_980,h_583,al_c,q_85,usm_0.33_1.00_0.00,enc_avif,quality_auto/11062b_62f0356712544a87b392417662c4658df000.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(244, 240, 234, 0.7);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* About Section */
+.about {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.about-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.about-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.about-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+/* Services Section */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  border: 1px solid var(--border-black);
+}
+
+.services-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--border-black);
+}
+
+.services-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.service-item {
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--border-black);
+  border-right: 1px solid var(--border-black);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.service-item:nth-child(even) {
+  border-right: none;
+}
+
+/* Gallery Section */
+.gallery {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.gallery-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-sm);
+}
+
+.gallery-item {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.gallery-item:hover img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+/* Contact Section */
+.contact {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-item {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.contact-item a {
+  text-decoration: underline;
+}
+
+.social-links {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.social-links img {
+  width: 32px;
+  height: 32px;
+}
+
+/* Payment Options */
+.payment {
+  padding: var(--space-lg) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.payment-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  align-items: center;
+  text-align: center;
+}
+
+.payment-text {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  max-width: 600px;
+}
+
+.payment-buttons {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.payment-buttons img {
+  height: 60px;
+  width: auto;
+}
+
+/* Offline Status Section */
+.offline-status {
+  padding: var(--space-lg) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.offline-status-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.offline-status-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+    --space-xxl: 4rem;
+  }
+
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+
+  .nav-logo {
+    font-size: 0.65rem;
+  }
+
+  .nav-links {
+    gap: var(--space-sm);
+  }
+
+  .nav-links a {
+    font-size: 0.6rem;
+  }
+
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+    background-attachment: scroll;
+  }
+
+  .hero-headline {
+    font-size: clamp(1.8rem, 8vw, 3rem);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(0.55rem, 1.5vw, 0.7rem);
+  }
+
+  .services-list {
+    grid-template-columns: 1fr;
+  }
+
+  .service-item {
+    border-right: none;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .payment-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .payment-buttons img {
+    max-width: 200px;
+  }
+
+  .social-links {
+    justify-content: center;
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .about-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .services-list {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .about {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .contact {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+
+  .services-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Beauty Eternal</a>
+  <ul class="nav-links">
+    <li><a href="https://www.beautyeternal.us/">home</a></li>
+    <li><a href="https://www.beautyeternal.us/booking">booking</a></li>
+    <li><a href="https://www.beautyeternal.us/about">about</a></li>
+    <li><a href="https://www.beautyeternal.us/contact">contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">Beauty Eternal</h1>
+    <p class="hero-subtitle">001 — Let your travel back in time begin. From enhancing your internal Beauty to Pivotal Transformations, Beauty Eternal is your Loyal Expert</p>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <span class="about-label">002 — mission</span>
+    <div class="about-text">
+      <p>Let your travel back in time begin. From enhancing your internal Beauty to Pivotal Transformations, Beauty Eternal is your Loyal Expert in skincare, laser hair reduction, facials, face-lift, lips augmentation, cheeks augmentation, dermal fillers, botox injections, face sculpting, wrinkle treatment, PDO thread-lifting, butt lift, laser hair removal, IPL Photo-facial, body-sculpting and much more!</p>
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="services" id="services">
+  <div class="services-grid">
+    <div class="services-label">003 — services</div>
+    <div class="services-list">
+      <div class="service-item">Botox Injections</div>
+      <div class="service-item">Dermal Fillers</div>
+      <div class="service-item">Lips Augmentation</div>
+      <div class="service-item">Russian Lips</div>
+      <div class="service-item">Cheeks Augmentation</div>
+      <div class="service-item">Face Sculpting</div>
+      <div class="service-item">Face-lift</div>
+      <div class="service-item">PDO Thread-lifting</div>
+      <div class="service-item">Wrinkle Treatment</div>
+      <div class="service-item">Skincare</div>
+      <div class="service-item">Facials</div>
+      <div class="service-item">IPL Photo-facial</div>
+      <div class="service-item">Laser Hair Reduction</div>
+      <div class="service-item">Laser Hair Removal</div>
+      <div class="service-item">Body-sculpting</div>
+      <div class="service-item">Butt Lift</div>
+      <div class="service-item">Training</div>
+      <div class="service-item">Consulting</div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery Section -->
+<section class="gallery">
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="https://static.wixstatic.com/media/c65902_50333b7ebb414df2a715717f8e54cb1a~mv2.jpeg/v1/crop/x_0,y_224,w_576,h_576/fill/w_49,h_49,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/WhatsApp%20Image%202021-01-01%20at%201_55_14%20PM_.jpeg" alt="Women Beautification">
+    </div>
+    <div class="gallery-item">
+      <img src="https://static.wixstatic.com/media/c65902_2b2cd6803e124af8ae023bb1b9c7365e~mv2.jpeg/v1/crop/x_0,y_224,w_576,h_576/fill/w_49,h_49,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/WhatsApp%20Image%202021-01-01%20at%201_55_28%20PM_.jpeg" alt="Women Rejuvenation & Anti-Aging">
+    </div>
+    <div class="gallery-item">
+      <img src="https://static.wixstatic.com/media/c65902_bbb7397a41004de3a4b71f417053f32c~mv2.jpeg/v1/crop/x_0,y_224,w_576,h_575/fill/w_52,h_49,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/WhatsApp%20Image%202021-01-01%20at%201_54_03%20PM_.jpeg" alt="Book your appointment now">
+    </div>
+    <div class="gallery-item">
+      <img src="https://static.wixstatic.com/media/c65902_615a448f41d1403a91eb882195a006e7~mv2.jpg/v1/crop/x_27,y_0,w_523,h_525/fill/w_49,h_49,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/c65902_615a448f41d1403a91eb882195a006e7~mv2.jpg" alt="Rejuvenating & Anti-Aging Injections">
+    </div>
+  </div>
+</section>
+
+<!-- Payment Options Section -->
+<section class="payment">
+  <div class="payment-inner">
+    <p class="payment-text">We accept various methods of payment beyond conventional options and Payment Plans as well! These include Cherry, CareCredit Apple Pay, Google Pay, Affirm etc. Text us 512-387-3127 with your questions. Thank you!</p>
+    <div class="payment-buttons">
+      <img src="https://static.wixstatic.com/media/c65902_f572f1f841b3491d8b5797e1eee283c2~mv2.jpg/v1/fill/w_264,h_128,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Widget-4.jpg" alt="Aesthetics">
+      <img src="https://www.carecredit.com/sites/pc/image/carecredit_button_applynow_prequal_280x100_green_v1.png" alt="CareCredit">
+    </div>
+  </div>
+</section>
+
+<!-- Offline Status Section -->
+<section class="offline-status">
+  <div class="offline-status-inner">
+    <h2 class="offline-status-text">We're offline.</h2>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-heading">Questions?</h2>
+    <div class="contact-info">
+      <div class="contact-item">
+        <span>text us:</span>
+        <a href="tel:512-387-3127">512-387-3127</a>
+      </div>
+      <div class="contact-item">
+        <span>or use our Contact Form by clicking here</span>
+      </div>
+      <div class="social-links">
+        <a href="https://www.facebook.com/beautyeternalus">
+          <img src="https://static.wixstatic.com/media/4057345bcf57474b96976284050c00df.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/4057345bcf57474b96976284050c00df.png" alt="Facebook Profile">
+        </a>
+        <a href="https://www.youtube.com/channel/UCBG-N5_dVF84g0GKRLwO1SQ">
+          <img src="https://static.wixstatic.com/media/45bce1d726f64f1999c49feae57f6298.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/45bce1d726f64f1999c49feae57f6298.png" alt="YouTube Channel">
+        </a>
+        <a href="http://www.instagram.com/ninatupushev">
+          <img src="https://static.wixstatic.com/media/e1aa082f7c0747168d9cf43e77046142.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/e1aa082f7c0747168d9cf43e77046142.png" alt="Instagram Profile">
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Beauty Eternal</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
