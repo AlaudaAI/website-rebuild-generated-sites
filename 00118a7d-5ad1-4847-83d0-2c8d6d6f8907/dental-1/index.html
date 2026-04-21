@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arizona Biltmore Dentistry</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  :root {
+    --bg-cream: #f7f3ee;
+    --bg-white: #ffffff;
+    --text-dark: #1a1a1f;
+    --text-grey: #6b6b76;
+    --text-light-grey: #9a9aa6;
+    --accent-orange: #e8603c;
+    --accent-orange-dark: #d14e2c;
+    --accent-lavender: #b8a9e8;
+    --accent-lavender-bg: #eee8fb;
+    --success-green: #3cc28a;
+    --border-light: rgba(0,0,0,0.08);
+    --shadow-card: 0 12px 40px rgba(0,0,0,0.1);
+    --shadow-small: 0 4px 16px rgba(0,0,0,0.06);
+    --radius-pill: 100px;
+    --radius-card: 16px;
+    --radius-sm: 10px;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 40px;
+    --space-2xl: 64px;
+    --space-3xl: 96px;
+    --container-max: 1280px;
+    --transition: 0.25s ease;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--bg-cream);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3 {
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+    line-height: 1.15;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+  }
+
+  /* ===== NAVIGATION ===== */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--bg-cream);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .nav-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md) var(--space-lg);
+    height: 64px;
+  }
+
+  .nav-logo {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent-orange);
+  }
+
+  .nav-links {
+    display: none;
+    list-style: none;
+    gap: var(--space-xl);
+    align-items: center;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-grey);
+    transition: color var(--transition);
+  }
+
+  .nav-links a:hover {
+    color: var(--text-dark);
+  }
+
+  .nav-cta {
+    background-color: var(--text-dark);
+    color: var(--bg-white);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 24px;
+    border-radius: var(--radius-pill);
+    transition: background-color var(--transition), transform var(--transition);
+  }
+
+  .nav-cta:hover {
+    background-color: #2d2d35;
+    transform: translateY(-1px);
+  }
+
+  /* ===== HERO SECTION ===== */
+  .hero {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: var(--space-xl) var(--space-lg) var(--space-2xl);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    align-items: center;
+    min-height: calc(100vh - 64px);
+  }
+
+  .hero-content {
+    max-width: 560px;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(36px, 6vw, 64px);
+    letter-spacing: -0.5px;
+    color: var(--text-dark);
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero-content h1 span {
+    display: inline;
+  }
+
+  .hero-content p {
+    font-size: clamp(15px, 1.2vw, 17px);
+    color: var(--text-grey);
+    line-height: 1.7;
+    margin-bottom: var(--space-xl);
+    max-width: 440px;
+  }
+
+  .hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 14px 32px;
+    border: 1.5px solid var(--text-dark);
+    border-radius: var(--radius-pill);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-dark);
+    background: transparent;
+    transition: all var(--transition);
+  }
+
+  .hero-btn:hover {
+    background-color: var(--text-dark);
+    color: var(--bg-white);
+    transform: translateY(-2px);
+  }
+
+  .hero-btn i {
+    font-size: 12px;
+    transition: transform var(--transition);
+  }
+
+  .hero-btn:hover i {
+    transform: translateX(3px);
+  }
+
+  .hero-image {
+    width: 100%;
+    border-radius: var(--radius-card);
+    object-fit: cover;
+    height: 400px;
+  }
+
+  /* ===== ABOUT SECTION ===== */
+  .about-section {
+    background: var(--bg-white);
+    padding: var(--space-3xl) var(--space-lg);
+  }
+
+  .about-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    align-items: center;
+  }
+
+  .about-content h2 {
+    font-size: clamp(28px, 4vw, 44px);
+    color: var(--text-dark);
+    margin-bottom: var(--space-lg);
+    line-height: 1.2;
+  }
+
+  .about-content p {
+    font-size: 15px;
+    color: var(--text-grey);
+    line-height: 1.7;
+    margin-bottom: var(--space-lg);
+  }
+
+  /* ===== SERVICES SECTION ===== */
+  .services-section {
+    padding: var(--space-3xl) var(--space-lg);
+  }
+
+  .services-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+
+  .services-header {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .services-header h2 {
+    font-size: clamp(28px, 4vw, 44px);
+    color: var(--text-dark);
+    margin-bottom: var(--space-lg);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-lg);
+  }
+
+  .service-card {
+    background: var(--bg-white);
+    padding: var(--space-lg);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-small);
+    transition: all var(--transition);
+  }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card);
+  }
+
+  .service-card h3 {
+    font-size: 18px;
+    color: var(--text-dark);
+    margin-bottom: var(--space-sm);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+  }
+
+  .service-card p {
+    font-size: 14px;
+    color: var(--text-grey);
+    line-height: 1.6;
+  }
+
+  /* ===== TEAM SECTION ===== */
+  .team-section {
+    background: var(--bg-white);
+    padding: var(--space-3xl) var(--space-lg);
+  }
+
+  .team-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+
+  .team-header {
+    text-align: center;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .team-header h2 {
+    font-size: clamp(28px, 4vw, 44px);
+    color: var(--text-dark);
+    margin-bottom: var(--space-lg);
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-xl);
+  }
+
+  .team-card {
+    text-align: center;
+    background: var(--bg-cream);
+    padding: var(--space-xl);
+    border-radius: var(--radius-card);
+  }
+
+  .team-card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto var(--space-md);
+    border: 3px solid var(--bg-white);
+  }
+
+  .team-card h3 {
+    font-size: 20px;
+    color: var(--text-dark);
+    margin-bottom: var(--space-xs);
+  }
+
+  .team-card .role {
+    font-size: 14px;
+    color: var(--accent-orange);
+    font-weight: 500;
+    margin-bottom: var(--space-sm);
+  }
+
+  .team-card p {
+    font-size: 14px;
+    color: var(--text-grey);
+    line-height: 1.6;
+  }
+
+  /* ===== STATS SECTION ===== */
+  .stats-section {
+    padding: var(--space-2xl) var(--space-lg);
+    background: var(--accent-lavender-bg);
+  }
+
+  .stats-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-xl);
+    text-align: center;
+  }
+
+  .stat-item {
+    background: var(--bg-white);
+    padding: var(--space-xl);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-small);
+  }
+
+  .stat-value {
+    font-size: clamp(36px, 5vw, 52px);
+    font-weight: 700;
+    color: var(--accent-orange);
+    line-height: 1;
+    margin-bottom: var(--space-sm);
+  }
+
+  .stat-label {
+    font-size: 14px;
+    color: var(--text-grey);
+    font-weight: 500;
+  }
+
+  /* ===== VIDEO SECTION ===== */
+  .video-section {
+    padding: var(--space-3xl) var(--space-lg);
+    background: var(--bg-white);
+  }
+
+  .video-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .video-header h2 {
+    font-size: clamp(28px, 4vw, 44px);
+    color: var(--text-dark);
+    margin-bottom: var(--space-xl);
+  }
+
+  .video-embed {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding-bottom: 56.25%;
+    height: 0;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+  }
+
+  .video-embed iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  /* ===== CONTACT SECTION ===== */
+  .contact-section {
+    padding: var(--space-3xl) var(--space-lg);
+    background: var(--text-dark);
+    color: var(--bg-white);
+  }
+
+  .contact-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-xl);
+  }
+
+  .contact-item h3 {
+    font-size: 20px;
+    margin-bottom: var(--space-md);
+    color: var(--accent-orange);
+  }
+
+  .contact-item p {
+    color: var(--bg-white);
+    margin-bottom: var(--space-sm);
+  }
+
+  .contact-item a {
+    color: var(--bg-white);
+    transition: color var(--transition);
+  }
+
+  .contact-item a:hover {
+    color: var(--accent-orange);
+  }
+
+  /* ===== SOCIAL LINKS ===== */
+  .social-links {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: center;
+    margin-top: var(--space-lg);
+  }
+
+  .social-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--accent-orange);
+    color: var(--bg-white);
+    border-radius: 50%;
+    transition: all var(--transition);
+  }
+
+  .social-links a:hover {
+    background: var(--accent-orange-dark);
+    transform: translateY(-2px);
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    background: var(--bg-cream);
+    padding: var(--space-2xl) var(--space-lg) var(--space-lg);
+  }
+
+  .footer-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-xl);
+  }
+
+  .footer-section h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: var(--space-md);
+    color: var(--text-dark);
+  }
+
+  .footer-section p,
+  .footer-section a {
+    font-size: 14px;
+    color: var(--text-grey);
+    line-height: 1.6;
+    margin-bottom: var(--space-sm);
+  }
+
+  .footer-section a:hover {
+    color: var(--accent-orange);
+  }
+
+  .footer-bottom {
+    margin-top: var(--space-xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--border-light);
+    text-align: center;
+  }
+
+  .footer-bottom p {
+    font-size: 12px;
+    color: var(--text-light-grey);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (min-width: 768px) {
+    .nav-inner {
+      padding: var(--space-md) var(--space-xl);
+      height: 72px;
+    }
+
+    .nav-links {
+      display: flex;
+    }
+
+    .hero {
+      padding: var(--space-2xl) var(--space-xl) var(--space-3xl);
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2xl);
+    }
+
+    .about-inner {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2xl);
+    }
+
+    .services-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .nav-inner {
+      padding: var(--space-md) var(--space-2xl);
+    }
+
+    .hero {
+      padding: var(--space-3xl) var(--space-2xl);
+    }
+
+    .services-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<!-- Navigation -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Arizona Biltmore Dentistry</a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>#1 Rated Dentist in Phoenix, AZ</h1>
+    <p>Welcome to Arizona Biltmore Dentistry - Privately owned by a lifelong Arizona native dedicated to exceptional patient care</p>
+    <button class="hero-btn">
+      Make an Appointment <i class="fas fa-arrow-right"></i>
+    </button>
+  </div>
+  <div class="hero-visual">
+    <img src="https://www.arizonabiltmoredentistry.com/wp-content/uploads/2021/07/az-biltmore.png" alt="az-biltmore" class="hero-image">
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="about-section">
+  <div class="about-inner">
+    <div class="about-content">
+      <h2>Welcome to Arizona Biltmore Dentistry in Phoenix</h2>
+      <p>We understand that going to the dentist may not be your favorite activity, but we're also not your average dental office. At Arizona Biltmore Dentistry, we're raising the bar when it comes to the patient experience.</p>
+      <p>We focus on the connection between your oral health and overall health for a complete wellness approach, and we work hard to create a warm, welcoming environment. From our advanced technology, including digital X-rays and laser gum therapy, to our comfortable patient amenities, like WiFi and comfortable pillows, we aim to help you feel at home.</p>
+    </div>
+    <div class="about-image">
+      <img src="https://www.arizonabiltmoredentistry.com/wp-content/uploads/2018/02/dr-jeziorski.jpg" alt="Headshot of Dr. Jeziorski">
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="services-section">
+  <div class="services-inner">
+    <div class="services-header">
+      <h2>Our Services</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <h3>Cosmetic Dentistry</h3>
+        <p>Affordable in-office cosmetic dentistry procedures designed to make your dream smile come true. From porcelain veneers, to orthodontics and teeth whitening.</p>
+      </div>
+      <div class="service-card">
+        <h3>Teeth Whitening</h3>
+      </div>
+      <div class="service-card">
+        <h3>General Dentistry</h3>
+      </div>
+      <div class="service-card">
+        <h3>Restorative Dentistry</h3>
+      </div>
+      <div class="service-card">
+        <h3>Root Canal Therapy</h3>
+        <p>Treatment to remove damaged tissue deep within the tooth to save your natural tooth and relieve your pain.</p>
+      </div>
+      <div class="service-card">
+        <h3>Dentures</h3>
+      </div>
+      <div class="service-card">
+        <h3>Family Dentistry</h3>
+        <p>Dental care for kids, with visits recommended when their first tooth comes in or no later than their first birthday.</p>
+      </div>
+      <div class="service-card">
+        <h3>Dental Implants</h3>
+        <p>Treatment options for patients with missing teeth due to tooth decay, periodontal disease or an injury.</p>
+      </div>
+      <div class="service-card">
+        <h3>All-on-4</h3>
+      </div>
+      <div class="service-card">
+        <h3>Single-Tooth Implants</h3>
+      </div>
+      <div class="service-card">
+        <h3>Teeth Straightening</h3>
+      </div>
+      <div class="service-card">
+        <h3>Clear Aligners</h3>
+      </div>
+      <div class="service-card">
+        <h3>ClearCorrect</h3>
+      </div>
+      <div class="service-card">
+        <h3>CandidPro</h3>
+      </div>
+      <div class="service-card">
+        <h3>Emergency Dental Service</h3>
+      </div>
+      <div class="service-card">
+        <h3>Sleep Apnea Services</h3>
+      </div>
+      <div class="service-card">
+        <h3>Sedation Dentistry</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-value">$99</div>
+      <div class="stat-label">Emergency Exam</div>
+    </div>
+  </div>
+</section>
+
+<!-- Team Section -->
+<section class="team-section">
+  <div class="team-inner">
+    <div class="team-header">
+      <h2>Meet the Team</h2>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <h3>Dr. Aaron Jeziorski</h3>
+        <div class="role">Dentist</div>
+        <p>Arizona native Dr. Aaron Jeziorski is a passionate dentist dedicated to exceptional patient care. He mentors dental students at the Central Arizona Shelter Services Clinic and is a dedicated family man with four children.</p>
+      </div>
+      <div class="team-card">
+        <h3>Dr. Michael Hood</h3>
+        <div class="role">Dentist</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Video Section -->
+<section class="video-section">
+  <div class="video-inner">
+    <div class="video-header">
+      <h2>See Our Practice in Action</h2>
+    </div>
+    <div class="video-embed">
+      <iframe src="https://www.youtube.com/embed/BXNRVrv8GVg" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-section">
+  <div class="contact-inner">
+    <div class="contact-item">
+      <h3>Phone</h3>
+      <p><a href="tel:6029578200">(602) 957-8200</a></p>
+    </div>
+    <div class="contact-item">
+      <h3>Address</h3>
+      <p>2777 E Camelback Rd #101, Phoenix, AZ 85016</p>
+    </div>
+    <div class="contact-item">
+      <h3>Location</h3>
+      <p><a href="https://goo.gl/maps/GHyGCp5fpvD2" target="_blank">View on Google Maps</a></p>
+    </div>
+    <div class="contact-item">
+      <h3>Follow Us</h3>
+      <div class="social-links">
+        <a href="https://www.facebook.com/arizonabiltmoredentistry?fref=ts" target="_blank" title="Facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.yelp.com/biz/arizona-biltmore-dentistry-phoenix" target="_blank" title="Yelp">
+          <i class="fab fa-yelp"></i>
+        </a>
+        <a href="https://twitter.com/AZBiltmore" target="_blank" title="Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://www.youtube.com/channel/UC3jj0nOhAv1mMHxlWFN49AQ" target="_blank" title="YouTube">
+          <i class="fab fa-youtube"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-section">
+      <h4>Arizona Biltmore Dentistry</h4>
+      <p>Privately owned dental practice dedicated to exceptional patient care in Phoenix, AZ.</p>
+    </div>
+    <div class="footer-section">
+      <h4>Quick Links</h4>
+      <p><a href="/">Home</a></p>
+      <p><a href="/services">Services</a></p>
+      <p><a href="/about">About</a></p>
+      <p><a href="/contact">Contact</a></p>
+    </div>
+    <div class="footer-section">
+      <h4>Contact Info</h4>
+      <p>(602) 957-8200</p>
+      <p>2777 E Camelback Rd #101<br>Phoenix, AZ 85016</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2024 Arizona Biltmore Dentistry. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
