@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nicholson & Hall PLLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  background-image: url('https://www.nicholsonandhall.com/assets/mainstage/mainstage-bg.2506201019030.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Services Section */
+.services {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.section-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 4vw, 32px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.service-card {
+  padding: var(--space-lg);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.service-card:hover {
+  background: var(--bg-hover);
+}
+
+.service-name {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.service-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.services-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+  list-style: none;
+}
+
+.service-item {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-muted);
+  padding: var(--space-sm);
+  border-left: 2px solid var(--border-color);
+  padding-left: var(--space-md);
+}
+
+/* Team Section */
+.team {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+}
+
+.team-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.team-photo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border-color);
+}
+
+.team-name {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.team-role {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Testimonials Section */
+.testimonials {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.testimonial-card {
+  padding: var(--space-lg);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.testimonial-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+.testimonial-author {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  align-self: flex-end;
+}
+
+/* Stats Section */
+.stats {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-family: var(--font-serif);
+  font-size: clamp(48px, 10vw, 72px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.stat-label {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-muted);
+  margin-top: var(--space-md);
+}
+
+/* About Section */
+.about {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.about-content {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.about-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.about-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Contact Section */
+.contact {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.contact-label {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.contact-value {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.contact-value:hover {
+  color: var(--text-muted);
+}
+
+/* Focused Section */
+.focused {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.focused-content {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.focused-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* Excellence Section */
+.excellence {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.excellence-content {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.excellence-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* Cookies Section */
+.cookies {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.cookies-content {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.cookies-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== MOBILE (max-width: 768px) =================== */
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .hero-headline {
+    font-size: clamp(28px, 6vw, 36px);
+  }
+  
+  .services, .team, .testimonials, .about, .contact, .focused, .excellence, .cookies {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .testimonial-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .services-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .hero-cta {
+    padding: 12px 24px;
+    font-size: 10px;
+  }
+  
+  .service-card, .team-card, .testimonial-card {
+    padding: var(--space-md);
+  }
+  
+  .team-photo {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .section-title {
+    font-size: clamp(20px, 5vw, 26px);
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  .testimonial-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .about {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .services {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .team {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .testimonials {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .contact {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .focused, .excellence, .cookies {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="#" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">Nicholson & Hall PLLC</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="#" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">Nicholson & Hall PLLC</span>
+    </a>
+    <nav>
+      <a href="https://www.nicholsonandhall.com/reviews/">Reviews</a>
+      <a href="https://www.nicholsonandhall.com/results/">Results</a>
+      <a href="https://www.nicholsonandhall.com/in-the-news/">In the News</a>
+      <a href="https://www.nicholsonandhall.com/en-espanol/">En Español</a>
+      <a href="https://payments.scorpion.co/pay-now/caf29807-bc31-611d-ebd2-60bef5e13dbb">Pay Here</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">All Systems Operational</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">API v4.2 Active</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Nashville Criminal Defense Firm</span>
+      <h1 class="hero-headline">Justice Starts Here</h1>
+      <p class="hero-subheading">Fearless Defense. Compassionate Counsel.</p>
+      <a href="tel:6159133932" class="hero-cta">Call Us Today <i class="fas fa-phone" style="font-size:10px;"></i></a>
+    </div>
+  </section>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.nicholsonandhall.com/images/brand/logo-light.2506181331212.png" alt="Nicholson & Hall PLLC" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- About Section -->
+  <section class="about">
+    <span class="section-label">About Our Firm</span>
+    <h2 class="section-title">Nashville Criminal Defense & Personal Injury Lawyers</h2>
+    <div class="about-content">
+      <p class="about-text">At Nicholson & Hall PLLC, we provide more than just legal representation; we offer trusted guidance, personalized attention, and strong advocacy when you need it most. Based in Nashville, our firm has built a reputation across Middle Tennessee for delivering results in serious criminal and personal injury cases. Our firm practices in Davidson County and the surrounding counties. This includes: Davidson, Cheatham, Robertson, Rutherford, Sumner, Wilson, and Williamson Counties. With over 16 years of trial experience, we deeply understand the law, the courtroom, and the real-life challenges our clients face.</p>
+      <p class="about-text">We are proud to be known for our compassionate, nonjudgmental approach. Whether you are facing criminal charges or recovering from a devastating injury, we meet you where you are—with respect, without assumptions, and with a clear focus on protecting your future. Our mission is to provide a personalized strategy grounded in experience, straightforward communication, and results.</p>
+      <img src="https://www.nicholsonandhall.com/assets/pack/foreground/content6.2506200958288.jpg" alt="" class="about-image">
+      <p class="about-text">Our commitment to service extends beyond the courtroom. We are actively involved in the Nashville community, including our work with Dismas House, which supports successful reentry for formerly incarcerated individuals. We believe in second chances and the power of community-based change. This spirit of commitment informs how we practice law and treat every client who walks through our doors.</p>
+      <p class="about-text">We are also proud to provide bilingual services for our Spanish-speaking clients. Everyone deserves access to justice, regardless of language or background. Our firm offers culturally competent, Spanish-language support to help clients feel understood, respected, and empowered.</p>
+    </div>
+  </section>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.nicholsonandhall.com/assets/images/pg1-home.2506201018125.jpg" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Services Section -->
+  <section class="services">
+    <span class="section-label">Our Practice Areas</span>
+    <h2 class="section-title">See How We Can Help You</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <h3 class="service-name">Criminal Defense</h3>
+        <p class="service-description">Criminal defense representation including domestic violence, drug crimes, DUI & BUI defense, sex crimes, theft crimes, and violent crimes</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Personal Injury</h3>
+        <p class="service-description">Personal injury cases including assault and battery, slip and fall, tractor trailer accidents, vehicle accidents, and wrongful death</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">DCS Abuse Registry</h3>
+        <p class="service-description">Administrative hearings for DCS abuse registry cases including abuse, drug exposed child, neglect, and sexual abuse cases</p>
+      </div>
+    </div>
+    <span class="section-label" style="margin-top: var(--space-xl);">Additional Practice Areas</span>
+    <ul class="services-list">
+      <li class="service-item">Domestic Violence</li>
+      <li class="service-item">Drug Crimes</li>
+      <li class="service-item">DUI & BUI Defense</li>
+      <li class="service-item">Sex Crimes</li>
+      <li class="service-item">Theft Crimes</li>
+      <li class="service-item">Violent Crimes</li>
+      <li class="service-item">Assault And Battery</li>
+      <li class="service-item">Slip And Fall</li>
+      <li class="service-item">Tractor Trailer</li>
+      <li class="service-item">Vehicle Accidents</li>
+      <li class="service-item">Wrongful Death</li>
+    </ul>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team">
+    <span class="section-label">Our Team</span>
+    <h2 class="section-title">Meet Our Dedicated Legal Team</h2>
+    <div class="team-grid">
+      <div class="team-card">
+        <img src="https://www.nicholsonandhall.com/cms/thumbnails/34/415x415/images/staff/Chelseapic-1.2506161546142.jpg" alt="Chelsea Nicholson" class="team-photo">
+        <h3 class="team-name">Chelsea Nicholson</h3>
+        <p class="team-role">Partner</p>
+      </div>
+      <div class="team-card">
+        <img src="https://www.nicholsonandhall.com/cms/thumbnails/34/415x415/images/staff/download.2506161559010.jpeg" alt="Justin Hall" class="team-photo">
+        <h3 class="team-name">Justin Hall</h3>
+        <p class="team-role">Partner</p>
+      </div>
+      <div class="team-card">
+        <img src="https://www.nicholsonandhall.com/cms/thumbnails/34/415x415/images/staff/Will_Sosna.2506201819409.png" alt="William Sosna" class="team-photo">
+        <h3 class="team-name">William Sosna</h3>
+        <p class="team-role">Law Clerk</p>
+      </div>
+      <div class="team-card">
+        <img src="https://www.nicholsonandhall.com/cms/thumbnails/34/415x415/images/staff/Shelby-Webb.2506201820572.jpg" alt="Shelby Webb" class="team-photo">
+        <h3 class="team-name">Shelby Webb</h3>
+        <p class="team-role">Paralegal</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats">
+    <span class="section-label">Our Experience</span>
+    <div class="stat-item">
+      <div class="stat-number">16+</div>
+      <p class="stat-label">years of trial experience</p>
+    </div>
+  </section>
+
+  <!-- Focused Section -->
+  <section class="focused">
+    <h2 class="section-title">Focused. Experienced. Client-Centered.</h2>
+    <div class="focused-content">
+      <p class="focused-text">Our firm was founded on the belief that effective legal representation demands more than legal knowledge. It requires genuine care, honest communication, and a relentless commitment to justice. We have established a 48-hour response policy: when you reach out to us, you can expect timely answers and consistent updates. Our clients deserve to be heard, informed, and supported throughout the legal process.</p>
+      <p class="focused-text">As trial attorneys, we are unafraid to challenge complex forensic evidence, scrutinize the government's case, or take matters to court when necessary. We are prepared for tough battles and bring that readiness to every case we handle. Our legal strategies are tailored to your unique circumstances, whether building a criminal defense or seeking justice in a personal injury matter.</p>
+      <img src="https://www.nicholsonandhall.com/assets/pack/foreground/content3.2506200958286.jpg" alt="" class="about-image">
+      <img src="https://www.nicholsonandhall.com/assets/pack/foreground/content8.2506200958289.jpg" alt="" class="about-image">
+    </div>
+  </section>
+
+  <!-- Excellence Section -->
+  <section class="excellence">
+    <h2 class="section-title">Recognized for Excellence</h2>
+    <div class="excellence-content">
+      <p class="excellence-text">Our peers and the legal community have recognized founding Attorney Chelsea Nicholson; she was selected to Super Lawyers 2024 - 2025. While we are honored by this distinction, our most outstanding achievement is the trust we have earned from the people we serve.</p>
+      <img src="https://www.nicholsonandhall.com/images/Screenshot-2025-12-09-145552.2512091458254.png" alt="Super Lawyers" style="width: 200px; height: auto; margin: var(--space-md) 0;">
+      <img src="https://www.nicholsonandhall.com/images/CN-Super-Lawyer.2508070851255.png" alt="Super Lawyers Chelsey" style="width: 200px; height: auto; margin: var(--space-md) 0;">
+      <img src="https://www.nicholsonandhall.com/assets/images/pg2-home.2506201018123.jpg" alt="" class="about-image">
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <span class="section-label">Client Reviews</span>
+    <h2 class="section-title">What Our Clients Say</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"They were incredible to work with. They successfully assisted in my case and led me where I needed to go, which also saved me a lot of time and money."</p>
+        <span class="testimonial-author">— Former Client</span>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"They took time to meet with me one-on-one and discuss my case and review the best options. The most important thing is she was on time and ultimately got my case dismissed. Best defense attorney in Nashville for certain!"</p>
+        <span class="testimonial-author">— Tessa</span>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"I would highly recommend Chelsea to anyone in need of legal representation. She is a true professional who truly cares about her clients and goes above and beyond to achieve the best possible outcome."</p>
+        <span class="testimonial-author">— Jesse</span>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"I believe I had the best possible outcome that I could have had in my case due to Ms. Chelsea Nicholson and I felt that most of all, she cared."</p>
+        <span class="testimonial-author">— Scotty</span>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"Fight for the things that you care about, but do it in a way that will lead others to join you."</p>
+        <span class="testimonial-author">— Honorable Ruth Bader Ginsburg</span>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"The information on this website is for general information purposes only. Nothing on this site should be taken as legal advice for any individual case or situation."</p>
+        <span class="testimonial-author">— Website Disclaimer</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact">
+    <span class="section-label">Compassionate Counsel for Tough Times</span>
+    <h2 class="section-title">We Listen. We Understand. We Fight for You.</h2>
+    <div class="contact-info">
+      <div class="contact-item">
+        <span class="contact-label">Phone</span>
+        <a href="tel:6159133932" class="contact-value">(615) 913-3932</a>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Address</span>
+        <span class="contact-value">343 Harrison St.<br>Nashville, TN 37219</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Spanish Speaking</span>
+        <span class="contact-value">Hablamos Español</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Location</span>
+        <iframe src="https://maps.app.goo.gl/Nm6Uzw4j7ddwMy927" width="100%" height="300" style="border:0" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cookies Section -->
+  <section class="cookies">
+    <h2 class="section-title">Manage Cookies</h2>
+    <div class="cookies-content">
+      <h3 style="color: var(--text-primary); margin-bottom: var(--space-md);">Managing your privacy preferences</h3>
+      <p class="cookies-text">We use cookies and scripts to improve site performance, understand how you use our site, and deliver relevant content and advertising. You can choose which types of cookies to allow. Essential cookies are necessary for the site to function and cannot be turned off.</p>
+      
+      <h4 style="color: var(--text-primary); margin: var(--space-lg) 0 var(--space-md) 0;">Manage Your Consent Preferences</h4>
+      
+      <div style="margin-bottom: var(--space-md);">
+        <h5 style="color: var(--text-primary); margin-bottom: var(--space-sm);">Essential Cookies</h5>
+        <p style="color: var(--text-muted); font-size: 12px;">Always Active</p>
+        <p class="cookies-text">These cookies are required for core website functions, such as secure login, privacy opt-outs, page navigation, and submitting forms, and cannot be turned off.</p>
+      </div>
+      
+      <div style="margin-bottom: var(--space-md);">
+        <h5 style="color: var(--text-primary); margin-bottom: var(--space-sm);">Analytics Cookies</h5>
+        <p class="cookies-text">These cookies help us understand how visitors use our site so we can measure and improve performance. They tell us which pages are popular, how long people stay, and how they navigate the site. This allows us to make improvements for our visitors.</p>
+      </div>
+      
+      <div style="margin-bottom: var(--space-md);">
+        <h5 style="color: var(--text-primary); margin-bottom: var(--space-sm);">Marketing Cookies</h5>
+        <p class="cookies-text">These cookies are used to personalize the advertising you see and may involve sharing information with our advertising partners. Turning this category off - or choosing "Do Not Sell/Share" in the footer of the website - will limit this sharing and reduce personalized ads.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Nicholson & Hall PLLC</span>
+      <span class="footer-copyright">© 2026 All Rights Reserved.</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.nicholsonandhall.com/reviews/">Reviews</a>
+      <a href="https://www.nicholsonandhall.com/results/">Results</a>
+      <a href="https://www.nicholsonandhall.com/in-the-news/">In the News</a>
+      <a href="https://www.nicholsonandhall.com/en-espanol/">En Español</a>
+      <a href="https://payments.scorpion.co/pay-now/caf29807-bc31-611d-ebd2-60bef5e13dbb">Pay Here</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
