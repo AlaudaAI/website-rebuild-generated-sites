@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>McCarter | East PLLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Visual Demo */
+.hero-visual {
+  width: 100%;
+  max-width: 400px;
+}
+
+.hero-image {
+  width: 100%;
+  border-radius: 16px;
+  object-fit: cover;
+  aspect-ratio: 3/4;
+}
+
+/* Services Grid */
+.services {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.services-card {
+  padding: var(--space-xl);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  background-color: var(--bg-card);
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+.services-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.service-protocol {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.service-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.service-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 380px;
+}
+
+.service-list {
+  margin-top: var(--space-lg);
+}
+
+.service-list ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
+}
+
+.service-list li {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-muted);
+  padding: var(--space-sm);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-secondary);
+}
+
+/* Team Section */
+.team-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.team-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-xl);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+}
+
+.team-member {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--bg-card);
+}
+
+.team-photo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.team-info {
+  flex: 1;
+}
+
+.team-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.team-role {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+/* Contact Section */
+.contact-section {
+  padding: var(--space-xl) var(--space-lg);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.contact-title {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.contact-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.contact-value {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.contact-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-link:hover {
+  color: var(--text-muted);
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .services {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .contact-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .services {
+    padding: var(--space-2xl);
+  }
+
+  .services-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .team-section {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .contact-section {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .services-card {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">McCarter | East PLLC</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">McCarter | East PLLC</span>
+    </a>
+    <nav>
+      <a href="https://www.mcelaw.com/">Home</a>
+      <a href="https://www.mcelaw.com/firm-overview/">Firm Overview</a>
+      <a href="https://www.mcelaw.com/practice-areas/">Practice Areas</a>
+      <a href="https://www.mcelaw.com/blog/">Blog</a>
+      <a href="https://www.mcelaw.com/contact/">Contact</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">All Systems Operational</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">API v4.2 Active</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">General Practice Attorneys</span>
+      <h1 class="hero-headline">Local Knowledge. Innovative Results.</h1>
+      <p class="hero-subheading">Whether you need a personal injury attorney, criminal law representation, family or divorce attorneys, or virtually anything else across the legal landscape, McE Law is the firm for you.</p>
+      <a href="#consultation" class="hero-cta">Contact Today <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+    </div>
+    <div class="hero-visual">
+      <img src="https://res.cloudinary.com/debi2p5ek/image/upload/fl_progressive:steep,q_50,w_800/v1/1232/88248-94977595_1755512124587834_2269072260889313280_n-c0a4fedf-f801c689.jpg" alt="McCarter | East PLLC" class="hero-image">
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services">
+    <div class="services-card">
+      <p class="service-protocol">Practice Area 01</p>
+      <h3 class="service-title">Family & Divorce Law</h3>
+      <p class="service-description">Divorce, child custody, child support, adoption, and other family law matters</p>
+      <div class="service-list">
+        <ul>
+          <li>Divorce & Legal Separation</li>
+          <li>Child Custody</li>
+          <li>Child Support</li>
+          <li>Parental Relocation</li>
+          <li>Adoption</li>
+          <li>Juvenile Matters</li>
+          <li>Pre- & Post-Nuptial Agreements</li>
+          <li>Asset & Property Division</li>
+          <li>Alimony</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="services-card">
+      <p class="service-protocol">Practice Area 02</p>
+      <h3 class="service-title">Criminal Defense</h3>
+      <p class="service-description">Defense for serious felony crimes, misdemeanors, and DUI charges</p>
+      <div class="service-list">
+        <ul>
+          <li>Murder</li>
+          <li>Rape</li>
+          <li>Felony Drug Crimes</li>
+          <li>DUI Defense</li>
+          <li>Domestic Assault</li>
+          <li>Aggravated Assault</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="services-card">
+      <p class="service-protocol">Practice Area 03</p>
+      <h3 class="service-title">Business & Insurance Law</h3>
+      <p class="service-description">Business formation, mergers, contracts, and other business matters</p>
+      <div class="service-list">
+        <ul>
+          <li>Business Formation</li>
+          <li>Business Dissolution</li>
+          <li>Merger & Acquisition</li>
+          <li>Contract Drafting & Review</li>
+          <li>Business Disputes</li>
+          <li>Business Contract Disputes</li>
+          <li>Partnership Disputes</li>
+          <li>Contract Disputes</li>
+          <li>Non-Compete Agreements</li>
+          <li>Employment Agreement</li>
+          <li>Trade Secret Lawsuits</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="services-card">
+      <p class="service-protocol">Practice Area 04</p>
+      <h3 class="service-title">Personal Injury</h3>
+      <p class="service-description">Fighting for compensation when injured by someone else's negligence</p>
+    </div>
+
+    <div class="services-card">
+      <p class="service-protocol">Practice Area 05</p>
+      <h3 class="service-title">Real Estate</h3>
+      <p class="service-description">Helping with purchasing and building processes while avoiding potential obstacles</p>
+      <div class="service-list">
+        <ul>
+          <li>Real Estate & Construction Litigation</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="services-card">
+      <p class="service-protocol">Practice Area 06</p>
+      <h3 class="service-title">Immigration</h3>
+      <p class="service-description">Trusted immigration legal services for individuals and families seeking visas and family-based immigration solutions</p>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <span class="team-label">Family Law, Divorce, & Criminal Defense Attorneys in Murfreesboro & Woodbury, Tennessee</span>
+    <div class="team-">
+      <div class="team-member">
+        <img src="https://res.cloudinary.com/debi2p5ek/image/upload/c_fill,g_face,h_600,w_400/v1/1232/88249-19964-19964-canva-photo-editor-2020-02-03t153647860-1-54ba2b2e-d19c0830-1a043191.png" alt="Gilbert W. McCarter, II" class="team-photo">
+        <div class="team-info">
+          <div class="team-name">Gilbert McCarter</div>
+          <div class="team-role">Founding Partner</div>
+        </div>
+      </div>
+
+      <div class="team-member">
+        <img src="https://res.cloudinary.com/debi2p5ek/image/upload/c_fill,g_face,h_600,w_400/v1/1232/20175-20175-mcce-20-1-6c97ee7a.jpg" alt="Brock East" class="team-photo">
+        <div class="team-info">
+          <div class="team-name">Brock East</div>
+          <div class="team-role">Founding Partner</div>
+        </div>
+      </div>
+
+      <div class="team-member">
+        <img src="https://res.cloudinary.com/debi2p5ek/image/upload/c_fill,g_face,h_600,w_400/v1/1232/51463-bens-picture-504d1c6f.JPG" alt="Benjamin Lewis" class="team-photo">
+        <div class="team-info">
+          <div class="team-name">Benjamin Lewis</div>
+          <div class="team-role">Partner</div>
+        </div>
+      </div>
+
+      <div class="team-member">
+        <img src="https://res.cloudinary.com/debi2p5ek/image/upload/c_fill,g_face,h_600,w_400/v1/1232/85354-tony-2-6fbffcd4.jpg" alt="Tony Cain" class="team-photo">
+        <div class="team-info">
+          <div class="team-name">Anthony Cain</div>
+          <div class="team-role">Partner</div>
+        </div>
+      </div>
+
+      <div class="team-member">
+        <img src="https://res.cloudinary.com/debi2p5ek/image/upload/c_fill,g_face,h_600,w_400/v1/1232/85355-kirstin-3-df8ddede.jpg" alt="Kirstin Harper" class="team-photo">
+        <div class="team-info">
+          <div class="team-name">Kirstin Harper</div>
+          <div class="team-role">Associate Attorney</div>
+        </div>
+      </div>
+
+      <div class="team-member">
+        <img src="https://res.cloudinary.com/debi2p5ek/image/upload/c_fill,g_face,h_600,w_400/v1/1232/88250-20004-canva-photo-editor-2020-02-03t154030370-1-f415c461-7dd42b07-39ba4410.png" alt="Russell Nixon" class="team-photo">
+        <div class="team-info">
+          <div class="team-name">Russell Nixon</div>
+          <div class="team-role">Associate Attorney</div>
+        </div>
+      </div>
+
+      <div class="team-member">
+        <img src="https://res.cloudinary.com/debi2p5ek/image/upload/c_fill,g_face,h_600,w_400/v1/1232/61332-noah-connor-for-website-349a781b.jpeg" alt="Noah Connor" class="team-photo">
+        <div class="team-info">
+          <div class="team-name">Noah Connor</div>
+          <div class="team-role">Associate Attorney</div>
+        </div>
+      </div>
+
+      <div class="team-member">
+        <img src="https://res.cloudinary.com/debi2p5ek/image/upload/c_fill,g_face,h_600,w_400/v1/1232/81732-june2025-25-d147a706.jpg" alt="Brad Stephens" class="team-photo">
+        <div class="team-info">
+          <div class="team-name">Bradley Stephens</div>
+          <div class="team-role">Associate Attorney</div>
+        </div>
+      </div>
+
+      <div class="team-member">
+        <img src="https://res.cloudinary.com/debi2p5ek/image/upload/c_fill,g_face,h_600,w_400/v1/1232/85324-andi-3-3a315153.jpg" alt="Andrea Fonseca" class="team-photo">
+        <div class="team-info">
+          <div class="team-name">Andrea Fonseca</div>
+          <div class="team-role">Associate Attorney</div>
+        </div>
+      </div>
+
+      <div class="team-member">
+        <img src="https://res.cloudinary.com/debi2p5ek/image/upload/c_fill,g_face,h_600,w_400/v1/1232/85323-daryl-south-photo-for-website-111025-6feb97d4.jpg" alt="Daryl South" class="team-photo">
+        <div class="team-info">
+          <div class="team-name">Daryl South</div>
+          <div class="team-role">Of Counsel</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section" id="consultation">
+    <div class="contact-form">
+      <h2 class="contact-title">SCHEDULE A NO-COST CONSULTATION</h2>
+    </div>
+    <div class="contact-info">
+      <div class="contact-item">
+        <span class="contact-label">McCarter | East PLLC</span>
+        <span class="contact-value">316 W Main St<br>Murfreesboro, TN 37130</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Phone</span>
+        <a href="tel:+16155703047" class="contact-link contact-value">(615) 570-3047</a>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Hours</span>
+        <span class="contact-value">Mon-Fri 8:00 AM - 5:00 PM<br>Weekends & After Hours by Appointment</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Woodbury Office</span>
+        <span class="contact-value">219 W Main St<br>Woodbury, TN 37190</span>
+        <a href="tel:+16155638042" class="contact-link contact-value">(615) 563-8042</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">McCarter | East PLLC</span>
+      <span class="footer-copyright">© 2024 McCarter | East PLLC Systems, Inc. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+    <a href="https://www.mcelaw.com/">Home</a>
+      <a href="https://www.mcelaw.com/firm-overview/">Firm Overview</a>
+      <a href="https://www.mcelaw.com/practice-areas/">Practice Areas</a>
+      <a href="https://www.mcelaw.com/blog/">Blog</a>
+      <a href="https://www.mcelaw.com/contact/">Contact</a>
+  </div>
+  </footer>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
