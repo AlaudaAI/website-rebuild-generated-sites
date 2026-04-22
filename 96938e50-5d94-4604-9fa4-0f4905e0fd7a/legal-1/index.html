@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Law Office of Morgan Smith</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Social Links */
+.sidebar .social-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.sidebar .social-links a {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar .social-links a:hover {
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://contesteddivorcelawyernashville.com/wp-content/uploads/2019/10/wedding-ring-on-bed.jpeg');
+  background-size: cover;
+  background-position: center;
+  min-height: 70vh;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Services Grid */
+.services {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.service-card {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+.service-card:last-child {
+  border-bottom: none;
+}
+
+.service-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.service-protocol {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.service-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.service-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 380px;
+}
+
+/* About Section */
+.about {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.about-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 800px;
+}
+
+.about-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.about-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.about-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.awards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.award-badge img {
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: var(--space-sm);
+  background: var(--bg-card);
+}
+
+/* Team Section */
+.team {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.team-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  max-width: 600px;
+}
+
+.team-member-name {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.team-member-role {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.team-member-bio {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* Testimonials Section */
+.testimonials {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.testimonials-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.testimonials-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.testimonials-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.testimonial-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-card);
+}
+
+.testimonial-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.testimonial-author {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* Stats Section */
+.stats {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.stats-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.stats-number {
+  font-family: var(--font-serif);
+  font-size: clamp(48px, 12vw, 72px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.stats-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 400px;
+}
+
+/* Contact Section */
+.contact {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.contact-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.contact-title {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-item {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.contact-item a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+  color: var(--text-muted);
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== MOBILE (max-width: 768px) =================== */
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-lg) var(--space-md);
+    min-height: 60vh;
+  }
+  
+  .hero-headline {
+    font-size: clamp(28px, 8vw, 40px);
+  }
+  
+  .services .service-card {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .about, .team, .stats, .contact {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .testimonials {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .footer {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .mobile-header .brand-name {
+    font-size: 12px;
+  }
+  
+  .awards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .services {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-card:nth-child(even) {
+    border-left: 1px solid var(--border-color);
+  }
+
+  .awards-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .services {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .service-card {
+    padding: var(--space-2xl) var(--space-xl);
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .service-card:last-child {
+    border-right: none;
+  }
+
+  .about {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .team {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+  
+  .testimonials {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .stats {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .contact {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .service-card {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <div class="globe-icon"><i class="fas fa-balance-scale"></i></div>
+    <span class="brand-name">Law Office of Morgan Smith</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-balance-scale"></i></div>
+      <span class="brand-name">Law Office of Morgan Smith</span>
+    </a>
+    <nav>
+      <a href="https://contesteddivorcelawyernashville.com/contested-divorce/">Contested Divorce</a>
+      <a href="https://contesteddivorcelawyernashville.com/contested-divorce-faqs/">FAQs</a>
+      <a href="https://contesteddivorcelawyernashville.com/about-us/">About Us</a>
+      <a href="https://contesteddivorcelawyernashville.com/blog/">Blog</a>
+      <a href="https://contesteddivorcelawyernashville.com/contact/">Contact Us</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Available M-F 8:30am-4:30pm</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Nashville, TN Licensed</span>
+    </div>
+    <div class="social-links">
+      <a href="https://www.linkedin.com/in/morgan-smith-69a15ba/">LinkedIn</a>
+      <a href="https://www.facebook.com/pages/category/Corporate-Lawyer/The-Law-Office-Of-Morgan-Smith-1874609429430262/">Facebook</a>
+      <a href="https://twitter.com/nashlawyer">Twitter</a>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Since 2007</span>
+      <h1 class="hero-headline">Divorce attorney Morgan Smith Law Office</h1>
+      <p class="hero-subheading">Law on Your Schedule</p>
+      <a href="#contact" class="hero-cta">Get a Consultation <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://contesteddivorcelawyernashville.com/wp-content/uploads/2019/10/business-man-alone.jpeg" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+  <!-- Services Grid -->
+  <section class="services">
+    <div class="service-card">
+      <p class="service-protocol">Service 01</p>
+      <h3 class="service-title">Contested Divorce</h3>
+      <p class="service-description">Legal representation for contested divorce cases with complex disputes and litigation</p>
+    </div>
+    <div class="service-card">
+      <p class="service-protocol">Service 02</p>
+      <h3 class="service-title">Grounds for Divorce</h3>
+      <p class="service-description">Legal guidance on Tennessee divorce grounds governed by statute</p>
+    </div>
+    <div class="service-card">
+      <p class="service-protocol">Service 03</p>
+      <h3 class="service-title">Divorce & Small Businesses</h3>
+      <p class="service-description">Legal assistance for divorces involving small business valuation and complications</p>
+    </div>
+    <div class="service-card">
+      <p class="service-protocol">Service 04</p>
+      <h3 class="service-title">Contested Divorces with Kids</h3>
+      <p class="service-description">Legal representation for contested divorce cases involving parenting time disputes</p>
+    </div>
+    <div class="service-card">
+      <p class="service-protocol">Service 05</p>
+      <h3 class="service-title">Same-Sex Divorces</h3>
+      <p class="service-description">Legal assistance for same-sex divorce cases with unique asset complications</p>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about">
+    <div class="about-text">
+      <span class="about-label">About Us</span>
+      <h2 class="about-title">Contested Divorce Issues Are Our Business</h2>
+      <p class="about-description">Divorce is unlike any other litigation you may deal with in your lifetime. It is a highly emotional and adversarial process. How do you put a value on quality of time with your children? How do you move on without being financially crippled? Uncontested divorces are a more logical and less emotional process. After all, if your divorce is uncontested, you and your spouse are at least on decent enough terms to have worked out all of the terms of the settlement. What happens when the divorce is contested though? That's why we are here.</p>
+      
+      <p class="about-description">Don't try to face divorce alone. A divorce is one of the most stressful and emotionally draining times in a persons life. It is not unusual for clients to have issues with their friends, family, substances, or work when dealing with a divorce. The stress and pressure of litigation is even greater if the action is contested or disputed. It is important that you understand your options, and that your divorce lawyer understands your goals, to ensure that you and your family end up in the best position possible.</p>
+    </div>
+    
+    <div class="awards-grid">
+      <div class="award-badge">
+        <img src="https://contesteddivorcelawyernashville.com/wp-content/uploads/2015/06/Screen-Shot-2016-04-05-at-11.13.55-AM.png" alt="Award">
+      </div>
+      <div class="award-badge">
+        <img src="https://contesteddivorcelawyernashville.com/wp-content/uploads/2019/04/2015-2019-10-BEST-FLA-.jpg" alt="10 Best Award">
+      </div>
+      <div class="award-badge">
+        <img src="https://contesteddivorcelawyernashville.com/wp-content/uploads/2017/08/avvo-img-superb.png" alt="Avvo Superb Rating">
+      </div>
+      <div class="award-badge">
+        <img src="https://contesteddivorcelawyernashville.com/wp-content/uploads/2019/10/paralegal-03.png" alt="Professional Badge">
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team">
+    <span class="team-label">Attorney</span>
+    <div class="team-member">
+      <h3 class="team-member-name">Morgan Smith</h3>
+      <p class="team-member-role">Divorce Attorney</p>
+      <p class="team-member-bio">A Three Best Rated Divorce Attorney in Nashville, Tennessee who understands the psychology of the court room, the positions of the judges, local Nashville divorce rules and practices.</p>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <span class="testimonials-label">Client Reviews</span>
+    <h2 class="testimonials-title">What Our Clients Say</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-item">
+        <p class="testimonial-quote">"[Follow](https://www.facebook.com/pages/category/Corporate-Lawyer/The-Law-Office-Of-Morgan-Smith..."</p>
+        <p class="testimonial-author">Reviewer 1</p>
+      </div>
+      <div class="testimonial-item">
+        <p class="testimonial-quote">"[Follow](https://twitter.com/nashlawyer ..."</p>
+        <p class="testimonial-author">Reviewer 2</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats">
+    <span class="stats-label">Experience</span>
+    <div>
+      <span class="stats-number">Since 2007</span>
+    </div>
+    <p class="stats-description">years in practice serving clients in Davidson County Circuit Court with contested divorce matters and family law issues.</p>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact" id="contact">
+    <span class="contact-label">contact us today</span>
+    <h2 class="contact-title">Get a Consultation</h2>
+    <div class="contact-info">
+      <div class="contact-item">
+        <a href="mailto:morgan@lawonyourschedule.com">morgan@lawonyourschedule.com</a>
+      </div>
+      <div class="contact-item">
+        <a href="tel:(615) 620-5848">(615) 620-5848</a>
+      </div>
+      <div class="contact-item">
+        1222 16th Avenue South Suite 23, Nashville, TN 37212
+      </div>
+      <div class="contact-item">
+        Available M-F from 8:30am-4:30pm
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Law Office of Morgan Smith</span>
+      <span class="footer-copyright">Copyright Morgan Smith All rights reserved</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://contesteddivorcelawyernashville.com/contested-divorce/">Contested Divorce</a>
+      <a href="https://contesteddivorcelawyernashville.com/contested-divorce-faqs/">FAQs</a>
+      <a href="https://contesteddivorcelawyernashville.com/about-us/">About Us</a>
+      <a href="https://contesteddivorcelawyernashville.com/blog/">Blog</a>
+      <a href="https://contesteddivorcelawyernashville.com/contact/">Contact Us</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
