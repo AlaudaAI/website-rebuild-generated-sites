@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Law Office of R. Timothy Hogan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.social-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Services Section */
+.services {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.services-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-2xl);
+}
+
+.services-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.services-title {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 6vw, 42px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--text-primary);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+
+.service-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: var(--space-xl);
+  transition: all 0.3s ease;
+}
+
+.service-card:hover {
+  background: var(--bg-hover);
+}
+
+.service-name {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.service-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.services-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+}
+
+.service-item {
+  padding: var(--space-md);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-card);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+/* About Section */
+.about {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.about-content {
+  max-width: 700px;
+}
+
+.about-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.about-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.about-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: var(--space-lg);
+}
+
+/* Testimonials Section */
+.testimonials {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.testimonials-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.testimonials-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.testimonials-title {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 6vw, 42px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--text-primary);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+
+.testimonial-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: var(--space-xl);
+}
+
+.testimonial-quote {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+  font-style: italic;
+}
+
+.testimonial-author {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* Team Section */
+.team {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.team-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.team-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.team-title {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 6vw, 42px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--text-primary);
+}
+
+.team-member {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: var(--space-xl);
+}
+
+.member-name {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.member-role {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-lg);
+}
+
+.member-bio {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* Contact Section */
+.contact {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.contact-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.contact-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.contact-title {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 6vw, 42px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--text-primary);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.contact-item-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.contact-item-value {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-primary);
+}
+
+.contact-item-value a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-item-value a:hover {
+  color: var(--text-muted);
+}
+
+.map-container {
+  margin-top: var(--space-xl);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== MOBILE (max-width: 768px) =================== */
+@media (max-width: 768px) {
+  .hero-headline {
+    font-size: 32px;
+  }
+  
+  .hero-subheading {
+    font-size: 16px;
+  }
+  
+  .services-title, .team-title, .contact-title, .testimonials-title {
+    font-size: 28px;
+  }
+  
+  .about-title {
+    font-size: 24px;
+  }
+  
+  .service-card, .team-member, .testimonial-card {
+    padding: var(--space-lg);
+  }
+  
+  .hero, .services, .about, .team, .contact, .testimonials {
+    padding: var(--space-lg) var(--space-md);
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+  }
+
+  .services-list {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contact-info {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .services {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .testimonials {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .about {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .team {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .contact {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="#" class="brand">
+    <div class="globe-icon"><i class="fas fa-scale-balanced"></i></div>
+    <span class="brand-name">Law Office of R. Timothy Hogan</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="#" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-scale-balanced"></i></div>
+      <span class="brand-name">Law Office of R. Timothy Hogan</span>
+    </a>
+    <nav>
+      <a href="https://www.murfreesborotnattorney.com/">Home</a>
+      <a href="https://www.murfreesborotnattorney.com/firm-overview">Firm Overview</a>
+      <a href="https://www.murfreesborotnattorney.com/attorney-profile">Attorney Profile</a>
+      <a href="https://www.murfreesborotnattorney.com/practice-areas">Practice Areas</a>
+      <a href="https://www.murfreesborotnattorney.com/resources">Resources</a>
+      <a href="https://www.murfreesborotnattorney.com/media">Media</a>
+      <a href="https://www.murfreesborotnattorney.com/contact-us">Contact Us</a>
+    </nav>
+    <div class="social-links">
+      <a href="https://www.instagram.com/rthoganlaw/">Instagram</a>
+    </div>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Available for Consultation</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Serving Murfreesboro, TN</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Family Law Attorney Murfreesboro TN</span>
+      <h1 class="hero-headline">Protecting Your Rights</h1>
+      <p class="hero-subheading">Dedicated to the Protection of Your Rights — Personal Service, Efficiency, and Affordability</p>
+      <a href="tel:6156868491" class="hero-cta">Call Today <i class="fas fa-phone" style="font-size:10px;"></i></a>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.murfreesborotnattorney.com/img/ig-white.svg" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.murfreesborotnattorney.com/img/gmb-icon.svg" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- About Section -->
+  <section class="about">
+    <div class="about-content">
+      <span class="about-label">Personal Service — Efficiency — Affordability</span>
+      <h2 class="about-title">Dedicated to the Protection of Your Rights</h2>
+      <p class="about-text">When you are involved in a legal case, you must project your rights in your best interest. You need the assistance of a lawyer who has the knowledge to handle your case with competency and care. The attorneys committed to seeking the best possible result in your case can make a large difference. You would want someone who will listen and care about your problems in Murfreesboro, Tennessee. You need an attorney who takes care of your needs and priorities in the case.</p>
+      <p class="about-text">R. Timothy Hogan is an experienced attorney who commits himself to provide dedicated and personal legal support to each of the clients. Mr. Hogan works as a sole practitioner and provides clients with accessible and personalized legal support. He works diligently to resolve disputes in the most efficient and cost-effective manner possible.</p>
+      <p class="about-text">At The Law Office of R. Timothy Hogan, we give our clients the utmost priority. We understand how they are having a hard time dealing with a legal case. We make sure to listen to their concerns and answer them in a prompt manner. We keep them informed with focused legal services.</p>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/loading.gif" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Services Section -->
+  <section class="services">
+    <div class="services-header">
+      <span class="services-label">Legal Services</span>
+      <h2 class="services-title">Winning arguments in all aspects of family laws in Murfreesboro TN</h2>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <h3 class="service-name">Family Law</h3>
+        <p class="service-description">Comprehensive family law services with dedicated personal legal support</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Divorce</h3>
+        <p class="service-description">Professional divorce law representation with years of court experience</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Child Custody & Visitation</h3>
+        <p class="service-description">Legal services for child custody and support, securing custody and visitation rights</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Divisions Of Property</h3>
+        <p class="service-description">Asset and debt division services including forced sales of properties</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Father's Rights</h3>
+        <p class="service-description">Establishing paternal rights and visitations</p>
+      </div>
+    </div>
+
+    <div class="services-list">
+      <div class="service-item">Dissolution of Marriage and Legal Separation</div>
+      <div class="service-item">Post-judgment Modification</div>
+      <div class="service-item">Child Support and Custody Modifications</div>
+      <div class="service-item">Spousal Support</div>
+      <div class="service-item">Adoption</div>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/download.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/download_white.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Team Section -->
+  <section class="team">
+    <div class="team-header">
+      <span class="team-label">Attorney Profile</span>
+      <h2 class="team-title">Your Legal Advocate</h2>
+    </div>
+    <div class="team-member">
+      <h3 class="member-name">R. Timothy Hogan</h3>
+      <p class="member-role">Attorney</p>
+      <p class="member-bio">An experienced attorney who commits himself to provide dedicated and personal legal support to each of the clients. Mr. Hogan works as a sole practitioner and provides clients with accessible and personalized legal support.</p>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/refresh_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/refresh_white_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Contact Section -->
+  <section class="contact">
+    <div class="contact-header">
+      <span class="contact-label">Get Legal Help Today</span>
+      <h2 class="contact-title">Have A Question?</h2>
+    </div>
+    <div class="contact-info">
+      <div class="contact-item">
+        <span class="contact-item-label">Phone</span>
+        <div class="contact-item-value">
+          <a href="tel:6156868491">(615) 686-8491</a><br>
+          <span>Toll Free: (888) 336-6297</span><br>
+          <span>After Hours: (615) 969-8248</span>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-item-label">Email</span>
+        <div class="contact-item-value">
+          <a href="mailto:rthogan10@gmail.com">rthogan10@gmail.com</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-item-label">Address</span>
+        <div class="contact-item-value">
+          218 West Main Street<br>
+          Murfreesboro, TN 37130
+        </div>
+      </div>
+    </div>
+    <div class="map-container">
+      <iframe src="https://goo.gl/maps/IHlqZ" width="100%" height="300" style="border:0" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/info_white_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/undo_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Law Office of R. Timothy Hogan</span>
+      <span class="footer-copyright">© 2026 Law Office Of R. Timothy Hogan. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.murfreesborotnattorney.com/">Home</a>
+      <a href="https://www.murfreesborotnattorney.com/firm-overview">Firm Overview</a>
+      <a href="https://www.murfreesborotnattorney.com/attorney-profile">Attorney Profile</a>
+      <a href="https://www.murfreesborotnattorney.com/practice-areas">Practice Areas</a>
+      <a href="https://www.murfreesborotnattorney.com/resources">Resources</a>
+      <a href="https://www.murfreesborotnattorney.com/media">Media</a>
+      <a href="https://www.murfreesborotnattorney.com/contact-us">Contact Us</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
