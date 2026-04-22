@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wildflower Wellness Med Spa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  position: relative;
+}
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.1;
+}
+
+.hero-background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Promotions Banner */
+.promotions {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+  padding: var(--space-md) var(--pad-x);
+  text-align: center;
+  overflow: hidden;
+}
+
+.promotions-scroll {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  animation: scroll-left 20s linear infinite;
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Philosophy Section */
+.philosophy {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.philosophy-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.philosophy-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.philosophy-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.service-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.service-cell:last-child {
+  border-bottom: none;
+}
+
+.service-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.service-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.service-cell:hover .service-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+.service-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: var(--space-xs);
+}
+
+.service-name {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.service-description {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: rgba(26, 26, 26, 0.7);
+  margin-top: var(--space-xs);
+}
+
+/* Team Section */
+.team {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.team-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.team-heading {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-lg);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.team-member {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.team-member-name {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-xs);
+}
+
+.team-member-role {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-weight: 300;
+  font-style: italic;
+  margin-bottom: var(--space-sm);
+}
+
+.team-member-bio {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* Stats Section */
+.stats {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.stats-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.stats-heading {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-lg);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.stat-item {
+  text-align: center;
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.stat-value {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 300;
+  line-height: 1;
+  margin-bottom: var(--space-xs);
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* Testimonials */
+.testimonials {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.testimonials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonials-heading {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-lg);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.testimonial {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.testimonial-text {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+}
+
+.testimonial-author {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+/* Contact Section */
+.contact {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-detail {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.contact-detail-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+}
+
+.contact-detail-text {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.contact-detail-text a {
+  border-bottom: 1px solid var(--border-black);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1rem;
+    --space-sm: 0.75rem;
+    --space-md: 1.5rem;
+    --space-lg: 3rem;
+    --space-xl: 4rem;
+  }
+
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+
+  .nav-logo {
+    font-size: 0.65rem;
+  }
+
+  .nav-links {
+    gap: var(--space-sm);
+  }
+
+  .nav-links a {
+    font-size: 0.65rem;
+  }
+
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .hero-headline {
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+    margin-bottom: var(--space-md);
+  }
+
+  .hero-subtitle {
+    font-size: 0.65rem;
+    max-width: 340px;
+  }
+
+  .philosophy {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .philosophy-text {
+    font-size: clamp(1rem, 4vw, 1.25rem);
+  }
+
+  .services {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .service-cell {
+    padding: var(--space-sm);
+  }
+
+  .team {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .team-grid {
+    gap: var(--space-md);
+  }
+
+  .team-member {
+    padding: var(--space-sm);
+  }
+
+  .stats {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .testimonials {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .testimonials-grid {
+    gap: var(--space-md);
+  }
+
+  .testimonial {
+    padding: var(--space-sm);
+  }
+
+  .contact {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .contact-detail {
+    padding: var(--space-sm);
+  }
+
+  .contact-heading {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .philosophy-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .service-cell:nth-child(-n+2) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .service-cell:nth-child(3) {
+    border-right: none;
+  }
+
+  .service-cell:nth-child(-n+3) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .philosophy {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .contact {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Wildflower Wellness Med Spa</a>
+  <ul class="nav-links">
+    <li><a href="https://www.wildflowerwellnessiv.com/services">services</a></li>
+    <li><a href="https://www.wildflowerwellnessiv.com/about">about</a></li>
+    <li><a href="https://www.wildflowerwellnessiv.com/memberships">memberships</a></li>
+    <li><a href="https://www.wildflowerwellnessiv.com/contact">contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-background">
+    <img src="https://images.squarespace-cdn.com/content/v1/6677762dff6aa75dfff30918/e538701b-6008-4621-8fd5-cefdc25da5ee/WWMS.florals1.png-24.png?format=1500w" alt="Wildflower Wellness">
+  </div>
+  <h1 class="hero-headline">Wellness Beyond<br>Treatment</h1>
+  <p class="hero-subtitle">001 — where education meets empowerment, and every client feels heard, understood, and supported through personalized care</p>
+</section>
+
+<!-- Promotions Banner -->
+<section class="promotions">
+  <div class="promotions-scroll">
+    50% off first IV with membership! Discount applied at spa. • BUY ONE FILLER SYRINGE GET ONE SYRINGE • 50% off first IV with membership! Discount applied at spa. •
+  </div>
+</section>
+
+<!-- Philosophy Section -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">002 — what makes us different</span>
+    <div class="philosophy-text">
+      <p>At Wildflower Wellness Med Spa, we believe wellness is about more than treatments—it's about education, empowerment, and trust. We take the time to truly listen to every client, understand their preferences, and explain each step of care. If you're curious, we'll dive deeper with you—reviewing labs, exploring vitamin levels, or checking hormones—to uncover the "why" behind how you're feeling.</p>
+      <p>Unlike places that rush or upsell, we keep our pricing transparent and inclusive, so you're never surprised with extra charges. Our team has decades of hands-on nursing experience, and with low turnover, you'll see familiar faces who know you and your story. From expert IV access to safe, tailored treatments, we focus on adapting care to your unique needs—not on one-size-fits-all solutions.</p>
+      <p>Here, you'll never feel like just another appointment—you'll feel heard, understood, and supported.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Services Grid -->
+<section class="services" id="services">
+  <div class="services-grid">
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/6677762dff6aa75dfff30918/646c8295-1d44-4dfc-a471-efd95506e238/IMG_7901.JPG" alt="IV Therapy">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">iv therapy</span>
+      </div>
+      <p class="service-description">IV treatments including The Skinny Drip and Defender</p>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/6677762dff6aa75dfff30918/a657573b-b106-45a8-8bd6-8510246dc1aa/IMG_1204.jpeg" alt="Botox">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">botox</span>
+      </div>
+      <p class="service-description">Injectable treatments for cosmetic enhancement</p>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/6677762dff6aa75dfff30918/8faa2bff-dae2-4765-a589-a4251bcafeff/IMG_7326.png" alt="Filler">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">filler</span>
+      </div>
+      <p class="service-description">Dermal filler treatments for facial enhancement</p>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/6677762dff6aa75dfff30918/1768331668673-65DOKHFYET3E8WCP7YEQ/unsplash-image-e7jpGYe7OtU.jpg" alt="GLP-1">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">glp-1</span>
+      </div>
+      <p class="service-description">Weight management treatments including Tirzepatide</p>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/6677762dff6aa75dfff30918/78eceee0-47c5-45c5-beb1-9b8af39a24c3/Screen+Shot+2025-09-25+at+2.59.17+PM.png" alt="Glutathione Shots">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">glutathione shots</span>
+      </div>
+      <p class="service-description">Antioxidant injections for wellness</p>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/6677762dff6aa75dfff30918/14e6845b-68ab-4a00-b1bc-e62e2d1e7b26/IMG_1250.png" alt="B12 Shots">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">b12 shots</span>
+      </div>
+      <p class="service-description">Vitamin B12 injections for energy and wellness</p>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/6677762dff6aa75dfff30918/b85cbf65-1c13-4231-a89c-282a846a484e/Screen+Shot+2025-09-26+at+2.15.57+PM.png" alt="Skinny Lush Shots">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">skinny lush shots</span>
+      </div>
+      <p class="service-description">Tirzepatide injections for weight management</p>
+    </div>
+  </div>
+</section>
+
+<!-- Team Section -->
+<section class="team" id="team">
+  <div class="team-inner">
+    <h2 class="team-heading">003 — our team</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <h3 class="team-member-name">christiana philastre</h3>
+        <p class="team-member-role">Founder</p>
+        <p class="team-member-bio">Christiana created Wildflower Wellness Med Spa to blend science with self-care. She brings an eye for detail, a passion for wellness, and a commitment to helping every client feel confident and cared for.</p>
+      </div>
+      <div class="team-member">
+        <h3 class="team-member-name">joseph philastre</h3>
+        <p class="team-member-role">Co-Owner & Clinical Director</p>
+        <p class="team-member-bio">With 18 years of ICU experience as an RN, Joe brings advanced medical expertise and a calm, compassionate touch. Known as a master of IV access, he can get even the hardest sticks with ease.</p>
+      </div>
+      <div class="team-member">
+        <h3 class="team-member-name">beth bowen</h3>
+        <p class="team-member-role">Registered Nurse</p>
+        <p class="team-member-bio">With 38 years of nursing experience, Beth is our Botox and Filler expert. She also specializes in vascular access and is known for her skill with even the toughest IV sticks, drawing on a career that includes PICC team and women's health roles in mother–baby care.</p>
+      </div>
+      <div class="team-member">
+        <h3 class="team-member-name">chase domingue</h3>
+        <p class="team-member-role">Registered Nurse</p>
+        <p class="team-member-bio">With 15 years of experience in the ER, ICU, and as a Flight Nurse, Chase brings critical care expertise and a steady hand to every treatment. His background in high-pressure settings ensures patients feel safe, supported, and in skilled hands.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats" id="stats">
+  <div class="stats-inner">
+    <h2 class="stats-heading">004 — by the numbers</h2>
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-value">50%</div>
+        <div class="stat-label">off first IV with membership</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">18</div>
+        <div class="stat-label">years of ICU experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">38</div>
+        <div class="stat-label">years of nursing experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">15</div>
+        <div class="stat-label">years of ER, ICU, and Flight Nurse experience</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials" id="testimonials">
+  <div class="testimonials-inner">
+    <h2 class="testimonials-heading">005 — hear from our happy clients</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <p class="testimonial-text">"My wife and I enjoyed going to get an IV together. The atmosphere was relaxing and the staff kind. The IV helped boost my energy and made me feel great. Wildflower Wellness Med Spa is a great way to relax and restore your body."</p>
+        <p class="testimonial-author">chris hefner</p>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-text">"I was hesitant about trying IV therapy - it seemed like one of those trends that might be too good to be true. But after my experience here, I'm completely convinced! The staff was incredibly knowledgeable and took the time to explain everything and answered my questions. They clearly know their stuff, which immediately put me at ease."</p>
+        <p class="testimonial-author">farhaud a</p>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-text">"I love this place!!! I do the glutathione and B12 shots which are amazing. I have never felt better. Now I'm trying the IV The Skinny Drip. Christina and Beth are knowledgeable professionals I trust completely. Ask them anything."</p>
+        <p class="testimonial-author">melinda zito o'brien</p>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-text">"I recently started getting Skinny Lush Shots (Tirzepatide) here, and I couldn't be happier with my experience! The staff is knowledgeable, professional, and incredibly welcoming. They took the time to answer all my questions and made me feel completely at ease."</p>
+        <p class="testimonial-author">juliana woodall</p>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-text">"I love this place! It's so beautiful and serene inside that I felt immediately relaxed. I enjoyed the friendly vibes and felt great afterwards! I'll be back!!"</p>
+        <p class="testimonial-author">carolyn kosmas</p>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-text">"Beautiful facility, great service, and felt wonderful after my IV treatment. I got the defender right before Christmas break since I'm a teacher and it helped me stay healthy through the holidays."</p>
+        <p class="testimonial-author">melissa h.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-heading">Let's Connect!</h2>
+    <div class="contact-info">
+      <div class="contact-detail">
+        <div class="contact-detail-label">location</div>
+        <div class="contact-detail-text">106 South Harris Street Suite 101<br>Round Rock, TX 78664</div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-label">hours</div>
+        <div class="contact-detail-text">Wellness Services:<br>Walk-ins welcome on Wednesdays, 9:00a – 3:00p<br>Other days/times available by appointment<br><br>Boutique Hours:<br>Open Monday – Friday, 9:00 AM – 3:00 PM</div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-label">contact</div>
+        <div class="contact-detail-text">
+          <a href="tel:5122756458">(512) 275-6458</a><br>
+          <a href="mailto:admin@wildflowerwellnessiv.com">admin@wildflowerwellnessiv.com</a>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-label">book now</div>
+        <div class="contact-detail-text">
+          <a href="https://wildflower.zenoti.com/webstoreNew/">book online</a>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-label">social media</div>
+        <div class="contact-detail-text">
+          <a href="https://www.facebook.com/profile.php?id=61567916438695">facebook</a><br>
+          <a href="https://www.instagram.com/wildflowerwellnessmedspa/">instagram</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Wildflower Wellness Med Spa</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
