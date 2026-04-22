@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signature Aesthetics & IV Lounge</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* About Section */
+.about {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.about-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.about-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.about-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.about-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.service-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.service-cell:last-child {
+  border-bottom: none;
+}
+
+.service-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.service-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.service-cell:hover .service-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+.service-meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding-top: var(--space-xs);
+}
+
+.service-name {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.service-description {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.4;
+  color: var(--placeholder-gray);
+}
+
+/* Team Section */
+.team {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.team-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.team-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.team-member {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.team-member-name {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-xs);
+}
+
+.team-member-role {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--placeholder-gray);
+  margin-bottom: var(--space-sm);
+}
+
+.team-member-bio {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Testimonials Section */
+.testimonials {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.testimonials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.testimonials-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.testimonial {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.testimonial-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: var(--space-sm);
+  font-style: italic;
+}
+
+.testimonial-author {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+/* Contact Section */
+.contact {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.contact-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.contact-value {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+
+.contact-value a {
+  transition: opacity 0.3s ease;
+}
+
+.contact-value a:hover {
+  opacity: 0.7;
+}
+
+.working-hours {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1rem;
+  }
+  
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+  
+  .nav-logo {
+    font-size: 0.6rem;
+  }
+  
+  .nav-links {
+    gap: var(--space-sm);
+  }
+  
+  .nav-links a {
+    font-size: 0.6rem;
+  }
+  
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+    min-height: 80vh;
+  }
+  
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .service-cell {
+    padding: var(--space-sm);
+  }
+  
+  .testimonial-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer {
+    text-align: center;
+  }
+  
+  .footer-right {
+    justify-content: center;
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .about-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .service-cell:nth-child(odd):not(:last-child) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .team-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+    align-items: start;
+  }
+
+  .testimonial-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .about {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .team {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .testimonials {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .contact {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .service-cell:nth-child(3n) {
+    border-right: none;
+  }
+
+  .service-cell:nth-child(-n+3) {
+    border-bottom: 1px solid var(--border-black);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Signature Aesthetics & IV Lounge</a>
+  <ul class="nav-links">
+    <li><a href="https://signatureaestheticstx.com/about-us/">about us</a></li>
+    <li><a href="https://signatureaestheticstx.com/services/">services</a></li>
+    <li><a href="https://signatureaestheticstx.com/gallery/">gallery</a></li>
+    <li><a href="https://signatureaestheticstx.com/contact/">contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <h1 class="hero-headline">Experience the Best in<br>Medical Aesthetics at Signature Aesthetics & IV Lounge</h1>
+  <p class="hero-subtitle">001 — At Signature Aesthetics & IV Lounge, we believe that confidence starts with self-care. As the best medical spa in Liberty Hill, TX, we provide individualized treatments that enhance natural beauty and promote well-being.</p>
+</section>
+
+<!-- About Section -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <span class="about-label">002 — mission</span>
+    <div class="about-text">
+      <p>Whether you're looking for medical aesthetics in Liberty Hill, TX, advanced skin care treatments, or rejuvenating IV therapy, our expert team is here to help you achieve radiant, youthful skin.</p>
+      <p>Led by Bethany Meyer, a highly skilled nurse practitioner and aesthetic expert, Signature Aesthetics & IV Lounge offers exceptional care in a comfortable environment. Because of Bethany's extensive experience in the medical field, every treatment is performed with precision and expertise, prioritizing patient safety and satisfaction.</p>
+    </div>
+  </div>
+</section>
+<div style="width:100%;margin:2rem 0"><img src="https://signatureaestheticstx.com/storage/2022/09/Signature-Aesthetics_Logo.svg" alt="Logo Signature Aesthetics & IV Lounge | Liberty Hill, Tx" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Services Grid -->
+<section class="services" id="services">
+  <div class="services-grid">
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://signatureaestheticstx.com/storage/elementor/thumbs/signature-aestheticstx-biostimulator-qvdk1vv76zb6f7uzqy3rrkh0ujrsc0hdmz2o596amk.png" alt="Biostimulators Treatment">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">biostimulators</span>
+        <span class="service-description">Enhance collagen production for firmer, younger-looking skin</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://signatureaestheticstx.com/storage/elementor/thumbs/signature-aestheticstx-biostimulator-qvdk1vv76zb6f7uzqy3rrkh0ujrsc0hdmz2o596amk.png" alt="Sculptra Treatment">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">sculptra®</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://signatureaestheticstx.com/storage/elementor/thumbs/signature-aestheticstx-biostimulator-qvdk1vv76zb6f7uzqy3rrkh0ujrsc0hdmz2o596amk.png" alt="Hyperdilute Radiesse Treatment">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">hyperdilute radiesse</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://signatureaestheticstx.com/storage/elementor/thumbs/chemical-peels-liberty-hill-texas-tx-signatureaesthetics-qufwgu23rkuuli25oqjpfoghiwns7eteimazuelyks.jpeg" alt="Chemical Peels Treatment">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">chemical peels</span>
+        <span class="service-description">Reveal a fresh, glowing complexion by exfoliating dead skin cells</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://signatureaestheticstx.com/storage/elementor/thumbs/signature-aesthetics-Clinical-Grade-Skincare-qvdk20ke55hm19o5zi4wm1abth4mei01bmc3jmzbrg.png" alt="Clinical Grade Skincare">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">clinical grade skincare</span>
+        <span class="service-description">Transform your skin with physician-approved products</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://signatureaestheticstx.com/storage/elementor/thumbs/custom-facial-liberty-hill-texas-tx-signatureaesthetics-qvdk1q861z3ghk36nvo0clw9a8jl1tuzm75r9lennw.jpeg" alt="Custom Facial Treatment">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">custom facial treatment</span>
+        <span class="service-description">Target specific skin concerns with a tailored facial experience</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://signatureaestheticstx.com/storage/elementor/thumbs/dermal-fillers-liberty-hill-texas-tx-signatureaesthetics-qufwgc765q6egws3l0tsmayq8l3t55ui45wrq5cfv0.jpeg" alt="Dermal Fillers Treatment">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">dermal fillers</span>
+        <span class="service-description">This treatment restores volume and smoothes fine lines and wrinkles</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://signatureaestheticstx.com/storage/elementor/thumbs/dermal-fillers-liberty-hill-texas-tx-signatureaesthetics-qufwgc765q6egws3l0tsmayq8l3t55ui45wrq5cfv0.jpeg" alt="Juvederm Treatment">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">juvederm®</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://signatureaestheticstx.com/storage/elementor/thumbs/dermal-fillers-liberty-hill-texas-tx-signatureaesthetics-qufwgc765q6egws3l0tsmayq8l3t55ui45wrq5cfv0.jpeg" alt="Restylane Treatment">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">restylane®</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://signatureaestheticstx.com/storage/elementor/thumbs/diamondglow-facial-liberty-hill-texas-tx-signatureaesthetics-qufwacy4onzqm7grhxs89ba67ckr6h3yykikts7lfw.jpeg" alt="DiamondGlow Facial Treatment">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">diamondglow® facial treatment</span>
+        <span class="service-description">Enhance collagen production for firmer, younger-looking skin</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://signatureaestheticstx.com/storage/elementor/thumbs/health-products-liberty-hill-texas-tx-signatureaesthetics-qufw9gzm8arzngr6ojywwjci08y9wrl3i6c2idizbg.jpeg" alt="Health Products">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">health products</span>
+        <span class="service-description">Support your skin and body with high-quality wellness solutions</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://signatureaestheticstx.com/storage/elementor/thumbs/Signature-Aesthetics_IV-Therapy-qufw9oibqz2a8cg9gn7xghg6rbx7mcey77jycl7txo.jpeg" alt="IV Therapy Treatment">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">iv therapy</span>
+        <span class="service-description">Hydrate and replenish essential nutrients for enhanced vitality</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://signatureaestheticstx.com/storage/elementor/thumbs/microneedling-liberty-hill-texas-tx-signatureaesthetics-qufwcls90f2eco7cdwq57qvtahibkg0vxomc3kvqks.jpeg" alt="Microneedling Treatment">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">microneedling</span>
+        <span class="service-description">Stimulate collagen production for smoother, firmer skin</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://signatureaestheticstx.com/storage/elementor/thumbs/microneedling-liberty-hill-texas-tx-signatureaesthetics-qufwcls90f2eco7cdwq57qvtahibkg0vxomc3kvqks.jpeg" alt="Pixel8-RF Microneedling Treatment">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">pixel8-rf microneedling</span>
+        <span class="service-description">Advanced skin tightening and rejuvenation</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://signatureaestheticstx.com/storage/elementor/thumbs/neuromodulators-liberty-hill-texas-tx-signatureaesthetics-qufwa1o2enkaqvx5bswpfe4n2q4cm3v6x0or2gobik.jpeg" alt="Neuromodulators Treatment">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">neuromodulators</span>
+        <span class="service-description">Reduce fine lines and wrinkles with precision treatments</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://signatureaestheticstx.com/storage/elementor/thumbs/neuromodulators-liberty-hill-texas-tx-signatureaesthetics-qufwa1o2enkaqvx5bswpfe4n2q4cm3v6x0or2gobik.jpeg" alt="Botox Treatment">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">botox®</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://signatureaestheticstx.com/storage/elementor/thumbs/neuromodulators-liberty-hill-texas-tx-signatureaesthetics-qufwa1o2enkaqvx5bswpfe4n2q4cm3v6x0or2gobik.jpeg" alt="Dysport Treatment">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">dysport®</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://signatureaestheticstx.com/storage/elementor/thumbs/Phoenix-CO2-Laser-scaled-qufw4jc4cm0sp5x8hx6fba6dqf9whyzttr1at2udzg.jpg" alt="Phoenix CO2 Laser Treatment">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">phoenix co2 laser</span>
+        <span class="service-description">Resurface skin and improve texture and tone</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://signatureaestheticstx.com/storage/elementor/thumbs/Spectrum-Laser-scaled-qufvuemqow5jkgmznjj6fu7j8x7hjerz3lwwlpv51o.jpeg" alt="Spectrum Laser Treatment">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">spectrum laser</span>
+        <span class="service-description">Effective solutions for hair removal, pigmentation, and more</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://signatureaestheticstx.com/storage/elementor/thumbs/AdobeStock_494565072-scaled-qufvx5bsmhwnfinmn8707naxmdp0zmnsh6evzrsswc.jpeg" alt="Hormone Optimization Treatment">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">men and women's hormone optimization</span>
+        <span class="service-description">Balance hormones for improved well-being</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://signatureaestheticstx.com/storage/elementor/thumbs/health-products-liberty-hill-texas-tx-signatureaesthetics-qufw9gzm8arzngr6ojywwjci08y9wrl3i6c2idizbg.jpeg" alt="Medical Weight Loss">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">medical weight loss</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://signatureaestheticstx.com/storage/elementor/thumbs/health-products-liberty-hill-texas-tx-signatureaesthetics-qufw9gzm8arzngr6ojywwjci08y9wrl3i6c2idizbg.jpeg" alt="Peptide Therapy">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">peptide therapy</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://signatureaestheticstx.com/storage/elementor/thumbs/Signature-Aesthetics_IV-Therapy-qufw9oibqz2a8cg9gn7xghg6rbx7mcey77jycl7txo.jpeg" alt="Wellness Injections">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">wellness injections</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://signatureaestheticstx.com/storage/elementor/thumbs/AdobeStock_494565072-scaled-qufvx5bsmhwnfinmn8707naxmdp0zmnsh6evzrsswc.jpeg" alt="Hormone Replacement Therapy">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">hormone replacement therapy</span>
+        <span class="service-description">Balance hormones for improved well-being</span>
+      </div>
+    </div>
+  </div>
+</section>
+<div style="width:100%;margin:2rem 0"><img src="https://signatureaestheticstx.com/storage/elementor/thumbs/Biostimulators-r61lm1msceoj6qms0t8mak4tlkjyx2ese4f7knybc8.png" alt="Boost circulation and skin health with facial massage therapy in Liberty Hill, TX by Signature Aesthetics &amp; IV Lounge" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+<div style="width:100%;margin:2rem 0"><img src="https://signatureaestheticstx.com/storage/elementor/thumbs/Chemical-Peels-r61lm1msceoj6qms0t8mak4tlkjyx2ese4f7knybc8.png" alt="Professional exfoliation and skincare applications in Liberty Hill, TX by Signature Aesthetics &amp; IV Lounge" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+<div style="width:100%;margin:2rem 0"><img src="https://signatureaestheticstx.com/storage/elementor/thumbs/Clinical-Grade-Skincare-r61lm2kmj8pticlevbn8v1wa6yfc4riiq92p1xwx60.png" alt="Relaxing and effective facial treatments in Liberty Hill, TX by Signature Aesthetics &amp; IV Lounge" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+<div style="width:100%;margin:2rem 0"><img src="https://signatureaestheticstx.com/storage/elementor/thumbs/Custom-Facials-r61llv1x0kfixgwc38e8b3slfvgef6oo17ut7q82js.png" alt="Advanced pore cleansing and acne treatment services in Liberty Hill, TX by Signature Aesthetics &amp; IV Lounge" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+<div style="width:100%;margin:2rem 0"><img src="https://signatureaestheticstx.com/storage/elementor/thumbs/Dermal-Fillers-r61llvzr7egt92uyxqsuvlk219brmvsedciap06odk.png" alt="Lip fillers to enhance volume and shape in Liberty Hill, TX by Signature Aesthetics &amp; IV Lounge" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+<div style="width:100%;margin:2rem 0"><img src="https://signatureaestheticstx.com/storage/elementor/thumbs/DiamondGlow-Facial-r61llwxle8i3kotls97hg3bimn74ukw4ph5s6a5a7c.png" alt="Safe and effective injectable treatments like Botox and dermal fillers in Liberty Hill, TX by Signature Aesthetics &amp; IV Lounge" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+<div style="width:100%;margin:2rem 0"><img src="https://signatureaestheticstx.com/storage/elementor/thumbs/Health-Products-r61llyt9rwko7wqvha0ql2uftexv9z3ldqgr4u2huw.png" alt="Best Skincare Products in Liberty Hill, TX | Signature Aesthetics" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+<div style="width:100%;margin:2rem 0"><img src="https://signatureaestheticstx.com/storage/elementor/thumbs/Hormone-Replacement-Therapy-r61lm2kmj8pticlevbn8v1wa6yfc4riiq92p1xwx60.png" alt="Hormone Replacement Therapy in Liberty Hill, TX by Signature Aesthetics &amp; IV Lounge" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+<div style="width:100%;margin:2rem 0"><img src="https://signatureaestheticstx.com/storage/elementor/thumbs/IV-Therapy-r61lm3igq2r3tyk1pu1vfjnqscapcgm92dq6j7vizs.png" alt="Rehydration and wellness with customized IV therapy in Liberty Hill, TX by Signature Aesthetics &amp; IV Lounge" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+<div style="width:100%;margin:2rem 0"><img src="https://signatureaestheticstx.com/storage/elementor/thumbs/Microneedling-r61lm4gawwse5kiokcgi01f7dq62k5pzeido0hu4tk.png" alt="Collagen Stimulator" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+<div style="width:100%;margin:2rem 0"><img src="https://signatureaestheticstx.com/storage/elementor/thumbs/Neuromodulators-r61llyt9rwko7wqvha0ql2uftexv9z3ldqgr4u2huw.png" alt="Relaxing and effective facial treatments in Liberty Hill, TX by Signature Aesthetics &amp; IV Lounge" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Team Section -->
+<section class="team" id="team">
+  <div class="team-inner">
+    <span class="team-label">003 — expertise</span>
+    <div class="team-member">
+      <h3 class="team-member-name">bethany meyer</h3>
+      <p class="team-member-role">nurse practitioner</p>
+      <p class="team-member-bio">Having spent years in the healthcare and medical field, Bethany Meyer is a well-known Nurse Practitioner as well as an owner of a Med Spa, where she helps people boost their confidence by refining their appearance. As a Nurse Practitioner, she has worked in different settings, ranging from inpatient psychiatric hospitals to outpatient rehabilitation centers and family practice offices to critical access facilities.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials" id="testimonials">
+  <div class="testimonials-inner">
+    <span class="testimonials-label">004 — patient voices</span>
+    <div class="testimonial-grid">
+      <div class="testimonial">
+        <p class="testimonial-text">"Bethany is the absolute best! She always has the client's best interest in mind and suggests exactly what you need. She makes you feel comfortable and addresses any questions or concerns you may have. I wouldn't trust anyone else with my aesthetic needs!"</p>
+        <p class="testimonial-author">stephanie l.</p>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-text">"Bethany was very helpful and knowledgeable. We discussed not only my current treatment but also future options. She is easy to talk to, and I highly recommend her."</p>
+        <p class="testimonial-author">alissa m.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-heading">Book Your<br>Consultation<br>Today</h2>
+    <div class="contact-info">
+      <div class="contact-item">
+        <span class="contact-label">phone</span>
+        <span class="contact-value"><a href="tel:512-264-5662">512-264-5662</a></span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">email</span>
+        <span class="contact-value"><a href="mailto:info@signatureatx.com">info@signatureatx.com</a></span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">location</span>
+        <span class="contact-value">201 St Joseph Ct, Ste 410 Liberty Hill, Tx 78642</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">hours</span>
+        <div class="working-hours">
+          Monday: 8:30AM - 5:00PM<br>
+          Tuesday: 10:00AM - 7:00PM<br>
+          Wednesday: 8:30AM - 5:00PM<br>
+          Thursday: 10:00AM - 7:00PM<br>
+          Friday: Closed<br>
+          Saturday: 8:30AM - 1:00PM<br>
+          (1st and 3rd Saturday of the month)
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">location map</span>
+        <iframe src="https://maps.google.com/maps?q=Signature%20Aesthetics%20%26%20IV%20Lounge&t=m&z=14&output=embed&iwloc=near" width="100%" height="300" style="border:0" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">follow us</span>
+        <div style="display:flex;gap:1rem;margin-top:0.5rem;">
+          <a href="https://www.facebook.com/SignatureAesthetics-Tx-103700234814132" style="font-family:var(--font-mono);font-size:0.7rem;text-transform:lowercase;">facebook</a>
+          <a href="https://www.instagram.com/signature_aesthetics_tx/" style="font-family:var(--font-mono);font-size:0.7rem;text-transform:lowercase;">instagram</a>
+          <a href="https://signatureaestheticstx.com/#content" style="font-family:var(--font-mono);font-size:0.7rem;text-transform:lowercase;">twitter</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Signature Aesthetics & IV Lounge</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
