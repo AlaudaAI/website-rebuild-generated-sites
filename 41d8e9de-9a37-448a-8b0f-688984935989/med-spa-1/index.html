@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glowing Skin Med SPA</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://images.squarespace-cdn.com/content/v1/5eb3997277305c1462c79db0/80901dc5-5d3f-4d0a-8a75-537846481116/IMG_9661.JPG');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(244, 240, 234, 0.7);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Philosophy Section */
+.philosophy {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.philosophy-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.philosophy-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.philosophy-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Glowing Skin Med SPA Section */
+.glowing-skin-section {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+  text-align: center;
+}
+
+.glowing-skin-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.glowing-skin-quote {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-sm);
+}
+
+.glowing-skin-author {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: var(--placeholder-gray);
+}
+
+/* Services Section */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.services-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.services-header {
+  margin-bottom: var(--space-lg);
+}
+
+.services-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-md);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.service-item {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.service-name {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+}
+
+.service-description {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Team Section */
+.team {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.team-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.team-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.team-member {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.team-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.team-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease;
+}
+
+.team-member:hover .team-image img {
+  filter: grayscale(0%);
+}
+
+.team-info h3 {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+}
+
+.team-role {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  color: var(--placeholder-gray);
+  margin-bottom: var(--space-sm);
+}
+
+.team-bio {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Reviews Section */
+.reviews {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.reviews-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.reviews-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.review-item {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.review-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  font-style: italic;
+  margin-bottom: var(--space-sm);
+}
+
+.review-author {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* Gallery Section */
+.gallery {
+  padding: var(--space-lg) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.gallery-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.gallery-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
+}
+
+.gallery-item {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border: 1px solid var(--border-black);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.gallery-item:hover img {
+  filter: grayscale(0%);
+  transform: scale(1.05);
+}
+
+/* Contact Section */
+.contact {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-item {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.contact-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+}
+
+.contact-value {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.contact-value a {
+  text-decoration: underline;
+}
+
+.social-links {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.social-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  text-decoration: underline;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+    --space-xxl: 4rem;
+  }
+
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+
+  .nav-logo {
+    font-size: 0.7rem;
+  }
+
+  .nav-links {
+    gap: var(--space-sm);
+  }
+
+  .nav-links a {
+    font-size: 0.65rem;
+  }
+
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(1.8rem, 8vw, 3rem);
+    margin-bottom: var(--space-md);
+  }
+
+  .hero-subtitle {
+    font-size: 0.65rem;
+  }
+
+  .philosophy,
+  .services,
+  .team,
+  .reviews,
+  .gallery,
+  .contact,
+  .glowing-skin-section {
+    padding: var(--space-md) var(--pad-x);
+  }
+
+  .philosophy-inner {
+    gap: var(--space-sm);
+  }
+
+  .philosophy-text {
+    font-size: clamp(1.1rem, 4vw, 1.4rem);
+  }
+
+  .services-heading,
+  .team-heading,
+  .reviews-heading,
+  .gallery-heading,
+  .contact-heading {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+    margin-bottom: var(--space-md);
+  }
+
+  .glowing-skin-quote {
+    font-size: clamp(1.2rem, 5vw, 1.8rem);
+  }
+
+  .services-grid {
+    gap: var(--space-sm);
+  }
+
+  .service-item,
+  .team-member,
+  .review-item,
+  .contact-item {
+    padding: var(--space-sm);
+  }
+
+  .service-name,
+  .team-info h3 {
+    font-size: 0.7rem;
+  }
+
+  .team-role {
+    font-size: 0.6rem;
+  }
+
+  .service-description,
+  .team-bio {
+    font-size: 0.9rem;
+  }
+
+  .review-text {
+    font-size: 1rem;
+  }
+
+  .review-author,
+  .contact-label {
+    font-size: 0.65rem;
+  }
+
+  .contact-value {
+    font-size: 1rem;
+  }
+
+  .contact-inner {
+    gap: var(--space-md);
+  }
+
+  .gallery-grid {
+    gap: var(--space-xs);
+  }
+
+  .footer {
+    padding: var(--space-sm) var(--pad-x);
+  }
+
+  .footer-left,
+  .footer-right {
+    font-size: 0.6rem;
+  }
+
+  .footer-right {
+    gap: var(--space-sm);
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .philosophy-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .team-member {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-lg);
+    align-items: start;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .philosophy {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .team {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .reviews {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .gallery {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .contact {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .glowing-skin-section {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <a href="/" class="nav-logo">Glowing Skin Med SPA</a>
+  <ul class="nav-links">
+    <li><a href="https://glowingskinmedspa.org/our-services">services</a></li>
+    <li><a href="https://glowingskinmedspa.org/about-us">about</a></li>
+    <li><a href="https://glowingskinmedspa.org/blog">blog</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">HydraFacial & Facial massage<br>in Cedar Park & North Austin</h1>
+    <p class="hero-subtitle">Medical - Grade Skin Treatment</p>
+  </div>
+</section>
+
+<!-- Philosophy Section -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">our mission</span>
+    <div class="philosophy-text">
+      <p>"Glowing Skin Med SPA is a place where you find your true beauty"</p>
+    </div>
+  </div>
+</section>
+<div style="width:100%;margin:2rem 0"><img src="https://images.squarespace-cdn.com/content/v1/5eb3997277305c1462c79db0/bcba8293-9b89-49f4-8768-fe478f25550e/IMAGE+2021-11-04+17%3A49%3A57.jpg" alt="Close-up of a human eye with long, curled eyelashes and a brown iris." style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Glowing Skin Med SPA Section -->
+<section class="glowing-skin-section" id="glowing-skin">
+  <div class="glowing-skin-inner">
+    <div class="glowing-skin-quote">"Glowing Skin Med SPA is a place where you find your true beauty"</div>
+    <div class="glowing-skin-author">— Marina P.</div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="services" id="services">
+  <div class="services-inner">
+    <div class="services-header">
+      <h2 class="services-heading">Our Services</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-item">
+        <div class="service-name">HydraFacial</div>
+        <div class="service-description">Medical-Grade Skin Treatment with facial massage</div>
+      </div>
+      <div class="service-item">
+        <div class="service-name">Eyelash Extensions</div>
+        <div class="service-description">Classic lash extension services</div>
+      </div>
+      <div class="service-item">
+        <div class="service-name">Facial Treatment</div>
+        <div class="service-description">Professional facial treatments for skin improvement</div>
+      </div>
+      <div class="service-item">
+        <div class="service-name">Botox Injections</div>
+        <div class="service-description">Cosmetic injection treatments</div>
+      </div>
+      <div class="service-item">
+        <div class="service-name">IV Therapy</div>
+      </div>
+      <div class="service-item">
+        <div class="service-name">Testosterone Therapy</div>
+      </div>
+      <div class="service-item">
+        <div class="service-name">Body Transformation</div>
+      </div>
+      <div class="service-item">
+        <div class="service-name">GLP-1 Weight Loss</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team Section -->
+<section class="team" id="team">
+  <div class="team-inner">
+    <h2 class="team-heading">Our Team</h2>
+    <div class="team-member">
+      <div class="team-image">
+        <img src="https://images.squarespace-cdn.com/content/v1/5eb3997277305c1462c79db0/1638763446863-QZD3CYYSBZPO8ENTCGIW/IMG-5628.jpg" alt="Marina P">
+      </div>
+      <div class="team-info">
+        <h3>Marina P</h3>
+        <div class="team-role">Aesthetician</div>
+        <div class="team-bio">Professional aesthetician specializing in lash extensions and facial treatments, providing services since 2018 with expertise in skincare and eye treatments.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews Section -->
+<section class="reviews" id="reviews">
+  <div class="reviews-inner">
+    <h2 class="reviews-heading">Reviews</h2>
+    <div class="review-item">
+      <div class="review-text">I got my classic lash extension yesterday with Marina. I wanted to thank her for such an amazing work. I was in a hurry with my own business, and I was running late. But Marina met me, I explained to her the situation, and we were done on time! She has a friendly vibe around her, and she is so lovely! Everything was done so professionally and fast! I enjoyed my time with her; and now, I have such fantastic air-light lashes! I definitely will come back to her!</div>
+      <div class="review-author">— Xeniia P.</div>
+    </div>
+    <div class="review-item">
+      <div class="review-text">I just got my eyelash extension today, and I love it! I have been doing lashes with Marina since 2018 and will continue to go! She's so friendly, and she has a positive vibe. She is professional, and she knows her business. Marina gives me tips how to take care of lashes, so they can last longer; and she knows a lot of stuff how to treat your eyes and skin. My lashes stay beautiful even after 4-5 weeks. Definitely recommend her services.</div>
+      <div class="review-author">— Anastasia Z.</div>
+    </div>
+    <div class="review-item">
+      <div class="review-text">Hi everyone! I wanted to say a world about my experience with Marina's facial treatment. I've got my facial treatment from Marina about a week ago. I've done this treatment before, but it was my first time with her. After the treatment, I could see the results right away. Skin was so soft and clean. Now, it has been a week, and I see how my face skin got way better. I follow her advices how to treat my face — that helps a lot!</div>
+      <div class="review-author">— Alexandra I.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery Section -->
+<section class="gallery" id="gallery">
+  <div class="gallery-inner">
+    <h2 class="gallery-heading">Gallery</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="https://images.squarespace-cdn.com/content/v1/5eb3997277305c1462c79db0/1605545805227-9AEFSGAKS8E6XBVW3JOE/IMG_3733.JPG" alt="Side-by-side comparison of a person's face before and after skincare treatment">
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.squarespace-cdn.com/content/v1/5eb3997277305c1462c79db0/1605545818169-ZJE2VFFBNU0GK7IKF95H/IMG_3734.JPG" alt="Close-up of a person's eye with long, curled eyelashes">
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.squarespace-cdn.com/content/v1/5eb3997277305c1462c79db0/ad23440d-ec81-41ef-b92a-b135d326f96c/unnamed.jpg" alt="Close-up of a woman with blonde hair lying on a white surface">
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.squarespace-cdn.com/content/v1/5eb3997277305c1462c79db0/57591105-05f0-4afa-8442-a5b68c72c090/9E40DDF1-0500-45B8-ABBE-3DE3B68251B2.JPG" alt="Close-up of a person's face showing blue eyes and long eyelashes">
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.squarespace-cdn.com/content/v1/5eb3997277305c1462c79db0/7d147f7c-78ef-440a-9412-652926b39826/IMAGE+2021-11-04+17%3A48%3A53.jpg" alt="Close-up of a person's eyes with long curled eyelashes">
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.squarespace-cdn.com/content/v1/5eb3997277305c1462c79db0/ddfb2363-055a-467d-80d7-5763c5a63d10/IMAGE+2021-11-04+17%3A49%3A03.jpg" alt="A woman receiving a facial treatment">
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.squarespace-cdn.com/content/v1/5eb3997277305c1462c79db0/8693efd7-041e-43f3-9a66-46bfd7d9620b/AA08C9C7-FBE4-4D17-9922-93DC0935B26D.JPG" alt="A woman receiving Botox injections">
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.squarespace-cdn.com/content/v1/5eb3997277305c1462c79db0/00489fde-5ae7-4d2e-abae-1bd8a8372d73/IMG-4320.jpg" alt="A woman receiving a facial treatment">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-heading">Let's Talk!</h2>
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-label">location</div>
+        <div class="contact-value">13740 N Hwy. 183 P-2<br>Austin TX 78750</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">contact</div>
+        <div class="contact-value">
+          <a href="tel:-1074942977">-1074942977</a><br>
+          <a href="mailto:glowingskinmedspa.llc@gmail.com">glowingskinmedspa.llc@gmail.com</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">follow</div>
+        <div class="contact-value">
+          <div class="social-links">
+            <a href="https://www.instagram.com/skin.med.spa/">Instagram</a>
+            <a href="https://www.facebook.com/Labo-de-la-beaute-107494297707926/">Facebook</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-left">© 2024 Glowing Skin Med SPA</div>
+  <div class="footer-right">
+    <span>austin</span>
+    <span>cedar park</span>
+    <span>north austin</span>
+  </div>
+</footer>
+
+</body>
+</html>
