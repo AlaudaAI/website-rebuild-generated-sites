@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Monica Aesthetic</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://static.showit.co/1600/dAzCmoJboFlvbqPKwNgxqw/246530/abygailbanksstudios-140.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(244, 240, 234, 0.85);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Philosophy Section */
+.philosophy {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.philosophy-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.philosophy-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.philosophy-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.service-cell {
+  border-bottom: 1px solid var(--border-black);
+  border-right: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 200px;
+}
+
+.service-cell:nth-child(2n) {
+  border-right: none;
+}
+
+.service-cell:nth-child(3),
+.service-cell:nth-child(4) {
+  border-bottom: none;
+}
+
+.service-name {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* Team Section */
+.team {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.team-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.team-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.team-member {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.member-info h3 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.5rem;
+  margin-bottom: var(--space-xs);
+}
+
+.member-role {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.member-education {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-sm);
+}
+
+.member-bio {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Testimonials Section */
+.testimonials {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.testimonials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonials-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-lg);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.testimonial {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.testimonial-quote {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  font-style: italic;
+  margin-bottom: var(--space-sm);
+}
+
+.testimonial-highlight {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: var(--space-sm);
+}
+
+.testimonial-author {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* Contact Section */
+.contact {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.contact-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.contact-section h3 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+.contact-section p {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: var(--space-xs);
+}
+
+.contact-section a {
+  color: var(--text-black);
+}
+
+.contact-section a:hover {
+  text-decoration: underline;
+}
+
+.social-links {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+}
+
+.social-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: var(--text-black);
+}
+
+.social-links a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+  
+  .nav-links {
+    gap: var(--space-sm);
+  }
+  
+  .nav-links a {
+    font-size: 0.65rem;
+  }
+  
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+    background-attachment: scroll;
+  }
+  
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .service-cell {
+    border-right: none;
+    border-bottom: 1px solid var(--border-black);
+  }
+  
+  .service-cell:last-child {
+    border-bottom: none;
+  }
+  
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .social-links {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .philosophy-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .team-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .team-member {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-xl);
+  }
+
+  .contact-info {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .philosophy {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .team {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .testimonials {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .contact {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">The Monica Aesthetic</a>
+  <ul class="nav-links">
+    <li><a href="https://themonicaaesthetic.com/meet-the-team">meet the team</a></li>
+    <li><a href="https://themonicaaesthetic.com/services">services</a></li>
+    <li><a href="https://themonicaaesthetic.com/gallery">gallery</a></li>
+    <li><a href="https://themonicaaesthetic.com/#book-now">book now</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">THE MONICA AESTHETIC</h1>
+    <p class="hero-subtitle">austin, texas medical beauty studio</p>
+  </div>
+</section>
+
+<!-- Philosophy Section -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">001 — approach</span>
+    <div class="philosophy-text">
+      <p>We follow a structural preservation method - a completely individualized approach that evaluates movement, support, and skin quality before recommending treatment. We believe in precision over volume, progression over immediacy, and using only what is truly necessary. we prioritize safety always. By working in measured phases and selecting products with intention, we create results that appear effortless, balanced, and quietly luxurious.</p>
+    </div>
+  </div>
+</section>
+<div style="width:100%;margin:2rem 0"><img src="https://static.showit.co/216/WsnSXXmiRawTao94T05D2g/246530/takenbyaby-58.jpg" alt="TakenByAby-58" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://static.showit.co/216/-ceIZG6SSt2DFRm5pwViPg/shared/6e5a1108.jpg" alt="6E5A1108" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://static.showit.co/1600/S79EInz-b1ijjKyVQRVWRg/246530/abygailbanksstudios-147.jpg" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://static.showit.co/1200/vSjiXJs65EKpL8_MlfroSA/246530/facetune_20-02-2026-19-50-23.jpg" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Services Grid -->
+<section class="services" id="services">
+  <div class="services-grid">
+    <div class="service-cell">
+      <span class="service-name">Filler & Injections</span>
+    </div>
+    <div class="service-cell">
+      <span class="service-name">Cosmetic Tattooing</span>
+    </div>
+    <div class="service-cell">
+      <span class="service-name">Skincare Treatments</span>
+    </div>
+    <div class="service-cell">
+      <span class="service-name">IV & Injectable Therapy</span>
+    </div>
+  </div>
+</section>
+<div style="width:100%;margin:2rem 0"><img src="https://static.showit.co/216/lUMgdUTBRKOgi30G_JfOEw/246530/98084d5f-e454-4bef-90da-765afc128a38.jpg" alt="98084D5F-E454-4BEF-90DA-765AFC128A38" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://static.showit.co/216/cvGFUj9dNlLYyeA1F5MCeg/246530/takenbyaby-49.jpg" alt="TakenByAby-49" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://static.showit.co/400/StS_A-uBIHTLXT9dFUVILw/246530/facetune_20-02-2026-20-21-33.jpg" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://static.showit.co/400/UtcZqD2Ofz7BPNyqW0IT-A/246530/14_1.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Team Section -->
+<section class="team" id="team">
+  <div class="team-inner">
+    <span class="team-label">002 — Meet the founder</span>
+    <div class="team-member">
+      <div class="member-info">
+        <h3>Monica Hutchinson</h3>
+        <div class="member-role">Founder</div>
+        <div class="member-education">BSN, RN</div>
+        <div class="member-bio">A Registered Nurse Injector, Permanent Make-up Artist, Family Nurse Practitioner Student, and Founder of The Monica Aesthetic. Her approach blends medical precision with aesthetic intention offering injectables and PMU in a space designed to feel effortless, personal, and refined.</div>
+      </div>
+    </div>
+  </div>
+</section>
+<div style="width:100%;margin:2rem 0"><img src="https://static.showit.co/400/YgoY7_z9RqemDCa5tX-vxw/shared/6.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://static.showit.co/216/LvZd9AokQRG6QqBSpIEiTA/shared/6e5a1560.jpg" alt="6E5A1560" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://s3.amazonaws.com/blvd-prod-client-uploads-master/uploads/businesses/e6715a20-cb2e-49c9-a626-f1ed85138b37/banner/medium.png?v=63901251257" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://s3.amazonaws.com/blvd-prod-client-uploads-master/uploads/businesses/e6715a20-cb2e-49c9-a626-f1ed85138b37/medium.png?v=63889146217" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Testimonials Section -->
+<section class="testimonials" id="testimonials">
+  <div class="testimonials-inner">
+    <span class="testimonials-label">003 — Reviews sourced from Google</span>
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <div class="testimonial-quote">I got lip filler with Monica and I'm SO happy with it! The process was fast and not as painful as I was expecting. My healed lips now look so natural and plump.</div>
+        <div class="testimonial-highlight">I'm in love with them to say the least!</div>
+        <div class="testimonial-author">- Bri Guerrero</div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-quote">Monica is fantastic to work with and made me feel so at ease. I have never had lip fillers before, so didn't know what to expect of the process. She offers such care and precision, and made my lips look fabulous!</div>
+        <div class="testimonial-highlight">.. such care and precision</div>
+        <div class="testimonial-author">- Jordan Faiferlick</div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-quote">Monica was absolutely incredible! She eased all my fears and was so fantastic during the entire treatment. I received Botox for hyperhidrosis and I could see results the next day! I would recommend everyone going to Monica! She is so wonderful to work with and was so incredibly kind and made you feel at ease</div>
+        <div class="testimonial-highlight">.. eased all my fears and was so fantastic</div>
+        <div class="testimonial-author">- Kenzie Klem</div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-quote">I'm so happy and loving the results of my powder brows! It's been so nice to wake up, add mascara and have perfect brows.. I no longer have a "favorite brow!" Monica is wonderful to chat with and has a beautiful studio. I always feel so comfortable and enjoy my time with her.</div>
+        <div class="testimonial-highlight">.. wake up and have perfect brows</div>
+        <div class="testimonial-author">- sonya maxwell</div>
+      </div>
+    </div>
+  </div>
+</section>
+<div style="width:100%;margin:2rem 0"><img src="https://static.showit.co/200/TZYHM98pSk6fdy227VWgyw/shared/header_1.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://static.showit.co/216/HDBkyxJcTteRJBvOEzvN8A/246530/29a46fbb-a545-4c87-890c-d904046c09f4.jpg" alt="29A46FBB-A545-4C87-890C-D904046C09F4" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <span class="contact-label">004 — Come Visit Us</span>
+    <div class="contact-info">
+      <div class="contact-section">
+        <h3>Location</h3>
+        <p>1600 E Riverside Dr. Unit 110<br>Suite 119<br>Austin, TX 78741<br>Inside Image Studios</p>
+        <h3>Hours</h3>
+        <p>Monday: 10-7<br>Tuesday: 10-7<br>Wednesday: 10-7<br>Thursday: 10-7<br>Friday: 10-7<br>Saturday: 9-2</p>
+        <p>by appointment only</p>
+      </div>
+      <div class="contact-section">
+        <h3>Contact</h3>
+        <p><a href="tel:17068934119">17068934119</a></p>
+        <p><a href="mailto:themonicaaesthetic@gmail.com">themonicaaesthetic@gmail.com</a></p>
+        <div class="social-links">
+          <a href="https://www.facebook.com/themonicaaesthetic">facebook</a>
+          <a href="https://www.instagram.com/themonicaaesthetic/">instagram</a>
+          <a href="https://www.tiktok.com/@themonicaaesthetic">tiktok</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 The Monica Aesthetic</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
