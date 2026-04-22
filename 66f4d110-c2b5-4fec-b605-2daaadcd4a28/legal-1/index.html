@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rogers, Shea & Spanos</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Visual Demo */
+.hero-visual {
+  width: 100%;
+  max-width: 400px;
+}
+
+.hero-image {
+  width: 100%;
+  height: 200px;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+/* Features Grid */
+.features {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.feature-card {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+.feature-card:last-child {
+  border-bottom: none;
+}
+
+.feature-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.feature-protocol {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.feature-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.feature-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 380px;
+}
+
+/* About Section */
+.about {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.about-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+}
+
+/* Services Section */
+.services {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.service-card {
+  padding: var(--space-lg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-card);
+  transition: all 0.3s ease;
+}
+
+.service-card:hover {
+  background: var(--bg-hover);
+}
+
+.service-name {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.service-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* Team Section */
+.team {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.team-member {
+  padding: var(--space-lg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-card);
+  transition: all 0.3s ease;
+}
+
+.team-member:hover {
+  background: var(--bg-hover);
+}
+
+.member-name {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.member-role {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.member-bio {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* Trust Metrics Section */
+.trust-section {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.trust-metrics {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.trust-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.trust-number {
+  font-family: var(--font-serif);
+  font-size: clamp(64px, 15vw, 120px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.trust-number-suffix {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 8vw, 60px);
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.trust-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 400px;
+}
+
+.stat-card {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* FAQ Section */
+.faq {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.faq-item {
+  margin-bottom: var(--space-xl);
+}
+
+.faq-question {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.faq-answer {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* Testimonials Section */
+.testimonials {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.testimonial-card {
+  padding: var(--space-lg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-card);
+  transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+  background: var(--bg-hover);
+}
+
+.testimonial-quote {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.testimonial-author {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+/* Contact Section */
+.contact {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.contact-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.contact-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.contact-text:hover {
+  color: var(--text-muted);
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* Section headings */
+.section-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xl);
+}
+
+.section-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-md);
+}
+
+/* Special Sections */
+.distinguished-advocacy {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.awards {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.awards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.award-card {
+  padding: var(--space-lg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-card);
+  transition: all 0.3s ease;
+}
+
+.award-card:hover {
+  background: var(--bg-hover);
+}
+
+.award-title {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.award-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .hero-headline {
+    font-size: clamp(28px, 6vw, 36px);
+  }
+
+  .feature-card {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .services,
+  .team,
+  .about,
+  .faq,
+  .testimonials,
+  .contact,
+  .distinguished-advocacy,
+  .awards {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .services-grid,
+  .team-grid,
+  .testimonials-grid,
+  .awards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .trust-metrics {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .footer {
+    padding: var(--space-lg) var(--space-md);
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:last-child {
+    border-right: none;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .awards-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-metrics {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .feature-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .awards-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-metrics {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-number {
+    font-size: 120px;
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .feature-card {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">Rogers, Shea & Spanos</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">Rogers, Shea & Spanos</span>
+    </a>
+    <nav>
+      <a href="https://www.midtnlawyers.com/">Home</a>
+      <a href="https://www.midtnlawyers.com/about-the-firm/">About Our Firm</a>
+      <a href="https://www.midtnlawyers.com/practice-areas/">Practice Areas</a>
+      <a href="https://www.midtnlawyers.com/contact/">Contact</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Serving Nashville</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">30+ Years Experience</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Nashville Divorce Attorneys</span>
+      <h1 class="hero-headline">Preparing You For Life's Legal Challenges For Over 30 Years</h1>
+      <p class="hero-subheading">Providing creative solutions and formidable, difference-making representation for clients throughout Nashville.</p>
+      <a href="tel:8885219952" class="hero-cta">Request Consultation <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+    </div>
+    <div class="hero-visual">
+      <img src="https://i.ytimg.com/vi/neNnq-Au9oQ/hqdefault.jpg" alt="Can you provide a quick overview of the divorce process?" class="hero-image">
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i16!2i16965!3i25701!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828093257272656889!2y788377205127997849!2s%2Fg%2F1tg4xl10!4m2!1x361523110!2x3426916628!15sgcid%3Adivorce_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=48705" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://i.ytimg.com/vi/2bxPs58lF-Y/hqdefault.jpg" alt="What advice do you have for parties in a high conflict divorce?" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Distinguished Advocacy Section -->
+  <section class="distinguished-advocacy">
+    <span class="section-label">Excellence in Legal Representation</span>
+    <h2 class="section-heading">Distinguished Advocacy for Tennessee's Most Complex Divorce Matters</h2>
+    <div class="about-content">
+      <p class="about-text">
+        When facing the most challenging divorce and family law matters in Tennessee, you need attorneys who have demonstrated excellence and earned recognition from their peers. At Rogers, Shea & Spanos, our attorneys bring unparalleled expertise to complex cases involving high-asset division, contentious custody disputes, and intricate business valuations.
+      </p>
+      <p class="about-text">
+        Our commitment to excellence has been recognized through prestigious professional ratings and peer acknowledgments. We handle matters that other attorneys refer to us, including cases involving professional practices, complex financial arrangements, and high-conflict family dynamics that require seasoned advocacy and strategic thinking.
+      </p>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i16!2i16964!3i25701!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828093257272656889!2y788377205127997849!2s%2Fg%2F1tg4xl10!4m2!1x361523110!2x3426916628!15sgcid%3Adivorce_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=112128" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Awards Section -->
+  <section class="awards">
+    <span class="section-label">Professional Recognition</span>
+    <h2 class="section-heading">Awards & Recognition</h2>
+    <div class="awards-grid">
+      <div class="award-card">
+        <h3 class="award-title"><a href="https://profiles.superlawyers.com/tennessee/nashville/lawfirm/rogers-shea-and-spanos/c71d0bc6-3519-4b52-b562-ad92fe55a802.html">Super Lawyers®</a></h3>
+        <p class="award-description">Recognition for outstanding achievement and professional excellence in family law.</p>
+      </div>
+      <div class="award-card">
+        <h3 class="award-title"><a href="https://www.martindale.com/search/attorneys-law-firms-articles/?term=rogers%2C%20shea%20%26%20Spanos">AV Preeminent® Rated</a></h3>
+        <p class="award-description">The highest rating for legal ability and ethical standards from Martindale-Hubbell.</p>
+      </div>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i16!2i16964!3i25699!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828093257272656889!2y788377205127997849!2s%2Fg%2F1tg4xl10!4m2!1x361523110!2x3426916628!15sgcid%3Adivorce_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=36084" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Features Grid -->
+  <section class="features">
+    <div class="feature-card">
+      <p class="feature-protocol">Principle 01</p>
+      <h3 class="feature-title">Responsive to our client's needs & questions</h3>
+      <p class="feature-description">We have an experienced staff of attorneys and paralegals that allow us to be very responsive to our client's needs and questions.</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Principle 02</p>
+      <h3 class="feature-title">Thousands of cases handled</h3>
+      <p class="feature-description">We have handled thousands of cases in Nashville, settled a majority of them for our clients, and have extensive and successful trial experience.</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Principle 03</p>
+      <h3 class="feature-title">We provide insight and practical solutions</h3>
+      <p class="feature-description">We are highly experienced and can provide insight and practical solutions for the tough problems you are facing.</p>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i16!2i16964!3i25700!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828093257272656889!2y788377205127997849!2s%2Fg%2F1tg4xl10!4m2!1x361523110!2x3426916628!15sgcid%3Adivorce_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=83585" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- About Section -->
+  <section class="about">
+    <span class="section-label">Experience & Personal Attention</span>
+    <h2 class="section-heading">Nashville Divorce Attorney</h2>
+    <div class="about-content">
+      <p class="about-text">
+        Navigating a divorce is challenging, but you don't have to face it alone. At Rogers, Shea & Spanos, our experienced Nashville divorce attorneys provide personalized, compassionate, and expert legal guidance to help you achieve a fair outcome. We specialize in divorce, child custody, alimony, and high-asset cases.
+      </p>
+      <p class="about-text">
+        Divorce is more than a legal process—it's a life transition that impacts your finances, family, and future. Our team at Rogers, Shea & Spanos combines decades of experience with a client-centered approach to deliver results. With over 30 years of experience, our attorneys have handled thousands of divorce cases, from uncontested agreements to complex high-asset disputes.
+      </p>
+      <p class="about-text">
+        We understand the emotional toll of divorce. Our team listens to your concerns, provides clear guidance, and ensures you feel supported every step of the way. Based in Nashville, we know Tennessee's family law courts, giving you a strategic advantage.
+      </p>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i16!2i16965!3i25699!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828093257272656889!2y788377205127997849!2s%2Fg%2F1tg4xl10!4m2!1x361523110!2x3426916628!15sgcid%3Adivorce_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=103732" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Services Section -->
+  <section class="services">
+    <span class="section-label">Nashville Practice Areas</span>
+    <h2 class="section-heading">Comprehensive Divorce and Family Law Services</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <h3 class="service-name">Divorce</h3>
+        <p class="service-description">Contested and uncontested divorce proceedings</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Family Law</h3>
+        <p class="service-description">Comprehensive family law services</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Uncontested Divorce</h3>
+        <p class="service-description">Amicable divorce proceedings for couples in agreement</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">High-Asset Divorce</h3>
+        <p class="service-description">Complex asset division including businesses, real estate, and retirement accounts</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Legal Separation</h3>
+        <p class="service-description">Legal separation proceedings</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Mediation</h3>
+        <p class="service-description">Alternative dispute resolution with certified mediators</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Child Custody and Visitation</h3>
+        <p class="service-description">Advocacy for fair custody arrangements prioritizing children's best interests</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Alimony</h3>
+        <p class="service-description">Spousal support agreements for both paying and receiving parties</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Property Division</h3>
+        <p class="service-description">Equitable distribution of marital assets and debts</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">High Conflict Divorce</h3>
+        <p class="service-description">Complex divorce litigation</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Business Owner Divorce</h3>
+        <p class="service-description">Divorce proceedings involving business ownership</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Prenuptial and Postnuptial Agreements</h3>
+        <p class="service-description">Legally sound agreements to protect financial future</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">LGBT Family Law</h3>
+        <p class="service-description">Dedicated legal services for same-sex couples and domestic partnerships</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Collaborative Law</h3>
+        <p class="service-description">Collaborative approach to resolve disputes amicably</p>
+      </div>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i16!2i16965!3i25700!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828093257272656889!2y788377205127997849!2s%2Fg%2F1tg4xl10!4m2!1x361523110!2x3426916628!15sgcid%3Adivorce_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=20162" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Team Section -->
+  <section class="team">
+    <span class="section-label">An Accomplished Legal Team</span>
+    <h2 class="section-heading">Our Attorneys</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <h3 class="member-name">Helen Rogers</h3>
+        <p class="member-role">Attorney</p>
+        <p class="member-bio">Founder of Rogers, Shea & Spanos, a Vanderbilt graduate and National Board of Trial Advocacy certified attorney.</p>
+      </div>
+      <div class="team-member">
+        <h3 class="member-name">Lawrence Kamm</h3>
+        <p class="member-role">Attorney</p>
+      </div>
+      <div class="team-member">
+        <h3 class="member-name">Stella Mallinak</h3>
+        <p class="member-role">Attorney</p>
+      </div>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i16!2i16963!3i25700!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828093257272656889!2y788377205127997849!2s%2Fg%2F1tg4xl10!4m2!1x361523110!2x3426916628!15sgcid%3Adivorce_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=15937" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Trust Metrics Section -->
+  <section class="trust-section">
+    <div class="trust-metrics">
+      <span class="trust-label">Experience Metrics</span>
+      <div>
+        <span class="trust-number">30</span><span class="trust-number-suffix">+</span>
+      </div>
+      <p class="trust-description">years of experience providing expert legal representation for families throughout Nashville and Middle Tennessee.</p>
+    </div>
+    <div class="stat-card">
+      <span class="trust-label">Case Volume</span>
+      <div>
+        <span class="trust-number" style="font-size: clamp(48px, 12vw, 80px);">thousands</span>
+      </div>
+      <p class="trust-description">cases handled with a majority settled successfully for our clients, backed by extensive trial experience.</p>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i16!2i16966!3i25699!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828093257272656889!2y788377205127997849!2s%2Fg%2F1tg4xl10!4m2!1x361523110!2x3426916628!15sgcid%3Adivorce_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=40309" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <span class="section-label">Client Testimonials</span>
+    <h2 class="section-heading">What Our Clients Say</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-quote">Weintraub Law Office...</p>
+        <p class="testimonial-author">Menu</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">best interest of the child...</p>
+        <p class="testimonial-author">Reviewer 2</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">irreconcilable differences...</p>
+        <p class="testimonial-author">Reviewer 3</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">Excellent support, communication and professionalism! Truly an amazing outcome for my family, they g...</p>
+        <p class="testimonial-author">Laura Storms</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">Report errors in the road map or imagery to Google...</p>
+        <p class="testimonial-author">To</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">Rogers Shea & Spanos Attorneys at Law...</p>
+        <p class="testimonial-author">Reviewer 6</p>
+      </div>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i16!2i16967!3i25701!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828093257272656889!2y788377205127997849!2s%2Fg%2F1tg4xl10!4m2!1x361523110!2x3426916628!15sgcid%3Adivorce_attorney!2b0!3b0!6b0!8b0&key=AIzySyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=52930" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- FAQ Section -->
+  <section class="faq">
+    <span class="section-label">Client Resources</span>
+    <h2 class="section-heading">Frequently Asked Questions About Divorces in Nashville</h2>
+    
+    <div class="faq-item">
+      <h3 class="faq-question">How long will the divorce process actually take in Nashville?</h3>
+      <p class="faq-answer">In Tennessee, even the fastest uncontested divorce requires a statutory waiting period from the date of filing a divorce— 60 days without children or 90 days with children. If your case is contested, it can take six months but can easily last over a year based on the complexity of your case and the Court's schedule.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 class="faq-question">How much does a divorce cost in Nashville?</h3>
+      <p class="faq-answer">The cost is driven by the level of disagreement. Our initial meeting focuses on assessing the complexity of your situation to give you a clear understanding of the financial commitment required. We aim to be highly efficient, minimizing unnecessary conflict to keep costs manageable.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 class="faq-question">How will child custody and the parenting schedule be determined?</h3>
+      <p class="faq-answer">The court's standard is the "best interest of the child". We believe the best plan is one that works for your unique family dynamic. We will help you craft a proposed Permanent Parenting Plan that focuses on stability, clear schedules, and healthy co-parenting.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 class="faq-question">How is child support calculated in Tennessee?</h3>
+      <p class="faq-answer">Child support is governed by the Tennessee Child Support Guidelines, which is a complex mathematical formula. We ensure that all income is properly documented and verified, that the number of overnights is correctly applied, and that credits are accurately applied.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 class="faq-question">How will our property and debts be divided in a divorce in Nashville?</h3>
+      <p class="faq-answer">Tennessee is an equitable distribution state. All marital property and debt must be divided equitably, i.e.: fairly. Our firm excels at tracing assets to correctly classify them as marital or separate. We conduct a thorough financial investigation to ensure every asset is accounted for.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 class="faq-question">Will I Receive or Have to Pay Alimony in a Nashville Divorce?</h3>
+      <p class="faq-answer">We evaluate your case based on the extensive list of factors the Tennessee court considers, including the length of your marriage and your relative financial needs and abilities. We develop a strong argument for or against an award of the appropriate type of alimony.</p>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i16!2i16966!3i25701!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828093257272656889!2y788377205127997849!2s%2Fg%2F1tg4xl10!4m2!1x361523110!2x3426916628!15sgcid%3Adivorce_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=116353" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Contact Section -->
+  <section class="contact">
+    <span class="section-label">Contact</span>
+    <h2 class="section-heading">Contact Our Nashville Divorce Attorneys Today</h2>
+    <div class="contact-info">
+      <div class="contact-item">
+        <i class="fas fa-phone contact-icon"></i>
+        <a href="tel:8885219952" class="contact-text">(888) 521-9952</a>
+      </div>
+      <div class="contact-item">
+        <i class="fas fa-map-marker-alt contact-icon"></i>
+        <span class="contact-text">2205 State St, Nashville, TN 37203</span>
+      </div>
+      <div class="contact-item">
+        <i class="fab fa-google contact-icon"></i>
+        <a href="https://www.google.com/maps/dir//''/data=!4m7!4m6!1m1!4e2!1m2!1m1!1s0x886466befb2603f9:0xaf0e0e41cab6999!3e0?g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYASAA" class="contact-text">Google Business Profile</a>
+      </div>
+      <div class="contact-item">
+        <i class="fab fa-linkedin contact-icon"></i>
+        <a href="https://www.linkedin.com/company/rogers-kamm-shea" class="contact-text">LinkedIn</a>
+      </div>
+      <div class="contact-item">
+        <i class="fab fa-facebook contact-icon"></i>
+        <a href="https://www.facebook.com/RogersSheaSpanos" class="contact-text">Facebook</a>
+      </div>
+    </div>
+    
+    <div style="margin-top: var(--space-xl);">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3221.5852320407157!2d-86.80506679999999!3d36.152311!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x886466befb2603f9%3A0xaf0e0e41cab6999!2sRogers%2C%20Shea%20%26%20Spanos%3A%20Nashville%20Divorce%20Lawyers!5e0!3m2!1sen!2sus!4v1747256668612!5m2!1sen!2sus" width="100%" height="300" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i16!2i16963!3i25699!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828093257272656889!2y788377205127997849!2s%2Fg%2F1tg4xl10!4m2!1x361523110!2x3426916628!15sgcid%3Adivorce_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=99507" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Rogers, Shea & Spanos</span>
+      <span class="footer-copyright">© 2024 Rogers, Shea & Spanos Systems, Inc. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.midtnlawyers.com/">Home</a>
+      <a href="https://www.midtnlawyers.com/about-the-firm/">About Our Firm</a>
+      <a href="https://www.midtnlawyers.com/keeping-costs-down/">Keeping Costs Under Control</a>
+      <a href="https://www.midtnlawyers.com/helen-s-rogers/">Helen Sfikas Rogers</a>
+      <a href="https://www.midtnlawyers.com/siew-ling-shea/">Siew-Ling Shea</a>
+      <a href="https://www.midtnlawyers.com/george-d-spanos/">George D. Spanos</a>
+      <a href="https://www.midtnlawyers.com/laura-blum/">Laura Blum</a>
+      <a href="https://www.midtnlawyers.com/lawrence-j-kamm/">Lawrence J. Kamm</a>
+      <a href="https://www.midtnlawyers.com/stella-k-mallinak/">Stella K. Mallinak</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
