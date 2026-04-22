@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spa Dulce</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://spadulce.com/wp-content/uploads/2024/09/krAjPYNEskhbWRNyk10Ul9Ltz48.avif');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(244, 240, 234, 0.7);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 680px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* About Section */
+.about {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.about-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.about-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.about-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.about-features {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.feature-item {
+  text-align: center;
+}
+
+.feature-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto var(--space-sm);
+}
+
+.feature-text {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.service-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.service-cell:last-child {
+  border-bottom: none;
+}
+
+.service-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.service-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.service-cell:hover .service-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+.service-meta {
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--space-xs);
+}
+
+.service-name {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: var(--space-xs);
+}
+
+.service-description {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0.03em;
+}
+
+/* Stats Section */
+.stats {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.stats-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+}
+
+.stat-item {
+  text-align: center;
+  border: 1px solid var(--border-black);
+  padding: var(--space-lg);
+}
+
+.stat-value {
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  font-weight: 300;
+  line-height: 1;
+  margin-bottom: var(--space-sm);
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+/* Team Section */
+.team {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.team-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.team-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.team-member {
+  border: 1px solid var(--border-black);
+  padding: var(--space-lg);
+  text-align: center;
+}
+
+.member-name {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: var(--space-xs);
+}
+
+.member-role {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.member-bio {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0.03em;
+}
+
+/* Testimonials Section */
+.testimonials {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.testimonials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonials-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.testimonial-card {
+  border: 1px solid var(--border-black);
+  padding: var(--space-lg);
+}
+
+.testimonial-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-style: italic;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: var(--space-md);
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.author-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border-black);
+}
+
+.author-info {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.rating-stars {
+  width: 80px;
+  height: 16px;
+  margin-top: var(--space-xs);
+}
+
+/* Contact Section */
+.contact {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  text-align: center;
+}
+
+.contact-item {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.contact-item a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-bottom-color 0.3s ease;
+}
+
+.contact-item a:hover {
+  border-bottom-color: var(--border-black);
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-lg);
+  margin-top: var(--space-md);
+}
+
+.social-links a {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.contact-map {
+  margin-top: var(--space-lg);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+  
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+  }
+  
+  .hero-headline {
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
+  }
+  
+  .about,
+  .services,
+  .stats,
+  .team,
+  .testimonials,
+  .contact {
+    padding: var(--space-lg) var(--pad-x);
+  }
+  
+  .stats-inner {
+    grid-template-columns: 1fr;
+  }
+  
+  .social-links {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .about-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .about-features {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .service-cell:nth-child(1),
+  .service-cell:nth-child(2) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .about {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .team {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .testimonials {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .contact {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Spa Dulce</a>
+  <ul class="nav-links">
+    <li><a href="https://spadulce.com/">home</a></li>
+    <li><a href="https://spadulce.com/about/">about</a></li>
+    <li><a href="https://spadulce.com/spa-party/">spa party</a></li>
+    <li><a href="https://spadulce.com/#">book now</a></li>
+    <li><a href="https://spadulce.com/specials/">pre-paid series</a></li>
+    <li><a href="https://spadulce.com/faqs/">faqs</a></li>
+    <li><a href="https://spadulce.com/gift-certificates/">gift certificates</a></li>
+    <li><a href="https://na2.meevo.com/CustomerPortal/onlinebooking/booking/guestinfo?tenantId=500699&locationId=500867">book online</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">Experience the Widest Variety of<br>Massage & Facial Services<br>in Cedar Park & North Austin</h1>
+    <p class="hero-subtitle">Indulge in our extensive menu of luxurious treatments, designed to relax, rejuvenate, and revitalize. From soothing massages to glowing facials, we proudly offer the most diverse selection of spa services in the area—all tailored to your unique needs. Your wellness journey starts here.</p>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <span class="about-label">welcome to spa dulce</span>
+    <div class="about-text">
+      <p>Welcome to Spa Dulce in Cedar Park, Texas, where tranquility meets luxury. Indulge in our rejuvenating treatments designed to refresh your body and soul.</p>
+      <div class="about-features">
+        <div class="feature-item">
+          <img src="https://spadulce.com/wp-content/uploads/2024/09/download-22.svg" alt="Custom-Tailored Experiences" class="feature-icon">
+          <div class="feature-text">Custom-Tailored Experiences</div>
+        </div>
+        <div class="feature-item">
+          <img src="https://spadulce.com/wp-content/uploads/2024/09/download-23.svg" alt="Local & Luxurious Spa" class="feature-icon">
+          <div class="feature-text">Local & Luxurious Spa</div>
+        </div>
+        <div class="feature-item">
+          <img src="https://spadulce.com/wp-content/uploads/2024/09/download-30.svg" alt="Five Star Customer Service" class="feature-icon">
+          <div class="feature-text">Five Star Customer Service</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services Grid -->
+<section class="services" id="services">
+  <div class="services-grid">
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://spadulce.com/wp-content/uploads/2024/09/Massages.jpg" alt="Massage services">
+      </div>
+      <div class="service-meta">
+        <h3 class="service-name">Massage</h3>
+        <p class="service-description">Soothing massages designed to relax and rejuvenate, including hot stone massage with aromatherapy</p>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://spadulce.com/wp-content/uploads/2024/09/Facials.jpg" alt="Facial services">
+      </div>
+      <div class="service-meta">
+        <h3 class="service-name">Facials</h3>
+        <p class="service-description">Glowing facials tailored to refresh your skin, including Hydrafacials</p>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://spadulce.com/wp-content/uploads/2024/09/For-Men.jpg" alt="Services for men">
+      </div>
+      <div class="service-meta">
+        <h3 class="service-name">For Men</h3>
+        <p class="service-description">Spa services specifically designed for men</p>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://spadulce.com/wp-content/uploads/2024/09/yHIu4NZNzCqdO8ZAovWJvNzcWg-1.png" alt="Spa party services">
+      </div>
+      <div class="service-meta">
+        <h3 class="service-name">Spa Party</h3>
+        <p class="service-description">Group spa experiences for special occasions</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-value">4.7</div>
+      <div class="stat-label">average rating with 21 reviews</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">4.9</div>
+      <div class="stat-label">average rating with 288 reviews</div>
+    </div>
+  </div>
+</section>
+
+<!-- Team Section -->
+<section class="team" id="team">
+  <div class="team-inner">
+    <h2 class="team-heading">Meet Our Expert Team</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <h3 class="member-name">Fatima</h3>
+        <div class="member-role">esthetician</div>
+        <p class="member-bio">Very knowledgeable esthetician providing fantastic facial services</p>
+      </div>
+      <div class="team-member">
+        <h3 class="member-name">Daniel</h3>
+        <div class="member-role">massage therapist</div>
+        <p class="member-bio">Massage therapist with perfect technique and pressure, known for thorough treatments</p>
+      </div>
+      <div class="team-member">
+        <h3 class="member-name">Diana</h3>
+        <div class="member-role">esthetician</div>
+        <p class="member-bio">Incredibly knowledgeable and kind esthetician specializing in facials and facial massage</p>
+      </div>
+      <div class="team-member">
+        <h3 class="member-name">Sheryl</h3>
+        <div class="member-role">massage therapist</div>
+        <p class="member-bio">Experienced masseuse who has been in the industry for a long time</p>
+      </div>
+      <div class="team-member">
+        <h3 class="member-name">Marcella</h3>
+        <div class="member-role">massage therapist</div>
+        <p class="member-bio">Massage therapist known for relaxing treatments that help clients fall asleep</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials" id="testimonials">
+  <div class="testimonials-inner">
+    <h2 class="testimonials-heading">Here's What Our Customers Say</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-text">"Hands down the BEST spa in Austin! Energy is everything to me and you can definitely feel and experience so much positivity. Everyone is so nice. The whole staff is experienced and professional. 10 out of 10."</p>
+        <div class="testimonial-author">
+          <img src="https://spadulce.com/wp-content/uploads/2024/09/lexi.png" alt="Lexi" class="author-avatar">
+          <div class="author-info">
+            <div>lexi</div>
+            <img src="https://spadulce.com/wp-content/uploads/2024/09/yellow-stars.svg" alt="5 stars" class="rating-stars">
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">"BEST SPA IN THE AREA!!!! I went to Spa Dulce Cedar Park because I had class pass credits to spend but ill be going back with or without class pass! This place is incredible, the woman working the front desk is so calming and sweet she immediately greeted me and sat me down in the relaxing room for a cold drink before I had my massage."</p>
+        <div class="testimonial-author">
+          <img src="https://spadulce.com/wp-content/uploads/2024/09/tanya.png" alt="Tanya" class="author-avatar">
+          <div class="author-info">
+            <div>tanya</div>
+            <img src="https://spadulce.com/wp-content/uploads/2024/09/yellow-stars.svg" alt="5 stars" class="rating-stars">
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">"This was my first time to Spa Dulce but definitely not my last. My facial with Fatima was fantastic! She's very knowledgeable. The other staff were helpful and friendly. I highly recommend Spa Dulce and I am picky!"</p>
+        <div class="testimonial-author">
+          <img src="https://spadulce.com/wp-content/uploads/2024/09/Cyn.png" alt="Cyn" class="author-avatar">
+          <div class="author-info">
+            <div>cyn</div>
+            <img src="https://spadulce.com/wp-content/uploads/2024/09/yellow-stars.svg" alt="5 stars" class="rating-stars">
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">"A lovely, brand new spa and so close to home! The staff was very welcoming & the atmosphere was quite relaxing. Daniel was my massage therapist and he did a wonderful job. His technique was perfect in pressure, very thorough & I left feeling much better!"</p>
+        <div class="testimonial-author">
+          <img src="https://spadulce.com/wp-content/uploads/2024/09/dr.png" alt="Dr" class="author-avatar">
+          <div class="author-info">
+            <div>dr</div>
+            <img src="https://spadulce.com/wp-content/uploads/2024/09/yellow-stars.svg" alt="5 stars" class="rating-stars">
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">"I highly recommend Spa Dulce to anyone looking for a great spa experience. The atmosphere is calming and clean. Diana is my esthetician and she is absolutely amazing. She's incredibly knowledgeable and kind."</p>
+        <div class="testimonial-author">
+          <img src="https://spadulce.com/wp-content/uploads/2024/09/angie.png" alt="Angie" class="author-avatar">
+          <div class="author-info">
+            <div>angie</div>
+            <img src="https://spadulce.com/wp-content/uploads/2024/09/yellow-stars.svg" alt="5 stars" class="rating-stars">
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">"Sheryl is an AWESOME masseuse. It's obvious She's been in the game a long time. Best massage I've had in a LONG time. Diana has done 2 facials for me so far. Best facial I've EVER had!"</p>
+        <div class="testimonial-author">
+          <img src="https://spadulce.com/wp-content/uploads/2024/09/ari.png" alt="Ari" class="author-avatar">
+          <div class="author-info">
+            <div>ari</div>
+            <img src="https://spadulce.com/wp-content/uploads/2024/09/yellow-stars.svg" alt="5 stars" class="rating-stars">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-heading">Visit Our Spa</h2>
+    <div class="contact-info">
+      <div class="contact-item">
+        <a href="tel:(512) 593-8680">(512) 593-8680</a>
+      </div>
+      <div class="contact-item">
+        <a href="https://maps.app.goo.gl/yVw5v1bagMZCC1Rg7">410 W Whitestone Blvd. Suite 102<br>Cedar Park, Texas 78613</a>
+      </div>
+      <div class="social-links">
+        <a href="https://www.facebook.com/SpaDulceDaySpa/">facebook</a>
+        <a href="https://www.instagram.com/spadulcedayspa?igsh=MTZoY25qeGNnM3MweA%3D%3D&utm_source=qr">instagram</a>
+        <a href="https://www.yelp.com/biz/spa-dulce-cedar-park">yelp</a>
+      </div>
+      <div class="contact-map">
+        <iframe src="https://maps.app.goo.gl/yVw5v1bagMZCC1Rg7" width="100%" height="300" style="border:0" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Spa Dulce</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
