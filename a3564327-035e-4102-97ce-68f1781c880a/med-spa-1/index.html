@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rok Wellness</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://images.squarespace-cdn.com/content/v1/690922a471393122e922c5a6/3f51eb80-3746-49f3-96bc-a145888decb8/Medspa+in+Spicewood%2C+TX+78669+l+Rok+Wellness+%282%29.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(244, 240, 234, 0.7);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-tagline {
+  font-family: var(--font-mono);
+  font-size: clamp(0.8rem, 1.5vw, 1rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.6s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.9s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* About Section */
+.about {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.about-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.about-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.about-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.about-image {
+  width: 100%;
+  max-width: 600px;
+  margin: var(--space-md) auto;
+}
+
+/* Services Section */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.service-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.service-cell:last-child {
+  border-bottom: none;
+}
+
+.service-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.service-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.service-cell:hover .service-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+.service-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: var(--space-xs);
+}
+
+.service-name {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 300;
+  text-transform: capitalize;
+  letter-spacing: 0.03em;
+}
+
+.services-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+/* Team Section */
+.team {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.team-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.team-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.team-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.team-member-photo {
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  filter: grayscale(40%);
+}
+
+.team-member-name {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+.team-member-role {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.team-member-bio {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.55;
+  max-width: 600px;
+}
+
+/* Testimonials Section */
+.testimonials {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.testimonials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonials-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-lg);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.testimonial {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.testimonial-quote {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.4;
+  margin-bottom: var(--space-sm);
+}
+
+.testimonial-author {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* Contact Section */
+.contact {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.contact-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.contact-value {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+.contact-value a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.contact-value a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1rem;
+    --space-md: 1.5rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+    --space-xxl: 4rem;
+  }
+
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-sm);
+  }
+
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+    min-height: 80vh;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .team-member {
+    text-align: center;
+  }
+
+  .team-member-photo {
+    margin: 0 auto;
+  }
+
+  .footer {
+    text-align: center;
+  }
+
+  .footer-right {
+    justify-content: center;
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .about-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .service-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(3n) {
+    border-right: none;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .team-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .team-content {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .team-member {
+    flex-direction: row;
+    gap: var(--space-lg);
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .about {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .team {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .testimonials {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .contact {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Rok Wellness</a>
+  <ul class="nav-links">
+    <li><a href="https://www.rokwellnessatx.com/iv-hydration">iv hydration</a></li>
+    <li><a href="https://www.rokwellnessatx.com/neurotoxins">neurotoxins</a></li>
+    <li><a href="https://www.rokwellnessatx.com/about-us">about us</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-tagline">Modern Wellness for Balanced, Beautiful Living</p>
+    <h1 class="hero-headline">Glow on the outside,<br>aligned on the inside.</h1>
+    <p class="hero-subtitle">Elevated, concierge medspa care in the comfort and privacy of your home</p>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <span class="about-label">welcome to rok wellness</span>
+    <div class="about-text">
+      <p>Rok Wellness delivers elevated, concierge medspa care in the comfort and privacy of your home. We offer results-focused treatments designed for busy individuals and families who want to feel radiant, restored, and aligned from the inside out.</p>
+      <img src="https://images.squarespace-cdn.com/content/v1/690922a471393122e922c5a6/01b25e76-dd45-4865-a173-33c206ec5b97/Medspa+in+Spicewood%2C+TX+78669+l+Rok+Wellness+%283%29.png" alt="Medspa in Spicewood, TX 78669 l Rok Wellness" class="about-image">
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="services" id="services">
+  <div class="services-label">patient favorites</div>
+  <div class="services-grid">
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/690922a471393122e922c5a6/90c28401-425c-4d2d-94a2-ed597c6c7f29/Medspa+in+Spicewood%2C+TX+78669+l+Botox+Near+Me.png" alt="Medspa in Spicewood, TX 78669 l Botox Near Me">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">Neurotoxins</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/690922a471393122e922c5a6/77974729-3365-45f5-bf1e-d6eef3488271/Medspa+in+Spicewood%2C+TX+78669+l+Chemical+Peels+Near+Me.png" alt="Medspa in Spicewood, TX 78669 l VI Chemical Peels Near Me">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">VI Chemical Peels</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/690922a471393122e922c5a6/b4aa86dd-ec02-431e-9b1c-d0f5444926f1/Medspa+in+Spicewood%2C+TX+78669+l+IV+Hydration+Near+Me.png" alt="Medspa in Spicewood, TX 78669 l IV Hydration Near Me">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">IV Hydration</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/690922a471393122e922c5a6/77974729-3365-45f5-bf1e-d6eef3488271/Medspa+in+Spicewood%2C+TX+78669+l+Chemical+Peels+Near+Me.png" alt="Medical Grade Chemical Peels">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">Medical Grade Chemical Peels</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/690922a471393122e922c5a6/90c28401-425c-4d2d-94a2-ed597c6c7f29/Medspa+in+Spicewood%2C+TX+78669+l+Botox+Near+Me.png" alt="Microneedling">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">Microneedling</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/690922a471393122e922c5a6/b4aa86dd-ec02-431e-9b1c-d0f5444926f1/Medspa+in+Spicewood%2C+TX+78669+l+IV+Hydration+Near+Me.png" alt="Biostimulators">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">Biostimulators</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/690922a471393122e922c5a6/77974729-3365-45f5-bf1e-d6eef3488271/Medspa+in+Spicewood%2C+TX+78669+l+Chemical+Peels+Near+Me.png" alt="Medical Weight Loss">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">Medical Weight Loss</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team Section -->
+<section class="team" id="team">
+  <div class="team-inner">
+    <span class="team-label">your beauty expert</span>
+    <div class="team-content">
+      <div class="team-member">
+        <img src="https://images.squarespace-cdn.com/content/v1/690922a471393122e922c5a6/18b10752-d50e-48e2-87d9-ef8dd1df07ef/Medspa+in+Spicewood%2C+TX+78669+l+Rok+Wellness.jpg" alt="Medspa in Spicewood, TX 78669 l Rok Wellness" class="team-member-photo">
+        <div>
+          <h3 class="team-member-name">Erin Tabarrok, RN</h3>
+          <p class="team-member-role">registered nurse</p>
+          <p class="team-member-bio">Originally from New Orleans and rooted in Austin since the early 2000s, I bring more than 20 years of nursing experience into a medspa model built on trust, safety, and natural results. As a mom of four girls and the wife of a doctor, I am a longtime advocate for whole-family wellness and I believe aesthetics should enhance, but not change who you are. My approach is calm, personal, and education-forward, helping clients feel confident, cared for, and authentically themselves, regardless of their busy schedules.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <div class="testimonials-label">what our clients say</div>
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <p class="testimonial-quote">"My skin has never looked this smooth and radiant. I'm obsessed with the results!"</p>
+        <p class="testimonial-author">Sarah A.</p>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-quote">"They make beauty fun, not intimidating. I actually look forward to my appointments now."</p>
+        <p class="testimonial-author">Ashley B.</p>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-quote">"The difference in my skin texture and glow is unbelievable."</p>
+        <p class="testimonial-author">Dan B.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-heading">Concierge Service<br>in Austin, TX</h2>
+    <div class="contact-details">
+      <div class="contact-item">
+        <span class="contact-label">contact us</span>
+        <div class="contact-value">
+          <a href="tel:(512) 890-1397">(512) 890-1397</a><br>
+          <a href="mailto:rokwellnessatx@gmail.com">rokwellnessatx@gmail.com</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">hours</span>
+        <div class="contact-value">By appointment only</div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">social</span>
+        <div class="contact-value">
+          <a href="https://www.facebook.com/profile.php?id=61582405636464">Facebook</a><br>
+          <a href="https://www.instagram.com/rokwellness/">Instagram</a><br>
+          <a href="https://www.rokwellnessatx.com/cart">Twitter</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Rok Wellness</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
