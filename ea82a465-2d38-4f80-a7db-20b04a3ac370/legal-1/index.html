@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Burns Law Office</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  background-image: linear-gradient(rgba(17,17,21,0.8), rgba(17,17,21,0.8)), url('https://attyburns.com/files/2014/04/banner-Recovered-Recovered-Recovered-Recovered-Recovered-Recovered-Recovered-Recovered.jpg?w=1440&h=598&a=t');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Follow Us Section */
+.follow-us {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-lg) var(--space-lg);
+  text-align: center;
+  background: var(--bg-secondary);
+}
+
+.follow-us-title {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.follow-us-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.follow-us-links a {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.follow-us-links a:hover {
+  color: var(--text-muted);
+}
+
+.brand-logos {
+  display: flex;
+  gap: var(--space-md);
+  margin: var(--space-lg) 0;
+}
+
+.brand-logos img {
+  height: 40px;
+  width: auto;
+}
+
+/* Small Business Section */
+.small-business {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  background: var(--bg-secondary);
+  text-align: center;
+}
+
+.small-business-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.small-business-subtitle {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: var(--space-lg);
+}
+
+/* Divorce Section */
+.divorce-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  background: var(--bg-secondary);
+  text-align: center;
+}
+
+.divorce-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.divorce-subtitle {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: var(--space-lg);
+}
+
+/* Services Grid */
+.services {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.services-header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.services-title {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 5vw, 42px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.services-subtitle {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.service-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: var(--space-xl);
+  transition: all 0.3s ease;
+}
+
+.service-card:hover {
+  background: var(--bg-hover);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.service-title {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.service-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* Three Services Section */
+.three-services {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  background: var(--bg-secondary);
+}
+
+.three-services-header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.three-services-title {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 5vw, 42px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.three-services-subtitle {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.three-services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.three-service-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: var(--space-xl);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.three-service-card:hover {
+  background: var(--bg-hover);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.three-service-card img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: var(--space-md);
+}
+
+.three-service-title {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+/* Estate Planning CTA */
+.estate-planning-cta {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  text-align: center;
+}
+
+.estate-planning-cta-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.estate-planning-cta-subtitle {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* About Section */
+.about {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+
+.about-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.about-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.about-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.about-content {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.about-image {
+  width: 100%;
+  height: 300px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 1px solid var(--border-color);
+}
+
+/* Team Section */
+.team {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.team-header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.team-title {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 5vw, 42px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.team-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.team-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border-color);
+  margin: 0 auto;
+}
+
+.team-info {
+  text-align: center;
+}
+
+.team-name {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.team-role {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.team-bio {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* Testimonials Section */
+.testimonials {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  background: var(--bg-secondary);
+}
+
+.testimonials-header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.testimonials-title {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 5vw, 42px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.testimonial-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.testimonial-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.testimonial-author {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+/* Contact Section */
+.contact {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.contact-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.contact-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.contact-item i {
+  width: 20px;
+  text-align: center;
+}
+
+.contact-item a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+  color: var(--text-muted);
+}
+
+.contact-map {
+  width: 100%;
+  height: 300px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== MOBILE (max-width: 768px) =================== */
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-lg) var(--space-md);
+    min-height: 60vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(28px, 7vw, 36px);
+  }
+
+  .services {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .service-card {
+    padding: var(--space-lg);
+  }
+
+  .about {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .team {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .testimonials {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .contact {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .footer {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .divorce-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .follow-us {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .small-business {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .three-services {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .estate-planning-cta {
+    padding: var(--space-lg) var(--space-md);
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .three-services-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .about {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+
+  .contact {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .services {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .three-services {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .about {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .team {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .testimonials {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .contact {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  .divorce-section {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .follow-us {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .small-business {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .estate-planning-cta {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <div class="globe-icon"><i class="fas fa-balance-scale"></i></div>
+    <span class="brand-name">Burns Law Office</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-balance-scale"></i></div>
+      <span class="brand-name">Burns Law Office</span>
+    </a>
+    <nav>
+      <a href="https://attyburns.com/">Home</a>
+      <a href="https://attyburns.com/probate-law/">Probate Law</a>
+      <a href="https://attyburns.com/estate-planning/">Estate Planning</a>
+      <a href="https://attyburns.com/uncontested-divorce/">Uncontested Divorce</a>
+      <a href="https://attyburns.com/small-business/">Small Business</a>
+      <a href="https://attyburns.com/probate/">Probate</a>
+      <a href="https://attyburns.com/faq/">FAQ</a>
+      <a href="https://attyburns.com/contact/">Contact</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Free Consultation</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">(615) 469-6857</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Nashville Estate & Probate Law</span>
+      <h1 class="hero-headline">You Don't Have to Figure Out Estate Law Alone</h1>
+      <p class="hero-subheading">Make Burns Law Office your probate lawyer in Nashville, TN. Anthony S. Burns is well-versed in probate, conservatorship law, uncontested divorce and estate laws.</p>
+      <a href="tel:+1-615-469-6857" class="hero-cta">Call Today for Free Consultation <i class="fas fa-phone" style="font-size:10px;"></i></a>
+    </div>
+  </section>
+
+  <!-- Follow Us Section -->
+  <section class="follow-us">
+    <h2 class="follow-us-title">Follow Us</h2>
+    <div class="follow-us-links">
+      <a href="tel:+1-615-469-6857">(615) 469-6857</a>
+      <div class="brand-logos">
+        <img src="https://attyburns.com/files/2018/05/1Untitled-16.png" alt="Burns Law Office">
+        <img src="https://attyburns.com/files/2018/05/1Untitled-16.png" alt="Burns Law Office">
+      </div>
+    </div>
+  </section>
+
+  <!-- Small Business Section -->
+  <section class="small-business">
+    <h2 class="small-business-title">Representing Your Company's Interests in Nashville, TN</h2>
+    <p class="small-business-subtitle">Choose Burns Law Office for small business law & conservatorship law</p>
+    <a href="https://attyburns.com/contact/" class="hero-cta">Learn More <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+  </section>
+
+  <!-- Divorce Section -->
+  <section class="divorce-section">
+    <h2 class="divorce-title">End Your Marriage as Quickly as Possible</h2>
+    <p class="divorce-subtitle">Turn to attorney Burns for uncontested divorces</p>
+    <a href="https://attyburns.com/contact/" class="hero-cta">Call Us Today <i class="fas fa-phone" style="font-size:10px;"></i></a>
+  </section>
+
+  <!-- About Section -->
+  <section class="about">
+    <div class="about-text">
+      <span class="about-label">Resolve Your Legal Troubles</span>
+      <h2 class="about-title">Hire an estate and divorce lawyer in Nashville, TN</h2>
+      <div class="about-content">
+        <p>When you choose Burns Law Office, you'll never have to face a legal dispute alone. Anthony S. Burns is a preferred probate and divorce lawyer serving Nashville, TN.</p>
+        <p>Attorney Burns is well-versed in the probate, conservatorship law, uncontested divorce and estate laws in Nashville, TN. He can even advise your small business. Attorney Burns will guide you through legal procedures step by step to minimize errors while fighting for your best interests throughout the process.</p>
+        <p>Burns Law Office offers free initial consultations. What do you have to lose? Call the office right away at 615-469-6857 to find out how attorney Burns can help you.</p>
+      </div>
+    </div>
+    <img src="http://attyburns.com/files/2014/04/32Untitled-6-Recovered-Recovered-Recovered-Recovered.jpg?&a=t" alt="Attorney Burns" class="about-image">
+  </section>
+
+  <!-- Services Section -->
+  <section class="services">
+    <div class="services-header">
+      <h2 class="services-title">Legal Services</h2>
+      <p class="services-subtitle">Comprehensive legal services for Nashville, TN</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <h3 class="service-title">Probate Law</h3>
+        <p class="service-description">Attorney Burns will help you distribute your deceased loved one's estate.</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-title">Estate Planning</h3>
+        <p class="service-description">Attorney Burns will make planning for your estate's future easy.</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-title">Uncontested Divorce</h3>
+        <p class="service-description">Attorney Burns will guide you through the uncontested divorce process.</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-title">Small Business</h3>
+        <p class="service-description">Don't make major business decisions without a smart small business lawyer on your side.</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-title">Conservatorship Law</h3>
+      </div>
+      <div class="service-card">
+        <h3 class="service-title">Will and Power of Attorney Documents</h3>
+        <p class="service-description">Draft clear, detailed will and power of attorney documents.</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-title">Contract Review</h3>
+        <p class="service-description">Review contracts for your small business.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Three Services Section -->
+  <section class="three-services">
+    <div class="three-services-header">
+      <h2 class="three-services-title">3 legal services attorney Burns provides</h2>
+      <p class="three-services-subtitle">Attorney Burns is so much more than an uncontested divorce lawyer in Nashville, TN. He can help you:</p>
+    </div>
+    <div class="three-services-grid">
+      <div class="three-service-card">
+        <img src="https://attyburns.com/cms_websites/img/lazy-load-placeholder.png" alt="Draft clear, detailed will and power of attorney documents.">
+        <h3 class="three-service-title">Draft clear, detailed will and power of attorney documents.</h3>
+      </div>
+      <div class="three-service-card">
+        <img src="https://attyburns.com/cms_websites/img/lazy-load-placeholder.png" alt="Carry out the wishes of a deceased loved one.">
+        <h3 class="three-service-title">Carry out the wishes of a deceased loved one.</h3>
+      </div>
+      <div class="three-service-card">
+        <img src="https://attyburns.com/cms_websites/img/lazy-load-placeholder.png" alt="Review contracts for your small business.">
+        <h3 class="three-service-title">Review contracts for your small business.</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- Estate Planning CTA Section -->
+  <section class="estate-planning-cta">
+    <h2 class="estate-planning-cta-title">Leave Your Estate in Capable Hands</h2>
+    <p class="estate-planning-cta-subtitle">Attorney Burns offers estate planning law services</p>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team">
+    <div class="team-header">
+      <h2 class="team-title">Meet Your Attorney</h2>
+    </div>
+    <div class="team-card">
+      <img src="https://attyburns.com/files/2014/04/banner-Recovered-Recovered-Recovered-Recovered-Recovered-Recovered-Recovered-Recovered.jpg?w=1440&h=598&a=t" alt="Anthony Burns" class="team-photo">
+      <div class="team-info">
+        <h3 class="team-name">Anthony Burns</h3>
+        <p class="team-role">Attorney</p>
+        <p class="team-bio">Attorney Burns is well-versed in the probate, conservatorship law, uncontested divorce and estate laws in Nashville, TN.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <div class="testimonials-header">
+      <h2 class="testimonials-title">Client Reviews</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-quote">(615) 469-6857</p>
+        <p class="testimonial-author">Reviewer 1</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">Burns Law Office</p>
+        <p class="testimonial-author">Reviewer 2</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">Call Today for a Free Consultation!</p>
+        <p class="testimonial-author">Call Today</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">Home - Probate Law - Estate Planning - Uncontested Divorce - Small Business - Probate - FAQ - Contact</p>
+        <p class="testimonial-author">Reviewer 4</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">Directions</p>
+        <p class="testimonial-author">Reviewer 5</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">Estate law Nashville TN</p>
+        <p class="testimonial-author">Copyright</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact">
+    <div class="contact-info">
+      <span class="contact-label">Contact Information</span>
+      <h2 class="contact-title">Leave Your Estate in Capable Hands</h2>
+      <div class="contact-details">
+        <div class="contact-item">
+          <i class="fas fa-phone"></i>
+          <a href="tel:+1-615-469-6857">(615) 469-6857</a>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>2517 Lebanon Pike, Suite 301, Nashville, TN 37214</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-directions"></i>
+          <a href="https://maps.google.com/maps?daddr=2517%20Lebanon%20Pike,%20Suite%20301,%20Nashville,%20TN%2037214" target="_blank">Get Directions</a>
+        </div>
+      </div>
+    </div>
+    <iframe 
+      src="https://maps.google.com/maps?q=2517%20Lebanon%20Pike,%20Suite%20301,%20Nashville,%20TN%2037214&output=embed" 
+      class="contact-map"
+      frameborder="0"
+      allowfullscreen
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Burns Law Office</span>
+      <span class="footer-copyright">© 2026 Burns Law Office, all rights reserved.</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://attyburns.com/">Home</a>
+      <a href="https://attyburns.com/probate-law/">Probate Law</a>
+      <a href="https://attyburns.com/estate-planning/">Estate Planning</a>
+      <a href="https://attyburns.com/uncontested-divorce/">Uncontested Divorce</a>
+      <a href="https://attyburns.com/small-business/">Small Business</a>
+      <a href="https://attyburns.com/probate/">Probate</a>
+      <a href="https://attyburns.com/faq/">FAQ</a>
+      <a href="https://attyburns.com/contact/">Contact</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
