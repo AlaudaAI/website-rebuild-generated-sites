@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spa Éclat — Luxury Facial & Skincare Spa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://images.squarespace-cdn.com/content/v1/68bc7147bdcca60b4770ff7f/1767023922676-P90D2H5GZN1KN08S3ZE4/unsplash-image-T7uYDZTVcu0.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(244, 240, 234, 0.7);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 680px;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+.hero-actions {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 1.2s forwards;
+}
+
+.hero-btn {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.hero-btn:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+.hero-btn.primary {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+.hero-btn.primary:hover {
+  background-color: transparent;
+  color: var(--text-black);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* About Section */
+.about {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.about-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.about-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.about-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+}
+
+.about-text p + p {
+  margin-top: var(--space-md);
+}
+
+.about-image-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.about-image-wrapper img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  filter: grayscale(20%);
+}
+
+/* Brand Partnerships */
+.partnerships {
+  padding: var(--space-lg) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.partnerships-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.partnerships-title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  line-height: 1.3;
+  margin-bottom: var(--space-lg);
+}
+
+.partnerships-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.partnership-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-sm);
+}
+
+.partnership-logo img {
+  max-height: 80px;
+  width: auto;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.partnership-logo:hover img {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.services-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.services-title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  line-height: 1.3;
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.service-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.service-image-wrapper {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.service-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.service-card:hover .service-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(1.02);
+}
+
+.service-content h3 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  line-height: 1.3;
+  margin-bottom: var(--space-sm);
+}
+
+.service-content p {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+}
+
+/* Why Choose Section */
+.why-choose {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.why-choose-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.why-choose-header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.why-choose-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.why-choose-title {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.why-choose-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 1.6;
+  margin-top: var(--space-md);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.feature-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-md);
+}
+
+.feature-icon {
+  width: 60px;
+  height: 60px;
+  margin-bottom: var(--space-sm);
+}
+
+.feature-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.feature-item h4 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 1.1rem;
+  line-height: 1.3;
+  margin-bottom: var(--space-xs);
+}
+
+.feature-item p {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.6;
+  max-width: 280px;
+}
+
+/* FAQ Section */
+.faq {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.faq-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  line-height: 1.3;
+  margin-bottom: var(--space-md);
+  text-align: center;
+}
+
+.faq-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 1.6;
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.faq-item {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.faq-question {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 1.1rem;
+  line-height: 1.3;
+  margin-bottom: var(--space-sm);
+}
+
+.faq-answer {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.faq-answer p + p {
+  margin-top: var(--space-sm);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.footer-contact {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  margin-top: var(--space-sm);
+}
+
+.footer-contact a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.footer-social {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  margin-top: var(--space-sm);
+}
+
+.footer-social a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1rem;
+    --space-xl: 3rem;
+    --space-lg: 2rem;
+  }
+  
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+  
+  .nav-links {
+    gap: var(--space-sm);
+  }
+  
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+  }
+  
+  .hero-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .hero-btn {
+    width: 100%;
+    max-width: 280px;
+    text-align: center;
+  }
+  
+  .about-content {
+    gap: var(--space-md);
+  }
+  
+  .services-grid {
+    gap: var(--space-md);
+  }
+  
+  .features-grid {
+    gap: var(--space-md);
+  }
+  
+  .partnerships-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .about-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .about-content {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+    align-items: center;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-card {
+    grid-template-columns: 1fr;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .hero-actions {
+    flex-direction: row;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .about {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .why-choose {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <a href="https://www.spaeclat.com/" class="nav-logo">spa éclat</a>
+  <ul class="nav-links">
+    <li><a href="https://www.spaeclat.com/about">about</a></li>
+    <li><a href="https://www.spaeclat.com/services">services</a></li>
+    <li><a href="https://www.spaeclat.com/contact">contact</a></li>
+    <li><a href="https://spaeclat.glossgenius.com/">book now</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">Glow From Inside Out</h1>
+    <p class="hero-subtitle">Rediscover your radiance with advanced facials, soothing massages, and personalized skincare rituals — all designed to help you look and feel your most luminous self.</p>
+    <div class="hero-actions">
+      <a href="https://spaeclat.glossgenius.com/" class="hero-btn primary">book your glow session</a>
+      <a href="https://www.spaeclat.com/services" class="hero-btn">explore services</a>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <span class="about-label">about spa éclat</span>
+    <div class="about-content">
+      <div class="about-text">
+        <p>At Spa Éclat, I believe that healthy, radiant skin is built with intention, expertise, and care.</p>
+        <p>Founded by a licensed esthetician with a background in professional beauty, Spa Éclat offers personalized, results-driven treatments using advanced technology and thoughtfully chosen products. Every service is designed to support long-term skin health while providing a calm, elevated experience.</p>
+        <p>From customized facials to high-performance treatments, I focus on quality over quantity. By combining modern techniques with products I trust, including Eminence® Organic Skin Care, Spa Éclat helps clients achieve a natural glow from the inside out.</p>
+      </div>
+      <div class="about-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/68bc7147bdcca60b4770ff7f/c89b943c-b9e5-45ed-8026-f5318ff0d44d/spa-eclat-relaxing-treatment-room.jpg" alt="Relaxing treatment room at Spa Éclat skincare clinic">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Brand Partnerships -->
+<section class="partnerships">
+  <div class="partnerships-inner">
+    <h2 class="partnerships-title">Brand Partnerships</h2>
+    <div class="partnerships-grid">
+      <div class="partnership-logo">
+        <img src="https://images.squarespace-cdn.com/content/v1/68bc7147bdcca60b4770ff7f/2c31b423-f0e7-4bee-9953-fddccc199d51/c299757da54b3f7c97d8f6834bc429e22e083a32.png" alt="Hydrafacial professional skincare partner">
+      </div>
+      <div class="partnership-logo">
+        <img src="https://images.squarespace-cdn.com/content/v1/68bc7147bdcca60b4770ff7f/4fc30e7a-189b-42d1-bc8d-f32fba4e6d6f/a6da662ffb2750c2f86337e857210b157f5eb79b.png" alt="medical-grade skincare products">
+      </div>
+      <div class="partnership-logo">
+        <img src="https://images.squarespace-cdn.com/content/v1/68bc7147bdcca60b4770ff7f/6977ac13-9481-4d0c-8723-98cbcd3c8104/f2526643a86ece8820503e1a02243380deae7d58.png" alt="Eminence Organic Skin Care used at Spa Éclat">
+      </div>
+      <div class="partnership-logo">
+        <img src="https://images.squarespace-cdn.com/content/v1/68bc7147bdcca60b4770ff7f/582cbd33-febe-4027-a920-c9881fcfdcd3/image+1529.png" alt="Dermaplane Pro logo in black background with gray text">
+      </div>
+      <div class="partnership-logo">
+        <img src="https://images.squarespace-cdn.com/content/v1/68bc7147bdcca60b4770ff7f/0e747b3b-3b21-4be0-a070-a04dd373ca5b/40da364030029963988788e0867c6ddc7f3b4387.png" alt="professional spa skincare brands">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Treatments -->
+<section class="services" id="services">
+  <div class="services-inner">
+    <h2 class="services-title">Featured Treatments</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-image-wrapper">
+          <img src="https://images.squarespace-cdn.com/content/v1/68bc7147bdcca60b4770ff7f/8fd62e88-d5f8-4e0a-b686-be35cc6f3832/image.png?format=2500w" alt="Custom Glow Facials">
+        </div>
+        <div class="service-content">
+          <h3>Custom Glow Facials</h3>
+          <p>A personalized treatment tailored to your skin's unique needs, combining targeted techniques and high-performance products to restore balance, boost radiance, and leave your complexion luminous and refreshed.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-image-wrapper">
+          <img src="https://images.squarespace-cdn.com/content/68bc7147bdcca60b4770ff7f/dc77cb44-53c5-47bb-99d8-9a27d84e30b7/Home+page+under+Featured+treatments-+Hydrafacial.webp?content-type=image%2Fwebp" alt="Hydrafacial">
+        </div>
+        <div class="service-content">
+          <h3>Hydrafacial</h3>
+          <p>A multi-step, non-invasive treatment that deeply cleanses, exfoliates, extracts, and hydrates the skin using vortex-fusion technology for instant, radiant results with no downtime.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-image-wrapper">
+          <img src="https://images.squarespace-cdn.com/content/68bc7147bdcca60b4770ff7f/aa292598-5345-4657-b596-374851587cab/Home+Page+under+Featured+treatments-+Dermaplaning.webp?content-type=image%2Fwebp" alt="Dermaplaning Facial Treatment">
+        </div>
+        <div class="service-content">
+          <h3>Dermaplaning Facial Treatment</h3>
+          <p>A gentle exfoliation treatment that removes dead skin cells and fine vellus hair to instantly reveal smoother, brighter skin and enhance product absorption.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-image-wrapper">
+          <img src="https://images.squarespace-cdn.com/content/68bc7147bdcca60b4770ff7f/e9dd5e71-38c5-4973-818b-20389318416b/Home+page+under+Featured+Treatments-Nanoneedling.webp?content-type=image%2Fwebp" alt="Nano-needling  Treatment">
+        </div>
+        <div class="service-content">
+          <h3>Nano-needling Treatment</h3>
+          <p>A painless, non-invasive treatment that uses microscopic channels to boost collagen stimulation and dramatically enhance the absorption of targeted serums for smoother, more radiant skin.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-image-wrapper">
+          <img src="https://images.squarespace-cdn.com/content/68bc7147bdcca60b4770ff7f/dc77cb44-53c5-47bb-99d8-9a27d84e30b7/Home+page+under+Featured+treatments-+Hydrafacial.webp?content-type=image%2Fwebp" alt="Deluxe Hydrafacial">
+        </div>
+        <div class="service-content">
+          <h3>Deluxe Hydrafacial</h3>
+          <p>Perfect for those wanting to target specific skin concerns, includes personalized boosters tailored to your skin, partnered with relaxing and rejuvenating Blue or Red LED light therapy.</p>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-image-wrapper">
+          <img src="https://images.squarespace-cdn.com/content/68bc7147bdcca60b4770ff7f/ab3c142a-8647-43b5-89f9-5ac087bb14f4/Home+page+under+Featured+treatments-+Packages.webp?content-type=image%2Fwebp" alt="Packages">
+        </div>
+        <div class="service-content">
+          <h3>Packages</h3>
+          <p>Facial packages designed to deliver the best results through a series of customized treatments, offering enhanced skin benefits, consistency, and exclusive savings.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose Section -->
+<section class="why-choose" id="why-choose">
+  <div class="why-choose-inner">
+    <div class="why-choose-header">
+      <span class="why-choose-label">our promise</span>
+      <h2 class="why-choose-title">Why Choose Spa Éclat</h2>
+      <p class="why-choose-subtitle">Thoughtful, results-driven skincare delivered with intention. Here is why clients choose Spa Éclat.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="feature-icon">
+          <img src="https://images.squarespace-cdn.com/content/v1/68bc7147bdcca60b4770ff7f/879b653c-4c17-4256-a10e-3f926d558fa7/Coach+website+%2810%29.png" alt="Expert-Led Care">
+        </div>
+        <h4>Expert-Led Care</h4>
+        <p>All treatments are performed by a licensed esthetician for consistent, attentive care.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <img src="https://images.squarespace-cdn.com/content/v1/68bc7147bdcca60b4770ff7f/8a0318bd-ad46-4cee-9ba3-005cc22bf171/Coach+website+%283%29.png?format=1500w" alt="Personalized Treatments">
+        </div>
+        <h4>Personalized Treatments</h4>
+        <p>Each treatment is customized to meet your unique skin type, concerns, and goals.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <img src="https://images.squarespace-cdn.com/content/v1/68bc7147bdcca60b4770ff7f/1767023922676-P90D2H5GZN1KN08S3ZE4/unsplash-image-T7uYDZTVcu0.jpg" alt="Clean & Safe Environment">
+        </div>
+        <h4>Clean & Safe Environment</h4>
+        <p>High standards of hygiene and sanitation for your comfort and safety.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <img src="https://images.squarespace-cdn.com/content/v1/68bc7147bdcca60b4770ff7f/c5562e15-a9c4-40b9-9668-86add4d3c096/Coach+website+%286%29.png" alt="Trusted Premium Products">
+        </div>
+        <h4>Trusted Premium Products</h4>
+        <p>Carefully selected products I trust personally, including Eminence® Organic Skin Care.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <img src="https://images.squarespace-cdn.com/content/68bc7147bdcca60b4770ff7f/ab3c142a-8647-43b5-89f9-5ac087bb14f4/Home+page+under+Featured+treatments-+Packages.webp?content-type=image%2Fwebp" alt="Easy Online Scheduling">
+        </div>
+        <h4>Easy Online Scheduling</h4>
+        <p>Simple, convenient schedule designed to fit your lifestyle.</p>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <img src="https://images.squarespace-cdn.com/content/v1/68bc7147bdcca60b4770ff7f/1299c046-4908-4c5c-93c7-a222a0b9d402/Coach+website+%286%29.png" alt="Results That Last">
+        </div>
+        <h4>Results That Last</h4>
+        <p>Treatments focused on long-term skin health and visible results.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="faq">
+  <div class="faq-inner">
+    <h2 class="faq-title">Frequently Asked Questions</h2>
+    <p class="faq-subtitle">Find answers to common questions about our services, booking, and policies.</p>
+    <div class="faq-list">
+      <div class="faq-item">
+        <h4 class="faq-question">What treatments do you offer?</h4>
+        <div class="faq-answer">
+          <p>At Spa Éclat, we specialize in advanced, results-driven skincare treatments including Hydrafacials, customized facials, Nano Needling and targeted treatments designed to improve your skin's health and glow. Every service is tailored to your unique skin needs.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <h4 class="faq-question">Which Hydrafacial should I choose?</h4>
+        <div class="faq-answer">
+          <p>If you're unsure which Hydrafacial is right for you, here's a simple guide:</p>
+          <p>The Signature Hydrafacial is ideal for clients with low-maintenance, problem-free skin who are looking to maintain a healthy glow.</p>
+          <p>The Deluxe Hydrafacial is perfect for those wanting to target specific skin concerns, as it includes personalized boosters tailored to your skin, partnered with relaxing and rejuvenating Blue or Red LED light therapy.</p>
+          <p>The Platinum Hydrafacial is designed for clients who want a complete skin health reset, combining detoxifying lymphatic drainage, a personalized booster to target specific skin concerns, and Blue or Red LED light therapy for a more comprehensive, results-driven experience.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <h4 class="faq-question">Is there any downtime after a facial?</h4>
+        <div class="faq-answer">
+          <p>Our treatments have no downtime. You can usually return to your daily activities right after your appointment, with your skin looking refreshed, hydrated, and glowing.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <h4 class="faq-question">How often should I get a facial?</h4>
+        <div class="faq-answer">
+          <p>For best results, we recommend a facial every 4 weeks. Consistency helps maintain healthy, balanced skin and enhances long-term results.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <h4 class="faq-question">How can I book an appointment?</h4>
+        <div class="faq-answer">
+          <p>Appointments can be booked easily through our website or by contacting us directly. We recommend booking in advance to secure your preferred time.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-left">© 2024 spa éclat</div>
+  <div class="footer-right">
+    <span>round rock</span>
+    <span>texas</span>
+    <span>skincare</span>
+    <div class="footer-contact">
+      <a href="tel:2807345696">2807345696</a>
+      <a href="mailto:info@spaeclat.com">info@spaeclat.com</a>
+    </div>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/spa_eclat/">instagram</a>
+      <a href="https://www.facebook.com/spaeclat">facebook</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
