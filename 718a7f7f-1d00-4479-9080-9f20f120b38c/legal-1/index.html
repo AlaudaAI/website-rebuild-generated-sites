@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Murfreesboro Family Law</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Visual Demo */
+.hero-visual {
+  width: 100%;
+  max-width: 400px;
+}
+
+.scan-container {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: var(--space-xl);
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* Services Grid */
+.services {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.service-card {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+.service-card:last-child {
+  border-bottom: none;
+}
+
+.service-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.service-protocol {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.service-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.service-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 380px;
+}
+
+/* Team Section */
+.team {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.team-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xl);
+  text-align: center;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.team-photo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border-color);
+}
+
+.team-name {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.team-role {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.team-bio {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--text-muted);
+  max-width: 300px;
+}
+
+/* Trust Metrics Section */
+.trust-section {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.trust-metrics {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.trust-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.trust-number {
+  font-family: var(--font-serif);
+  font-size: clamp(64px, 15vw, 120px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.trust-number-suffix {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 8vw, 60px);
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.trust-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 400px;
+}
+
+.trust-clients {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.stat-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  gap: var(--space-xs);
+}
+
+.stat-value {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.stat-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* Testimonials Section */
+.testimonials {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.testimonials-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xl);
+  text-align: center;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.testimonial {
+  padding: var(--space-lg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.testimonial-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.testimonial-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.testimonial-name {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.testimonial-rating {
+  display: flex;
+  gap: 2px;
+  margin-left: auto;
+}
+
+.testimonial-rating .star {
+  color: #ffd700;
+  font-size: 12px;
+}
+
+/* Contact Section */
+.contact {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.contact-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xl);
+  text-align: center;
+}
+
+.contact-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.contact-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+
+.contact-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.contact-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-link:hover {
+  color: var(--text-muted);
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== MOBILE (max-width: 768px) =================== */
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .hero-headline {
+    font-size: 32px;
+  }
+  
+  .service-card {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .team, .testimonials, .contact {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .trust-metrics, .trust-clients {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .footer {
+    padding: var(--space-lg) var(--space-md);
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .services {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .service-card:nth-child(even) {
+    border-right: none;
+  }
+
+  .service-card:nth-last-child(-n+2) {
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .trust-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-metrics {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .services {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .service-card {
+    padding: var(--space-2xl) var(--space-xl);
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .service-card:nth-child(3n) {
+    border-right: none;
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .trust-metrics {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-clients {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-number {
+    font-size: 120px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .service-card {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="https://murfreesborofamilylaw.com/" class="brand">
+    <div class="globe-icon"><i class="fas fa-scales-justice"></i></div>
+    <span class="brand-name">Murfreesboro Family Law</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="https://murfreesborofamilylaw.com/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-scales-justice"></i></div>
+      <span class="brand-name">Murfreesboro Family Law</span>
+    </a>
+    <nav>
+      <a href="https://murfreesborofamilylaw.com/">Home</a>
+      <a href="https://murfreesborofamilylaw.com/about/">About</a>
+      <a href="https://murfreesborofamilylaw.com/#">Services</a>
+      <a href="https://murfreesborofamilylaw.com/blog-news/">Blog & News</a>
+      <a href="https://murfreesborofamilylaw.com/contact/">Contact</a>
+      <a href="https://www.google.com/maps/contrib/113763397926190028945/reviews">Google Reviews</a>
+      <a href="https://www.facebook.com/profile.php?id=100057361362738">Facebook</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">All Systems Operational</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">615-890-3656</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Murfreesboro Family Law</span>
+      <h1 class="hero-headline">Family Law, Criminal Defense, Personal Injury & Estate Law</h1>
+      <p class="hero-subheading">One of Rutherford County's most experienced & successful law practices.</p>
+      <a href="https://murfreesborofamilylaw.com/contact/" class="hero-cta">Schedule Consultation <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+    </div>
+    <div class="hero-visual">
+      <div class="scan-container">
+        <img src="https://murfreesborofamilylaw.com/wp-content/uploads/2025/09/logo.png" alt="Murfreesboro Family Law" class="hero-image">
+      </div>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="http://i.vimeocdn.com/video/1935769390-a1671da969cee0abd577fe0faedd8fb83f0e3dc8dd9955003bb720e4dad2bc6b-d_960" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/loading.gif" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Services Grid -->
+  <section class="services">
+    <div class="service-card">
+      <p class="service-protocol">A Different Approach</p>
+      <h3 class="service-title">A Different Approach</h3>
+      <p class="service-description">What makes us different? Our legal team approaches every client's case with both compassion and professionalism. We take your legal situation seriously and are dedicated to achieving successful outcomes. From research, writing, mediation, negotiations, courtroom representation and seeing your case through all of the legal requirements—our entire legal team is here for you.</p>
+    </div>
+    <div class="service-card">
+      <p class="service-protocol">Insights, Advice & News</p>
+      <h3 class="service-title">Insights, Advice & News</h3>
+      <p class="service-description">VIEW OUR BLOG</p>
+    </div>
+    <div class="service-card">
+      <p class="service-protocol">Divorce Attorney</p>
+      <h3 class="service-title">Divorce Attorney</h3>
+      <p class="service-description">Unfortunately, not every marriage has a happy ending. If you find yourself wading through a messy divorce, we can help. We'll guide you through the process and help you stand on solid ground once again.</p>
+    </div>
+    <div class="service-card">
+      <p class="service-protocol">Criminal Defense</p>
+      <h3 class="service-title">We understand the magnitude of a criminal charge.</h3>
+      <p class="service-description">We understand the magnitude of a criminal charge. Specializing in criminal defense law for individuals accused of criminal activity. With over twenty years of experience, we are here for you.</p>
+    </div>
+    <div class="service-card">
+      <p class="service-protocol">Child Support</p>
+      <h3 class="service-title">Providing quality legal solutions to child support issues.</h3>
+      <p class="service-description">Providing quality legal solutions to child support issues. If you find yourself wading through a messy divorce, we can help. We'll guide you through the process and help you stand on solid ground once again.</p>
+    </div>
+    <div class="service-card">
+      <p class="service-protocol">Personal Injury</p>
+      <h3 class="service-title">Get the compensation you deserve.</h3>
+      <p class="service-description">Get the compensation you deserve. When injured in an accident, you want the best support behind you. Offering in-depth knowledge of the law and how to deal with insurance companies.</p>
+    </div>
+    <div class="service-card">
+      <p class="service-protocol">Child Custody</p>
+      <h3 class="service-title">Every child custody case is different and unique.</h3>
+      <p class="service-description">Every child custody case is different and unique. Our main priority is the well-being of your children. We will work hard to fight for their rights and limit the impact of litigation on their lives.</p>
+    </div>
+    <div class="service-card">
+      <p class="service-protocol">Estate Law/Elder Law</p>
+      <h3 class="service-title">Estate Law/Elder Law</h3>
+      <p class="service-description">Do you have an Estate Plan? Creating an Estate Plan ensures your affairs are in order and the distribution of wealth and assets are determined for all beneficiaries, providing peace of mind.</p>
+    </div>
+    <div class="service-card">
+      <p class="service-protocol">Adoption</p>
+      <h3 class="service-title">Adoptions are exciting and can be complicated.</h3>
+      <p class="service-description">Adoptions are exciting and can be complicated. Providing compassionate and knowledgeable adoption guidance through this wonderful journey, to help make the process seamless.</p>
+    </div>
+    <div class="service-card">
+      <p class="service-protocol">Legal Writing & Research</p>
+      <h3 class="service-title">Legal Writing & Research</h3>
+      <p class="service-description">Experienced, Comprehensive and Concise. Specializing in professional legal research and writing, covering all faucets of the legal system, utilizing the best resources for your case.</p>
+    </div>
+    <div class="service-card">
+      <p class="service-protocol">Grandparent's Rights</p>
+      <h3 class="service-title">Grandparent's Rights</h3>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/download.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Team Section -->
+  <section class="team">
+    <h2 class="team-title">Our Legal Team</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <img src="https://murfreesborofamilylaw.com/wp-content/uploads/2023/10/bg-laurie-young.png" alt="Laurie Young" class="team-photo">
+        <h3 class="team-name">Laurie Young, Esq.</h3>
+        <p class="team-role">Attorney at Law</p>
+        <p class="team-bio">Understands that a family law matter can be one of the most difficult situations in your life and handles cases with compassion and respect.</p>
+      </div>
+      <div class="team-member">
+        <img src="https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png" alt="Katie Fults" class="team-photo">
+        <h3 class="team-name">Katie Fults</h3>
+        <p class="team-role">Attorney</p>
+      </div>
+      <div class="team-member">
+        <img src="https://cdn-cookieyes.com/assets/images/close.svg" alt="Alex Starr" class="team-photo">
+        <h3 class="team-name">Alex Starr</h3>
+        <p class="team-role">Attorney</p>
+      </div>
+      <div class="team-member">
+        <img src="https://i.vimeocdn.com/video/1935769390-a1671da969cee0abd577fe0faedd8fb83f0e3dc8dd9955003bb720e4dad2bc6b-d?mw=80&q=85" alt="Allison Renfro" class="team-photo">
+        <h3 class="team-name">Allison Renfro</h3>
+        <p class="team-role">Attorney</p>
+      </div>
+      <div class="team-member">
+        <img src="https://lh3.googleusercontent.com/a-/ALV-UjV284lT7P0KxK8BF7YNsaWgEdw0Hrp3K68NqydFVkiBRWv5CzhU=s128-c0x00000000-cc-rp-mo" alt="Joe Agee" class="team-photo">
+        <h3 class="team-name">Joe Agee</h3>
+        <p class="team-role">Attorney</p>
+      </div>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/download_white.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/refresh_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Trust Metrics Section -->
+  <section class="trust-section">
+    <div class="trust-metrics">
+      <span class="trust-label">Client Satisfaction</span>
+      <div>
+        <span class="trust-number">4.8</span><span class="trust-number-suffix">★</span>
+      </div>
+      <p class="trust-description">Google rating from 293 reviews across all practice areas. We have assisted clients with a variety of legal issues for more than 30 years.</p>
+    </div>
+    <div class="trust-clients">
+      <span class="trust-label">Experience & Results</span>
+      <div class="stats-grid">
+        <div class="stat-badge">
+          <span class="stat-value">30+</span>
+          <span class="stat-label">Years Experience</span>
+        </div>
+        <div class="stat-badge">
+          <span class="stat-value">293</span>
+          <span class="stat-label">Client Reviews</span>
+        </div>
+        <div class="stat-badge">
+          <span class="stat-value">100%</span>
+          <span class="stat-label">Rutherford County</span>
+        </div>
+        <div class="stat-badge">
+          <span class="stat-value">24/7</span>
+          <span class="stat-label">Support Available</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/refresh_white_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/audio_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <h2 class="testimonials-title">Client Testimonials</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <p class="testimonial-text">Laurie just recently completed my divorce case. She did an amazing job. She will fight hard for your case and she is a tough firecracker to go up against. She is very informative and her communication is excellent. She is highly intelligent and knows family law.</p>
+        <div class="testimonial-author">
+          <img src="https://lh3.googleusercontent.com/a-/ALV-UjVTzlEA3YGzENKs1LQFqZk-yco9RNTKr6FiBUNvDXQrdP9CBL_i=s128-c0x00000000-cc-rp-mo" alt="Norma Ortiz" class="testimonial-avatar">
+          <span class="testimonial-name">Norma Ortiz</span>
+          <div class="testimonial-rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-text">Katie Fults went above and beyond in helping close a chapter in my life. She was professional but so kind hearted towards my divorce case! I would highly recommend her to anyone for an attorney! She was persistent and honest with all my requests and questions.</p>
+        <div class="testimonial-author">
+          <img src="https://lh3.googleusercontent.com/a-/ALV-UjU_3TOUzMHckr7zfn4RzEysPO0G8fyGWjc23xYsBWqMANxrY9ItLA=s128-c0x00000000-cc-rp-mo" alt="Megan Cencelewski" class="testimonial-avatar">
+          <span class="testimonial-name">Megan Cencelewski</span>
+          <div class="testimonial-rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-text">I was so very blessed to have Alex and his team working my case. I could not asked for better. My phone calls were returned the same day. They were extremely professional, but they did it in a way that made you aware they were people too.</p>
+        <div class="testimonial-author">
+          <img src="https://lh3.googleusercontent.com/a/ACg8ocIDSG92rA7AtzKgmP9u0SrfCfoPPBI3TxW5oUuP9WfUdShd-g=s128-c0x00000000-cc-rp-mo" alt="Linda Halbeck" class="testimonial-avatar">
+          <span class="testimonial-name">Linda Halbeck</span>
+          <div class="testimonial-rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-text">Allison Renfro has truly been a Godsend to my family! I recommend her to anyone going through a divorce or any custody issue! She always responses with compassion, and has a great understanding of the law. My case is unique and she always breaks down the details for me on next steps.</p>
+        <div class="testimonial-author">
+          <img src="https://lh3.googleusercontent.com/a/ACg8ocLA-B8e-GZ5LQ26x89yM0erRnpL-22n50BtdPYGUu22QnoPtQ=s128-c0x00000000-cc-rp-mo" alt="Danielle Millis" class="testimonial-avatar">
+          <span class="testimonial-name">Danielle Millis</span>
+          <div class="testimonial-rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/audio_white_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Contact Section -->
+  <section class="contact">
+    <h2 class="contact-title">WE WANT TO HELP YOU WITH YOUR LEGAL CASE.</h2>
+    <div class="contact-content">
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-phone"></i></div>
+          <div class="contact-text">
+            <a href="tel:6158903656" class="contact-link">615-890-3656</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="contact-text">119 N Maple St. Murfreesboro, TN 37130</div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-clock"></i></div>
+          <div class="contact-text">Mon. - Fri. 8:00AM - 5:00PM | Sat. - Sun. CLOSED</div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-globe"></i></div>
+          <div class="contact-text">Hablamos Español</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Murfreesboro Family Law</span>
+      <span class="footer-copyright">© 2026 | Guided by Navigation Advertising, LLC</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://murfreesborofamilylaw.com/">Home</a>
+      <a href="https://murfreesborofamilylaw.com/about/">About</a>
+      <a href="https://murfreesborofamilylaw.com/#">Services</a>
+      <a href="https://murfreesborofamilylaw.com/blog-news/">Blog & News</a>
+      <a href="https://murfreesborofamilylaw.com/contact/">Contact</a>
+      <a href="tel:6158903656">615-890-3656</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
