@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Texas Needle Queen</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background: url('https://img1.wsimg.com/isteam/ip/bc9cbcd2-a300-4b6c-a0d9-808383ad68a7/IMG_1070.jpeg/:/') center/cover no-repeat;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(244, 240, 234, 0.85);
+  z-index: 1;
+}
+
+.hero > * {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+  margin-bottom: var(--space-md);
+}
+
+.hero-cta {
+  display: flex;
+  gap: var(--space-sm);
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 1.2s forwards;
+}
+
+.hero-cta a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: inline-block;
+}
+
+.hero-cta a:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Stats Section */
+.stats {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  text-align: center;
+}
+
+.stats-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.stat-item {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.stat-value {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin-right: var(--space-xs);
+}
+
+/* Philosophy Section */
+.philosophy {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.philosophy-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.philosophy-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.philosophy-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.service-card {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.service-name {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.service-description {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Team Section */
+.team {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.team-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.team-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: var(--space-md);
+}
+
+.team-name {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+}
+
+.team-role {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: var(--placeholder-gray);
+  margin-bottom: var(--space-sm);
+}
+
+.team-bio {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 500px;
+}
+
+/* Testimonials Section */
+.testimonials {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.testimonials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonials-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.testimonial-card {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  gap: var(--space-md);
+}
+
+.testimonial-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.testimonial-content {
+  flex: 1;
+}
+
+.testimonial-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+}
+
+.testimonial-author {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* Gallery Section */
+.gallery {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.gallery-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.gallery-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-sm);
+}
+
+.gallery-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  filter: grayscale(20%);
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.gallery-image:hover {
+  filter: grayscale(0%);
+  transform: scale(1.02);
+}
+
+/* Contact Section */
+.contact {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  text-align: center;
+}
+
+.contact-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.contact-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto var(--space-md);
+}
+
+.contact-cta {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: inline-block;
+}
+
+.contact-cta:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+.social-links {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  margin-top: var(--space-md);
+}
+
+.social-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.social-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--text-black);
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.social-links a:hover::after {
+  width: 100%;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+  
+  .nav-links {
+    display: none;
+  }
+  
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+  }
+  
+  .hero-headline {
+    font-size: 2.2rem;
+  }
+  
+  .stats-inner {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+  
+  .philosophy {
+    padding: var(--space-lg) var(--pad-x);
+  }
+  
+  .services {
+    padding: var(--space-lg) var(--pad-x);
+  }
+  
+  .services-grid {
+    gap: var(--space-sm);
+  }
+  
+  .team {
+    padding: var(--space-lg) var(--pad-x);
+  }
+  
+  .testimonials {
+    padding: var(--space-lg) var(--pad-x);
+  }
+  
+  .gallery {
+    padding: var(--space-lg) var(--pad-x);
+  }
+  
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xs);
+  }
+  
+  .contact {
+    padding: var(--space-lg) var(--pad-x);
+  }
+  
+  .social-links {
+    flex-wrap: wrap;
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .philosophy-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .team-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-xl);
+    align-items: center;
+  }
+
+  .team-member {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+    text-align: left;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .hero-cta {
+    flex-direction: row;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .philosophy {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .team {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .testimonials {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .gallery {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .contact {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Texas Needle Queen</a>
+  <ul class="nav-links">
+    <li><a href="https://texasneedlequeen.com/facial-balancing">facial balancing</a></li>
+    <li><a href="https://texasneedlequeen.com/botox">botox</a></li>
+    <li><a href="https://texasneedlequeen.com/lip-filler">lip filler</a></li>
+    <li><a href="https://texasneedlequeen.com/skin-treatments">skin treatments</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <h1 class="hero-headline">Facial Balancing Botox &<br>Lip Filler in Round Rock, Texas</h1>
+  <p class="hero-subtitle">Personalized facial balancing for soft, feminine, natural-looking results. Look refreshed - and feel confident.</p>
+  <div class="hero-cta">
+    <a href="https://book.squareup.com/appointments/fu8s0dm5hyvin0/location/LCDDE3PYM5MJ3/services/QLTGJAZOIC4DQX3WIFS56G2O">Get your personalized treatment plan</a>
+    <a href="tel:+15122624676">Text with Questions</a>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <span class="stat-value">5.0</span>Google Reviews
+    </div>
+    <div class="stat-item">
+      <span class="stat-value">50</span>Reviews
+    </div>
+  </div>
+</section>
+<div style="width:100%;margin:2rem 0"><img src="https://img1.wsimg.com/isteam/ip/bc9cbcd2-a300-4b6c-a0d9-808383ad68a7/image-removebg-preview%20(4).png/:/rs=h:200,cg:true,m/qt=q:95" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+<!-- Philosophy Section -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">002 — approach</span>
+    <div class="philosophy-text">
+      <p>Advanced Aesthetic Injector who listens, educates, and treats your face with intention.</p>
+      <p>Facial balancing is a customized approach to Botox and dermal fillers that enhances harmony, softness, and natural features — never trends or overfilling.</p>
+      <p>The result is a refreshed, feminine look that still feels like you.</p>
+    </div>
+  </div>
+</section>
+<div style="width:100%;margin:2rem 0"><img src="https://img1.wsimg.com/isteam/ip/bc9cbcd2-a300-4b6c-a0d9-808383ad68a7/IMG_0921.jpeg/:/rs=w:600,cg:true,m" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+<!-- Services Grid -->
+<section class="services" id="services">
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-name">facial balancing</div>
+      <div class="service-description">Customized approach to Botox and dermal fillers that enhances harmony, softness, and natural features — never trends or overfilling</div>
+    </div>
+    <div class="service-card">
+      <div class="service-name">botox</div>
+      <div class="service-description">Relax overactive muscles, soften lines, and gently lift features while maintaining natural expression</div>
+    </div>
+    <div class="service-card">
+      <div class="service-name">lip filler</div>
+      <div class="service-description">Enhance shape, symmetry, and softness while keeping lips natural and proportional to your face</div>
+    </div>
+    <div class="service-card">
+      <div class="service-name">soft facial balancing with botox</div>
+      <div class="service-description">Relax overactive muscles, soften lines, and gently lift features while maintaining natural expression</div>
+    </div>
+    <div class="service-card">
+      <div class="service-name">artful lip balancing</div>
+      <div class="service-description">Enhance shape, symmetry, and softness while keeping lips natural and proportional to your face</div>
+    </div>
+    <div class="service-card">
+      <div class="service-name">customized facial enhancement</div>
+      <div class="service-description">A tailored combination of Botox and filler based on your facial structure and goals</div>
+    </div>
+    <div class="service-card">
+      <div class="service-name">skin treatments</div>
+    </div>
+  </div>
+</section>
+<div style="width:100%;margin:2rem 0"><img src="https://img1.wsimg.com/isteam/ip/bc9cbcd2-a300-4b6c-a0d9-808383ad68a7/IMG_0918.jpeg/:/rs=w:600,cg:true,m" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+<!-- Team Section -->
+<section class="team" id="team">
+  <div class="team-inner">
+    <img src="https://img1.wsimg.com/isteam/ip/bc9cbcd2-a300-4b6c-a0d9-808383ad68a7/IMG_5392.jpeg/:/cr=t:5.54%25,l:0%25,w:100%25,h:75%25/rs=w:365,h:365,cg:true" alt="Texas Needle Queen" class="team-image">
+    <div class="team-member">
+      <div class="team-name">tatiana</div>
+      <div class="team-role">certified cosmetic injector</div>
+      <div class="team-bio">Certified cosmetic injector behind Texas Needle Queen known for gentle technique, attention to detail, and ability to create soft, natural results that enhance — never overpower — your features.</div>
+    </div>
+  </div>
+</section>
+<div style="width:100%;margin:2rem 0"><img src="https://img1.wsimg.com/isteam/ip/bc9cbcd2-a300-4b6c-a0d9-808383ad68a7/IMG_6890.jpeg/:/rs=w:70,h:70,cg:true,m/cr=w:70,h:70,a:cc" alt="A woman's face before and after a facial treatment" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+<!-- Testimonials Section -->
+<section class="testimonials" id="testimonials">
+  <div class="testimonials-inner">
+    <h2 class="testimonials-heading">Discover What Our<br>Clients Love</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <img src="https://lh3.googleusercontent.com/a/ACg8ocJLRXfL_mbw4vm4BAJYQQBguOKpUkGmp9hcmXmaKSfMAJvsXw=s120-c-rp-mo-br100" alt="Bryanna Griger" class="testimonial-avatar">
+        <div class="testimonial-content">
+          <div class="testimonial-text">"I had the pleasure of going to Tatiana for my first time getting injections and she was absolutely amazing!"</div>
+          <div class="testimonial-author">Bryanna Griger</div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <img src="https://lh3.googleusercontent.com/a/ACg8ocKL1NZtmmkUwWVMG0mY5BZ0Id37TsauESH7V-r87R1MU2ccaCM=s120-c-rp-mo-br100" alt="K R" class="testimonial-avatar">
+        <div class="testimonial-content">
+          <div class="testimonial-text">"Tatiana is amazing! She's sweet and helpful and does natural looking work."</div>
+          <div class="testimonial-author">K R</div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <img src="https://lh3.googleusercontent.com/a-/ALV-UjWQkAoyHjrgsmXC2M161sRlbKGzbTiXmJbo-JSv1xcRFL--Hzo=s120-c-rp-mo-ba3-br100" alt="Violet Martinez" class="testimonial-avatar">
+        <div class="testimonial-content">
+          <div class="testimonial-text">"I was a tad nervous. Tatiana was very on point from beginning to end."</div>
+          <div class="testimonial-author">Violet Martinez</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery Section -->
+<section class="gallery" id="gallery">
+  <div class="gallery-inner">
+    <h2 class="gallery-heading">Check out my beautiful clients<br>and their amazing results!</h2>
+    <div class="gallery-grid">
+      <img src="https://img1.wsimg.com/isteam/ip/bc9cbcd2-a300-4b6c-a0d9-808383ad68a7/IMG_9264.jpeg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25" alt="a woman with glasses and a t - shirt" class="gallery-image">
+      <img src="https://img1.wsimg.com/isteam/ip/bc9cbcd2-a300-4b6c-a0d9-808383ad68a7/IMG_1196.jpeg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25" alt="a woman with piercings" class="gallery-image">
+      <img src="https://img1.wsimg.com/isteam/ip/bc9cbcd2-a300-4b6c-a0d9-808383ad68a7/IMG_6890.jpeg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25" alt="A woman's face before and after a facial treatment" class="gallery-image">
+      <img src="https://img1.wsimg.com/isteam/ip/bc9cbcd2-a300-4b6c-a0d9-808383ad68a7/IMG_1197.jpeg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25" alt="A woman's face before and after lip injections" class="gallery-image">
+      <img src="https://img1.wsimg.com/isteam/ip/bc9cbcd2-a300-4b6c-a0d9-808383ad68a7/IMG_8735.jpeg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25" alt="A woman with glasses and a t - shirt" class="gallery-image">
+      <img src="https://img1.wsimg.com/isteam/ip/bc9cbcd2-a300-4b6c-a0d9-808383ad68a7/IMG_0920.jpeg/:/rs=w:600,cg:true,m" alt="Treatment result" class="gallery-image">
+      <img src="https://img1.wsimg.com/isteam/ip/bc9cbcd2-a300-4b6c-a0d9-808383ad68a7/IMG_0923.jpeg/:/rs=w:600,cg:true,m" alt="Treatment result" class="gallery-image">
+      <img src="https://img1.wsimg.com/isteam/ip/bc9cbcd2-a300-4b6c-a0d9-808383ad68a7/IMG_0922.jpeg/:/rs=w:600,cg:true,m" alt="Treatment result" class="gallery-image">
+      <img src="https://img1.wsimg.com/isteam/ip/bc9cbcd2-a300-4b6c-a0d9-808383ad68a7/IMG_0917.jpeg/:/rs=w:600,cg:true,m" alt="Treatment result" class="gallery-image">
+      <img src="https://img1.wsimg.com/isteam/ip/bc9cbcd2-a300-4b6c-a0d9-808383ad68a7/IMG_0924.jpeg/:/rs=w:600,cg:true,m" alt="Treatment result" class="gallery-image">
+      <img src="https://img1.wsimg.com/isteam/ip/bc9cbcd2-a300-4b6c-a0d9-808383ad68a7/IMG_0926.jpeg/:/rs=w:600,cg:true,m" alt="Treatment result" class="gallery-image">
+      <img src="https://img1.wsimg.com/isteam/ip/bc9cbcd2-a300-4b6c-a0d9-808383ad68a7/IMG_0919.jpeg/:/rs=w:600,cg:true,m" alt="Treatment result" class="gallery-image">
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-heading">Ready to Feel<br>Refreshed, Balanced,<br>and Confident?</h2>
+    <div>
+      <p class="contact-text">Texas Needle Queen proudly offers facial balancing, Botox, and lip filler services in Round Rock, TX and surrounding areas. Appointments are available by booking in advance.</p>
+      <p class="contact-text">Book your facial balance consultation and receive a personalized treatment plan designed for your features, lifestyle, and goals.</p>
+      <a href="https://book.squareup.com/appointments/fu8s0dm5hyvin0/location/LCDDE3PYM5MJ3/services" class="contact-cta">book now</a>
+      <div style="margin: var(--space-md) 0;">
+        <iframe src="https://maps.google.com/maps?cid=15103917516360445575" width="100%" height="300" style="border:0" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="social-links">
+        <a href="https://www.facebook.com/texasneedlequeen">facebook</a>
+        <a href="https://www.instagram.com/texasneedlequeen">instagram</a>
+        <a href="https://www.pinterest.com/texasneedlequeen">pinterest</a>
+        <a href="https://www.tiktok.com/@texasneedlequeen">tiktok</a>
+        <a href="https://maps.google.com/maps?cid=15103917516360445575">google business</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Texas Needle Queen</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
