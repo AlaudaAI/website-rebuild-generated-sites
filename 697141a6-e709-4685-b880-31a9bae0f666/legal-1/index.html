@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Greater Nashville Apartment Association</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Visual Demo */
+.hero-visual {
+  width: 100%;
+  max-width: 400px;
+}
+
+.logo-container {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: var(--space-xl);
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-container img {
+  width: 80%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Services Grid */
+.services {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.service-card {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+.service-card:last-child {
+  border-bottom: none;
+}
+
+.service-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.service-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.service-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 380px;
+}
+
+/* About Section */
+.about {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.about-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.about-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.about-content {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 600px;
+}
+
+/* Video Section */
+.video-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+  overflow: hidden;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Testimonials Section */
+.testimonials {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.testimonials-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.testimonials-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xl);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.testimonial-card {
+  padding: var(--space-lg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--bg-card);
+}
+
+.testimonial-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.testimonial-author {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Trust Metrics Section */
+.trust-section {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.trust-metrics {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.trust-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.trust-number {
+  font-family: var(--font-serif);
+  font-size: clamp(64px, 15vw, 120px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.trust-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 400px;
+}
+
+.trust-sponsors {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sponsor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--space-md);
+}
+
+.sponsor-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--bg-card);
+  overflow: hidden;
+}
+
+.sponsor-logo img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  max-height: 60px;
+}
+
+/* Contact Section */
+.contact {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.contact-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-item {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.contact-item a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+  color: var(--text-muted);
+}
+
+/* Social Links */
+.social-links {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.social-grid {
+  display: flex;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 12px 24px;
+  border: 1px solid var(--border-color);
+  border-radius: 50px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== MOBILE (max-width: 768px) =================== */
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .hero-headline {
+    font-size: clamp(28px, 8vw, 36px);
+  }
+  
+  .services {
+    padding: 0;
+  }
+  
+  .service-card {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .about {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .video-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .testimonials {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .testimonials-grid {
+    gap: var(--space-md);
+  }
+  
+  .trust-metrics {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .trust-sponsors {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .contact {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .social-links {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .footer {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .sponsor-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: var(--space-sm);
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .services {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .service-card:nth-child(even) {
+    border-right: none;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .trust-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-metrics {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .services {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .service-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .trust-section {
+    /* already 2-col from tablet */
+  }
+
+  .trust-metrics {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-sponsors {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-number {
+    font-size: 120px;
+  }
+
+  .sponsor-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--space-lg);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .service-card {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <div class="globe-icon"><i class="fas fa-building"></i></div>
+    <span class="brand-name">Greater Nashville Apartment Association</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-building"></i></div>
+      <span class="brand-name">Greater Nashville Apartment Association</span>
+    </a>
+    <nav>
+      <a href="https://www.gnaa.org/membership-information">Membership</a>
+      <a href="https://www.gnaa.org/events/education-course">Education</a>
+      <a href="https://www.gnaa.org/events/">Events</a>
+      <a href="https://www.gnaa.org/legislative">Advocacy</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Serving Since 1968</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">174,000+ Units</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Founded 1968 • Nashville & Middle Tennessee</span>
+      <h1 class="hero-headline">Greater Nashville Apartment Association</h1>
+      <p class="hero-subheading">Advocacy • Communication • Education • Outreach</p>
+      <a href="https://www.gnaa.org/membership-information" class="hero-cta">Become A Member <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+    </div>
+    <div class="hero-visual">
+      <div class="logo-container">
+        <img src="https://assets.noviams.com/novi-file-uploads/gnaa/Logos/gnaa-full-color-logo.png" alt="Greater Nashville Apartment Association Logo">
+      </div>
+    </div>
+  </section>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://assets.noviams.com/novi-file-uploads/gnaa/members/2022_3_name_scale_hall_gnaawebsitelogo-update-smallcaps-1.png" alt="Law Office of Hall & Associates, PLC" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://assets.noviams.com/novi-file-uploads/gnaa/members/freeman-webb-company-1.png" alt="Freeman Webb Company" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://assets.noviams.com/novi-file-uploads/gnaa/auto-files/image_1773340536145.jpg" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://assets.noviams.com/novi-file-uploads/gnaa/members/bug-solutions-1.jpg" alt="Bug Solutions" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- About Section -->
+  <section class="about">
+    <span class="about-label">About GNAA</span>
+    <h2 class="about-title">Supporting the Rental Housing Industry</h2>
+    <div class="about-content">
+      <p>The Greater Nashville Apartment Association (GNAA), founded in 1968, supports the rental housing industry in Nashville and Middle Tennessee through our 4 core tenets: Advocacy • Communication • Education • Outreach</p>
+      <br>
+      <p>GNAA represents more than 174,000 units managed by companies as well as more than 430 supplier member businesses that provide products and services to GNAA members.</p>
+      <br>
+      <p>GNAA is an affiliate of both the National Apartment Association and the Tennessee Apartment Association.</p>
+    </div>
+  </section>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://assets.noviams.com/novi-file-uploads/gnaa/members/new-logo-1-1.jpg" alt="Rose Paving" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://assets.noviams.com/novi-file-uploads/gnaa/auto-files/image_1773340880365.jpg" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://assets.noviams.com/novi-file-uploads/gnaa/members/silver-linings-concierge-1.jpg" alt="Silver Linings Concierge" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Video Section -->
+  <section class="video-section">
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/oHG6UisGxM8" title="GNAA | What is GNAA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://assets.noviams.com/novi-file-uploads/gnaa/members/realfloors_logo-1.jpg" alt="Real Floors, Inc." style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://assets.noviams.com/novi-file-uploads/gnaa/Website_Advertisers/CS-Banner_Ad_728x90_GNAA_V2.jpg%20728W" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://assets.noviams.com/novi-file-uploads/gnaa/members/jennifer-mccoy-1.png" alt="Law Office of Jennifer McCoy" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Services Grid -->
+  <section class="services">
+    <div class="service-card">
+      <h3 class="service-title">Membership Services</h3>
+      <p class="service-description">Professional membership for rental housing industry companies and supplier businesses</p>
+    </div>
+    <div class="service-card">
+      <h3 class="service-title">Education Courses</h3>
+      <p class="service-description">GNAA education courses including CALP certification and professional designations</p>
+    </div>
+    <div class="service-card">
+      <h3 class="service-title">Legislative Advocacy</h3>
+      <p class="service-description">Advocacy and legislative support for the rental housing industry</p>
+    </div>
+    <div class="service-card">
+      <h3 class="service-title">Events</h3>
+      <p class="service-description">Industry events including Trade Show, Awards Gala, Golf Tournament, and networking meetings</p>
+    </div>
+    <div class="service-card">
+      <h3 class="service-title">Member Directory</h3>
+      <p class="service-description">Directory access for GNAA member companies and professionals</p>
+    </div>
+    <div class="service-card">
+      <h3 class="service-title">Market Survey</h3>
+      <p class="service-description">Market survey and GIS services for members</p>
+    </div>
+    <div class="service-card">
+      <h3 class="service-title">Room Rentals & Office Services</h3>
+      <p class="service-description">Education room rentals and office services for members</p>
+    </div>
+    <div class="service-card">
+      <h3 class="service-title">Scholarships</h3>
+      <p class="service-description">Educational scholarships for industry professionals</p>
+    </div>
+    <div class="service-card">
+      <h3 class="service-title">Leadership Programs</h3>
+      <p class="service-description">Leadership Lyceum, LEAD Program, and GNAA Mentorship Program</p>
+    </div>
+    <div class="service-card">
+      <h3 class="service-title">Job Opportunities</h3>
+      <p class="service-description">Career center with job postings for the rental housing industry</p>
+    </div>
+  </section>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://assets.noviams.com/novi-file-uploads/gnaa/members/members-cort_notag_logo_185-1.jpg" alt="CORT" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <span class="testimonials-label">Member Reviews</span>
+    <h2 class="testimonials-title">What Our Members Say</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-text">RentDebt Automated Collections...</p>
+        <p class="testimonial-author">Reviewer 1</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">[![Career Strategies Inc.](https://assets.noviams.com/novi-file-uploads/gnaa/members/logo2019-1.p...</p>
+        <p class="testimonial-author">Reviewer 2</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">[![Mission Rock Residential](https://assets.noviams.com/novi-file-uploads/gnaa/members/your-parag...</p>
+        <p class="testimonial-author">Reviewer 3</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">[![Wheeler, Inc.](https://assets.noviams.com/novi-file-uploads/gnaa/members/wheeler-inc-1.png)](h...</p>
+        <p class="testimonial-author">Reviewer 4</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">[![SynergyBuilt](https://assets.noviams.com/novi-file-uploads/gnaa/members/members-synergybuilt-l...</p>
+        <p class="testimonial-author">Reviewer 5</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">[![Waterman Pool Management](https://assets.noviams.com/novi-file-uploads/gnaa/members/waterman_p...</p>
+        <p class="testimonial-author">Reviewer 6</p>
+      </div>
+    </div>
+  </section>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.gnaa.org/img/noviams-logo.png" alt="Novi AMS" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://assets.noviams.com/novi-file-uploads/gnaa/auto-files/image_1753894546194.png" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Trust Metrics Section -->
+  <section class="trust-section">
+    <div class="trust-metrics">
+      <span class="trust-label">Industry Impact</span>
+      <div>
+        <span class="trust-number">174,000</span>
+      </div>
+      <p class="trust-description">units managed by member companies</p>
+      <br>
+      <div>
+        <span class="trust-number">430</span>
+      </div>
+      <p class="trust-description">supplier member businesses</p>
+    </div>
+    <div class="trust-sponsors">
+      <span class="trust-label">2026 Education Sponsors</span>
+      <div class="sponsor-grid">
+        <div class="sponsor-logo">
+          <img src="https://assets.noviams.com/novi-file-uploads/gnaa/members/images-off-google-2-1.png" alt="RentDebt Automated Collections">
+        </div>
+        <div class="sponsor-logo">
+          <img src="https://assets.noviams.com/novi-file-uploads/gnaa/members/timberland-logo-01-1.jpg" alt="Timberland Partners">
+        </div>
+        <div class="sponsor-logo">
+          <img src="https://assets.noviams.com/novi-file-uploads/gnaa/members/logo2019-1.png" alt="Career Strategies Inc.">
+        </div>
+        <div class="sponsor-logo">
+          <img src="https://assets.noviams.com/novi-file-uploads/gnaa/members/your-paragraph-text-20-1.jpg" alt="Mission Rock Residential">
+        </div>
+        <div class="sponsor-logo">
+          <img src="https://assets.noviams.com/novi-file-uploads/gnaa/members/wheeler-inc-1.png" alt="Wheeler, Inc.">
+        </div>
+        <div class="sponsor-logo">
+          <img src="https://assets.noviams.com/novi-file-uploads/gnaa/members/members-synergybuilt-logo-1.png" alt="SynergyBuilt">
+        </div>
+        <div class="sponsor-logo">
+          <img src="https://assets.noviams.com/novi-file-uploads/gnaa/members/waterman_pool_management_300x300.jpg" alt="Waterman Pool Management">
+        </div>
+        <div class="sponsor-logo">
+          <img src="https://assets.noviams.com/novi-file-uploads/gnaa/members/chadwell_supply-01-1.jpg" alt="Chadwell Supply">
+        </div>
+        <div class="sponsor-logo">
+          <img src="https://assets.noviams.com/novi-file-uploads/gnaa/members/logo-2-1.png" alt="Greenway Waste & Recycling">
+        </div>
+        <div class="sponsor-logo">
+          <img src="https://assets.noviams.com/novi-file-uploads/gnaa/members/artisent-floors-1.png" alt="Artisent Floors">
+        </div>
+        <div class="sponsor-logo">
+          <img src="https://assets.noviams.com/novi-file-uploads/gnaa/members/new-logo-thelibertygroup-4.png" alt="Liberty Group">
+        </div>
+        <div class="sponsor-logo">
+          <img src="https://assets.noviams.com/novi-file-uploads/gnaa/members/bozzuto_primary_logo_green_cmyk_forprint-2.png" alt="Bozzuto">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://assets.noviams.com/novi-file-uploads/gnaa/Logos/TNAA-solid_1_color_white.png" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Contact Section -->
+  <section class="contact">
+    <span class="contact-label">Contact Information</span>
+    <div class="contact-info">
+      <div class="contact-item">
+        <a href="tel:15428790811">(615) 365-3047</a>
+      </div>
+      <div class="contact-item">
+        2 International Plaza Suite 201, Nashville, TN 37217
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Links -->
+  <section class="social-links">
+    <div class="social-grid">
+      <a href="https://www.facebook.com/GNAATN?ref=embed_page" class="social-link">
+        <i class="fab fa-facebook"></i> Facebook
+      </a>
+      <a href="https://www.linkedin.com/company/greater-nashville-apartment-association" class="social-link">
+        <i class="fab fa-linkedin"></i> LinkedIn
+      </a>
+      <a href="https://www.instagram.com/gnaatn/" class="social-link">
+        <i class="fab fa-instagram"></i> Instagram
+      </a>
+      <a href="https://www.youtube.com/watch?v=oHG6UisGxM8" class="social-link">
+        <i class="fab fa-youtube"></i> YouTube
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Greater Nashville Apartment Association</span>
+      <span class="footer-copyright">© 2026 - Greater Nashville Apartment Association.</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.gnaa.org/contact-us">Contact Us</a>
+      <a href="https://www.gnaa.org/legal">Legal</a>
+      <a href="https://www.gnaa.org/events">Events</a>
+      <a href="https://www.gnaa.org/membership-information">Membership</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
