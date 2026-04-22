@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spa Luxe</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://spaluxe.com/wp-content/uploads/2024/09/20240622-RSX06662-scaled-e1727443514856.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(244, 240, 234, 0.8);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+  margin-bottom: var(--space-lg);
+}
+
+.hero-cta {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 1.2s forwards;
+}
+
+.hero-btn {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.hero-btn:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Awards Section */
+.awards {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.awards-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.awards-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.awards-title {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.awards-description {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  line-height: 1.8;
+  max-width: 600px;
+  margin: 0 auto var(--space-lg) auto;
+}
+
+.awards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-md);
+  border: 1px solid var(--border-black);
+}
+
+.award-cell {
+  border-right: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.award-cell:last-child {
+  border-right: none;
+}
+
+.award-cell img {
+  max-width: 150px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Experience Section */
+.experience {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.experience-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.experience-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+}
+
+.experience-text h2 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  margin-bottom: var(--space-md);
+}
+
+.experience-features {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-md) 0;
+}
+
+.experience-features li {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+  position: relative;
+  padding-left: var(--space-md);
+}
+
+.experience-features li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--placeholder-gray);
+}
+
+.experience-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.experience-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(20%);
+  transition: filter 0.7s ease;
+}
+
+.experience-image:hover img {
+  filter: grayscale(0%);
+}
+
+/* Services Section */
+.services {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.services-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.services-title {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-xl);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-lg);
+}
+
+.service-card {
+  text-align: center;
+}
+
+.service-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto var(--space-md) auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.service-icon img {
+  max-width: 100%;
+  height: auto;
+  filter: opacity(0.8);
+}
+
+.service-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.service-description {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--placeholder-gray);
+}
+
+/* Testimonials Section */
+.testimonials {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.testimonials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.testimonials-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.testimonials-title {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-xl);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-lg);
+}
+
+.testimonial-card {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+  text-align: left;
+}
+
+.testimonial-quote {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.6;
+  font-style: italic;
+  margin-bottom: var(--space-md);
+}
+
+.testimonial-author {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* Contact Section */
+.contact {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-title {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.contact-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.contact-location {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+  text-align: left;
+}
+
+.location-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-md);
+}
+
+.location-hours,
+.location-contact {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+}
+
+.contact-map {
+  width: 100%;
+  height: 300px;
+  border: 1px solid var(--border-black);
+}
+
+/* CTA Sections */
+.cta-section {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+  text-align: center;
+}
+
+.cta-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.cta-title {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.cta-description {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  line-height: 1.8;
+  max-width: 600px;
+  margin: 0 auto var(--space-lg) auto;
+}
+
+.cta-button {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.cta-button:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Social Links */
+.social-section {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+  text-align: center;
+}
+
+.social-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.social-title {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.social-links {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.social-link {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.social-link:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+    --space-xxl: 4rem;
+  }
+
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-sm);
+  }
+
+  .nav-links a {
+    font-size: 0.65rem;
+  }
+
+  .hero-headline {
+    font-size: clamp(1.8rem, 8vw, 3rem);
+  }
+
+  .hero-subtitle {
+    font-size: 0.65rem;
+  }
+
+  .hero-cta {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .awards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .contact-details {
+    grid-template-columns: 1fr;
+  }
+
+  .social-links {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .experience-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: center;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .awards-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .award-cell {
+    border-bottom: none;
+  }
+
+  .award-cell:not(:last-child) {
+    border-right: 1px solid var(--border-black);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .hero {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .awards,
+  .experience,
+  .services,
+  .testimonials,
+  .contact,
+  .cta-section,
+  .social-section {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Spa Luxe</a>
+  <ul class="nav-links">
+    <li><a href="https://spaluxe.com/the-luxe-experience/">the luxe experience</a></li>
+    <li><a href="https://spaluxe.com/spa-treatments/">spa treatments</a></li>
+    <li><a href="https://spaluxe.com/med-spa-treatments/">med spa treatments</a></li>
+    <li><a href="https://spaluxe.com/locations/">locations</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">Experience World-Class<br>Wellness and Unparalleled<br>Hospitality</h1>
+    <p class="hero-subtitle">Discover a sanctuary of tranquility and rejuvenation at Spa Luxe of Texas, where luxury meets relaxation.</p>
+    <div class="hero-cta">
+      <a href="https://clients.mindbodyonline.com/classic/ws?studioid=600203&stype=-9" class="hero-btn">book your appointment</a>
+      <a href="https://clients.mindbodyonline.com/asp/main_shop.asp?pMode=2&tabID=3" class="hero-btn">buy a gift card</a>
+    </div>
+  </div>
+</section>
+
+<!-- Awards Section -->
+<section class="awards" id="awards">
+  <div class="awards-inner">
+    <span class="awards-label">experience</span>
+    <h2 class="awards-title">Award-Winning Luxury You Can Trust</h2>
+    <p class="awards-description">Praised for excellence, Spa Luxe is your haven for award-winning treatments and unmatched care. Take a look at some of our achievements to find out what sets us apart.</p>
+    <div class="awards-grid">
+      <div class="award-cell">
+        <img src="https://spaluxe.com/wp-content/uploads/2025/02/IMG_0107.jpg" alt="Gold ribbon design with three stars at the top. Text reads: Small Business of the Year, Spa Luxe, 2024. Below is the Georgetown Chamber of Commerce logo. The background is black with subtle circles.">
+      </div>
+      <div class="award-cell">
+        <img src="https://spaluxe.com/wp-content/uploads/2025/04/Neighborhood_Faves_2024_-_Digital_Kit_Sticker-1.png" alt="A green circular badge with a yellow trophy icon at the top. Below, it reads 2024 Neighborhood FAVES nextdoor in a mix of yellow, white, and black text.">
+      </div>
+      <div class="award-cell">
+        <img src="https://spaluxe.com/wp-content/uploads/2026/02/1-Gold-Winner-2-1.png" alt="A round badge featuring red poppies, the text 2025 Georgetown's Best, five gold stars, and a gold ribbon at the bottom labeled Gold.">
+      </div>
+      <div class="award-cell">
+        <img src="https://spaluxe.com/wp-content/uploads/2026/03/Quality-Business-Award-Spa-Luxe.jpg" alt="A circular badge reads 2025 Winner, Quality Rating Over 95% with two stars and a gold shield in the center labeled Quality Business Awards.">
+      </div>
+      <div class="award-cell">
+        <img src="https://spaluxe.com/wp-content/uploads/2024/07/tbhf.jpg" alt="Logo of the Texas Business Hall of Fame Foundation featuring large blue initials TBHF with a red star integrated into the letter F. Below, it reads Texas Business Hall of Fame Foundation and Enterprise. Community. Excellence. on a white background.">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Experience Section -->
+<section class="experience" id="experience">
+  <div class="experience-inner">
+    <div class="experience-text">
+      <h2>Where Every Detail Matters</h2>
+      <p>At Spa Luxe, we blend luxury with a personal touch, ensuring a memorable escape right in Georgetown, Texas. Our commitment to exceptional customer service fuels every facet of your spa journey.</p>
+      <ul class="experience-features">
+        <li>Unrivaled Customer Attention</li>
+        <li>Family-Like Team Atmosphere</li>
+        <li>Customized Guest Comfort</li>
+        <li>Exclusive Amenities</li>
+        <li>Certified and Licensed Team Members</li>
+      </ul>
+    </div>
+    <div class="experience-image">
+      <img src="https://spaluxe.com/wp-content/uploads/2024/04/20240401-RSX05323-HDR-1024x683.jpg" alt="A narrow hallway with a rustic wooden floor and walls. The right side features a vertical garden with different shades and textures of green and brown moss in rectangular sections. The left side hallways lead to doors and are illuminated by ceiling lights.">
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="services" id="services">
+  <div class="services-inner">
+    <h2 class="services-title">Explore Our Services</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">
+          <img src="https://spaluxe.com/wp-content/uploads/2024/07/download.png" alt="A minimalist pink outline of a human from the back, displaying three circular forms aligned vertically along the spine area.">
+        </div>
+        <h3 class="service-title">MASSAGE THERAPY</h3>
+        <p class="service-description">Our specialty massages rely on skillful techniques to ease tension uniquely, setting us apart with a blend of tailored relaxation.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <img src="https://spaluxe.com/wp-content/uploads/2024/07/newpink-2.png" alt="A minimalist, pink line illustration of a woman's torso, viewed from the front.">
+        </div>
+        <h3 class="service-title">BODY TREATMENTS</h3>
+        <p class="service-description">Standout rejuvenation is achieved through our exclusive selection of body therapies, each designed to re-energize and renew.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <img src="https://spaluxe.com/wp-content/uploads/2024/07/Asset-14-1.png" alt="A minimalist, pink line drawing of a person's face with eyes closed and two hands gently holding their head.">
+        </div>
+        <h3 class="service-title">FACIALS, WAXING & LASH</h3>
+        <p class="service-description">Our aesthetic treatments excel with personalized attention, ensuring each session leaves you with an unmatched radiant allure.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <img src="https://spaluxe.com/wp-content/uploads/2024/08/facial.svg" alt="A minimalist line drawing of a woman with a towel on her head using a steam wand for a facial.">
+        </div>
+        <h3 class="service-title">HYDRAFACIALS</h3>
+        <p class="service-description">We elevate traditional facials with an award-winning, patented technology to deliver immediate results and long-term benefits.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <img src="https://spaluxe.com/wp-content/uploads/2024/07/Asset-14-1.png" alt="A minimalist, pink line drawing of a person's face with eyes closed and two hands gently holding their head.">
+        </div>
+        <h3 class="service-title">SKIN REJUVENATION</h3>
+        <p class="service-description">Our advanced skin rejuvenation treatments—Microneedling, IPL Photofacial, ADVA Bright laser therapy, Scarlett RF microneedling, and Agnes RF contouring—are designed to renew your skin from within, enhancing tone, texture, and radiance.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <img src="https://spaluxe.com/wp-content/uploads/2025/10/Spa-Luxe-2.png" alt="Simple line drawing of a syringe injecting into a pair of lips, representing cosmetic lip injections or lip augmentation.">
+        </div>
+        <h3 class="service-title">FILLERS & INJECTABLES</h3>
+        <p class="service-description">From targeted neuromodulators to volumizing fillers, each treatment becomes a tailored ritual of refinement—delivered in a serene setting and with the caliber of hospitality you've come to expect.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <img src="https://spaluxe.com/wp-content/uploads/2025/10/Spa-Luxe-3.png" alt="A simple line drawing of a medical laser machine on wheels with a touchscreen display and an articulated arm.">
+        </div>
+        <h3 class="service-title">LASER TREATMENTS</h3>
+        <p class="service-description">Our Med Spa offers advanced ADVA Bright, Scarlett RF, and Agnes RF laser treatments—precision solutions that refine texture, even tone, and rejuvenate your skin with visible, lasting radiance.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <img src="https://spaluxe.com/wp-content/uploads/2024/07/nails-1-1.png" alt="A minimalist pink line art illustration of three manicured fingernails with sparkles around them.">
+        </div>
+        <h3 class="service-title">NATURAL NAIL CARE</h3>
+        <p class="service-description">With a dedication to chemical-free indulgence, our nail care shines by prioritizing your health and the planet's wellbeing.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <img src="https://spaluxe.com/wp-content/uploads/2024/07/couple-new.png" alt="A simple pink line drawing of two figures standing side by side.">
+        </div>
+        <h3 class="service-title">LUXE COUPLES RETREAT</h3>
+        <p class="service-description">Our customizable couple's retreats transcend the typical, creating a haven of intimacy and luxury for you and your partner to reconnect.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <img src="https://spaluxe.com/wp-content/uploads/2024/07/Asset-5-1.png" alt="A simple pink line drawing of a person sitting cross-legged in a meditative pose.">
+        </div>
+        <h3 class="service-title">LUXE WELLNESS JOURNEYS</h3>
+        <p class="service-description">Our distinctive approach to wellness infuses each journey with a holistic touch that nurtures a balance like no other.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <img src="https://spaluxe.com/wp-content/uploads/2025/10/Spa-Luxe-3.png" alt="A simple line drawing of a medical laser machine on wheels with a touchscreen display and an articulated arm.">
+        </div>
+        <h3 class="service-title">LASER HAIR REMOVAL</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials" id="testimonials">
+  <div class="testimonials-inner">
+    <span class="testimonials-label">testimonials</span>
+    <h2 class="testimonials-title">Hear From Our Happy Guests</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"Very good service. Feel very pampered from the moment you enter. Nice lounge you can wait in before and then linger in it after your service. Had a CBD massage and felt like a wet noodle when it was done-soooo relaxing."</p>
+        <p class="testimonial-author">Sandra R.</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"This was the most relaxed I have felt since my honeymoon in Cancun when I had a massage on the beach. I had the sensitive skin facial and the bliss massage and both were wonderful. My skin is glowing, I feel relaxed and refreshed, and I think this is my new favorite place!"</p>
+        <p class="testimonial-author">Jordan J.</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"This was my first visit to Spa Luxe and it was so pleasant. The spa is clean, refreshing and relaxing and the staff are very friendly and helpful. I loved the dry sauna and the spacious shower. I highly recommend a visit to Spa Luxe!"</p>
+        <p class="testimonial-author">Kimberle M.</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"Absolutely obsessed with everything about Spa Luxe. I've been to many spas and this is the only one I keep coming back to! They give you a robe and sandals to change into before your treatment and time to relax in the coziest room before you get called back!"</p>
+        <p class="testimonial-author">Emily A.</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"Once a year, I treat myself with a facial for my birthday. This year, my mom joined my tradition. Spa Luxe is one of the places you go to truly relax and have an amazing day. They have an amazing list of services and the best customer service!"</p>
+        <p class="testimonial-author">Kasey G.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Book Now CTA Section -->
+<section class="cta-section" id="book-now">
+  <div class="cta-inner">
+    <h2 class="cta-title">Book Your Appointment</h2>
+    <p class="cta-description">Ready to experience world-class wellness? Book your luxurious spa appointment today.</p>
+    <a href="https://clients.mindbodyonline.com/classic/ws?studioid=600203&stype=-9" class="cta-button">book now</a>
+  </div>
+</section>
+
+<!-- Gift Card CTA Section -->
+<section class="cta-section" id="gift-cards">
+  <div class="cta-inner">
+    <h2 class="cta-title">Buy a Gift Card</h2>
+    <p class="cta-description">Share the gift of relaxation with your loved ones. Purchase a Spa Luxe gift card today.</p>
+    <a href="https://clients.mindbodyonline.com/asp/main_shop.asp?pMode=2&tabID=3" class="cta-button">buy gift card</a>
+  </div>
+</section>
+
+<!-- Careers CTA Section -->
+<section class="cta-section" id="careers">
+  <div class="cta-inner">
+    <h2 class="cta-title">Work With Us</h2>
+    <p class="cta-description">Join our team of wellness professionals at Spa Luxe and help us create exceptional experiences.</p>
+    <a href="https://spaluxe.com/careers/" class="cta-button">explore careers</a>
+  </div>
+</section>
+
+<!-- Social Media Section -->
+<section class="social-section" id="social">
+  <div class="social-inner">
+    <h2 class="social-title">Connect With Us</h2>
+    <div class="social-links">
+      <a href="https://www.facebook.com/spaluxetx/" class="social-link">facebook</a>
+      <a href="https://www.instagram.com/spaluxetx/" class="social-link">instagram</a>
+      <a href="https://www.linkedin.com/company/spa-luxe-luxury-day-spa/" class="social-link">linkedin</a>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-title">Immerse Yourself in a Personalized Luxe Experience!</h2>
+    <div class="contact-details">
+      <div class="contact-location">
+        <h3 class="location-title">Georgetown</h3>
+        <p class="location-hours">Mon-Fri: 9am-7pm<br>Sat: 9am-6pm</p>
+        <p class="location-contact">
+          <a href="tel:512-646-2255">(512) 646-2255</a><br>
+          <a href="mailto:info@spaluxe.com">info@spaluxe.com</a><br>
+          <a href="https://www.google.com/maps/place/1500+Rivery+Blvd+Suite+300,+Georgetown,+TX+78628/data=!4m2!3m1!1s0x8644d60d8bf04095:0xa7c221935a31e30b?sa=X&ved=1t:242&ictx=111">1500 Rivery Blvd. Suite 300, Georgetown, TX 78628</a>
+        </p>
+      </div>
+      <div class="contact-location">
+        <h3 class="location-title">Austin</h3>
+        <p class="location-hours">Mon-Fri: 9am-7pm<br>Sat: 9am-6pm</p>
+        <p class="location-contact">
+          <a href="tel:512-452-3500">(512) 452-3500</a><br>
+          <a href="mailto:austininfo@spaluxe.com">austininfo@spaluxe.com</a><br>
+          <a href="https://share.google/Swpsu61pJvdhvG6wI">The Grove 2713 Perseverance Dr. Austin TX 78731</a>
+        </p>
+      </div>
+    </div>
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3457.123456789!2d-97.7431!3d30.6321!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8644d60d8bf04095%3A0xa7c221935a31e30b!2s1500%20Rivery%20Blvd%20Suite%20300%2C%20Georgetown%2C%20TX%2078628!5e0!3m2!1sen!2sus!4v1234567890123"
+      class="contact-map"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Spa Luxe</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
