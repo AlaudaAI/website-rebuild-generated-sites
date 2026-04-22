@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daydreaming Spa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://images.squarespace-cdn.com/content/v1/6636a10cd4cbd62c241bf7e1/437be3c0-1516-4d06-8af9-75147358db17/DSC09163.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(244, 240, 234, 0.7);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 680px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Philosophy Section */
+.philosophy {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.philosophy-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.philosophy-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.philosophy-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.service-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.service-cell:last-child {
+  border-bottom: none;
+}
+
+.service-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.service-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.service-cell:hover .service-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+.service-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: var(--space-xs);
+}
+
+.service-name {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.service-description {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  margin-top: var(--space-xs);
+  line-height: 1.5;
+}
+
+/* Gift Certificate Section */
+.gift-section {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://images.squarespace-cdn.com/content/v1/6636a10cd4cbd62c241bf7e1/9d848e6d-3943-4b95-8485-502920ba5ef1/Daydreaming+Spa+GC.png');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.gift-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(244, 240, 234, 0.85);
+  z-index: 1;
+}
+
+.gift-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.gift-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-md);
+}
+
+.gift-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  line-height: 1.6;
+  margin-bottom: var(--space-lg);
+}
+
+.gift-features {
+  margin: var(--space-md) 0;
+}
+
+.gift-features li {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  margin-bottom: var(--space-xs);
+}
+
+.gift-cta {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.gift-cta:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Locations Section */
+.locations {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.locations-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.locations-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.location-card {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.location-image {
+  width: 100%;
+  aspect-ratio: 4/3;
+  margin-bottom: var(--space-md);
+}
+
+.location-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.location-name {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.location-details {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.map-container {
+  margin-top: var(--space-md);
+  border: 1px solid var(--border-black);
+}
+
+/* Testimonials Section */
+.testimonials {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.testimonials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonials-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.testimonial-card {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.testimonial-text {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-style: italic;
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+}
+
+.testimonial-author {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.footer-social {
+  margin-top: var(--space-sm);
+}
+
+.footer-social a {
+  margin-right: var(--space-md);
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-sm);
+  }
+
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+    min-height: 80vh;
+  }
+
+  .philosophy,
+  .services,
+  .gift-section,
+  .locations,
+  .testimonials {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .service-cell {
+    padding: var(--space-sm);
+  }
+
+  .location-card {
+    padding: var(--space-sm);
+  }
+
+  .testimonial-card {
+    padding: var(--space-sm);
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .philosophy-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .service-cell:nth-child(1),
+  .service-cell:nth-child(2) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(3),
+  .service-cell:nth-child(4) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .location-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .philosophy {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .gift-section {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .locations {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .testimonials {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Daydreaming Spa</a>
+  <ul class="nav-links">
+    <li><a href="#services">services</a></li>
+    <li><a href="#philosophy">about</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">Austin's Premier<br>Head Spa Experience</h1>
+    <p class="hero-subtitle">001 — Welcome to Daydreaming Spa, Austin's premier destination for head spa and skincare services. We're proud to be the first head spa of its kind in Austin, specializing in Japanese-style treatments that blend innovation with relaxation to elevate your beauty and wellness journey.</p>
+  </div>
+</section>
+
+<!-- Philosophy Section -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">002 — about us</span>
+    <div class="philosophy-text">
+      <p>Welcome to Daydreaming Spa, Austin's premier destination for head spa and skincare services. Among our locations, Daydreaming Head Spa—conveniently situated in North Austin—specializes in the art of Japanese-style head spa treatments, featuring our signature ASMR scalp shampoo massage.</p>
+      <p>Our skincare offerings are equally exceptional, with treatments including chemical peels, acne care, anti-aging therapies, oxygen and hydration facials, back facials, and soothing facial massages.</p>
+      <p>At Daydreaming, we blend innovation with relaxation to elevate your beauty and wellness journey.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Services Grid -->
+<section class="services" id="services">
+  <div class="services-grid">
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/6636a10cd4cbd62c241bf7e1/2f53293e-659c-4d8e-a64a-60101a910c08/IMG_1938.png" alt="Head spa treatment">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">head spa</span>
+      </div>
+      <div class="service-description">Japanese-style head spa treatments featuring signature ASMR scalp shampoo massage</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/6636a10cd4cbd62c241bf7e1/1714859469615-KTPTK7ZJU3R6TPMP78RO/IMG_0427.jpg" alt="Facial treatments">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">facials</span>
+      </div>
+      <div class="service-description">Chemical peels, acne care, anti-aging therapies, oxygen and hydration facials, back facials, and facial massages</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/6636a10cd4cbd62c241bf7e1/1770432748042-K49JR93XC1T0YLG5EER5/unsplash-image-83RTpUBjyYY.jpg" alt="Full body massage">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">full-body massage</span>
+      </div>
+      <div class="service-description">Complete body massage treatments</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/6636a10cd4cbd62c241bf7e1/437be3c0-1516-4d06-8af9-75147358db17/DSC09163.jpg" alt="HydraFacial treatment">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">hydrafacial</span>
+      </div>
+      <div class="service-description">Signature Glow HydraFacial sessions</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/6636a10cd4cbd62c241bf7e1/82487565-6f46-4bea-9af6-c3c81ecfeefb/536EC468-5197-4AA0-AD56-8E967129CFCE.JPEG" alt="Hair pampering">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">hair pampering</span>
+      </div>
+      <div class="service-description">Relaxing hair shampoo with head, shoulder, neck, and scalp massage including blow drying</div>
+    </div>
+  </div>
+</section>
+
+<!-- Gift Certificate Section -->
+<section class="gift-section">
+  <div class="gift-content">
+    <h2 class="gift-heading">Give the Gift of<br>Ultimate Relaxation</h2>
+    <div class="gift-text">
+      <p>Treat someone special to an unforgettable escape with a Daydreaming Head Spa Gift Certificate. More than just a hair treatment, our head spa is a holistic sensory journey designed to melt away stress, rejuvenate the scalp, and restore inner peace.</p>
+      <p>Whether they need a quiet moment away from a busy schedule or a deep-cleansing botanical treatment to refresh their hair and mind, this is the perfect way to show you care.</p>
+    </div>
+    <ul class="gift-features">
+      <li>Deep Relaxation: Soothing scalp and upper body massages that release tension and promote restful sleep.</li>
+      <li>Revitalized Hair & Scalp: Deep cleansing, exfoliation, and nourishing treatments tailored to their specific needs.</li>
+      <li>Head-to-Toe Radiance: The option to elevate their experience by combining their head spa treatment with a rejuvenating facial.</li>
+      <li>A Sensory Escape: A tranquil environment featuring calming aromatherapy, warm water therapy, and absolute serenity.</li>
+    </ul>
+    <a href="#" class="gift-cta">gift certificate</a>
+  </div>
+</section>
+
+<!-- Locations Section -->
+<section class="locations" id="contact">
+  <div class="locations-inner">
+    <h2 class="locations-heading">Austin Locations</h2>
+    <div class="location-grid">
+      <div class="location-card">
+        <div class="location-image">
+          <img src="https://images.squarespace-cdn.com/content/v1/6636a10cd4cbd62c241bf7e1/9d848e6d-3943-4b95-8485-502920ba5ef1/Daydreaming+Spa+GC.png" alt="North Austin MoPac location">
+        </div>
+        <h3 class="location-name">North Austin | MoPac</h3>
+        <div class="location-details">
+          <p>Just south of The Domain</p>
+          <p><a href="https://maps.app.goo.gl/zTm1CD1jDuSLY8Bf8">10515 N Mopac Expy Suite 320, Austin</a></p>
+          <p>By appointment only, Mon to Sat, 9am to 7pm</p>
+          <p><a href="tel:5125459001">(512) 545-9001</a></p>
+        </div>
+      </div>
+      <div class="location-card">
+        <div class="location-image">
+          <img src="https://images.squarespace-cdn.com/content/v1/6636a10cd4cbd62c241bf7e1/a2d77aaa-3aef-4b29-8587-112e08e0461c/outside.jpg" alt="North Austin Jollyville location">
+        </div>
+        <h3 class="location-name">North Austin | Jollyville</h3>
+        <div class="location-details">
+          <p><a href="https://maps.app.goo.gl/c9fDcdHFK5BxeQMU9">11673 Jollyville Rd # 204, Austin</a></p>
+          <p>By appointment only, Mon to Sat, 9am to 7pm</p>
+          <p><a href="tel:5129790575">(512) 979-0575</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="map-container">
+      <iframe src="https://maps.app.goo.gl/zTm1CD1jDuSLY8Bf8" width="100%" height="300" style="border:0" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <h2 class="testimonials-heading">Our Stories</h2>
+    <div class="testimonial-card">
+      <p class="testimonial-text">"My first time coming here and I got a hair spa treatment, let me just say wow it was amazinggg!!! It's so relaxing I loved everything about it. The ladies are so nice and welcoming and made sure I was comfortable. They do blow dry your hair however it's not a style blow dry, it's a simple blow dry and I thought I was going to leave with a style blow dry (wouldn't had mind paying a little extra for it) also wish my hair was completely dried but it was fine just did my hair at home. Overall, highly recommend this place won't regret it!!"</p>
+      <p class="testimonial-author">— Crystal Enriquez</p>
+    </div>
+    <div class="testimonial-card">
+      <p class="testimonial-text">"10/10 Recommend. Amazing experience. I heard about head spas and starting searching for one as it seemed like something I would love. I was not disspointed. I booked the signature hair pampering package. Pampering is the right description. I felt so well taken care of and the esthetician was very professional and the customer service was top notch. I was a bit surprised that it was not a full sized salon and instead a shared room but I still feel they do a great job of providing a spa like experience!"</p>
+      <p class="testimonial-author">— Karlie Lemos</p>
+    </div>
+    <div class="testimonial-card">
+      <p class="testimonial-text">"I came for a hydrofacial and an express hair wash. The facial was incredible and so relaxing. The he hair wash was so great and they really know how to give your scalp a good massage. It's an incredible experience but I did expected my hair to be softer, i also paid $10 extra because I have long hair and i wish my hair was dried fully before I left. Overall, the experience was great and i highly recommend it and will definitely be back."</p>
+      <p class="testimonial-author">— Angie I</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Daydreaming Spa</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+  <div class="footer-social">
+    <a href="http://instagram.com/daydreamingsalon">instagram</a>
+    <a href="https://www.facebook.com/daydreamingspa">facebook</a>
+  </div>
+</footer>
+
+</body>
+</html>
