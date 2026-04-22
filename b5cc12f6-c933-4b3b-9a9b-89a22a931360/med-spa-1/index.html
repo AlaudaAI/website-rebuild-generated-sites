@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peachy</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://peachystudio.com/cdn/shop/files/Wrinkle_Treatment_b9d4b53a-02e1-49af-9458-608f6285c905.jpg?v=1744382224&width=1250');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(26, 26, 26, 0.4);
+  z-index: 1;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+  color: white;
+  z-index: 2;
+  position: relative;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+  color: white;
+  z-index: 2;
+  position: relative;
+}
+
+.hero-cta {
+  margin-top: var(--space-md);
+  z-index: 2;
+  position: relative;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 1.2s forwards;
+}
+
+.hero-cta a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.hero-cta a:hover {
+  background-color: white;
+  color: var(--text-black);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Features Section */
+.features {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.features-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.features-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.feature-item {
+  text-align: center;
+  padding: var(--space-md);
+}
+
+.feature-item h3 {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+/* Services Section */
+.services {
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.services-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.services-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.service-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.service-cell:last-child {
+  border-bottom: none;
+}
+
+.service-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.service-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.service-cell:hover .service-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+.service-meta {
+  padding-top: var(--space-xs);
+}
+
+.service-name {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-xs);
+}
+
+.service-description {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: var(--placeholder-gray);
+}
+
+/* Testimonials Section */
+.testimonials {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.testimonials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonials-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.testimonial-item {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.testimonial-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  font-style: italic;
+  margin-bottom: var(--space-sm);
+}
+
+.testimonial-author {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+/* Locations Section */
+.locations {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.locations-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.locations-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.locations-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.location-item {
+  text-align: center;
+}
+
+.location-name {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-xs);
+}
+
+.location-count {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 0.9rem;
+  color: var(--placeholder-gray);
+}
+
+/* Schedule Section */
+.schedule {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+  text-align: center;
+}
+
+.schedule-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.schedule-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-md);
+}
+
+.schedule-description {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+}
+
+.schedule-cta {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--text-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.schedule-cta:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Contact Section */
+.contact {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  text-align: center;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.contact-link {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  color: var(--text-black);
+  text-decoration: none;
+}
+
+.contact-link:hover {
+  text-decoration: underline;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Reviews Section */
+.reviews {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.reviews-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.reviews-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.review-item {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.review-author {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.review-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  .nav-links {
+    gap: var(--space-sm);
+  }
+  
+  .nav-links a {
+    font-size: 0.6rem;
+  }
+  
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+    min-height: 80vh;
+  }
+  
+  .hero-headline {
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
+    margin-bottom: var(--space-md);
+  }
+  
+  .hero-subtitle {
+    font-size: 0.6rem;
+  }
+  
+  .hero-cta a {
+    font-size: 0.6rem;
+    padding: var(--space-xs) var(--space-sm);
+  }
+  
+  .features,
+  .services,
+  .locations,
+  .testimonials,
+  .reviews,
+  .schedule,
+  .contact {
+    padding: var(--space-lg) var(--pad-x);
+  }
+  
+  .features-heading,
+  .services-heading,
+  .locations-heading,
+  .testimonials-heading,
+  .reviews-heading,
+  .schedule-heading {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+  
+  .contact-links {
+    gap: var(--space-xs);
+  }
+  
+  .social-links {
+    gap: var(--space-sm);
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .features-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .service-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(3n) {
+    border-right: none;
+  }
+
+  .locations-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .reviews-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contact-links {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .features {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .locations {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .testimonials {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .reviews {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .schedule {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .contact {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <a href="/" class="nav-logo">peachy</a>
+  <ul class="nav-links">
+    <li><a href="https://peachystudio.com/pages/locations">locations</a></li>
+    <li><a href="https://peachystudio.com/pages/learn">treatments</a></li>
+    <li><a href="https://peachystudio.com/pages/reviews">reviews</a></li>
+    <li><a href="https://peachystudio.com/pages/shop">shop</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <h1 class="hero-headline">Better Botox,<br>Better Results</h1>
+  <p class="hero-subtitle">Flat-rate pricing, always</p>
+  <div class="hero-cta">
+    <a href="https://peachystudio.com/pages/book">Book Now</a>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+  <div class="features-inner">
+    <h2 class="features-heading">Trust the experts,<br>love the results</h2>
+    <div class="features-grid">
+      <div class="feature-item">
+        <h3>Flat-fee for all the units you need</h3>
+      </div>
+      <div class="feature-item">
+        <h3>Patented AI treatment mapping</h3>
+      </div>
+      <div class="feature-item">
+        <h3>Complimentary 2-week dose adjustment</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://peachystudio.com/cdn/shop/files/brooke.jpg?v=1743611195&width=800" alt="Brooke testimonial" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://peachystudio.com/cdn/shop/files/jessica.jpg?v=1743611499&width=800" alt="Jessica testimonial" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://peachystudio.com/cdn/shop/files/madison.jpg?v=1743611694&width=800" alt="Madison testimonial" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://peachystudio.com/cdn/shop/files/DC._8e40016c-e0af-47d3-b817-16d59b2bda56.jpg?v=1744566306&width=1250" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://peachystudio.com/cdn/shop/files/global.jpg?v=1773840887&width=1000" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://peachystudio.com/cdn/shop/files/forbes_4c60fb1c-cd37-4823-8c7f-7e9b1fdb7019.jpg?v=1755900317&width=800" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://peachystudio.com/cdn/shop/files/washington-post_6486eb60-5f74-4d03-9b68-b033d081c2a3.png?v=1755887615&width=400" alt="The Washington Post logo" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://peachystudio.com/cdn/shop/files/imrs.jpg?v=1755887361&width=800" alt="Four identical floating faces with needle injection marks on a light blue background" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://peachystudio.com/cdn/shop/files/esquire-logo.png?v=1741901638&width=174" alt="Esquire logo" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://peachystudio.com/cdn/shop/files/robot.jpg?v=1741900447&width=800" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://peachystudio.com/cdn/shop/files/mashble.png?v=1744150659&width=180" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://peachystudio.com/cdn/shop/files/Mashable_ca4b4601-f735-473d-bba9-478b9593e040.jpg?v=1744481179&width=800" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://peachystudio.com/cdn/shop/files/Frame_524.jpg?v=1743615313&width=1360" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Services Section -->
+<section class="services" id="services">
+  <div class="services-inner">
+    <h2 class="services-heading">Our Offerings</h2>
+    <div class="services-grid">
+      <div class="service-cell">
+        <div class="service-image-wrapper">
+          <img src="https://peachystudio.com/cdn/shop/files/Wrinkle_Treatment_b9d4b53a-02e1-49af-9458-608f6285c905.jpg?v=1744382224&width=1250" alt="Wrinkle Treatment">
+        </div>
+        <div class="service-meta">
+          <div class="service-name">Wrinkle Treatment</div>
+          <div class="service-description">Prevent and treat wrinkles in forehead, glabella, and crow's feet. $425 flat fee.</div>
+        </div>
+      </div>
+      <div class="service-cell">
+        <div class="service-image-wrapper">
+          <img src="https://peachystudio.com/cdn/shop/files/Masseter_f319d803-657b-4924-9c1d-f0858b7089d8.jpg?v=1744382224&width=1250" alt="Masseter Treatment">
+        </div>
+        <div class="service-meta">
+          <div class="service-name">Masseter Treatment</div>
+          <div class="service-description">Slim jawline, reduce TMJ. $525 flat fee.</div>
+        </div>
+      </div>
+      <div class="service-cell">
+        <div class="service-image-wrapper">
+          <img src="https://peachystudio.com/cdn/shop/files/Botox_Facial_0de14304-0584-46ce-b255-057f643413ca.jpg?v=1744382224&width=1250" alt="Botox Facial with Aquagold">
+        </div>
+        <div class="service-meta">
+          <div class="service-name">Botox Facial with Aquagold</div>
+          <div class="service-description">Reduce wrinkles & tighten skin in the face & neck. $375 flat fee.</div>
+        </div>
+      </div>
+      <div class="service-cell">
+        <div class="service-meta">
+          <div class="service-name">Prescription Retinoids</div>
+        </div>
+      </div>
+      <div class="service-cell">
+        <div class="service-meta">
+          <div class="service-name">Tinted Facial Sunscreen SPF 50</div>
+        </div>
+      </div>
+      <div class="service-cell">
+        <div class="service-meta">
+          <div class="service-name">Mineral Facial Sunscreen SPF 50</div>
+        </div>
+      </div>
+      <div class="service-cell">
+        <div class="service-meta">
+          <div class="service-name">Moisturizing Cream</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://peachystudio.com/cdn/shop/files/forbes_0eb8212f-4fa4-44e3-af44-2fa5f5e7aaf1.png?v=1744150659&width=118" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://peachystudio.com/cdn/shop/files/Austin.jpg?v=1744486444&width=1250" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://peachystudio.com/cdn/shop/files/NY_9d7347e5-8e6b-4299-ab8a-4ef3e6a5ba21.jpg?v=1744486438&width=1250" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://peachystudio.com/cdn/shop/files/Screenshot_2025-04-08_at_4.44.39_PM.png?v=1744145201&width=800" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://peachystudio.com/cdn/shop/files/Screenshot_2025-04-08_at_4.45.00_PM.png?v=1744145201&width=800" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <h2 class="testimonials-heading">What Our Clients Say</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-item">
+        <div class="testimonial-text">"When you're here your family"</div>
+        <div class="testimonial-author">— Client</div>
+      </div>
+      <div class="testimonial-item">
+        <div class="testimonial-text">"When you're here your family"</div>
+        <div class="testimonial-author">— Reviewer 2</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Locations Section -->
+<section class="locations">
+  <div class="locations-inner">
+    <h2 class="locations-heading">Visit one of our<br>Botox Studios</h2>
+    <div class="locations-grid">
+      <div class="location-item">
+        <div class="location-name">New York</div>
+        <div class="location-count">8 Locations</div>
+      </div>
+      <div class="location-item">
+        <div class="location-name">Chicago</div>
+        <div class="location-count">2 Locations</div>
+      </div>
+      <div class="location-item">
+        <div class="location-name">Washington DC</div>
+        <div class="location-count">2 Locations</div>
+      </div>
+      <div class="location-item">
+        <div class="location-name">Atlanta</div>
+        <div class="location-count">1 Location</div>
+      </div>
+      <div class="location-item">
+        <div class="location-name">Austin</div>
+        <div class="location-count">1 Location</div>
+      </div>
+      <div class="location-item">
+        <div class="location-name">Charlotte</div>
+        <div class="location-count">1 Location</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://peachystudio.com/cdn/shop/files/global.jpg?v=1773840887&width=1250" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://peachystudio.com/cdn/shop/files/Chicago_431033f6-acc7-4f68-8839-a07c30fe4097.jpg?v=1744636120&width=1250" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Schedule Section -->
+<section class="schedule">
+  <div class="schedule-inner">
+    <h2 class="schedule-heading">Schedule a free consult</h2>
+    <p class="schedule-description">Connect with one of our experts to discuss your treatment goals</p>
+    <a href="#" class="schedule-cta">Schedule Now</a>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact">
+  <div class="contact-inner">
+    <div class="contact-links">
+      <a href="tel:1744382224" class="contact-link">call us</a>
+      <div class="social-links">
+        <a href="https://www.instagram.com/peachystudio" class="contact-link">instagram</a>
+        <a href="https://www.facebook.com/Peachy-2127944670829044" class="contact-link">facebook</a>
+        <a href="https://www.linkedin.com/company/peachystudio/" class="contact-link">linkedin</a>
+        <a href="https://www.tiktok.com/@peachystudionyc" class="contact-link">tiktok</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews Section -->
+<section class="reviews">
+  <div class="reviews-inner">
+    <h2 class="reviews-heading">Thousands of<br>trusted reviews</h2>
+    <div class="reviews-grid">
+      <div class="review-item">
+        <div class="review-header">
+          <div class="review-author">Ian</div>
+        </div>
+        <div class="review-text">"The best Botox experience you can ask for. Very friendly staff and all the providers are skilled. It's a flat rate so you get as many units as you need, plus a touch up included if needed."</div>
+      </div>
+      <div class="review-item">
+        <div class="review-header">
+          <div class="review-author">Sara</div>
+        </div>
+        <div class="review-text">"I've been doing Botox for several years and by far, Peachy has been the best experience. Alice was so professional and experienced. And had the magic touch. The studio is super cute, clean and comfortable. And best of all? The results are fabulous! Thank you, Peachy!"</div>
+      </div>
+      <div class="review-item">
+        <div class="review-header">
+          <div class="review-author">Daniel</div>
+        </div>
+        <div class="review-text">"Such an easy and streamlined experience. All the Providers are really kind and thorough when explaining options and answered all my questions related to their services. Especially, NP Alice, she was very helpful in explaining the way botox works in relation to me and the areas I wanted to treat."</div>
+      </div>
+      <div class="review-item">
+        <div class="review-header">
+          <div class="review-author">Mija</div>
+        </div>
+        <div class="review-text">"I am no stranger to muscle relaxers, but it was my first time getting it done at Peachy this past weekend, and it was a phenomenal experience. I found the check-in process fast and efficient, and the nurse practitioner was not only more knowledgable than most doctors that I've seen before but also kind and comforting."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-left">© 2024 Peachy</div>
+  <div class="footer-right">
+    <span>new york</span>
+    <span>chicago</span>
+    <span>washington dc</span>
+  </div>
+</footer>
+
+</body>
+</html>
