@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stover Law Group</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Visual Demo */
+.hero-visual {
+  width: 100%;
+  max-width: 400px;
+}
+
+.office-container {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: var(--space-xl);
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.office-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* Hero Images Section */
+.hero-images {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.images-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.image-item {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.image-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Features Grid */
+.features {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.feature-card {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+.feature-card:last-child {
+  border-bottom: none;
+}
+
+.feature-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.feature-protocol {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.feature-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.feature-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 380px;
+}
+
+/* Trust Metrics Section */
+.trust-section {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.trust-metrics {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.trust-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.trust-number {
+  font-family: var(--font-serif);
+  font-size: clamp(64px, 15vw, 120px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.trust-number-suffix {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 8vw, 60px);
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.trust-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 400px;
+}
+
+.trust-clients {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+}
+
+.stat-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.stat-value {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.stat-label {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* About Section */
+.about-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.about-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.about-text {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+}
+
+/* Gallery Section */
+.gallery-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.gallery-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-lg);
+}
+
+.gallery-item {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: scale(1.02);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Why Choose Section */
+.why-choose-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.why-choose-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.why-choose-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.why-choose-text {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+}
+
+/* Personalized Strategies Section */
+.strategies-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.strategies-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.strategies-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.strategies-text {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+}
+
+/* Client Reviews Section */
+.reviews-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.reviews-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.reviews-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.reviews-text {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+}
+
+/* Team Section */
+.team-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.team-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-md);
+}
+
+.team-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  object-fit: cover;
+}
+
+.team-name {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.team-role {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+/* Contact Section */
+.contact-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.contact-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.contact-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.contact-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.contact-value {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.contact-value a {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.contact-value a:hover {
+  text-decoration: underline;
+}
+
+.map-container {
+  margin-top: var(--space-lg);
+  border-radius: 12px;
+  overflow: hidden;
+  height: 300px;
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Social Links */
+.social-links {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 16px;
+}
+
+.social-link:hover {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== MOBILE RESPONSIVE =================== */
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-lg);
+    gap: var(--space-lg);
+  }
+
+  .hero-headline {
+    font-size: clamp(28px, 8vw, 36px);
+  }
+
+  .hero-subheading {
+    font-size: 16px;
+  }
+
+  .feature-card {
+    padding: var(--space-lg);
+  }
+
+  .feature-title {
+    font-size: clamp(20px, 5vw, 24px);
+  }
+
+  .about-section,
+  .why-choose-section,
+  .strategies-section,
+  .reviews-section,
+  .team-section,
+  .contact-section,
+  .gallery-section {
+    padding: var(--space-lg);
+  }
+
+  .about-title,
+  .why-choose-title,
+  .strategies-title,
+  .reviews-title,
+  .team-title,
+  .contact-title,
+  .gallery-title {
+    font-size: clamp(24px, 6vw, 28px);
+  }
+
+  .about-text,
+  .why-choose-text,
+  .strategies-text,
+  .reviews-text {
+    font-size: 14px;
+  }
+
+  .trust-metrics,
+  .trust-clients {
+    padding: var(--space-lg);
+  }
+
+  .trust-number {
+    font-size: clamp(48px, 12vw, 64px);
+  }
+
+  .trust-number-suffix {
+    font-size: clamp(24px, 6vw, 32px);
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  .stat-badge {
+    padding: 16px 12px;
+  }
+
+  .stat-value {
+    font-size: 20px;
+  }
+
+  .stat-label {
+    font-size: 10px;
+  }
+
+  .contact-info {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .social-links {
+    gap: var(--space-sm);
+  }
+
+  .social-link {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  .footer {
+    padding: var(--space-lg);
+    gap: var(--space-md);
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:nth-child(2n) {
+    border-right: none;
+  }
+
+  .trust-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-metrics {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .contact-info {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .feature-card {
+    padding: var(--space-2xl) var(--space-xl);
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:nth-child(3n) {
+    border-right: none;
+  }
+
+  .trust-section {
+    /* already 2-col from tablet */
+  }
+
+  .trust-metrics {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-clients {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-number {
+    font-size: 120px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .feature-card {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="#" class="brand">
+    <div class="globe-icon"><i class="fas fa-gavel"></i></div>
+    <span class="brand-name">Stover Law Group</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="https://www.wstoverlaw.com/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-gavel"></i></div>
+      <span class="brand-name">Stover Law Group</span>
+    </a>
+    <nav>
+      <a href="https://www.wstoverlaw.com/">Home</a>
+      <a href="https://www.wstoverlaw.com/#">Practice Areas</a>
+      <a href="https://www.wstoverlaw.com/reviews">Reviews</a>
+      <a href="https://www.wstoverlaw.com/about">About</a>
+      <a href="https://www.wstoverlaw.com/client-referral-form">Referrals</a>
+      <a href="https://www.wstoverlaw.com/contact">Contact</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Emergency Consultations Available</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Virtual Appointments Available</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Nashville Legal Services</span>
+      <h1 class="hero-headline">Criminal Defense, Family Law, and Civil Litigation Attorney in Nashville, TN</h1>
+      <p class="hero-subheading">Over 25 years of experience serving Middle Tennessee with compassionate legal support and emergency consultations when you need them most.</p>
+      <a href="tel:(615) 613-0541" class="hero-cta">(615) 613-0541 <i class="fas fa-phone" style="font-size:10px;"></i></a>
+    </div>
+    <div class="hero-visual">
+      <div class="office-container">
+        <img src="https://le-cdn.hibuwebsites.com/366e89e70d9348f8bfde01eefbedb42c/dms3rep/multi/opt/stover-law-group-video-a37497fb-1920w.jpg" alt="Stover Law Group Office" class="office-image">
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="gallery-section">
+    <h2 class="gallery-title">Our Firm</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="https://dd-cdn.multiscreensite.com/runtime-img/arrowBlackRight.png" alt="">
+      </div>
+      <div class="gallery-item">
+        <img src="https://s3.amazonaws.com/dudamobile-themes/Icons/searchBtn.png" alt="">
+      </div>
+      <div class="gallery-item">
+        <img src="https://dd-cdn.multiscreensite.com/runtime-img/restaurantMenu/menu-image1.jpg" alt="">
+      </div>
+      <div class="gallery-item">
+        <img src="https://dp-cdn.multiscreensite.com/bfsImages/sunset-hair.jpg" alt="">
+      </div>
+      <div class="gallery-item">
+        <img src="https://dd-cdn.multiscreensite.com/themes/sections/sectionImg5.jpg" alt="">
+      </div>
+      <div class="gallery-item">
+        <img src="https://dd-cdn.multiscreensite.com/themes/sections/click2Call.jpg" alt="">
+      </div>
+      <div class="gallery-item">
+        <img src="https://dd-cdn.multiscreensite.com/themes/sections/halloween_call.jpg" alt="">
+      </div>
+      <div class="gallery-item">
+        <img src="https://dd-cdn.multiscreensite.com/themes/sections/Trick-or-Treat.jpg" alt="">
+      </div>
+      <div class="gallery-item">
+        <img src="https://dp-cdn.multiscreensite.com/gallery/pink_pattern.png" alt="">
+      </div>
+      <div class="gallery-item">
+        <img src="https://dd-cdn.multiscreensite.com/themes/sections/holiday/thanksgivingBg.jpg" alt="">
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-section">
+    <div class="about-content">
+      <h2 class="about-title">Navigating Legal Challenges with Stover Law Group</h2>
+      <p class="about-text">Stover Law Group, located in Nashville, TN, has been a steadfast pillar for Middle Tennessee residents since its establishment in 2007. With over 25 years of experience, our team specializes in a wide range of legal services, including personal injury, criminal defense, family law, probate and estate planning, and civil litigation. Understanding that legal issues often arise during the most challenging times, we offer compassionate and timely assistance to help our clients navigate through their difficulties.</p>
+      <p class="about-text">Whether you need emergency consultations for urgent matters or prefer the convenience of virtual appointments, we strive to accommodate your needs. Our office is strategically positioned close to the downtown courthouse, making it convenient for clients across the region. As a locally owned, veteran, and minority-owned firm, we take pride in our community roots and commitment to providing exemplary legal support, backed by the latest research technology.</p>
+    </div>
+  </section>
+
+  <!-- Why Choose Stover Law Group Section -->
+  <section class="why-choose-section">
+    <div class="why-choose-content">
+      <h2 class="why-choose-title">Why Choose Stover Law Group?</h2>
+      <p class="why-choose-text">Choosing Stover Law Group means partnering with a team that genuinely cares about your legal concerns. Our compassionate approach ensures that we take the time to understand your unique situation and provide tailored solutions. With over 25 years of experience and a specialization as a civil trial specialist, we bring a wealth of knowledge and expertise to every case.</p>
+      <p class="why-choose-text">We offer emergency consultations for personal injury, criminal defense, and some family law cases, which underscores our commitment to being there when you need us most. Additionally, our adoption of the latest research technology ensures that we remain at the forefront of legal practice, providing you with the best possible representation.</p>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section class="features">
+    <div class="feature-card">
+      <p class="feature-protocol">Practice Area 01</p>
+      <h3 class="feature-title">Personal Injury Law</h3>
+      <p class="feature-description">Dedicated to helping you recover the compensation you deserve with compassionate legal support for physical, emotional, and financial burdens from injuries.</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Practice Area 02</p>
+      <h3 class="feature-title">Auto Accident Representation</h3>
+      <p class="feature-description">Comprehensive auto accident representation to protect your interests, from filing claims to negotiating settlements and securing compensation for medical bills and lost wages.</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Practice Area 03</p>
+      <h3 class="feature-title">Criminal Defense</h3>
+      <p class="feature-description">Robust representation protecting your rights in criminal cases from misdemeanors to serious felonies, with emergency consultations available.</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Practice Area 04</p>
+      <h3 class="feature-title">Family Law</h3>
+      <p class="feature-description">Compassionate and knowledgeable representation in emotionally charged family matters including divorce, child custody, and support cases.</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Practice Area 05</p>
+      <h3 class="feature-title">Probate and Estate Planning</h3>
+      <p class="feature-description">Services to protect your assets and ensure your wishes are honored, including drafting wills, establishing trusts, and navigating the probate process.</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Practice Area 06</p>
+      <h3 class="feature-title">Civil Litigation</h3>
+      <p class="feature-description">Handling complex civil disputes involving contracts, property, and other matters with precision and expertise through negotiation, mediation, or trial.</p>
+    </div>
+  </section>
+
+  <!-- Personalized Strategies Section -->
+  <section class="strategies-section">
+    <div class="strategies-content">
+      <h2 class="strategies-title">Personalized Strategies for Every Client</h2>
+      <p class="strategies-text">At Stover Law Group, we recognize that no two legal situations are identical. That's why we take a personalized approach to every case, developing strategies that are specifically tailored to your circumstances and goals. Our experienced team takes the time to understand not just the legal aspects of your case, but also the personal and emotional factors that may influence the outcome.</p>
+      <p class="strategies-text">From the moment you walk into our office, you'll experience the difference that personalized attention makes. We work closely with you throughout the entire legal process, keeping you informed and involved in important decisions. Our goal is not just to resolve your legal matter, but to ensure you feel supported and confident every step of the way.</p>
+    </div>
+  </section>
+
+  <!-- Trust Metrics Section -->
+  <section class="trust-section">
+    <div class="trust-metrics">
+      <span class="trust-label">Experience & Trust</span>
+      <div>
+        <span class="trust-number">25</span><span class="trust-number-suffix">+</span>
+      </div>
+      <p class="trust-description">Years of experience serving Nashville and Middle Tennessee with compassionate legal support. Established in 2007 as a locally owned, veteran, and minority-owned firm.</p>
+    </div>
+    <div class="trust-clients">
+      <span class="trust-label">Client Satisfaction</span>
+      <div class="stats-grid">
+        <div class="stat-badge">
+          <div class="stat-value">4.0</div>
+          <div class="stat-label">Rating</div>
+        </div>
+        <div class="stat-badge">
+          <div class="stat-value">164</div>
+          <div class="stat-label">Ratings & Reviews</div>
+        </div>
+        <div class="stat-badge">
+          <div class="stat-value">2007</div>
+          <div class="stat-label">Established</div>
+        </div>
+        <div class="stat-badge">
+          <div class="stat-value">25+</div>
+          <div class="stat-label">Years of Experience</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Client Reviews Section -->
+  <section class="reviews-section">
+    <div class="reviews-content">
+      <h2 class="reviews-title">Here's what our satisfied clients are saying...</h2>
+      <p class="reviews-text">At Stover Law Group, we take pride in providing exceptional legal representation to our clients. We would be grateful if you could share your thoughts about our law firm with others. Your feedback helps us improve and helps others make informed decisions. Please take a moment to leave a review of Stover Law Group and let others know what you think.</p>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <h2 class="team-title">Our Attorney</h2>
+    <div class="team-member">
+      <img src="https://le-cdn.hibuwebsites.com/366e89e70d9348f8bfde01eefbedb42c/dms3rep/multi/opt/stover-law-group-logo-310w.png" alt="William Stover" class="team-photo">
+      <h3 class="team-name">William H. Stover</h3>
+      <p class="team-role">Attorney</p>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <h2 class="contact-title">Contact Stover Law Group</h2>
+    <div class="contact-info">
+      <div class="contact-item">
+        <span class="contact-label">Phone</span>
+        <div class="contact-value"><a href="tel:(615) 613-0541">(615) 613-0541</a></div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Email</span>
+        <div class="contact-value"><a href="mailto:ws@wstoverlaw.com">ws@wstoverlaw.com</a></div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Address</span>
+        <div class="contact-value">214 2nd Avenue North<br>Nashville, TN 37201</div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Hours</span>
+        <div class="contact-value">Mon - Fri: 8:30 am - 4:30 pm<br>Sat - Sun: Closed</div>
+      </div>
+    </div>
+    <div class="social-links">
+      <a href="https://maps.google.com/maps?q=214+2nd+Avenue+North%2C+Nashville%2C+TN+37201%2C+US(NOB)&sll=36.16543,-86.77692" class="social-link" target="_blank" rel="noopener" aria-label="Google Business">
+        <i class="fab fa-google"></i>
+      </a>
+      <a href="https://facebook.com/175577205963" class="social-link" target="_blank" rel="noopener" aria-label="Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://www.wstoverlaw.com/&title=Civil%20Litigation%20Attorney%20Nashville,%20TN%20%7C%20Stover%20Law%20Group" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+      <a href="https://twitter.com/intent/tweet?text=https://www.wstoverlaw.com/" class="social-link" target="_blank" rel="noopener" aria-label="Twitter">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="http://pinterest.com/pin/create/button/?url=https://www.wstoverlaw.com/&description=Civil%20Litigation%20Attorney%20Nashville,%20TN%20%7C%20Stover%20Law%20Group" class="social-link" target="_blank" rel="noopener" aria-label="Pinterest">
+        <i class="fab fa-pinterest-p"></i>
+      </a>
+    </div>
+    <div class="map-container">
+      <iframe src="https://maps.google.com/maps?q=214+2nd+Avenue+North%2C+Nashville%2C+TN+37201%2C+US(NOB)&output=embed" loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Stover Law Group</span>
+      <span class="footer-copyright">© 2026 The content on this website is owned by us and our licensors. Do not copy any content (including images) without our consent.</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.wstoverlaw.com/">Home</a>
+      <a href="https://www.wstoverlaw.com/reviews">Reviews</a>
+      <a href="https://www.wstoverlaw.com/about">About</a>
+      <a href="https://www.wstoverlaw.com/client-referral-form">Referrals</a>
+      <a href="https://www.wstoverlaw.com/contact">Contact</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
