@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Cassell Firm</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.contact-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.contact-item {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  transition: color 0.3s ease;
+}
+
+.contact-item:hover {
+  color: var(--text-primary);
+}
+
+.social-links {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.social-links a {
+  color: var(--text-muted);
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Visual Demo */
+.hero-visual {
+  width: 100%;
+  max-width: 400px;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+}
+
+/* Features Grid */
+.features {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.feature-card {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+.feature-card:last-child {
+  border-bottom: none;
+}
+
+.feature-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.feature-protocol {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.feature-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.feature-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 380px;
+  margin-bottom: var(--space-md);
+}
+
+.feature-services-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.feature-services-list li {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+  padding-left: var(--space-md);
+  position: relative;
+}
+
+.feature-services-list li:before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--text-dim);
+}
+
+/* About Section */
+.about-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.about-content {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.about-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.about-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* Team Section */
+.team-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.team-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.team-member h3 {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.team-photo {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+/* Testimonials Section */
+.testimonials-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.testimonials-header {
+  margin-bottom: var(--space-xl);
+}
+
+.testimonials-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.testimonials-subtitle {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+
+.testimonial-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.testimonial-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.testimonial-author {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* News Section */
+.news-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.news-header {
+  margin-bottom: var(--space-xl);
+}
+
+.news-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.news-subtitle {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.news-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 10px 24px;
+  border: 1px solid var(--border-color);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-top: var(--space-md);
+}
+
+.news-cta:hover {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+}
+
+/* Contact CTA Section */
+.contact-cta-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  text-align: center;
+}
+
+.contact-cta-title {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.contact-cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.contact-cta-button:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Maps Section */
+.maps-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.maps-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Service Modules */
+.service-module {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.service-module-content {
+  max-width: 600px;
+}
+
+.service-module-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.service-module-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: var(--space-lg);
+}
+
+.service-module-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 10px 24px;
+  border: 1px solid var(--border-color);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.service-module-cta:hover {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .features {
+    grid-template-columns: 1fr;
+  }
+  
+  .feature-card {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .about-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .team-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .testimonials-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .news-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .contact-cta-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .maps-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .service-module {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .footer {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .hero-headline {
+    font-size: clamp(28px, 6vw, 36px);
+  }
+  
+  .feature-title {
+    font-size: clamp(20px, 4vw, 24px);
+  }
+  
+  .about-title, .testimonials-title, .news-title, .maps-title, .service-module-title {
+    font-size: clamp(24px, 5vw, 32px);
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:last-child {
+    border-right: none;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .feature-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .about-section {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .team-section {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .testimonials-section {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .news-section {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .service-module {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .maps-section {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .feature-card {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="https://www.thecassellfirm.com/" class="brand">
+    <div class="globe-icon"><i class="fas fa-gavel"></i></div>
+    <span class="brand-name">The Cassell Firm</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="https://www.thecassellfirm.com/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-gavel"></i></div>
+      <span class="brand-name">The Cassell Firm</span>
+    </a>
+    <nav>
+      <a href="https://www.thecassellfirm.com/nashville-lawyer/">Nashville Lawyers</a>
+      <a href="https://www.thecassellfirm.com/criminal-defense-attorney/">Criminal Defense</a>
+      <a href="https://www.thecassellfirm.com/nashville-family-lawyer/">Family Lawyer</a>
+      <a href="https://www.thecassellfirm.com/nashville-immigration-lawyers/">Immigration</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Available for Consultation</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Middle Tennessee Practice</span>
+    </div>
+    <div class="contact-sidebar">
+      <a href="tel:(615) 475-7041" class="contact-item">(615) 475-7041</a>
+      <a href="mailto:info@thecassellfirm.com" class="contact-item">info@thecassellfirm.com</a>
+      <div class="social-links">
+        <a href="https://www.facebook.com/TheCassellFirm/" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.linkedin.com/company/the-cassell-firm" target="_blank"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Nashville Attorneys</span>
+      <h1 class="hero-headline">CRIMINAL DEFENSE, FAMILY & DIVORCE, AND IMMIGRATION LAW</h1>
+      <p class="hero-subheading">Not just attorneys. Your advocates when the odds feel stacked against you.</p>
+      <a href="https://www.thecassellfirm.com/contact/" class="hero-cta">Schedule My Consultation <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+    </div>
+    <div class="hero-visual">
+      <img src="https://www.thecassellfirm.com/wp-content/uploads/2025/08/CASSEL-TEAM-IMG-TP.png" alt="Nashville lawyers" class="hero-image">
+    </div>
+  </section>
+
+  <!-- Service Module: Criminal Defense -->
+  <section class="service-module">
+    <div class="service-module-content">
+      <h2 class="service-module-title">Criminal Defense</h2>
+      <p class="service-module-description">If you've been charged with a crime in Nashville, you need an attorney who understands the system and knows how to fight. From DUI and drug offenses to felony cases, our Nashville criminal defense lawyer provides focused legal defense to protect your rights and your future.</p>
+      <a href="https://www.thecassellfirm.com/criminal-defense-lawyer/" class="service-module-cta">Learn More About Nashville Criminal Defense <i class="fas fa-arrow-right" style="font-size:8px;"></i></a>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.thecassellfirm.com/wp-content/uploads/2025/08/The-Cassell-Firm.jpg" alt="The-Cassell-Firm Nashville City" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Service Module: Family & Divorce -->
+  <section class="service-module">
+    <div class="service-module-content">
+      <h2 class="service-module-title">Family & Divorce</h2>
+      <p class="service-module-description">Family law cases require both clarity and compassion. Whether you're dealing with divorce, custody, or support issues, our Nashville family lawyer offers trusted legal guidance. We work to protect your family, your finances, and your peace of mind during uncertain times.</p>
+      <a href="https://www.thecassellfirm.com/nashville-family-lawyer/" class="service-module-cta">Learn More About Family & Divorce Law <i class="fas fa-arrow-right" style="font-size:8px;"></i></a>
+    </div>
+  </section>
+
+  <!-- Service Module: Immigration Law -->
+  <section class="service-module">
+    <div class="service-module-content">
+      <h2 class="service-module-title">Immigration Law</h2>
+      <p class="service-module-description">Navigating U.S. immigration law isn't easy — but you don't have to do it alone. Our Nashville immigration lawyer helps with visas, green cards, citizenship, and removal defense. Get clear, compassionate legal help for your future and your family.</p>
+      <a href="https://www.thecassellfirm.com/nashville-immigration-lawyers/" class="service-module-cta">Learn More About Immigration Law in Nashville <i class="fas fa-arrow-right" style="font-size:8px;"></i></a>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section class="features">
+    <div class="feature-card">
+      <p class="feature-protocol">Criminal Defense</p>
+      <h3 class="feature-title">Criminal Defense</h3>
+      <p class="feature-description">Charged in Nashville or Middle Tennessee? You need fast action, clear communication, and a defense built on preparation and courtroom experience. We work to protect your record and your future.</p>
+      <ul class="feature-services-list">
+        <li>DUI / DWI and implied consent</li>
+        <li>Drug possession or distribution</li>
+        <li>Assault and domestic charges</li>
+        <li>Theft, burglary, and property crimes</li>
+        <li>Probation violations</li>
+        <li>Expungement and record sealing</li>
+        <li>Violent Crimes Defense</li>
+        <li>Drug Crime Defense</li>
+        <li>Property Crime Defense</li>
+        <li>Gun Charges Defense</li>
+        <li>White Collar Defense</li>
+        <li>Domestic Violence Defense</li>
+        <li>Public Order Offenses Defense</li>
+      </ul>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Family Law</p>
+      <h3 class="feature-title">Family & Divorce</h3>
+      <p class="feature-description">Family cases demand steady guidance and a plan that fits your goals. We help you navigate divorce and parenting issues while protecting your children, finances, and peace of mind.</p>
+      <ul class="feature-services-list">
+        <li>Divorce and legal separation</li>
+        <li>Child custody and parenting plans</li>
+        <li>Child support and modifications</li>
+        <li>Alimony / spousal support</li>
+        <li>Prenuptial and postnuptial agreements</li>
+        <li>Orders of protection</li>
+        <li>Post Divorce Modification</li>
+        <li>Powers of Attorneys</li>
+        <li>Divorce Lawyers</li>
+      </ul>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Immigration</p>
+      <h3 class="feature-title">Immigration Law</h3>
+      <p class="feature-description">From visas to citizenship, we help individuals and families move forward with confidence. You get careful filings, clear updates, and local counsel you can reach.</p>
+      <ul class="feature-services-list">
+        <li>Family-based petitions</li>
+        <li>Marriage green cards and adjustment of status</li>
+        <li>Consular processing</li>
+        <li>Fiancé(e) visas (K-1)</li>
+        <li>Work authorization and extensions</li>
+        <li>U.S. citizenship and naturalization</li>
+        <li>DACA and renewals</li>
+        <li>Waivers (I-601 / I-601A)</li>
+        <li>Cancellation of Removal</li>
+        <li>Adjustment of Status (Getting a Green Card)</li>
+        <li>Renewals of Green Cards and Employment Authorization Documents (Work Permits)</li>
+        <li>T and U Visas</li>
+        <li>DACA / Renewals</li>
+        <li>Temporary Protected Status</li>
+        <li>Inadmissibility and Deportability</li>
+        <li>Petition to Remove Conditions</li>
+        <li>EOIR Processes / Removal Proceedings</li>
+        <li>Bond</li>
+        <li>Parole in Place</li>
+      </ul>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.thecassellfirm.com/wp-content/uploads/2025/08/TBA.png" alt="TBA Tennessee bar association" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+  <!-- About Section -->
+  <section class="about-section">
+    <div class="about-content">
+      <h2 class="about-title">THE CASSELL FIRM</h2>
+      <p class="about-text"><strong>Based in Nashville and Serve Middle Tennessee</strong>, The Cassell Firm attorneys are focused on protecting the rights of their clients in Criminal Defense cases, fighting for fair treatment in the Family and Divorce context, and helping individuals secure the American dream in Immigration matters.</p>
+      <p class="about-text">Our Nashville Attorneys have a reputation for taking on even the most complicated cases. We work tirelessly to help you resolve your Immigration Status, Criminal Defense, and Family Law concerns so you can move forward with your life without the stress of unanswered questions.</p>
+      <p class="about-text">Focused. Fearless. Unshaken.</p>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.thecassellfirm.com/wp-content/uploads/2025/10/TACDL_Cassell.webp" alt="TACDL_Cassell" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <h2 class="about-title">Experienced Nashville Lawyers</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <h3>J. Caleb Cassell</h3>
+      </div>
+      <div class="team-member">
+        <h3>Jane Ellen Cassell</h3>
+      </div>
+      <div class="team-member">
+        <h3>Lexi Woods</h3>
+      </div>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.thecassellfirm.com/wp-content/uploads/2025/08/LAWYERS-ASSOC-WOMEN.png" alt="Lawyers AssociationLawyers association for women" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+  <!-- Testimonials Section -->
+  <section class="testimonials-section">
+    <div class="testimonials-header">
+      <h2 class="testimonials-title">What Our Clients Say:</h2>
+      <p class="testimonials-subtitle">Clients across Nashville count on us for clear answers, steady communication, and strong advocacy. These reviews are real stories from criminal defense, family, and immigration cases we handled. See what working with our team actually feels like.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-text">My husband and I are beyond grateful to have had Jane Cassell as our lawyer during my immigration process. My case was complex and had a lot of twists and turns, but Jane remained calm, confident, and incredibly professional every step of the way. What stood out to me most was just how knowledgeable and deeply dedicated she is to getting the results she knows are possible. She truly goes above and beyond—not only did she walk me through every step of the process, but she also made sure I felt supported the entire time. She answered every single question I had (and there were a lot!), always responded to emails, and helped ease my worries with clear, thoughtful guidance. Thanks to Jane, we achieved the outcome we were hoping for, and I can't imagine having gone through this without her. I wholeheartedly recommend her to anyone in need of an exceptional immigration lawyer.</p>
+        <span class="testimonial-author">Kathlen Sanchez</span>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">I highly recommend the Cassell law firm. I'm from Texas and caught an evading arrest charge out here in Wilson County. I hired a first lawyer who did not do anything but take money and push my court dates back. As soon as I got Caleb on my side, he was quick and adamant about getting me in the best situation possible. I did have to sign for probation, but all charges will be dropped after completing it, which I fully accept. He fought for me, stood up for me, and argued with every DA in the courtroom to get me something reasonable. My first lawyer did the complete opposite. I wish I had had Caleb the first go around. I appreciate everything he did for me, a real genuine dude. And his assistant Lexi Woods was great as well. He couldn't make my very last court date because he was jammed with other court sessions, and she stepped in & took over right from where he left off and closed everything! I appreciate the Cassell law firm! Thank you, Caleb and Lexi!</p>
+        <span class="testimonial-author">Tayvohn Glover</span>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">If you're looking for a DUI lawyer in Middle Tennessee, stop your search right now—Caleb is hands down the best. From the very beginning, it was clear he really knows his stuff. He walked me through every step of the process with confidence, clarity, and professionalism that made a stressful situation so much more manageable. What sets Caleb apart is not just his deep knowledge of DUI law, but his ability to apply that expertise in a way that truly benefits his clients. He spotted things in my case that others completely missed and used that insight to build a strong defense. The outcome was better than I could have ever hoped for. He's sharp, responsive, and genuinely cares about his clients. You can tell this isn't just a job for him—he's passionate about what he does and it shows in his results. If you need a DUI attorney in Middle Tennessee, you won't find anyone better than Caleb. Highly recommended!</p>
+        <span class="testimonial-author">Breanna Tidwell</span>
+      </div>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.thecassellfirm.com/wp-content/uploads/2025/10/NashvilleBarAssociation_Cassell.webp" alt="Nashville Bar Association_Cassell" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+  <!-- News Section -->
+  <section class="news-section">
+    <div class="news-header">
+      <h2 class="news-title">The Cassell Firm News</h2>
+      <p class="news-subtitle">Practical Law You Can Use</p>
+      <p class="news-subtitle">Quick reads that explain your rights, the court process, and how to prepare for a consultation.</p>
+      <a href="https://www.thecassellfirm.com/news/" class="news-cta">TAKE ME TO THE NEWS <i class="fas fa-arrow-right" style="font-size:8px;"></i></a>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.thecassellfirm.com/wp-content/uploads/2025/08/JUSTIA.png" alt="Justa Lawyer rating 10.0" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+  <!-- Contact CTA Section -->
+  <section class="contact-cta-section">
+    <h2 class="contact-cta-title">Need help with a case?</h2>
+    <a href="https://www.thecassellfirm.com/contact/" class="contact-cta-button">Get a Free Consultation <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+  </section>
+
+  <!-- Maps Section -->
+  <section class="maps-section">
+    <h2 class="maps-title">Visit Our Nashville Office</h2>
+    <iframe src="https://maps.app.goo.gl/yyJaWEVeoweBTgBn6" width="100%" height="300" style="border:0" allowfullscreen loading="lazy"></iframe>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">The Cassell Firm</span>
+      <span class="footer-copyright">© 2026 The Cassell Firm. All Rights Reserved.</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.thecassellfirm.com/">Home</a>
+      <a href="https://www.thecassellfirm.com/nashville-lawyer/">Nashville Lawyers</a>
+      <a href="https://www.thecassellfirm.com/criminal-defense-attorney/">Criminal Defense Lawyers</a>
+      <a href="https://www.thecassellfirm.com/nashville-family-lawyer/">Family Lawyer</a>
+      <a href="https://www.thecassellfirm.com/nashville-immigration-lawyers/">Immigration Lawyers</a>
+      <a href="https://www.thecassellfirm.com/news/">News</a>
+      <a href="https://www.thecassellfirm.com/contact/">Contact</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
