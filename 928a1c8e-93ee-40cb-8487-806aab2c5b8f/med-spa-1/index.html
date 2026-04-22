@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lake Electrolysis</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://static.wixstatic.com/media/a6b252_2c37ac9dfe6640588e8fca21d7ea450b~mv2.jpg/v1/fill/w_720,h_308,al_c,lg_1,q_80,enc_avif,quality_auto/a6b252_2c37ac9dfe6640588e8fca21d7ea450b~mv2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(244, 240, 234, 0.8);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+  margin-bottom: var(--space-md);
+}
+
+.hero-cta {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 1.2s forwards;
+}
+
+.hero-cta a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.hero-cta a:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* About Section */
+.about {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.about-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.about-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.about-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.about-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Second Image Section */
+.second-image {
+  width: 100%;
+  margin: 2rem 0;
+}
+
+.second-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  max-height: 500px;
+}
+
+/* Third Content Section */
+.third-content {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.third-content-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.third-content-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.third-content-cta {
+  margin-top: var(--space-md);
+}
+
+.third-content-cta a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.third-content-cta a:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.service-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.service-cell:last-child {
+  border-bottom: none;
+}
+
+.service-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.service-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.service-cell:hover .service-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+.service-meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.service-name {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.service-description {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--placeholder-gray);
+}
+
+/* Contact Section */
+.contact {
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-item {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1.6;
+}
+
+.contact-item a {
+  color: var(--text-black);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-bottom-color 0.3s ease;
+}
+
+.contact-item a:hover {
+  border-bottom-color: var(--text-black);
+}
+
+.book-button {
+  align-self: flex-start;
+  margin-top: var(--space-sm);
+}
+
+.book-button a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.book-button a:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  .hero {
+    background-attachment: scroll;
+  }
+  
+  .hero-headline {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+  
+  .about-text {
+    font-size: clamp(1rem, 4vw, 1.25rem);
+  }
+  
+  .third-content-text {
+    font-size: clamp(1rem, 4vw, 1.25rem);
+  }
+  
+  .nav-links {
+    gap: var(--space-sm);
+  }
+  
+  .nav-logo {
+    font-size: 0.65rem;
+  }
+  
+  .nav-links a {
+    font-size: 0.6rem;
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .about-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .third-content-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .service-cell:nth-child(1),
+  .service-cell:nth-child(2) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .about {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .third-content {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .contact {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Lake Electrolysis</a>
+  <ul class="nav-links">
+    <li><a href="https://www.lakeelectrolysis.com/blog">explore</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">Lake Electrolysis</h1>
+    <p class="hero-subtitle">Your Destination for Permanent Hair Removal</p>
+    <div class="hero-cta">
+      <a href="https://www.lakeelectrolysis.com/blog">Explore</a>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <span class="about-label">001 — permanent solution</span>
+    <div class="about-text">
+      <p>Say goodbye to shaving, tweezing, waxing, and threading with Electrolysis. The only FDA approved method for achieving permanent results. This technique uses an electric current to destroy hair follicles, ensuring that hair does not grow back. It is suitable for all skin types and hair colors, making it a versatile choice for anyone seeking a long-term solution. With our Certified professionals, you can expect a safe and effective treatment tailored to your needs.</p>
+    </div>
+  </div>
+</section>
+
+<div class="second-image">
+  <img src="https://static.wixstatic.com/media/a6b252_d3faa8abba4d4dd1b5e3fc570f0ee794~mv2.jpg/v1/fill/w_953,h_802,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/a6b252_d3faa8abba4d4dd1b5e3fc570f0ee794~mv2.jpg" alt="">
+</div>
+
+<div class="second-image">
+  <img src="https://static.wixstatic.com/media/a6b252_4d4acb04280e44eebcf24422d9a2be6d~mv2.jpg/v1/fill/w_953,h_864,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/a6b252_4d4acb04280e44eebcf24422d9a2be6d~mv2.jpg" alt="IMG_4635.jpg">
+</div>
+
+<!-- Third Content Section -->
+<section class="third-content" id="third-content">
+  <div class="third-content-inner">
+    <span class="about-label">002 — Say goodbye to shaving, tweezing, waxing, and threading with Electrolysis</span>
+    <div class="third-content-text">
+      <p>Say goodbye to shaving, tweezing, waxing, and threading with Electrolysis. The only FDA approved method for achieving permanent results. This technique uses an electric current to destroy hair follicles, ensuring that hair does not grow back. It is suitable for all skin types and hair colors, making it a versatile choice for anyone seeking a long-term solution. With our Certified professionals, you can expect a safe and effective treatment tailored to your needs.</p>
+      <div class="third-content-cta">
+        <a href="http://www.vagaro.com/lakeelectrolysis">Book Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services Grid -->
+<section class="services" id="services">
+  <div class="services-grid">
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://static.wixstatic.com/media/a6b252_f94c2b4828f14f368df348bc43067950~mv2.jpg/v1/fill/w_216,h_207,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Hair_Follicle.jpg" alt="Hair follicle diagram showing electrolysis treatment">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">Personalized Consultations</span>
+        <p class="service-description">Consultation where certified electrologist evaluates skin and hair type to create a tailored treatment plan.</p>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://static.wixstatic.com/media/a6b252_292c57d4c579428cb47ef8d067d2a895~mv2.jpg/v1/fill/w_221,h_198,al_c,lg_1,q_80,enc_avif,quality_auto/Hair_Follicle_edited.jpg" alt="Hair follicle treatment illustration">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">Electrolysis Hair Removal</span>
+        <p class="service-description">FDA approved method for permanent hair removal using electric current to destroy hair follicles. Suitable for all skin types and hair colors.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-heading">Let's Chat!</h2>
+    <div class="contact-info">
+      <div class="contact-item">
+        <strong>LAKE ELECTROLYSIS</strong>
+      </div>
+      <div class="contact-item">
+        Email: <a href="mailto:info@mysite.com">info@mysite.com</a>
+      </div>
+      <div class="contact-item">
+        Phone: <a href="tel:512-693-8435">512-693-8435</a>
+      </div>
+      <div class="contact-item">
+        Address: 3801 N Capital of Texas Hwy Ste D200 #36, Austin, TX 78646
+      </div>
+      <div class="book-button">
+        <a href="http://www.vagaro.com/lakeelectrolysis">Book Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Lake Electrolysis</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
