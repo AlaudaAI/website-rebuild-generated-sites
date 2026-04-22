@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fidelis Law, PLLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Visual Demo */
+.hero-visual {
+  width: 100%;
+  max-width: 400px;
+}
+
+.video-embed {
+  width: 100%;
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: var(--space-md);
+  aspect-ratio: 16/9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.video-embed iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 12px;
+}
+
+/* Features Grid */
+.features {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.feature-card {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+.feature-card:last-child {
+  border-bottom: none;
+}
+
+.feature-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.feature-protocol {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.feature-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.feature-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 380px;
+}
+
+/* About section */
+.about-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.about-content {
+  max-width: 800px;
+}
+
+.about-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: var(--space-lg);
+}
+
+.about-text strong {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* Values section */
+.values-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.value-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
+}
+
+.value-card:hover {
+  border-color: var(--text-muted);
+}
+
+.value-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+
+.value-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.value-title {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* Services List */
+.services-list {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.services-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xl);
+}
+
+.service-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.service-link {
+  display: inline-block;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 16px;
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.service-link:hover {
+  color: var(--text-primary);
+  border-bottom-color: var(--text-primary);
+}
+
+/* Testimonials Section */
+.testimonials {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.testimonials-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xl);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.testimonial-card {
+  padding: var(--space-lg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-card);
+}
+
+.testimonial-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.testimonial-author {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--text-primary);
+  text-transform: uppercase;
+}
+
+/* Social Links */
+.social-links {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+  margin-top: var(--space-lg);
+}
+
+.social-links a {
+  color: var(--text-muted);
+  font-size: 18px;
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+.social-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Contact Section */
+.contact {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.contact-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.contact-form {
+  max-width: 500px;
+}
+
+.contact-form h3 {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.form-group {
+  margin-bottom: var(--space-md);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: var(--space-md);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 14px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--text-primary);
+}
+
+.contact-info {
+  max-width: 400px;
+}
+
+.contact-info h3 {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.contact-detail {
+  margin-bottom: var(--space-lg);
+}
+
+.contact-detail strong {
+  color: var(--text-primary);
+  font-size: 14px;
+  display: block;
+  margin-bottom: var(--space-xs);
+}
+
+.contact-detail a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.contact-detail a:hover {
+  color: var(--text-primary);
+}
+
+.contact-address {
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+/* Map Section */
+.map-section {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.map-container {
+  width: 100%;
+  height: 300px;
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== MOBILE (max-width: 768px) =================== */
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .hero-headline {
+    font-size: clamp(28px, 6vw, 36px);
+  }
+  
+  .feature-card {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .about-section,
+  .values-section,
+  .services-list,
+  .testimonials,
+  .contact {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .footer {
+    padding: var(--space-lg) var(--space-md);
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:last-child {
+    border-right: none;
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contact-content {
+    flex-direction: row;
+    gap: var(--space-2xl);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .feature-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .about-section {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .values-section {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .services-list {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .testimonials {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .contact {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .feature-card {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="https://www.fidelislawfirm.com/" class="brand">
+    <div class="globe-icon"><i class="fas fa-scale-balanced"></i></div>
+    <span class="brand-name">Fidelis Law, PLLC</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="https://www.fidelislawfirm.com/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-scale-balanced"></i></div>
+      <span class="brand-name">Fidelis Law, PLLC</span>
+    </a>
+    <nav>
+      <a href="https://www.fidelislawfirm.com/about/">Our Firm</a>
+      <a href="https://www.fidelislawfirm.com/practice/">Faith In Practice</a>
+      <a href="https://www.fidelislawfirm.com/clients-reviews/">Clients & Reviews</a>
+      <a href="https://www.fidelislawfirm.com/faq/">FAQ</a>
+    </nav>
+    <div class="social-links">
+      <a href="https://www.facebook.com/fidelislawbrentwoodtn"><i class="fab fa-facebook"></i></a>
+      <a href="https://twitter.com/FidelisLawPLLC"><i class="fab fa-twitter"></i></a>
+      <a href="https://maps.google.com/maps?ll=35.975348,-86.807699&z=15&t=m&hl=en&gl=US&mapclient=embed&q=1585%20Mallory%20Ln%20STE%20104%20Brentwood%2C%20TN%2037027"><i class="fab fa-google"></i></a>
+    </div>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Brentwood Office Open</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Christian Law Practice</span>
+      <h1 class="hero-headline">Dependable, proven law firm serving Middle Tennessee</h1>
+      <p class="hero-subheading">Honored to serve each of our clients with Christian values and ethics that flow through our legal practice and continuous support to our communities.</p>
+      <a href="tel:615-370-3010" class="hero-cta">Call: 615-370-3010 <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+    </div>
+    <div class="hero-visual">
+      <div class="video-embed">
+        <iframe src="https://player.vimeo.com/video/87033613" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-section">
+    <div class="about-content">
+      <span class="hero-label">About Our Practice</span>
+      <h2 class="hero-headline">Comprehensive Legal Solutions</h2>
+      
+      <p class="about-text">We believe in transparency and helping each of our clients make informed legal decisions. We believe in clearly communicating throughout our relationship, and we believe in faithful and loyal service.</p>
+
+      <p class="about-text">At <strong>Fidelis Law, PLLC</strong>, we are committed to exceeding your expectations by helping you achieve peace of mind through the resolution of your legal issue(s). Our approach to serving you is comprehensive, straightforward and personalized. Your needs and goals are unique, and that should be reflected in the work of your legal counsel.</p>
+
+      <p class="about-text">Our team of attorneys operates with Christian values and ethics that we take seriously in our professional and personal lives. These principles flow through our legal practice and our continuous support to our communities.</p>
+
+      <p class="about-text">Much of our law firm's success emanates from our adherence to the Golden Rule. We put ourselves in your shoes, and we are grateful for the trust you place in our firm. We are committed to providing each of our clients with the highest quality service.</p>
+
+      <p class="about-text">Whether your legal issues involve <strong>nonprofit law</strong>, <strong>business law</strong>, <strong>family law</strong>, <strong>personal injury</strong>, <strong>estate planning</strong> or <strong>probate</strong>, we would love to speak with you. Consultations with our lawyers are not fee-driven. We are relationship-driven — responsive to your needs and questions.</p>
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="values-section">
+    <span class="hero-label">Our Values</span>
+    <h2 class="hero-headline">Guided by Christian Principles</h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-icon">
+          <img src="https://www.fidelislawfirm.com/wp-content/uploads/2021/10/caring-respect.png" alt="Caring & Respect">
+        </div>
+        <div class="value-title">Caring & Respect</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <img src="https://www.fidelislawfirm.com/wp-content/uploads/2021/10/responsiveness.png" alt="Responsiveness">
+        </div>
+        <div class="value-title">Responsiveness</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <img src="https://www.fidelislawfirm.com/wp-content/uploads/2021/10/dedication-excellence.png" alt="Dedication and Excellence">
+        </div>
+        <div class="value-title">Dedication and Excellence</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">
+          <img src="https://www.fidelislawfirm.com/wp-content/uploads/2021/10/integrity-trust.png" alt="Integrity and Trust">
+        </div>
+        <div class="value-title">Integrity and Trust</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section class="features">
+    <div class="feature-card">
+      <p class="feature-protocol">Legal Practice 01</p>
+      <h3 class="feature-title">Church & Nonprofit Law</h3>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Legal Practice 02</p>
+      <h3 class="feature-title">Business Law</h3>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Legal Practice 03</p>
+      <h3 class="feature-title">Estate Planning & Probate</h3>
+    </div>
+  </section>
+
+  <!-- Additional Services -->
+  <section class="services-list">
+    <h2 class="services-title">Complete Legal Services</h2>
+    <div class="service-links">
+      <a href="https://www.fidelislawfirm.com/church-nonprofit-law/" class="service-link">Church & Nonprofit Law</a>
+      <a href="https://www.fidelislawfirm.com/business-law/" class="service-link">Business Law</a>
+      <a href="https://www.fidelislawfirm.com/estate-planning-and-probate/" class="service-link">Estate Planning & Probate</a>
+      <a href="https://www.fidelislawfirm.com/family-law/" class="service-link">Family Law & Divorce</a>
+      <a href="https://www.fidelislawfirm.com/personal-injury/" class="service-link">Personal Injury</a>
+    </div>
+  </section>
+
+  <!-- Additional Images -->
+  <div style="width:100%;margin:2rem 0"><img src="https://www.fidelislawfirm.com/wp-content/uploads/2021/09/fidelis-logo-large.png" alt="Fidelis law" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.fidelislawfirm.com/wp-content/uploads/2021/09/fidelis-law-firm-logo-blue.png" alt="Fidelis Law Firm" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8486!3i12870!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=71169" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8486!3i12869!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=34382" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i13!2i2120!3i3217!4i256!2m1!1e1!3m12!2sen!3sUS!5e289!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy5lOmx8cC52Om9mZg!4e0!5m1!1e3!23i47083502&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=86892" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://i.vimeocdn.com/video/464931116-a771354f5b8e29e95ef7576ac35428538bb8047411cff209fe7298a5b1be34fc-d?mw=80&q=85" alt="video thumbnail" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8481!3i12870!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=87539" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8484!3i12870!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=77717" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8480!3i12869!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=54026" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8481!3i12869!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=50752" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8479!3i12869!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=49253" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8479!3i12870!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=86040" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8483!3i12869!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=44204" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8482!3i12870!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=84265" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8484!3i12869!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=40930" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8483!3i12870!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=80991" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8478!3i12869!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=52527" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8480!3i12870!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=90813" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8478!3i12870!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=89314" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8485!3i12869!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=37656" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8485!3i12870!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=74443" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8482!3i12869!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=47478" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <h2 class="testimonials-title">Client Testimonials</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"Responsiveness"</p>
+        <p class="testimonial-author">— Reviewer 1</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"Dedication and Excellence"</p>
+        <p class="testimonial-author">— Reviewer 2</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"Integrity and Trust"</p>
+        <p class="testimonial-author">— Trusted Counselor</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"Objective Advisor - Trusted Counselor - Courtroom Advocate. When life calls for legal assistance, it is our privilege to come alongside our clients to provide sound legal counsel and representation."</p>
+        <p class="testimonial-author">— Reviewer 4</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"Phone: 615-370-3010. Address: 1585 Mallory Lane Suite 104, Brentwood, TN 37027"</p>
+        <p class="testimonial-author">— Reviewer 5</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"Move left, Move right, Move up, Move down"</p>
+        <p class="testimonial-author">— Reviewer 6</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map Section -->
+  <section class="map-section">
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3228.839547168091!2d-86.80989284831574!3d35.97534808002933!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88647beeba2489d3%3A0xa677931535a20fc8!2s1585%20Mallory%20Ln%20STE%20104%2C%20Brentwood%2C%20TN%2037027!5e0!3m2!1sen!2sus!4v1631573237519!5m2!1sen!2sus" width="100%" height="300" style="border:0" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact">
+    <div class="contact-content">
+      <div class="contact-form">
+        <h3>Complete this form for a free evaluation.</h3>
+        <form>
+          <div class="form-group">
+            <input type="text" placeholder="First Name" required>
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="Last Name" required>
+          </div>
+          <div class="form-group">
+            <input type="email" placeholder="Email" required>
+          </div>
+          <div class="form-group">
+            <input type="tel" placeholder="Phone" required>
+          </div>
+          <div class="form-group">
+            <textarea rows="4" placeholder="Description of your legal matter" required></textarea>
+          </div>
+          <div class="form-group">
+            <label style="display: flex; align-items: center; gap: 8px; color: var(--text-muted); font-size: 12px;">
+              <input type="checkbox" required>
+              I have read the Disclaimer at the bottom of the page.
+            </label>
+          </div>
+          <button type="submit" class="hero-cta">Submit Form</button>
+        </form>
+      </div>
+      
+      <div class="contact-info">
+        <h3>Objective Advisor - Trusted Counselor - Courtroom Advocate</h3>
+        <p class="about-text">When life calls for legal assistance, it is our privilege to come alongside our clients to provide sound legal counsel and representation. We understand that any legal decision has a major life impact. Many times, these needs arise during some of life's more difficult situations, which is why our team is dedicated to serving to the best of our ability in all of our cases.</p>
+        
+        <div class="contact-detail">
+          <strong>Phone</strong>
+          <a href="tel:615-370-3010">615-370-3010</a>
+        </div>
+        
+        <div class="contact-detail">
+          <strong>Address</strong>
+          <div class="contact-address">1585 Mallory Lane Suite 104
+
+Brentwood, TN 37027</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Fidelis Law, PLLC</span>
+      <span class="footer-copyright">© 2024 Fidelis Law, PLLC. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.fidelislawfirm.com/">Home</a>
+      <a href="https://www.fidelislawfirm.com/about/">Our Firm</a>
+      <a href="https://www.fidelislawfirm.com/practice/">Faith In Practice</a>
+      <a href="https://www.fidelislawfirm.com/clients-reviews/">Clients & Reviews</a>
+      <a href="https://www.fidelislawfirm.com/faq/">FAQ</a>
+      <a href="https://www.fidelislawfirm.com/church-nonprofit-law/">Church & Nonprofit Law</a>
+      <a href="https://www.fidelislawfirm.com/business-law/">Business Law</a>
+      <a href="https://www.fidelislawfirm.com/estate-planning-and-probate/">Estate Planning & Probate</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
