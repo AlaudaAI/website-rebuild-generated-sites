@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cole Law Group, PC</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Visual Demo */
+.hero-visual {
+  width: 100%;
+  max-width: 400px;
+}
+
+.scan-container {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: var(--space-xl);
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* Features Grid */
+.features {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.feature-card {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+.feature-card:last-child {
+  border-bottom: none;
+}
+
+.feature-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.feature-protocol {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.feature-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.feature-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 380px;
+}
+
+/* Services Grid */
+.services-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.services-title {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 5vw, 42px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xl);
+  text-align: center;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.service-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: var(--space-lg);
+  transition: all 0.3s ease;
+}
+
+.service-card:hover {
+  background: var(--bg-hover);
+}
+
+.service-card h3 {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.service-card p {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.service-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: var(--space-md);
+}
+
+/* Simple services list for services without descriptions */
+.simple-services {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.simple-service {
+  padding: var(--space-md);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-card);
+}
+
+.simple-service h3 {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+/* Team Section */
+.team-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.team-title {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 5vw, 42px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xl);
+  text-align: center;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.team-member {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: var(--space-lg);
+  text-align: center;
+}
+
+.team-member h3 {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.team-member .role {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.team-member .bio {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* Reviews Section */
+.reviews-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.reviews-title {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 5vw, 42px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xl);
+  text-align: center;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.review-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: var(--space-lg);
+}
+
+.review-text {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.review-author {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Social Links */
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin: var(--space-lg) 0;
+  justify-content: center;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  color: var(--text-primary);
+  border-color: var(--text-primary);
+}
+
+/* Content sections */
+.content-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.content-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.content-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 800px;
+  margin-bottom: var(--space-lg);
+}
+
+/* Contact form */
+.contact-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  max-width: 500px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.form-group label {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.form-group input,
+.form-group textarea {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: var(--space-md);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 14px;
+}
+
+.form-group textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== MOBILE (max-width: 768px) =================== */
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .hero-headline {
+    font-size: clamp(28px, 7vw, 36px);
+  }
+
+  .hero-subheading {
+    font-size: 14px;
+  }
+
+  .feature-card {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .services-section,
+  .team-section,
+  .reviews-section,
+  .content-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .social-links {
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .footer {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .footer-links {
+    gap: var(--space-sm) var(--space-md);
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:last-child {
+    border-right: none;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .simple-services {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .reviews-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .feature-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .simple-services {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .reviews-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .content-section {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="https://www.colelawgrouppc.com/" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">Cole Law Group, PC</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="https://www.colelawgrouppc.com/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">Cole Law Group, PC</span>
+    </a>
+    <nav>
+      <a href="https://www.colelawgrouppc.com/about-us/">About Us</a>
+      <a href="https://www.colelawgrouppc.com/practice-areas/">Practice Areas</a>
+      <a href="https://www.colelawgrouppc.com/lawyers/">Attorneys</a>
+      <a href="https://www.colelawgrouppc.com/contact-us/">Contact Us</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">All Systems Operational</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">API v4.2 Active</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Nashville Legal Representation</span>
+      <h1 class="hero-headline">Nashville Litigation Lawyers</h1>
+      <p class="hero-subheading">Cole Law Group's Nashville litigation attorneys help families, individuals, and businesses large and small as they confront legal challenges.</p>
+      <a href="tel:+16154906020" class="hero-cta">Call Now (615) 490-6020 <i class="fas fa-phone" style="font-size:10px;"></i></a>
+    </div>
+    <div class="hero-visual">
+      <div class="scan-container">
+        <img src="https://www.colelawgrouppc.com/static/2024/03/homepage-desktop.jpg" alt="Picture of a Meeting Room" class="hero-image">
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Links -->
+  <div class="social-links">
+    <a href="https://www.facebook.com/colelawgroup/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+      <i class="fab fa-facebook-f"></i>
+    </a>
+    <a href="https://twitter.com/colelawgrouppc" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+      <i class="fab fa-twitter"></i>
+    </a>
+    <a href="https://www.linkedin.com/company/cole-law-group/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+      <i class="fab fa-linkedin-in"></i>
+    </a>
+    <a href="https://www.instagram.com/colelawgroup/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+      <i class="fab fa-instagram"></i>
+    </a>
+    <a href="https://www.youtube.com/channel/UCOT7FaaMLDmOCOIAFX2SuBQ" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+      <i class="fab fa-youtube"></i>
+    </a>
+  </div>
+
+  <!-- Core Services -->
+  <section class="features">
+    <div class="feature-card">
+      <p class="feature-protocol">Core Practice 01</p>
+      <h3 class="feature-title">Divorce & Family Law</h3>
+      <p class="feature-description">Cole Law Group began as a family law firm and through the years has had a highly successful track record in achieving the objectives of our divorce clients both at the negotiating table and in the courtroom. We often deal with high-asset, complex cases.</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Core Practice 02</p>
+      <h3 class="feature-title">Business & Commercial</h3>
+      <p class="feature-description">Our Nashville business lawyers are proud to provide clients with the ability to establish their companies and ensure that they are poised for success. We work to provide our clients with unshakable foundations on which they can build their companies and allow them to grow.</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Core Practice 03</p>
+      <h3 class="feature-title">Immigration Law</h3>
+      <p class="feature-description">Cole Law Group's immigration law practice has helped many clients adjust their immigration status and avoid the possibility of deportation. Our immigration team is fluent in Spanish, Russian, and Chinese.</p>
+    </div>
+  </section>
+
+  <!-- Practice Areas -->
+  <section class="content-section">
+    <h2 class="content-title">Divorce</h2>
+    <p class="content-text">Cole Law Group began as a family law firm and through the years has had a highly successful track record in achieving the objectives of our divorce clients both at the negotiating table and in the courtroom.</p>
+    <img src="https://www.colelawgrouppc.com/static/2024/03/divorce-family-law.jpg" alt="Divorce & Family Law" style="width: 100%; max-width: 600px; height: auto; border-radius: 8px; margin: var(--space-lg) 0;">
+  </section>
+
+  <section class="content-section">
+    <h2 class="content-title">Child Custody</h2>
+    <p class="content-text">Our child custody attorneys understand that parenting plans and custody arrangements must prioritize the best interests of the children involved.</p>
+  </section>
+
+  <section class="content-section">
+    <h2 class="content-title">Defamation and Privacy</h2>
+    <p class="content-text">Cole Law Group provides experienced legal representation for defamation and privacy cases, protecting clients against false statements and invasion of privacy.</p>
+    <img src="https://www.colelawgrouppc.com/static/2024/03/defamation.jpg" alt="Defamation" style="width: 100%; max-width: 600px; height: auto; border-radius: 8px; margin: var(--space-lg) 0;">
+  </section>
+
+  <!-- About Section -->
+  <section class="content-section">
+    <h2 class="content-title">What We Can Do for You</h2>
+    <p class="content-text">The Cole Law Group culture has attracted talented attorneys who have graduated from highly acclaimed schools, served in the military, and earned professional honors and respect in the legal community. We encourage our lawyers to bring their unique abilities and diverse experience to the table in order to develop the best possible strategies for our clients. With our collaborative teamwork and outside-the-box way of thinking, we combat the opposition with creative solutions that other attorneys might not even think of. The overall strength and knowledge within the firm, plus a wide bandwidth of concentrations, allows us to offer you a variety of legal services:</p>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services-section">
+    <h2 class="services-title">Our Practice Areas</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <img src="https://www.colelawgrouppc.com/static/2024/03/divorce-family-law.jpg" alt="Divorce & Family Law" class="service-image">
+        <h3>Divorce</h3>
+        <p>Family law with high-asset, complex cases and general divorce representation</p>
+      </div>
+      <div class="service-card">
+        <h3>Child Custody</h3>
+        <p>Parenting plans and custody arrangements focusing on children's best interests</p>
+      </div>
+      <div class="service-card">
+        <img src="https://www.colelawgrouppc.com/static/2024/03/defamation.jpg" alt="Defamation" class="service-image">
+        <h3>Defamation and Privacy</h3>
+        <p>Protection against false statements and invasion of privacy, including social media cases</p>
+      </div>
+      <div class="service-card">
+        <img src="https://www.colelawgrouppc.com/static/2024/03/immigration.jpg" alt="Immigration" class="service-image">
+        <h3>Immigration Law</h3>
+        <p>Immigration status adjustment and deportation defense with multilingual support</p>
+      </div>
+      <div class="service-card">
+        <h3>Sexual Harassment</h3>
+        <p>Workplace and academic sexual harassment claims under federal and state law</p>
+      </div>
+      <div class="service-card">
+        <img src="https://www.colelawgrouppc.com/static/2024/03/business-commercial.jpg" alt="Business & Commercial" class="service-image">
+        <h3>Business & Commercial</h3>
+        <p>Entity formation, business planning, operations, and general counsel services</p>
+      </div>
+      <div class="service-card">
+        <h3>Personal Injury</h3>
+        <p>Individual attention for serious injury cases with precise investigation and strategy</p>
+      </div>
+      <div class="service-card">
+        <h3>Government & Administrative Law</h3>
+        <p>Regulatory compliance, permits, licenses, and defending against government investigations</p>
+      </div>
+      <div class="service-card">
+        <img src="https://www.colelawgrouppc.com/static/2024/03/intellectual-property.jpg" alt="Intellectual Property" class="service-image">
+        <h3>Intellectual Property Law</h3>
+        <p>Trademark, copyright, trade secret protection, and licensing agreements</p>
+      </div>
+      <div class="service-card">
+        <h3>Entertainment Law</h3>
+        <p>Contract negotiation, business entities, and protection for entertainment and esports professionals</p>
+      </div>
+    </div>
+    
+    <div style="margin-top: var(--space-xl);">
+      <h3 style="font-family: var(--font-serif); font-size: 24px; margin-bottom: var(--space-lg); color: var(--text-primary);">Additional Practice Areas</h3>
+      <div class="simple-services">
+        <div class="simple-service">
+          <img src="https://www.colelawgrouppc.com/static/2024/03/education-law.jpg" alt="Education Law" style="width: 100%; height: 120px; object-fit: cover; border-radius: 4px; margin-bottom: var(--space-sm);">
+          <h3>Education Law</h3>
+        </div>
+        <div class="simple-service">
+          <img src="https://www.colelawgrouppc.com/static/2024/03/employment-law.jpg" alt="Employment Law" style="width: 100%; height: 120px; object-fit: cover; border-radius: 4px; margin-bottom: var(--space-sm);">
+          <h3>Employment Law</h3>
+        </div>
+        <div class="simple-service">
+          <img src="https://www.colelawgrouppc.com/static/2024/03/estate-planning-probate.jpg" alt="Estate Planning & Probate" style="width: 100%; height: 120px; object-fit: cover; border-radius: 4px; margin-bottom: var(--space-sm);">
+          <h3>Estate Planning & Probate</h3>
+        </div>
+        <div class="simple-service">
+          <img src="https://www.colelawgrouppc.com/static/2024/03/litigation-appeals.jpg" alt="Litigation & Appeals" style="width: 100%; height: 120px; object-fit: cover; border-radius: 4px; margin-bottom: var(--space-sm);">
+          <h3>Litigation & Appeals</h3>
+        </div>
+        <div class="simple-service">
+          <img src="https://www.colelawgrouppc.com/static/2024/03/mediation.jpg" alt="Mediation" style="width: 100%; height: 120px; object-fit: cover; border-radius: 4px; margin-bottom: var(--space-sm);">
+          <h3>Mediation</h3>
+        </div>
+        <div class="simple-service">
+          <h3>Professional License Defense</h3>
+        </div>
+        <div class="simple-service">
+          <h3>Real Estate & Construction Litigation</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <h2 class="team-title">Our Attorneys</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <h3>Todd Cole</h3>
+        <p class="bio">Has a special interest in defamation and privacy cases and has successfully represented individuals who have asserted defamation or privacy claims.</p>
+      </div>
+      <div class="team-member">
+        <h3>Andy Goldstein</h3>
+        <p class="role">Managing Shareholder</p>
+      </div>
+      <div class="team-member">
+        <h3>Alyssa Castronovo</h3>
+      </div>
+      <div class="team-member">
+        <h3>Madeleine Karstens</h3>
+      </div>
+      <div class="team-member">
+        <h3>Leen Heresh</h3>
+      </div>
+      <div class="team-member">
+        <h3>Ryan Ritchey</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Section -->
+  <section class="content-section">
+    <h2 class="content-title">Why Choose Cole Law Group?</h2>
+    <p class="content-text">You deserve to work with Nashville litigation lawyers who are talented, responsive, and demonstrate a high standard of professional ethics. Every lawyer at Cole Law Group understands that our integrity and the quality of work we produce will have a significant impact on you, your future, the future of your family, your professional reputation, or the success of your business enterprise. We strive to build a lasting partnership with our clients based upon mutual trust and respect. We believe that clients who put their future in our hands deserve the highest caliber of client service, legal representation, and ethical standards. The first step to a successful outcome is choosing the right attorney.</p>
+  </section>
+
+  <!-- Client Reviews -->
+  <section class="reviews-section">
+    <h2 class="reviews-title">Client Reviews</h2>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <p class="review-text">"Excellent team, responsible, honest, accessible and above all human."</p>
+        <p class="review-author">I.I.</p>
+      </div>
+      <div class="review-card">
+        <p class="review-text">"Cole Law Group has been nothing short of spectacular for myself and family. Their knowledge and experience is a solid and valuable asset to have at one's disposal in today's world."</p>
+        <p class="review-author">R.F.</p>
+      </div>
+      <div class="review-card">
+        <p class="review-text">"Communicative, collaborative, and professional to the core!"</p>
+        <p class="review-author">J.K.</p>
+      </div>
+      <div class="review-card">
+        <p class="review-text">"A beacon of hope when my choices were limited (...). Not only were they able to look out for my best interest, but their calm and empathetic demeanor offered me both amazing legal advice and emotional support. I am eternally grateful for their service, and I wholeheartedly recommend Cole Law Group..."</p>
+        <p class="review-author">D.B.</p>
+      </div>
+      <div class="review-card">
+        <p class="review-text">"Now, as professionals, just astounding. There was such a calmness and a genuine strength that they exhibit because they simply know the law. It was amazing to see the back and forth of their work and never once be wavering or scrambling. There was not one time this entire process where I knew I..."</p>
+        <p class="review-author">M.Z.</p>
+      </div>
+      <div class="review-card">
+        <p class="review-text">"This group can get anything you need done! They can do just about any kind of court issues! When you hire these guys you will walk away feeling confident that they will get things done for you!"</p>
+        <p class="review-author">S.G.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Awards -->
+  <div style="width:100%;margin:2rem 0"><img src="https://www.colelawgrouppc.com/static/2025/09/OTW.png" alt="Ones To Watch - Lawyer Logo" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Community Involvement Section -->
+  <section class="content-section">
+    <h2 class="content-title">Community Involvement</h2>
+    <p class="content-text">"When Cole Law Group was founded 10 years ago, it quickly became apparent that our attorneys and staff wanted to actively give back to the communities we serve. As the number of employees at our Firm has grown, so has that commitment. It is now my pleasure to announce the establishment of the CLG Compass Project. By formalizing our efforts into this initiative, we will be able to take Cole Law Group's community outreach to the next level. Please stay tuned for more updates on how our attorneys and staff are working to help Middle Tennessee." - Todd Cole</p>
+  </section>
+
+  <!-- Badges -->
+  <div style="width:100%;margin:2rem 0"><img src="https://www.colelawgrouppc.com/static/2024/03/justia-lawyer-rating.png" alt="Justia Lawyer badge" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Contact Section -->
+  <section class="content-section">
+    <h2 class="content-title">Contact Us</h2>
+    <div class="content-text">
+      <p style="margin-bottom: var(--space-lg);">Fill out the contact form or call us at <strong>(615) 490-6020</strong> to schedule your consultation.</p>
+      <ul style="list-style: none; padding: 0; margin-bottom: var(--space-xl);">
+        <li style="margin-bottom: var(--space-sm);">✓ Video Conferencing Available</li>
+        <li style="margin-bottom: var(--space-sm);">✓ Responsive Client Service</li>
+        <li style="margin-bottom: var(--space-sm);">✓ Fluent in Spanish</li>
+      </ul>
+      <div class="contact-form">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone">
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+        <a href="tel:+16154906020" class="hero-cta">Contact Us Now</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Cole Law Group, PC</span>
+      <span class="footer-copyright">© 2026 Cole Law Group, PC Systems, Inc. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.colelawgrouppc.com/">Home</a>
+      <a href="https://www.colelawgrouppc.com/about-us/">About Us</a>
+      <a href="https://www.colelawgrouppc.com/practice-areas/">Practice Areas</a>
+      <a href="https://www.colelawgrouppc.com/lawyers/">Attorneys</a>
+      <a href="https://www.colelawgrouppc.com/client-reviews/">Client Reviews</a>
+      <a href="https://www.colelawgrouppc.com/blog/categories/compass-project/">Community</a>
+      <a href="https://www.colelawgrouppc.com/videos/">Videos</a>
+      <a href="https://www.colelawgrouppc.com/blog/">Blog</a>
+      <a href="https://www.colelawgrouppc.com/contact-us/">Contact Us</a>
+    </div>
+  </footer>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
