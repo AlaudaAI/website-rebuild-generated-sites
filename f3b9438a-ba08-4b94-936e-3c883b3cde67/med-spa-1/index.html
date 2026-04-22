@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spa 512</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://images.squarespace-cdn.com/content/v1/645eff31d28f3c73afc7bcf3/0b888477-602f-444c-8474-d69a1a200b60/homepage-banner.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(26, 26, 26, 0.3);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+  color: #ffffff;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+  color: #ffffff;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Welcome Section */
+.welcome {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.welcome-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  text-align: center;
+}
+
+.welcome-logo {
+  margin: 0 auto var(--space-lg);
+  max-width: 200px;
+}
+
+.welcome-heading {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-md);
+}
+
+.welcome-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.service-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.service-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: var(--space-md);
+}
+
+.service-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(20%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.service-card:hover .service-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(1.02);
+}
+
+.service-name {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-sm);
+  text-transform: uppercase;
+}
+
+.service-description {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1rem, 1.8vw, 1.1rem);
+  line-height: 1.6;
+  max-width: 400px;
+}
+
+/* Contact Section */
+.contact {
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://images.squarespace-cdn.com/content/v1/645eff31d28f3c73afc7bcf3/3388d204-6cb5-4f08-8223-9bd2bf48385c/gold-pattern.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.contact::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(244, 240, 234, 0.9);
+  z-index: 1;
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  position: relative;
+  z-index: 2;
+}
+
+.contact-section {
+  text-align: center;
+}
+
+.contact-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.contact-value {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  line-height: 1.6;
+}
+
+.contact-value a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-bottom-color 0.3s ease;
+}
+
+.contact-value a:hover {
+  border-bottom-color: var(--border-black);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.65rem;
+  }
+  
+  .welcome-inner {
+    gap: var(--space-md);
+  }
+  
+  .services-grid {
+    gap: var(--space-md);
+  }
+  
+  .contact-inner {
+    gap: var(--space-md);
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .welcome-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+    text-align: left;
+  }
+
+  .welcome-logo {
+    margin: 0;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--space-xl);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .welcome {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .contact {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Spa 512</a>
+  <ul class="nav-links">
+    <li><a href="https://www.spa512.com/">home</a></li>
+    <li><a href="https://www.spa512.com/massage">massage</a></li>
+    <li><a href="https://www.spa512.com/skincare">skincare</a></li>
+    <li><a href="https://www.spa512.com/postsurgery-massage">post-surgery</a></li>
+    <li><a href="https://www.spa512.com/body-contour">body contour</a></li>
+    <li><a href="https://spa512booking.as.me/">book now</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">Spa 512</h1>
+    <p class="hero-subtitle">Providing the Austin area with a wide range of spa treatments. From massages and facials to body contouring and post-op treatments, customized sessions are tailored to your specific needs.</p>
+  </div>
+</section>
+
+<!-- Welcome Section -->
+<section class="welcome" id="welcome">
+  <div class="welcome-inner">
+    <div>
+      <img src="https://images.squarespace-cdn.com/content/v1/645eff31d28f3c73afc7bcf3/a2b25834-93b0-4f4c-867f-d162c6808b88/logo-transparent.png" alt="Spa 512" class="welcome-logo">
+    </div>
+    <div>
+      <h2 class="welcome-heading">Welcome to Spa 512</h2>
+      <p class="welcome-text">Providing the Austin area with a wide range of spa treatments. From massages and facials to body contouring and post-op treatments, customized sessions are tailored to your specific needs. Spa 512 is the leading massage therapy clinic in the area, specializing in Post-Surgery Massage, ensuring you achieve your session goals.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Services Grid -->
+<section class="services" id="services">
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/645eff31d28f3c73afc7bcf3/d36144a0-0aeb-4b89-9a8c-691ed289a782/beautiful-girl-at-spa-2021-08-29-16-14-48-utc.png" alt="therapeutic massage back massage deep tissue">
+      </div>
+      <h3 class="service-name">Massage</h3>
+      <p class="service-description">Whether you need a light touch or deep tissue, let our healing hands lead the way to your renewed sense of wellness.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/645eff31d28f3c73afc7bcf3/de347ac7-a5a0-43d7-999e-62387bb7c962/different-ethnicity-women-caucasian-african-asian.png" alt="acne facial chemical peel skincare">
+      </div>
+      <h3 class="service-name">Skincare</h3>
+      <p class="service-description">Customized facials to address your skin's needs. Let us help you restore your natural beauty with our skincare services.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/645eff31d28f3c73afc7bcf3/0072f8ad-a979-421f-9857-d4df86623df5/belly.jpg" alt="liposuction tummy tuck bbl post plastic surgery massage">
+      </div>
+      <h3 class="service-name">Post-Surgery Massage</h3>
+      <p class="service-description">Specializing in post plastic surgery massage for procedures such as Liposuction, BBL, Tummy Tuck, Breast lift, etc.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/645eff31d28f3c73afc7bcf3/54e9fae2-5721-4e1e-8c56-9571a20d5a78/bodysculpt.jpg" alt="wood therapy EMSculpt vacuum therapy cupping laser lipo skin tightening">
+      </div>
+      <h3 class="service-name">Body Contouring</h3>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="contact-section">
+      <h3 class="contact-label">location</h3>
+      <div class="contact-value">3215 Gonzales St, Suite 1103<br>Austin, TX 78702</div>
+    </div>
+    <div class="contact-section">
+      <h3 class="contact-label">hours</h3>
+      <div class="contact-value">By <a href="https://spa512booking.as.me/schedule/64134270">Appointment</a></div>
+    </div>
+    <div class="contact-section">
+      <h3 class="contact-label">contact</h3>
+      <div class="contact-value">
+        <a href="mailto:amber@spa512.com">amber@spa512.com</a><br>
+        <a href="tel:+15122701466">(512) 270-1466</a><br>
+        <a href="https://www.instagram.com/spa_512/">instagram</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Spa 512</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
