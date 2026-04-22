@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ryan A. Freeze Attorney at Law</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Social Links */
+.social-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+}
+
+.social-links {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.social-links a {
+  color: var(--text-muted);
+  font-size: 14px;
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+.social-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Hero image */
+.hero-visual {
+  width: 100%;
+  max-width: 400px;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* About Section */
+.about {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.about-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.about-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.about-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.about-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 600px;
+}
+
+/* Gallery Section */
+.gallery {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.gallery-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.gallery-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.gallery-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.gallery-item {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.gallery-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Services Grid */
+.services {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.service-card {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+.service-card:last-child {
+  border-bottom: none;
+}
+
+.service-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.service-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.service-title {
+  font-family: var(--font-serif);
+  font-size: clamp(18px, 3vw, 22px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.service-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 380px;
+}
+
+/* Team Section */
+.team {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.team-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.team-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.team-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.team-member-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border-color);
+}
+
+.team-member-name {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.team-member-role {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.team-member-bio {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 500px;
+}
+
+/* Testimonials Section */
+.testimonials {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.testimonials-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.testimonials-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.testimonials-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.testimonial-card {
+  padding: var(--space-lg);
+  background: var(--bg-card);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.testimonial-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.testimonial-author {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-align: right;
+}
+
+/* Stats Section */
+.stats-section {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.stats-metrics {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.stats-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.stats-number {
+  font-family: var(--font-serif);
+  font-size: clamp(48px, 12vw, 80px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.stats-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 400px;
+}
+
+.contact-info {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.contact-title {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 4vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.contact-item-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.contact-item-value {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.contact-item-value a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-item-value a:hover {
+  color: var(--text-muted);
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== MOBILE (max-width: 768px) =================== */
+@media (max-width: 768px) {
+  .mobile-header .brand-name {
+    font-size: 12px;
+  }
+  
+  .hero {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .hero-headline {
+    font-size: clamp(28px, 7vw, 36px);
+  }
+  
+  .about, .team, .testimonials, .gallery {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .service-card {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .stats-metrics, .contact-info {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .testimonials-grid {
+    gap: var(--space-md);
+  }
+  
+  .footer {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .services {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .service-card:nth-child(2n) {
+    border-right: none;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stats-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stats-metrics {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .services {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .service-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .service-card:nth-child(3n) {
+    border-right: none;
+  }
+
+  .service-card:nth-child(2n) {
+    border-right: 1px solid var(--border-color);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .service-card {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <div class="globe-icon"><i class="fas fa-gavel"></i></div>
+    <span class="brand-name">Ryan A. Freeze Attorney at Law</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-gavel"></i></div>
+      <span class="brand-name">Ryan A. Freeze Attorney at Law</span>
+    </a>
+    <nav>
+      <a href="https://rfreezelaw.com/murfreesboro-family-lawyer">Family Law</a>
+      <a href="https://rfreezelaw.com/murfreesboro-divorce-lawyer">Divorce Lawyer</a>
+      <a href="https://rfreezelaw.com/murfreesboro-child-custody-lawyer">Child Custody</a>
+      <a href="https://rfreezelaw.com/murfreesboro-criminal-defense-lawyer">Criminal Defense</a>
+      <a href="https://rfreezelaw.com/murfreesboro-probate-estate-lawyer">Estate Planning</a>
+      <a href="https://rfreezelaw.com/murfreesboro-small-claims-court-lawyer">Small Claims</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Office Open</span>
+    </div>
+    <div class="social-section">
+      <div class="social-links">
+        <a href="https://www.facebook.com/sharer.php?u=https://murfreesboro.com/license-plate-readers-public-safety-cameras-lead-to-arrests-in-murfreesboro-robbery/" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="https://x.com/intent/post?text=License%20plate%20readers%2C%20public%20safety%20cameras%20lead%20to%20arrests%20in%20Murfreesboro%20robbery&url=https://murfreesboro.com/license-plate-readers-public-safety-cameras-lead-to-arrests-in-murfreesboro-robbery/" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://murfreesboro.com/license-plate-readers-public-safety-cameras-lead-to-arrests-in-murfreesboro-robbery/&title=License%20plate%20readers%2C%20public%20safety%20cameras%20lead%20to%20arrests%20in%20Murfreesboro%20robbery" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://pinterest.com/pin/create/button/?url=https://murfreesboro.com/license-plate-readers-public-safety-cameras-lead-to-arrests-in-murfreesboro-robbery/&description=License%20plate%20readers%2C%20public%20safety%20cameras%20lead%20to%20arrests%20in%20Murfreesboro%20robbery&media=https://i0.wp.com/murfreesboro.com/wp-content/uploads/2026/04/License-plate-readers-public-safety-cameras-lead-to-arrests-in-Murfreesboro-robbery-1.jpeg?fit=1000%2C652&ssl=1" target="_blank"><i class="fab fa-pinterest"></i></a>
+        <a href="https://instagram.com/#" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://youtube.com/#?sub_confirmation=1" target="_blank"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Rutherford County Attorney</span>
+      <h1 class="hero-headline">Fighting for Rutherford County</h1>
+      <p class="hero-subheading">Solo-Practitioner Attorney that provides the one-on-one and personal attention each client deserves.</p>
+      <a href="tel:9430867086" class="hero-cta">Call Now <i class="fas fa-phone" style="font-size:10px;"></i></a>
+    </div>
+    <div class="hero-visual">
+      <img src="https://rfreezelaw.com/images/judicialbuilding1-min.png" alt="Rutherford County Judicial Building" class="hero-image">
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://storage.googleapis.com/revex-reputation-production/assets/google-icon.svg" alt="247" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://rfreezelaw.com/images/clocktower-min.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://rfreezelaw.com/images/slides1-min.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- About Section -->
+  <section class="about">
+    <div class="about-header">
+      <span class="about-label">Who is Ryan?</span>
+      <h2 class="about-title">Personal Attention Each Client Deserves</h2>
+    </div>
+    <p class="about-text">Solo-Practitioner Attorney that provides one-on-one and personal attention each client deserves. An excellent communicator with a friendly manner who helps take the stress out of complex legal matters. "I work with my clients to understand their goals and then achieve them. My clients know that my work is for—and about—them."</p>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://rfreezelaw.com/images/block-min.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://rfreezelaw.com/images/ryan3.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Gallery Section -->
+  <section class="gallery">
+    <div class="gallery-header">
+      <span class="gallery-label">Gallery</span>
+      <h2 class="gallery-title">Additional Images</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="https://rfreezelaw.com/images/icons/homeicon.png" alt="" class="gallery-image">
+      </div>
+      <div class="gallery-item">
+        <img src="https://rfreezelaw.com/images/icons/ryanicon.png" alt="" class="gallery-image">
+      </div>
+      <div class="gallery-item">
+        <img src="https://rfreezelaw.com/images/icons/lawicon.png" alt="" class="gallery-image">
+      </div>
+      <div class="gallery-item">
+        <img src="https://rfreezelaw.com/images/icons/testimonyicon.png" alt="" class="gallery-image">
+      </div>
+      <div class="gallery-item">
+        <img src="https://rfreezelaw.com/images/icons/faqicon.png" alt="" class="gallery-image">
+      </div>
+      <div class="gallery-item">
+        <img src="https://rfreezelaw.com/images/icons/estimateicon.png" alt="" class="gallery-image">
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Grid -->
+  <section class="services">
+    <div class="service-card">
+      <p class="service-label">Legal Service 01</p>
+      <h3 class="service-title">Family Law</h3>
+      <p class="service-description">Provides personalized attention for family and personal issues with case preparation sensitive to particular family dynamics, helping clients find long-lasting solutions to their legal problems.</p>
+    </div>
+    <div class="service-card">
+      <p class="service-label">Legal Service 02</p>
+      <h3 class="service-title">Divorce Lawyer</h3>
+      <p class="service-description">Help protect what is yours during the end of marriage, providing proper planning and legal guidance through complex divorce proceedings.</p>
+    </div>
+    <div class="service-card">
+      <p class="service-label">Legal Service 03</p>
+      <h3 class="service-title">Child Custody Cases</h3>
+      <p class="service-description">Handle child custody issues including parenting techniques, education disagreements, visitation disputes, and parenting plans.</p>
+    </div>
+    <div class="service-card">
+      <p class="service-label">Legal Service 04</p>
+      <h3 class="service-title">Criminal Defense Attorney</h3>
+      <p class="service-description">Dedicated and aggressive legal representation for criminal defense matters including misdemeanors and felonies.</p>
+    </div>
+    <div class="service-card">
+      <p class="service-label">Legal Service 05</p>
+      <h3 class="service-title">Probate & Estate Planning</h3>
+      <p class="service-description">Experienced trust, estate, and taxation services to preserve your legacy by crafting and administering estate plans that protect assets, provide security for family, and minimize taxes.</p>
+    </div>
+    <div class="service-card">
+      <p class="service-label">Legal Service 06</p>
+      <h3 class="service-title">Small Claims Court Cases</h3>
+      <p class="service-description">Handle claims where disputed amount is typically $25,000 or less, including nonpayment of loans, failure to perform work, landlord/tenant disputes, and breach of contract claims.</p>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://rfreezelaw.com/images/imgcriminal-min.png" alt="Best Murfreesboro Criminal Defense Lawyer" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://rfreezelaw.com/images/imgestate-min.png" alt="Murfreesboro Estate Planning Attorney" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://rfreezelaw.com/images/imgsmallclaims-min.png" alt="Lawyer for Murfreesboro Small Claims Court" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://rfreezelaw.com/images/icons/phoneicon.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://rfreezelaw.com/images/icons/messageicon.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Team Section -->
+  <section class="team">
+    <div class="team-header">
+      <span class="team-label">Attorney Profile</span>
+      <h2 class="team-title">Ryan Freeze</h2>
+    </div>
+    <div class="team-member">
+      <img src="https://rfreezelaw.com/images/ryanhomeabout-min.png" alt="Ryan A. Freeze Attorney" class="team-member-image">
+      <h3 class="team-member-name">Ryan Freeze</h3>
+      <p class="team-member-role">Attorney at Law</p>
+      <p class="team-member-bio">Solo-Practitioner Attorney that provides one-on-one and personal attention each client deserves. An excellent communicator with a friendly manner who helps take the stress out of complex legal matters.</p>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://rfreezelaw.com/images/scrolldown.gif" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://rfreezelaw.com/images/tristar.png" alt="Murfreesboro Tristar for Ryan Freeze Lawyer" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <div class="testimonials-header">
+      <span class="testimonials-label">Client Reviews</span>
+      <h2 class="testimonials-title">What Our Clients Say</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-text">Ryan was very patient and kind throughout the process. He answered any questions I had and I highly recommend him. He was extremely professional. Thanks Ryan!</p>
+        <p class="testimonial-author">— Heather Porter</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">Ryan was very honest & Professional. I couldn't have asked for better representation. Walked me through the entire process & handled all the groundwork & paperwork.</p>
+        <p class="testimonial-author">— Jerry Bullock</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">Ryan is extremely knowledgeable and is effective and efficient! Won't go wrong going with Ryan!</p>
+        <p class="testimonial-author">— Lakshmi Giroti</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">I can't recommend Ryan enough. He represented me in a child custody case and truly fought for what was best for my child. He never backed down, kept my child's best interests at the center of everything, and helped me stay clear and focused during such a stressful time. Because of his dedication and guidance, we were able to reach a reasonable agreement. I'm so grateful for his hard work and highly recommend him to anyone needing a strong and compassionate attorney.</p>
+        <p class="testimonial-author">— Alyson Mcclellan</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">Ryan did an excellent job representing me in the legal action I was a part of. He was timely and informative. I would recommend him to anyone in need of excellent legal counsel.</p>
+        <p class="testimonial-author">— James I</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">Ryan represented me in a custody action that took close to two years and eventual trial to remedy. Through all of that time, he was attentive and always returned calls or emails in a timely manner. His counsel was always well thought out and accurate.I'm very glad that I was led to Ryan for the legal action against me. I would be glad to use him in the future for any other legal needs.</p>
+        <p class="testimonial-author">— Kristopher Doyle</p>
+      </div>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://rfreezelaw.com/images/imgdivorce-min.png" alt="Murfreesboro Family Divorce Lawyer" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://rfreezelaw.com/images/icons/contacticon.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="stats-metrics">
+      <span class="stats-label">Client Rating</span>
+      <div>
+        <span class="stats-number">4.90</span>
+      </div>
+      <p class="stats-description">Average customer rating based on client reviews and testimonials from satisfied customers.</p>
+    </div>
+    <div class="contact-info">
+      <h3 class="contact-title">Contact Information</h3>
+      <div class="contact-details">
+        <div class="contact-item">
+          <span class="contact-item-label">Phone</span>
+          <div class="contact-item-value">
+            <a href="tel:9430867086">943.086.7086</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">Office Location</span>
+          <div class="contact-item-value">
+            <a href="https://www.google.com/maps/dir/Current+Location/6+north+public+square+Murfreesboro+TN+37130">6 N Public Square, Murfreesboro, TN 37130</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-label">Reviews</span>
+          <div class="contact-item-value">42 client reviews</div>
+        </div>
+      </div>
+      <iframe src="https://www.google.com/maps/dir/Current+Location/6+north+public+square+Murfreesboro+TN+37130" width="100%" height="300" style="border:0;margin-top:var(--space-lg);border-radius:8px;" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Ryan A. Freeze Attorney at Law</span>
+      <span class="footer-copyright">© 2024 Ryan A. Freeze Attorney at Law Systems, Inc. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://rfreezelaw.com/about">About Ryan</a>
+      <a href="https://rfreezelaw.com/services">Legal Services</a>
+      <a href="https://rfreezelaw.com/contact">Contact</a>
+      <a href="https://rfreezelaw.com/faq">F.A.Q.</a>
+  </div>
+  </footer>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
