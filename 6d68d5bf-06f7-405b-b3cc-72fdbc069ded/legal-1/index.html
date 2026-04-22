@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tennessee Law Group</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Tennessee Law Group Section */
+.tennessee-law-group {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.tennessee-law-group-title {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+/* Professional Legal Advice Section */
+.professional-legal-advice {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.professional-legal-advice-title {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.professional-legal-advice-text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.professional-legal-advice-text a {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.professional-legal-advice-text a:hover {
+  color: var(--text-muted);
+}
+
+/* Welcome Section */
+.welcome {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.welcome-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.welcome-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.welcome-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 600px;
+}
+
+.welcome-image {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 12px;
+  margin-top: var(--space-lg);
+}
+
+/* Our Practice Areas Section */
+.our-practice-areas {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.our-practice-areas-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+/* Services Grid */
+.services {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.services-header {
+  padding: var(--space-xl) var(--space-lg) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.services-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-md);
+}
+
+.services-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  font-style: italic;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.service-card {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+}
+
+.service-card:last-child {
+  border-bottom: none;
+}
+
+.service-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.service-title {
+  font-family: var(--font-serif);
+  font-size: clamp(20px, 3vw, 24px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.service-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* Testimonials Section */
+.testimonials {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.testimonials-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.testimonials-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xl);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.testimonial-card {
+  padding: var(--space-lg);
+  background: var(--bg-card);
+  border-radius: 12px;
+  border: 1px solid var(--border-light);
+}
+
+.testimonial-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+  font-style: italic;
+}
+
+.testimonial-author {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-align: right;
+}
+
+/* Trust Section */
+.trust {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.trust-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.trust-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.trust-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: var(--space-xl);
+  max-width: 600px;
+}
+
+.trust-principles {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.trust-principle {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-primary);
+  padding-left: var(--space-lg);
+  position: relative;
+}
+
+.trust-principle:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+}
+
+/* Contact Section */
+.contact {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  text-align: center;
+}
+
+.contact-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.contact-title {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.contact-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.contact-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+.contact-info {
+  margin-top: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.contact-detail {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-muted);
+}
+
+.contact-detail a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-detail a:hover {
+  color: var(--text-muted);
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== MOBILE (max-width: 768px) =================== */
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .hero-headline {
+    font-size: clamp(28px, 8vw, 36px);
+  }
+
+  .tennessee-law-group {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .professional-legal-advice {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .welcome {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .our-practice-areas {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .services-header {
+    padding: var(--space-lg) var(--space-md) var(--space-md);
+  }
+
+  .service-card {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .testimonials {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .trust {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .contact {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .footer {
+    padding: var(--space-lg) var(--space-md);
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+    gap: var(--space-2xl);
+  }
+
+  .hero-text {
+    flex: 1;
+  }
+
+  .welcome {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-2xl);
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .welcome-content {
+    flex: 1;
+  }
+
+  .welcome-image {
+    flex: 0.8;
+    margin-top: 0;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-card {
+    border-right: 1px solid var(--border-color);
+  }
+
+  .service-card:nth-child(even) {
+    border-right: none;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-principles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+  }
+
+  .contact-info {
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--space-xl);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .tennessee-law-group {
+    padding: var(--space-2xl) var(--space-2xl);
+  }
+
+  .professional-legal-advice {
+    padding: var(--space-2xl) var(--space-2xl);
+  }
+
+  .welcome {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .our-practice-areas {
+    padding: var(--space-2xl) var(--space-2xl);
+  }
+
+  .services-header {
+    padding: var(--space-2xl) var(--space-2xl) var(--space-lg);
+  }
+
+  .service-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .testimonials {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .trust {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .contact {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">Tennessee Law Group</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">Tennessee Law Group</span>
+    </a>
+    <nav>
+      <a href="https://mylawyertennessee.com/">HOME</a>
+      <a href="https://mylawyertennessee.com/meet-our-team/">MEET OUR TEAM</a>
+      <a href="https://mylawyertennessee.com/areas-of-practice/">AREAS OF PRACTICE</a>
+      <a href="https://mylawyertennessee.com/contact/">CONTACT</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Serving Tennessee</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Available 24/7</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Legal Services in Tennessee</span>
+      <h1 class="hero-headline">Professional Legal Advice</h1>
+      <p class="hero-subheading">Tennessee Law Group is a client-focused law association dedicated to serving our clientele throughout Tennessee with the most aggressive advocacy available.</p>
+      <a href="mailto:office@mylawyertennessee.com" class="hero-cta">Contact Us <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://mylawyertennessee.com/wp-content/plugins/gtranslate/flags/svg/en-us.svg" alt="en" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Tennessee Law Group Section -->
+  <section class="tennessee-law-group">
+    <h1 class="tennessee-law-group-title">TennesseeLawGroup</h1>
+  </section>
+
+  <!-- Professional Legal Advice Section -->
+  <section class="professional-legal-advice">
+    <h1 class="professional-legal-advice-title">ProfessionalLegalAdvice</h1>
+    <p class="professional-legal-advice-text">Sí, hablamos español. <a href="mailto:office@mylawyertennessee.com">Contáctanos.</a></p>
+  </section>
+
+  <!-- Welcome Section -->
+  <section class="welcome">
+    <div class="welcome-content">
+      <span class="welcome-label">About Our Firm</span>
+      <h2 class="welcome-title">WELCOME TO TENNESSEE LAW GROUP</h2>
+      <p class="welcome-description">Tennessee Law Group is a client-focused law association dedicated to serving our clientele throughout Tennessee with the most aggressive advocacy available.</p>
+    </div>
+    <img src="https://mylawyertennessee.com/wp-content/uploads/2025/12/home-row-photos.jpg" alt="Tennessee Law Group" class="welcome-image">
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://mylawyertennessee.com/wp-content/uploads/2025/12/tnlawgroup100.webp" alt="Tennessee Law Group" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Our Practice Areas Section -->
+  <section class="our-practice-areas">
+    <h2 class="our-practice-areas-title">Our Practice Areas</h2>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services">
+    <div class="services-header">
+      <span class="services-label">What We Do</span>
+      <h2 class="services-title">Our Practice Areas</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <h3 class="service-title">IMMIGRATION LAW</h3>
+        <p class="service-description">Today's complex federal immigration system requires knowledgeable counsel to guide individuals and families through every stage of the process. Tennessee Law Group provides immigration law services, representing clients before immigration courts and federal agencies in matters including: Family-Based Immigration – Adjustment of Status – Asylum – Deportation Defense – Naturalization & Citizenship – Visas & Waivers.</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-title">CRIMINAL LAW</h3>
+        <p class="service-description">Nothing in the law is more important than your freedom. Please contact us as soon as you or someone you love is under investigation or charged with a crime. Never comment on any aspect of a charge until you have the opportunity to consult a lawyer. Criminal offenses include: DUI – Drug Offenses – Domestic Assault – Assault & Battery – Theft.</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-title">FAMILY LAW</h3>
+        <p class="service-description">Family Law is a term that encompasses most legal issues surrounding families. These issues include: Marriage – Divorce – Adoption – Termination of Parental Rights – Child Advocacy – Child support – Child custody</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-title">PERSONAL INJURY LAW</h3>
+        <p class="service-description">The field of tort law is a major area of law that encompasses a civil wrong, intentional or accidental involving: Automobile Accidents – Civil Rights – Wrongful Death – Governmental Tort Liability – Medical Malpractice</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <span class="testimonials-label">Client Reviews</span>
+    <h2 class="testimonials-title">What Our Clients Say</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-text">[Spanish](https://mylawyertennessee.com/# ...</p>
+        <p class="testimonial-author">— Reviewer 1</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">[Russian](https://mylawyertennessee.com/# ...</p>
+        <p class="testimonial-author">— Reviewer 2</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">[Arabic](https://mylawyertennessee.com/# ...</p>
+        <p class="testimonial-author">— Reviewer 3</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">[Ukrainian](https://mylawyertennessee.com/# ...</p>
+        <p class="testimonial-author">— Hit</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">[French](https://mylawyertennessee.com/# ...</p>
+        <p class="testimonial-author">— Hit</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Section -->
+  <section class="trust">
+    <span class="trust-label">Our Values</span>
+    <h2 class="trust-title">ALL ABOUT TRUST</h2>
+    <p class="trust-description">* * *</p>
+    <p class="trust-description">At Tennessee Law Group, we strive to address all of our clients' legal needs. Our focus is to provide competent representation for our friends and neighbors at fair, reasonable and competitive prices. Our goal is to make our community better by helping others work through their problems in a respectable manner. We accomplish that through dedication, open-mindedness, and hard work.</p>
+    <div class="trust-principles">
+      <div class="trust-principle">All people are equal before the law.</div>
+      <div class="trust-principle">A good attorney is what makes the difference.</div>
+      <div class="trust-principle">Serving all Areas of Greater Tennessee.</div>
+      <div class="trust-principle">We are available to help you.</div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact">
+    <span class="contact-label">Get in Touch</span>
+    <h2 class="contact-title">Do you need legal advice? / Necesitas asesoramiento legal?</h2>
+    <a href="mailto:office@mylawyertennessee.com" class="contact-cta">Contact Us <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+    
+    <div class="contact-info">
+      <div class="contact-detail">
+        <strong>Phone:</strong> <a href="tel:615-742-5373">615-742-5373</a>
+      </div>
+      <div class="contact-detail">
+        <strong>Email:</strong> <a href="mailto:office@mylawyertennessee.com">office@mylawyertennessee.com</a>
+      </div>
+      <div class="contact-detail">
+        <strong>Address:</strong> 1300 Division Street, Ste 102<br>Nashville, TN 37203
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Tennessee Law Group</span>
+      <span class="footer-copyright">© 2024 Tennessee Law Group Systems, Inc. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://mylawyertennessee.com/">HOME</a>
+      <a href="https://mylawyertennessee.com/meet-our-team/">MEET OUR TEAM</a>
+      <a href="https://mylawyertennessee.com/areas-of-practice/">AREAS OF PRACTICE</a>
+      <a href="https://mylawyertennessee.com/contact/">CONTACT</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
