@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paraiso</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Alert Banner */
+.alert-banner {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+  padding: var(--space-sm) var(--pad-x);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  margin-top: 80px;
+}
+
+.alert-banner a {
+  text-decoration: underline;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://img1.wsimg.com/isteam/ip/b96631fa-0c5d-42e3-9e8d-4a20f246c936/Palm%20Tree%20Ad.png/:/cr=t:2.83%25,l:2.83%25,w:94.34%25,h:94.34%25/rs=w:1240,cg:true,m');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(244, 240, 234, 0.7);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Philosophy Section */
+.philosophy {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.philosophy-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.philosophy-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.philosophy-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  border: 1px solid var(--border-black);
+}
+
+.service-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.service-cell:last-child {
+  border-bottom: none;
+}
+
+.service-name {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+}
+
+.service-description {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--placeholder-gray);
+}
+
+/* Knowledge Section */
+.knowledge {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.knowledge-header {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.knowledge-title {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.knowledge-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-md);
+}
+
+.knowledge-item {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border: 1px solid var(--border-black);
+}
+
+.knowledge-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.knowledge-item:hover img {
+  filter: grayscale(0%);
+  transform: scale(1.05);
+}
+
+/* Plans Section */
+.plans {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.plans-header {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.plans-title {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.plans-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.plan-card {
+  border: 1px solid var(--border-black);
+  padding: var(--space-lg);
+  text-align: center;
+}
+
+.plan-name {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.plan-description {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Team Section */
+.team {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.team-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.team-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.member-name {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.member-role {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: var(--placeholder-gray);
+}
+
+.member-bio {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Testimonials Section */
+.testimonials {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.testimonials-header {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.testimonials-title {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.testimonials-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.testimonial {
+  border: 1px solid var(--border-black);
+  padding: var(--space-lg);
+}
+
+.testimonial-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: var(--space-md);
+  font-style: italic;
+}
+
+.testimonial-author {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* Partners Section */
+.partners {
+  padding: var(--space-lg) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.partners-title {
+  text-align: center;
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.5rem;
+  margin-bottom: var(--space-lg);
+}
+
+.partners-grid {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.partner-logo {
+  height: 60px;
+  width: auto;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
+.partner-logo:hover {
+  filter: grayscale(0%);
+}
+
+/* Contact Section */
+.contact {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-title {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.contact-phone {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
+  display: inline-block;
+  border: 1px solid var(--border-black);
+  padding: var(--space-sm) var(--space-md);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-bottom: var(--space-md);
+}
+
+.contact-phone:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+.contact-email {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
+  display: inline-block;
+  border: 1px solid var(--border-black);
+  padding: var(--space-sm) var(--space-md);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-bottom: var(--space-md);
+}
+
+.contact-email:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+.social-links {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: var(--space-lg);
+}
+
+.social-link {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  border: 1px solid var(--border-black);
+  padding: var(--space-sm) var(--space-md);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.social-link:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Newsletter Section */
+.newsletter {
+  padding: var(--space-lg) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.newsletter-inner {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.newsletter-title {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+.newsletter-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-lg);
+}
+
+.newsletter-form {
+  display: flex;
+  gap: var(--space-sm);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.newsletter-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1rem;
+  padding: var(--space-sm) 0;
+  color: var(--text-black);
+  outline: none;
+}
+
+.newsletter-input::placeholder {
+  color: var(--placeholder-gray);
+  font-style: italic;
+}
+
+.newsletter-submit {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.newsletter-submit:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1rem;
+    --space-xl: 3rem;
+    --space-lg: 2rem;
+  }
+
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+    background-attachment: scroll;
+  }
+
+  .hero-headline {
+    font-size: clamp(1.8rem, 10vw, 2.5rem);
+  }
+
+  .nav-links {
+    gap: var(--space-sm);
+  }
+
+  .nav-links a {
+    font-size: 0.6rem;
+  }
+
+  .philosophy {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-md) var(--pad-x);
+  }
+
+  .knowledge-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .knowledge-item {
+    aspect-ratio: 16/9;
+  }
+
+  .plans-grid {
+    gap: var(--space-sm);
+  }
+
+  .plan-card {
+    padding: var(--space-md);
+  }
+
+  .team {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .testimonials {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .testimonial {
+    padding: var(--space-md);
+  }
+
+  .contact {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .contact-phone,
+  .contact-email {
+    font-size: 1rem;
+    margin-bottom: var(--space-sm);
+    display: block;
+  }
+
+  .social-links {
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+  }
+
+  .social-link {
+    font-size: 0.6rem;
+    padding: var(--space-xs) var(--space-sm);
+  }
+
+  .newsletter-form {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .newsletter-input {
+    font-size: 0.9rem;
+  }
+
+  .partners-grid {
+    gap: var(--space-md);
+  }
+
+  .partner-logo {
+    height: 40px;
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .philosophy-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-cell {
+    border-right: 1px solid var(--border-black);
+    border-bottom: none;
+  }
+
+  .service-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .service-cell:nth-child(1),
+  .service-cell:nth-child(2),
+  .service-cell:nth-child(3),
+  .service-cell:nth-child(4),
+  .service-cell:nth-child(5),
+  .service-cell:nth-child(6),
+  .service-cell:nth-child(7),
+  .service-cell:nth-child(8),
+  .service-cell:nth-child(9) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .plans-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .team-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+    align-items: start;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .newsletter-form {
+    flex-direction: row;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .philosophy {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <a href="/" class="nav-logo">paraiso</a>
+  <ul class="nav-links">
+    <li><a href="https://paraisoinc.com/m/account">sign in</a></li>
+    <li><a href="https://paraisoinc.com/m/create-account">create account</a></li>
+    <li><a href="https://paraisoinc.com/m/account">my account</a></li>
+  </ul>
+</nav>
+
+<!-- Alert Banner -->
+<div class="alert-banner">
+  SPA Paraiso relocating to South Austin! <a href="tel:2109292839">(210)-929-2839</a> - <a href="#contact">More INFO</a>
+</div>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">Welcome to Paradise</h1>
+    <p class="hero-subtitle">001 — where self-care is healthcare. The future of healthcare is holistic!</p>
+  </div>
+</section>
+
+<!-- Philosophy Section -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">002 — approach</span>
+    <div class="philosophy-text">
+      <p>Paraiso, founded in 2020, envisions a pioneering Holistic Healthcare System. The visionary behind this endeavor is Master Clint L. Colbert IV, who boasts over a decade of professional practice in holistic healthcare. Through his extensive professional background and personal encounters with holistic therapies, he has gained profound insights into the holistic healing process.</p>
+      <p>Paraiso is a dedicated expert in comprehensive holistic healthcare. We specialize in rectifying improper motor movements to optimize health and well-being. Our mission is to introduce an autonomous Holistic Healthcare System known as Holistcare, designed to amplify the body's innate healing potential.</p>
+      <p>At Paraiso, we pride ourselves on being at the forefront of whole-body health, and our commitment is to transform your experience of living in your own body into a paradise in Buda!</p>
+    </div>
+  </div>
+</section>
+
+<!-- Services Grid -->
+<section class="services" id="services">
+  <div class="services-grid">
+    <div class="service-cell">
+      <div class="service-name">SPA</div>
+      <div class="service-description">Spa services and treatments</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Holistcare</div>
+      <div class="service-description">Autonomous Holistic Healthcare System designed to amplify the body's innate healing potential</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Erbalceuticals</div>
+      <div class="service-description">Herbal-based healthcare products</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Restoration System</div>
+      <div class="service-description">Self-care restoration techniques</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Upper Body Stretches</div>
+      <div class="service-description">Targeted stretching for upper body</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Mid Body Stretches</div>
+      <div class="service-description">Targeted stretching for mid body</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Lower Body Stretches</div>
+      <div class="service-description">Targeted stretching for lower body</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Lifestyle Chair Massage</div>
+      <div class="service-description">Quick chair massage sessions with full body rejuvenation</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Deep Tissue Massage</div>
+      <div class="service-description">Therapeutic massage for muscle tension and knots</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Systemic Physio Amelioration</div>
+      <div class="service-description">Groundbreaking technique for correcting improper motor movements</div>
+    </div>
+  </div>
+</section>
+
+<!-- Healthcare Plans Section -->
+<section class="plans" id="plans">
+  <div class="plans-header">
+    <h2 class="plans-title">NEED A HEALTHCARE PLAN THAT WORKS!</h2>
+  </div>
+  <div class="plans-grid">
+    <div class="plan-card">
+      <div class="plan-name">Starter Plan</div>
+      <div class="plan-description">New to holistic healing and the benefits of it all</div>
+    </div>
+    <div class="plan-card">
+      <div class="plan-name">Most Popular</div>
+      <div class="plan-description">Looking for a place to call Paradise but not sure</div>
+    </div>
+    <div class="plan-card">
+      <div class="plan-name">Best Value</div>
+      <div class="plan-description">This is what you're spirit has been searching for</div>
+    </div>
+  </div>
+</section>
+
+<!-- Knowledge Section -->
+<section class="knowledge" id="knowledge">
+  <div class="knowledge-header">
+    <h2 class="knowledge-title">KNOWLEDGE TO KNOW</h2>
+  </div>
+  <div class="knowledge-grid">
+    <div class="knowledge-item">
+      <img src="https://img1.wsimg.com/isteam/ip/b96631fa-0c5d-42e3-9e8d-4a20f246c936/Dark%20chocolate%20benefits.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25" alt="Dark chocolate benefits">
+    </div>
+    <div class="knowledge-item">
+      <img src="https://img1.wsimg.com/isteam/ip/b96631fa-0c5d-42e3-9e8d-4a20f246c936/Reflexology%20Benefits.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25" alt="Reflexology benefits">
+    </div>
+    <div class="knowledge-item">
+      <img src="https://img1.wsimg.com/isteam/ip/b96631fa-0c5d-42e3-9e8d-4a20f246c936/Wine%20Benefits-0001.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25" alt="Wine benefits">
+    </div>
+  </div>
+</section>
+
+<!-- Team Section -->
+<section class="team" id="team">
+  <div class="team-inner">
+    <span class="team-label">003 — founder</span>
+    <div class="team-member">
+      <div class="member-name">Clint Colbert</div>
+      <div class="member-role">Master/Founder</div>
+      <div class="member-bio">Master Clint L. Colbert IV boasts over a decade of professional practice in holistic healthcare and founded Paraiso in 2020 with a vision for a pioneering Holistic Healthcare System.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials" id="testimonials">
+  <div class="testimonials-header">
+    <h2 class="testimonials-title">THE PALM-TENTIAL OF IT ALL!</h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial">
+      <div class="testimonial-text">SPA Paraiso has made such a difference in my health and well-being. Clint is professional and thorough and has helped me meet many physical goals. A year ago, I couldn't raise my arm as I held it straight out in front of me. Hadn't been able to in 7 years. Within a few sessions, I had my range of motion back and virtually no pain. I have always worked a very physical job and it had taken a toll on my body. I am continually amazed at how my flexibility improves each time. SPA Paraiso's focus is on whole-body health, and they strive to work with you to help you reach your goals. The space is welcoming and tranquil. Clint is friendly and communicates well, so you always know why a certain therapy is going to be helpful! Cannot say enough about my fabulous experiences at Spa Paraíso!!</div>
+      <div class="testimonial-author">Melinda Waide, Austin, Texas</div>
+    </div>
+    <div class="testimonial">
+      <div class="testimonial-text">Today was the first time I had a massage at Spa Paraiso. after having the same masseuse for the last four years, I must say I was very satisfied. clint was very KNOWLEDGEABLE and understanding of my needs. he was able to work all my troubled spots, with the exact pressure I like. the WORKMANSHIP spa Paraiso provides is SUPERB! I've found a new masseuse and Spa! EVERYONE needs to EXPERIENCE clint's TALENT. thank you clint see you in 2 weeks</div>
+      <div class="testimonial-author">Jamie Bishop, Wimberley, Texas</div>
+    </div>
+  </div>
+</section>
+
+<!-- Partners Section -->
+<section class="partners">
+  <h3 class="partners-title">Partners</h3>
+  <div class="partners-grid">
+    <img src="https://img1.wsimg.com/isteam/ip/b96631fa-0c5d-42e3-9e8d-4a20f246c936/download%20(1).jpg/:/rs=h:100,cg:true,m" alt="Partner" class="partner-logo">
+    <img src="https://img1.wsimg.com/isteam/ip/b96631fa-0c5d-42e3-9e8d-4a20f246c936/ClassPass-circle-blue.png/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=h:100,cg:true" alt="ClassPass" class="partner-logo">
+    <img src="https://img1.wsimg.com/isteam/ip/b96631fa-0c5d-42e3-9e8d-4a20f246c936/thervo-2021.png/:/rs=h:100,cg:true,m" alt="Thervo" class="partner-logo">
+  </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="newsletter">
+  <div class="newsletter-inner">
+    <h2 class="newsletter-title">Subscribe Now</h2>
+    <p class="newsletter-subtitle">Simply just healthcare, no ultimatum</p>
+    <form class="newsletter-form" onsubmit="event.preventDefault();">
+      <input type="email" class="newsletter-input" placeholder="enter email">
+      <button type="submit" class="newsletter-submit">join</button>
+    </form>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-title">Contact Paradise</h2>
+    <a href="tel:2109292839" class="contact-phone">(210) 929-2839</a>
+    <a href="tel:10142383851" class="contact-phone">(014) 238-3851</a>
+    <a href="mailto:filler@godaddy.com" class="contact-email">filler@godaddy.com</a>
+    
+    <div class="social-links">
+      <a href="https://www.facebook.com/101423838514445" class="social-link" target="_blank">facebook</a>
+      <a href="https://www.instagram.com/paraisogroupcompany" class="social-link" target="_blank">instagram</a>
+      <a href="https://www.linkedin.com/in/clint-colbert-3046871ab" class="social-link" target="_blank">linkedin</a>
+      <a href="https://www.x.com/LlcParaiso" class="social-link" target="_blank">twitter</a>
+      <a href="https://www.yelp.com/biz/TULCW0qkobJTHSa5T7D7ZQ" class="social-link" target="_blank">yelp</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-left">© 2024 Paraiso</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
