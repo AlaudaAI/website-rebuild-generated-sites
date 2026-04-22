@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pate & Knott</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Hero visual */
+.hero-visual {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-visual img {
+  width: 100%;
+  height: auto;
+  max-width: 120px;
+}
+
+/* Why Hire Us Section */
+.why-hire-us {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.why-hire-us-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-lg);
+}
+
+.why-hire-us-content {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.why-hire-us-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.why-hire-us-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.why-hire-us-points {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  margin-top: var(--space-lg);
+}
+
+.point {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.point-title {
+  font-family: var(--font-serif);
+  font-size: clamp(18px, 3vw, 22px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.point-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* About section */
+.about {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.about-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-lg);
+}
+
+.about-content {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.about-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.about-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Team Section */
+.team {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.team-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-lg);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2xl);
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.team-member-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  object-fit: cover;
+}
+
+.team-member-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.team-member-name {
+  font-family: var(--font-serif);
+  font-size: clamp(20px, 3vw, 24px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.team-member-role {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.team-member-bio {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 500px;
+}
+
+/* Services Grid */
+.services {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.services-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-lg);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
+}
+
+.service-item {
+  padding: var(--space-md);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-card);
+  transition: background-color 0.3s ease;
+}
+
+.service-item:hover {
+  background-color: var(--bg-hover);
+}
+
+.service-name {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+/* Responsive Section */
+.responsive {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.responsive-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-lg);
+}
+
+.responsive-content {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.responsive-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.responsive-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* Stats Section */
+.stats-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.stats-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-lg);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.stat-number {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.stat-label {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-muted);
+}
+
+/* Contact Section */
+.contact {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.contact-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-lg);
+}
+
+.contact-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.contact-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(20px, 3vw, 24px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.contact-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 500px;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.contact-item {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.contact-item a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+  color: var(--text-muted);
+}
+
+/* Office Location Section */
+.office-location {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.office-location-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-lg);
+}
+
+.office-location-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.office-location-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(20px, 3vw, 24px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.office-location-address {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== MOBILE (max-width: 768px) =================== */
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-lg) var(--space-md);
+    gap: var(--space-lg);
+  }
+
+  .hero-headline {
+    font-size: clamp(28px, 6vw, 36px);
+  }
+
+  .about {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .team {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .services {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .stats-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .contact {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .footer {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .why-hire-us {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .responsive {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .office-location {
+    padding: var(--space-lg) var(--space-md);
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .about {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .team {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .services {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .stats-section {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .contact {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  .why-hire-us {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .responsive {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .office-location {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="#" class="brand">
+    <div class="globe-icon"><i class="fas fa-balance-scale"></i></div>
+    <span class="brand-name">Pate & Knott</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="#" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-balance-scale"></i></div>
+      <span class="brand-name">Pate & Knott</span>
+    </a>
+    <nav>
+      <a href="https://www.pateandknottlawfirm.com/home">Home</a>
+      <a href="https://www.pateandknottlawfirm.com/about/attorneys">Attorneys</a>
+      <a href="https://www.pateandknottlawfirm.com/practice-areas.html">Practice Areas</a>
+      <a href="https://www.pateandknottlawfirm.com/contact-us">Contact</a>
+    </nav>
+    <div style="margin-top: var(--space-2xl);">
+      <span class="team-label">Menu</span>
+      <nav style="margin-top: var(--space-md);">
+        <a href="https://www.pateandknottlawfirm.com/home">Home</a>
+        <a href="https://www.pateandknottlawfirm.com/about/attorneys">Attorneys</a>
+        <a href="https://www.pateandknottlawfirm.com/practice-areas.html">Practice Areas</a>
+        <a href="https://www.pateandknottlawfirm.com/family-mediation.html">Family Mediation</a>
+        <a href="https://www.pateandknottlawfirm.com/frequent-questions.html">FAQs</a>
+        <a href="https://www.pateandknottlawfirm.com/case-results">Case Results</a>
+        <a href="https://www.pateandknottlawfirm.com/resources">Resources</a>
+        <a href="https://www.pateandknottlawfirm.com/blog">Blog</a>
+        <a href="https://www.pateandknottlawfirm.com/contact-us">Contact</a>
+      </nav>
+    </div>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Available 24/7</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Free Consultation</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Dedicated Professional Attorneys</span>
+      <h1 class="hero-headline">IN PARTNERSHIP WITH YOU FOR SUCCESS</h1>
+      <p class="hero-subheading">With more than 50 years of combined legal experience, the attorneys at Pate & Knott focus on a broad range of legal specialties to provide comprehensive legal services to the local community.</p>
+      <a href="tel:(615) 848-1221" class="hero-cta">Call (615) 848-1221 <i class="fas fa-phone" style="font-size:10px;"></i></a>
+    </div>
+    <div class="hero-visual">
+      <img src="https://cdn.lawlytics.com/law-media/uploads/667/39571/original/family-ico.png?1497898131" alt="Legal Services">
+    </div>
+  </section>
+
+  <!-- Legal Service Icons -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 1rem; padding: 2rem; border-bottom: 1px solid var(--border-color);">
+    <img src="https://cdn.lawlytics.com/law-media/uploads/667/39570/original/personal-ico.png?1497897640" alt="PERSONAL INJURY Icon" style="width:100%;max-width:120px;height:auto;justify-self:center">
+    <img src="https://cdn.lawlytics.com/law-media/uploads/667/39569/original/criminal-ico.png?1497897638" alt="CRIMINAL LAW Icon" style="width:100%;max-width:120px;height:auto;justify-self:center">
+    <img src="https://cdn.lawlytics.com/law-media/uploads/667/39568/original/mediation-ico.png?1497897637" alt="MEDIATION Icon" style="width:100%;max-width:120px;height:auto;justify-self:center">
+    <img src="https://cdn.lawlytics.com/law-media/uploads/667/40782/original/juvenile.png?1500570710" alt="JUVENILE LAW Icon" style="width:100%;max-width:120px;height:auto;justify-self:center">
+  </div>
+
+  <!-- Why Hire Us Section -->
+  <section class="why-hire-us">
+    <span class="why-hire-us-label">Our Strengths</span>
+    <div class="why-hire-us-content">
+      <h2 class="why-hire-us-headline">WHY HIRE THE LAW FIRM OF PATE & KNOTT?</h2>
+      <div class="why-hire-us-text">
+        <p>When you are facing a legal challenge, turn to Pate & Knott for steadfast legal representation when you need it most. At the law firm of Pate & Knott, we have been serving clients throughout Tennessee since 1979. What sets our firm apart and makes us the ideal choice for all your legal needs is our relentless focus on the fundamentals of a traditional, trusted law firm. Our strengths include:</p>
+      </div>
+      <div class="why-hire-us-points">
+        <div class="point">
+          <h3 class="point-title">Focused Experience</h3>
+          <p class="point-text">We have more than 50 years of combined experience in a number of practice areas, with a primary focus on family law. Our years of experience handling hundreds of cases provides us with a depth and breadth of knowledge and case success that is invaluable. We have a long history of effectively guiding clients through the complex legal system, developing reliable strategies and resolving their legal challenges along the way.</p>
+        </div>
+        <div class="point">
+          <h3 class="point-title">Solid Reputation</h3>
+          <p class="point-text">We enjoy a reputation for success throughout our community and throughout Tennessee. Every member of the team strives to develop long-lasting relationships with clients, becoming their go-to source for reliable legal counsel, no matter what the need may be. We are proud to have a strong base of client referrals and consider it the highest form of praise.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about">
+    <span class="about-label">About Our Firm</span>
+    <div class="about-content">
+      <h2 class="about-headline">MURFREESBORO FAMILY LAW, CRIMINAL DEFENSE & PERSONAL INJURY ATTORNEYS</h2>
+      <div class="about-text">
+        <p>With more than 50 years of combined legal experience, the attorneys at Pate & Knott focus on a broad range of legal specialties in order to provide comprehensive legal services to the local community. From family law matters including divorce, child custody and paternity actions to child support and adoption, our team handles all your family law needs with compassion.</p>
+        <p>We also handle personal injury cases, representing victims injured in auto, truck or motorcycle accidents, or injury caused by third party's negligence. Our firm also provides strong criminal defense strategies, successfully representing clients facing all types of criminal charges, including DUI, drug possession or trafficking, theft and probation violations.</p>
+        <p>At Pate & Knott, we know the need to hire an attorney usually arises out of an unexpected crisis or accident. You need an attorney you can trust, who will compassionately listen and firmly represent you through the challenges you face, whether it's a family dispute, criminal defense matter or a personal injury claim.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team">
+    <span class="team-label">Meet the Partners</span>
+    <div class="team-grid">
+      <div class="team-member">
+        <img src="https://cdn.lawlytics.com/law-media/uploads/667/42055/original/steve-pate-round.png" alt="Stephen Pate" class="team-member-photo">
+        <div class="team-member-info">
+          <h3 class="team-member-name">Stephen Pate</h3>
+          <p class="team-member-role">Senior Partner</p>
+          <p class="team-member-bio">Mr. Pate is the senior partner of Pate and Knott, Attorneys at Law, and has been engaged in the practice of law since 1979. His practice is focused in the areas of domestic litigation, including divorces, child custody, child support, paternity actions, and civil litigation, personal injury cases, criminal law, and juvenile law.</p>
+        </div>
+      </div>
+      <div class="team-member">
+        <img src="https://cdn.lawlytics.com/law-media/uploads/667/40778/original/knott-round.png" alt="Heather Knott" class="team-member-photo">
+        <div class="team-member-info">
+          <h3 class="team-member-name">Heather Knott</h3>
+          <p class="team-member-role">Managing Partner</p>
+          <p class="team-member-bio">Ms. Knott is the managing partner of Pate and Knott, Attorneys at Law, and has been engaged in the practice of law since 2003. Her practice is focused in domestic litigation, including divorces, child custody, child support, paternity actions, civil litigation, and personal injury cases, and mediation.</p>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:2rem;">
+      <img src="https://cdn.lawlytics.com/law-media/uploads/667/42986/original/pate-knott-compressor.jpg?1505317787" alt="Pate & Knott Team" style="width:100%;max-width:500px;height:auto;object-fit:cover;border-radius:8px">
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services">
+    <span class="services-label">Practice Areas</span>
+    <div class="services-grid">
+      <div class="service-item"><span class="service-name">Divorce</span></div>
+      <div class="service-item"><span class="service-name">Child Custody & Visitation</span></div>
+      <div class="service-item"><span class="service-name">Child Support</span></div>
+      <div class="service-item"><span class="service-name">Alimony & Spousal Support</span></div>
+      <div class="service-item"><span class="service-name">Paternity</span></div>
+      <div class="service-item"><span class="service-name">Father's Rights</span></div>
+      <div class="service-item"><span class="service-name">Adoption</span></div>
+      <div class="service-item"><span class="service-name">Grandparents' Rights</span></div>
+      <div class="service-item"><span class="service-name">DUI Defense</span></div>
+      <div class="service-item"><span class="service-name">Drug Crimes</span></div>
+      <div class="service-item"><span class="service-name">Domestic Violence</span></div>
+      <div class="service-item"><span class="service-name">Probation Violations</span></div>
+      <div class="service-item"><span class="service-name">Sex Crimes</span></div>
+      <div class="service-item"><span class="service-name">Theft & Robbery</span></div>
+      <div class="service-item"><span class="service-name">Car Accidents</span></div>
+      <div class="service-item"><span class="service-name">Motorcycle Accidents</span></div>
+      <div class="service-item"><span class="service-name">Truck Accidents</span></div>
+      <div class="service-item"><span class="service-name">Slip and Fall</span></div>
+      <div class="service-item"><span class="service-name">Premises Liability</span></div>
+      <div class="service-item"><span class="service-name">Wrongful Death</span></div>
+      <div class="service-item"><span class="service-name">Family Mediation</span></div>
+      <div class="service-item"><span class="service-name">Juvenile Law</span></div>
+    </div>
+  </section>
+
+  <!-- Responsive and Attentive Section -->
+  <section class="responsive">
+    <span class="responsive-label">Client Service</span>
+    <div class="responsive-content">
+      <h2 class="responsive-headline">Responsive and Attentive</h2>
+      <p class="responsive-text">Our responsiveness to client needs is unsurpassed. We have the knowledge and resources to respond to your legal needs quickly and confidently. From family law and mediation to criminal defense and personal injury, you will be working with a team of attorneys with the single focus of protecting your interests and fighting for your rights. All calls are returned quickly and clients speak with attorneys directly.</p>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <span class="stats-label">Our Experience</span>
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number">50+</div>
+        <div class="stat-label">years of combined legal experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">37+</div>
+        <div class="stat-label">years serving Murfreesboro & surrounding counties</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact">
+    <span class="contact-label">Free Consultation</span>
+    <div class="contact-content">
+      <h2 class="contact-headline">Contact Our Firm</h2>
+      <p class="contact-text">The Firm of Pate and Knott charges no fee for the initial consultation regarding personal injury cases, including automobile/truck/motorcycle accidents, slip and fall accidents or any other type of accident caused by a third party.</p>
+      <div class="contact-info">
+        <div class="contact-item"><a href="tel:1500999185">1500999185</a></div>
+        <div class="contact-item"><a href="tel:(615) 848-1221">(615) 848-1221</a></div>
+        <div class="contact-item">104 North Church Street, Murfreesboro, TN 37130</div>
+        <div class="contact-item">Evening and Saturday appointments available</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Office Location Section -->
+  <section class="office-location">
+    <span class="office-location-label">Location</span>
+    <div class="office-location-content">
+      <h2 class="office-location-headline">Murfreesboro Office</h2>
+      <div class="office-location-address">
+        104 North Church Street<br>
+        Murfreesboro, TN 37130<br><br>
+        <a href="tel:(615) 848-1221">(615) 848-1221</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Pate & Knott</span>
+      <span class="footer-copyright">© 2026 Pate & Knott</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.pateandknottlawfirm.com/home">Home</a>
+      <a href="https://www.pateandknottlawfirm.com/about/attorneys">Attorneys</a>
+      <a href="https://www.pateandknottlawfirm.com/practice-areas.html">Practice Areas</a>
+      <a href="https://www.pateandknottlawfirm.com/family-mediation.html">Family Mediation</a>
+      <a href="https://www.pateandknottlawfirm.com/frequent-questions.html">FAQs</a>
+      <a href="https://www.pateandknottlawfirm.com/case-results">Case Results</a>
+      <a href="https://www.pateandknottlawfirm.com/resources">Resources</a>
+      <a href="https://www.pateandknottlawfirm.com/blog">Blog</a>
+      <a href="https://www.pateandknottlawfirm.com/contact-us">Contact</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
