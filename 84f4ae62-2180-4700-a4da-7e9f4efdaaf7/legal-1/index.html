@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digby Family Law, PLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* About Section */
+.about {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.about-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.about-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.about-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.about-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.about-image {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.about-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Services Grid */
+.services {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.services-header {
+  margin-bottom: var(--space-xl);
+}
+
+.services-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.services-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.service-item {
+  padding: var(--space-lg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-card);
+  transition: background-color 0.3s ease;
+}
+
+.service-item:hover {
+  background: var(--bg-hover);
+}
+
+.service-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* Team Section */
+.team {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.team-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.team-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.team-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-card);
+}
+
+.team-member-info h3 {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.team-member-role {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.team-member-bio {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* Stats Section */
+.stats {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.stats-header {
+  margin-bottom: var(--space-xl);
+}
+
+.stats-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.stats-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  text-align: center;
+}
+
+.stat-number {
+  font-family: var(--font-serif);
+  font-size: clamp(48px, 12vw, 84px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.stat-label {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+/* Testimonials Section */
+.testimonials {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.testimonials-header {
+  margin-bottom: var(--space-xl);
+}
+
+.testimonials-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.testimonials-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+}
+
+.testimonial-image {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.testimonial-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Contact Section */
+.contact {
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.contact-header {
+  margin-bottom: var(--space-xl);
+}
+
+.contact-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.contact-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.contact-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+
+.contact-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.contact-text:hover {
+  color: var(--text-muted);
+}
+
+/* Social Links */
+.social-links {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== MOBILE (max-width: 768px) =================== */
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .about {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .services {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .team {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .stats {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .testimonials {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .footer {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .social-links {
+    justify-content: center;
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .about {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .about-text {
+    flex: 1.2;
+  }
+
+  .about-image {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .about {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .services {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .team {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .stats {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .testimonials {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .contact {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <div class="globe-icon"><i class="fas fa-balance-scale"></i></div>
+    <span class="brand-name">Digby Family Law</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-balance-scale"></i></div>
+      <span class="brand-name">Digby Family Law</span>
+    </a>
+    <nav>
+      <a href="https://www.digbyfamilylaw.com/about/">About Our Firm</a>
+      <a href="https://www.digbyfamilylaw.com/areas-of-practice/">Areas of Practice</a>
+      <a href="https://www.digbyfamilylaw.com/resources/">Resources</a>
+      <a href="https://www.digbyfamilylaw.com/blog/">Blog</a>
+      <a href="https://www.digbyfamilylaw.com/contact/">Contact Us</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Nashville, TN Office</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Consultations Available</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Boutique Family Law Firm</span>
+      <h1 class="hero-headline">Relationships beyond the courtroom.</h1>
+      <p class="hero-subheading">You deserve personalized, attentive representation. We work with you to create an individualized strategy based on your specific goals.</p>
+      <a href="https://www.digbyfamilylaw.com/contact/" class="hero-cta">Get In Touch <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about">
+    <div class="about-text">
+      <span class="about-label">Our Difference</span>
+      <h2 class="about-title">We are a boutique firm comprised of four attorneys who came together over the common belief that service to our clients should extend beyond the courtroom.</h2>
+      <p class="about-description">In addition to comprehensive legal support, we provide our clients with a variety of resources, including connections to the professional relationships we have fostered over the years.</p>
+      <p class="about-description">As the largest all-female family law firm in the greater Nashville area, we serve a diverse range of clients in Davidson, Williamson, and the surrounding counties. By exclusively practicing family law, we're able to stay current on changes in case law and the fluctuating trends in our local courts.</p>
+      <p class="about-description">Our unique, team-based approach allows us to combine forces through collaboration, giving our clients the benefit of multi-faceted perspectives while at the same time providing them ongoing, consistent communication with their primary attorney.</p>
+    </div>
+    <div class="about-image">
+      <img src="https://www.digbyfamilylaw.com/wp-content/uploads/2024/08/feitenphotography-51.jpg" alt="A close-up of a handshake between two people in a professional setting. One person wears a textured blazer, and the other wears a navy suit jacket with a pink shirt. In the background, a sign reads Digby Family Law, PLLC, indicating a legal or business agreement." />
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services">
+    <div class="services-header">
+      <span class="services-label">Practice Areas</span>
+      <h2 class="services-title">Our award-winning firm provides expert and empathetic representation for the following family matters and more:</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-item">
+        <h3 class="service-name">Divorce</h3>
+      </div>
+      <div class="service-item">
+        <h3 class="service-name">Collaborative Divorce</h3>
+      </div>
+      <div class="service-item">
+        <h3 class="service-name">Child Custody</h3>
+      </div>
+      <div class="service-item">
+        <h3 class="service-name">Child Support & Child Support Contempt</h3>
+      </div>
+      <div class="service-item">
+        <h3 class="service-name">Child Support Modification</h3>
+      </div>
+      <div class="service-item">
+        <h3 class="service-name">Adoption</h3>
+      </div>
+      <div class="service-item">
+        <h3 class="service-name">LGBTQ+ Family Law</h3>
+      </div>
+      <div class="service-item">
+        <h3 class="service-name">Estate Planning</h3>
+      </div>
+      <div class="service-item">
+        <h3 class="service-name">Mediation</h3>
+      </div>
+      <div class="service-item">
+        <h3 class="service-name">Pro Se Mediation</h3>
+      </div>
+      <div class="service-item">
+        <h3 class="service-name">Prenuptial Agreement</h3>
+      </div>
+      <div class="service-item">
+        <h3 class="service-name">Order of Protection</h3>
+      </div>
+      <div class="service-item">
+        <h3 class="service-name">Guardianship</h3>
+      </div>
+      <div class="service-item">
+        <h3 class="service-name">Spousal Support (Alimony)</h3>
+      </div>
+      <div class="service-item">
+        <h3 class="service-name">Post-Nuptial Agreements</h3>
+      </div>
+      <div class="service-item">
+        <h3 class="service-name">Legal Separation</h3>
+      </div>
+      <div class="service-item">
+        <h3 class="service-name">Property Division</h3>
+      </div>
+      <div class="service-item">
+        <h3 class="service-name">Termination of Parental Rights</h3>
+      </div>
+      <div class="service-item">
+        <h3 class="service-name">Cohabitation Agreements</h3>
+      </div>
+      <div class="service-item">
+        <h3 class="service-name">Parentage Issues</h3>
+      </div>
+      <div class="service-item">
+        <h3 class="service-name">Post-Divorce Enforcement & Modification</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team">
+    <div class="team-header">
+      <span class="team-label">Your Team</span>
+      <h2 class="team-title">You Matter, and We Want to See YOUR STORY Through to the End.</h2>
+    </div>
+    <div class="team-member">
+      <div class="team-member-info">
+        <h3>Sarah Digby</h3>
+        <p class="team-member-role">Founding Attorney</p>
+        <p class="team-member-bio">Founding attorney Sarah Digby appeared in Nashville Business Journal's 40 Under 40 in 2023 and was named Top Lawyer Under 40 by the American Society of Legal Advocates in 2017.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats">
+    <div class="stats-header">
+      <span class="stats-label">Awards</span>
+      <h2 class="stats-title">Recognition & Excellence</h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number">10.0</div>
+        <p class="stat-label">Superb rating for Top Attorney Child Custody by Avvo</p>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">5</div>
+        <p class="stat-label">years in a row listed in 10 Best Attorneys for Client Satisfaction</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <div class="testimonials-header">
+      <span class="testimonials-label">Client Reviews</span>
+      <h2 class="testimonials-title">What Our Clients Say</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-image">
+        <img src="https://www.digbyfamilylaw.com/wp-content/uploads/2024/08/Joshua-S.-Testimonial.png" alt="Joshua S. Testimonial" />
+      </div>
+      <div class="testimonial-image">
+        <img src="https://www.digbyfamilylaw.com/wp-content/uploads/2024/08/Johnathan-B.-Testimonial.png" alt="Johnathan B. Testimonial" />
+      </div>
+      <div class="testimonial-image">
+        <img src="https://www.digbyfamilylaw.com/wp-content/uploads/2024/08/Jay-E.-Testimonial.png" alt="Jay E. Testimonial" />
+      </div>
+      <div class="testimonial-image">
+        <img src="https://www.digbyfamilylaw.com/wp-content/uploads/2024/08/Andrea-T.-Testimonial.png" alt="Andrea T. Testimonial" />
+      </div>
+      <div class="testimonial-image">
+        <img src="https://www.digbyfamilylaw.com/wp-content/uploads/2024/08/Steph-L.-Testimonial.png" alt="Steph L. Testimonial" />
+      </div>
+      <div class="testimonial-image">
+        <img src="https://www.digbyfamilylaw.com/wp-content/uploads/2024/08/Sadie-M.-Testimonial.png" alt="Sadie M. Testimonial" />
+      </div>
+      <div class="testimonial-image">
+        <img src="https://www.digbyfamilylaw.com/wp-content/uploads/2024/08/Nannette-H.-Testimonial.png" alt="Nannette H. Testimonial" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact">
+    <div class="contact-header">
+      <span class="contact-label">Contact Us</span>
+      <h2 class="contact-title">Reach Out Today</h2>
+    </div>
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-icon"><i class="fas fa-phone"></i></div>
+        <a href="tel:123-123-1234" class="contact-text">123-123-1234</a>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+        <a href="mailto:info@domain.com" class="contact-text">info@domain.com</a>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+        <span class="contact-text">5123 Virginia Way, Suite C-22 Brentwood, TN 37027</span>
+      </div>
+    </div>
+    <div class="social-links">
+      <a href="https://www.facebook.com/digbyfamilylaw/" aria-label="Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://www.instagram.com/digbyfamilylaw/" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://www.linkedin.com/company/digby-family-law-plc/" aria-label="LinkedIn">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Digby Family Law, PLC</span>
+      <span class="footer-copyright">© 2026. Digby Family Law, PLC. All Rights Reserved.</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.digbyfamilylaw.com/about/">About Our Firm</a>
+      <a href="https://www.digbyfamilylaw.com/areas-of-practice/">Areas of Practice</a>
+      <a href="https://www.digbyfamilylaw.com/resources/">Resources</a>
+      <a href="https://www.digbyfamilylaw.com/blog/">Blog</a>
+      <a href="https://www.digbyfamilylaw.com/contact/">Contact Us</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
