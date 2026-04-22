@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vixen Esthetics</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  position: relative;
+  background-image: url('https://static.showit.co/1600/O4mDJK4fTIGl8DH9npYG3A/shared/vixen_esthetics_2.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(244, 240, 234, 0.8);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Philosophy Section */
+.philosophy {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.philosophy-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.philosophy-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.philosophy-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.service-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.service-cell:last-child {
+  border-bottom: none;
+}
+
+.service-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.service-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.service-cell:hover .service-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+.service-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: var(--space-xs);
+  margin-bottom: var(--space-sm);
+}
+
+.service-number {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.service-name {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.service-description {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--placeholder-gray);
+}
+
+/* Testimonials Section */
+.testimonials {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.testimonials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.testimonial-card {
+  border: 1px solid var(--border-black);
+  padding: var(--space-lg);
+}
+
+.testimonial-text {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 300;
+  line-height: 1.55;
+  margin-bottom: var(--space-md);
+}
+
+.testimonial-author {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* Contact Section */
+.contact {
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+}
+
+.contact-value {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+.contact-value a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--placeholder-gray);
+  transition: text-decoration-color 0.3s ease;
+}
+
+.contact-value a:hover {
+  text-decoration-color: var(--text-black);
+}
+
+/* Social Links */
+.social-links {
+  margin-top: var(--space-md);
+}
+
+.social-links-list {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.social-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  text-decoration: underline;
+  text-decoration-color: var(--placeholder-gray);
+  transition: text-decoration-color 0.3s ease;
+}
+
+.social-links a:hover {
+  text-decoration-color: var(--text-black);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-sm);
+  }
+
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .philosophy {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-md) var(--pad-x);
+  }
+
+  .testimonials {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .testimonial-card {
+    padding: var(--space-md);
+  }
+
+  .contact {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .social-links-list {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .philosophy-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .service-cell:nth-child(odd):nth-last-child(2),
+  .service-cell:nth-child(odd):nth-last-child(2) + .service-cell {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .service-cell:not(:nth-last-child(2)):not(:last-child) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .testimonials-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .philosophy {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .contact {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .service-cell {
+    border-right: 1px solid var(--border-black);
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(3n) {
+    border-right: none;
+  }
+
+  .service-cell:nth-last-child(-n+3) {
+    border-bottom: none;
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Vixen Esthetics</a>
+  <ul class="nav-links">
+    <li><a href="https://vixenesthetics.com/services">services</a></li>
+    <li><a href="https://vixenesthetics.com/about">about</a></li>
+    <li><a href="https://vixenesthetics.com/contact">contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">Austin's Best<br>Esthetics Studio</h1>
+    <p class="hero-subtitle">Where you feel more confident than you thought was possible with the skin and brows of your dreams</p>
+  </div>
+</section>
+
+<!-- Philosophy Section -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">our mission</span>
+    <div class="philosophy-text">
+      <p>Our mission is to empower every individual who steps through our doors, helping them discover and embrace the unwavering confidence that resides within.</p>
+      <p>Whether it's crafting impeccable brows, preparing you for a special event, or assisting you in achieving your long-term skincare aspirations, we're dedicated to fulfilling all your beauty and skincare requirements.</p>
+      <p>Step out of our studio embracing the fierce & empowered you.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Services Grid -->
+<section class="services" id="services">
+  <div class="services-grid">
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://static.showit.co/1600/HJ9X2FmVqFduPiLCZWMVnQ/252504/screenshot_2025-07-13_at_10_09_22_am.png" alt="Permanent Makeup Services">
+      </div>
+      <div class="service-meta">
+        <span class="service-number">001</span>
+        <span class="service-name">permanent makeup</span>
+      </div>
+      <p class="service-description">Microblading, Powder Brows, Nano Brows, Combination Brows and More. We have a style and technique for everyone, performed by our master artists</p>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://static.showit.co/1600/c8pY0z8fRiaC9EQGjRB-zg/shared/7.png" alt="DMK Enzyme Therapy">
+      </div>
+      <div class="service-meta">
+        <span class="service-number">002</span>
+        <span class="service-name">dmk enzyme therapy</span>
+      </div>
+      <p class="service-description">One of the most effective non-invasive treatments for improving skin health. It works by stimulating the lymphatic system, restoring your skin's natural function for a healthier, more youthful glow</p>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://static.showit.co/189/-mMuF0hbST-XfMWrZw9jyQ/shared/dsc00489.jpg" alt="Skin Treatments">
+      </div>
+      <div class="service-meta">
+        <span class="service-number">003</span>
+        <span class="service-name">skin treatments</span>
+      </div>
+      <p class="service-description">We specialize in both holistic treatments and corrective treatments. We truly have something for everybody here</p>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://static.showit.co/189/PGpyLyEfQW6gGFSdTtrFCA/shared/dsc00436.jpg" alt="Acne Treatments">
+      </div>
+      <div class="service-meta">
+        <span class="service-number">004</span>
+        <span class="service-name">acne treatments</span>
+      </div>
+      <p class="service-description">We are Austin's top acne experts. We have a unique approach to acne where we look at lifestyle and topical factors that can affect your skin, and work to find the root cause to keep your acne under control</p>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://static.showit.co/189/6SXbY2TRRdu2xce2fd8qag/shared/dsc00653.jpg" alt="Facial Massages">
+      </div>
+      <div class="service-meta">
+        <span class="service-number">005</span>
+        <span class="service-name">facial massages</span>
+      </div>
+      <p class="service-description">We offer a variety of facial massage techniques including lymphatic massage, buccal sculpting facial massage, and more</p>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://static.showit.co/189/YWD7An3uSjW9w6LGl9cc6A/shared/dsc00635.jpg" alt="Esthetics Trainings">
+      </div>
+      <div class="service-meta">
+        <span class="service-number">006</span>
+        <span class="service-name">esthetics trainings</span>
+      </div>
+      <p class="service-description">Offering trainings such as business mentorship and permanent makeup trainings, you'll be able to take your business and skills to the next level with Jackie's expertise</p>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://static.showit.co/189/Ab4LEtpeTXeXPzzgxytIpQ/shared/dsc00646.jpg" alt="Hydrafacial">
+      </div>
+      <div class="service-meta">
+        <span class="service-number">007</span>
+        <span class="service-name">hydrafacial</span>
+      </div>
+      <p class="service-description">We offer a wide range of skincare services ranging from corrective, to more relaxing</p>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <div class="testimonial-card">
+      <p class="testimonial-text">"I would recommend this place to everyone I know!!! I got my eyebrows micro bladed here by Jackie, and continue to go here for upkeep and I love them and constantly get compliments on them. I also started going to get control of my acne and my face has been clear ever since."</p>
+      <div class="testimonial-author">janine</div>
+    </div>
+    <div class="testimonial-card">
+      <p class="testimonial-text">"Jackie and her staff are absolutely incredible!!! Best place in town for brow tint and lamination! They all also do a killer customized Hydrafacial!"</p>
+      <div class="testimonial-author">morgan</div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-heading">How We<br>Care For<br>You</h2>
+    <div class="contact-details">
+      <div class="contact-item">
+        <span class="contact-label">phone</span>
+        <div class="contact-value">
+          <a href="tel:5125377274">(512) 537-7274</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">hours</span>
+        <div class="contact-value">
+          Monday 9am-4pm<br>
+          Tuesday-Thursday 11am-7pm<br>
+          Friday-Sunday 9am-5pm
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">austin location</span>
+        <div class="contact-value">8305 State HWY 71 SUITE 115<br>Austin, TX  78735</div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">buda location</span>
+        <div class="contact-value">645 FM 967 Bldg 1 ste 107<br>buda, tx  78610</div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">follow us</span>
+        <div class="social-links">
+          <ul class="social-links-list">
+            <li><a href="https://www.instagram.com/vixenesthetics/">instagram</a></li>
+            <li><a href="https://www.facebook.com/vixestheticsatx/">facebook</a></li>
+            <li><a href="https://www.tiktok.com/@vixenesthetics">tiktok</a></li>
+            <li><a href="https://www.yelp.com/biz/vixen-esthetics-austin">yelp</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Vixen Esthetics</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
