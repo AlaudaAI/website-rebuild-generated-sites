@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Face Card Clinics</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://static.wixstatic.com/media/945224_2aa027c4a49b4588852f0b18a8d6ce9ef000.jpg/v1/fill/w_720,h_257,al_c,q_80,usm_0.33_1.00_0.00,enc_avif,quality_auto/945224_2aa027c4a49b4588852f0b18a8d6ce9ef000.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+  color: #ffffff;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Welcome Section */
+.welcome {
+  padding: var(--space-xl) var(--pad-x);
+  text-align: center;
+}
+
+.welcome-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.welcome-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.welcome-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-md);
+}
+
+.welcome-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-lg);
+}
+
+.welcome-button {
+  display: inline-block;
+}
+
+.welcome-button a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.welcome-button a:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Philosophy Section */
+.philosophy {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.philosophy-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.philosophy-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.philosophy-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.service-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.service-cell:last-child {
+  border-bottom: none;
+}
+
+.service-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.service-number {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.service-name {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.service-description {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-style: italic;
+  margin-top: var(--space-xs);
+  color: var(--placeholder-gray);
+}
+
+/* Team Section */
+.team {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.team-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.team-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.team-image {
+  width: 300px;
+  height: 350px;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease;
+}
+
+.team-image:hover {
+  filter: grayscale(0%);
+}
+
+.team-info {
+  flex: 1;
+}
+
+.team-name {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: var(--space-xs);
+}
+
+.team-role {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.team-bio {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+}
+
+.team-education {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  line-height: 1.8;
+}
+
+/* Look Around Section */
+.lookaround {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.lookaround-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.lookaround-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.lookaround-links {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
+}
+
+.lookaround-links a {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-black);
+  text-decoration: none;
+  padding: var(--space-xs) 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.lookaround-links a:hover {
+  border-bottom-color: var(--text-black);
+}
+
+/* Stats Section */
+.stats {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.stats-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+}
+
+.stat-item {
+  text-align: center;
+  padding: var(--space-md);
+  border: 1px solid var(--border-black);
+}
+
+.stat-value {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 300;
+  line-height: 1;
+  margin-bottom: var(--space-xs);
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* Gallery Section */
+.gallery {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.gallery-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.gallery-image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.gallery-image:hover {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+/* Contact Section */
+.contact {
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.contact-button {
+  align-self: flex-start;
+}
+
+.contact-button a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.contact-button a:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.contact-item {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+}
+
+.contact-item a {
+  color: var(--text-black);
+  text-decoration: none;
+}
+
+.contact-item a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+  
+  .nav-links {
+    display: none;
+  }
+  
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+  }
+  
+  .welcome {
+    padding: var(--space-lg) var(--pad-x);
+  }
+  
+  .philosophy {
+    padding: var(--space-lg) var(--pad-x);
+  }
+  
+  .team {
+    padding: var(--space-lg) var(--pad-x);
+  }
+  
+  .lookaround {
+    padding: var(--space-lg) var(--pad-x);
+  }
+  
+  .contact {
+    padding: var(--space-lg) var(--pad-x);
+  }
+  
+  .team-image {
+    width: 100%;
+    height: 300px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .gallery-image {
+    height: 250px;
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .philosophy-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .service-cell:nth-child(1),
+  .service-cell:nth-child(2),
+  .service-cell:nth-child(3),
+  .service-cell:nth-child(4),
+  .service-cell:nth-child(5),
+  .service-cell:nth-child(6),
+  .service-cell:nth-child(7) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .team-member {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .lookaround-links {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .philosophy {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .contact {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  .service-cell:nth-child(4n) {
+    border-right: none;
+  }
+
+  .service-cell:nth-child(1),
+  .service-cell:nth-child(2),
+  .service-cell:nth-child(3),
+  .service-cell:nth-child(4) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(5),
+  .service-cell:nth-child(6),
+  .service-cell:nth-child(7),
+  .service-cell:nth-child(8) {
+    border-bottom: none;
+  }
+
+  .lookaround-links {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Face Card Clinics</a>
+  <ul class="nav-links">
+    <li><a href="https://www.joannainjects.com/">home</a></li>
+    <li><a href="https://www.joannainjects.com/services">services</a></li>
+    <li><a href="https://www.joannainjects.com/about">about</a></li>
+    <li><a href="https://www.joannainjects.com/our-work">policies</a></li>
+    <li><a href="https://www.joannainjects.com/faq-1">faq</a></li>
+    <li><a href="https://www.joannainjects.com/locations-and-hours">locations</a></li>
+    <li><a href="https://www.joannainjects.com/payment-plans">payment plans</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <h1 class="hero-headline">Face Card Clinics<br>where beauty meets expertise</h1>
+  <p class="hero-subtitle">001 — Ready to get flawless?</p>
+</section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://static.wixstatic.com/media/945224_924feb9b05f94770b76b10db508488ff~mv2.jpg/v1/fill/w_1905,h_982,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/945224_924feb9b05f94770b76b10db508488ff~mv2.jpg" alt="black-marble-texture-background.jpg" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Welcome Section -->
+<section class="welcome" id="welcome">
+  <div class="welcome-inner">
+    <h3 class="welcome-label">WELCOME TO</h3>
+    <h1 class="welcome-heading">Face Card Clinics</h1>
+    <p class="welcome-subtitle">Ready to get flawless?</p>
+    <div class="welcome-button">
+      <a href="https://abcfu.myaestheticrecord.com/online-booking">BOOK OUR SERVICES</a>
+    </div>
+  </div>
+</section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://static.wixstatic.com/media/945224_1ef287f2c96e431181f5ba353c5b2673~mv2.jpg/v1/fill/w_11,h_1024,al_c,q_80,enc_avif,quality_auto/945224_1ef287f2c96e431181f5ba353c5b2673~mv2.jpg" alt="white soft wave marble.jpg" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Philosophy Section -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">002 — education based med spa</span>
+    <div class="philosophy-text">
+      <p>At Face Card Clinics, we believe that growth is rooted in knowledge. Our commitment to excellence goes beyond beauty—it's about staying at the forefront of advanced aesthetic techniques through continuous education.</p>
+      <p>Our team regularly participates in hands-on training, masterclasses, and certification programs focused on the latest injection techniques, safety protocols, and artistry in aesthetics. We prioritize client safety, natural results, and cutting-edge practices, ensuring every injector is confident, competent, and current.</p>
+      <p>Whether it's refining our skills in lip enhancements, mastering facial balancing, or learning the latest in regenerative treatments, we never stop learning—so you can always trust you're in expert hands.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Services Grid -->
+<section class="services" id="services">
+  <div class="services-grid">
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-number">001</span>
+        <span class="service-name">botox</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-number">002</span>
+        <span class="service-name">fillers</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-number">003</span>
+        <span class="service-name">microneedling</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-number">004</span>
+        <span class="service-name">prp</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-number">005</span>
+        <span class="service-name">laser hair removal</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-number">006</span>
+        <span class="service-name">fat dissolvers</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-number">007</span>
+        <span class="service-name">chemical peels</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-number">008</span>
+        <span class="service-name">aerolase neo elite laser</span>
+      </div>
+      <div class="service-description">Works beneath the surface to target acne, inflammation, and uneven skin without harsh recovery</div>
+    </div>
+  </div>
+</section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://static.wixstatic.com/media/945224_5b855deea44244edbfec468bf64d5f9bf000.jpg/v1/fill/w_526,h_617,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/945224_5b855deea44244edbfec468bf64d5f9bf000.jpg" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Team Section -->
+<section class="team" id="team">
+  <div class="team-inner">
+    <h2 class="team-heading">Who´s the Face Behind<br>Face Card Clinics?</h2>
+    <div class="team-member">
+      <img src="https://static.wixstatic.com/media/945224_27bd36f1d31a4c28b90333c9174ae0be~mv2.jpg/v1/crop/x_0,y_98,w_888,h_1084/fill/w_431,h_509,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_5085_JPG.jpg" alt="Nurse Joanna Zhu administering aesthetic injections" class="team-image">
+      <div class="team-info">
+        <h3 class="team-name">Joanna Zhu MSN, RN</h3>
+        <p class="team-role">CEO & Founder of Face Card Clinics 💉</p>
+        <p class="team-bio">Originally from California, Joanna has five years of RN experience and one year of specialized training in aesthetics. Dedicated to making beauty accessible in Oahu & Texas.</p>
+        <div class="team-education">
+          Bachelor's in public health from San Diego State University<br>
+          Bachelor's of Nursing from University of Hawaii at Mānoa<br>
+          Master's of Nursing from University of Hawaii at Mānoa<br>
+          MSN, RN
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://static.wixstatic.com/media/945224_74bec51cd3134d6a9a1ac76c598028d5~mv2.jpg/v1/fill/w_7,h_1280,al_c,q_80,enc_avif,quality_auto/945224_74bec51cd3134d6a9a1ac76c598028d5~mv2.jpg" alt="IMG_5088.JPG" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Look Around Section -->
+<section class="lookaround" id="lookaround">
+  <div class="lookaround-inner">
+    <h3 class="lookaround-heading">LOOK AROUND</h3>
+    <ul class="lookaround-links">
+      <li><a href="https://www.joannainjects.com/">HOME</a></li>
+      <li><a href="https://www.joannainjects.com/services">SERVICES</a></li>
+      <li><a href="https://www.joannainjects.com/about">ABOUT</a></li>
+      <li><a href="https://www.joannainjects.com/our-work">POLICIES</a></li>
+      <li><a href="https://www.joannainjects.com/faq-1">FAQ</a></li>
+      <li><a href="https://www.joannainjects.com/locations-and-hours">LOCATIONS</a></li>
+      <li><a href="https://www.joannainjects.com/payment-plans">PAYMENT PLANS</a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats" id="stats">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-value">5</div>
+      <div class="stat-label">years of RN experience</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">1</div>
+      <div class="stat-label">year of specialized training in aesthetics</div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery Section -->
+<section class="gallery" id="gallery">
+  <div class="gallery-grid">
+    <img src="https://scontent-den2-1.cdninstagram.com/v/t51.71878-15/670616459_936253939222564_6675667617805039376_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=102&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=4RZOhapG0loQ7kNvwEhrg05&_nc_oc=AdoheDyWt5I7C7j7tKPZvDEiClQnoDgIKe7xqhK-bckkxi41MBHQLSDsz55fV5nn3E8&_nc_zt=23&_nc_ht=scontent-den2-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=YmunJtcm_nWE_JxgDVOnDg&_nc_tpa=Q5bMBQEOun9P9xtBKJELHgBc47EVN241gpoYqseu5OMlcgviV6trJ4y5gfT5dXOidccyGetYHIFzScnM&oh=00_Af2z3KJo9Ngvdd9HJ6CvhPkpyqn-9eBDSZ2qLDbctb_Eiw&oe=69EEDDEF" alt="Aerolase Neo Elite laser treatment" class="gallery-image">
+    <img src="https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/673577485_17928905502257479_8495243408167548791_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=102&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=CGsmmrO981wQ7kNvwGNGOhu&_nc_oc=AdrPHVkCiq9cMqsZlHJK-Lz-6yEldUW_MkrN-ksAHMRIJO613EH1C1a-SIhEymLkuLw&_nc_zt=23&_nc_ht=scontent-den2-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=YmunJtcm_nWE_JxgDVOnDg&_nc_tpa=Q5bMBQGcdycUg8UfAzsV0IF0uiqH-lmqqrZc4dck1gBtJpFa_dBwvQKst6nwAosLhNr-oKwrz4Bx-cML&oh=00_Af1dHHDDPaI6UN6vST2puMHiOrHuI3rGoEj-yutYbrQxng&oe=69EEC1C3" alt="Grand opening event guest" class="gallery-image">
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-heading">Ready to get<br>Flawless?</h2>
+    <div class="contact-info">
+      <div class="contact-button">
+        <a href="https://abcfu.myaestheticrecord.com/online-booking">book our services</a>
+      </div>
+      <div class="contact-item">
+        <a href="tel:9362539392">936.253.9392</a>
+      </div>
+      <div class="contact-item">
+        <a href="https://www.instagram.com/joanna.injects/">instagram</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Face Card Clinics</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
