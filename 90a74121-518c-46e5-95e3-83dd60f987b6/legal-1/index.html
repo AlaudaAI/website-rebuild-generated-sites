@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Turner Law Offices, P.C.</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Hero Visual */
+.hero-visual {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.office-building {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: var(--space-xl);
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.building-facade {
+  width: 100%;
+  max-width: 200px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.window-row {
+  display: flex;
+  justify-content: space-around;
+  gap: var(--space-sm);
+}
+
+.window {
+  width: 20px;
+  height: 16px;
+  background: var(--border-color);
+  border-radius: 2px;
+  opacity: 0.7;
+}
+
+.window.lit {
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+.entrance {
+  width: 60%;
+  height: 24px;
+  background: var(--bg-hover);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.entrance::after {
+  content: "LAW";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 8px;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+/* About section */
+.about-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.about-header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.about-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-md);
+}
+
+.about-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.about-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.about-text a {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.about-text a:hover {
+  text-decoration: underline;
+}
+
+.about-images {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.about-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+/* Services Grid */
+.services {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.services-header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.services-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-md);
+}
+
+.services-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.service-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: var(--space-xl);
+  transition: all 0.3s ease;
+}
+
+.service-card:hover {
+  background: var(--bg-hover);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.service-name {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.service-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* Stats Section */
+.stats-section {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.stat-item {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.stat-item:last-child {
+  border-bottom: none;
+}
+
+.stat-number {
+  font-family: var(--font-serif);
+  font-size: clamp(48px, 12vw, 80px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.stat-label {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--text-muted);
+  max-width: 300px;
+}
+
+/* Team Section */
+.team-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.team-header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.team-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-md);
+}
+
+.team-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+
+.team-member {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: var(--space-xl);
+  text-align: center;
+}
+
+.member-name {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.member-role {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.member-bio {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* Testimonials Section */
+.testimonials-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.testimonials-header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.testimonials-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-md);
+}
+
+.testimonials-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.testimonial-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: var(--space-xl);
+}
+
+.testimonial-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  margin-bottom: var(--space-lg);
+}
+
+.testimonial-quote::before {
+  content: """;
+  font-size: 24px;
+  color: var(--text-primary);
+}
+
+.testimonial-quote::after {
+  content: """;
+  font-size: 24px;
+  color: var(--text-primary);
+}
+
+.testimonial-author {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* Contact Section */
+.contact-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.contact-header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.contact-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-md);
+}
+
+.contact-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-2xl);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.contact-item i {
+  width: 20px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.contact-item a {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.contact-item a:hover {
+  color: var(--text-muted);
+}
+
+.map-container {
+  width: 100%;
+  height: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+.footer-social {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.footer-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footer-social a:hover {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== MOBILE RESPONSIVE =================== */
+@media (max-width: 768px) {
+  .mobile-header .brand-name {
+    font-size: 12px;
+  }
+  
+  .hero {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .hero-headline {
+    font-size: clamp(28px, 8vw, 36px);
+  }
+  
+  .hero-visual {
+    max-width: 300px;
+  }
+  
+  .services, .team-section, .testimonials-section, .contact-section, .about-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .services-grid {
+    gap: var(--space-md);
+  }
+  
+  .service-card {
+    padding: var(--space-lg);
+  }
+  
+  .team-grid {
+    gap: var(--space-lg);
+  }
+  
+  .testimonials-grid {
+    gap: var(--space-md);
+  }
+  
+  .testimonial-card {
+    padding: var(--space-lg);
+  }
+  
+  .stat-item {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .footer {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .about-images {
+    grid-template-columns: 1fr;
+  }
+  
+  .about-image {
+    height: 150px;
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stats-section {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .stat-item {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .stat-item:last-child {
+    border-right: none;
+  }
+
+  .contact-info {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .about-images {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 70vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .about-images {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .about-images {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <div class="globe-icon"><i class="fas fa-balance-scale"></i></div>
+    <span class="brand-name">Turner Law Offices, P.C.</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-balance-scale"></i></div>
+      <span class="brand-name">Turner Law Offices, P.C.</span>
+    </a>
+    <nav>
+      <a href="https://www.turnerlawoffices.com/divorce/">Divorce</a>
+      <a href="https://www.turnerlawoffices.com/custody/">Child Custody</a>
+      <a href="https://www.turnerlawoffices.com/child-support/">Child Support</a>
+      <a href="https://www.turnerlawoffices.com/nashville-criminal-lawyer/">Criminal Law</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Available 24/7</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Family Law Practice</span>
+      <h1 class="hero-headline">Nashville's Choice for Family Law! A Reputation For Excellence</h1>
+      <p class="hero-subheading">We Guarantee We Will Do Our Best!!!</p>
+      <a href="tel:6152494576" class="hero-cta">Call for Consultation <i class="fas fa-phone" style="font-size:10px;"></i></a>
+    </div>
+    <div class="hero-visual">
+      <div class="office-building">
+        <div class="building-facade">
+          <div class="window-row">
+            <div class="window lit"></div>
+            <div class="window"></div>
+            <div class="window lit"></div>
+          </div>
+          <div class="window-row">
+            <div class="window"></div>
+            <div class="window lit"></div>
+            <div class="window"></div>
+          </div>
+          <div class="window-row">
+            <div class="window lit"></div>
+            <div class="window lit"></div>
+            <div class="window"></div>
+          </div>
+          <div class="entrance"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-section">
+    <div class="about-header">
+      <span class="about-label">About Our Firm</span>
+      <h2 class="about-title">Successfully Representing Clients</h2>
+    </div>
+    <div class="about-content">
+      <p class="about-text">Successfully representing clients throughout <a href="https://www.tn.gov/">Tennessee</a>.</p>
+      <div class="about-images">
+        <img src="https://www.turnerlawoffices.com/wp-content/uploads/2020/04/Best-Nashville-Divorce-Attorney-Nashville-Tennessee.jpg" alt="Best Nashville Divorce Attorney" class="about-image">
+        <img src="https://www.turnerlawoffices.com/wp-content/uploads/2020/04/Best-Nashville-Child-Custody-Attorney-Nashville-Tennessee.jpg" alt="Best Nashville Child Custody Attorney" class="about-image">
+        <img src="https://www.turnerlawoffices.com/wp-content/uploads/2020/04/Best-Nashville-Divorce-Lawyer-Nashville-Tennessee.jpg" alt="Best Nashville Divorce Lawyer" class="about-image">
+        <img src="https://www.turnerlawoffices.com/wp-content/uploads/2020/04/Best-Business-Lawyer-Nashville-Tennessee.jpg" alt="Best Business Lawyer Nashville" class="about-image">
+        <img src="https://www.turnerlawoffices.com/wp-content/uploads/2020/04/Best-Nashville-Family-Law-Attorney-Nashville-Tennessee.jpg" alt="Best Nashville Family Law Attorney" class="about-image">
+        <img src="https://www.turnerlawoffices.com/wp-content/uploads/2020/04/Best-Nashville-Criminal-Lawyer-Nashville-Tennessee.jpg" alt="Best Nashville Criminal Lawyer" class="about-image">
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services">
+    <div class="services-header">
+      <span class="services-label">Legal Practice Areas</span>
+      <h2 class="services-title">Featured Practice Areas</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <h3 class="service-name">Divorce</h3>
+        <p class="service-description">Contested and uncontested divorce, alimony, property division, high asset divorce, prenuptial agreements</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Child Custody</h3>
+        <p class="service-description">Child custody criteria, modification, parental relocation, paternity</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Child Support</h3>
+        <p class="service-description">Tennessee child support guidelines, calculator, modification, enforcement</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">DUI</h3>
+        <p class="service-description">DUI defense, BAC testing, field sobriety tests, DUI injuries</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Criminal Law</h3>
+        <p class="service-description">Criminal defense, assault, theft, sex offenses, drug offenses, probation violations</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Probate</h3>
+        <p class="service-description">Wills and trusts, will contests, estate planning, conservatorship, guardianship</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Personal Injury</h3>
+        <p class="service-description">Auto accidents, medical malpractice, truck accidents, wrongful death, worker's compensation</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Business Law</h3>
+        <p class="service-description">Business formation, dissolution, litigation, contract negotiations, bankruptcy</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Bankruptcy</h3>
+        <p class="service-description">Personal and business bankruptcy, debt relief, bankruptcy fraud</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Immigration Law</h3>
+        <p class="service-description">Family-based immigration, extraordinary ability green cards, natural birth citizenship</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Social Security Disability</h3>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Entertainment Law</h3>
+        <p class="service-description">Copyright law</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Mediation Services</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="stat-item">
+      <div class="stat-number">20+</div>
+      <div class="stat-label">years practicing law</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">15,000+</div>
+      <div class="stat-label">clients represented</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">30+</div>
+      <div class="stat-label">years experience in family law</div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <div class="team-header">
+      <span class="team-label">Our Legal Team</span>
+      <h2 class="team-title">Experienced Attorneys</h2>
+    </div>
+    <div class="team-grid">
+      <div class="team-member">
+        <h3 class="member-name">Rob Turner</h3>
+        <p class="member-role">Attorney</p>
+        <p class="member-bio">Has been practicing law for over 20 years and has represented over 15,000 clients. At Turner Law Offices, P.C., you don't have just a lawyer; you have a team of hand-picked attorneys and paralegals with superior legal skills and friendly, caring dispositions.</p>
+      </div>
+      <div class="team-member">
+        <h3 class="member-name">Joseph Tutro</h3>
+        <p class="member-role">Attorney</p>
+      </div>
+      <div class="team-member">
+        <h3 class="member-name">Austin Trevor</h3>
+        <p class="member-role">Attorney</p>
+      </div>
+      <div class="team-member">
+        <h3 class="member-name">Ryan</h3>
+        <p class="member-role">Attorney</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials-section">
+    <div class="testimonials-header">
+      <span class="testimonials-label">Client Reviews</span>
+      <h2 class="testimonials-title">What Our Clients Say</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-quote">The well being of my children is of highest priority to me. I will have only one opportunity for to raise them well. Rob is helping make sure I get that opportunity. He is a capable, caring attorney whom I trust. He has worked effectively to help protect my children from the harm they were</p>
+        <p class="testimonial-author">J.R., Ashland City, TN</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">Rob always goes above and beyond to creatively solve any business or legal problem. He is also just an all-around good guy. Highly recommend!</p>
+        <p class="testimonial-author">M.M., Murfreesboro TN</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">Rob Turner has been of great service when I've desperately needed his expertise. He is an impeccable atty that sincerely cares about his clients & always made me feel at ease! HIGHLY recommend!</p>
+        <p class="testimonial-author">B.S., Nashville, TN</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">You are 100% dependable! I appreciate all that you did to help me out when other lawyers would not give me the time of day.</p>
+        <p class="testimonial-author">T.M., Nashville, TN</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">Thanks a Billion! (After all, a million doesn't go as far as it used to. You did such a good job! I couldn't have done it without you. Divorce Done!!</p>
+        <p class="testimonial-author">S.W., Murfreesboro, TN</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">Rob Turner, you are an awesome rock star lawyer!</p>
+        <p class="testimonial-author">B.Y., Clarksville, TN</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">Thank you for your services. If I ever, and I mean EVER, need legal representation in the future, I will definitely keep you in mind!</p>
+        <p class="testimonial-author">R.H., Nashville, TN</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">The professionalism was far better than I had hoped. The Attorneys at Turner went above and beyond to help me through my legal Problem.</p>
+        <p class="testimonial-author">B.G., Franklin, TN</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">I want to say your associate did an excellent job and I appreciate you all's representation. He really, REALLY did an excellent job!</p>
+        <p class="testimonial-author">C.S., Nashville, TN</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">Thank you for helping our family in a time of great need. It was a situation filled with anxiety and unknowns, but because of you, we survived. Thank you for working with us!</p>
+        <p class="testimonial-author">L.B., Donelson</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">Rob, you're so appreciated! Thank you for all of your patience.</p>
+        <p class="testimonial-author">R.F., Nashville</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">Turner Law Offices is a great law firm. They are willing to work with me on my payments too.</p>
+        <p class="testimonial-author">G.D., Nashville</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <div class="contact-header">
+      <span class="contact-label">Contact Information</span>
+      <h2 class="contact-title">Contact Our Nashville Office</h2>
+    </div>
+    <div class="contact-info">
+      <div class="contact-item">
+        <i class="fas fa-phone"></i>
+        <a href="tel:6152494576">(615) 249-4576</a>
+      </div>
+      <div class="contact-item">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>500 Church Street, Second Floor, Nashville, TN 37219</span>
+      </div>
+      <div class="contact-item">
+        <i class="fas fa-clock"></i>
+        <span>Monday-Friday, 8:00 am - 5:00 pm</span>
+      </div>
+    </div>
+    <div class="map-container">
+      <iframe src="https://maps.google.com/?cid=14965508745630491552&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYASAA&hl=en-US&source=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Turner Law Offices, P.C.</span>
+      <span class="footer-copyright">© 2024 Turner Law Offices, P.C. Systems, Inc. All rights reserved.</span>
+      <div class="footer-social">
+        <a href="https://twitter.com/TurnerLaw" aria-label="Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://www.facebook.com/Turner-Law-Offices-134662523231980" aria-label="Facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="http://www.linkedin.com/profile/view?id=18133653&authType=name&authToken=-RwZ&trk=prof-sb-browse_map-name" aria-label="LinkedIn">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="https://www.google.com/maps/dir//''/data=!4m7!4m6!1m1!4e2!1m2!1m1!1s0x886466585ef5f7a7:0xcfb02ae9da4ea3a0!3e0?g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYASAA" aria-label="Google Business">
+          <i class="fab fa-google"></i>
+        </a>
+      </div>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.turnerlawoffices.com/about-us/">About</a>
+      <a href="https://www.turnerlawoffices.com/disclaimer/">Legal Disclaimer</a>
+      <a href="https://www.turnerlawoffices.com/privacy-policy/">Privacy Policy</a>
+      <a href="https://www.turnerlawoffices.com/contact-us/">Contact</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
