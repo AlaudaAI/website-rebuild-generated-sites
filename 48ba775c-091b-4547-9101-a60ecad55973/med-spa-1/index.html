@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relive Health</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  position: relative;
+  background: url('https://relivehealth.com/wp-content/uploads/2024/11/DSC00139.jpg') center/cover no-repeat;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(244, 240, 234, 0.7);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* About Section */
+.about {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.about-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.about-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.about-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+}
+
+.about-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Mission Section */
+.mission {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.mission-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.mission-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.mission-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  line-height: 1.55;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Innovative Treatments Section */
+.innovative {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.innovative-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.innovative-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.innovative-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.innovative-item {
+  text-align: center;
+}
+
+.innovative-item h3 {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-sm);
+}
+
+.innovative-item p {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.service-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.service-cell:last-child {
+  border-bottom: none;
+}
+
+.service-name {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-xs);
+}
+
+.service-description {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--placeholder-gray);
+}
+
+/* Team Section */
+.team {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.team-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.team-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  align-items: center;
+  text-align: center;
+}
+
+.team-photo {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.team-name {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.team-role {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--placeholder-gray);
+}
+
+.team-bio {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.5;
+  max-width: 600px;
+}
+
+/* Success Stories Section */
+.success-stories {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.success-stories-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.success-stories-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+/* Testimonials Section */
+.testimonials {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.testimonials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonials-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.testimonial {
+  text-align: center;
+  padding: var(--space-md);
+  border: 1px solid var(--border-black);
+}
+
+.testimonial-quote {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.5;
+  margin-bottom: var(--space-md);
+}
+
+.testimonial-author {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+/* Contact Section */
+.contact {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-item h4 {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+}
+
+.contact-item p {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+.contact-item a {
+  text-decoration: underline;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+  
+  .nav-links {
+    gap: var(--space-sm);
+  }
+  
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+  }
+  
+  .about,
+  .mission,
+  .innovative,
+  .team,
+  .success-stories,
+  .testimonials,
+  .contact {
+    padding: var(--space-lg) var(--pad-x);
+  }
+  
+  .services {
+    padding: var(--space-md) var(--pad-x);
+  }
+  
+  .team-photo {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .about-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .innovative-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .service-cell:nth-child(odd):not(:nth-last-child(-n+2)) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(even):not(:nth-last-child(-n+2)) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .about {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .team {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .mission,
+  .innovative,
+  .success-stories,
+  .testimonials,
+  .contact {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Relive Health</a>
+  <ul class="nav-links">
+    <li><a href="https://relivehealth.com/austin-tx/personalized-health">health</a></li>
+    <li><a href="https://relivehealth.com/austin-tx/medical-aesthetics">aesthetics</a></li>
+    <li><a href="https://relivehealth.com/austin-tx/about-us">about</a></li>
+    <li><a href="https://relivehealth.com/austin-tx/contact">contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">Take Charge of your health in Austin</h1>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <span class="about-label">001 — about relive health</span>
+    <div class="about-text">
+      <p>At Relive Health Austin, we believe symptoms are signals, pointing to something deeper. Our team takes a personalized approach by looking at your full health picture: lifestyle, lab results, concerns, and goals. This helps us identify the root causes behind what's keeping you from feeling your best.</p>
+      <p>Whether you're dealing with low energy, weight gain, hormone imbalance, or skin issues, we treat your health with a whole-body perspective. Gut health, stress, sleep, nutrition, and physical activity all play a role in your day-to-day wellbeing. That's why we offer everything from comprehensive lab testing and hormone therapy to IV vitamin drips and aesthetic services, all designed to help you look and feel better from the inside out.</p>
+      <p>Relive Health Austin combines experience in functional medicine, aesthetics, and wellness with a commitment to long-term care. When you walk through our doors, you're not just a patient, you're a partner on a journey toward lasting health and confidence.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Mission Section -->
+<section class="mission" id="mission">
+  <div class="mission-inner">
+    <h2 class="mission-heading">Our Mission</h2>
+    <div class="mission-text">
+      <p>Relive Health's mission is to guide you toward better health and well-being. Whether you're seeking balanced hormones or younger-looking skin, we take the time to understand your needs and create a treatment plan tailored just for you.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Innovative Treatments Section -->
+<section class="innovative" id="innovative">
+  <div class="innovative-inner">
+    <h2 class="innovative-heading">innovative treatments. Unparalleled Care.</h2>
+    <p style="text-align: center; font-family: var(--font-serif); font-size: clamp(1.1rem, 2vw, 1.4rem); font-weight: 300; margin-bottom: var(--space-lg); max-width: 800px; margin-left: auto; margin-right: auto;">Our team blends the most innovative therapies with unmatched support to help you achieve lasting health and vitality.</p>
+    <div class="innovative-grid">
+      <div class="innovative-item">
+        <h3>Personalized Health</h3>
+        <p>Male and female hormone therapy, peptides, medical weight loss and more.</p>
+      </div>
+      <div class="innovative-item">
+        <h3>Wellness</h3>
+        <p>Vitamin therapy treatments fully customized to your specific needs.</p>
+      </div>
+      <div class="innovative-item">
+        <h3>Anti-Aging</h3>
+        <p>Advanced medical aesthetics, cosmetic & laser treatments.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services Grid -->
+<section class="services" id="services">
+  <div class="services-grid">
+    <div class="service-cell">
+      <div class="service-name">Men's Hormone Therapy</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Women's Hormone Therapy</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Medical Weight Loss</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">IV Vitamin Therapy</div>
+      <div class="service-description">Vitamin therapy treatments fully customized to your specific needs</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Ozone Therapy</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">VISIA® Skin Analysis</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Neurotoxins</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Dermal Filler</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Hydrafacial®</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Laser Skin Resurfacing</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Hormone Replacement Therapy</div>
+      <div class="service-description">Science backed, clinical approach to correcting hormone imbalances</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Regenerative Medicine</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Blood Work</div>
+      <div class="service-description">Comprehensive lab testing</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Laser Hair Removal</div>
+    </div>
+    <div class="service-cell">
+      <div class="service-name">Micro-needling Facials</div>
+      <div class="service-description">With or without PRP</div>
+    </div>
+  </div>
+</section>
+
+<!-- Team Section -->
+<section class="team" id="team">
+  <div class="team-inner">
+    <h2 class="team-heading">Meet Our Team</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <img src="https://relivehealth.com/wp-content/uploads/2024/10/4-1.jpg" alt="Brian Brown, MD" class="team-photo">
+        <div class="team-name">Brian Brown, MD</div>
+        <div class="team-role">Medical Director</div>
+        <div class="team-bio">Dr. Brian Brown was born and raised in Corpus Christi, Tx. He went to college at Texas Tech University where he earned a degree in biology. He then went on to attend Medical School at the American University of the Caribbean. He trained in various locations across the country such as Baltimore, NYC and multiple cities throughout the state of Texas. Upon graduation he returned to Corpus Christi and completed his residency.</div>
+      </div>
+      <div class="team-member">
+        <div class="team-name">Jenny Gates, APRN, FNP-C</div>
+        <div class="team-role">Nurse Practitioner</div>
+        <div class="team-bio">Jenny earned both her Bachelor's and Master's of Science in Nursing from West Texas A&M University in Canyon, Texas. With over 15 years of diverse experience across multiple populations, Jenny brings a compassionate, evidence-based approach to healthcare. She specializes in integrative and holistic medicine, bioidentical hormone replacement therapy, and medical weight loss.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Success Stories Section -->
+<section class="success-stories" id="success-stories">
+  <div class="success-stories-inner">
+    <h2 class="success-stories-heading">Success Stories</h2>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials" id="testimonials">
+  <div class="testimonials-inner">
+    <h2 class="testimonials-heading">What Our Clients Say</h2>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-heading">Get Started<br>Today</h2>
+    <div class="contact-info">
+      <div class="contact-item">
+        <h4>address</h4>
+        <p>10710 Research Blvd #136<br>Austin, TX 78759</p>
+      </div>
+      <div class="contact-item">
+        <h4>phone</h4>
+        <p><a href="tel:5125222900">(512) 522-2900</a></p>
+      </div>
+      <div class="contact-item">
+        <h4>hours</h4>
+        <p>Mon: Closed<br>
+        Tue: 9am – 5pm<br>
+        Wed: 10am – 7pm<br>
+        Thu: 9am – 5pm<br>
+        Fri: 9am – 5pm<br>
+        Sat: Closed<br>
+        Sun: Closed</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Relive Health</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
