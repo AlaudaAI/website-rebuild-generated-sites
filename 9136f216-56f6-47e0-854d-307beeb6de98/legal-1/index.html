@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lawyers People Love</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand-logo {
+  height: 32px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .brand-logo {
+  height: 38px;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+.hero-visual img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 16px;
+}
+
+/* Features Grid */
+.features {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.feature-card {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+.feature-card:last-child {
+  border-bottom: none;
+}
+
+.feature-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.feature-protocol {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.feature-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.feature-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 380px;
+}
+
+/* About Section */
+.about {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.about-content {
+  max-width: 800px;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.section-subtitle {
+  font-family: var(--font-serif);
+  font-size: clamp(18px, 3vw, 22px);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--text-muted);
+  margin-bottom: var(--space-lg);
+}
+
+.about-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: var(--space-lg);
+}
+
+/* Team Section */
+.team {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.team-photo {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+.team-info h3 {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.team-info .role {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-md);
+}
+
+.team-bio {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* Contact Section */
+.contact {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.contact-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.contact-value {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.contact-value a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-value a:hover {
+  color: var(--text-muted);
+}
+
+.map-container {
+  width: 100%;
+  height: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Testimonials Section */
+.testimonials {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.testimonial-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: var(--space-lg);
+}
+
+.testimonial-text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.testimonial-author {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+.footer-social {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.footer-social a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-social a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== MOBILE (max-width: 768px) =================== */
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .hero-text {
+    gap: var(--space-md);
+  }
+
+  .hero-headline {
+    font-size: clamp(28px, 7vw, 36px);
+  }
+
+  .hero-subheading {
+    font-size: clamp(14px, 2vw, 16px);
+  }
+
+  .hero-cta {
+    padding: 12px 24px;
+    font-size: 10px;
+  }
+
+  .feature-card {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .feature-title {
+    font-size: clamp(18px, 4vw, 22px);
+  }
+
+  .feature-description {
+    font-size: 13px;
+  }
+
+  .about, .team, .contact, .testimonials {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .section-title {
+    font-size: clamp(22px, 5vw, 28px);
+  }
+
+  .section-subtitle {
+    font-size: clamp(16px, 3vw, 18px);
+  }
+
+  .about-text {
+    font-size: 13px;
+  }
+
+  .team-member {
+    gap: var(--space-md);
+  }
+
+  .team-photo {
+    width: 150px;
+    height: 150px;
+  }
+
+  .team-info h3 {
+    font-size: 20px;
+  }
+
+  .team-bio {
+    font-size: 13px;
+  }
+
+  .testimonial-text {
+    font-size: 14px;
+  }
+
+  .footer {
+    padding: var(--space-lg) var(--space-md);
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:last-child {
+    border-right: none;
+  }
+
+  .team-member {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .testimonial-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .feature-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .about, .team, .contact, .testimonials {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .feature-card {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="#" class="brand">
+    <img src="https://lawpeolov.wpengine.com/wp-content/uploads/2017/07/lpl-logo-light.png" alt="Lawyers People Love" class="brand-logo">
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="#" class="brand-link">
+      <img src="https://lawpeolov.wpengine.com/wp-content/uploads/2017/07/lpl-logo-light.png" alt="Lawyers People Love" class="brand-logo">
+    </a>
+    <nav>
+      <a href="https://lawyerspeoplelove.com/about-us/">About Us</a>
+      <a href="https://lawyerspeoplelove.com/services/">Services</a>
+      <a href="https://lawyerspeoplelove.com/testimonials/">Testimonials</a>
+      <a href="https://lawyerspeoplelove.com/blog/">Blog</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Available for Consultation</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Licensed in Tennessee</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Nashville Family Law</span>
+      <h1 class="hero-headline">The Nashville Family Law and Divorce Lawyers People Really Love</h1>
+      <p class="hero-subheading">We care. We get results. Don't wait until it's too late!</p>
+      <a href="https://lawyerspeoplelove.com/request-free-consultation/" class="hero-cta">Request a Free Consultation <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+    </div>
+    <div class="hero-visual">
+      <img src="https://lawpeolov.wpengine.com/wp-content/uploads/2017/07/asset-16.png" alt="Nashville Family Law">
+    </div>
+  </section>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/download_white.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Do you need to talk to a lawyer? Section -->
+  <section class="about">
+    <div class="about-content">
+      <h2 class="section-title">Do you need to talk to a lawyer?</h2>
+      <p class="about-text">We understand that dealing with legal issues can be overwhelming and stressful. Whether you're facing a divorce, custody battle, or other family law matter, having the right legal representation can make all the difference in achieving a favorable outcome.</p>
+      <div style="margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/refresh_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:300px"></div>
+      <p class="about-text">Our experienced Nashville family law attorneys are here to provide you with the guidance, support, and aggressive representation you need during this difficult time. We take the time to understand your unique situation and work tirelessly to protect your rights and interests.</p>
+    </div>
+  </section>
+
+  <!-- Common Divorce Questions Section -->
+  <section class="about">
+    <div class="about-content">
+      <h2 class="section-title"><a href="https://lawyerspeoplelove.com/divorce/common-divorce-questions/" style="color: var(--text-primary); text-decoration: none;">Common Divorce Questions</a></h2>
+      <p class="about-text">Divorce can be one of the most challenging experiences in a person's life. If you're considering divorce or are already in the process, you likely have many questions about what to expect. Here are some of the most common questions we receive from clients:</p>
+      <div style="margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/refresh_white_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:300px"></div>
+      <p class="about-text">Understanding the divorce process in Tennessee is crucial for making informed decisions about your future. Our experienced divorce attorneys can help answer your specific questions and guide you through every step of the process.</p>
+      <div style="margin:1rem 0"><img src="https://www.gstatic.com/recaptcha/api2/audio_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:200px"></div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about">
+    <div class="about-content">
+      <h2 class="section-title">Nashville's Most Loved Family Law and Divorce Lawyers</h2>
+      <h3 class="section-subtitle">Choose a Nashville lawyer with experience helping families, businesses and individuals navigate challenging legal issues</h3>
+      <div style="margin:1rem 0"><img src="https://www.gstatic.com/recaptcha/api2/audio_white_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:200px"></div>
+      <p class="about-text">You want an attorney who will empathize with your situation and fight passionately on your behalf, without emptying your pocketbook. This is how Lisa P. Webb runs her practice — with empathy, conviction and the experience necessary to deliver the results you deserve. Lisa is local to Nashville, which is becoming less common by the minute, and this matters.</p>
+      <p class="about-text">Lisa has lived and worked in Nashville for the entirety of her career. Her intimate knowledge of the local court systems, her exceptional track record of success, affordable fees and a deep sense of commitment to fight for her clients, are only some of the reasons why you should choose Lisa to represent you!</p>
+      <div style="margin:1rem 0"><img src="https://www.gstatic.com/recaptcha/api2/image_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:200px"></div>
+    </div>
+  </section>
+
+  <!-- Services Grid -->
+  <section class="features">
+    <div class="feature-card">
+      <p class="feature-protocol">Service 01</p>
+      <h3 class="feature-title">Divorce and Mediation</h3>
+      <p class="feature-description">Divorces are often deeply stressful, emotionally taxing times in your life, especially if there are children involved. Our Nashville divorce attorneys work hard to make the process as easy as possible for you, as we fight on your behalf to get what you deserve.</p>
+      <div style="margin:1rem 0"><img src="https://www.gstatic.com/recaptcha/api2/image_white_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:200px"></div>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Service 02</p>
+      <h3 class="feature-title">Family Law</h3>
+      <p class="feature-description">Family law encompasses many areas, including domestic abuse, adoption issues, child abuse, civil unions and more. These are often tragic situations that can rip families apart that require a sympathetic attorney to fight on your behalf.</p>
+      <div style="margin:1rem 0"><img src="https://www.gstatic.com/recaptcha/api2/liveness_dark.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:200px"></div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team">
+    <div class="team-member">
+      <img src="https://lawyerspeoplelove.com/wp-content/uploads/bfi_thumb/lisa-r8pswvyvr2j56mgownlzhplhrcyb7ilqlt53xyi7j2.jpg" alt="Lisa Webb" class="team-photo">
+      <div class="team-info">
+        <h3>Lisa Webb</h3>
+        <p class="role">Attorney</p>
+        <p class="team-bio">Lisa is a Nashville native who received her Juris Doctor from the Nashville School of Law and has excelled in a wide variety of practices including family law, domestic violence, mediation, divorce and much more. Her peers have awarded her honors including Top 10 Under 40 – National Academy of Family Law Attorneys and 10 Best Female Attorneys – American Institute of Family Law Attorneys.</p>
+        <div style="margin:1rem 0"><img src="https://www.gstatic.com/recaptcha/api2/modac_mobile_dark.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:200px"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <span class="hero-label">Client Testimonials</span>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-text">"Lisa was an excellent attorney. She came highly recommended to me. She was so strategic in everything she does in each case it was fascinating. She has a great personality but is very aggressive when necessary. I recommend her to anyone needing a lawyer. You will love her!"</p>
+        <p class="testimonial-author">Amanda</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">"Lisa was an awesome attorney . She took our case and fought for our grandson . She showed extreme knowledge and worked long hours to make sure we had a favorable outcome . So thankful Lisa was recommended to us . She was honest , kind and extremely approachable. I never had to wait long for a response from her . She replied in a timely manner to all my emails and phone calls . She has a real courtroom presence. I would highly recommend her ."</p>
+        <p class="testimonial-author">Bobby</p>
+      </div>
+    </div>
+    <div style="margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/liveness_light.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:300px"></div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact">
+    <span class="hero-label">Contact Information</span>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-item">
+          <span class="contact-label">Location</span>
+          <div class="contact-value">
+            <a href="https://goo.gl/maps/Z1tMsAuNcL2Xamj59" target="_blank">5409 Maryland Way, Suite 333,<br>Brentwood, TN 37027</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">Phone</span>
+          <div class="contact-value">
+            <a href="tel:615-628-7052">Lisa: (615) 628-7052</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">Fax</span>
+          <div class="contact-value">(615) 469-6871</div>
+        </div>
+      </div>
+      <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3225.8!2d-86.7816!3d35.9962!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8864661c6c6c6c6c%3A0x6c6c6c6c6c6c6c6c!2s5409%20Maryland%20Way%2C%20Brentwood%2C%20TN%2037027!5e0!3m2!1sen!2sus!4v1234567890" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Lawyers People Love</span>
+      <span class="footer-copyright">© 2017 Lawyers People Love Systems, Inc. All rights reserved.</span>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/lawyerspeoplelove/" target="_blank" aria-label="Facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </div>
+    </div>
+    <div class="footer-links">
+      <a href="https://lawyerspeoplelove.com/privacy-policy">Privacy Policy</a>
+      <a href="https://lawyerspeoplelove.com/about-us/">About Us</a>
+      <a href="https://lawyerspeoplelove.com/services/">Services</a>
+      <a href="https://lawyerspeoplelove.com/request-free-consultation/">Free Consultation</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
