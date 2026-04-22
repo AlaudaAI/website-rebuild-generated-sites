@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stratton Family Law</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .brand-logo {
+  width: 38px;
+  height: 38px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Visual Demo */
+.hero-visual {
+  width: 100%;
+  max-width: 400px;
+}
+
+.hero-image {
+  width: 100%;
+  border-radius: 16px;
+  background: var(--bg-card);
+  padding: var(--space-md);
+  aspect-ratio: 3/2;
+  object-fit: cover;
+}
+
+/* Services Section */
+.services {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.services-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.services-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.services-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.service-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+  border: 1px solid var(--border-color);
+  border-radius: 50px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* About Section */
+.about {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.about-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.about-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.about-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.about-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 600px;
+}
+
+.about-image {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 12px;
+  aspect-ratio: 3/2;
+  object-fit: cover;
+  border: 1px solid var(--border-color);
+}
+
+/* Team Section */
+.team {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.team-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.team-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.team-member {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--bg-card);
+}
+
+.team-member-photo {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--border-color);
+  background: var(--bg-hover);
+}
+
+.team-member-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.team-member-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.team-member-role {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-muted);
+}
+
+/* Contact Section */
+.contact {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.contact-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.contact-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.contact-item-label {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.contact-item-value {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.contact-item-value a {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.contact-item-value a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== MOBILE (max-width: 768px) =================== */
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-lg) var(--space-md);
+    gap: var(--space-lg);
+  }
+
+  .hero-headline {
+    font-size: clamp(28px, 7vw, 36px);
+  }
+
+  .hero-subheading {
+    font-size: 16px;
+  }
+
+  .hero-cta {
+    padding: 12px 24px;
+    font-size: 10px;
+  }
+
+  .services {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .about {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .team {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .contact {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .footer {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .mobile-header .brand-name {
+    font-size: 12px;
+  }
+
+  .services-list {
+    gap: var(--space-sm);
+  }
+
+  .service-item {
+    padding: 10px 16px;
+    font-size: 11px;
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .about {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .about-content {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-2xl);
+  }
+
+  .about-text {
+    flex: 1;
+  }
+
+  .about-image {
+    flex: 0 0 300px;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .services {
+    padding: var(--space-2xl) var(--space-2xl);
+  }
+
+  .about {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .team {
+    padding: var(--space-2xl) var(--space-2xl);
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .contact {
+    padding: var(--space-2xl) var(--space-2xl);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="https://strattonlawtn.com/" class="brand">
+    <img src="https://strattonlawtn.com/images/logo.png" alt="Logo" class="brand-logo">
+    <span class="brand-name">Stratton Family Law</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="https://strattonlawtn.com/" class="brand-link">
+      <img src="https://strattonlawtn.com/images/logo.png" alt="Logo" class="brand-logo">
+      <span class="brand-name">Stratton Family Law</span>
+    </a>
+    <nav>
+      <a href="https://strattonlawtn.com/">Home</a>
+      <a href="https://strattonlawtn.com/bryan-stratton/">Bryan Stratton</a>
+      <a href="https://strattonlawtn.com/dillon-estes/">Dillon Estes</a>
+      <a href="https://strattonlawtn.com/martha-alef/">Martha Alef</a>
+      <a href="https://strattonlawtn.com/divorce/">Divorce</a>
+      <a href="https://strattonlawtn.com/custody-support/">Custody & Support</a>
+      <a href="https://strattonlawtn.com/alimony/">Alimony</a>
+      <a href="https://strattonlawtn.com/adoption/">Adoption</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Free Consultation Available</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Nashville Office Open</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Nashville Family Law</span>
+      <h1 class="hero-headline">Your Nashville Family Attorneys</h1>
+      <p class="hero-subheading">We are Stratton Family Law and we are a group of experienced and passionate family law lawyers. We've helped clients from every walk of life with their legal needs.</p>
+      <a href="tel:615-252-5791" class="hero-cta">Free Consultation: 615-252-5791 <i class="fas fa-phone" style="font-size:10px;"></i></a>
+    </div>
+    <div class="hero-visual">
+      <img src="https://strattonlawtn.com/images/nashville-web-22.jpg" alt="Nashville Law Office" class="hero-image">
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services">
+    <span class="services-label">Practice Areas</span>
+    <h2 class="services-title">Family Law Services</h2>
+    <div class="services-list">
+      <div class="service-item">Divorce</div>
+      <div class="service-item">Child Custody & Support</div>
+      <div class="service-item">Alimony</div>
+      <div class="service-item">Adoption</div>
+      <div class="service-item">Property Division</div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about">
+    <div class="about-content">
+      <div class="about-text">
+        <span class="about-label">About Our Firm</span>
+        <h2 class="about-title">Experience and Dedication – Trust Stratton Family Law</h2>
+        <p class="about-description">We focus on the practice of family law, including handling divorces, child custody cases, alimony orders, or adoptions. If you're in need of assistance in one of these areas please call our office today. We'll devote every resource at my disposal to helping you achieve your goal.</p>
+        <p class="about-description">No matter what your legal needs, when you come to our law office, your first consultation is free and you're under no obligation to retain our services. We simply want to offer the best and most complete service to each client, no matter who you are or what may be your problem.</p>
+      </div>
+      <img src="https://strattonlawtn.com/images/Bryan_Stratton.jpg" alt="Bryan Stratton" class="about-image">
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team">
+    <span class="team-label">Our Attorneys</span>
+    <h2 class="team-title">Legal Team</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <div class="team-member-photo"></div>
+        <div class="team-member-info">
+          <div class="team-member-name">Bryan Stratton</div>
+          <div class="team-member-role">Attorney</div>
+        </div>
+      </div>
+      <div class="team-member">
+        <div class="team-member-photo"></div>
+        <div class="team-member-info">
+          <div class="team-member-name">Dillon Estes</div>
+          <div class="team-member-role">Attorney</div>
+        </div>
+      </div>
+      <div class="team-member">
+        <div class="team-member-photo"></div>
+        <div class="team-member-info">
+          <div class="team-member-name">Martha Alef</div>
+          <div class="team-member-role">Attorney</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact">
+    <span class="contact-label">Get In Touch</span>
+    <h2 class="contact-title">Contact Our Office</h2>
+    <div class="contact-info">
+      <div class="contact-item">
+        <span class="contact-item-label">Phone</span>
+        <div class="contact-item-value"><a href="tel:615-252-5791">615-252-5791</a></div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-item-label">Address</span>
+        <div class="contact-item-value">3102 West End Avenue, Suite 400<br>Nashville, TN 37203</div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-item-label">Hours</span>
+        <div class="contact-item-value">Monday - Friday: 8:00 AM - 5:00 PM<br>Saturday - Sunday: Closed</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Stratton Family Law</span>
+      <span class="footer-copyright">COPYRIGHT 2026 - STRATTON FAMILY LAW</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://strattonlawtn.com/">Home</a>
+      <a href="https://strattonlawtn.com/bryan-stratton/">Bryan Stratton</a>
+      <a href="https://strattonlawtn.com/dillon-estes/">Dillon Estes</a>
+      <a href="https://strattonlawtn.com/martha-alef/">Martha Alef</a>
+      <a href="https://strattonlawtn.com/divorce/">Divorce</a>
+      <a href="https://strattonlawtn.com/custody-support/">Custody & Support</a>
+      <a href="https://strattonlawtn.com/alimony/">Alimony</a>
+      <a href="https://strattonlawtn.com/adoption/">Adoption</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
