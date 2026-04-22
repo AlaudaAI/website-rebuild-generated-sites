@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leo Aesthetics</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background: url('https://static.wixstatic.com/media/1e67de_9c8e74a1fce44ea791b1d489e5f364a9~mv2.jpg/v1/fill/w_1905,h_855,al_l,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/1e67de_9c8e74a1fce44ea791b1d489e5f364a9~mv2.jpg') center/cover no-repeat;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(26, 26, 26, 0.3);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 600px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Philosophy Section */
+.philosophy {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.philosophy-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.philosophy-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.philosophy-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Services Section */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.service-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.service-cell:last-child {
+  border-bottom: none;
+}
+
+.service-icon {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto var(--space-sm) auto;
+}
+
+.service-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.service-title {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.service-list {
+  list-style: none;
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+/* Team Section */
+.team {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.team-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.team-intro {
+  margin-bottom: var(--space-lg);
+}
+
+.team-intro h2 {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-md);
+}
+
+.team-intro p {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.8;
+  max-width: 800px;
+  margin: 0 auto var(--space-md) auto;
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.team-photo {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border: 1px solid var(--border-black);
+}
+
+.team-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.3s ease;
+}
+
+.team-photo:hover img {
+  filter: grayscale(0%);
+}
+
+.team-info h3 {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.team-info p {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.stats {
+  text-align: center;
+  margin-top: var(--space-lg);
+}
+
+.stat-item {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.8;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  display: block;
+}
+
+/* Testimonials Section */
+.testimonials {
+  padding: var(--space-lg) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.testimonials-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.testimonial {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.testimonial-text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+}
+
+.testimonial-author {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Contact Section */
+.contact {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.contact-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-section h4 {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.contact-section p, .contact-section a {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+  
+  .hero-headline {
+    font-size: 2.2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.6rem;
+  }
+  
+  .philosophy-text {
+    font-size: 1.25rem;
+  }
+  
+  .service-cell {
+    padding: var(--space-sm);
+  }
+  
+  .team-photo {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .contact-info {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .philosophy-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .service-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(3n) {
+    border-right: none;
+  }
+
+  .service-cell:nth-child(-n+3) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .team-member {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .contact-info {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .philosophy {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .contact {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Leo Aesthetics</a>
+  <ul class="nav-links">
+    <li><a href="https://www.leo-aesthetics.com/cosmetic-injections-leander-hutto">cosmetic injections</a></li>
+    <li><a href="https://www.leo-aesthetics.com/skin-rejuvenation">skin rejuvenation</a></li>
+    <li><a href="https://www.leo-aesthetics.com/wellness-and-hair-replacement">wellness</a></li>
+    <li><a href="https://www.leo-aesthetics.com/weight-loss-injections-leander-hutto">weight loss</a></li>
+    <li><a href="https://www.leo-aesthetics.com/ways-to-save">ways to save</a></li>
+    <li><a href="https://www.leo-aesthetics.com/about-us">about</a></li>
+    <li><a href="https://www.leo-aesthetics.com/contact-leo">contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">Look Sharp. Feel Fierce. Stay You.</h1>
+    <p class="hero-subtitle">Welcome to Leo Aesthetics in Leander and Hutto—where beauty isn't about fitting in, it's about standing out. Led by Cat, aka the Tattooed Nurse Injector, we're flipping the script on the traditional med spa experience with bold energy, clinical expertise, and a whole lot of Leo energy.</p>
+  </div>
+</section>
+
+<!-- Philosophy Section -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">002 — our approach</span>
+    <div class="philosophy-text">
+      <p>Whether you're looking to smooth, plump, or define, with cosmetic injections or hit the reset button your skin, our services are designed to highlight your best features. Every treatment is customized to your face, your vibe, and your goals.</p>
+      <p>Looking for results and personality? You just found your new favorite med spa. At Leo Aesthetics, we do things differently. Our space is bold, our team is badass, and our results speak for themselves. We combine medical expertise with an unapologetically fun, feminine, and fearless vibe that delivers unmatched results.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="services" id="services">
+  <div class="services-grid">
+    <div class="service-cell">
+      <div class="service-icon">
+        <img src="https://static.wixstatic.com/media/1e67de_79b9406ab57147329e4ff6e45cf21d42~mv2.png/v1/fill/w_157,h_157,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Cosmetic%20Injections%20at%20Leo%20Aesthetics.png" alt="Cosmetic Injections">
+      </div>
+      <h3 class="service-title">Cosmetic Injections</h3>
+      <ul class="service-list">
+        <li>Tox (Dysport®)</li>
+        <li>Dermal Filler</li>
+        <li>Sculptra</li>
+      </ul>
+    </div>
+    <div class="service-cell">
+      <div class="service-icon">
+        <img src="https://static.wixstatic.com/media/1e67de_fdf2c7c6ec1044f587b6e3e6186fd36a~mv2.png/v1/fill/w_157,h_157,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Skin%20Rejuvenation%20at%20Leo%20Aesthetics.png" alt="Skin Rejuvenation">
+      </div>
+      <h3 class="service-title">Skin Rejuvenation</h3>
+      <ul class="service-list">
+        <li>Microneedling</li>
+        <li>VI Peels</li>
+        <li>HydraBeauty</li>
+      </ul>
+    </div>
+    <div class="service-cell">
+      <div class="service-icon">
+        <img src="https://static.wixstatic.com/media/1e67de_9ffd1f528fa24aa18c2d19c44d05548f~mv2.png/v1/fill/w_157,h_157,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Weight%20Loss%20at%20Leo%20Aesthetics.png" alt="Weight Loss">
+      </div>
+      <h3 class="service-title">Weight Loss</h3>
+      <ul class="service-list">
+        <li>Semaglutide</li>
+        <li>Tirzepatide</li>
+        <li>Lipo Shot</li>
+      </ul>
+    </div>
+    <div class="service-cell">
+      <div class="service-icon">
+        <img src="https://static.wixstatic.com/media/1e67de_e536e998630049d29044e1a71d0eb49e~mv2.png/v1/fill/w_157,h_157,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Hair%20Restoration%20at%20Leo%20Aesthetics.png" alt="Hair Restoration">
+      </div>
+      <h3 class="service-title">Hair Restoration</h3>
+      <ul class="service-list">
+        <li>State-of-the Art hair restoration</li>
+      </ul>
+    </div>
+    <div class="service-cell">
+      <div class="service-icon">
+        <img src="https://static.wixstatic.com/media/1e67de_2c9ed5252e7f432abfbe04d70323ef43~mv2.png/v1/fill/w_157,h_157,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Wellness%20at%20Leo%20Aesthetics.png" alt="Wellness">
+      </div>
+      <h3 class="service-title">Wellness</h3>
+      <ul class="service-list">
+        <li>Vitamin Shots</li>
+        <li>Lipo Shot</li>
+        <li>Peptide Therapy</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Team Section -->
+<section class="team" id="team">
+  <div class="team-inner">
+    <div class="team-intro">
+      <h2>Meet the Team & Learn More about Leo aesthetics</h2>
+      <p>With over 18 years in the aesthetic industry, our team is composed of talented nurses who aim to help you find solutions to your anti-aging needs. Our goal is to deliver natural looking results at our Leander and Hutto locations to help you look and feel your best.</p>
+    </div>
+    
+    <div class="team-member">
+      <div class="team-photo">
+        <img src="https://static.wixstatic.com/media/2f897e_0f0f24e4832541ada4af53b695cbda52~mv2.jpg/v1/fill/w_583,h_498,al_b,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/2f897e_0f0f24e4832541ada4af53b695cbda52~mv2.jpg" alt="Caitlin Shrader">
+      </div>
+      <div class="team-info">
+        <h3>caitlin shrader</h3>
+        <p>nurse injector</p>
+      </div>
+    </div>
+
+    <div class="team-member">
+      <div class="team-photo">
+        <img src="" alt="Pamela Garner-Taylor">
+      </div>
+      <div class="team-info">
+        <h3>Pamela Garner-Taylor</h3>
+        <p></p>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat-item">
+        <span class="stat-number">18+</span>
+        years in the aesthetic industry
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+  <div class="testimonials-grid">
+    <div class="testimonial">
+      <p class="testimonial-text">I can't say enough good things about Caitlin at Leo's Aesthetic! She's hands down the best nurse injector in town. Every time I walk out of my appointment, I'm beyond thrilled with the results. Caitlin is not only a pro at what she does, but she's also super honest about the treatments, which I really appreciate. She answers all my questions with patience and clarity, making sure I feel totally comfortable and informed. Plus, she does follow-ups to ensure I'm looking and feeling my best. If you're looking for someone who truly cares about your results, Caitlin's your girl! Highly recommend!</p>
+      <div class="testimonial-author">AnnaLisya T. — Google Review</div>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-text">Caitlin at Leo Aesthetics is fantastic! She clearly explained her services, including procedures I was initially nervous about, and went above and beyond to answer all of my questions in depth. After our consultation, I decided to book a procedure, including the VI Peel, and the experience was great—I was in and out quickly, and Caitlin made sure I felt comfortable the entire time. She also provided thorough follow-up care instructions and checked in on me afterward, which I really appreciated. I'll definitely be revisiting Caitlin and am so glad to have found a great esthetician in Hutto.</p>
+      <div class="testimonial-author">Sari S. — Google Review</div>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-text">Wow!!!! Have you ever wanted to have someone listen to your needs, be honest and not feel like you're being rushed in and out for another client? I have to! Well, look no further. Kat is absolutely amazing! I would highly recommend her in every aspect of beauty. She takes her time, gives you treatment options and she won't drain your pocket book. If you want to feel beautiful; I don't know many woman who don't want that! Kat is your girl! I cannot say enough positive things about her and my treatment. Give Kat a chance! I promise you won't be disappointed and you'll feel like a real queen when you leave! I'll never go anywhere else!</p>
+      <div class="testimonial-author">Michelle R. — Google Review</div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-heading">Injectables, skin rejuvenation and wellness all under one roof.</h2>
+    <div class="contact-info">
+      <div class="contact-section">
+        <h4>Locations</h4>
+        <p><strong>Leo Aesthetics - Leander</strong><br>
+        11620 Hero Way<br>
+        Suite 230, Loft 33<br>
+        Leander, TX 78641<br>
+        <em>*Located inside Salons by JC*</em></p>
+        
+        <p><strong>Leo Aesthetics - Hutto</strong><br>
+        531 Ed Schmidt Blvd<br>
+        Suite 9<br>
+        Hutto, TX 78634<br>
+        <em>*Located inside Salon Lofts*</em></p>
+      </div>
+      
+      <div class="contact-section">
+        <h4>Contact</h4>
+        <p><a href="tel:512-913-4225">512-913-4225</a></p>
+        <p><a href="mailto:info@Leo-aesthetics.com">info@Leo-aesthetics.com</a></p>
+        
+        <h4>Social</h4>
+        <p><a href="https://www.instagram.com/leo.aesthetics/">Instagram</a></p>
+        <p><a href="https://www.facebook.com/LeoAestheticsTexas">Facebook</a></p>
+        
+        <h4>Hours</h4>
+        <p>Tue - Fri: 10am - 6pm<br>
+        Saturday: Appointment only<br>
+        Sunday- Monday: Closed</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Leo Aesthetics</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
