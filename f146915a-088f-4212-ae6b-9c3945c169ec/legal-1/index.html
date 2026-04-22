@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Freeman & Fuson Trial Lawyers</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand-logo {
+  height: 32px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .brand-logo {
+  height: 38px;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Visual Demo */
+.hero-visual {
+  width: 100%;
+  max-width: 400px;
+}
+
+.hero-visual img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+/* Features Grid */
+.features {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.feature-card {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+.feature-card:last-child {
+  border-bottom: none;
+}
+
+.feature-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.feature-protocol {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.feature-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.feature-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 380px;
+}
+
+/* About Section */
+.about-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.about-section img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+/* Team Section */
+.team-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.team-member {
+  padding: var(--space-lg);
+  background: var(--bg-card);
+  border-radius: 12px;
+}
+
+.team-member h4 {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.team-member .role {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: var(--space-sm);
+}
+
+/* Services Section */
+.services-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.service-card {
+  padding: var(--space-lg);
+  background: var(--bg-card);
+  border-radius: 12px;
+  transition: background-color 0.3s ease;
+}
+
+.service-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.service-card h4 {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.service-card p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.service-list {
+  columns: 1;
+  column-gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.service-list li {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-bottom: var(--space-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  break-inside: avoid;
+}
+
+/* Testimonials Section */
+.testimonials-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.testimonial-card {
+  padding: var(--space-lg);
+  background: var(--bg-card);
+  border-radius: 12px;
+}
+
+.testimonial-author {
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.testimonial-text {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Contact CTA */
+.contact-cta {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  text-align: center;
+}
+
+.contact-cta .hero-cta {
+  margin: 0 auto;
+}
+
+/* Blog Section */
+.blog-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.blog-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.blog-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.blog-card h4 {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  color: var(--text-primary);
+}
+
+.blog-card p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-logo {
+  height: 40px;
+  width: auto;
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-contact a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer-contact a:hover {
+  color: var(--text-primary);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+.footer-social {
+  display: flex;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.footer-social a {
+  color: var(--text-muted);
+  font-size: 18px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-social a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== MOBILE (768px and below) =================== */
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .hero-headline {
+    font-size: clamp(28px, 6vw, 36px);
+  }
+
+  .hero-subheading {
+    font-size: clamp(14px, 4vw, 16px);
+  }
+
+  .feature-card {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .services-section,
+  .testimonials-section,
+  .about-section,
+  .team-section,
+  .blog-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .footer {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .contact-cta {
+    padding: var(--space-lg) var(--space-md);
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:last-child {
+    border-right: none;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-list {
+    columns: 2;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .blog-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .feature-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  .service-list {
+    columns: 3;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .feature-card {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <img src="https://lirp.cdn-website.com/79c67c38/dms3rep/multi/opt/fuson-logo-white-520w.png" alt="Freeman & Fuson Trial Lawyers" class="brand-logo">
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <img src="https://lirp.cdn-website.com/79c67c38/dms3rep/multi/opt/fuson-logo-white-520w.png" alt="Freeman & Fuson Trial Lawyers" class="brand-logo">
+    </a>
+    <nav>
+      <a href="https://www.fusonlaw.com/about">About Us</a>
+      <a href="https://www.fusonlaw.com/testimonials">Testimonials</a>
+      <a href="https://www.fusonlaw.com/case-notes">Case Notes</a>
+      <a href="https://www.fusonlaw.com/blog">Blog</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Available 24/7</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Nashville Trial Lawyers</span>
+      <h1 class="hero-headline">Nashville Trial Lawyers, Ready When You Are</h1>
+      <p class="hero-subheading">Experienced, approachable counsel for criminal defense, family law, personal injury, and civil litigation across Middle Tennessee.</p>
+      <a href="tel:+16152987272" class="hero-cta">Call Now <i class="fas fa-phone" style="font-size:10px;"></i></a>
+    </div>
+    <div class="hero-visual">
+      <img src="https://lirp.cdn-website.com/79c67c38/dms3rep/multi/opt/11.20.25-Freeman-Fuson-Headshots-308-1152w.jpg" alt="Freeman & Fuson Trial Lawyers in Nashville, Tennessee">
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section class="features">
+    <div class="feature-card">
+      <p class="feature-protocol">Immediate Defense</p>
+      <h3 class="feature-title">Criminal Protection</h3>
+      <p class="feature-description">Immediate defense after an arrest or investigation (DUI, drug charges, assault, white collar, traffic/CDL, juvenile matters).</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Family Guidance</p>
+      <h3 class="feature-title">Clarity and Protection</h3>
+      <p class="feature-description">Clarity and protection during a family law issue (divorce, custody, orders of protection, post‑divorce modifications).</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Injury Recovery</p>
+      <h3 class="feature-title">Relief and Recovery</h3>
+      <p class="feature-description">Relief and recovery after a motor vehicle or workplace accident (car, truck, motorcycle, wrongful death, workers' comp, slip and fall).</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Dispute Resolution</p>
+      <h3 class="feature-title">Business Resolution</h3>
+      <p class="feature-description">Resolution to a dispute that's holding life or business back (contract, real estate, landlord‑tenant, insurance, TCPA, non‑compete).</p>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-section">
+    <span class="hero-label">About Freeman & Fuson</span>
+    <h2 class="feature-title">What you can expect when you work with us</h2>
+    <p class="feature-description">Personal attention from your attorney, clear communication, and strategy built for results—not surprises.</p>
+    <img src="https://lirp.cdn-website.com/79c67c38/dms3rep/multi/opt/11.20.25-Freeman-Fuson-Headshots-312-2f5fac2a-696w.png" alt="Freeman & Fuson">
+    <p class="feature-description">Founded by Mark T. Freeman, Esq. and Joseph W. Fuson, Esq., Freeman & Fuson Law has built its reputation on being both formidable in the courtroom and compassionate with clients. Our attorneys are seasoned trial lawyers who prepare each case as if it will go before a judge and jury—because that preparation often leads to better outcomes in negotiations, too.</p>
+    <p class="feature-description">We believe legal representation should be as accessible as it is effective. That means clear communication from day one, honest expectations about costs and timelines, and a commitment to treating every case—no matter the size—with the attention it deserves. Our team has successfully handled matters ranging from high‑stakes criminal defense to sensitive family law disputes, complex civil litigation, and life‑altering injury claims.</p>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <span class="hero-label">Our Team</span>
+    <h2 class="feature-title">Meet Our Attorneys and Staff</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <h4>Mark Freeman</h4>
+        <div class="role">Esq.</div>
+      </div>
+      <div class="team-member">
+        <h4>Joseph Fuson</h4>
+        <div class="role">Esq.</div>
+      </div>
+      <div class="team-member">
+        <h4>Carolanne King</h4>
+        <div class="role">Esq.</div>
+      </div>
+      <div class="team-member">
+        <h4>Marissa Knight</h4>
+        <div class="role">Esq.</div>
+      </div>
+      <div class="team-member">
+        <h4>Nickolas Schulenberg</h4>
+        <div class="role">Esq.</div>
+      </div>
+      <div class="team-member">
+        <h4>Katy Haggard</h4>
+        <div class="role">Esq.</div>
+      </div>
+      <div class="team-member">
+        <h4>Kristen Johnson</h4>
+        <div class="role">Esq.</div>
+      </div>
+      <div class="team-member">
+        <h4>Sarah Hastings</h4>
+      </div>
+      <div class="team-member">
+        <h4>Charles Grissom</h4>
+      </div>
+      <div class="team-member">
+        <h4>Kynlie Reames</h4>
+      </div>
+      <div class="team-member">
+        <h4>Kara Giesing</h4>
+      </div>
+      <div class="team-member">
+        <h4>Kyra Freeman</h4>
+      </div>
+      <div class="team-member">
+        <h4>Megan Duty</h4>
+      </div>
+      <div class="team-member">
+        <h4>Makenzie Clark</h4>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services-section">
+    <span class="hero-label">Practice Areas We Handle</span>
+    <div class="services-grid">
+      <div class="service-card">
+        <h4>Civil Litigation</h4>
+        <p>We resolve disputes for both individuals and businesses — whether it's contract breaches, business conflicts, real estate disputes or other civil matters.</p>
+        <ul class="service-list">
+          <li>Breach of Contract</li>
+          <li>Fraud</li>
+          <li>Corporation/LLC Issues</li>
+          <li>Construction Issues</li>
+          <li>Real Estate Disputes</li>
+          <li>Boundary Disputes</li>
+          <li>Probate and Estate Issues / Will Contests</li>
+          <li>Insurance Litigation</li>
+          <li>Commercial Disputes</li>
+          <li>Tennessee Consumer Protection Act</li>
+          <li>Landlord Tenant Disputes</li>
+          <li>Tennessee Vulnerable Persons Abuse Registry</li>
+          <li>Tennessee Government and Administrative Law</li>
+          <li>Equal Pay Litigation</li>
+          <li>Non-Compete/Non-Solicitation Agreements</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <h4>Criminal Defense</h4>
+        <p>Charged with a crime? From minor misdemeanors to serious felonies, we act fast to defend your rights and preserve your future.</p>
+        <ul class="service-list">
+          <li>Crimes Against the Person</li>
+          <li>Assault</li>
+          <li>Aggravated Assault</li>
+          <li>Domestic Assault</li>
+          <li>Harassment</li>
+          <li>Stalking</li>
+          <li>Violation of Order of Protection</li>
+          <li>OP Violations</li>
+          <li>Vehicular Assault</li>
+          <li>Vehicular Homicide</li>
+          <li>Reckless Endangerment</li>
+          <li>Homicide/Murder</li>
+          <li>First Degree Murder</li>
+          <li>Second Degree Murder</li>
+          <li>Voluntary Manslaughter</li>
+          <li>Criminally Negligent Homicide</li>
+          <li>Property Crimes</li>
+          <li>Theft of Property</li>
+          <li>Theft of Services</li>
+          <li>Burglary</li>
+          <li>Aggravated Burglary</li>
+          <li>Criminal Trespass</li>
+          <li>Aggravated Criminal Trespass</li>
+          <li>Robbery</li>
+          <li>Aggravated Robbery</li>
+          <li>Carjacking</li>
+          <li>Vandalism</li>
+          <li>Drug Offenses</li>
+          <li>Marijuana Offenses</li>
+          <li>Drug Paraphernalia</li>
+          <li>Possession With Intent</li>
+          <li>Drug Sale & Delivery</li>
+          <li>Drug Conspiracy</li>
+          <li>White Collar & Financial Crimes</li>
+          <li>White Collar Crimes</li>
+          <li>Embezzlement Charges</li>
+          <li>Forgery</li>
+          <li>Criminal Simulation</li>
+          <li>Identity Theft</li>
+          <li>Credit / Debit Card Fraud</li>
+          <li>Money Laundering</li>
+          <li>Conspiracy (Financial Crimes)</li>
+          <li>Property and Cash Seizures (DEA and Local)</li>
+          <li>Weapons Charges</li>
+          <li>Unlawful Weapon Possession</li>
+          <li>Firearm During Dangerous Felony</li>
+          <li>Public Order / Obstruction</li>
+          <li>Disorderly Conduct</li>
+          <li>Public Intoxication</li>
+          <li>Criminal Impersonation</li>
+          <li>Evading Arrest</li>
+          <li>Resisting Arrest</li>
+          <li>Failure to Appear</li>
+          <li>Criminal Contempt</li>
+          <li>DUI & Traffic Crimes</li>
+          <li>Driving Under the Influence</li>
+          <li>Driving on Suspended License</li>
+          <li>Traffic Violations / CDL</li>
+          <li>Reckless Driving</li>
+          <li>Hit and Run</li>
+          <li>Juvenile Defense</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <h4>Family Law</h4>
+        <p>When family issues become legal matters — divorce, custody, support, or guardianship — we guide you through the process with empathy, clarity and steady support.</p>
+        <ul class="service-list">
+          <li>Divorce</li>
+          <li>Child Custody</li>
+          <li>Orders of Protection</li>
+          <li>Post-Divorce Matters</li>
+          <li>Grandparent's Rights</li>
+          <li>Parental Relocation</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <h4>Personal Injury</h4>
+        <p>If you've been hurt in an accident, we step in so you don't have to navigate the aftermath alone.</p>
+        <ul class="service-list">
+          <li>Car Accidents</li>
+          <li>Motorcycle Accidents</li>
+          <li>ATV Accidents</li>
+          <li>Truck Accidents</li>
+          <li>Wrongful Death</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials-section">
+    <span class="hero-label">Our Testimonials</span>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <h4 class="testimonial-author">D.D.</h4>
+        <p class="testimonial-text">I just want to say that Mrs. Carolanne King is the greatest lawyer I have ever had. She is truly amazing and knows how to get the job done. She walked with me through the whole court process and worked for me when everyone else said that they could not help me. I am truly grateful for the law firm...</p>
+      </div>
+      <div class="testimonial-card">
+        <h4 class="testimonial-author">Taylor</h4>
+        <p class="testimonial-text">I loved working with Sarah and Joey. They are very kind people who made sure I understood every step of the process. They treated me with kindness continuously and I would definitely use them again!</p>
+      </div>
+      <div class="testimonial-card">
+        <h4 class="testimonial-author">Bill Hoskinson</h4>
+        <p class="testimonial-text">Joey is a talented lawyer who cares about his clients. Sarah his assistant is a true professional, but more than that they care about you as a person first. I would highly recommend the team.</p>
+      </div>
+      <div class="testimonial-card">
+        <h4 class="testimonial-author">Peter P.</h4>
+        <p class="testimonial-text">Relief! Mark Freeman is the best lawyer I have ever had. He took care of my Criminal Case in one day. Answered all phone calls and returned them all as well. He didn't hesitate to answer any of my questions. I am very thankful he had my case dropped! Not many lawyers can do that. I highly recommend...</p>
+      </div>
+      <div class="testimonial-card">
+        <h4 class="testimonial-author">Charles G.</h4>
+        <p class="testimonial-text">Joey: Just wanted you to know how appreciative I am to be represented by such an outstanding attorney. You did an awesome job. Thank you for your help and support throughout. I have NEVER gotten so much for my money with any other attorney before. I'm looking forward to referring you as much as...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact CTA -->
+  <section class="contact-cta">
+    <h2 class="feature-title">Take the First Step Toward Resolution</h2>
+    <a href="tel:+16152987272" class="hero-cta">Contact Us Now <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+  </section>
+
+  <!-- Blog Section -->
+  <section class="blog-section">
+    <span class="hero-label">Tennessee Trial Lawyers Blog</span>
+    <p class="feature-description">Practical insights and updates from our team.</p>
+    <div class="blog-grid">
+      <div class="blog-card">
+        <img src="https://lirp.cdn-website.com/79c67c38/dms3rep/multi/opt/pexels-photo-6069511-445w.jpeg" alt="The Miranda Warning - Freeman & Fuson Trial Lawyers in Nashville, Tennessee">
+        <h4>The Miranda Warning</h4>
+        <p>The "Miranda warning" is a statement given by law enforcement to a suspect in custody, informing them of their rights. The warning is derived from the United States Supreme Court case, Miranda v. Arizona, 384 U.S. 436 (1966), which established the requirement for law enforcement to inform suspects of their rights before interrogating them...</p>
+      </div>
+      <div class="blog-card">
+        <img src="https://lirp.cdn-website.com/79c67c38/dms3rep/multi/opt/OIP-445w.jpg" alt="CDL Speeding Tickets and Traffic Citations - Freeman & Fuson Trial Lawyers in Nashville, Tennessee">
+        <h4>CDL Speeding Tickets and Traffic Citations</h4>
+        <p>A speeding ticket or traffic citation for a CDL driver can have a serious effect on their employment. While a non-CDL driver may be eligible for traffic school to keep a traffic citation off their driving record, there are some limitaitons on what Courts are allowed to do with citations for CDL drivers...</p>
+      </div>
+      <div class="blog-card">
+        <img src="https://lirp.cdn-website.com/79c67c38/dms3rep/multi/opt/Police-Photo-445w.jpeg" alt="Tennessee Implied Consent Law - Freeman & Fuson Trial Lawyers in Nashville, Tennessee">
+        <h4>Tennessee Implied Consent Law</h4>
+        <p>Under TCA 55-10-406 any person driving a motor vehicle in Tennessee is deemed to have given implied consent to a breath test, a blood test, or both to determine the person's alcohol or drug content of their blood. A refusal to submit to one of these tests is a civil rather than criminal offense...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <img src="https://lirp.cdn-website.com/79c67c38/dms3rep/multi/opt/fuson-logo-white-582w.png" alt="Freeman & Fuson Trial Lawyers Nashville TN" class="footer-brand-logo">
+      <span class="footer-copyright">© 2026 All Rights Reserved | Freeman & Fuson</span>
+      <div class="footer-contact">
+        <a href="tel:+16152987272">(615) 298-7272</a>
+        <span>305 Church St, Franklin, TN 37064</span>
+      </div>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/freemanfuson/" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="https://twitter.com/joeyfuson" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.linkedin.com/in/fusonlaw/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.fusonlaw.com/about">About Us</a>
+      <a href="https://www.fusonlaw.com/testimonials">Testimonials</a>
+      <a href="https://www.fusonlaw.com/case-notes">Case Notes</a>
+      <a href="https://www.fusonlaw.com/blog">Blog</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
