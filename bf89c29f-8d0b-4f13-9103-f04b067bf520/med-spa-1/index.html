@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mint and Thyme — Holistic Medspa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Mobile Menu */
+@media (max-width: 767px) {
+  .nav-links {
+    display: none;
+  }
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  position: relative;
+  background-image: url('https://images.squarespace-cdn.com/content/v1/53a10c09e4b080549e5f454a/1701404455457-NRDV5FX3723PERP564BP/MT+background.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(244, 240, 234, 0.7);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-logo {
+  width: 200px;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.6s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.9s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* About Section */
+.about {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.about-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.about-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.about-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.about-text h4 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  margin-bottom: var(--space-sm);
+}
+
+.about-text p + p,
+.about-text h4 + h4 {
+  margin-top: var(--space-md);
+}
+
+.about-text ul {
+  margin-top: var(--space-md);
+  list-style: none;
+  padding-left: 0;
+}
+
+.about-text li {
+  position: relative;
+  padding-left: var(--space-md);
+  margin-bottom: var(--space-sm);
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+}
+
+.about-text li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* Services Section */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.service-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.service-cell:last-child {
+  border-bottom: none;
+}
+
+.service-name {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.service-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.service-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.service-cell:hover .service-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+/* Gallery Section */
+.gallery {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.gallery-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-sm);
+}
+
+.gallery-image {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.gallery-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+.gallery-image:hover img {
+  transform: scale(1.05);
+}
+
+/* Newsletter Section */
+.newsletter {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.newsletter-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.newsletter-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.newsletter-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  line-height: 1.6;
+  max-width: 500px;
+}
+
+.newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  max-width: 400px;
+}
+
+.form-field {
+  position: relative;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  padding: var(--space-sm) 0;
+  color: var(--text-black);
+  outline: none;
+  border-radius: 0;
+  transition: border-bottom-width 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: var(--placeholder-gray);
+  font-style: italic;
+  font-family: var(--font-serif);
+  font-weight: 300;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-bottom-width: 2px;
+}
+
+.form-submit {
+  align-self: flex-start;
+}
+
+.form-submit button {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.form-submit button:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .about-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .service-cell:nth-child(-n+2) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .newsletter-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .about {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .newsletter {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .service-cell {
+    border-right: 1px solid var(--border-black);
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(5n) {
+    border-right: none;
+  }
+
+  .service-cell:nth-child(n+6) {
+    border-bottom: none;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Mint and Thyme — Holistic Medspa</a>
+  <ul class="nav-links">
+    <li><a href="https://www.mintandthyme.com/online-store">store</a></li>
+    <li><a href="https://www.mintandthyme.com/locations">location</a></li>
+    <li><a href="https://www.mintandthyme.com/spa-policies-1">policies</a></li>
+    <li><a href="https://clients.mindbodyonline.com/classic/ws?studioid=166814&stype=-9">book now</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <img src="https://images.squarespace-cdn.com/content/v1/53a10c09e4b080549e5f454a/35a302f5-5843-4ca0-806b-fcb36bb1cd77/Asset+1_4x+%282%29.png?format=1500w" alt="mint and thyme | holistic medspa | Austin, Tx" class="hero-logo">
+    <h1 class="hero-headline">holistic medspa</h1>
+    <p class="hero-subtitle">001 — a local and woman-owned business serving our austin community since 2014</p>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <span class="about-label">002 — who we are</span>
+    <div class="about-text">
+      <h4>A local and woman-owned business, Mint and Thyme first began serving our Austin community in 2014.</h4>
+      <h4>We pride ourselves on treatments that are both relaxing and effective, stressing the importance of educating our clients to properly care for their skin and help them achieve their skincare goals through professional treatments and a customized at-home regimen. We offer a range of services including clinical facials, hydrafacials, chemical peels, microneedling, photofacials, laser hair removal, Geneo, and cosmetic injections.</h4>
+      <h4>At Mint and Thyme we hold strongly to three core philosophies...</h4>
+      <ul>
+        <li>Lifelong skincare is a necessity, not a luxury; therefore, we make it accessible and affordable.</li>
+        <li>Internal balance creates external beauty.</li>
+        <li>We believe in taking a personal approach to each individual.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/audio_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/download_white.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/loading.gif" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+<!-- Services Grid -->
+<section class="services" id="services">
+  <div class="services-">
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://www.google.com/recaptcha/api2/payload?p=06AFcWeA5UwF-kjvpjEv3A3mtxae0Eog3gnuwlbcd9HNABzqHRTzwmPWH2iNlQAAl3aWSuQoOZnP1vBPP8o6QaACsw7qhl1o7-Sjr2cx86N2HE6VBdI6GRr_ot0cunrPUh7ggFbWFjQeF4g5VaJy4QzxmT8Wchn6OOOHihjVSdW0DaQ_90cIXKZ12frJnFxKlcWZ5upD9y9qM2&amp;k=6LfHrSkUAAAAAPnKk5cT6JuKlKPzbwyTYuO8--Vr" alt="A woman receiving a facial massage with her eyes closed, wearing a headband and lying down">
+      </div>
+      <span class="service-name">clinical facials</span>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/53a10c09e4b080549e5f454a/0e188be0-1dd0-4286-92c3-6334ca835085/iStock-1251534350.jpg" alt="A woman receiving a cosmetic facial treatment with a small device on her cheek, lying with eyes closed, in a clinical setting">
+      </div>
+      <span class="service-name">hydrafacials</span>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/53a10c09e4b080549e5f454a/49d8e450-20cf-4c9c-8945-c16e3fe4e064/Chemical-Peels-2.jpeg" alt="A woman receiving a facial treatment at a spa, with her eyes closed, lying on a treatment bed with a headband, and a person applying a cosmetic product with a cotton pad on her face, with skincare products on a tray nearby">
+      </div>
+      <span class="service-name">chemical peels</span>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/53a10c09e4b080549e5f454a/1701404455457-NRDV5FX3723PERP564BP/MT+background.jpeg" alt="A woman lying on a bed receiving a facial treatment with a handheld device held by a person wearing blue gloves">
+      </div>
+      <span class="service-name">microneedling</span>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://static.ctctcdn.com/contacts/images/signup-tools/ctct-close-x.svg" alt="A woman receiving an IPL Photofacial with a laser or light therapy device in a medical setting">
+      </div>
+      <span class="service-name">photofacials</span>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/53a10c09e4b080549e5f454a/51c20d6e-85a1-48f2-831f-0bed0fa3571a/iStock-1361723155.jpg" alt="A woman receiving laser hair removal in a clinical or spa setting, with medical equipment in the background">
+      </div>
+      <span class="service-name">laser hair removal</span>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://www.google.com/recaptcha/api2/payload?p=06AFcWeA5UwF-kjvpjEv3A3mtxae0Eog3gnuwlbcd9HNABzqHRTzwmPWH2iNlQAAl3aWSuQoOZnP1vBPP8o6QaACsw7qhl1o7-Sjr2cx86N2HE6VBdI6GRr_ot0cunrPUh7ggFbWFjQeF4g5VaJy4QzxmT8Wchn6OOOHihjVSdW0DaQ_90cIXKZ12frJnFxKlcWZ5upD9y9qM2&k=6LfHrSkUAAAAAPnKk5cT6JuKlKPzbwyTYuO8--Vr" alt="A massage room with a massage table covered in a green blanket, a white fireplace on the wall, a painting of flowers above it, a tall lamp beside the table, and a chair with a round cushion. Relaxing ambiance with soft lighting">
+      </div>
+      <span class="service-name">geneo</span>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/53a10c09e4b080549e5f454a/a229d4ab-ea9c-4152-b335-31aa5d9ddc84/iStock-1356246202.jpg" alt="A woman with closed eyes receiving botox injection in her forehead from a healthcare professional wearing gloves">
+      </div>
+      <span class="service-name">cosmetic injections</span>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/53a10c09e4b080549e5f454a/359ad080-45d8-4926-b6f0-3b6d07403163/iStock-1471428648.jpg" alt="A woman lying on a bed receiving a facial treatment with a handheld device held by a person wearing blue gloves">
+      </div>
+      <span class="service-name">skinpen microneedling</span>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/53a10c09e4b080549e5f454a/9293a950-3447-44b2-844e-230c172fa22c/iStock-1356246510.jpg" alt="A woman receiving an IPL Photofacial with a laser or light therapy device in a medical setting">
+      </div>
+      <span class="service-name">laser skincare treatments</span>
+    </div>
+  </div>
+</section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/refresh_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+<!-- Gallery Section -->
+<section class="gallery">
+  <div class="gallery-">
+    <div class="gallery-image">
+      <img src="https://images.squarespace-cdn.com/content/v1/53a10c09e4b080549e5f454a/c80ab753-3ba7-49f6-a89f-4facf28bda66/Mint+%26+Thyme-042.jpg" alt="Display of Image MD skincare products, including serums, eye gel, and SPF, arranged on a black platform with a promotional backdrop">
+    </div>
+    <div class="gallery-image">
+      <img src="https://images.squarespace-cdn.com/content/v1/53a10c09e4b080549e5f454a/2bc1c4b5-6ab0-49ad-95a6-74d87f304fe6/Mint+%26+Thyme-045.jpg" alt="Display of skincare products from Image Skincare, including daily prevention moisturizers with SPF 20, 30, and 40, arranged on a shelf with a promotional poster in the background showcasing a woman's face and the text 'Prevention: An Evolution in Sun">
+    </div>
+    <div class="gallery-image">
+      <img src="https://images.squarespace-cdn.com/content/v1/53a10c09e4b080549e5f454a/e76739a0-f080-482e-bf69-9f5573fae86d/Mint+%26+Thyme-028-Edit.jpg" alt="A massage room with a massage table covered in a green blanket, a white fireplace on the wall, a painting of flowers above it, a tall lamp beside the table, and a chair with a round cushion. Relaxing ambiance with soft lighting">
+    </div>
+    <div class="gallery-image">
+      <img src="https://images.squarespace-cdn.com/content/v1/53a10c09e4b080549e5f454a/e7f2608c-e09f-4f4c-90d1-f13541c83545/iStock-173245802.jpg" alt="A woman receiving a facial massage with her eyes closed, wearing a headband and lying down">
+    </div>
+  </div>
+</section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/refresh_white_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/download.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+<!-- Newsletter Section -->
+<section class="newsletter" id="newsletter">
+  <div class="newsletter-inner">
+    <div>
+      <h2 class="newsletter-heading">Stay in the know!</h2>
+      <p class="newsletter-text">Stay current on treatments we offer at the spa plus be the first to know about our promotions happening at Mint and Thyme!</p>
+    </div>
+    <form class="newsletter-form" onsubmit="event.preventDefault();">
+      <div class="form-field">
+        <input type="email" placeholder="Email" required>
+      </div>
+      <div class="form-field">
+        <input type="text" placeholder="First Name" required>
+      </div>
+      <div class="form-field">
+        <input type="text" placeholder="Last Name" required>
+      </div>
+      <div class="form-submit">
+        <button type="submit">sign me up!</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Mint and Thyme — Holistic Medspa</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
