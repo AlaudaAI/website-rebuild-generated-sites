@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Self Aesthetics & Wellness</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-logo img {
+  height: 40px;
+  width: auto;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://static.wixstatic.com/media/11062b_a45479dc544f44cf92aa57b05f84807c~mv2.jpg/v1/fill/w_1095,h_863,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_a45479dc544f44cf92aa57b05f84807c~mv2.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(26, 26, 26, 0.3);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: #ffffff;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+.hero-cta {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 1.2s forwards;
+}
+
+.hero-cta a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+  padding: var(--space-sm) var(--space-md);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.hero-cta a:hover {
+  background-color: #ffffff;
+  color: var(--text-black);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Services Section */
+.services {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.services-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.services-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-xl);
+  text-align: center;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  border: 1px solid var(--border-black);
+}
+
+.service-category {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.service-category:last-child {
+  border-bottom: none;
+}
+
+.service-image-wrapper {
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  margin-bottom: var(--space-md);
+}
+
+.service-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease;
+}
+
+.service-category:hover .service-image-wrapper img {
+  filter: grayscale(0%);
+}
+
+.service-title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.75rem;
+  margin-bottom: var(--space-sm);
+}
+
+.service-description {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--placeholder-gray);
+  margin-bottom: var(--space-md);
+  max-width: 400px;
+}
+
+.service-link {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  border: 1px solid var(--border-black);
+  padding: var(--space-xs) var(--space-sm);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.service-link:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Individual Services Section */
+.individual-services {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.individual-services-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.individual-services-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-xl);
+  text-align: center;
+}
+
+.individual-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-md);
+}
+
+.individual-service {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+  text-align: center;
+}
+
+.individual-service h4 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.25rem;
+  margin-bottom: var(--space-sm);
+}
+
+.individual-service p {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  line-height: 1.6;
+  color: var(--placeholder-gray);
+}
+
+/* Testimonials Section */
+.testimonials {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.testimonials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonials-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-xl);
+  text-align: center;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.testimonial {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.testimonial-quote {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-style: italic;
+  line-height: 1.55;
+  margin-bottom: var(--space-md);
+}
+
+.testimonial-author {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* About Section */
+.about {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.about-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+.about-content h2 {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-md);
+}
+
+.about-content h3 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+.about-content p {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.8;
+  color: var(--placeholder-gray);
+}
+
+.about-image-wrapper {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.about-image-wrapper img {
+  width: 100%;
+  height: auto;
+}
+
+/* Contact Section */
+.contact {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.contact-info {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 2;
+  margin-bottom: var(--space-lg);
+}
+
+.contact-info a {
+  color: var(--text-black);
+  border-bottom: 1px solid transparent;
+  transition: border-bottom-color 0.3s ease;
+}
+
+.contact-info a:hover {
+  border-bottom-color: var(--text-black);
+}
+
+.hours {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  line-height: 1.8;
+  margin-bottom: var(--space-lg);
+  color: var(--placeholder-gray);
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.social-links img {
+  width: 33px;
+  height: 33px;
+  transition: opacity 0.3s ease;
+}
+
+.social-links img:hover {
+  opacity: 0.7;
+}
+
+.map-container {
+  margin-top: var(--space-lg);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .service-category {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-category:nth-child(3n) {
+    border-right: none;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .about-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .services {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .individual-services {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .testimonials {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .about {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .contact {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+}
+
+/* Mobile menu styles */
+@media (max-width: 767px) {
+  .nav-links {
+    display: none;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Self Aesthetics & Wellness</a>
+  <ul class="nav-links">
+    <li><a href="https://dashboard.boulevard.io/booking/businesses/d647afc5-2b4e-4909-bdfd-3c29353235f2/widget#/visit-type">book here</a></li>
+    <li><a href="https://www.selfatx.com/registration">become a member</a></li>
+    <li><a href="https://www.selfatx.com/aesthetic-services">services</a></li>
+    <li><a href="https://www.selfatx.com/about">about</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">feel and look<br>your best<br>self</h1>
+    <p class="hero-subtitle">At Self Aesthetics & Wellness, master injector, Dara McDonald offers cutting-edge aesthetic treatments to clients seeking luxury, hands-on care, and custom results. From Botox and Dysport to Sculptra and EZ Gel. We offer a variery of injectables and skin care treatments to help you feel and look your best SELF.</p>
+    <div class="hero-cta">
+      <a href="https://dashboard.boulevard.io/booking/businesses/d647afc5-2b4e-4909-bdfd-3c29353235f2/widget#/visit-type">Book Here</a>
+      <a href="https://www.selfatx.com/registration">Become a Member</a>
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="services" id="services">
+  <div class="services-inner">
+    <h2 class="services-heading">Our Services</h2>
+    <div class="services-grid">
+      <div class="service-category">
+        <div class="service-image-wrapper">
+          <img src="https://static.wixstatic.com/media/7ed5a2_2f77011d4cca4f0caac0381dc059b978~mv2.jpg/v1/fill/w_309,h_517,al_b,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/7ed5a2_2f77011d4cca4f0caac0381dc059b978~mv2.jpg" alt="Aesthetic Services">
+        </div>
+        <h3 class="service-title">Aesthetic Services</h3>
+        <p class="service-description">Our aesthetic services offer advanced treatments like Botox, dermal fillers, Sculptra, EZGel, and microneedling to enhance your natural beauty. Our non-surgical procedures provide youthful, radiant results with minimal downtime. Tailored to your unique needs, our services help you look and feel your best.</p>
+        <a href="https://www.selfatx.com/aesthetic-services" class="service-link">go to</a>
+      </div>
+      <div class="service-category">
+        <div class="service-image-wrapper">
+          <img src="https://static.wixstatic.com/media/7ed5a2_053b374b57f24ca6af9fc42dec28c71f~mv2.jpg/v1/fill/w_309,h_513,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/7ed5a2_053b374b57f24ca6af9fc42dec28c71f~mv2.jpg" alt="Wellness Services">
+        </div>
+        <h3 class="service-title">Wellness Services</h3>
+        <p class="service-description">Our wellness services include effective weight loss programs, revitalizing IV therapy drips, personalized nutrition coaching, and rejuvenating NAD+ treatments. Designed to enhance energy, promote healthy weight management, and support overall vitality.</p>
+        <a href="https://www.selfatx.com/wellness-services" class="service-link">go to</a>
+      </div>
+      <div class="service-category">
+        <div class="service-image-wrapper">
+          <img src="https://static.wixstatic.com/media/7ed5a2_7b01ab41ac434be48e4b16b6b85861e4~mv2.png/v1/fill/w_309,h_494,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/7ed5a2_7b01ab41ac434be48e4b16b6b85861e4~mv2.png" alt="About Dara">
+        </div>
+        <h3 class="service-title">About Dara</h3>
+        <p class="service-description">Founder and Master Injector, Dara McDonald created a space where clients can look and feel their best with a curated selection of services that enhance your beauty with natural results.</p>
+        <a href="https://www.selfatx.com/about" class="service-link">go to</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Individual Services Section -->
+<section class="individual-services">
+  <div class="individual-services-inner">
+    <h2 class="individual-services-heading">Detailed Services</h2>
+    <div class="individual-services-grid">
+      <div class="individual-service">
+        <h4>Botox</h4>
+        <p>Injectable treatment to reduce wrinkles and fine lines</p>
+      </div>
+      <div class="individual-service">
+        <h4>Dysport</h4>
+        <p>Injectable treatment similar to Botox for wrinkle reduction</p>
+      </div>
+      <div class="individual-service">
+        <h4>Dermal Fillers</h4>
+        <p>Injectable treatments to enhance natural beauty and restore volume</p>
+      </div>
+      <div class="individual-service">
+        <h4>Sculptra</h4>
+        <p>Collagen-stimulating injectable for natural-looking volume</p>
+      </div>
+      <div class="individual-service">
+        <h4>EZ Gel</h4>
+        <p>Advanced injectable treatment</p>
+      </div>
+      <div class="individual-service">
+        <h4>Microneedling</h4>
+        <p>Skin rejuvenation treatment using fine needles</p>
+      </div>
+      <div class="individual-service">
+        <h4>Weight Loss Programs</h4>
+        <p>Effective programs for healthy weight management</p>
+      </div>
+      <div class="individual-service">
+        <h4>IV Therapy</h4>
+        <p>Revitalizing vitamin drips to enhance energy and vitality</p>
+      </div>
+      <div class="individual-service">
+        <h4>Nutrition Coaching</h4>
+        <p>Personalized coaching for optimal nutrition and wellness</p>
+      </div>
+      <div class="individual-service">
+        <h4>NAD+ Treatments</h4>
+        <p>Rejuvenating treatments to support overall vitality</p>
+      </div>
+      <div class="individual-service">
+        <h4>IM Injections</h4>
+        <p>Intramuscular injections for wellness support</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials" id="testimonials">
+  <div class="testimonials-inner">
+    <h2 class="testimonials-heading">Testimonials</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <blockquote class="testimonial-quote">Wonderful experience!! Dara definitely knows what she is doing and went above and beyond to counsel me on what would be beneficial for my aging face. She made me feel comfortable throughout the procedures, and the results are way more than what I was even expecting! Highly recommend Dara!</blockquote>
+        <cite class="testimonial-author">Darlene Johnson</cite>
+      </div>
+      <div class="testimonial">
+        <blockquote class="testimonial-quote">Absolutely love, Dara. Wonderful job at explaining everything! Can't wait for my next treatment!</blockquote>
+        <cite class="testimonial-author">Heidi Dewey</cite>
+      </div>
+      <div class="testimonial">
+        <blockquote class="testimonial-quote">I am so thankful I found Dara, I have received lip filler before, and I felt like it wasn't symmetrical to my face. Dara was able to dissolve the filler and help me achieve the perfect pout.</blockquote>
+        <cite class="testimonial-author">Julie Sommers</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div style="margin-bottom: var(--space-lg);">
+      <img src="https://static.wixstatic.com/media/7ed5a2_19a74d68626242a79fb02b6bbd89d4a7~mv2.png/v1/fill/w_287,h_227,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/7ed5a2_19a74d68626242a79fb02b6bbd89d4a7~mv2.png" alt="Self Aesthetics & Wellness" style="margin: 0 auto;">
+    </div>
+    <h2 class="contact-heading">Ready to feel and look your best self!</h2>
+    <div class="contact-info">
+      <p>1130 Cottonwood Creek Suite C-2</p>
+      <p>Cedar Park, TX 78613</p>
+      <p><a href="tel:5126611877">(512) 661-1877</a></p>
+      <p><a href="mailto:dara@selfatx.com">dara@selfatx.com</a></p>
+    </div>
+    <div class="hours">
+      <p><strong>Hours of Operation</strong></p>
+      <p>Monday • Closed</p>
+      <p>Tuesday-Friday • 9am-4:30pm</p>
+      <p>Saturday/Sunday • Closed</p>
+    </div>
+    <div class="social-links">
+      <a href="https://www.facebook.com/profile.php?id=61571903663288">
+        <img src="https://static.wixstatic.com/media/11062b_f4e3e7f537ff4762a1914aa14e3e36b9~mv2.png/v1/fill/w_33,h_33,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_f4e3e7f537ff4762a1914aa14e3e36b9~mv2.png" alt="Facebook">
+      </a>
+      <a href="https://www.instagram.com/selfaestheticsatx">
+        <img src="https://static.wixstatic.com/media/11062b_cef3b719166a4815b446d4dcfcb6120d~mv2.png/v1/fill/w_33,h_33,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_cef3b719166a4815b446d4dcfcb6120d~mv2.png" alt="Instagram">
+      </a>
+      <a href="https://www.tiktok.com/@darahaynesmcdonald">
+        <img src="https://static.wixstatic.com/media/11062b_3a1a34a22c10436caac05a4e0f6a876e~mv2.png/v1/fill/w_33,h_33,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_3a1a34a22c10436caac05a4e0f6a876e~mv2.png" alt="TikTok">
+      </a>
+    </div>
+    <div class="map-container">
+      <iframe src="https://maps.app.goo.gl/7tTWgNYX8XS8pc2B7?g_st=com.google.maps.preview.copy" width="100%" height="300" style="border:0" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Self Aesthetics & Wellness</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
