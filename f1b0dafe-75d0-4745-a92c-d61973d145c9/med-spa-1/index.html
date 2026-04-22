@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Austin Regional Clinic</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://www.austinregionalclinic.com/uploads/facebook.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(26, 26, 26, 0.5);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: #ffffff;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Alert Section */
+.alerts {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+}
+
+.alert-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.alert-item {
+  margin-bottom: var(--space-lg);
+  padding: var(--space-md);
+  border: 1px solid var(--border-black);
+}
+
+.alert-heading {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.3;
+  margin-bottom: var(--space-sm);
+}
+
+.alert-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.alert-text p + p {
+  margin-top: var(--space-sm);
+}
+
+/* Team Section */
+.team {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.team-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.team-member {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  border: 1px solid var(--border-black);
+}
+
+.team-photo {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border: 1px solid var(--border-black);
+}
+
+.team-name {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.3;
+  margin-bottom: var(--space-xs);
+}
+
+.team-role {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.team-bio {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.team-quote {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.2rem;
+  font-style: italic;
+  line-height: 1.6;
+  margin-top: var(--space-md);
+  padding: var(--space-md);
+  border-left: 3px solid var(--border-black);
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-header {
+  max-width: 1200px;
+  margin: 0 auto var(--space-lg);
+}
+
+.services-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-sm);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
+}
+
+.service-item {
+  padding: var(--space-md);
+  border: 1px solid var(--border-black);
+}
+
+.service-name {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-xs);
+}
+
+.service-description {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Gallery Section */
+.gallery {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.gallery-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.gallery-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.gallery-item {
+  position: relative;
+  border: 1px solid var(--border-black);
+}
+
+.gallery-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.gallery-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(26, 26, 26, 0.8);
+  color: #ffffff;
+  padding: var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+/* Testimonials Section */
+.testimonials {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.testimonials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonials-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.testimonial-item {
+  padding: var(--space-md);
+  border: 1px solid var(--border-black);
+}
+
+.testimonial-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  font-style: italic;
+  margin-bottom: var(--space-sm);
+}
+
+.testimonial-author {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+/* Stats Section */
+.stats {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.stats-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+}
+
+.stat-item {
+  text-align: center;
+  padding: var(--space-md);
+  border: 1px solid var(--border-black);
+}
+
+.stat-value {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1;
+  margin-bottom: var(--space-xs);
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* Reviews Section */
+.reviews {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.reviews-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.reviews-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.review-item {
+  padding: var(--space-md);
+  border: 1px solid var(--border-black);
+}
+
+.review-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  font-style: italic;
+  margin-bottom: var(--space-sm);
+}
+
+.review-date {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+/* Contact Section */
+.contact {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-md);
+}
+
+.contact-info {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.contact-phone {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-sm);
+}
+
+.contact-address {
+  margin-bottom: var(--space-sm);
+}
+
+.contact-map {
+  width: 100%;
+  margin-top: var(--space-md);
+  border: 1px solid var(--border-black);
+}
+
+/* Social Section */
+.social {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+}
+
+.social-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.social-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.3;
+  margin-bottom: var(--space-md);
+}
+
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.social-link {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  padding: var(--space-xs) var(--space-sm);
+  border: 1px solid var(--border-black);
+  transition: background-color 0.3s ease;
+}
+
+.social-link:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1rem;
+    --space-xl: 3rem;
+    --space-lg: 2rem;
+  }
+
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-sm);
+  }
+
+  .nav-links a {
+    font-size: 0.65rem;
+  }
+
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .team-member {
+    padding: var(--space-sm);
+  }
+
+  .team-photo {
+    width: 150px;
+    height: 150px;
+  }
+
+  .stats-inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .gallery-grid {
+    gap: var(--space-sm);
+  }
+
+  .gallery-image {
+    height: 200px;
+  }
+
+  .social-links {
+    gap: var(--space-sm);
+  }
+
+  .social-link {
+    padding: var(--space-xs);
+    font-size: 0.7rem;
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .team-member {
+    grid-template-columns: 200px 1fr;
+    align-items: start;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .reviews-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <a href="https://www.austinregionalclinic.com/" class="nav-logo">austin regional clinic</a>
+  <ul class="nav-links">
+    <li><a href="https://www.austinregionalclinic.com/find-a-doctor-or-apc">find a doctor</a></li>
+    <li><a href="https://www.austinregionalclinic.com/find-a-location">locations</a></li>
+    <li><a href="https://mychart.austinregionalclinic.com/mychart/Authentication/Login?utm_source=arc-website&utm_medium=web&utm_campaign=arc-engage&utm_content=top-nav">mychart</a></li>
+    <li><a href="https://www.austinregionalclinic.com/help-me-book?utm_source=arc-website&utm_medium=web&utm_campaign=arc-engage&utm_content=top-nav">book now</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">Excellence in Healthcare<br>for the Austin Community</h1>
+    <p class="hero-subtitle">001 — providing comprehensive medical care with state-of-the-art facilities, expert physicians, and personalized patient experiences across multiple convenient locations</p>
+  </div>
+</section>
+
+<!-- Gallery Section -->
+<section class="gallery">
+  <div class="gallery-inner">
+    <h2 class="gallery-heading">Our Facilities</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="https://d1mkxymatx0q5n.cloudfront.net/images/locations/Southwest-min.jpg" alt="ARC Southwest Location" class="gallery-image">
+        <div class="gallery-caption">arc southwest facility</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://www.austinregionalclinic.com/templates/arcrd/Assets/ma-monthly-exclusive-arc-800x552-16.jpg" alt="Treatment Results" class="gallery-image">
+        <div class="gallery-caption">patient treatment results</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://www.austinregionalclinic.com/templates/arcrd/Assets/2025-community-choice-awards-arc-800x552.jpg" alt="Community Choice Awards" class="gallery-image">
+        <div class="gallery-caption">community choice awards recognition</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://www.austinregionalclinic.com/templates/ARCRD/Assets/instagram_icon_aug2017.png" alt="Instagram" class="gallery-image">
+        <div class="gallery-caption">social media presence</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://www.austinregionalclinic.com/templates/ARCRD/Assets/tiktok-app-icon.png" alt="TikTok" class="gallery-image">
+        <div class="gallery-caption">digital outreach</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://www.austinregionalclinic.com/templates/ARCRD/Assets/btn-google-play.png" alt="Google Play" class="gallery-image">
+        <div class="gallery-caption">mobile app access</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://www.austinregionalclinic.com/templates/ARCRD/Assets/btn-app-store.png" alt="App Store" class="gallery-image">
+        <div class="gallery-caption">ios app availability</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Alerts Section -->
+<section class="alerts">
+  <div class="alert-inner">
+    <div class="alert-item">
+      <h2 class="alert-heading">Opening this summer! ARC South Specialty</h2>
+      <div class="alert-text">
+        <p>Select physicians and advanced practice clinicians (APCs) from ARC East 7th, ARC Goodnight Ranch, ARC South 1st, ARC South 1st Pediatrics (formerly ARC South 1st Specialty & Pediatrics), and ARC Southwest are relocating to our new clinic, ARC South Specialty, this summer.</p>
+        <p>If this move affects any of your scheduled appointments, you will receive communications via email, text, or phone. Please review all notifications from ARC before any upcoming appointments.</p>
+      </div>
+    </div>
+    
+    <div class="alert-item">
+      <h2 class="alert-heading">Book your flu shot today</h2>
+      <div class="alert-text">
+        <p>Schedule your flu shot at your nearest ARC clinic to stay protected. It's easy to get your flu shot:</p>
+        <p>If you already have a primary care or ob/gyn visit scheduled, ask for your flu shot at your visit.</p>
+        <p>Book your flu shot online in your ARC MyChart account or at ARCflushot.com.</p>
+        <p>Call 512-272-4636.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team Section -->
+<section class="team">
+  <div class="team-inner">
+    <div class="team-member">
+      <img src="https://d1mkxymatx0q5n.cloudfront.net/images/providers/rasmussen_s_0021.jpg" alt="Steven Rasmussen" class="team-photo">
+      <div class="team-info">
+        <h3 class="team-name">Steven E. Rasmussen</h3>
+        <p class="team-role">Chief of Dermatology, MD, FAAD</p>
+        <p class="team-bio">Dr. Rasmussen enjoys taking advantage of all the fun activities Austin has to offer, including having season tickets to UT football. As a foodie, he enjoys taking advantage of Austin's food scene and trying out new restaurants.</p>
+        <blockquote class="team-quote">I can honestly say I truly love what I do, and I can't imagine doing anything else. I feel honored to have the privilege to practice medicine. I do believe medicine is an art, and I strive every day to hone my skills to provide the absolute best possible care to my patients. My interactions with my patients are what give me the biggest joy in my day and what makes all my hard work and effort worth it.</blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="services">
+  <div class="services-header">
+    <h2 class="services-heading">Comprehensive Medical Services</h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-item">
+      <h4 class="service-name">Acne & Rosacea Treatment for Adult and Teen Skin</h4>
+      <p class="service-description">Your ARC dermatologist or advanced practice clinician (APC) will help you decide on the best treatment plan for your acne.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">ActiveFX™ Laser Skin Resurfacing</h4>
+      <p class="service-description">ActiveFX laser resurfacing helps reduce wrinkles and fine lines, softens deep wrinkles, and improves skin tone and texture.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">Biopsies of Skin Lesions and Conditions</h4>
+      <p class="service-description">A skin biopsy is done by removing cells or skin samples from your body for laboratory examination. The skin samples are used to help diagnose skin conditions and determine a treatment plan for you.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">Botox Treatment of Axillary Hyperhidrosis</h4>
+      <p class="service-description">Botox® Cosmetic is a a safe, non-surgical procedure used to treat excess sweating in the underarms.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">BOTOX® Injections</h4>
+      <p class="service-description">Botox® Cosmetic treatment is a safe, non-surgical procedure that smoothes the wrinkles in motion on your face (i.e. frown lines and crow's feet).</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">Candela Vbeam® Laser Treatment</h4>
+      <p class="service-description">The Candela VBeam® is a versatile, non-invasive laser that treats a variety of skin conditions including rosacea and facial redness.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">Care for Chronic Skin Conditions like Psoriasis, Eczema, Lupus</h4>
+      <p class="service-description">Your ARC dermatologist or advanced practice clinician (APC) works with you to provide care to help ease chronic skin conditions like psoriasis, eczema, lupus, etc.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">chemical peels</h4>
+      <p class="service-description">Chemical peels are used to treat rough, discolored, sun-damaged skin and acne and improve fine lines.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">Diagnosis & Management of Cancer and Other Skin Lesions</h4>
+      <p class="service-description">Detecting severe skin conditions early can improve your quality of life. Our ARC dermatologists and advanced practice clinicians (APCs) can provide the proper care for skin cancer and other skin lesions.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">Dysport® Injections</h4>
+      <p class="service-description">Dysport® is a prescription injection that helps temporarily soften and improve the look of frown lines.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">Evaluation, Diagnosis, and Treatment of Bacterial/Viral/Fungal Infections</h4>
+      <p class="service-description">An ARC dermatologist or advanced practice clinician (APC) can evaluate, diagnose, and treat bacterial, viral, and fungal infections.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">Evaluation, Diagnosis, and Treatment of Hair Loss and Nail Disorders</h4>
+      <p class="service-description">Find out what is causing your hair loss and nail disorders and receive treatment to get them back to a healthy state.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">FemTouch™ Vaginal Rejuvenation</h4>
+      <p class="service-description">FemTouch vaginal rejuvenation is a non-surgical laser treatment for vaginal and urinary health, especially for those experiencing changes due to pre-menopause, post-menopause, and childbirth.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">hydrafacial</h4>
+      <p class="service-description">Hydrafacial treatments cleanse, exfoliate, and hydrate your skin to improve the look of your skin tone and elasticity. Results are seen after only one treatment.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">Intramuscular and Intralesional Injections</h4>
+      <p class="service-description">Dermatologic therapy injections that deliver medication deep into the muscle or skin lesions.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">ipl photofacials</h4>
+      <p class="service-description">ARC offers IPL photofacials, a laser treatment, to treat sun damage, acne, symptoms of rosacea, age spots, freckles, veins, and other skin blemishes.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">JUVÉDERM® Injections</h4>
+      <p class="service-description">JUVÉDERM® injectable gel is a great dermal filler that delivers nutrients to the cheeks, lips, and superficial wrinkles on your skin. Rejuvenate your skin.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">Legend M²™ Microneedling with Radio Frequency</h4>
+      <p class="service-description">Microneedling helps rejuvenate facial collagen with little to no downtime. This procedure also helps skin conditions caused by acne scarring, wrinkles, stretch marks, pigment issues, and pore sizes.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">medical aesthetics</h4>
+      <p class="service-description">ARC Medical Aesthetics offers safe, affordable, and effective medical aesthetic services using state-of-the-art equipment. You can receive the latest medical and cosmetic dermatology services in a relaxed and reassuring environment.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">Mole Evaluations and Skin Cancer Screenings</h4>
+      <p class="service-description">The evaluation of suspicious moles and skin areas can help detect skin cancer and chronic conditions.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">NuEra® Skin Tightening</h4>
+      <p class="service-description">NuEra® Tight uses radio frequency to tighten loose or sagging skin. This skin tightening treatment can also be used to reduce excess fat and cellulite.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">Patch Testing for Contact Dermatitis</h4>
+      <p class="service-description">Contact dermatitis is a reaction that happens after your skin comes in direct contact with certain substances. Patch testing can be done to find the substance that's causing the rash.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">photodynamic therapy</h4>
+      <p class="service-description">Photodynamic therapy (PDT) is a topical therapy-based treatment for pre-cancerous lesions and acne. A topical solution is applied to the affected area, which is absorbed by cancerous cells and sebaceous glands. Once absorbed, a specialized blue light is shown to the area, activating the solution, destroying the abnormal/damaged cancer cells, and shrinking sebaceous glands. The entire treatment is completed within 30 minutes.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">piqo4 laser treatment</h4>
+      <p class="service-description">PiQo4 laser is a breakthrough laser technology that delivers outstanding results for skin rejuvenation, skin resurfacing, and tattoo removal.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">platelet-rich fibrin</h4>
+      <p class="service-description">Platelet-Rich Fibrin (PRF), also known as a vampire facial, is an advanced biological treatment used to rejuvenate your skin and promote hair growth.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">Restylane® Injections</h4>
+      <p class="service-description">Restylane® is used to treat superficial lines and wrinkles. Restore volume and fullness to the skin to correct facial wrinkles and folds.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">ResurFX™ Skin Rejuvenation</h4>
+      <p class="service-description">Lumenis® ResurFX™ laser treatment is a fractional skin rejuvenation solution for younger, healthier, glowing looking skin. Promote deep collagen regeneration.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">RF Microneedling with Platelet-Rich Fibrin (PRF)</h4>
+      <p class="service-description">RF Microneedling with Platelet-Rich Fibrin is an advanced aesthetic procedure that improves skin complexion, stimulates tissue regeneration, and promotes collagen production.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">Sclerotherapy for Varicose and Spider Veins</h4>
+      <p class="service-description">Sclerotherapy treats spider veins, and may also treat other conditions including aching, burning, swelling and night cramps.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">Sculptra® Injectable Filler</h4>
+      <p class="service-description">Sculptra® poly-L-lactic acid is an injectable dermal filler that rejuvenates the skin, reduces wrinkles and facial lines. Cosmetic treatment to promote collagen.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">SmoothGlo™ Laser Skin Resurfacing</h4>
+      <p class="service-description">SmoothGlo™ is a laser resurfacing skin treatment that targets the tone, texture, and volume of your skin, addressing all three aspects in a single session.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">Splendor X Laser Hair Removal</h4>
+      <p class="service-description">ARC offers Splendor X's laser hair removal system to permanently remove unwanted hair from the face, leg, arm, underarm, bikini, and other areas.</p>
+    </div>
+    <div class="service-item">
+      <h4 class="service-name">totalfx fractional laser</h4>
+      <p class="service-description">TotalFX Fractional CO2 Laser Skin Resurfacing tightens and rejuvenates the skin with two laser technologies. Treat scarring, stretch marks, wrinkles, and more.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <h2 class="testimonials-heading">What Our Patients Say</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-item">
+        <p class="testimonial-text">Texas Monthly, 2019, 2020</p>
+        <p class="testimonial-author">reviewer 1</p>
+      </div>
+      <div class="testimonial-item">
+        <p class="testimonial-text">4.9 out of 5 - ARC Patient Feedback - Guide to ARC Patient Feedback and Ratings</p>
+        <p class="testimonial-author">reviewer 2</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-value">4.9</div>
+      <div class="stat-label">out of 5 provider rating</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">1689</div>
+      <div class="stat-label">patient reviews</div>
+    </div>
+  </div>
+</section>
+
+<!-- Reviews Section -->
+<section class="reviews">
+  <div class="reviews-inner">
+    <h2 class="reviews-heading">Patient Reviews</h2>
+    <div class="reviews-grid">
+      <div class="review-item">
+        <p class="review-text">I'm very pleased with my first time visit with this superb dermatologist👍 thank you send message send message</p>
+        <p class="review-date">april 11, 2026</p>
+      </div>
+      <div class="review-item">
+        <p class="review-text">They were very caring and explained about my concerns very great experience fir being my for being my first visit. Thank you!!</p>
+        <p class="review-date">april 11, 2026</p>
+      </div>
+      <div class="review-item">
+        <p class="review-text">Dr. Rasmussen's office is always relaxing and pleasant to be at and his staff is amazing and so is he.</p>
+        <p class="review-date">april 10, 2026</p>
+      </div>
+      <div class="review-item">
+        <p class="review-text">I was very impressed with Dr. Rasmussen's attentiveness and knowledge and recommendations regarding the my problem. I was so very impressed with a follow-up called from him not his medical assistant or PA answering a question that I had forgotten to ask. I would definitely refer him to others.</p>
+        <p class="review-date">april 10, 2026</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact">
+  <div class="contact-inner">
+    <div>
+      <h2 class="contact-heading">Contact Us</h2>
+      <p class="contact-info">Ready to schedule your appointment or have questions about our services? We're here to help.</p>
+    </div>
+    <div class="contact-details">
+      <p class="contact-phone"><a href="tel:512-272-4636">512-272-4636</a></p>
+      <p class="contact-address">1807 West Slaughter Lane<br>Suite 490<br>Austin, TX 78748</p>
+      <p><a href="https://www.google.com/maps/place/Austin+Regional+Clinic:+ARC+Southwest/@30.1713465,-97.8254716,17z/data=!3m1!4b1!4m5!3m4!1s0x865b4cf15dd4ad01:0x27ca3cf4de0c4d0!8m2!3d30.1713694!4d-97.8232898">Get Directions</a></p>
+      <div class="contact-map">
+        <iframe src="https://www.google.com/maps/place/Austin+Regional+Clinic:+ARC+Southwest/@30.1713465,-97.8254716,17z/data=!3m1!4b1!4m5!3m4!1s0x865b4cf15dd4ad01:0x27ca3cf4de0c4d0!8m2!3d30.1713694!4d-97.8232898" width="100%" height="300" style="border:0" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Social Section -->
+<section class="social">
+  <div class="social-inner">
+    <h2 class="social-heading">Follow Us</h2>
+    <div class="social-links">
+      <a href="https://www.youtube.com/user/MyARCchannel" class="social-link">youtube</a>
+      <a href="https://www.facebook.com/olinomedicalaesthetics" class="social-link">facebook</a>
+      <a href="https://www.instagram.com/olinomedicalaesthetics" class="social-link">instagram</a>
+      <a href="https://www.tiktok.com/@olinomedicalaesthetics" class="social-link">tiktok</a>
+      <a href="https://www.linkedin.com/company/austin-regional-clinic" class="social-link">linkedin</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-left">© 2024 Austin Regional Clinic</div>
+  <div class="footer-right">
+    <span>austin</span>
+    <span>texas</span>
+    <span>healthcare</span>
+  </div>
+</footer>
+
+</body>
+</html>
