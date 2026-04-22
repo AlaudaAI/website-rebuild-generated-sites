@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumeva MedSpa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://images.squarespace-cdn.com/content/v1/673224e8f96acf256416134e/01695a0a-8d79-49c3-a6b2-9c18f6e5ca4a/Lumeva-Medspa-Austin-TX-78726.png?format=2500w');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(244, 240, 234, 0.7);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Welcome Section */
+.welcome {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+  text-align: center;
+}
+
+.welcome-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.welcome-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+.welcome-symbol {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin: var(--space-md) 0;
+}
+
+/* About Section */
+.about {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.about-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.about-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.about-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.about-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.service-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.service-cell:last-child {
+  border-bottom: none;
+}
+
+.service-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.service-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.service-cell:hover .service-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+.service-meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding-top: var(--space-xs);
+}
+
+.service-name {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.service-description {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.4;
+  color: var(--placeholder-gray);
+}
+
+/* Team Section */
+.team {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.team-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.team-label {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.team-member {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  align-items: start;
+}
+
+.team-member-image {
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  filter: grayscale(40%);
+  margin: 0 auto;
+}
+
+.team-member-info {
+  text-align: center;
+}
+
+.team-member-info h3 {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: var(--space-xs);
+}
+
+.team-member-role {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-sm);
+}
+
+.team-member-bio {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* Stats Section */
+.stats {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.stats-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.stat-item {
+  margin-bottom: var(--space-md);
+}
+
+.stat-value {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 400;
+  line-height: 1;
+  margin-bottom: var(--space-xs);
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* Testimonials Section */
+.testimonials {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.testimonials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonial-item {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+  padding: var(--space-md);
+  border: 1px solid var(--border-black);
+}
+
+.testimonial-stars {
+  font-size: 1.2rem;
+  margin-bottom: var(--space-sm);
+}
+
+.testimonial-text {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+  font-style: italic;
+}
+
+.testimonial-author {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* Contact Section */
+.contact {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-info {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1.8;
+}
+
+.contact-info a {
+  color: var(--text-black);
+  transition: opacity 0.3s ease;
+}
+
+.contact-info a:hover {
+  opacity: 0.7;
+}
+
+.cta-button {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-top: var(--space-md);
+}
+
+.cta-button:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1rem;
+    --space-xl: 4rem;
+    --space-xxl: 6rem;
+  }
+
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-sm);
+  }
+
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+    background-attachment: scroll;
+  }
+
+  .hero-headline {
+    font-size: clamp(1.8rem, 8vw, 3rem);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(0.7rem, 2.5vw, 0.8rem);
+  }
+
+  .welcome {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .welcome-text {
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+  }
+
+  .about {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .about-text {
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
+  }
+
+  .services {
+    padding: var(--space-md) var(--pad-x);
+  }
+
+  .team {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .team-label {
+    font-size: clamp(1.2rem, 5vw, 1.5rem);
+    margin-bottom: var(--space-md);
+  }
+
+  .stats {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .testimonials {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .testimonial-item {
+    margin-bottom: var(--space-md);
+    padding: var(--space-sm);
+  }
+
+  .contact {
+    padding: var(--space-lg) var(--pad-x);
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .about-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .service-cell:nth-child(1),
+  .service-cell:nth-child(2),
+  .service-cell:nth-child(3),
+  .service-cell:nth-child(4) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .team-member {
+    grid-template-columns: 300px 1fr;
+    gap: var(--space-lg);
+  }
+
+  .team-member-image {
+    margin: 0;
+  }
+
+  .team-member-info {
+    text-align: left;
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .about {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .team {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .contact {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .service-cell:nth-child(3n) {
+    border-right: none;
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Lumeva MedSpa</a>
+  <ul class="nav-links">
+    <li><a href="https://www.lumevamedspa.com/">home</a></li>
+    <li><a href="https://www.lumevamedspa.com/neurotoxins">services</a></li>
+    <li><a href="https://www.lumevamedspa.com/aboutus">about</a></li>
+    <li><a href="https://www.lumevamedspa.com/contact">contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">Less is More</h1>
+    <p class="hero-subtitle">001 — Lumeva, meaning "light forever", offers non-surgical solutions for clients looking to age gracefully. Our focus is on personalized care that enhances your natural beauty, helping you feel confident and radiant—you but enhanced.</p>
+  </div>
+</section>
+
+<!-- Welcome Section -->
+<section class="welcome">
+  <div class="welcome-inner">
+    <div class="welcome-text">Welcome to Lumeva MedSpa—where "Less is More" and natural beauty shines through.</div>
+    <div class="welcome-symbol">❦</div>
+    <div class="welcome-text">Welcome to Lumeva MedSpa—where "Less is More" and natural beauty shines through.❦Welcome to Lumeva MedSpa—where "Less is More" and natural beauty shines through.❦Welcome to Lumeva MedSpa—where "Less is More" and natural beauty shines through.❦Welcome to Lumeva MedSpa—where "Less is More" and natural beauty shines through.❦  Welcome to Lumeva MedSpa—where "Less is More" and natural beauty shines through. ❦</div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <span class="about-label">002 — philosophy</span>
+    <div class="about-text">
+      <p>At Lumeva, we believe in creating a truly luxurious experience for our clients. From our serene, sophisticated space to our attentive, one-on-one consultations, every detail is crafted to ensure you feel pampered and rejuvenated.</p>
+      <p>Discover the elegance of natural results in a setting designed to celebrate your beauty. Where "Less is More" and natural beauty shines through.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Services Grid -->
+<section class="services" id="services">
+  <div class="services-grid">
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/673224e8f96acf256416134e/41460b7b-8c21-466f-bcbe-e87a195b8a57/Neurotoxins-Lumeva-Medspa.png?format=1000w" alt="Neurotoxins treatment">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">neurotoxins</span>
+        <span class="service-description">Botox and other neurotoxin injections for wrinkle reduction</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/673224e8f96acf256416134e/f5de7f0b-cc74-4a9b-a299-691e7c7e2d24/Dermal-Fillers-Lumeva-Medspa+%281%29.png?format=1000w" alt="Dermal fillers treatment">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">fillers</span>
+        <span class="service-description">Dermal filler treatments for volume enhancement</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/673224e8f96acf256416134e/178c6f87-1bd2-4b0f-bb60-5e110c8bcabf/Weight-Loss-Lumeva-Medspa+%281%29.png?format=1000w" alt="Weight loss program">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">weight loss program</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/673224e8f96acf256416134e/b47dd86e-ed49-4b1e-a83e-802e761fba3d/Lumeva-MedSpa-tox-party.png" alt="Microneedling with PRP">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">microneedling with prp</span>
+        <span class="service-description">Microneedling treatment combined with platelet-rich plasma</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/673224e8f96acf256416134e/b46c89c3-e3f7-4e0a-9ee0-e2fdb8264050/Lumeva-MedSpa-tox-parties.png" alt="PRP/PRF treatment">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">prp/prf</span>
+        <span class="service-description">Platelet-rich plasma and platelet-rich fibrin treatments</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/673224e8f96acf256416134e/e92e4eeb-2b08-4628-8aa0-ab26cba13eea/monthly-specials-background.png" alt="Tox parties">
+      </div>
+      <div class="service-meta">
+        <span class="service-name">tox parties</span>
+        <span class="service-description">Group neurotoxin treatment parties for 5 or more people</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team Section -->
+<section class="team" id="team">
+  <div class="team-inner">
+    <div class="team-label">MEET OUR BEAUTY EXPERT, shaRmila</div>
+    <div class="team-member">
+      <img src="https://images.squarespace-cdn.com/content/v1/673224e8f96acf256416134e/1c9fa56c-34a4-4dd1-874d-6656af086778/Founder-Sharmila+Lakhani%2C+MSN-APRN-FNP-BC-Lumeva-Medspa.jpg" alt="Sharmila Lakhani" class="team-member-image">
+      <div class="team-member-info">
+        <h3>Sharmila Lakhani</h3>
+        <div class="team-member-role">Founder, MSN, APRN, FNP-BC</div>
+        <div class="team-member-bio">Brings over 15 years of diverse healthcare experience to Lumeva MedSpa, delivering advanced, patient-centered care with a holistic approach to wellness.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats" id="stats">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-value">15 years</div>
+      <div class="stat-label">healthcare experience</div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials" id="testimonials">
+  <div class="testimonials-inner">
+    <div class="testimonial-item">
+      <div class="testimonial-stars">⭐️⭐️⭐️⭐️⭐️</div>
+      <div class="testimonial-text">I have had Botox/other brand name injections from half a dozen different providers over the past 10 years and I can say without question that Lumeva Med Spa has BY FAR given me the best results and best care out of all of them! Sharmila was so attentive to my requests (ie to not look frozen), took great care during the appointment, and has followed up to ensure I'm happy with the results.</div>
+      <div class="testimonial-author">- Jessica K.</div>
+    </div>
+    <div class="testimonial-item">
+      <div class="testimonial-stars">⭐️⭐️⭐️⭐️⭐️</div>
+      <div class="testimonial-text">I had a wonderful experience at Lumeva Med Spa. Sharmila was professional and made me feel comfortable throughout my procedure. I'm thrilled with my results. Highly recommend!</div>
+      <div class="testimonial-author">- Farah H.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <div>Salon Lofts 11521 N FM 620, Suite 500, Loft 11<br>Austin, TX 78726</div>
+      <br>
+      <div>Monday: 9:00AM-2:00PM<br>Friday: 9:00AM-2:00PM<br>By Appointments</div>
+      <br>
+      <div><a href="tel:5127616044">(512) 761-6044</a></div>
+      <div><a href="mailto:lumevamedspa@gmail.com">lumevamedspa@gmail.com</a></div>
+      <br>
+      <div>
+        <a href="https://www.facebook.com/LumevaMedSpa">Facebook</a> | 
+        <a href="https://www.instagram.com/LumevaMedSpa">Instagram</a>
+      </div>
+      <a href="https://app.joinmoxie.com/booking/lumeva-medspa" class="cta-button">book now</a>
+    </div>
+    <div>
+      <h2 style="font-family: var(--font-serif); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 300; line-height: 1.15; letter-spacing: 0.02em; margin-bottom: var(--space-md);">HOST A TOX PARTY WITH US!</h2>
+      <p style="font-family: var(--font-serif); font-size: 1rem; line-height: 1.6; margin-bottom: var(--space-md);">Give your next night out a fresh new look. You may gather a minimum of five friends and your guests and you can enjoy a whole lot fun and exciting wrinkle-reduction party for that smoother, more youthful skin.</p>
+      <p style="font-family: var(--font-mono); font-size: 0.8rem;">Call or text us to inquire!</p>
+      <a href="https://app.joinmoxie.com/booking/lumeva-medspa" class="cta-button">book a tox party</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Lumeva MedSpa</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
