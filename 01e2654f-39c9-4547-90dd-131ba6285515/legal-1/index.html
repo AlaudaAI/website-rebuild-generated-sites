@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zale Dowlen, JD, MBA</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  text-align: center;
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Profile Section */
+.profile {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+.profile-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 16px;
+  object-fit: cover;
+  border: 1px solid var(--border-color);
+}
+
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  text-align: center;
+  max-width: 600px;
+}
+
+.profile-name {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.profile-bio {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* Services Grid */
+.services {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.service-card {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  align-items: center;
+  text-align: center;
+}
+
+.service-card:last-child {
+  border-bottom: none;
+}
+
+.service-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.service-image {
+  width: 180px;
+  height: 180px;
+  border-radius: 16px;
+  object-fit: cover;
+  border: 1px solid var(--border-color);
+}
+
+.service-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  max-width: 400px;
+}
+
+.service-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.service-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.service-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 12px 24px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.service-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Contact Section */
+.contact {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  text-align: center;
+}
+
+.contact-title {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 12px 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 50px;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.contact-link:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+  border-color: var(--text-primary);
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== MOBILE (max-width: 768px) =================== */
+@media (max-width: 768px) {
+  .hero-headline {
+    font-size: 32px;
+  }
+  
+  .hero-subheading {
+    font-size: 16px;
+  }
+  
+  .profile-name {
+    font-size: 28px;
+  }
+  
+  .service-title {
+    font-size: 22px;
+  }
+  
+  .contact-title {
+    font-size: 24px;
+  }
+  
+  .contact-links {
+    gap: var(--space-sm);
+  }
+  
+  .contact-link {
+    padding: 10px 16px;
+    font-size: 10px;
+  }
+  
+  .service-cta {
+    padding: 10px 20px;
+    font-size: 10px;
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .profile {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-2xl);
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .profile-image {
+    width: 240px;
+    height: 240px;
+    flex-shrink: 0;
+  }
+
+  .profile-content {
+    text-align: left;
+    flex: 1;
+  }
+
+  .services {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .service-card:last-child {
+    border-right: none;
+  }
+
+  .contact {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .profile {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .profile-image {
+    width: 280px;
+    height: 280px;
+  }
+
+  .service-card {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .contact {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="#" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">Zale Dowlen, JD, MBA</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="#" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">Zale Dowlen, JD, MBA</span>
+    </a>
+    <nav>
+      <a href="https://www.zaledowlen.com/">Practice Areas</a>
+      <a href="https://www.zaledowlen.com/contact-zale">Contact Zale</a>
+      <a href="https://www.zaledowlen.com/tell-me-more">Tell Me More</a>
+      <a href="https://www.zaledowlen.com/the-celebration">The Celebration</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Licensed Attorney</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Licensed Financial Professional</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Kingdom Driven Planning</span>
+      <h1 class="hero-headline"><strong>LIVE</strong> WELL & BE <strong>REMEMBERED</strong></h1>
+      <p class="hero-subheading">I help people to live well and be remembered as the heroes they already are.</p>
+      <a href="https://calendly.com/zaledowlen/meeting" class="hero-cta">How can I help you? <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+    </div>
+  </section>
+
+  <!-- Profile Section -->
+  <section class="profile">
+    <img src="https://www.zaledowlen.com/-_-/res/95f94906-598d-40e0-9465-62043eb178fd/images/files/95f94906-598d-40e0-9465-62043eb178fd/a91ba998-8dc6-40d1-ad0f-a6faa646fca4/455-455/a8466c724d39f3947598b01bcc7777d508c03bbe" alt="Zale Dowlen" class="profile-image">
+    <div class="profile-content">
+      <h2 class="profile-name">Zale Dowlen, JD, MBA</h2>
+      <p class="profile-bio">I am a Kingdom driven Estate and Retirement Planner. I help people to live well and be remembered as the heroes they already are.</p>
+    </div>
+  </section>
+
+  <!-- Services Grid -->
+  <section class="services">
+    <div class="service-card">
+      <img src="https://www.zaledowlen.com/-_-/res/95f94906-598d-40e0-9465-62043eb178fd/images/files/95f94906-598d-40e0-9465-62043eb178fd/33581a89-49e2-4847-8375-3170ffbf7b0e/455-455/928bcc896cf93e3254db1b77d2ebd69370484053" alt="Estate Planning" class="service-image">
+      <div class="service-content">
+        <h3 class="service-title">Estate Planning</h3>
+        <p class="service-description">I am a licensed Tennessee attorney. I love helping those who want to leave a legacy of peace. I use Wills, Trusts, Powers of Attorney and the like to make your Estate as easy on your loved ones as possible.</p>
+        <a href="https://calendly.com/zaledowlen/meeting?back=1&month=2026-01" class="service-cta">Set my free Estate Planning appointment.</a>
+      </div>
+    </div>
+    <div class="service-card">
+      <img src="https://www.zaledowlen.com/-_-/res/95f94906-598d-40e0-9465-62043eb178fd/images/files/95f94906-598d-40e0-9465-62043eb178fd/4abd446e-53b2-4f69-b814-9dff7bf548bb/455-455/afb8385861b4026351368b2ddef2d88f0cd594df" alt="Retirement Planning" class="service-image">
+      <div class="service-content">
+        <h3 class="service-title">Retirement Planning</h3>
+        <p class="service-description">I am a licensed financial professional. I love helping those who want to better understand their financial situation. I use all of the financial tools to help you reach your financial goals.</p>
+        <a href="https://calendly.com/zaledowlen/estate-planning-meeting-clone?back=1&month=2026-01" class="service-cta">Set my free Financial Planning meeting.</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact">
+    <h2 class="contact-title">Connect With Zale</h2>
+    <div class="contact-links">
+      <a href="tel:16154970763" class="contact-link"><i class="fas fa-phone"></i> Call</a>
+      <a href="mailto:youmatter@zaledowlen.com" class="contact-link"><i class="fas fa-envelope"></i> Email</a>
+      <a href="https://www.facebook.com/Zale.Dowlen.Attorney" class="contact-link"><i class="fab fa-facebook"></i> Facebook</a>
+      <a href="https://www.instagram.com/zaledowlen/" class="contact-link"><i class="fab fa-instagram"></i> Instagram</a>
+      <a href="https://www.linkedin.com/in/zaledowlen/" class="contact-link"><i class="fab fa-linkedin"></i> LinkedIn</a>
+      <a href="https://twitter.com/ZaleDowlen" class="contact-link"><i class="fab fa-twitter"></i> Twitter</a>
+      <a href="https://www.youtube.com/channel/UCCaqHPfMvGTQ0qUW7lJS8qg" class="contact-link"><i class="fab fa-youtube"></i> YouTube</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Zale Dowlen, JD, MBA</span>
+      <span class="footer-copyright">© Zale Dowlen, JD, MBA. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.zaledowlen.com/">Practice Areas</a>
+      <a href="https://www.zaledowlen.com/contact-zale">Contact Zale</a>
+      <a href="https://www.zaledowlen.com/tell-me-more">Tell Me More</a>
+      <a href="https://www.zaledowlen.com/the-celebration">The Celebration</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
