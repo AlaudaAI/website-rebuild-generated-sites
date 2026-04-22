@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rothschild & Ausbrooks, PLLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Visual Demo */
+.hero-visual {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.hero-visual img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+/* Services Grid */
+.services {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.service-card {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+.service-card:last-child {
+  border-bottom: none;
+}
+
+.service-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.service-protocol {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.service-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.service-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 380px;
+}
+
+/* Team section */
+.team-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.team-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  align-items: center;
+  text-align: center;
+}
+
+.team-photo {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--border-color);
+}
+
+.team-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.team-name {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.team-role {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.team-bio {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 400px;
+}
+
+/* Trust Metrics Section */
+.trust-section {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.trust-metrics {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.trust-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.trust-number {
+  font-family: var(--font-serif);
+  font-size: clamp(64px, 15vw, 120px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.trust-number-suffix {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 8vw, 60px);
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.trust-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 400px;
+}
+
+.trust-clients {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.contact-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.contact-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.contact-item i {
+  width: 20px;
+  color: var(--text-muted);
+}
+
+.contact-item a {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-family: var(--font-sans);
+  font-size: 14px;
+}
+
+.contact-item a:hover {
+  color: var(--text-muted);
+}
+
+/* Social Links */
+.social-links {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.social-links a {
+  color: var(--text-muted);
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== MOBILE (max-width: 768px) =================== */
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-lg);
+  }
+
+  .hero-headline {
+    font-size: clamp(28px, 8vw, 36px);
+  }
+
+  .hero-subheading {
+    font-size: 16px;
+  }
+
+  .service-card {
+    padding: var(--space-lg);
+  }
+
+  .team-section {
+    padding: var(--space-lg);
+  }
+
+  .team-photo {
+    width: 150px;
+    height: 150px;
+  }
+
+  .trust-metrics,
+  .trust-clients {
+    padding: var(--space-lg);
+  }
+
+  .contact-section {
+    padding: var(--space-lg);
+  }
+
+  .footer {
+    padding: var(--space-lg);
+  }
+
+  .trust-number {
+    font-size: clamp(48px, 12vw, 80px);
+  }
+
+  .trust-number-suffix {
+    font-size: clamp(24px, 6vw, 40px);
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .services {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .service-card:nth-child(even) {
+    border-right: none;
+  }
+
+  .service-card:nth-last-child(1),
+  .service-card:nth-last-child(2) {
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .service-card:last-child {
+    border-bottom: none;
+  }
+
+  .team-member {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .trust-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-metrics {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .services {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .service-card {
+    padding: var(--space-2xl) var(--space-xl);
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .service-card:nth-child(3n) {
+    border-right: none;
+  }
+
+  .service-card:nth-last-child(-n+3) {
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .service-card:last-child {
+    border-bottom: none;
+  }
+
+  .trust-section {
+    /* already 2-col from tablet */
+  }
+
+  .trust-metrics {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-clients {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-number {
+    font-size: 120px;
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .service-card {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="https://rothschildbklaw.com/" class="brand">
+    <div class="globe-icon"><i class="fas fa-gavel"></i></div>
+    <span class="brand-name">Rothschild & Ausbrooks, PLLC</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="https://rothschildbklaw.com/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-gavel"></i></div>
+      <span class="brand-name">Rothschild & Ausbrooks, PLLC</span>
+    </a>
+    <nav>
+      <a href="https://rothschildbklaw.com/">Home</a>
+      <a href="https://rothschildbklaw.com/about/">About</a>
+      <a href="https://rothschildbklaw.com/services/bankruptcy-and-debt-relief/">Services</a>
+      <a href="https://rothschildbklaw.com/resources/">Resources</a>
+      <a href="https://rothschildbklaw.com/testimonials/">Testimonials</a>
+      <a href="https://rothschildbklaw.com/contact/">Contact</a>
+      <a href="https://rothschildbklaw.com/blog/">Blog</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Board-Certified Attorney</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">30+ Years Experience</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Middle Tennessee Bankruptcy Attorney</span>
+      <h1 class="hero-headline">Your Debt Relief is My Priority</h1>
+      <p class="hero-subheading">Filing for bankruptcy can be daunting, especially when customers try to navigate the process alone. At Rothschild & Ausbrooks, PLLC, we understand this and strive to help our clients in the best ways possible to alleviate the stress.</p>
+      <a href="https://rothschildbklaw.com/contact/" class="hero-cta">Contact Us Today <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+    </div>
+    <div class="hero-visual">
+      <img src="https://rothschildbklaw.com/wp-content/uploads/2024/02/about-1024x686.jpg" alt="Middle Tennessee Bankruptcy Attorney">
+    </div>
+  </section>
+
+  <!-- Additional Contact Sections -->
+  <section class="hero" style="border-bottom:1px solid var(--border-color);text-align:center;">
+    <div style="display:flex;flex-direction:column;gap:var(--space-lg);">
+      <h2 class="hero-headline" style="font-size:clamp(24px,5vw,36px);">Contact Us Today!</h2>
+      <a href="https://rothschildbklaw.com/contact/" class="hero-cta">Book A Free Consultation <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+    </div>
+  </section>
+
+  <section class="hero" style="border-bottom:1px solid var(--border-color);text-align:center;">
+    <div style="display:flex;flex-direction:column;gap:var(--space-lg);">
+      <h2 class="hero-headline" style="font-size:clamp(24px,5vw,36px);">Call Us 615-242-3996</h2>
+      <a href="tel:+16152423996" class="hero-cta">Call Now <i class="fas fa-phone" style="font-size:10px;"></i></a>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://rothschildbklaw.com/wp-content/uploads/2020/04/white_logo.png" alt="Rothschild & Ausbrooks, PLLC" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://rothschildbklaw.com/wp-content/uploads/2021/09/logo-1.png" alt="American Board of Certification" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://rothschildbklaw.com/wp-content/uploads/2021/09/phone_icon.png" alt="phone icon" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://rothschildbklaw.com/wp-content/uploads/2024/02/education_logo.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://rothschildbklaw.com/wp-content/uploads/2024/02/avvo.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/loading.gif" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/download.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Services Grid -->
+  <section class="services">
+    <div class="service-card">
+      <p class="service-protocol">Service 01</p>
+      <h3 class="service-title">Bankruptcy And Debt Relief</h3>
+      <p class="service-description">We are committed to offering comprehensive debt relief services to natives of Middle Tennessee, including filing for bankruptcy, credit counseling and debt consolidation.</p>
+    </div>
+    <div class="service-card">
+      <p class="service-protocol">Service 02</p>
+      <h3 class="service-title">Debt Problems And Solutions</h3>
+      <p class="service-description">If you are struggling with credit card payments and need assistance, schedule a free consultation with our certified credit counsellors for a budget and debt analysis session.</p>
+    </div>
+    <div class="service-card">
+      <p class="service-protocol">Service 03</p>
+      <h3 class="service-title">The Bankruptcy Process</h3>
+      <p class="service-description">Our experienced bankruptcy attorneys in Middle Tennessee will take you through the filing process ensuring that you understand your options</p>
+    </div>
+    <div class="service-card">
+      <p class="service-protocol">Service 04</p>
+      <h3 class="service-title">Types Of Bankruptcies</h3>
+      <p class="service-description">Whether it is a chapter 7 and 13 bankruptcy, you can rely on our experienced team what type of bankruptcies is ideal for you.</p>
+    </div>
+    <div class="service-card">
+      <p class="service-protocol">Service 05</p>
+      <h3 class="service-title">Debt In Bankruptcy</h3>
+      <p class="service-description">No matter your debt, filing for a bankruptcy can assist you manage it, if not completely eliminate it.</p>
+    </div>
+    <div class="service-card">
+      <p class="service-protocol">Service 06</p>
+      <h3 class="service-title">Credit</h3>
+      <p class="service-description">You don't need to avoid bankruptcy in order to maintain a great credit score. Schedule a free consultation with us to know more.</p>
+    </div>
+    <div class="service-card">
+      <p class="service-protocol">Service 07</p>
+      <h3 class="service-title">Chapter 13 and Chapter 7 Bankruptcy</h3>
+      <p class="service-description">Wages garnished, home foreclosed, car repossessed, or credit and medical card debts pilling up? Our bankruptcy attorney can help</p>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://rothschildbklaw.com/wp-content/uploads/2024/02/pbmit-left-span1.jpg" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://rothschildbklaw.com/wp-content/uploads/2024/02/CorporateLawFirminmumbai.jpg" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://rothschildbklaw.com/wp-content/uploads/2024/02/debt-settlement-1000x666-2.jpg" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://rothschildbklaw.com/wp-content/uploads/2024/02/image22.jpg" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://rothschildbklaw.com/wp-content/uploads/2024/02/project-07-1200x770-1.jpg" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://rothschildbklaw.com/wp-content/uploads/2024/02/Chapter-13-and-Chapter-7-Bankruptcy.jpg" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://rothschildbklaw.com/wp-content/uploads/2024/02/super_lawer.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://rothschildbklaw.com/wp-content/uploads/2024/02/review_btn-2.png" alt="review us" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/download_white.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/refresh_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/refresh_white_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/audio_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/audio_white_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/image_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/image_white_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <span class="team-label">Featured Attorney</span>
+    <div class="team-member">
+      <img src="https://rothschildbklaw.com/wp-content/uploads/2024/02/1517063308014.jpg" alt="Mary Beth Ausbrooks" class="team-photo">
+      <div class="team-info">
+        <h3 class="team-name">Mary Beth Ausbrooks</h3>
+        <p class="team-role">bankruptcy lawyer</p>
+        <p class="team-bio">Mary Beth Ausbrooks is a board-certified bankruptcy law specialist with more than 30 years of legal experience.</p>
+      </div>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://rothschildbklaw.com/wp-content/uploads/2024/02/client_award2019.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://rothschildbklaw.com/wp-content/uploads/2021/09/facebook-h.gif" alt="Facebook" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Trust Metrics Section -->
+  <section class="trust-section">
+    <div class="trust-metrics">
+      <span class="trust-label">Experience & Results</span>
+      <div>
+        <span class="trust-number">30</span><span class="trust-number-suffix">+</span>
+      </div>
+      <p class="trust-description">years of legal experience providing comprehensive bankruptcy and debt relief services to Middle Tennessee residents.</p>
+    </div>
+    <div class="trust-clients">
+      <span class="trust-label">Client Success</span>
+      <div>
+        <span class="trust-number">1000</span><span class="trust-number-suffix">s</span>
+      </div>
+      <p class="trust-description">of individuals assisted with debt relief. We have guided thousands of clients through the bankruptcy process and helped them achieve financial freedom.</p>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://rothschildbklaw.com/wp-content/uploads/2024/02/review.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://rothschildbklaw.com/wp-content/uploads/2021/09/bbb-h.gif" alt="Better Business Bureau" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <span class="contact-label">Contact Our Greater Nashville/Middle Tennessee Consumer Bankruptcy Lawyer For a Free Consultation</span>
+    <div class="contact-info">
+      <div class="contact-item">
+        <i class="fas fa-phone"></i>
+        <a href="tel:+16152423996">615-242-3996</a>
+      </div>
+      <div class="contact-item">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>110 Glancy St., Ste. 109, Greater Nashville/Middle Tennessee, TN 37072</span>
+      </div>
+      <div class="contact-item">
+        <i class="fas fa-external-link-alt"></i>
+        <a href="https://www.google.com/maps/place/Rothschild+%26+Ausbrooks,+PLLC/@36.2975129,-86.7022215,17z/data=!4m6!3m5!1s0x8864669ae089c0cf:0xde459956165a67af!8m2!3d36.2976376!4d-86.7021244!16s%2Fg%2F1tdx08fj?entry=ttu" target="_blank">View on Google Maps</a>
+      </div>
+    </div>
+    <div class="social-links">
+      <a href="https://www.facebook.com/rabankruptcy/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.linkedin.com/company/rothschild-&-ausbrooks-pllc/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://twitter.com/RABankruptcyTN/" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="https://www.instagram.com/rothschildandausbrooks/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    </div>
+    <a href="https://rothschildbklaw.com/contact/" class="hero-cta">Book A Free Consultation <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Rothschild & Ausbrooks, PLLC</span>
+      <span class="footer-copyright">© 2026 Rothschild & Ausbrooks, PLLC • All Rights Reserved</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://rothschildbklaw.com/">Home</a>
+      <a href="https://rothschildbklaw.com/about/">About</a>
+      <a href="https://rothschildbklaw.com/services/bankruptcy-and-debt-relief/">Services</a>
+      <a href="https://rothschildbklaw.com/resources/">Resources</a>
+      <a href="https://rothschildbklaw.com/testimonials/">Testimonials</a>
+      <a href="https://rothschildbklaw.com/contact/">Contact</a>
+      <a href="https://rothschildbklaw.com/blog/">Blog</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
