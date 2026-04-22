@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Logica Aesthetics</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://static.wixstatic.com/media/11062b_02bc3584267940cea67108c518b33df9f000.jpg/v1/fill/w_803,h_356,al_c,q_80,usm_0.33_1.00_0.00,enc_avif,quality_auto/11062b_02bc3584267940cea67108c518b33df9f000.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(244, 240, 234, 0.7);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Philosophy Section */
+.philosophy {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.philosophy-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.philosophy-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.philosophy-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.service-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.service-cell:last-child {
+  border-bottom: none;
+}
+
+.service-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.service-number {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.service-name {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+/* Contact Info Section */
+.contact-info-section {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.contact-info-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.contact-info-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.contact-info-content {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+}
+
+.contact-info-content a {
+  border-bottom: 1px solid var(--border-black);
+  transition: opacity 0.3s ease;
+}
+
+.contact-info-content a:hover {
+  opacity: 0.6;
+}
+
+/* Inquiry Section */
+.inquiry {
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.inquiry-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.inquiry-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.contact-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.contact-text {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 300;
+}
+
+.contact-link {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 300;
+  border-bottom: 1px solid var(--border-black);
+  transition: opacity 0.3s ease;
+}
+
+.contact-link:hover {
+  opacity: 0.6;
+}
+
+.reserve-button {
+  align-self: flex-start;
+  margin-top: var(--space-md);
+}
+
+.reserve-button a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  display: inline-block;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.reserve-button a:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+.social-links {
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+.social-links img {
+  width: 24px;
+  height: 24px;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.social-links a:hover img {
+  opacity: 1;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+  
+  .nav-links {
+    gap: var(--space-sm);
+  }
+  
+  .nav-links a {
+    font-size: 0.6rem;
+  }
+  
+  .hero {
+    padding: var(--space-md) var(--pad-x);
+  }
+  
+  .hero-headline {
+    font-size: 2.5rem;
+  }
+  
+  .philosophy {
+    padding: var(--space-md) var(--pad-x);
+  }
+  
+  .services {
+    padding: var(--space-md) var(--pad-x);
+  }
+  
+  .contact-info-section {
+    padding: var(--space-md) var(--pad-x);
+  }
+  
+  .inquiry {
+    padding: var(--space-md) var(--pad-x);
+  }
+  
+  .service-cell {
+    padding: var(--space-sm);
+  }
+  
+  .contact-info {
+    gap: var(--space-sm);
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .philosophy-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .contact-info-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .service-cell:nth-child(1),
+  .service-cell:nth-child(2) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(3),
+  .service-cell:nth-child(4) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .inquiry-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .philosophy {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .contact-info-section {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .inquiry {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Logica Aesthetics</a>
+  <ul class="nav-links">
+    <li><a href="https://www.logicaaesthetics.com/">Home</a></li>
+    <li><a href="https://www.logicaaesthetics.com/peptide-therapy-wellness">Peptides + Wellness</a></li>
+    <li><a href="https://www.logicaaesthetics.com/about-6">About Us</a></li>
+    <li><a href="https://www.logicaaesthetics.com/medical-spa-georgetown-tx">Services</a></li>
+    <li><a href="https://www.vagaro.com/Users/BusinessWidget.aspx?enc=MMLjhIwJMcwFQhXLL7ifVOxJe/nu3CK81r/edEA/ul+yQI53N++AQLFyWhTBeKJDm1F1Ea9yV4kfcxtnEjDOuTpK11vZFE+7Svo/juk9Ib7lcYrDewo2E+jfeubBxIXNqCNw+IgQ0xJgtOJk7/KWqOipH6NBpOryek8W9PGdLC3080t4ZRRyRNFLBgT/Zzy6XtzFokxA5XbZdxQMNKbHnHRlnUHdWiwgDoEpslAF3SBzkXEw6pLt8WM3pCZg5YDMihL3H0/RCglKFEIw0JVCntq1FAG6rU98S1u7Q0VTbXe2EZHy2VTSIGzP6vdrWpPC6+qe7Rf9tNulqxYSa2W69Nfk1clgCy2o9nBeALd/X0W8n83Jflfb7dRgkPdxK+pcCbjWdDBGu+7PUtnwk/Ivs1vI8kobtYSCC6MN114z7wX/MtMqO0WLaeul+Dy975RQMvVNStxRRGsTt7ZUJfCHeQ==">Book Now</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">LOGICA<br>AESTHETICS</h1>
+    <p class="hero-subtitle">the art of refinement</p>
+  </div>
+</section>
+
+<!-- Philosophy Section -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">001 — approach</span>
+    <div class="philosophy-text">
+      <p>Welcome to Logica Aesthetics, a boutique MedSpa in the heart of Georgetown. Here, science and artistry come together to create natural, refined results through neurotoxin treatments, dermal fillers, injectables, and advanced skin rejuvenation. Every experience is client-centered and tailored to your unique goals, ensuring you feel confident, refreshed, and cared for in a luxury environment trusted by clients throughout Georgetown, Round Rock, and the greater Austin area.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Services Grid -->
+<section class="services" id="services">
+  <div class="services-grid">
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-number">001</span>
+        <span class="service-name">neurotoxin treatments</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-number">002</span>
+        <span class="service-name">dermal fillers</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-number">003</span>
+        <span class="service-name">injectables</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-number">004</span>
+        <span class="service-name">advanced skin rejuvenation</span>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-meta">
+        <span class="service-number">005</span>
+        <span class="service-name">peptide therapy + wellness</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Info Section -->
+<section class="contact-info-section" id="contact-info">
+  <div class="contact-info-inner">
+    <span class="contact-info-label">002 — LOGICA AESTHETICS</span>
+    <div class="contact-info-content">
+      <p>101 River Hills Drive<br><br>Suite1<br><br>Georgetown, Texas 78628<br><br>737-215-4020<br><br><a href="mailto:dacia@logicaaesthetics.com">dacia@logicaaesthetics.com</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- Inquiry Section -->
+<section class="inquiry" id="inquiry">
+  <div class="inquiry-inner">
+    <h2 class="inquiry-heading">Reserve Your<br>Experience<br>Today</h2>
+    <div class="contact-info">
+      <div class="contact-section">
+        <span class="contact-label">location</span>
+        <div class="contact-text">101 River Hills Drive<br><br>Suite1<br><br>Georgetown, Te</div>
+      </div>
+      <div class="contact-section">
+        <span class="contact-label">call</span>
+        <a href="tel:737-215-4020" class="contact-link">737-215-4020</a>
+      </div>
+      <div class="contact-section">
+        <span class="contact-label">email</span>
+        <a href="mailto:info@mysite.com" class="contact-link">info@mysite.com</a>
+      </div>
+      <div class="contact-section">
+        <span class="contact-label">follow us</span>
+        <div class="social-links">
+          <a href="https://www.instagram.com/logicaaesthetics?igsh=eGgzMHR0bm1teWdm&utm_source=qr">
+            <img src="https://static.wixstatic.com/media/fdcfaba150fc427da298a00cb09d91c1.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/fdcfaba150fc427da298a00cb09d91c1.png" alt="Instagram">
+          </a>
+          <a href="https://www.facebook.com/share/1CfeLw5XW9/?mibextid=wwXIfr">
+            <img src="https://static.wixstatic.com/media/ce6ec7c11b174c0581e20f42bb865ce3.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ce6ec7c11b174c0581e20f42bb865ce3.png" alt="Facebook">
+          </a>
+          <a href="https://www.linkedin.com/company/logica-aesthetics/">
+            <img src="https://static.wixstatic.com/media/8efda6398c724b5ea342287bfe3f5ed0.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/8efda6398c724b5ea342287bfe3f5ed0.png" alt="LinkedIn">
+          </a>
+        </div>
+      </div>
+      <div class="reserve-button">
+        <a href="https://www.vagaro.com/Users/BusinessWidget.aspx?enc=MMLjhIwJMcwFQhXLL7ifVOxJe/nu3CK81r/edEA/ul+yQI53N++AQLFyWhTBeKJDm1F1Ea9yV4kfcxtnEjDOuTpK11vZFE+7Svo/juk9Ib7lcYrDewo2E+jfeubBxIXNqCNw+IgQ0xJgtOJk7/KWqOipH6NBpOryek8W9PGdLC3080t4ZRRyRNFLBgT/Zzy6XtzFokxA5XbZdxQMNKbHnHRlnUHdWiwgDoEpslAF3SBzkXEw6pLt8WM3pCZg5YDMihL3H0/RCglKFEIw0JVCntq1FAG6rU98S1u7Q0VTbXe2EZHy2VTSIGzP6vdrWpPC6+qe7Rf9tNulqxYSa2W69Nfk1clgCy2o9nBeALd/X0W8n83Jflfb7dRgkPdxK+pcCbjWdDBGu+7PUtnwk/Ivs1vI8kobtYSCC6MN114z7wX/MtMqO0WLaeul+Dy975RQMvVNStxRRGsTt7ZUJfCHeQ==">Reserve Your Experience</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Logica Aesthetics</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
