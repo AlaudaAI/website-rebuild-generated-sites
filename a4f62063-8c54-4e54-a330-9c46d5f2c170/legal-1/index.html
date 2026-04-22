@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Law Office of J. Ryan Johnson, PLLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #1e2b38;
+  --bg-secondary: #2a3847;
+  --bg-hover: #34445a;
+  --bg-card: #252f3e;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.7);
+  --text-dim: rgba(255, 255, 255, 0.5);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand img {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .brand-link img {
+  width: 38px;
+  height: 38px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Visual Demo */
+.hero-visual {
+  width: 100%;
+  max-width: 400px;
+}
+
+.law-visual {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: var(--space-xl);
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.law-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* Features Grid */
+.features {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.feature-card {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+.feature-card:last-child {
+  border-bottom: none;
+}
+
+.feature-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.feature-protocol {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.feature-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.feature-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 380px;
+}
+
+/* About Section */
+.about-section {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.about-content {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.about-image {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+/* Services List */
+.services-list {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+}
+
+.service-item {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--text-primary);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.service-item:last-child {
+  border-bottom: none;
+}
+
+/* Testimonials Section */
+.testimonials-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.testimonial-card {
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: var(--space-lg);
+  border: 1px solid var(--border-color);
+}
+
+.testimonial-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.testimonial-author {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+/* CTA Section */
+.cta-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  text-align: center;
+}
+
+.cta-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 16px 36px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Contact Section */
+.contact-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.contact-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--text-muted);
+}
+
+.contact-link {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-link:hover {
+  color: var(--text-muted);
+}
+
+/* Social Links */
+.social-links {
+  display: flex;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  color: var(--text-primary);
+  border-color: var(--text-primary);
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== MOBILE (max-width: 768px) =================== */
+@media (max-width: 768px) {
+  .mobile-header .brand-name {
+    display: none;
+  }
+  
+  .hero {
+    padding: var(--space-lg) var(--space-md);
+    gap: var(--space-lg);
+  }
+  
+  .hero-headline {
+    font-size: clamp(28px, 8vw, 36px);
+  }
+  
+  .hero-subheading {
+    font-size: 16px;
+  }
+  
+  .feature-card {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .about-content, .about-image {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .services-list, .testimonials-section, .cta-section, .contact-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .footer {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .social-links {
+    flex-wrap: wrap;
+    gap: var(--space-md);
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:nth-child(even) {
+    border-right: none;
+  }
+
+  .about-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .about-content {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  .feature-card:not(:last-child) {
+    border-right: 1px solid var(--border-color);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .feature-card {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <img src="https://jryanjohnson.law/wp-content/uploads/2025/02/JRJ-logo_Revised-2.png" alt="Law Office of J. Ryan Johnson, PLLC">
+    <span class="brand-name">Law Office of J. Ryan Johnson, PLLC</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <img src="https://jryanjohnson.law/wp-content/uploads/2025/02/JRJ-logo_Revised-2.png" alt="Law Office of J. Ryan Johnson, PLLC">
+      <span class="brand-name">Law Office of J. Ryan Johnson, PLLC</span>
+    </a>
+    <nav>
+      <a href="https://jryanjohnson.law/practice-area/divorce-and-family-attorney-nashville-tn/">Practice Areas</a>
+      <a href="https://jryanjohnson.law/our-team/">Our Team</a>
+      <a href="https://jryanjohnson.law/#">Resources</a>
+      <a href="https://jryanjohnson.law/contact-us/">Contact Us</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Available for Consultation</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Serving Nashville, TN</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Nashville Family Law</span>
+      <h1 class="hero-headline">We Tell Your Story</h1>
+      <p class="hero-subheading">Your Family's Trusted Advocate in the Heart of Nashville</p>
+      <a href="tel:615-645-2800" class="hero-cta">Schedule Consultation <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+    </div>
+    <div class="hero-visual">
+      <div class="law-visual">
+        <img src="https://jryanjohnson.law/wp-content/uploads/2025/03/Frame-2087326165500.webp" alt="a building with many windows">
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-section">
+    <div class="about-content">
+      <span class="feature-protocol">Why Choose Us</span>
+      <h2 class="feature-title">Your Trusted Nashville Attorney, Focused on Honesty and Service</h2>
+      <p class="feature-description">When hiring an attorney in Nashville, The Law Office of J. Ryan Johnson is dedicated to providing the highest quality legal services in the areas of family law. Ryan has represented hundreds of clients throughout Davidson County and Middle Tennessee in the courtroom and at the negotiation table. He approaches each case with honesty, understanding, and clear legal advice. During a divorce or a custody issue, you need an advocate that understands your perspective and works aggressively on your behalf. It's learning the client's issues and answering their questions to formulate and execute a strategy.</p>
+    </div>
+    <div class="about-image">
+      <img src="https://jryanjohnson.law/wp-content/uploads/2025/02/Ryan-Johnson-Headshot-12.webp" alt="a man in a suit and tie">
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services-list">
+    <span class="feature-protocol">How We Can Help</span>
+    <h2 class="feature-title">Practice Areas</h2>
+    <div class="services-grid">
+      <div class="service-item">Divorce</div>
+      <div class="service-item">Child Support</div>
+      <div class="service-item">Child Custody</div>
+      <div class="service-item">Private Mediation Services</div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials-section">
+    <span class="feature-protocol">What Our Clients Say</span>
+    <h2 class="feature-title">Testimonials</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"Ryan Johnson is an expert on helping clients in divorce or post-divorce situations. I recommend him wholeheartedly."</p>
+        <p class="testimonial-author">– J.H.</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"Ryan had good instincts with my case and got me a positive result in a difficult situation."</p>
+        <p class="testimonial-author">– J.J.</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"Mr. Johnson exuded professionalism throughout the entirety of our working together. Always on time, always effectively communicating, and always providing excellent advice and expertise. Money well spent. Can't recommend him enough."</p>
+        <p class="testimonial-author">– M.C.</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"Ryan was great to work with during a stressful time. We went to mediation and he was really prepared; he was the most prepared attorney there. I'm not sure the case would have settled without his guidance and experience (both as an attorney and experienced mediator)."</p>
+        <p class="testimonial-author">– T.J.</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"Ryan Johnson was my attorney for our initial child custody case and then again a few years later for a more serious custody matter, including child support. He kept me informed of everything going on and what I should expect. Ryan advocated for the safety of my child, won our case, and I would highly recommend him."</p>
+        <p class="testimonial-author">– J.B.</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"Ryan is one of the best family law attorneys in Nashville. I had a very heated divorce and Ryan helped immensely! Later, when my child custody agreement had to be modified, he was there to guide me through the process. I appreciate his professionalism and recommend him to anyone needing help."</p>
+        <p class="testimonial-author">– T.A.</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"I had a fantastic experience working with Ryan during my divorce. His assistance made the process quick and relatively stress-free for me. I highly recommend his services to anyone in need of legal support during a difficult time. Five stars!"</p>
+        <p class="testimonial-author">– K.S.</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"Ryan was extremely helpful through a difficult situation I had to navigate. He was always professional, kind, thorough, and responsive. I am very grateful for his support through that time, and resolving the matter with the best possible outcome."</p>
+        <p class="testimonial-author">– D.F.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <h2 class="cta-title">Family law does not have to be stressful. The Law Office of J. Ryan Johnson is here to help.</h2>
+    <a href="tel:615-645-2800" class="cta-button">Schedule Your Appointment Now!</a>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <span class="feature-protocol">Let's Get Started Today</span>
+    <h2 class="feature-title">Contact us today for a consultation, and let's work together to achieve the best possible outcome for your case.</h2>
+    <div class="contact-info">
+      <div class="contact-item">
+        <i class="fas fa-phone contact-icon"></i>
+        <a href="tel:615-645-2800" class="contact-link">615-645-2800</a>
+      </div>
+      <div class="contact-item">
+        <i class="fas fa-map-marker-alt contact-icon"></i>
+        <span class="contact-link">214 2nd Ave N Suite 208 Nashville, Tennessee 37201</span>
+      </div>
+    </div>
+    <div class="social-links">
+      <a href="https://www.facebook.com/jryanjohnsonlaw/" class="social-link" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://www.instagram.com/jryanjohnsonlaw/" class="social-link" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://x.com/i/flow/login?redirect_after_login=%2Fjryanjohnsonlaw" class="social-link" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Law Office of J. Ryan Johnson, PLLC</span>
+      <span class="footer-copyright">© 2026 Law Office of J. Ryan Johnson, PLLC</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://jryanjohnson.law/practice-area/divorce-and-family-attorney-nashville-tn/">Practice Areas</a>
+      <a href="https://jryanjohnson.law/our-team/">Our Team</a>
+      <a href="https://jryanjohnson.law/#">Resources</a>
+      <a href="https://jryanjohnson.law/contact-us/">Contact Us</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
