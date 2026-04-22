@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Southwest Skin — Dermatology Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://swskin.com/wp-content/uploads/2020/04/telehealth.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(244, 240, 234, 0.8);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Announcement Section */
+.announcement {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.announcement-text {
+  font-family: var(--font-mono);
+  font-size: clamp(0.7rem, 1.5vw, 1rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.announcement-text a {
+  border-bottom: 1px solid var(--border-black);
+  transition: border-bottom-width 0.2s ease;
+}
+
+.announcement-text a:hover {
+  border-bottom-width: 2px;
+}
+
+/* Services Section */
+.services {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.services-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.services-title {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+  gap: 0;
+}
+
+.service-item {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  text-align: center;
+}
+
+.service-item:last-child {
+  border-bottom: none;
+}
+
+.service-name {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+}
+
+.service-description {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+/* Feature Cards */
+.features {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.features-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  border: 1px solid var(--border-black);
+  background-color: var(--border-black);
+}
+
+.feature-card {
+  background-color: var(--bg-cream);
+  padding: var(--space-md);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.feature-image {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: var(--space-sm);
+}
+
+.feature-title {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+}
+
+.feature-description {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Stats Section */
+.stats {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+  text-align: center;
+}
+
+.stats-grid {
+  max-width: 600px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  border: 1px solid var(--border-black);
+  background-color: var(--border-black);
+}
+
+.stat-item {
+  background-color: var(--bg-cream);
+  padding: var(--space-lg) var(--space-md);
+  text-align: center;
+}
+
+.stat-value {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  line-height: 1.1;
+  margin-bottom: var(--space-xs);
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* Contact Section */
+.contact {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.locations-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.location-card {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+  text-align: center;
+}
+
+.location-name {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.location-hours {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.location-address {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.4;
+  margin-bottom: var(--space-sm);
+}
+
+.location-contact {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+.location-contact a {
+  border-bottom: 1px solid var(--border-black);
+  transition: border-bottom-width 0.2s ease;
+}
+
+.location-contact a:hover {
+  border-bottom-width: 2px;
+}
+
+/* CTA Section */
+.cta {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-lg) var(--pad-x);
+  text-align: center;
+}
+
+.cta-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.cta-button {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.cta-button:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .locations-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .locations-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-buttons {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .service-item {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-item:last-child {
+    border-right: none;
+  }
+
+  .features-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .locations-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Southwest Skin</a>
+  <ul class="nav-links">
+    <li><a href="https://swskin.com/index.php/forms-and-information/">patient info</a></li>
+    <li><a href="https://swskin.com/index.php/providers/">doctors</a></li>
+    <li><a href="https://swskin.com/index.php/our-services/">services</a></li>
+    <li><a href="https://swskin.com/index.php/locations/">locations</a></li>
+    <li><a href="https://swskin.com/index.php/contact-us/">contact us</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">Serving the Greater Austin area for over 40 years</h1>
+    <p class="hero-subtitle">001 — comprehensive dermatology services including surgical & general dermatology with focus on skin cancer and leg veins</p>
+  </div>
+</section>
+
+<!-- Announcement Section -->
+<section class="announcement">
+  <p class="announcement-text">002 — <a href="https://swskin.com/index.php/austin-oak-hill/">now open in southwest medical village</a></p>
+</section>
+
+<!-- Services Section -->
+<section class="services" id="services">
+  <div class="services-inner">
+    <h2 class="services-title">Our Services</h2>
+    <div class="services-grid">
+      <div class="service-item">
+        <div class="service-name">general dermatology</div>
+      </div>
+      <div class="service-item">
+        <div class="service-name">mohs & skin cancer surgery</div>
+      </div>
+      <div class="service-item">
+        <div class="service-name">leg veins</div>
+      </div>
+      <div class="service-item">
+        <div class="service-name">cosmetics</div>
+      </div>
+      <div class="service-item">
+        <div class="service-name">telehealth</div>
+        <div class="service-description">Connect to your Provider from Anywhere</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Feature Cards -->
+<section class="features">
+  <div class="features-grid">
+    <div class="feature-card">
+      <img src="https://swskin.com/wp-content/uploads/2019/10/locations-1.png" alt="Locations" class="feature-image">
+      <div class="feature-title">locations</div>
+      <div class="feature-description">Now featuring 5 locations for your convenience</div>
+    </div>
+    <div class="feature-card">
+      <img src="https://swskin.com/wp-content/uploads/2019/10/1.png" alt="Patient Portal" class="feature-image">
+      <div class="feature-title">patient portal</div>
+      <div class="feature-description">View your records, request prescriptions, and more online</div>
+    </div>
+    <div class="feature-card">
+      <img src="https://swskin.com/wp-content/uploads/2019/10/3.png" alt="Bill Pay" class="feature-image">
+      <div class="feature-title">bill pay</div>
+      <div class="feature-description">Pay your bill through our secure online portal using a credit card</div>
+    </div>
+    <div class="feature-card">
+      <img src="https://swskin.com/wp-content/uploads/2020/04/telehealth.png" alt="Telehealth" class="feature-image">
+      <div class="feature-title">telehealth</div>
+      <div class="feature-description">Connect to your Provider from Anywhere</div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-value">40 years</div>
+      <div class="stat-label">serving the Greater Austin area</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">5</div>
+      <div class="stat-label">locations</div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-heading">Our Locations</h2>
+    <div class="locations-grid">
+      <div class="location-card">
+        <div class="location-name">austin – westgate</div>
+        <div class="location-hours">m-f: 8am – 5pm</div>
+        <div class="location-address">4544 S Lamar Blvd<br>Suite 640<br>Austin, TX 78745</div>
+        <div class="location-contact">
+          Ph: <a href="tel:512.444.7208">512.444.7208</a><br>
+          Fx: 512.444.2343
+        </div>
+      </div>
+      <div class="location-card">
+        <div class="location-name">buda</div>
+        <div class="location-hours">m-f: 8am – 5pm</div>
+        <div class="location-address">211B N FM 1626<br>Suite 1A<br>Buda, TX 78610</div>
+        <div class="location-contact">
+          Ph: <a href="tel:737.717.3244">737.717.3244</a><br>
+          Fx: 512.318.2537
+        </div>
+      </div>
+      <div class="location-card">
+        <div class="location-name">dripping springs</div>
+        <div class="location-hours">m-f: 8am – 5pm</div>
+        <div class="location-address">249 Sportsplex Dr<br>Suite 210<br>Dripping Springs, TX 78620</div>
+        <div class="location-contact">
+          Ph: <a href="tel:512.444.2277">512.444.2277</a><br>
+          Fx: 512.829.4869
+        </div>
+      </div>
+      <div class="location-card">
+        <div class="location-name">manor</div>
+        <div class="location-hours">m-f: 8am – 5pm</div>
+        <div class="location-address">14008 Shadowglen Blvd<br>Suite 200<br>Manor, TX 78653</div>
+        <div class="location-contact">
+          Ph: 512.443.4774<br>
+          Fx: 512.284.9713
+        </div>
+      </div>
+      <div class="location-card">
+        <div class="location-name">austin – oak hill</div>
+        <div class="location-hours">m-f: 8am – 5pm</div>
+        <div class="location-address">5625 Eiger Rd<br>Suite 105<br>Austin, TX 78735</div>
+        <div class="location-contact">
+          Ph: <a href="tel:512.444.8078">512.444.8078</a><br>
+          Fx: 512.551.9625
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta">
+  <div class="cta-buttons">
+    <a href="https://patient.klara.com/#/widget/publicScheduling/scheduling/NDFlNmYxNmRjNDZkOGUyZTYwMDYwOTEyMmZmY2JjMWZkODEyMDA5OTE0N2MzN2I1NzViYTMzMTU2MDFjCjIyMDQkaTI3eGhkVTgwRVF6RTNmd0tjMVdMdz09" class="cta-button">book appointment</a>
+    <a href="tel:512.444.7208" class="cta-button">call us 512.444.7208</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Southwest Skin</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
