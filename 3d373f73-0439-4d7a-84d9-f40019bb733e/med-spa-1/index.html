@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Body Tonic RX</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://mybodytonic.com/storage/2026/02/Look-Better.webp');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(244, 240, 234, 0.7);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Philosophy Section */
+.philosophy {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.philosophy-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.philosophy-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.philosophy-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.services-title {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-md);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-md);
+}
+
+.service-card {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+  background: rgba(255, 255, 255, 0.3);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.service-name {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+}
+
+.service-description {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.services-compact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-xs);
+  margin-top: var(--space-md);
+}
+
+.service-compact {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  padding: var(--space-xs);
+  border-bottom: 1px solid var(--placeholder-gray);
+}
+
+/* Stats Section */
+.stats {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+  text-align: center;
+}
+
+.stats-item {
+  display: inline-block;
+  margin: 0 var(--space-lg);
+}
+
+.stats-value {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 300;
+  line-height: 1;
+  display: block;
+  margin-bottom: var(--space-xs);
+}
+
+.stats-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* Testimonials */
+.testimonials {
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.testimonials-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-lg);
+}
+
+.testimonial-card {
+  text-align: center;
+  padding: var(--space-md);
+}
+
+.testimonial-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 0 auto var(--space-sm);
+  object-fit: cover;
+}
+
+.testimonial-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: var(--space-sm);
+}
+
+.testimonial-author {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+/* Gallery */
+.gallery {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.gallery-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-sm);
+}
+
+.gallery-item {
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+/* Inquiry Section */
+.inquiry {
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.inquiry-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.inquiry-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.inquiry-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.form-field {
+  position: relative;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  padding: var(--space-sm) 0;
+  color: var(--text-black);
+  outline: none;
+  border-radius: 0;
+  transition: border-bottom-width 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: var(--placeholder-gray);
+  font-style: italic;
+  font-family: var(--font-serif);
+  font-weight: 300;
+}
+
+.form-field select {
+  cursor: pointer;
+  color: var(--placeholder-gray);
+  font-style: italic;
+}
+
+.form-field select.has-value {
+  color: var(--text-black);
+  font-style: normal;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-bottom-width: 2px;
+}
+
+.form-submit {
+  align-self: flex-start;
+}
+
+.form-submit button {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.form-submit button:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .philosophy-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .inquiry-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+  }
+
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .services-compact {
+    grid-template-columns: 1fr;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+
+  .stats-item {
+    margin: 0 var(--space-sm);
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .philosophy {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .inquiry {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <a href="/" class="nav-logo">Body Tonic RX</a>
+  <ul class="nav-links">
+    <li><a href="https://mybodytonic.com/home-migrate/">home</a></li>
+    <li><a href="https://mybodytonic.com/about-us/">about us</a></li>
+    <li><a href="https://mybodytonic.com/services/">services</a></li>
+    <li><a href="https://mybodytonic.com/#">memberships</a></li>
+    <li><a href="https://mybodytonic.com/before-and-after/">before and after</a></li>
+    <li><a href="https://mybodytonic.com/gift-card/">gift card</a></li>
+    <li><a href="https://mybodytonic.com/our-products/">products</a></li>
+    <li><a href="https://mybodytonic.com/shop/">peptide shop</a></li>
+    <li><a href="https://mybodytonic.com/blog/">blog</a></li>
+    <li><a href="https://mybodytonic.com/contact-us/">contact us</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">Look Better. Feel Better.<br>Live Better.</h1>
+    <p class="hero-subtitle">001 — Body Tonic is a boutique aesthetics and wellness practice in Westlake and Bee Cave near Austin, TX focused on helping you look better, feel better, and actually maintain it.</p>
+  </div>
+</section>
+
+<!-- Philosophy Section -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">002 — why body tonic?</span>
+    <div class="philosophy-text">
+      <p>Body Tonic is a boutique aesthetics and wellness practice in Westlake and Bee Cave near Austin, TX focused on helping you look better, feel better, and actually maintain it.</p>
+      <p>On the aesthetic side, we enhance your natural features with treatments that look subtle and balanced, never overdone. The goal is for you to feel refreshed, not different.</p>
+      <p>On the wellness side, we go deeper. Using labs, body composition testing, and real provider guidance, we create a plan that's built specifically for you whether that's weight loss, hormones, or overall health.</p>
+      <p>No cookie cutter plans. No quick fixes. Just a team that's here to support you long term and get you real results.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Our Mission Section -->
+<section class="philosophy">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">Our Mission</span>
+    <div class="philosophy-text">
+      <p>Our mission is to help you look better, feel better, and live better through personalized aesthetics and wellness treatments. We believe in enhancing your natural beauty while supporting your overall health and wellness journey.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Telemedicine Available Nationwide Section -->
+<section class="philosophy">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">TELEMEDICINE AVAILABLE NATIONWIDE</span>
+    <div class="philosophy-text">
+      <p>Telemedicine Available Nationwide - Experience our comprehensive wellness programs from anywhere in the country through our secure telemedicine platform. Get expert guidance and personalized treatment plans without geographic limitations.</p>
+    </div>
+  </div>
+</section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://mybodytonic.com/storage/2025/12/Book-an-appointment-Body-Tonic-LLC-TX.svg" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Stats Section -->
+<section class="stats">
+  <div class="stats-item">
+    <span class="stats-value">2011</span>
+    <span class="stats-label">Serving Customers Since</span>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="services" id="services">
+  <div class="services-header">
+    <h2 class="services-title">our services</h2>
+  </div>
+  
+  <div class="services-grid">
+    <div class="service-card">
+      <h3 class="service-name">Dermal Filler</h3>
+      <p class="service-description">Dermal Fillers restore volume to the skin and reduce the appearance of wrinkles. The service involves injecting a gel-like substance, typically made from hyaluronic acid</p>
+    </div>
+    
+    <div class="service-card">
+      <h3 class="service-name">Sculptra®</h3>
+      <p class="service-description">We love Sculptra because it is a biostimulator that helps your body produce its own collagen, creating a more youthful look over time without adding traditional filler.</p>
+    </div>
+    
+    <div class="service-card">
+      <h3 class="service-name">PRF</h3>
+      <p class="service-description">Platelet-rich fibrin (PRF) therapy rejuvenates the skin and addresses hair loss by utilizing your body's natural healing capabilities.</p>
+    </div>
+    
+    <div class="service-card">
+      <h3 class="service-name">Sculptra Brazilian Butt Lift</h3>
+      <p class="service-description">Sculptra for a Brazilian butt lift, also known as BBL, is a popular, noninvasive, and versatile procedure to add more shape and volume to the buttocks.</p>
+    </div>
+    
+    <div class="service-card">
+      <h3 class="service-name">MOXI FRACTIONAL LASER</h3>
+      <p class="service-description">Moxi is an advanced laser treatment designed to target common skin concerns, such as fine lines, wrinkles, sun damage, uneven skin tone, and overall skin texture irregularities.</p>
+    </div>
+    
+    <div class="service-card">
+      <h3 class="service-name">HALO LASER SKIN RESURFACING</h3>
+      <p class="service-description">Halo is a skin resurfacing treatment that delivers non-ablative and ablative wavelengths to the same treatment zone, giving impressive results without the discomfort or downtime of the older ablative treatments.</p>
+    </div>
+    
+    <div class="service-card">
+      <h3 class="service-name">CoolPeel Laser Resurfacing</h3>
+      <p class="service-description">CoolPeel Laser Resurfacing in Austin, TX, provides an innovative and gentle solution for refreshing the skin's surface without the downtime of traditional resurfacing treatments.</p>
+    </div>
+  </div>
+  
+  <div class="services-compact">
+    <div class="service-compact">Neuromodulators (Botox®)</div>
+    <div class="service-compact">Kybella</div>
+    <div class="service-compact">SKINVIVE</div>
+    <div class="service-compact">PRF EZ Gel</div>
+    <div class="service-compact">RADIESSE®</div>
+    <div class="service-compact">Body Contouring</div>
+    <div class="service-compact">Hyperhidrosis Injections</div>
+    <div class="service-compact">Helix CO2 Laser Resurfacing</div>
+    <div class="service-compact">Radiant Trio</div>
+    <div class="service-compact">HydraFacial</div>
+    <div class="service-compact">Glass Skin Facial (Salmon Sperm)</div>
+    <div class="service-compact">AQUAGOLD FINE TOUCH</div>
+    <div class="service-compact">BBL HERO</div>
+    <div class="service-compact">MICRONEEDLING WITH SKINPEN</div>
+    <div class="service-compact">EXOSOMES</div>
+    <div class="service-compact">SKIN TIGHTENING</div>
+    <div class="service-compact">Dexa Scans</div>
+    <div class="service-compact">MEDICAL WEIGHT LOSS (GLP-1)</div>
+    <div class="service-compact">Semaglutide</div>
+    <div class="service-compact">Tirzepatide</div>
+    <div class="service-compact">Retatrutide</div>
+    <div class="service-compact">Bio-Identical Hormone Therapy</div>
+    <div class="service-compact">Concierge HRT</div>
+    <div class="service-compact">Functional Wellness</div>
+    <div class="service-compact">NAD+ Therapy</div>
+    <div class="service-compact">Sexual Wellness</div>
+    <div class="service-compact">Peptides PT-141</div>
+    <div class="service-compact">Vitamin IV Treatments</div>
+    <div class="service-compact">Regenerative Pain Therapy: PRP & Exosome Treatments</div>
+    <div class="service-compact">Advanced Peptide Therapy</div>
+    <div class="service-compact">PRO-NOX™ NITROUS OXIDE SYSTEM</div>
+    <div class="service-compact">Extra Comfort Aesthetic Treatments</div>
+    <div class="service-compact">Aura Skin Assessment</div>
+  </div>
+</section>
+
+<!-- Team Section -->
+<section class="philosophy">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">003 — meet the team</span>
+    <div class="philosophy-text">
+      <p>Our medical professionals at Body Tonic RX specialize in weight management and metabolic health, bringing both clinical knowledge and real compassion to every interaction. Each provider on our team has been selected for their expertise in obesity medicine and their ability to connect with patients facing frustrating health challenges.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <img src="https://mybodytonic.com/storage/2026/01/vivien-austin-Body-Tonic-LLC-TX.webp" alt="Vivien" class="testimonial-image">
+      <blockquote class="testimonial-quote">"Iris was such a kind, gentle and funny soul. I highly recommend her."</blockquote>
+      <div class="testimonial-author">
+        <div>Vivien - Austin & NYC Blogger</div>
+        <div>@iamvivientatham</div>
+      </div>
+    </div>
+    
+    <div class="testimonial-card">
+      <img src="https://mybodytonic.com/storage/2026/01/Amberlee-diamond-Body-Tonic-LLC-TX.webp" alt="Amberlee Diamond" class="testimonial-image">
+      <blockquote class="testimonial-quote">"Thanks to my bb Gina for her subtle magic!"</blockquote>
+      <div class="testimonial-author">
+        <div>Amberlee Diamond - Blogger, Influencer</div>
+        <div>@amberleediamond</div>
+      </div>
+    </div>
+    
+    <div class="testimonial-card">
+      <img src="https://mybodytonic.com/storage/2026/01/emily-herren-Body-Tonic-LLC-TX.webp" alt="Emily Herren" class="testimonial-image">
+      <blockquote class="testimonial-quote">"My Austin girls, I go to Body Tonic RX and I have been super pleased!"</blockquote>
+      <div class="testimonial-author">
+        <div>Emily Herren - Influencer</div>
+        <div>@champagneandchanel</div>
+      </div>
+    </div>
+    
+    <div class="testimonial-card">
+      <img src="https://mybodytonic.com/storage/2026/01/reven-elyse-Body-Tonic-LLC-TX.webp" alt="Raven Elyse" class="testimonial-image">
+      <blockquote class="testimonial-quote">"If you need any injectables, I highly recommend Body Tonic RX. I've been going for a few years now and I am never disappointed!"</blockquote>
+      <div class="testimonial-author">
+        <div>Raven Elyse - Digital Creator</div>
+        <div>@ravenelyse</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery Section -->
+<section class="gallery">
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="https://mybodytonic.com/storage/2026/01/Foorter-insta-feed-one-Body-Tonic-LLC-TX.webp" alt="Instagram feed">
+    </div>
+    <div class="gallery-item">
+      <img src="https://mybodytonic.com/storage/2026/01/Foorter-insta-feed-two-Body-Tonic-LLC-TX.webp" alt="Instagram feed">
+    </div>
+    <div class="gallery-item">
+      <img src="https://mybodytonic.com/storage/2026/01/Foorter-insta-feed-three-Body-Tonic-LLC-TX.webp" alt="Instagram feed">
+    </div>
+    <div class="gallery-item">
+      <img src="https://mybodytonic.com/storage/2026/01/Foorter-insta-feed-four-Body-Tonic-LLC-TX.webp" alt="Instagram feed">
+    </div>
+    <div class="gallery-item">
+      <img src="https://mybodytonic.com/storage/2026/01/Foorter-insta-feed-five-Body-Tonic-LLC-TX.webp" alt="Instagram feed">
+    </div>
+    <div class="gallery-item">
+      <img src="https://mybodytonic.com/storage/2026/01/Foorter-insta-feed-six-Body-Tonic-LLC-TX.webp" alt="Instagram feed">
+    </div>
+  </div>
+</section>
+
+<!-- Google Maps Section -->
+<section style="padding: 2rem 1.5rem;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <iframe src="https://maps.app.goo.gl/JJ5wJ6SradfZ1sEr9" width="100%" height="300" style="border:0" allowfullscreen loading="lazy"></iframe>
+  </div>
+</section>
+
+<!-- Inquiry Section -->
+<section class="inquiry" id="inquiry">
+  <div class="inquiry-inner">
+    <h2 class="inquiry-heading">Begin Your<br>Personalized<br>Beauty Path Today</h2>
+    <form class="inquiry-form" onsubmit="event.preventDefault();">
+      <div class="form-field">
+        <input type="text" placeholder="Your name">
+      </div>
+      <div class="form-field">
+        <input type="email" placeholder="Email address">
+      </div>
+      <div class="form-field">
+        <input type="tel" placeholder="Phone number">
+      </div>
+      <div class="form-field">
+        <select onchange="this.classList.toggle('has-value', this.value !== '')">
+          <option value="">Area of interest</option>
+          <option value="aesthetics">Aesthetics</option>
+          <option value="wellness">Wellness</option>
+          <option value="weight-loss">Weight Loss</option>
+          <option value="peptides">Peptide Therapy</option>
+          <option value="consultation">Consultation</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <textarea placeholder="Tell us about your goals" rows="4"></textarea>
+      </div>
+      <div class="form-submit">
+        <button type="submit">submit inquiry</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-left">© 2024 Body Tonic RX</div>
+  <div class="footer-right">
+    <span>300 Beardsley Lane D-102 Austin, TX 78746</span>
+    <span><a href="tel:2605371079">2605371079</a></span>
+    <span><a href="https://www.instagram.com/bodytonic">instagram</a></span>
+    <span><a href="https://www.facebook.com/BodyTonicMedSpa">facebook</a></span>
+    <span><a href="http://www.tiktok.com/bodytonicatx">tiktok</a></span>
+    <span><a href="http://www.yelp.com/biz/body-tonic-med-spa-austin-2">yelp</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
