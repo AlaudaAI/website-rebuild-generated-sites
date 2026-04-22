@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Law Office of W. Scott Kimberly</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+  --accent-gold: #ddbf5f;
+  --accent-blue: #272c3f;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--accent-gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: var(--accent-gold);
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--accent-gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--accent-gold);
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--accent-gold);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-gold);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--accent-gold);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--accent-gold);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--accent-gold);
+  color: var(--bg-primary);
+}
+
+/* Visual Demo */
+.hero-visual {
+  width: 100%;
+  max-width: 400px;
+}
+
+.courthouse-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+}
+
+/* Services Grid */
+.services-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.section-header {
+  margin-bottom: var(--space-xl);
+}
+
+.section-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-md);
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.service-card {
+  padding: var(--space-lg);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  transition: border-color 0.3s ease;
+}
+
+.service-card:hover {
+  border-color: var(--accent-gold);
+}
+
+.service-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: var(--accent-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-md);
+  color: var(--bg-primary);
+  font-size: 16px;
+}
+
+.service-title {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.service-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* Team Section */
+.team-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  align-items: center;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.team-photo {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--accent-gold);
+}
+
+.team-info h3 {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.team-role {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  margin-bottom: var(--space-md);
+}
+
+.team-bio {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* Stats Section */
+.stats-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  text-align: center;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.stat-number {
+  font-family: var(--font-serif);
+  font-size: clamp(48px, 12vw, 80px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--accent-gold);
+}
+
+.stat-label {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Testimonials Section */
+.testimonials-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-top: var(--space-xl);
+}
+
+.testimonial-card {
+  padding: var(--space-lg);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  transition: border-color 0.3s ease;
+}
+
+.testimonial-card:hover {
+  border-color: var(--accent-gold);
+}
+
+.testimonial-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+  font-style: italic;
+}
+
+.testimonial-author {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--accent-gold);
+}
+
+/* Contact Section */
+.contact-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-top: var(--space-xl);
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.contact-label {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.contact-value {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.contact-value a {
+  color: var(--accent-gold);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-value a:hover {
+  color: var(--text-primary);
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--accent-gold);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .mobile-header .brand-name {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+  }
+  
+  .hero {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .hero-headline {
+    font-size: clamp(28px, 6vw, 36px);
+  }
+  
+  .services-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .services-grid {
+    gap: var(--space-md);
+  }
+  
+  .service-card {
+    padding: var(--space-md);
+  }
+  
+  .team-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .testimonials-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .testimonials-grid {
+    gap: var(--space-md);
+  }
+  
+  .contact-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .footer {
+    padding: var(--space-lg) var(--space-md);
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .team-member {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .services-section {
+    padding: var(--space-2xl) var(--space-2xl);
+  }
+
+  .team-section {
+    padding: var(--space-2xl) var(--space-2xl);
+  }
+
+  .testimonials-section {
+    padding: var(--space-2xl) var(--space-2xl);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .stats-section {
+    padding: var(--space-2xl) var(--space-2xl);
+  }
+
+  .contact-section {
+    padding: var(--space-2xl) var(--space-2xl);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <div class="globe-icon"><i class="fas fa-balance-scale"></i></div>
+    <span class="brand-name">The Law Office of W. Scott Kimberly</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-balance-scale"></i></div>
+      <span class="brand-name">The Law Office of W. Scott Kimberly</span>
+    </a>
+    <nav>
+      <a href="https://murfreesborolawyer.com/">Home</a>
+      <a href="https://murfreesborolawyer.com/attorneys/">Our Team</a>
+      <a href="https://murfreesborolawyer.com/#">What We Do</a>
+      <a href="https://murfreesborolawyer.com/community/">In the Community</a>
+      <a href="https://murfreesborolawyer.com/contact/">Contact</a>
+      <a href="https://murfreesborolawyer.com/blog/">Blog</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Available for Consultation</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">10.0 Avvo Rating</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Murfreesboro Attorney</span>
+      <h1 class="hero-headline">We help. When it matters most.</h1>
+      <p class="hero-subheading">Experienced Criminal Defense and Divorce Attorney at The Law Office of W. Scott Kimberly practices in Rutherford County of Middle Tennessee. We aren't just here to help. We are here to help when it matters most.</p>
+      <a href="https://murfreesborolawyer.com/contact/" class="hero-cta">Contact the office today <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+    </div>
+    <div class="hero-visual">
+      <img src="https://murfreesborolawyer.com/wp-content/uploads/2022/11/Courthouse-Graded.jpg" alt="A Courthouse Building Top in a Cloud of Smoke" class="courthouse-image">
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://murfreesborolawyer.com/wp-content/uploads/2021/02/WSK-Logo-Schema.jpg" alt="Logo" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+  <!-- Services Section -->
+  <section class="services-section">
+    <div class="section-header">
+      <span class="section-label">Practice Areas</span>
+      <h2 class="section-title">Our Murfreesboro Law Firm focuses on the following areas of law</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-gavel"></i></div>
+        <h3 class="service-title">Criminal Defense</h3>
+        <p class="service-description">Legal representation for serious criminal defense charges including DUI, Drug Possession, Theft & Property Crimes</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-home"></i></div>
+        <h3 class="service-title">Family Law</h3>
+        <p class="service-description">Solution-minded legal matters including Divorce, Child Custody, TPR & Adoption</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-user-injured"></i></div>
+        <h3 class="service-title">Personal Injury</h3>
+        <p class="service-description">Sound guidance for personal injury cases such as Car Accidents, Medical Malpractice, Slip and Fall</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-heart-broken"></i></div>
+        <h3 class="service-title">Divorce</h3>
+        <p class="service-description">Guidance through contested and uncontested divorce, including property division, spousal support, and protecting your rights</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-child"></i></div>
+        <h3 class="service-title">Child Custody</h3>
+        <p class="service-description">Representation focused on parenting plans and custody arrangements that prioritize your child's best interests and long-term stability</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-dollar-sign"></i></div>
+        <h3 class="service-title">Child Support</h3>
+        <p class="service-description">Assistance with establishing, modifying, and enforcing child support orders to ensure fair outcomes that follow Tennessee guidelines</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
+        <h3 class="service-title">Protection Orders</h3>
+        <p class="service-description">Help seeking or defending against orders of protection, with swift action to protect your safety, rights, and peace of mind</p>
+      </div>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://murfreesborolawyer.com/wp-content/uploads/2025/04/Divorce.png" alt="Divorce" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <div class="section-header">
+      <span class="section-label">Meet Our Attorney</span>
+      <h2 class="section-title">Scott Kimberly</h2>
+    </div>
+    <div class="team-member">
+      <img src="https://murfreesborolawyer.com/wp-content/uploads/2022/08/Untitled-design-18.jpg" alt="Attorney Scott Kimberly" class="team-photo">
+      <div class="team-info">
+        <h3>Scott Kimberly</h3>
+        <p class="team-role">Attorney</p>
+        <p class="team-bio">Murfreesboro Lawyer Scott Kimberly's main areas of practice are criminal defense, family law, and personal injury. Through years of award-winning customer service, numerous client testimonials, and an Avvo Rating of 10.0, Scott has earned a reputation for putting clients first.</p>
+      </div>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://murfreesborolawyer.com/wp-content/uploads/2025/04/Child-Custody.png" alt="Child Custody" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+  <!-- Our Team Section -->
+  <section class="services-section">
+    <div class="section-header">
+      <span class="section-label">Our Team</span>
+      <h2 class="section-title">Our Team</h2>
+    </div>
+    <div class="service-description">
+      <p class="hero-subheading">Scott and his team are committed to putting clients first.</p>
+    </div>
+  </section>
+
+  <!-- What We Do Section -->
+  <section class="services-section">
+    <div class="section-header">
+      <span class="section-label">What We Do</span>
+      <h2 class="section-title">What We Do</h2>
+    </div>
+    <div class="service-description">
+      <p class="hero-subheading">We handle Criminal Defense, Family Law, and Personal Injury.</p>
+    </div>
+  </section>
+
+  <!-- Contact Us Section -->
+  <section class="services-section">
+    <div class="section-header">
+      <span class="section-label">Contact Us</span>
+      <h2 class="section-title">Contact Us</h2>
+    </div>
+    <div class="service-description">
+      <p class="hero-subheading">201 East Main Street Suite 360</p>
+      <p class="hero-subheading">Murfreesboro, TN 37130</p>
+      <p class="hero-subheading">(615) 890-1099</p>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="section-header">
+      <span class="section-label">Client Trust</span>
+      <h2 class="section-title">Proven Record of Success</h2>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">10.0</div>
+      <div class="stat-label">Avvo Rating</div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials-section">
+    <div class="section-header">
+      <span class="section-label">Client Reviews</span>
+      <h2 class="section-title">What Our Clients Say</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-text">Services at our office include Criminal Defense; Divorce; Child Custody; and Personal Injury. For a complete list of practice areas, see our page on What We Do.</p>
+        <p class="testimonial-author">Reviewer 1</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">When you need legal representation and have a serious criminal defense charge, finding the right attorney to handle your criminal law case matters.</p>
+        <p class="testimonial-author">Reviewer 2</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">Many times legal issues arise in a relationship at unexpected times. As family law matters emerge such as child support or divorce, you'll need a solution-minded attorney.</p>
+        <p class="testimonial-author">Reviewer 3</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">Guidance through contested and uncontested divorce, including property division, spousal support, and protecting your rights at every stage of the process.</p>
+        <p class="testimonial-author">Reviewer 4</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">Representation focused on parenting plans and custody arrangements that prioritize your child's best interests and long-term stability.</p>
+        <p class="testimonial-author">Reviewer 5</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">Scott and his team are committed to putting clients first.</p>
+        <p class="testimonial-author">We</p>
+      </div>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://murfreesborolawyer.com/wp-content/uploads/2025/04/Child-Support.png" alt="Child Support" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <div class="section-header">
+      <span class="section-label">Contact</span>
+      <h2 class="section-title">Contact Us</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <span class="contact-label">Phone</span>
+        <span class="contact-value"><a href="tel:(615) 890-1099">(615) 890-1099</a></span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Address</span>
+        <span class="contact-value">201 East Main Street Suite 360<br>Murfreesboro, TN 37130</span>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">Social Media</span>
+        <span class="contact-value">
+          <a href="https://www.facebook.com/MurfreesboroLawyer">Facebook</a><br>
+          <a href="https://www.instagram.com/murfreesborolawyer">Instagram</a><br>
+          <a href="https://www.linkedin.com/in/scottkimberly">LinkedIn</a>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">The Law Office of W. Scott Kimberly</span>
+      <span class="footer-copyright">© 2024 The Law Office of W. Scott Kimberly. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://murfreesborolawyer.com/">Home</a>
+      <a href="https://murfreesborolawyer.com/attorneys/">Our Team</a>
+      <a href="https://murfreesborolawyer.com/#">What We Do</a>
+      <a href="https://murfreesborolawyer.com/community/">In the Community</a>
+      <a href="https://murfreesborolawyer.com/contact/">Contact</a>
+      <a href="https://murfreesborolawyer.com/blog/">Blog</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
