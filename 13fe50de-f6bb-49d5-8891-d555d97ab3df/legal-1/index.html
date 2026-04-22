@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baumgardner Law, PLLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  object-fit: contain;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .brand-logo-img {
+  width: 38px;
+  height: 38px;
+  border-radius: 4px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Visual Demo */
+.hero-visual {
+  width: 100%;
+  max-width: 400px;
+}
+
+.hero-visual img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+/* Features Grid */
+.features {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.feature-card {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+.feature-card:last-child {
+  border-bottom: none;
+}
+
+.feature-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.feature-protocol {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.feature-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.feature-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 380px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+/* Consultation Services */
+.consultation-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.consultation-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: var(--space-xl);
+  color: var(--text-primary);
+}
+
+.consultation-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.consultation-card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.consultation-card:hover {
+  transform: translateY(-4px);
+}
+
+.consultation-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.consultation-content {
+  padding: var(--space-lg);
+}
+
+.consultation-name {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.consultation-duration {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.consultation-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: var(--space-lg);
+}
+
+.consultation-cta {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.consultation-cta:hover {
+  background: var(--text-muted);
+}
+
+/* Testimonials Section */
+.testimonials-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.testimonials-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: var(--space-xl);
+  color: var(--text-primary);
+}
+
+.testimonials-grid {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.testimonial-card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: var(--space-lg);
+  text-align: center;
+}
+
+.testimonial-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.testimonial-author {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* FAQ Section */
+.faq-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.faq-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: var(--space-xl);
+  color: var(--text-primary);
+}
+
+.faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: var(--space-lg);
+}
+
+.faq-item:last-child {
+  border-bottom: none;
+}
+
+.faq-question {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.faq-answer {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* Trust Metrics Section */
+.trust-section {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.trust-metrics {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.trust-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.trust-number {
+  font-family: var(--font-serif);
+  font-size: clamp(64px, 15vw, 120px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.trust-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 400px;
+}
+
+/* About Section */
+.about-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.about-content {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.about-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* Contact Section */
+.contact-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.contact-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: var(--space-xl);
+  color: var(--text-primary);
+}
+
+.contact-content {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-phone {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+}
+
+.contact-phone:hover {
+  color: var(--text-muted);
+}
+
+.contact-address {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.contact-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.contact-map {
+  width: 100%;
+  max-width: 800px;
+  height: 300px;
+  margin: var(--space-xl) auto 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.contact-map iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  filter: grayscale(50%) contrast(120%);
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+.footer-social {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.footer-social a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-social a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== MOBILE (max-width: 768px) =================== */
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .hero-headline {
+    font-size: clamp(24px, 6vw, 36px);
+  }
+  
+  .hero-subheading {
+    font-size: clamp(14px, 2vw, 16px);
+  }
+  
+  .hero-visual {
+    max-width: 100%;
+  }
+  
+  .feature-card {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .consultation-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .consultation-grid {
+    gap: var(--space-lg);
+  }
+  
+  .consultation-content {
+    padding: var(--space-md);
+  }
+  
+  .faq-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .trust-metrics {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .about-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .contact-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .testimonials-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .consultation-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:last-child {
+    border-right: none;
+  }
+
+  .trust-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-metrics {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .feature-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .trust-metrics {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-number {
+    font-size: 120px;
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .feature-card {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="https://www.baumgardnerlawoffice.com/" class="brand">
+    <img src="https://static.wixstatic.com/media/f2d168_a785901ba6434518a78f3a124440e4ad~mv2.png/v1/fill/w_85,h_84,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ChatGPT%20Image%20Sep%2022%2C%202025%2C%2006_53_20%20PM.png" alt="Baumgardner Law, PLLC" class="brand-logo">
+    <span class="brand-name">Baumgardner Law, PLLC</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="https://www.baumgardnerlawoffice.com/" class="brand-link">
+      <img src="https://static.wixstatic.com/media/f2d168_a785901ba6434518a78f3a124440e4ad~mv2.png/v1/fill/w_85,h_84,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/ChatGPT%20Image%20Sep%2022%2C%202025%2C%2006_53_20%20PM.png" alt="Baumgardner Law, PLLC" class="brand-logo-img">
+      <span class="brand-name">Baumgardner Law, PLLC</span>
+    </a>
+    <nav>
+      <a href="https://www.baumgardnerlawoffice.com/">Home</a>
+      <a href="https://www.baumgardnerlawoffice.com/practices">Practice Areas</a>
+      <a href="https://www.baumgardnerlawoffice.com/divorce">Divorce</a>
+      <a href="https://www.baumgardnerlawoffice.com/book-online">Schedule Consult</a>
+      <a href="https://www.baumgardnerlawoffice.com/about">About</a>
+      <a href="https://www.baumgardnerlawoffice.com/contact">Contact</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Serving Tennessee & Montana</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Virtual Consultations Available</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Family Law Attorney</span>
+      <h1 class="hero-headline">Family Law Attorney in Nashville, TN, for Divorce and Custody Matters</h1>
+      <p class="hero-subheading">As a dedicated family law firm in Nashville, TN, Baumgardner Law, PLLC, guides clients through some of life's most difficult transitions.</p>
+      <a href="tel:6156698684" class="hero-cta">Call (615) 669-8684 <i class="fas fa-phone" style="font-size:10px;"></i></a>
+    </div>
+    <div class="hero-visual">
+      <img src="https://static.wixstatic.com/media/f2d168_5c01cef409ae4107b3080ed04e1de691~mv2.jpg/v1/fill/w_1905,h_680,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/f2d168_5c01cef409ae4107b3080ed04e1de691~mv2.jpg" alt="Courthouse Steps">
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i17!2i33925!3i51405!4i256!2m1!1e1!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m12!2sen!3sUS!5e289!12m4!1e68!2m2!1sset!2sRoadmapSatellite!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828094173905590557!2y6942138416766417339!2s%2Fg%2F11ylmmsy5y!4m2!1x361436205!2x3426795250!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=63319" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://static.wixstatic.com/media/f2d168_30644371b87b44eea95093933df30044~mv2.png/v1/fill/w_600,h_600,al_c,q_85,enc_avif,quality_auto/f2d168_30644371b87b44eea95093933df30044~mv2.png" alt="Baumgardner Law – Lawyer Nashville TN" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- About Section -->
+  <section class="about-section">
+    <div class="about-content">
+      <p class="about-text">Whether you need a divorce lawyer to navigate the end of a marriage or a family lawyer to address ongoing parenting issues, you receive clear advice and practical strategies. From the first consultation, as your child custody lawyer, we listen closely, explain Tennessee family law, and help you make informed decisions that protect your future and your children.</p>
+      <p class="about-text">Clients across Nashville, TN, turn to Baumgardner Law, PLLC, for both contested and uncontested cases. In divorce cases, we handle complex finances, parenting schedules, and long-term planning. In custody cases, we advocate for fair parenting time, establish parentage, enforce existing orders, and seek modifications when circumstances change. Our firm also assists with child support calculations and enforcement, stepparent adoptions, as well as prenuptial and postnuptial agreement services.</p>
+      <p class="about-text">When your family's stability is on the line, having a focused divorce law attorney in your corner matters. As your family lawyer, we work to resolve disputes efficiently while always being prepared to litigate when negotiation is not enough. As your trusted custody lawyer in Nashville, TN, the firm prioritizes your child's best interests in every decision. Reach out to Baumgardner Law, PLLC, today to schedule a confidential consultation and move forward with experienced representation you can rely on.</p>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i17!2i33926!3i51404!4i256!2m1!1e1!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m12!2sen!3sUS!5e289!12m4!1e68!2m2!1sset!2sRoadmapSatellite!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828094173905590557!2y6942138416766417339!2s%2Fg%2F11ylmmsy5y!4m2!1x361436205!2x3426795250!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=120984" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i17!2i33926!3i51405!4i256!2m1!1e1!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m12!2sen!3sUS!5e289!12m4!1e68!2m2!1sset!2sRoadmapSatellite!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828094173905590557!2y6942138416766417339!2s%2Fg%2F11ylmmsy5y!4m2!1x361436205!2x3426795250!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=81559" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Consultation Services -->
+  <section class="consultation-section">
+    <h2 class="consultation-title">CONSULTATIONS</h2>
+    <div class="consultation-grid">
+      <div class="consultation-card">
+        <img src="https://static.wixstatic.com/media/11062b_0fcef054c5ab48648b9e9e815fa2dc36~mv2.jpg/v1/fill/w_578,h_578,fp_0.50_0.50,q_80,usm_0.66_1.00_0.01,enc_auto/11062b_0fcef054c5ab48648b9e9e815fa2dc36~mv2.jpg" alt="General Consultation" class="consultation-image">
+        <div class="consultation-content">
+          <h3 class="consultation-name">General Consultation</h3>
+          <p class="consultation-duration">30 min</p>
+          <p class="consultation-description">30-minute consultation to discuss general family law matters</p>
+          <a href="https://www.baumgardnerlawoffice.com/booking-calendar/general-consultation" class="consultation-cta">Request to Book</a>
+        </div>
+      </div>
+      <div class="consultation-card">
+        <img src="https://static.wixstatic.com/media/b3a4967ff3214a43b9ca98e1b3b8777b.jpg/v1/fill/w_578,h_578,fp_0.50_0.50,q_80,usm_0.66_1.00_0.01,enc_auto/b3a4967ff3214a43b9ca98e1b3b8777b.jpg" alt="Divorce Consultation" class="consultation-image">
+        <div class="consultation-content">
+          <h3 class="consultation-name">Divorce Consultation</h3>
+          <p class="consultation-duration">30 min</p>
+          <p class="consultation-description">30-minute consultation specifically for divorce matters</p>
+          <a href="https://www.baumgardnerlawoffice.com/booking-calendar/divorce-consultation" class="consultation-cta">Request to Book</a>
+        </div>
+      </div>
+      <div class="consultation-card">
+        <img src="https://static.wixstatic.com/media/f2d168_d49abae60d2d42988699069b1b4af08d~mv2.jpg/v1/fill/w_578,h_578,fp_0.50_0.50,q_80,usm_0.66_1.00_0.01,enc_auto/f2d168_d49abae60d2d42988699069b1b4af08d~mv2.jpg" alt="Custody Consultation" class="consultation-image">
+        <div class="consultation-content">
+          <h3 class="consultation-name">Custody Consultation</h3>
+          <p class="consultation-duration">30 min</p>
+          <p class="consultation-description">30-minute consultation specifically for custody matters</p>
+          <a href="https://www.baumgardnerlawoffice.com/booking-calendar/custody-consultation" class="consultation-cta">Request to Book</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i17!2i33928!3i51404!4i256!2m1!1e1!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m12!2sen!3sUS!5e289!12m4!1e68!2m2!1sset!2sRoadmapSatellite!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828094173905590557!2y6942138416766417339!2s%2Fg%2F11ylmmsy5y!4m2!1x361436205!2x3426795250!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=26393" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Services Grid -->
+  <section class="features">
+    <div class="feature-card">
+      <p class="feature-protocol">Service 01</p>
+      <h3 class="feature-title">Divorce</h3>
+      <p class="feature-description">Both contested and uncontested divorce cases, handling complex finances, parenting schedules, and long-term planning</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Service 02</p>
+      <h3 class="feature-title">Child Custody</h3>
+      <p class="feature-description">Advocacy for fair parenting time, establish parentage, enforce existing orders, and seek modifications when circumstances change</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Service 03</p>
+      <h3 class="feature-title">Child Support</h3>
+      <p class="feature-description">Child support calculations and enforcement</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Service 04</p>
+      <h3 class="feature-title">Stepparent Adoptions</h3>
+      <p class="feature-description">Legal assistance with stepparent adoption processes</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Service 05</p>
+      <h3 class="feature-title">Prenuptial and Postnuptial Agreements</h3>
+      <p class="feature-description">Drafting and review of prenuptial and postnuptial agreement services</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Service 06</p>
+      <h3 class="feature-title">Order of Protection Matters</h3>
+      <p class="feature-description">Legal assistance with order of protection matters</p>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i17!2i33927!3i51406!4i256!2m1!1e1!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m12!2sen!3sUS!5e289!12m4!1e68!2m2!1sset!2sRoadmapSatellite!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828094173905590557!2y6942138416766417339!2s%2Fg%2F11ylmmsy5y!4m2!1x361436205!2x3426795250!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=60374" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i17!2i33927!3i51405!4i256!2m1!1e1!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m12!2sen!3sUS!5e289!12m4!1e68!2m2!1sset!2sRoadmapSatellite!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828094173905590557!2y6942138416766417339!2s%2Fg%2F11ylmmsy5y!4m2!1x361436205!2x3426795250!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=99799" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i17!2i33928!3i51406!4i256!2m1!1e1!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m12!2sen!3sUS!5e289!12m4!1e68!2m2!1sset!2sRoadmapSatellite!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828094173905590557!2y6942138416766417339!2s%2Fg%2F11ylmmsy5y!4m2!1x361436205!2x3426795250!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=78614" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i17!2i33926!3i51406!4i256!2m1!1e1!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m12!2sen!3sUS!5e289!12m4!1e68!2m2!1sset!2sRoadmapSatellite!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828094173905590557!2y6942138416766417339!2s%2Fg%2F11ylmmsy5y!4m2!1x361436205!2x3426795250!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=42134" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i17!2i33925!3i51406!4i256!2m1!1e1!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m12!2sen!3sUS!5e289!12m4!1e68!2m2!1sset!2sRoadmapSatellite!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828094173905590557!2y6942138416766417339!2s%2Fg%2F11ylmmsy5y!4m2!1x361436205!2x3426795250!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=23894" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i17!2i33928!3i51405!4i256!2m1!1e1!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m12!2sen!3sUS!5e289!12m4!1e68!2m2!1sset!2sRoadmapSatellite!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828094173905590557!2y6942138416766417339!2s%2Fg%2F11ylmmsy5y!4m2!1x361436205!2x3426795250!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=118039" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i17!2i33924!3i51406!4i256!2m1!1e1!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m12!2sen!3sUS!5e289!12m4!1e68!2m2!1sset!2sRoadmapSatellite!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828094173905590557!2y6942138416766417339!2s%2Fg%2F11ylmmsy5y!4m2!1x361436205!2x3426795250!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=5654" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i17!2i33923!3i51406!4i256!2m1!1e1!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m12!2sen!3sUS!5e289!12m4!1e68!2m2!1sset!2sRoadmapSatellite!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828094173905590557!2y6942138416766417339!2s%2Fg%2F11ylmmsy5y!4m2!1x361436205!2x3426795250!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=118485" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i17!2i33930!3i51404!4i256!2m1!1e1!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m12!2sen!3sUS!5e289!12m4!1e68!2m2!1sset!2sRoadmapSatellite!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828094173905590557!2y6942138416766417339!2s%2Fg%2F11ylmmsy5y!4m2!1x361436205!2x3426795250!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzySyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=91464" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i17!2i33929!3i51405!4i256!2m1!1e1!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m12!2sen!3sUS!5e289!12m4!1e68!2m2!1sset!2sRoadmapSatellite!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828094173905590557!2y6942138416766417339!2s%2Fg%2F11ylmmsy5y!4m2!1x361436205!2x3426795250!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=5208" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i17!2i33929!3i51406!4i256!2m1!1e1!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m12!2sen!3sUS!5e289!12m4!1e68!2m2!1sset!2sRoadmapSatellite!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828094173905590557!2y6942138416766417339!2s%2Fg%2F11ylmmsy5y!4m2!1x361436205!2x3426795250!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=96854" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i17!2i33924!3i51405!4i256!2m1!1e1!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m12!2sen!3sUS!5e289!12m4!1e68!2m2!1sset!2sRoadmapSatellite!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828094173905590557!2y6942138416766417339!2s%2Fg%2F11ylmmsy5y!4m2!1x361436205!2x3426795250!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=45079" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i17!2i33924!3i51404!4i256!2m1!1e1!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m12!2sen!3sUS!5e289!12m4!1e68!2m2!1sset!2sRoadmapSatellite!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828094173905590557!2y6942138416766417339!2s%2Fg%2F11ylmmsy5y!4m2!1x361436205!2x3426795250!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=84504" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i17!2i33923!3i51404!4i256!2m1!1e1!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m12!2sen!3sUS!5e289!12m4!1e68!2m2!1sset!2sRoadmapSatellite!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828094173905590557!2y6942138416766417339!2s%2Fg%2F11ylmmsy5y!4m2!1x361436205!2x3426795250!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=66264" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i17!2i33930!3i51406!4i256!2m1!1e1!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m12!2sen!3sUS!5e289!12m4!1e68!2m2!1sset!2sRoadmapSatellite!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828094173905590557!2y6942138416766417339!2s%2Fg%2F11ylmmsy5y!4m2!1x361436205!2x3426795250!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzySyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=12614" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i17!2i33930!3i51405!4i256!2m1!1e1!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m12!2sen!3sUS!5e289!12m4!1e68!2m2!1sset!2sRoadmapSatellite!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828094173905590557!2y6942138416766417339!2s%2Fg%2F11ylmmsy5y!4m2!1x361436205!2x3426795250!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzySyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=52039" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i17!2i33923!3i51405!4i256!2m1!1e1!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m12!2sen!3sUS!5e289!12m4!1e68!2m2!1sset!2sRoadmapSatellite!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828094173905590557!2y6942138416766417339!2s%2Fg%2F11ylmmsy5y!4m2!1x361436205!2x3426795250!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzySyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=26839" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i17!2i33929!3i51404!4i256!2m1!1e1!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m12!2sen!3sUS!5e289!12m4!1e68!2m2!1sset!2sRoadmapSatellite!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828094173905590557!2y6942138416766417339!2s%2Fg%2F11ylmmsy5y!4m2!1x361436205!2x3426795250!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=44633" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i13!2i2120!3i3212!4i256!2m3!1e0!2sm!3i776539984!3m18!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy5lOmx8cC52Om9mZg!4e0!5m1!1e3!23i47083502&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=123847" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <h2 class="faq-title">Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <h3 class="faq-question">What services does Baumgardner Law offer in Nashville, TN?</h3>
+        <p class="faq-answer">Baumgardner Law provides comprehensive family law services, including both contested and uncontested divorce, prenuptial and postnuptial agreements, order of protection matters, child custody and parentage matters, including child support issues, and related legal matters. Our Nashville-based firm guides clients through the legal process with personalized strategies to protect their rights and interests.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-question">What is an uncontested divorce, and can Baumgardner Law help?</h3>
+        <p class="faq-answer">An uncontested divorce occurs when both parties agree on key issues such as property division, child custody, and support. Baumgardner Law guides clients through the divorce process, from the initial filing through the final hearing, ensuring a smooth process with minimal court involvement.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-question">How is an uncontested divorce different from a contested divorce in Nashville?</h3>
+        <p class="faq-answer">While uncontested divorces involve mutual agreement on key issues, generally making the process faster and less costly, contested divorces involve disputes that may require mediation and/or court intervention.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-question">What documents or requirements are needed to start a divorce case?</h3>
+        <p class="faq-answer">Typical requirements include statistical marital information, including dates of marriage and separation, financial records, documents related to property, and any relevant custody agreements. Baumgardner Law will provide a checklist during the consultation to help streamline the preparation process.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-question">How can I schedule a consultation with a divorce lawyer?</h3>
+        <p class="faq-answer">Clients can schedule a confidential consultation by calling (615) 669-8684 or by filling out the online form on our website. Consultations are available for 30-minute in-person or phone meetings to discuss the client's legal needs.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-question">How much does a divorce law attorney in Nashville, TN charge?</h3>
+        <p class="faq-answer">Fees vary based on the complexity of each case. Baumgardner Law offers transparent pricing and will discuss payment options during the initial consultation. Contact us for your personalized estimate.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-question">How quickly can I get divorced in Tennessee?</h3>
+        <p class="faq-answer">Tennessee has a statutory waiting period of 60 days if the parties have no minor children, or 90 days if the parties do have minor children. The statutory waiting period begins the day the Complaint for Divorce is filed. Contact Baumgardner Law to begin drafting your Complaint.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-question">Does Baumgardner Law handle high-conflict divorce cases?</h3>
+        <p class="faq-answer">Yes, Baumgardner Law has experience managing complex and high-conflict divorces, including those in which domestic violence is present. Baumgardner Law ensures professional guidance throughout the entire legal process.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-question">What is involved in child custody cases?</h3>
+        <p class="faq-answer">Baumgardner Law assists clients with custody agreements, modifications, visitation rights, establishing paternity, and enforcement. The focus of child custody cases remains aligned with the child's best interests, while the attorney advocates for the client's parental rights.</p>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-question">Does Baumgardner Law offer online consultations for Nashville clients?</h3>
+        <p class="faq-answer">Yes, virtual consultations are available for convenience, allowing clients to confidentially discuss their cases with an attorney. Contact Baumgardner Law for a same-day consultation at (615) 669-8684.</p>
+      </div>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i17!2i33927!3i51404!4i256!2m1!1e1!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m12!2sen!3sUS!5e289!12m4!1e68!2m2!1sset!2sRoadmapSatellite!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828094173905590557!2y6942138416766417339!2s%2Fg%2F11ylmmsy5y!4m2!1x361436205!2x3426795250!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=8153" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Trust Metrics Section -->
+  <section class="trust-section">
+    <div class="trust-metrics">
+      <span class="trust-label">Google Rating</span>
+      <div>
+        <span class="trust-number">5.0</span>
+      </div>
+      <p class="trust-description">Google rating based on client reviews and feedback from families we've helped across Nashville, TN.</p>
+    </div>
+    <div class="trust-metrics">
+      <span class="trust-label">Client Reviews</span>
+      <div>
+        <span class="trust-number">8</span>
+      </div>
+      <p class="trust-description">Google reviews from clients who have experienced our dedicated family law services in Tennessee.</p>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i17!2i33925!3i51404!4i256!2m1!1e1!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m12!2sen!3sUS!5e289!12m4!1e68!2m2!1sset!2sRoadmapSatellite!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828094173905590557!2y6942138416766417339!2s%2Fg%2F11ylmmsy5y!4m2!1x361436205!2x3426795250!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=102744" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <h2 class="contact-title">NASHVILLE FAMILY LAW ATTORNEY</h2>
+    <div class="contact-content">
+      <p class="contact-description">Ready to discuss your legal issue? Contact Baumgardner Law for a confidential consultation. Call (615) 669-8684 or fill out our online form to get started.</p>
+      <div class="contact-info">
+        <a href="tel:6156698684" class="contact-phone">(615) 669-8684</a>
+        <p class="contact-address">3102 West End Ave Suite 400, Nashville, TN 37203</p>
+      </div>
+    </div>
+    <div class="contact-map">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2269.623349054778!2d-86.8172046!3d36.1436205!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8864679466ba991d%3A0x60576e1be8f479bb!2sBaumgardner%20Law%2C%20PLLC!5e1!3m2!1sen!2sus!4v1767346061683!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Baumgardner Law, PLLC</span>
+      <span class="footer-copyright">© 2024 Baumgardner Law, PLLC Systems, Inc. All rights reserved.</span>
+    </div>
+    <div>
+      <div class="footer-links">
+        <a href="https://www.baumgardnerlawoffice.com/">Home</a>
+        <a href="https://www.baumgardnerlawoffice.com/practices">Practice Areas</a>
+        <a href="https://www.baumgardnerlawoffice.com/divorce">Divorce</a>
+        <a href="https://www.baumgardnerlawoffice.com/book-online">Schedule Consult</a>
+        <a href="https://www.baumgardnerlawoffice.com/about">About</a>
+        <a href="https://www.baumgardnerlawoffice.com/contact">Contact</a>
+      </div>
+      <div class="footer-social">
+        <a href="https://www.google.com/maps/dir//''/data=!4m7!4m6!1m1!4e2!1m2!1m1!1s0x8864679466ba991d:0x60576e1be8f479bb!3e0?g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYASAA">Google Business</a>
+      </div>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
