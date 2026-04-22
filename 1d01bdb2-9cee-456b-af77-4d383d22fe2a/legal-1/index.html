@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anderson Law, PLLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .logo-img {
+  width: 40px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .brand-logo {
+  width: 38px;
+  height: 30px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Visual Demo */
+.hero-visual {
+  width: 100%;
+  max-width: 400px;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+/* Features Grid */
+.features {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.feature-card {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+.feature-card:last-child {
+  border-bottom: none;
+}
+
+.feature-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.feature-protocol {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.feature-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.feature-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 380px;
+}
+
+/* About Section */
+.about-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.about-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 600px;
+}
+
+.about-visual {
+  width: 100%;
+  max-width: 400px;
+}
+
+.about-image {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+.check-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.check-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* Services Grid */
+.services-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.services-header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.services-title {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 5vw, 42px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.services-subtitle {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.service-card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: var(--space-xl);
+  transition: background-color 0.3s ease;
+}
+
+.service-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.service-name {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.service-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* Team Section */
+.team-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.team-header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.team-title {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 5vw, 42px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.team-subtitle {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.team-member {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-lg);
+}
+
+.member-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border-color);
+}
+
+.member-info h3 {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.member-role {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-md);
+}
+
+.member-bio {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* Contact Section */
+.contact-section {
+  padding: var(--space-xl) var(--space-lg);
+  background: var(--bg-secondary);
+}
+
+.contact-header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.contact-title {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 5vw, 42px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.contact-subtitle {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  color: var(--text-muted);
+}
+
+.contact-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.contact-label {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.contact-value {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  color: var(--text-primary);
+}
+
+.contact-value a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-value a:hover {
+  color: var(--text-muted);
+}
+
+.contact-map {
+  width: 100%;
+  height: 300px;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== MOBILE (max-width: 768px) =================== */
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-lg);
+  }
+
+  .hero-headline {
+    font-size: clamp(28px, 6vw, 36px);
+  }
+
+  .hero-subheading {
+    font-size: 16px;
+  }
+
+  .about-section {
+    padding: var(--space-lg);
+  }
+
+  .services-section {
+    padding: var(--space-lg);
+  }
+
+  .team-section {
+    padding: var(--space-lg);
+  }
+
+  .contact-section {
+    padding: var(--space-lg);
+  }
+
+  .footer {
+    padding: var(--space-lg);
+  }
+
+  .mobile-header .brand-name {
+    font-size: 12px;
+  }
+
+  .feature-card {
+    padding: var(--space-lg);
+  }
+
+  .service-card {
+    padding: var(--space-lg);
+  }
+
+  .team-member {
+    padding: var(--space-lg);
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .about-section {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .about-text {
+    flex: 1.2;
+  }
+
+  .about-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .features {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:last-child {
+    border-right: none;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .team-member {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .contact-content {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .about-section {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .services-section {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .team-section {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .contact-section {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .feature-card {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="https://andersonlaw-firm.com/" class="brand">
+    <img src="https://andersonlaw-firm.com/wp-content/themes/yootheme/cache/e9/Anderson-Law-logo-dark-e93f1925.png" alt="Anderson Law, PLLC" class="logo-img">
+    <span class="brand-name">Anderson Law, PLLC</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="https://andersonlaw-firm.com/" class="brand-link">
+      <img src="https://andersonlaw-firm.com/wp-content/themes/yootheme/cache/e9/Anderson-Law-logo-dark-e93f1925.png" alt="Anderson Law, PLLC" class="brand-logo">
+      <span class="brand-name">Anderson Law, PLLC</span>
+    </a>
+    <nav>
+      <a href="https://andersonlaw-firm.com/">Home</a>
+      <a href="https://andersonlaw-firm.com/attorneys/grace-p-anderson/">Attorney</a>
+      <a href="https://andersonlaw-firm.com/about-us/">About</a>
+      <a href="https://andersonlaw-firm.com/practice-areas/">Practice Areas</a>
+      <a href="https://andersonlaw-firm.com/contact-us/">Contact</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Client Focused Practice</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Family Law Specialists</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Nashville Family Law</span>
+      <h1 class="hero-headline">Client Focused Divorce and Family Law Firm</h1>
+      <p class="hero-subheading">Providing family law services in the heart of Tennessee.</p>
+      <a href="https://andersonlaw-firm.com/contact-us/" class="hero-cta">Get Help Now <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+    </div>
+    <div class="hero-visual">
+      <img src="https://andersonlaw-firm.com/wp-content/themes/yootheme/cache/5b/Anderson-mobile-5b404761.jpeg" alt="Father and daughter sharing a joyful moment, Nashville skyline in the background." class="hero-image">
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://andersonlaw-firm.com/wp-content/themes/yootheme/cache/8d/Anderson-Law-Logo-Light-8d490776.png" alt="Anderson Law, PLLC" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+  <!-- About Section -->
+  <section class="about-section">
+    <div class="about-text">
+      <span class="hero-label">We Understand Your Challenges</span>
+      <h2 class="hero-headline" style="font-size: clamp(28px, 5vw, 36px);">We Understand Your Challenges</h2>
+      <p class="hero-subheading">At Anderson Law, PLLC, we understand that family law matters can be some of the most difficult challenges you'll ever face.</p>
+      <ul class="check-list">
+        <li class="check-item">
+          <img src="https://andersonlaw-firm.com/wp-content/themes/yootheme/cache/34/Anderson-Law-Logo-Light-34b2dc9e.png" alt="check" class="check-icon">
+          <span>Proven track record of successful case resolutions</span>
+        </li>
+        <li class="check-item">
+          <img src="https://andersonlaw-firm.com/wp-content/themes/yootheme/cache/f9/Anderson-Law-Logo-Light-f95b5be7.png" alt="check" class="check-icon">
+          <span>Personalized legal strategies tailored to your needs</span>
+        </li>
+        <li class="check-item">
+          <img src="https://andersonlaw-firm.com/wp-content/themes/yootheme/cache/50/Anderson-Law-logo-dark-50c4c2cd.png" alt="check" class="check-icon">
+          <span>Committed to clear, responsive communication</span>
+        </li>
+        <li class="check-item">
+          <img src="https://andersonlaw-firm.com/wp-content/uploads/2024/10/square-check-regular.svg" alt="check" class="check-icon">
+          <span>Uncompromising ethics and professional integrity</span>
+        </li>
+      </ul>
+      <a href="https://andersonlaw-firm.com/about-us/" class="hero-cta">About Our Firm <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+    </div>
+    <div class="about-visual">
+      <img src="https://andersonlaw-firm.com/wp-content/themes/yootheme/cache/9b/Mother-daughter-nashville-9b90c964.jpeg" alt="Mother and daughter laughing together outdoors on a sunny day, wearing colorful autumn clothing." class="about-image">
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://andersonlaw-firm.com/wp-content/themes/yootheme/cache/5a/A-man-sitting-at-a-desk-in-front-of-a-laptop-computer-1-5a648b65.jpeg" alt="a man sitting at a desk in front of a laptop computer" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://andersonlaw-firm.com/wp-content/themes/yootheme/cache/39/Marital-Dissolution-Agreement-3990f5e0.jpeg" alt="Couple in counseling session, seated on a sofa, talking to a therapist, expressing emotions and seeking guidance." style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Practice Areas Section -->
+  <section class="services-section">
+    <div class="services-header">
+      <h2 class="services-title">Our Practice Areas</h2>
+      <p class="services-subtitle">Whether you're navigating divorce, child custody, support, or another family law matter, we provide straightforward guidance and dedicated advocacy.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <h3 class="service-name">Post-Divorce Modification</h3>
+        <p class="service-description">When circumstances change, modifying court orders can help ensure your agreements continue to reflect your family's needs.</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Divorce and Family Law</h3>
+        <p class="service-description">Sometimes life's curveballs land right in the middle of your family.</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Divorce</h3>
+        <p class="service-description">Divorce can turn your world upside down, leaving you unsure where to turn.</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Divorce Mediation</h3>
+        <p class="service-description">Mediation is a powerful way to resolve family law disputes with dignity.</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Marital Dissolution Agreement</h3>
+        <p class="service-description">MDA is a critical part of resolving a divorce in Tennessee.</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Cohabitation Agreements Lawyer</h3>
+        <p class="service-description">Not all committed couples marry, but many share property, expenses, and responsibilities.</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Grandparent Visitation</h3>
+        <p class="service-description">The relationship between a grandparent and child is important.</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Partition Agreements</h3>
+        <p class="service-description">When unmarried couples split, dividing shared property can be complicated.</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Paternity</h3>
+        <p class="service-description">Establishing paternity protects the rights of parents and children.</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Property Division</h3>
+        <p class="service-description">Providing clear guidance to divide assets and debts fairly to protect your rights.</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Child Support</h3>
+        <p class="service-description">Protecting the long-term needs of your children.</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Experienced Team</h3>
+        <p class="service-description">Our team of dedicated lawyers brings years of experience and a proven track record, providing you with the highest quality of legal representation.</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Transparent Communication</h3>
+        <p class="service-description">We believe in clear and open communication, keeping you informed at every stage of your case, fostering trust and understanding.</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Comprehensive Legal Services</h3>
+        <p class="service-description">We offer a wide range of legal services, from corporate to personal law, ensuring all your legal needs are met under one roof.</p>
+      </div>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://andersonlaw-firm.com/wp-content/themes/yootheme/cache/e1/Adnerson-Law-6-e1cc24b7.jpeg" alt="Children sitting on a couch witnessing an argument between adults in the foreground." style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://andersonlaw-firm.com/wp-content/themes/yootheme/cache/f8/A-group-of-people-sitting-around-a-table-working-on-a-laptop-2-f82c3323.jpeg" alt="a group of people sitting around a table working on a laptop" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <div class="team-header">
+      <h2 class="team-title">Meet Our Founder</h2>
+      <p class="team-subtitle">Grace founded Anderson Law, PLLC with a vision to help clients navigate family law and divorce matters with client centered, determined advocacy.</p>
+    </div>
+    <div class="team-member">
+      <img src="https://andersonlaw-firm.com/wp-content/themes/yootheme/cache/c8/Grace-anderson-headshot-c84f1fbc.jpeg" alt="Grace Anderson" class="member-photo">
+      <div class="member-info">
+        <h3>Grace P. Anderson</h3>
+        <div class="member-role">Founder and Managing Attorney</div>
+        <p class="member-bio">Grace, a Nashville native, is an experienced family law attorney, having practiced exclusively family law for the duration of her professional career. Grace is also a certified Rule 31 Mediator, allowing her to assist families in reaching negotiated resolutions outside of the courtroom.</p>
+      </div>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://andersonlaw-firm.com/wp-content/themes/yootheme/cache/8f/A-person-holding-a-pen-and-writing-on-a-piece-of-paper-next-to-a-wooden-8fa50042.jpeg" alt="a person holding a pen and writing on a piece of paper next to a wooden gavel" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://andersonlaw-firm.com/wp-content/themes/yootheme/cache/d3/Adnerson-Law-10-d3628339.jpeg" alt="Grandparents and child sharing a joyful moment on the couch, using a tablet. Holiday decorations in background." style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://andersonlaw-firm.com/wp-content/themes/yootheme/cache/d5/house-for-sale-with-sign-in-yard-d5568648.jpeg" alt="For Sale sign in front of a beautiful suburban house with green lawn and trees, symbolizing a real estate opportunity." style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://andersonlaw-firm.com/wp-content/themes/yootheme/cache/17/Adnerson-Law-1-17708f81.jpeg" alt="Toddler in blue hat on swing with parental support in a park." style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://andersonlaw-firm.com/wp-content/themes/yootheme/cache/34/Adnerson-Law-11-34acdd3b.jpeg" alt="Red tulips blooming in front of residential house surrounded by trees on a sunny day." style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Features Grid -->
+  <section class="features">
+    <div class="feature-card">
+      <p class="feature-protocol">Your Partner</p>
+      <h3 class="feature-title">Client-Centric</h3>
+      <p class="feature-description">Our law firm prioritizes your needs, creating personalized strategies to ensure your legal circumstances are handled with utmost care and effectiveness.</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Comprehensive</p>
+      <h3 class="feature-title">Legal Services</h3>
+      <p class="feature-description">We offer a wide range of legal services, from corporate to personal law, ensuring all your legal needs are met under one roof.</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Experience</p>
+      <h3 class="feature-title">Proven Results</h3>
+      <p class="feature-description">Our team of dedicated lawyers brings years of experience and a proven track record, providing you with the highest quality of legal representation.</p>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://andersonlaw-firm.com/wp-content/themes/yootheme/cache/06/Adnerson-Law-15-066bbbda.jpeg" alt="Divorce concept: couple with folded arms, two wedding rings on table symbolize separation." style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://andersonlaw-firm.com/wp-content/themes/yootheme/cache/2a/A-young-boy-playing-with-a-toy-ship-and-coins-2aca9934.jpeg" alt="a young boy playing with a toy ship and coins" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://andersonlaw-firm.com/wp-content/uploads/2024/01/Mother-daughter-nashville.jpeg" alt="Mother and daughter laughing together outdoors on a sunny day, wearing colorful autumn clothing." style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://andersonlaw-firm.com/wp-content/themes/yootheme/cache/e5/Attorney-family-law-e5ee6dcb.jpeg" alt="Two people reviewing documents and signing papers in an office setting, sunlight streaming through large windows." style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://andersonlaw-firm.com/wp-content/themes/yootheme/cache/e3/Grace-anderson-headshot-e30a3145.jpeg" alt="Grace Anderson in a gray blazer and black top standing against a textured wall background." style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <div class="contact-header">
+      <h2 class="contact-title">Get Help Now: <a href="tel:+1-615-241-0795" style="color: var(--text-primary);">615-241-0795</a></h2>
+      <p class="contact-subtitle">Take the First Step to Protect Your Family's Well-Being</p>
+    </div>
+    <div class="contact-content">
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-label">Phone</div>
+          <div class="contact-value">
+            <a href="tel:+1-615-241-0795">615-241-0795</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">Office Location</div>
+          <div class="contact-value">95 White Bridge Pike, Suite 406,<br>Nashville, TN 37205</div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">Social</div>
+          <div class="contact-value">
+            <a href="https://www.linkedin.com/in/grace-peach-anderson-00918095/" target="_blank">LinkedIn</a>
+            <br>
+            <a href="https://www.google.com/maps?cid=14808173299387848143" target="_blank">Google Business</a>
+          </div>
+        </div>
+      </div>
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3219.123456789!2d-86.8234567!3d36.1234567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xcd23456789abcdef!2sAnderson%20Law%2C%20PLLC!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
+        class="contact-map"
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Anderson Law, PLLC</span>
+      <span class="footer-copyright">© 2026 Anderson Law, PLLC. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://andersonlaw-firm.com/">Home</a>
+      <a href="https://andersonlaw-firm.com/attorneys/grace-p-anderson/">Attorney</a>
+      <a href="https://andersonlaw-firm.com/about-us/">About</a>
+      <a href="https://andersonlaw-firm.com/practice-areas/">Practice Areas</a>
+      <a href="https://andersonlaw-firm.com/contact-us/">Contact</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
