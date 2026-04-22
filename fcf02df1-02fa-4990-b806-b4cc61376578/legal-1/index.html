@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maniatis Law PLLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Visual Demo */
+.hero-visual {
+  width: 100%;
+  max-width: 400px;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  background: var(--bg-card);
+  padding: var(--space-lg);
+}
+
+/* About Section */
+.about-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.about-header {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.about-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.about-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--text-primary);
+  padding: var(--space-lg);
+  border-left: 2px solid var(--border-color);
+  margin: var(--space-lg) 0;
+}
+
+.about-image {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 12px;
+}
+
+/* Services Grid */
+.services-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.services-header {
+  margin-bottom: var(--space-xl);
+}
+
+.services-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.service-card {
+  padding: var(--space-lg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-card);
+  transition: background-color 0.3s ease;
+}
+
+.service-card:hover {
+  background: var(--bg-hover);
+}
+
+.service-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.service-description {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.services-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.service-item {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-muted);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+}
+
+/* Team Section */
+.team-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.team-header {
+  margin-bottom: var(--space-xl);
+}
+
+.team-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.member-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.member-name {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.member-role {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.member-bio {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.member-image {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 12px;
+}
+
+/* Contact Section */
+.contact-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.contact-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.contact-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.contact-value {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.contact-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-link:hover {
+  color: var(--text-muted);
+}
+
+/* Social Links */
+.social-links {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  color: var(--text-primary);
+  border-color: var(--text-primary);
+}
+
+/* Gallery grid for additional images */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.gallery-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== MOBILE (max-width: 768px) =================== */
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-lg) var(--space-md);
+    gap: var(--space-lg);
+  }
+
+  .hero-headline {
+    font-size: clamp(28px, 8vw, 36px);
+  }
+
+  .hero-subheading {
+    font-size: 16px;
+  }
+
+  .about-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .services-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .services-list {
+    grid-template-columns: 1fr;
+  }
+
+  .team-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .contact-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .footer {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .social-links {
+    flex-wrap: wrap;
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .about-section {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-2xl);
+  }
+
+  .about-content {
+    flex: 1;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .services-list {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .team-member {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .member-info {
+    flex: 1;
+  }
+
+  .contact-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .about-section {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .services-section {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .team-section {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .contact-section {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="https://www.maniatislawoffice.com/" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">Maniatis Law PLLC</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="https://www.maniatislawoffice.com/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">Maniatis Law PLLC</span>
+    </a>
+    <nav>
+      <a href="https://www.maniatislawoffice.com/attorney-profiles/">About</a>
+      <a href="https://www.maniatislawoffice.com/#/">Practice Areas</a>
+      <a href="https://www.maniatislawoffice.com/blog/">Blog</a>
+      <a href="https://www.maniatislawoffice.com/testimonials/">Testimonials</a>
+      <a href="https://www.maniatislawoffice.com/video-center/">Videos</a>
+      <a href="https://www.maniatislawoffice.com/contact/">Contact</a>
+      <a href="https://www.mycase.com/login/">Client Portal</a>
+      <a href="https://www.maniatislawoffice.com/espanol-home/">Español</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Available 24/7</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Practicing Since 2011</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Nashville Legal Advocate</span>
+      <h1 class="hero-headline">Protecting Your Family, Freedom And Future</h1>
+      <p class="hero-subheading">Maniatis Law PLLC is Nashville's trusted legal advocate for immigration and naturalization law, criminal defense, and DUI.</p>
+      <a href="https://www.maniatislawoffice.com/contact/" class="hero-cta">Get Help Today <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+    </div>
+    <div class="hero-visual">
+      <img src="https://www.maniatislawoffice.com/wp-content/uploads/sites/1503802/2023/10/logo-icon.png" alt="Maniatis Law PLLC" class="hero-image">
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-section">
+    <div class="about-content">
+      <h2 class="about-header">An Attorney Who Will Fight For Your Rights</h2>
+      <p class="about-text">Since 2011, attorney Matt Maniatis has worked with individuals and families facing immigration issues, family law concerns and criminal charges, which are often connected. As the grandchild of refugees from Greece, he has a personal understanding of the challenges his clients face.</p>
+      <blockquote class="about-quote">He and the staff at Maniatis Law know that dealing with the legal system is stressful and they treat clients with respect and compassion while providing aggressive advocacy.</blockquote>
+      <p class="about-text">Everyone on staff speaks Spanish, so you can communicate in the language most comfortable for you.</p>
+    </div>
+    <img src="https://www.maniatislawoffice.com/wp-content/uploads/sites/1503802/2023/10/MattManiatis_0015-retouched-v1.jpg" alt="Matt Maniatis" class="about-image">
+  </section>
+
+  <!-- Services Section -->
+  <section class="services-section">
+    <div class="services-header">
+      <h2 class="services-title">A Full-Service Approach To Legal Challenges</h2>
+      <p class="about-text">Everyone deserves effective legal representation. That includes an immigrant seeking a home in the United States, a parent trying to resolve a child custody dispute or a defendant who has been arrested on suspicion of committing a crime. The staff at Maniatis Law is committed to providing comprehensive representation to clients.</p>
+    </div>
+    
+    <div class="services-grid">
+      <div class="service-card">
+        <h3 class="service-name">Immigration & Naturalization</h3>
+        <p class="service-description">Comprehensive immigration law services</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Criminal Defense</h3>
+        <p class="service-description">Criminal defense representation</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Family Law</h3>
+        <p class="service-description">Family law services</p>
+      </div>
+    </div>
+
+    <div class="services-list">
+      <div class="service-item">Family-Based Immigration</div>
+      <div class="service-item">Fiancé K-1 Visas</div>
+      <div class="service-item">Marriage Visas</div>
+      <div class="service-item">Adjustment Of Status</div>
+      <div class="service-item">DACA Renewals</div>
+      <div class="service-item">Deportation Defense & Bonds</div>
+      <div class="service-item">Immigration Appeals</div>
+      <div class="service-item">Removing Conditions On Permanent Residency</div>
+      <div class="service-item">Special Immigrant Juvenile Status</div>
+      <div class="service-item">U Status (U Visa)</div>
+      <div class="service-item">U.S. Citizenship Through Naturalization</div>
+      <div class="service-item">Waivers of Inadmissibility</div>
+      <div class="service-item">Domestic Violence & Orders Of Protection</div>
+      <div class="service-item">Driving Without A License Or On A Suspended License</div>
+      <div class="service-item">Drug Offenses</div>
+      <div class="service-item">DUI Defense</div>
+      <div class="service-item">Uncontested Divorce</div>
+      <div class="service-item">Agreed Child Custody and Support</div>
+    </div>
+
+    <div class="gallery-grid">
+      <img src="https://www.maniatislawoffice.com/wp-content/uploads/sites/1503802/2023/10/logo-icon-shadow.png" alt="Maniatis Law PLLC" class="gallery-image">
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <div class="team-header">
+      <h2 class="team-title">Meet Attorney Matt Maniatis</h2>
+    </div>
+    <div class="team-member">
+      <div class="member-info">
+        <h3 class="member-name">Matt Maniatis</h3>
+        <p class="member-role">Attorney</p>
+        <p class="member-bio">Since 2011, attorney Matt Maniatis has worked with individuals and families facing immigration issues, family law concerns and criminal charges. As the grandchild of refugees from Greece, he has a personal understanding of the challenges his clients face.</p>
+      </div>
+      <img src="https://www.maniatislawoffice.com/wp-content/uploads/sites/1503802/2023/10/AdobeStock_173531756-1.jpg" alt="Matt Maniatis" class="member-image">
+    </div>
+
+    <div class="gallery-grid">
+      <img src="https://www.maniatislawoffice.com/wp-content/uploads/sites/1503802/2024/01/2024-Member-American-Immigration-Lawyers-Association.png" alt="2024 Member American Immigration Lawyers Association" class="gallery-image">
+      <img src="https://www.maniatislawoffice.com/wp-content/uploads/sites/1503802/2023/11/AV-Preeminent.png" alt="Martindale-Hubbell AV Preeminent Peer Rated For Highest Level of Professional Excellence | 2023" class="gallery-image">
+      <img src="https://www.maniatislawoffice.com/wp-content/uploads/sites/1503802/2024/01/2024-Member-American-Immigration-Lawyers-Association-1.png" alt="Forbes Advisor Best Of 2024" class="gallery-image">
+      <img src="https://www.maniatislawoffice.com/wp-content/uploads/sites/1503802/2023/11/Logo-footer-new-1.png" alt="" class="gallery-image">
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <div class="contact-info">
+      <h2 class="contact-title">Bringing Clarity And Calm To Legal Matters</h2>
+      <p class="about-text">The legal process is complex and can be intimidating. Whether you are dealing with an immigration issue, family law concern or criminal accusation, attorney Maniatis will make sure that you understand what is happening with your case. He offers honest, trustworthy feedback and advice based on over a decade of experience.</p>
+      <blockquote class="about-quote">Same-day appointments are available and you can arrange a flexible payment plan if necessary.</blockquote>
+      
+      <div class="social-links">
+        <a href="https://www.facebook.com/NashvilleImmigrationLawyers" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.linkedin.com/company/maniatislaw/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="https://www.instagram.com/Maniatislaw/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.youtube.com/channel/UCw0YQISJbcpi8qFV5nExY4w" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://twitter.com/Maniatislawfirm" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </div>
+    </div>
+    
+    <div class="contact-info">
+      <div class="contact-item">
+        <span class="contact-label">Phone</span>
+        <a href="tel:+1-615-988-1441" class="contact-link contact-value">615-988-1441</a>
+        <span class="contact-value" style="font-size: 12px; color: var(--text-muted);">Available 24/7</span>
+      </div>
+      
+      <div class="contact-item">
+        <span class="contact-label">Address</span>
+        <span class="contact-value">211 Donelson Pike, Ste 204<br>Nashville, TN 37214</span>
+      </div>
+      
+      <div class="contact-item">
+        <span class="contact-label">Business Hours</span>
+        <span class="contact-value">Monday-Friday<br>8 am to 4 pm</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Maniatis Law PLLC</span>
+      <span class="footer-copyright">© 2026 Maniatis Law PLLC • All Rights Reserved</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.maniatislawoffice.com/attorney-profiles/">About</a>
+      <a href="https://www.maniatislawoffice.com/#/">Practice Areas</a>
+      <a href="https://www.maniatislawoffice.com/blog/">Blog</a>
+      <a href="https://www.maniatislawoffice.com/testimonials/">Testimonials</a>
+      <a href="https://www.maniatislawoffice.com/video-center/">Videos</a>
+      <a href="https://www.maniatislawoffice.com/contact/">Contact</a>
+      <a href="https://www.mycase.com/login/">Client Portal</a>
+      <a href="https://www.maniatislawoffice.com/espanol-home/">Español</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
