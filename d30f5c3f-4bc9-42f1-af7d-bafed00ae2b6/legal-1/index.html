@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fiola | Parker PLLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Visual Demo */
+.hero-visual {
+  width: 100%;
+  max-width: 400px;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+/* Features Grid */
+.features {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.feature-card {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+.feature-card:last-child {
+  border-bottom: none;
+}
+
+.feature-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.feature-protocol {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.feature-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.feature-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 380px;
+}
+
+/* Trust Metrics Section */
+.trust-section {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.trust-metrics {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.trust-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.trust-number {
+  font-family: var(--font-serif);
+  font-size: clamp(64px, 15vw, 120px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.trust-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 400px;
+}
+
+.services-section {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.service-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 50px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.team-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.team-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-md);
+}
+
+.team-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border-color);
+}
+
+.team-name {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.team-role {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.awards-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.awards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.award-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-md);
+}
+
+.award-image {
+  width: 80px;
+  height: auto;
+  object-fit: contain;
+}
+
+.about-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.about-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.about-title {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 5vw, 32px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.about-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 600px;
+}
+
+.about-images {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.about-image {
+  width: 120px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.criminal-defense-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.criminal-defense-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.criminal-defense-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.criminal-defense-title {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 5vw, 32px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.criminal-defense-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 600px;
+}
+
+.criminal-defense-images {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.criminal-defense-image {
+  width: 120px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.why-choose-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.why-choose-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.why-choose-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+}
+
+.why-choose-title {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.why-choose-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.family-law-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.family-law-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.family-law-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.family-law-title {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 5vw, 32px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.family-law-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 600px;
+}
+
+.family-law-image {
+  width: 200px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.protect-rights-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.protect-rights-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  align-items: center;
+  text-align: center;
+}
+
+.protect-rights-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.protect-rights-subtitle {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.protect-rights-title {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 5vw, 32px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.protect-rights-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 600px;
+}
+
+.protect-rights-image {
+  width: 200px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.media-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.media-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-md);
+}
+
+.media-image {
+  width: 100px;
+  height: auto;
+  object-fit: contain;
+}
+
+.testimonials-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.testimonial-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+}
+
+.testimonial-quote {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.testimonial-author {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.social-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .hero-headline {
+    font-size: clamp(28px, 8vw, 36px);
+  }
+  
+  .hero-subheading {
+    font-size: 16px;
+  }
+  
+  .feature-title {
+    font-size: clamp(20px, 5vw, 24px);
+  }
+  
+  .trust-number {
+    font-size: clamp(48px, 12vw, 80px);
+  }
+  
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .awards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-images {
+    justify-content: center;
+  }
+
+  .criminal-defense-images {
+    justify-content: center;
+  }
+
+  .media-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:last-child {
+    border-right: none;
+  }
+
+  .trust-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-metrics {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .awards-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .why-choose-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .media-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .about-content {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .about-text {
+    flex: 1;
+  }
+
+  .about-images {
+    justify-content: flex-end;
+  }
+
+  .criminal-defense-content {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .criminal-defense-text {
+    flex: 1;
+  }
+
+  .family-law-content {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .family-law-text {
+    flex: 1;
+  }
+
+  .protect-rights-content {
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+  }
+
+  .protect-rights-text {
+    flex: 1;
+    align-items: flex-start;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .feature-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .trust-metrics {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .services-section {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-number {
+    font-size: 120px;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .awards-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .why-choose-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .media-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .feature-card {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="https://www.fiolaparkerlaw.com/" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">Fiola | Parker PLLC</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="https://www.fiolaparkerlaw.com/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">Fiola | Parker PLLC</span>
+    </a>
+    <nav>
+      <a href="https://www.fiolaparkerlaw.com/">Home</a>
+      <a href="https://www.fiolaparkerlaw.com/about-our-attorneys/">About</a>
+      <a href="https://www.fiolaparkerlaw.com/practice-areas/">Practice Areas</a>
+      <a href="https://www.fiolaparkerlaw.com/contact/">Contact</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Serving Murfreesboro Since 1975</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Call 615-896-4154</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Generations Of Experience</span>
+      <h1 class="hero-headline">A Legacy of Litigation</h1>
+      <p class="hero-subheading">Serving Murfreesboro, Tennessee & Surrounding Areas</p>
+      <a href="tel:615-896-4154" class="hero-cta">Call For Consultation <i class="fas fa-phone" style="font-size:10px;"></i></a>
+    </div>
+    <div class="hero-visual">
+      <img src="https://www.fiolaparkerlaw.com/wp-content/uploads/2026/02/banner-new-image.webp" alt="Law Office" class="hero-image">
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <span class="trust-label">meet our experienced attorneys</span>
+    <div class="team-grid">
+      <div class="team-card">
+        <img src="https://www.fiolaparkerlaw.com/wp-content/uploads/2025/05/attorney-dlg2-img-246x300.webp" alt="Daniel L. Graves" class="team-photo">
+        <h3 class="team-name">Daniel Graves</h3>
+        <a href="https://www.fiolaparkerlaw.com/daniel-l-graves-ii/" class="team-role">view bio</a>
+      </div>
+      <div class="team-card">
+        <img src="https://www.fiolaparkerlaw.com/wp-content/uploads/2025/07/John-img.webp" alt="John H. Baker III" class="team-photo">
+        <h3 class="team-name">John Baker</h3>
+        <a href="https://www.fiolaparkerlaw.com/baker-john-h-iii/" class="team-role">view bio</a>
+      </div>
+      <div class="team-card">
+        <img src="https://www.fiolaparkerlaw.com/wp-content/uploads/2025/07/Lauren-img.webp" alt="Lauren Thomas" class="team-photo">
+        <h3 class="team-name">Lauren Thomas</h3>
+        <a href="https://www.fiolaparkerlaw.com/lauren-thomas/" class="team-role">view bio</a>
+      </div>
+      <div class="team-card">
+        <img src="https://www.fiolaparkerlaw.com/wp-content/uploads/2026/02/dan-img.webp" alt="Dan Vickers" class="team-photo">
+        <h3 class="team-name">Dan Vickers</h3>
+        <a href="https://www.fiolaparkerlaw.com/dan-vickers/" class="team-role">view bio</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-section">
+    <span class="trust-label">Fighting For Tennesseans Since 1975</span>
+    <div class="about-content">
+      <div class="about-text">
+        <h2 class="about-title">Complex Cases Do Not Scare Us</h2>
+        <p class="about-description">Many law firms say they have experience with criminal defense and family law. With the toughest of cases, however, few firms have the know-how of Fiola | Parker PLLC.
+
+From homicide to federal crimes, from complex to high-conflict divorces, our lawyers deliver results for our criminal defense and family law clients. We have
+a unique ability to defend serious criminal charges and resolve contentious
+family law issues.</p>
+      </div>
+      <div class="about-images">
+        <img src="https://www.fiolaparkerlaw.com/wp-content/uploads/2025/04/about-img-1.webp" alt="about-img" class="about-image">
+        <img src="https://www.fiolaparkerlaw.com/wp-content/uploads/2025/04/year-exp-img.webp" alt="year-exp-img" class="about-image">
+      </div>
+    </div>
+  </section>
+
+  <!-- Accolades & Achievements Section -->
+  <section class="awards-section">
+    <span class="trust-label">Accolades & Achievements</span>
+    <div class="awards-grid">
+      <div class="award-card">
+        <img src="https://www.fiolaparkerlaw.com/wp-content/uploads/2025/04/nafla-award.png" alt="NAFLA Award" class="award-image">
+      </div>
+      <div class="award-card">
+        <img src="https://www.fiolaparkerlaw.com/wp-content/uploads/2025/04/top100-award.png" alt="Top 100 Award" class="award-image">
+      </div>
+      <div class="award-card">
+        <img src="https://www.fiolaparkerlaw.com/wp-content/uploads/2025/04/best-award.webp" alt="Best Award" class="award-image">
+      </div>
+      <div class="award-card">
+        <img src="https://www.fiolaparkerlaw.com/wp-content/uploads/2025/08/sl-award.webp" alt="Super Lawyers Award" class="award-image">
+      </div>
+      <div class="award-card">
+        <img src="https://www.fiolaparkerlaw.com/wp-content/uploads/2026/04/top-fl-award.webp" alt="Top Family Lawyer Award" class="award-image">
+      </div>
+      <div class="award-card">
+        <img src="https://www.fiolaparkerlaw.com/wp-content/uploads/2025/08/best-lawer-updt-awrd.webp" alt="Best Lawyers - Lawyer Logo" class="award-image">
+      </div>
+      <div class="award-card">
+        <img src="https://www.fiolaparkerlaw.com/wp-content/uploads/2025/04/ctla-award.png" alt="CTLA Award" class="award-image">
+      </div>
+      <div class="award-card">
+        <img src="https://www.fiolaparkerlaw.com/wp-content/uploads/2025/04/national-award.png" alt="national-award" class="award-image">
+      </div>
+      <div class="award-card">
+        <img src="https://www.fiolaparkerlaw.com/wp-content/uploads/2025/04/tacdl-award.png" alt="tacdl-award" class="award-image">
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section class="features">
+    <div class="feature-card">
+      <p class="feature-protocol">practice areas</p>
+      <h3 class="feature-title">criminal defense</h3>
+      <p class="feature-description">criminal defense</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">practice areas</p>
+      <h3 class="feature-title">family law</h3>
+      <p class="feature-description">family law</p>
+    </div>
+  </section>
+
+  <!-- Criminal Defense Section -->
+  <section class="criminal-defense-section">
+    <span class="trust-label">Criminal Defense</span>
+    <div class="criminal-defense-content">
+      <div class="criminal-defense-text">
+        <h2 class="criminal-defense-title">Don't Gamble With Your Future</h2>
+        <p class="criminal-defense-description">If you are facing criminal charges, a conviction could haunt you for the rest of your life. It could mean loss of freedom and significant damage to your reputation and financial well-being.
+
+The outcome of criminal cases depends heavily on the quality of the legal representation. With so much on the line, you must feel confident that your attorney can build a strong defense.
+
+At Fiola | Parker PLLC, we will give your criminal case the care it deserves.</p>
+      </div>
+      <div class="criminal-defense-images">
+        <img src="https://www.fiolaparkerlaw.com/wp-content/uploads/2025/05/criminal-defense-img.webp" alt="criminal-defense-img" class="criminal-defense-image">
+        <img src="https://www.fiolaparkerlaw.com/wp-content/uploads/2025/04/crimnal-image1.webp" alt="crimnal-image1" class="criminal-defense-image">
+        <img src="https://www.fiolaparkerlaw.com/wp-content/uploads/2026/02/fiolaparkerlaw-logo-new-image.webp" alt="ebp-logo-image" class="criminal-defense-image">
+        <img src="https://www.fiolaparkerlaw.com/wp-content/uploads/2025/04/crimnal-image2.webp" alt="crimnal-image2" class="criminal-defense-image">
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us Section -->
+  <section class="why-choose-section">
+    <span class="trust-label">Why Choose Us?</span>
+    <div class="why-choose-grid">
+      <div class="why-choose-card">
+        <h3 class="why-choose-title">Proven Track Record</h3>
+        <p class="why-choose-description">With over 135 years of combined experience, our team has successfully handled thousands of cases throughout Tennessee.</p>
+      </div>
+      <div class="why-choose-card">
+        <h3 class="why-choose-title">Personalized Attention</h3>
+        <p class="why-choose-description">We provide individualized legal strategies tailored to your unique circumstances and goals.</p>
+      </div>
+      <div class="why-choose-card">
+        <h3 class="why-choose-title">Local Knowledge</h3>
+        <p class="why-choose-description">As lifelong Tennessee residents, we understand the local court systems and have established relationships throughout the legal community.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Family Law Section -->
+  <section class="family-law-section">
+    <span class="trust-label">Family Law</span>
+    <div class="family-law-content">
+      <div class="family-law-text">
+        <h2 class="family-law-title">Hire Us Before Your Spouse Does</h2>
+        <p class="family-law-description">The last thing you want is to oppose our lawyers in divorce proceedings. We are known throughout Tennessee as tenacious, smart attorneys.
+
+At Fiola | Parker PLLC, our attorneys know how to resolve family law matters effectively. We strive to achieve your goals while minimizing the emotional toll on you and your family.</p>
+      </div>
+      <img src="https://www.fiolaparkerlaw.com/wp-content/uploads/2025/04/family-law.webp" alt="family-law-img" class="family-law-image">
+    </div>
+  </section>
+
+  <!-- Protect Rights Section -->
+  <section class="protect-rights-section">
+    <div class="protect-rights-content">
+      <div class="protect-rights-text">
+        <span class="protect-rights-subtitle">Skilled, Battle-Tested And</span>
+        <h2 class="protect-rights-title">Ready To Protect Your Rights</h2>
+        <p class="protect-rights-description">When your future is at stake, contact Fiola | Parker PLLC.</p>
+      </div>
+      <img src="https://www.fiolaparkerlaw.com/wp-content/uploads/2025/04/advicing-image.webp" alt="advicing-image" class="protect-rights-image">
+    </div>
+  </section>
+
+  <!-- In The Media Section -->
+  <section class="media-section">
+    <span class="trust-label">In The Media</span>
+    <div class="media-grid">
+      <div class="media-card">
+        <img src="https://www.fiolaparkerlaw.com/wp-content/uploads/2025/05/ap-logo.webp" alt="ap-logo" class="media-image">
+      </div>
+      <div class="media-card">
+        <img src="https://www.fiolaparkerlaw.com/wp-content/uploads/2025/05/lawcrime-img.webp" alt="lawcrime-img" class="media-image">
+      </div>
+      <div class="media-card">
+        <img src="https://www.fiolaparkerlaw.com/wp-content/uploads/2025/05/wbbj-img.webp" alt="wbbj-img" class="media-image">
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Metrics Section -->
+  <section class="trust-section">
+    <div class="trust-metrics">
+      <span class="trust-label">Combined Experience</span>
+      <div>
+        <span class="trust-number">135</span>
+      </div>
+      <p class="trust-description">years of combined experience fighting for clients across Tennessee since 1975. We have proudly served Middle Tennessee with skilled, battle-tested representation.</p>
+    </div>
+    <div class="services-section">
+      <span class="trust-label">Practice Areas</span>
+      <div class="services-grid">
+        <div class="service-item">Family Law</div>
+        <div class="service-item">Divorce</div>
+        <div class="service-item">High-Conflict Divorce</div>
+        <div class="service-item">Spousal Support</div>
+        <div class="service-item">Business Owner Divorce</div>
+        <div class="service-item">High Asset Divorce</div>
+        <div class="service-item">Alimony</div>
+        <div class="service-item">Child Custody</div>
+        <div class="service-item">High Conflict Custody</div>
+        <div class="service-item">Paternity Law</div>
+        <div class="service-item">Child Visitation</div>
+        <div class="service-item">Federal Criminal Defense</div>
+        <div class="service-item">Federal Drug Crime</div>
+        <div class="service-item">Federal Gun Crime</div>
+        <div class="service-item">Criminal Defense</div>
+        <div class="service-item">Drug Possession</div>
+        <div class="service-item">DUI</div>
+        <div class="service-item">Violent Crime</div>
+        <div class="service-item">Sex Crime</div>
+        <div class="service-item">State Charges</div>
+        <div class="service-item">Sexual Misconduct</div>
+        <div class="service-item">White Collar Crime</div>
+        <div class="service-item">Bank Fraud</div>
+        <div class="service-item">Medicare Fraud</div>
+        <div class="service-item">Civil Litigation</div>
+        <div class="service-item">Estate Planning</div>
+        <div class="service-item">Personal Injury</div>
+        <div class="service-item">Motor Vehicle Accident</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials-section">
+    <span class="trust-label">Client Testimonials</span>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-quote">Murfreesboro Family Lawyer...</p>
+        <p class="testimonial-author">Reviewer 1</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">Murfreesboro Divorce Lawyer...</p>
+        <p class="testimonial-author">Conflict Divorce</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">Murfreesboro High-Conflict Divorce Lawyer...</p>
+        <p class="testimonial-author">Reviewer 3</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">Murfreesboro Spousal Support Lawyer...</p>
+        <p class="testimonial-author">Reviewer 4</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">Murfreesboro Business Owner Divorce Lawyer...</p>
+        <p class="testimonial-author">Reviewer 5</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">Murfreesboro High Asset Divorce Lawyer...</p>
+        <p class="testimonial-author">Reviewer 6</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Google Maps -->
+  <section>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1922.9784143300521!2d-86.39045700599114!3d35.84774536569639!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8863f86fa3063de5%3A0xb119100a030d8d9b!2sEvans%20Bulloch%20Parker%20PLLC!5e0!3m2!1sen!2sin!4v1745560305741!5m2!1sen!2sin" width="100%" height="300" style="border:0" allowfullscreen loading="lazy"></iframe>
+  </section>
+
+  <!-- Social Media Links -->
+  <section class="social-section">
+    <span class="trust-label">Connect With Us</span>
+    <div class="social-links">
+      <a href="https://www.facebook.com/fiolaparkerpllc" class="social-link" target="_blank" rel="noopener">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://x.com/FiolaParkerLaw?s=20" class="social-link" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="https://www.linkedin.com/company/fiola-parker-pllc/" class="social-link" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+      <a href="https://www.youtube.com/@LawAndCrime" class="social-link" target="_blank" rel="noopener">
+        <i class="fab fa-youtube"></i>
+      </a>
+      <a href="https://www.google.com/maps/place/Evans+Bulloch+Parker+PLLC/@35.8486661,-86.3884226,16246m/data=!3m1!1e3!4m8!3m7!1s0x8863f86fa3063de5:0xb119100a030d8d9b!8m2!3d35.8481795!4d-86.3895454!9m1!1b1!16s%2Fg%2F1v8j151r!5m1!1e1?hl=en-US&entry=ttu&g_ep=EgoyMDI1MDQyMy4wIKXMDSoJLDEwMjExNjQwSAFQAw%3D%3D" class="social-link" target="_blank" rel="noopener">
+        <i class="fas fa-map-marker-alt"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Fiola | Parker PLLC</span>
+      <span class="footer-copyright">© 2024 Fiola | Parker PLLC Systems, Inc. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.fiolaparkerlaw.com/">Home</a>
+      <a href="https://www.fiolaparkerlaw.com/about-our-attorneys/">About</a>
+      <a href="https://www.fiolaparkerlaw.com/practice-areas/">Practice Areas</a>
+      <a href="https://www.fiolaparkerlaw.com/areas-served/">Areas Served</a>
+      <a href="https://www.fiolaparkerlaw.com/testimonials/">Reviews</a>
+      <a href="https://www.fiolaparkerlaw.com/blog/">Blog</a>
+      <a href="https://www.fiolaparkerlaw.com/contact/">Contact</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
