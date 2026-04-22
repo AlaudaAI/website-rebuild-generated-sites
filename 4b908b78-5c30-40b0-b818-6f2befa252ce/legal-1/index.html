@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>James M. Judkins, Attorney-at-Law</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .brand-link img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Visual Demo */
+.hero-visual {
+  width: 100%;
+  max-width: 400px;
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: var(--space-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-visual img {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Team Section */
+.team-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.team-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.team-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-md);
+}
+
+.team-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.team-name {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.team-role {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Services Grid */
+.services {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.services-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-lg);
+}
+
+.services-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-md);
+}
+
+.service-item {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-primary);
+  padding: var(--space-sm);
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* About Section */
+.about {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.about-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.about-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 600px;
+}
+
+/* Trust Metrics Section */
+.trust-section {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.trust-metrics {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.trust-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.trust-number {
+  font-family: var(--font-serif);
+  font-size: clamp(64px, 15vw, 120px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.trust-number-suffix {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 8vw, 60px);
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.trust-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 400px;
+}
+
+/* Contact Section */
+.contact-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.contact-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.contact-item-label {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.contact-item-value {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-primary);
+}
+
+.contact-item-value a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-item-value a:hover {
+  color: var(--text-muted);
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== MOBILE (max 768px) =================== */
+@media (max-width: 768px) {
+  .hero-text {
+    gap: var(--space-md);
+  }
+  
+  .hero-headline {
+    font-size: clamp(28px, 6vw, 36px);
+  }
+  
+  .hero-subheading {
+    font-size: clamp(14px, 2vw, 16px);
+  }
+  
+  .services-list {
+    grid-template-columns: repeat(1, 1fr);
+    gap: var(--space-sm);
+  }
+  
+  .about {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .trust-metrics {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .contact-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .services-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .about {
+    flex-direction: row;
+    gap: var(--space-2xl);
+  }
+
+  .about-content {
+    flex: 1;
+  }
+
+  .trust-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-metrics {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .services {
+    padding: var(--space-2xl) var(--space-2xl);
+  }
+
+  .services-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .about {
+    padding: var(--space-2xl) var(--space-2xl);
+  }
+
+  .trust-metrics {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .contact-section {
+    padding: var(--space-2xl) var(--space-2xl);
+  }
+
+  .trust-number {
+    font-size: 120px;
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <img src="https://cdn.lawlytics.com/law-media/uploads/1587/90862/original/Logo.png?1582236553" alt="James M. Judkins, Attorney-at-Law">
+    <span class="brand-name">James M. Judkins, Attorney-at-Law</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <img src="https://cdn.lawlytics.com/law-media/uploads/1587/90862/original/Logo.png?1582236553" alt="James M. Judkins, Attorney-at-Law">
+      <span class="brand-name">James M. Judkins, Attorney-at-Law</span>
+    </a>
+    <nav>
+      <a href="https://www.judkinslawtn.com/home">Home</a>
+      <a href="https://www.judkinslawtn.com/about">About Mr. Judkins</a>
+      <a href="https://www.judkinslawtn.com/practice-areas">Practice Areas</a>
+      <a href="https://www.judkinslawtn.com/blog">Blog</a>
+      <a href="https://www.judkinslawtn.com/contact-us">Contact</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Weekend & After Hours Available</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Professional and Dedicated to You</span>
+      <h1 class="hero-headline">Murfreesboro Attorney</h1>
+      <p class="hero-subheading">"I love helping individuals get through some of the most challenging and difficult times in their lives. We greatly enjoy helping clients successfully obtain the result they want."</p>
+      <a href="tel:615-893-8190" class="hero-cta">Call Now <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+    </div>
+    <div class="hero-visual">
+      <img src="https://cdn.lawlytics.com/law-media/uploads/1587/134637/original/alexander-mils-lCPhGxs7pww-unsplash.jpg?1615160793" alt="Attorney Office">
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://cdn.lawlytics.com/law-media/uploads/1587/186677/original/melinda-gimpel-xcVW_sFp4jQ-unsplash.jpg?1650579534" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <span class="team-label">Our Team</span>
+    <div class="team-list">
+      <div class="team-item">
+        <div class="team-name">James Judkins</div>
+        <div class="team-role">Attorney</div>
+      </div>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://cdn.lawlytics.com/law-media/uploads/1587/90665/original/PA4.png?1582001562" alt="Family Law Icon" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- About Section -->
+  <section class="about">
+    <div class="about-content">
+      <span class="about-label">About</span>
+      <div class="about-text">
+        <p>I love helping individuals get through some of the most challenging and difficult times in their lives. We greatly enjoy helping clients successfully obtain the result they want. As a family law firm we dedicate ourselves to helping them identify the best plausible outcome they will receive from a court and fight to meet that goal.</p>
+        <p>We not only advocate for our clients, lead them through the process, and equipping our clients with the resources and advice to help their case.</p>
+        <p>Don't take your chances-get a lawyer who understands what you're facing and knows that it takes. Call 615-893-8190 for a free case strategy session.</p>
+      </div>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://cdn.lawlytics.com/law-media/uploads/1587/90664/original/PA5.png?1582001561" alt="Divorce Icon" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Services Grid -->
+  <section class="services">
+    <span class="services-label">Practice Areas</span>
+    <div class="services-list">
+      <div class="service-item">Family Law</div>
+      <div class="service-item">Divorce Lawyer</div>
+      <div class="service-item">Child Custody</div>
+      <div class="service-item">Child Abandonment Charges</div>
+      <div class="service-item">Contempt of Court</div>
+      <div class="service-item">Child Support</div>
+      <div class="service-item">Adoption Attorney</div>
+      <div class="service-item">Prenuptial Agreements</div>
+      <div class="service-item">Felony</div>
+      <div class="service-item">DUI</div>
+      <div class="service-item">Juvenile Crimes</div>
+      <div class="service-item">Misdemeanor</div>
+      <div class="service-item">Traffic Ticket</div>
+      <div class="service-item">Probation Violation</div>
+      <div class="service-item">Violent Crimes</div>
+      <div class="service-item">Disputed or Contested Wills</div>
+      <div class="service-item">Criminal Defense</div>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://cdn.lawlytics.com/law-media/uploads/1587/90663/original/PA6.png?1582001560" alt="Child Custody Icon" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://cdn.lawlytics.com/law-media/uploads/1587/90668/original/PA1.png?1582001563" alt="Criminal Defense Icon" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://cdn.lawlytics.com/law-media/uploads/1587/90666/original/PA2.png?1582001562" alt="DUI Icon" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://cdn.lawlytics.com/law-media/uploads/1587/90667/original/PA3.png?1582001563" alt="Felonies Icon" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Trust Metrics Section -->
+  <section class="trust-section">
+    <div class="trust-metrics">
+      <span class="trust-label">Professional Recognition</span>
+      <div>
+        <span class="trust-number">10</span><span class="trust-number-suffix">%</span>
+      </div>
+      <p class="trust-description">attorneys with AV Preeminent status</p>
+    </div>
+    <div class="trust-metrics">
+      <span class="trust-label">Experience</span>
+      <div>
+        <span class="trust-number">James</span>
+      </div>
+      <p class="trust-description">M. Judkins - Attorney with AV Rating for professional ethics and legal ability</p>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://cdn.lawlytics.com/law-media/uploads/1587/182392/original/logo_av.png?1646770014" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://cdn.lawlytics.com/law-media/uploads/1587/181028/original/istockphoto-1158481742-612x612.jpg?1645729710" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://cdn.lawlytics.com/law-media/uploads/1587/152154/original/istockphoto-463071255-612x612.jpg?1625950751" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <span class="contact-label">Contact Us Today</span>
+    <div class="contact-info">
+      <div class="contact-item">
+        <span class="contact-item-label">Office Location</span>
+        <div class="contact-item-value">104 N Church Street<br>Murfreesboro, TN 37130</div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-item-label">Phone</span>
+        <div class="contact-item-value"><a href="tel:615-893-8190">615-893-8190</a></div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-item-label">Hours</span>
+        <div class="contact-item-value">
+          Mon-Fri: 08:00am - 05:00pm<br>
+          Weekend and after hours appointments available
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">James M. Judkins, Attorney-at-Law</span>
+      <span class="footer-copyright">© 2026 James M. Judkins, Attorney-at-Law</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.judkinslawtn.com/home">Home</a>
+      <a href="https://www.judkinslawtn.com/about">About Mr. Judkins</a>
+      <a href="https://www.judkinslawtn.com/practice-areas">Practice Areas</a>
+      <a href="https://www.judkinslawtn.com/blog">Blog</a>
+      <a href="https://www.judkinslawtn.com/contact-us">Contact</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
