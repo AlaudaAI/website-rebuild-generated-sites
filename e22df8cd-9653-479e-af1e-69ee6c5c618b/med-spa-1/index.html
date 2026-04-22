@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contour & Sculpt Aesthetics</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background: url('https://contour-sculpt-aesthetics-v1776877189.websitepro-cdn.com/wp-content/uploads/2026/04/mobile-hero-resized-1.webp') center/cover;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(26, 26, 26, 0.3);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Philosophy Section */
+.philosophy {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.philosophy-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.philosophy-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.philosophy-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Project Grid */
+.projects {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.projects-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.project-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.project-cell:last-child {
+  border-bottom: none;
+}
+
+.project-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.project-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.project-cell:hover .project-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: var(--space-xs);
+}
+
+.project-number {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.project-name {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+/* Services Section */
+.services {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.services-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.services-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.service-card {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.service-title {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.service-description {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.service-meta {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  margin-top: var(--space-sm);
+  color: rgba(26, 26, 26, 0.7);
+}
+
+/* Stats Section */
+.stats {
+  padding: var(--space-lg) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.stats-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.stat-value {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 300;
+  line-height: 1;
+  margin-bottom: var(--space-xs);
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* Gallery Section */
+.gallery {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.gallery-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.gallery-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-sm);
+}
+
+.gallery-item {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border: 1px solid var(--border-black);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+/* How It Works Section */
+.how-it-works {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.how-it-works-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.how-it-works-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.step-card {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.step-number {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+}
+
+.step-title {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.step-description {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* FAQ Section */
+.faq {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.faq-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.faq-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.faq-card {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.faq-question {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+}
+
+.faq-answer {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Get Started Section */
+.get-started {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.get-started-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.get-started-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-md);
+}
+
+.get-started-text {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto var(--space-lg);
+}
+
+.get-started-button {
+  display: inline-block;
+  border: 1px solid var(--border-black);
+  padding: var(--space-sm) var(--space-md);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.get-started-button:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Testimonials */
+.testimonials {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.testimonials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonials-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.testimonial-card {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.testimonial-text {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+  font-style: italic;
+}
+
+.testimonial-author {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* Inquiry Section */
+.inquiry {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.inquiry-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.inquiry-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.contact-info {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.contact-info a {
+  border-bottom: 1px solid var(--border-black);
+  transition: border-bottom-width 0.2s ease;
+}
+
+.contact-info a:hover {
+  border-bottom-width: 2px;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+    --space-xxl: 4rem;
+  }
+
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+
+  .nav-logo {
+    font-size: 0.65rem;
+  }
+
+  .nav-links {
+    gap: var(--space-sm);
+  }
+
+  .nav-links a {
+    font-size: 0.6rem;
+  }
+
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(1.8rem, 8vw, 3rem);
+  }
+
+  .hero-subtitle {
+    font-size: 0.65rem;
+  }
+
+  .philosophy,
+  .services,
+  .inquiry {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .philosophy-text {
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+  }
+
+  .services-grid {
+    gap: var(--space-md);
+  }
+
+  .service-card {
+    padding: var(--space-sm);
+  }
+
+  .project-cell {
+    padding: var(--space-sm);
+  }
+
+  .testimonial-card,
+  .step-card,
+  .faq-card {
+    padding: var(--space-sm);
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .philosophy-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .project-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .project-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .project-cell:nth-child(1),
+  .project-cell:nth-child(2) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .inquiry-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .philosophy {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .projects {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .inquiry {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Contour & Sculpt Aesthetics</a>
+  <ul class="nav-links">
+    <li><a href="https://contourandsculptaesthetics.com/">home</a></li>
+    <li><a href="https://contourandsculptaesthetics.com/services/">services</a></li>
+    <li><a href="https://contourandsculptaesthetics.com/service-areas/">service areas</a></li>
+    <li><a href="https://contourandsculptaesthetics.com/about/">about</a></li>
+    <li><a href="https://contourandsculptaesthetics.com/blog/">blog</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">The Private Studio for<br>Botox in Leander, TX</h1>
+    <p class="hero-subtitle">001 — Experience an intentional, one-on-one aesthetic journey. We specialize in natural results with lip fillers and botox in Leander, TX, providing a dedicated environment where your goals and budget lead the way.</p>
+  </div>
+</section>
+
+<!-- Philosophy Section -->
+<section class="philosophy" id="philosophy">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">002 — approach</span>
+    <div class="philosophy-text">
+      <p>Experience an intentional aesthetic journey rooted in transparency and personalized care. We take the time to understand your unique anatomy, providing a discrete, one-on-one experience in our professional Leander studio. From lip fillers to precision Botox, every treatment is designed to enhance your natural balance.</p>
+      <p>We prioritize education, transparency, and natural-looking results in a discrete, by-appointment-only environment. Our boutique studio offers a professional setting designed for your comfort, safety, and total privacy.</p>
+    </div>
+  </div>
+</section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://contour-sculpt-aesthetics-v1776877189.websitepro-cdn.com/wp-content/uploads/2026/02/Contour-Sculpt-Logo.png" alt="Contour & Sculpt Logo" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Project Grid - Real Transformations -->
+<section class="projects" id="projects">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">003 — transformations</span>
+    <div class="philosophy-text">
+      <h2>Artistry in Motion: Natural Transformations</h2>
+      <p>See the difference that an intentional, one-on-one approach makes. Our gallery showcases real results from our Leander studio, focusing on subtle enhancements that respect your natural anatomy.</p>
+    </div>
+  </div>
+  <div class="projects-grid">
+    <div class="project-cell">
+      <div class="project-image-wrapper">
+        <img src="https://contour-sculpt-aesthetics-v1776877189.websitepro-cdn.com/wp-content/uploads/2026/02/Before_After_Daxxify_Lip-Flip-300x300.jpg" alt="Before and after Daxxify lip flip treatment results">
+      </div>
+      <div class="project-meta">
+        <span class="project-number">001</span>
+        <span class="project-name">daxxify lip flip</span>
+      </div>
+    </div>
+    <div class="project-cell">
+      <div class="project-image-wrapper">
+        <img src="https://contour-sculpt-aesthetics-v1776877189.websitepro-cdn.com/wp-content/uploads/2026/04/Before_After_Letybo_Crow_s-Feet.webp" alt="Before after Letybo crow's feet treatment">
+      </div>
+      <div class="project-meta">
+        <span class="project-number">002</span>
+        <span class="project-name">letybo crow's feet</span>
+      </div>
+    </div>
+    <div class="project-cell">
+      <div class="project-image-wrapper">
+        <img src="https://contour-sculpt-aesthetics-v1776877189.websitepro-cdn.com/wp-content/uploads/2026/04/Before_After_Letybo_DAO.webp" alt="Before after Letybo DAO treatment">
+      </div>
+      <div class="project-meta">
+        <span class="project-number">003</span>
+        <span class="project-name">letybo dao</span>
+      </div>
+    </div>
+    <div class="project-cell">
+      <div class="project-image-wrapper">
+        <img src="https://contour-sculpt-aesthetics-v1776877189.websitepro-cdn.com/wp-content/uploads/2026/04/Before_After_Letybo_Forehead.webp" alt="Before after Letybo forehead treatment">
+      </div>
+      <div class="project-meta">
+        <span class="project-number">004</span>
+        <span class="project-name">letybo forehead</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://contour-sculpt-aesthetics-v1776877189.websitepro-cdn.com/wp-content/uploads/2026/04/Professional-Photo-scaled-1-768x1024.webp" alt="Lip Filler Leander TX: The Ultimate Guide to Perfect Pouts" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Services Section -->
+<section class="services" id="services">
+  <div class="services-inner">
+    <h2 class="services-heading">Boutique Aesthetic<br>Care Services</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <h3 class="service-title">Specialized Treatments for Natural Results</h3>
+        <p class="service-description"><a href="https://contourandsculptaesthetics.com/services/">Explore All Services</a></p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-title">Botox & Neurotoxins</h3>
+        <p class="service-description">Achieve a refreshed, well-rested look with specialized neurotoxins. We specialize in precision treatments for forehead rejuvenation and <strong>crows feet botox</strong>.</p>
+        <div class="service-meta">
+          <div>Duration: 30 – 120 min</div>
+          <div>Type : Neurotoxin</div>
+          <div>Focus Area : Upper Face & Jaw</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <h3 class="service-title">Natural Lip Enhancement</h3>
+        <p class="service-description">Achieve hydrated volume that honors your natural anatomy. Our boutique approach to <strong>lip fillers in Leander</strong> ensures a beautiful, balanced result tailored to your goals.</p>
+        <div class="service-meta">
+          <div>Duration: 45 - 120 min</div>
+          <div>Type : Lip Enhancement</div>
+          <div>Focus Area : Lips & Perioral</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <h3 class="service-title">Body Contouring</h3>
+        <p class="service-description">Non-invasive silhouette refinement for a more sculpted appearance. This service serves as our foundation for upcoming specialized massage and post-op care in the <strong>Austin area</strong>.</p>
+        <div class="service-meta">
+          <div>Duration: 60+ min</div>
+          <div>Type : Body Sculpting</div>
+          <div>Focus Area : Full Body</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <h3 class="service-title">Facial Treatments</h3>
+        <p class="service-description">Clinical-grade treatments designed for skin health and rejuvenation. We provide high-impact medical skin services in <strong>Leander</strong> and surrounding areas that deliver visible, lasting results for our private studio clients.</p>
+        <div class="service-meta">
+          <div>Duration: 45 – 60 min</div>
+          <div>Type : Clinical Skincare</div>
+          <div>Focus Area : Skin Texture & Tone</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <h3 class="service-title">Lympathic Drainage Massage</h3>
+        <p class="service-description">Our lymphatic drainage massage is a specialized wellness service designed to promote detoxification and significantly reduce post-treatment swelling.</p>
+        <div class="service-meta">
+          <div>Duration: 45 – 120 min</div>
+          <div>Type : Massage</div>
+        </div>
+      </div>
+      <div class="service-card">
+        <h3 class="service-title">Socials</h3>
+        <p class="service-description"><a href="https://www.facebook.com/contourandsculptaesthetics">Facebook</a><a href="https://www.youtube.com/@contoursculptaesthetics">Youtube</a><a href="https://www.instagram.com/contoursculptaesthetics/">Instagram</a><a href="https://www.tiktok.com/@contoursculptaesthetics">Tiktok</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://contour-sculpt-aesthetics-v1776877189.websitepro-cdn.com/wp-content/uploads/2026/04/procedure-bed-and-room-1024x574.webp" alt=" Botox in Leander TX: Your Guide to a Refreshed Glow" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Stats Section -->
+<section class="stats" id="stats">
+  <div class="stats-inner">
+    <div class="stat-value">5.0</div>
+    <div class="stat-label">Google rating</div>
+    <div style="margin-top: var(--space-lg);">
+      <div class="stat-value">33</div>
+      <div class="stat-label">Google reviews</div>
+    </div>
+  </div>
+</section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://contour-sculpt-aesthetics-v1776877189.websitepro-cdn.com/wp-content/uploads/2026/02/Before_After_Daxxify_Lip-Flip-1024x1024.webp" alt="Why Medical-Grade Facials Outperform Spa Treatments" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- How It Works Section -->
+<section class="how-it-works" id="how-it-works">
+  <div class="how-it-works-inner">
+    <h2 class="how-it-works-heading">How It Works</h2>
+    <div class="step-card">
+      <div class="step-number">step 001</div>
+      <h3 class="step-title">consultation</h3>
+      <p class="step-description">We begin with a thorough consultation to understand your aesthetic goals and discuss treatment options tailored to your unique anatomy.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-number">step 002</div>
+      <h3 class="step-title">treatment planning</h3>
+      <p class="step-description">Together, we create a personalized treatment plan that aligns with your budget and desired outcomes, ensuring transparency every step of the way.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-number">step 003</div>
+      <h3 class="step-title">expert treatment</h3>
+      <p class="step-description">In our private Leander studio, receive professional aesthetic care in a comfortable, discrete environment designed for your safety and privacy.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-number">step 004</div>
+      <h3 class="step-title">follow-up care</h3>
+      <p class="step-description">We provide comprehensive aftercare instructions and schedule follow-up appointments to ensure optimal results and your complete satisfaction.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="faq" id="faq">
+  <div class="faq-inner">
+    <h2 class="faq-heading">Common Questions</h2>
+    <div class="faq-card">
+      <h3 class="faq-question">what should I expect during my first visit?</h3>
+      <p class="faq-answer">Your first visit includes a comprehensive consultation where we discuss your aesthetic goals, medical history, and treatment options. We'll create a personalized plan that fits your budget and timeline.</p>
+    </div>
+    <div class="faq-card">
+      <h3 class="faq-question">how long do results typically last?</h3>
+      <p class="faq-answer">Results vary depending on the treatment. Botox typically lasts 3-4 months, while lip fillers can last 6-12 months. We'll discuss expected duration during your consultation.</p>
+    </div>
+    <div class="faq-card">
+      <h3 class="faq-question">is there any downtime after treatments?</h3>
+      <p class="faq-answer">Most treatments have minimal to no downtime. You may experience slight swelling or bruising, but this typically resolves within a few days. We provide detailed aftercare instructions.</p>
+    </div>
+    <div class="faq-card">
+      <h3 class="faq-question">what makes your studio different?</h3>
+      <p class="faq-answer">Our boutique approach focuses on one-on-one care in a private setting. We prioritize natural results, transparency, and building long-term relationships with our clients.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Get Started Section -->
+<section class="get-started" id="get-started">
+  <div class="get-started-inner">
+    <h2 class="get-started-heading">Get Started</h2>
+    <p class="get-started-text">Ready to begin your aesthetic journey? Schedule your consultation and discover how our personalized approach can help you achieve your goals.</p>
+    <a href="tel:5123331526" class="get-started-button">schedule consultation</a>
+  </div>
+</section>
+
+<!-- Team Section -->
+<section class="philosophy" id="team">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">004 — team</span>
+    <div class="philosophy-text">
+      <h2>Certified Expertise</h2>
+      <p>Led by Kamryn, a certified cosmetic injector, we focus on natural results and safety. We build long-term plans based on your aesthetic goals and budget.</p>
+    </div>
+  </div>
+</section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://contour-sculpt-aesthetics-v1776877189.websitepro-cdn.com/wp-content/uploads/elementor/thumbs/contour-sculpt-logo-2-rl1hfk4wxm7zlfg8yz3tua5ixz5zlfyjgjnqrmyuas.png" alt="Leander Med Spa Logo" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Testimonials Section -->
+<section class="testimonials" id="testimonials">
+  <div class="testimonials-inner">
+    <h2 class="testimonials-heading">Client Experiences</h2>
+    <div class="testimonial-card">
+      <p class="testimonial-text">"I loved every minute with Kameron! She makes you feel at home and relaxed. She talks you through every step and makes you comfortable with all her services. Already booked my next services! 100% recommend!"</p>
+      <div class="testimonial-author">— Ashley Medel</div>
+    </div>
+    <div class="testimonial-card">
+      <p class="testimonial-text">"Kamryn was so sweet and incredibly knowledgeable. I felt comfortable as we discussed my desired look. I had consultations at other places that were very pushy on over injecting and I never once got that from Kamryn, the results are perfect."</p>
+      <div class="testimonial-author">— Kristen Rizzardi</div>
+    </div>
+    <div class="testimonial-card">
+      <p class="testimonial-text">"She is the best! Really she is super professional and honest! I'm super happy with my results 🥰"</p>
+      <div class="testimonial-author">— Blanca Andrade</div>
+    </div>
+    <div class="testimonial-card">
+      <p class="testimonial-text">" experience like? Our pract..."</p>
+      <div class="testimonial-author">— Reviewer 1</div>
+    </div>
+  </div>
+</section>
+
+<!-- Google Maps -->
+<section style="padding: var(--space-lg) var(--pad-x); border-top: 1px solid var(--border-black);">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3435.2361904453655!2d-97.8776297!3d30.5708772!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2a63e7b9a85bb09d%3A0x6d3ab89221925541!2sContour%20%26%20Sculpt%20Aesthetics!5e0!3m2!1sen!2sus!4v1770315759338!5m2!1sen!2sus" width="100%" height="300" style="border:0" allowfullscreen loading="lazy"></iframe>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="inquiry" id="inquiry">
+  <div class="inquiry-inner">
+    <h2 class="inquiry-heading">Experience<br>Intentional<br>Aesthetic Care</h2>
+    <div class="contact-info">
+      <p>Our journey to natural results begins with a dedicated, one-on-one consultation. Whether you are looking for lip fillers, Botox, microneedling, dermaplaning, or manual lymphatic drainage massage in Leander, TX, our private studio provides a discreet and professional environment tailored to your goals.</p>
+      <br>
+      <p><strong>Phone:</strong> <a href="tel:5123331526">512-333-1526</a></p>
+      <p><strong>Email:</strong> <a href="mailto:kamryn@contourandsculptaesthetics.com">kamryn@contourandsculptaesthetics.com</a></p>
+      <p><strong>Address:</strong> 200 Joes Cove, Leander, TX 78641</p>
+      <p><strong>Georgetown Location:</strong> 202 S Austin Ave, Suite 100, Georgetown, TX 78626</p>
+      <br>
+      <p><strong>Social Media:</strong></p>
+      <p><a href="https://www.facebook.com/contourandsculptaesthetics">Facebook</a> | <a href="https://www.youtube.com/@contoursculptaesthetics">YouTube</a> | <a href="https://www.instagram.com/contoursculptaesthetics/">Instagram</a> | <a href="https://www.tiktok.com/@contoursculptaesthetics">TikTok</a> | <a href="https://www.google.com/maps/@30.5708772,-97.8776297,16z/data=!10m1!1e1!12b1?source=apiv3&rapsrc=apiv3">Google Business</a></p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Contour & Sculpt Aesthetics</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
