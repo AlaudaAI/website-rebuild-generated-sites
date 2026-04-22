@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Law Office of Robert Lee Jackson II</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Social links */
+.social-links {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.social-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Visual Demo */
+.hero-visual {
+  width: 100%;
+  max-width: 400px;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+.hero-social-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* About Section */
+.about {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.about-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 800px;
+}
+
+.about-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* Services Grid */
+.services {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.services-header {
+  margin-bottom: var(--space-xl);
+}
+
+.services-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.services-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.service-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  transition: background-color 0.3s ease;
+}
+
+.service-item:hover {
+  background-color: var(--bg-hover);
+}
+
+.service-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+
+.service-content {
+  flex: 1;
+}
+
+.service-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.service-description {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* Team Section */
+.team {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.team-header {
+  margin-bottom: var(--space-xl);
+}
+
+.team-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.team-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.team-photo {
+  width: 168px;
+  height: 168px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border-color);
+}
+
+.team-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.team-name {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.team-role {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.team-bio {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 600px;
+}
+
+.team-education {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.education-item {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.signature-image {
+  width: 361px;
+  height: auto;
+  margin: var(--space-lg) 0;
+}
+
+.office-image {
+  width: 392px;
+  height: auto;
+  margin: var(--space-lg) 0;
+  border-radius: 16px;
+}
+
+/* Stats Section */
+.stats {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.stats-header {
+  margin-bottom: var(--space-xl);
+}
+
+.stats-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.stat-number {
+  font-family: var(--font-serif);
+  font-size: clamp(64px, 15vw, 120px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.stat-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 400px;
+}
+
+/* Contact Section */
+.contact {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.contact-header {
+  margin-bottom: var(--space-xl);
+}
+
+.contact-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.contact-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.contact-type {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.contact-value {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.contact-value a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-value a:hover {
+  color: var(--text-muted);
+}
+
+.award-image {
+  width: 300px;
+  height: auto;
+  margin: var(--space-lg) 0;
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== MOBILE (max-width: 768px) =================== */
+@media (max-width: 768px) {
+  .mobile-header .brand-name {
+    font-size: 12px;
+  }
+  
+  .hero {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .hero-headline {
+    font-size: clamp(28px, 6vw, 36px);
+  }
+  
+  .services-grid {
+    gap: var(--space-md);
+  }
+  
+  .service-item {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+  
+  .team-photo {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .signature-image {
+    width: 280px;
+  }
+  
+  .office-image {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .award-image {
+    width: 250px;
+  }
+  
+  .footer {
+    text-align: center;
+  }
+  
+  .footer-links {
+    justify-content: center;
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+  }
+
+  .team-member {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .services {
+    padding: var(--space-2xl) var(--space-2xl);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .team {
+    padding: var(--space-2xl) var(--space-2xl);
+  }
+
+  .stats {
+    padding: var(--space-2xl) var(--space-2xl);
+  }
+
+  .contact {
+    padding: var(--space-2xl) var(--space-2xl);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .services {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .team {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .stats {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .contact {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <div class="globe-icon"><i class="fas fa-balance-scale"></i></div>
+    <span class="brand-name">The Law Office of Robert Lee Jackson II</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-balance-scale"></i></div>
+      <span class="brand-name">The Law Office of Robert Lee Jackson II</span>
+    </a>
+    <nav>
+      <a href="https://www.leejacksonlaw.com/">HOME</a>
+      <a href="https://www.leejacksonlaw.com/">ABOUT</a>
+      <a href="https://www.leejacksonlaw.com/divorce">DIVORCE</a>
+      <a href="https://www.leejacksonlaw.com/alimony">ALIMONY</a>
+      <a href="https://www.leejacksonlaw.com/child-custody-child-support">CHILD CUSTODY & CHILD SUPPORT</a>
+      <a href="https://www.leejacksonlaw.com/order-of-protection">ORDER OF PROTECTION</a>
+      <a href="https://www.leejacksonlaw.com/post-divorce-issues">POST DIVORCE ISSUES</a>
+      <a href="https://www.leejacksonlaw.com/blog">BLOG</a>
+      <a href="https://www.leejacksonlaw.com/contempt">CONTEMPT</a>
+      <a href="https://www.leejacksonlaw.com/criminal-law">CRIMINAL LAW</a>
+      <a href="https://www.leejacksonlaw.com/other-legal-services">OTHER LEGAL SERVICES</a>
+      <a href="https://www.leejacksonlaw.com/">CONTACT</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Serving Middle Tennessee</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Family Law Expert</span>
+    </div>
+    <div class="social-links">
+      <a href="https://www.linkedin.com/in/leejacksonlaw/" target="_blank" aria-label="LinkedIn">
+        <img src="https://static.wixstatic.com/media/7528824071724d12a3e6c31eee0b40d4.png/v1/fill/w_20,h_20,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/7528824071724d12a3e6c31eee0b40d4.png" alt="LinkedIn" class="hero-social-icon">
+      </a>
+      <a href="https://www.facebook.com/leejacksonlaw/" target="_blank" aria-label="Facebook">
+        <img src="https://static.wixstatic.com/media/23fd2a2be53141ed810f4d3dcdcd01fa.png/v1/fill/w_20,h_20,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/23fd2a2be53141ed810f4d3dcdcd01fa.png" alt="White Facebook Icon" class="hero-social-icon">
+      </a>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">THE RIGHT RESOURCE THE RIGHT TIME</span>
+      <h1 class="hero-headline">Divorce and Family Law Attorney - Brentwood, Franklin, and Nashville, TN</h1>
+      <p class="hero-subheading">Life can be tough. And not having proper legal representation during a lawsuit can make it a lot tougher. We believe that no one should go through that alone and it is our job to be the support, resource, and advocate necessary to get our clients through these trying times.</p>
+      <a href="tel:615-376-9933" class="hero-cta">CALL NOW <i class="fas fa-phone" style="font-size:10px;"></i></a>
+    </div>
+    <div class="hero-visual">
+      <img src="https://static.wixstatic.com/media/6c5e94_0a4b3b212a3547c5bb241c75040c0b6a~mv2.jpg/v1/crop/x_8,y_0,w_1905,h_1080,q_90,enc_avif,quality_auto/6c5e94_0a4b3b212a3547c5bb241c75040c0b6a~mv2.jpg" alt="Lee Jackson Attorney" class="hero-image">
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about">
+    <div class="about-text">
+      <span class="hero-label">About the Firm</span>
+      <h2 class="hero-headline">Life can be tough.</h2>
+      <p class="about-description">And not having proper legal representation during a lawsuit can make it a lot tougher. Whether it's divorce, child custody or support actions, orders of protection, post-divorce modifications, criminal allegations, or numerous other potential legal issues, the emotional toll of these sometimes necessary events can be overwhelming even before considering the legal process. We believe that no one should go through that alone and it is our job to be the support, resource, and advocate necessary to get our clients through these trying times.</p>
+      <p class="about-description">Our priorities are hard work, professionalism, civility, and diligence in advocating for our clients as we accomplish what must be done -- together.</p>
+      <img src="https://static.wixstatic.com/media/6c5e94_ca4c461e5d904f19bd43a6a27e286d29~mv2.jpg/v1/fill/w_250,h_250,fp_0.50_0.50,q_30,blur_30,enc_avif,quality_auto/6c5e94_ca4c461e5d904f19bd43a6a27e286d29~mv2.webp" alt="A couple contemplating divorce issues." class="office-image">
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services">
+    <div class="services-header">
+      <span class="services-label">PRACTICE AREAS</span>
+      <h2 class="services-title">Legal Services</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-item">
+        <img src="https://static.wixstatic.com/media/6c5e94_b96f635b5a0a4af09d4b07b34717a042~mv2.png/v1/fill/w_92,h_92,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/CCA_Law-Icon-set_line_Divorce.png" alt="Divorce" class="service-icon">
+        <div class="service-content">
+          <h3 class="service-name">Divorce</h3>
+          <p class="service-description">Contested and uncontested divorce proceedings</p>
+        </div>
+      </div>
+      <div class="service-item">
+        <img src="https://static.wixstatic.com/media/6c5e94_5e583eed19c840a78b4fca102129bbde~mv2.png/v1/fill/w_76,h_76,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/8b25f8f2dd5d1fad767c5e8c1ed92580-family-.png" alt="Child Custody and Child Support" class="service-icon">
+        <div class="service-content">
+          <h3 class="service-name">Child Custody & Child Support</h3>
+          <p class="service-description">Visitation and support matters</p>
+        </div>
+      </div>
+      <div class="service-item">
+        <img src="https://static.wixstatic.com/media/6c5e94_e62eb2c8e1814796ad23e8961c529a4b~mv2.png/v1/fill/w_68,h_68,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/court-1953.png" alt="Contempt of Court" class="service-icon">
+        <div class="service-content">
+          <h3 class="service-name">Contempt</h3>
+          <p class="service-description">Civil and criminal contempt matters</p>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-content">
+          <h3 class="service-name">Trajectory of a Divorce in Tennessee</h3>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-content">
+          <h3 class="service-name">Dividing Marital Assets & Liabilities</h3>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-content">
+          <h3 class="service-name">Alimony</h3>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-content">
+          <h3 class="service-name">Grandparent Visitation Rights</h3>
+        </div>
+      </div>
+      <div class="service-item">
+        <img src="https://static.wixstatic.com/media/6c5e94_7e05b91117564847ae0c49c346e98bed~mv2.png/v1/fill/w_68,h_68,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/scroll.png" alt="Order of Protection" class="service-icon">
+        <div class="service-content">
+          <h3 class="service-name">Order of Protection</h3>
+        </div>
+      </div>
+      <div class="service-item">
+        <img src="https://static.wixstatic.com/media/6c5e94_ad9317e5be074efcbcdd7194a5e71711~mv2.png/v1/fill/w_68,h_68,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/divorce-icons-download-free-png-and-vect.png" alt="Post Divorce Issues" class="service-icon">
+        <div class="service-content">
+          <h3 class="service-name">Post Divorce Issues</h3>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-content">
+          <h3 class="service-name">Criminal Law</h3>
+        </div>
+      </div>
+      <div class="service-item">
+        <img src="https://static.wixstatic.com/media/6c5e94_1fa1782917f54d6fba7e012dfe5e3c33~mv2.png/v1/fill/w_86,h_86,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/court-gavel-pngrepo-com.png" alt="Parenting Plan" class="service-icon">
+        <div class="service-content">
+          <h3 class="service-name">Parenting Plans</h3>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-content">
+          <h3 class="service-name">Prenuptial/Postnuptial Agreements</h3>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-content">
+          <h3 class="service-name">Conservatorships</h3>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-content">
+          <h3 class="service-name">Guardianships</h3>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-content">
+          <h3 class="service-name">Wills</h3>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-content">
+          <h3 class="service-name">Partitions</h3>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-content">
+          <h3 class="service-name">Expungements</h3>
+        </div>
+      </div>
+    </div>
+    <img src="https://static.wixstatic.com/media/11062b_31990c4a19c9437ca4eed04d9398b18b~mv2.jpg/v1/fill/w_250,h_250,fp_0.50_0.50,q_30,blur_30,enc_avif,quality_auto/11062b_31990c4a19c9437ca4eed04d9398b18b~mv2.webp" alt="Filing for Divorce with a Family Law Attorney in Brentwood and Franklin, TN" class="office-image">
+  </section>
+
+  <!-- Team Section -->
+  <section class="team">
+    <div class="team-header">
+      <span class="team-label">Attorney</span>
+      <h2 class="team-title">ROBERT LEE JACKSON II</h2>
+    </div>
+    <div class="team-member">
+      <img src="https://static.wixstatic.com/media/6c5e94_24bfe9f297b441f7b501ac39d8c5530c~mv2.jpg/v1/crop/x_1332,y_352,w_1750,h_1746/fill/w_168,h_168,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Lee's%20Best%20Lawyer%20Photo.jpg" alt="Robert Jackson" class="team-photo">
+      <div class="team-info">
+        <h3 class="team-name">Robert Jackson</h3>
+        <p class="team-role">Attorney</p>
+        <p class="team-bio">Robert Lee Jackson II is a local attorney native to Franklin, serving the areas of greater Nashville and all of Middle Tennessee. A graduate of the University of Tennessee, and the Nashville School of Law, Lee has enjoyed serving the community and state he grew up in.</p>
+        <div class="team-education">
+          <div class="education-item">University of Tennessee</div>
+          <div class="education-item">Nashville School of Law</div>
+        </div>
+      </div>
+    </div>
+    <img src="https://static.wixstatic.com/media/6c5e94_ede39bf30fd14d4b9b0e69ef8f8c9b2d~mv2.png/v1/fill/w_361,h_228,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/RLJ%20Sig%201.png" alt="Signed Robert Lee Jackson II, Attorney" class="signature-image">
+    <img src="https://static.wixstatic.com/media/6c5e94_3e22f08c6db14afc8c2b56eb66b796c5~mv2.jpg/v1/crop/x_0,y_237,w_4032,h_2016/fill/w_392,h_196,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Robert%20Lee%20Jackson%20II%20Law%20Desk.jpg" alt="Robert Lee Jackson II Law Desk" class="office-image">
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats">
+    <div class="stats-header">
+      <span class="stats-label">Legacy of Excellence</span>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">7</div>
+      <p class="stat-description">generations of law expertise</p>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact">
+    <div class="contact-header">
+      <span class="contact-label">Contact</span>
+      <h2 class="contact-title">Contact Us</h2>
+    </div>
+    <div class="contact-info">
+      <div class="contact-item">
+        <span class="contact-type">Phone</span>
+        <div class="contact-value"><a href="tel:615-669-3591">615-669-3591</a></div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-type">Email</span>
+        <div class="contact-value"><a href="mailto:lee@leejacksonlaw.com">lee@leejacksonlaw.com</a></div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-type">Address</span>
+        <div class="contact-value">5115 Maryland Way<br>Suite 301<br>Brentwood, TN 37027</div>
+      </div>
+    </div>
+    <img src="https://static.wixstatic.com/media/6c5e94_9b11b8ca054545eb892848b5821f2c5c~mv2.png/v1/fill/w_300,h_89,al_c,q_85,enc_avif,quality_auto/Lee_Jackson_PR_AV_300.png" alt="Attorney Award for AV Preeminent. Peer Rated for Highest Level of Professional Excellance" class="award-image">
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">The Law Office of Robert Lee Jackson II</span>
+      <span class="footer-copyright">© 2020 by Law Office of Robert Lee Jackson II - Proudly created ZPS</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.leejacksonlaw.com/">HOME</a>
+      <a href="https://www.leejacksonlaw.com/">ABOUT</a>
+      <a href="https://www.leejacksonlaw.com/divorce">DIVORCE</a>
+      <a href="https://www.leejacksonlaw.com/alimony">ALIMONY</a>
+      <a href="https://www.leejacksonlaw.com/child-custody-child-support">CHILD CUSTODY & CHILD SUPPORT</a>
+      <a href="https://www.leejacksonlaw.com/order-of-protection">ORDER OF PROTECTION</a>
+      <a href="https://www.leejacksonlaw.com/post-divorce-issues">POST DIVORCE ISSUES</a>
+      <a href="https://www.leejacksonlaw.com/blog">BLOG</a>
+      <a href="https://www.leejacksonlaw.com/contempt">CONTEMPT</a>
+      <a href="https://www.leejacksonlaw.com/criminal-law">CRIMINAL LAW</a>
+      <a href="https://www.leejacksonlaw.com/other-legal-services">OTHER LEGAL SERVICES</a>
+      <a href="https://www.leejacksonlaw.com/">CONTACT</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
