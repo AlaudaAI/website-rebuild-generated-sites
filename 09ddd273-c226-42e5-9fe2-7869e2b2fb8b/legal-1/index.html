@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Freeman & Bracey, PLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  background-image: url('https://lirp.cdn-website.com/f9cfa0f4/dms3rep/multi/opt/freeman+logo+white-1920w.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Problems Section */
+.problems-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.problems-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+
+.problem-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+}
+
+.problem-icon {
+  font-size: 24px;
+  color: var(--text-muted);
+}
+
+.problem-title {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.problem-answer {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* About Section */
+.about-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.about-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 700px;
+}
+
+/* Services Grid */
+.services-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.service-card {
+  padding: var(--space-lg);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.service-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.service-title {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.service-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* Contact Info Section */
+.contact-info-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  text-align: center;
+}
+
+.contact-methods {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.contact-link {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-link:hover {
+  color: var(--text-muted);
+}
+
+.contact-label {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.social-links {
+  display: flex;
+  gap: var(--space-lg);
+  justify-content: center;
+  margin-top: var(--space-lg);
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+}
+
+/* Stats Section */
+.stats-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  align-items: center;
+  text-align: center;
+}
+
+.stat-number {
+  font-family: var(--font-serif);
+  font-size: clamp(48px, 12vw, 80px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.stat-label {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Contact CTA */
+.contact-cta {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  align-items: center;
+  text-align: center;
+}
+
+.cta-text {
+  font-family: var(--font-serif);
+  font-size: clamp(18px, 3vw, 24px);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--text-muted);
+  max-width: 500px;
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== MOBILE (max-width: 768px) =================== */
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .hero-headline {
+    font-size: clamp(28px, 7vw, 36px);
+  }
+  
+  .problems-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  
+  .contact-methods {
+    align-items: center;
+  }
+  
+  .social-links {
+    gap: var(--space-md);
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .problems-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contact-methods {
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--space-2xl);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="https://www.freemanbraceylaw.com/" class="brand">
+    <div class="globe-icon"><i class="fas fa-balance-scale"></i></div>
+    <span class="brand-name">Freeman & Bracey, PLC</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="https://www.freemanbraceylaw.com/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-balance-scale"></i></div>
+      <span class="brand-name">Freeman & Bracey, PLC</span>
+    </a>
+    <nav>
+      <a href="https://www.freemanbraceylaw.com/">Home</a>
+      <a href="https://www.freemanbraceylaw.com/about">About</a>
+      <a href="https://www.freemanbraceylaw.com/practice-areas">Practice Areas</a>
+      <a href="https://www.freemanbraceylaw.com/blog">Blog</a>
+      <a href="https://www.freemanbraceylaw.com/contact">Contact</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Local Service Available</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Goodlettsville Law Firm</span>
+      <h1 class="hero-headline">Protecting Your Family, Your Future, & What Matters Most</h1>
+      <p class="hero-subheading">Serving Goodlettsville, Davidson, Sumner & Robertson Counties Since 1988</p>
+      <a href="https://www.freemanbraceylaw.com/contact" class="hero-cta">Schedule Your Consultation <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://lirp.cdn-website.com/f9cfa0f4/dms3rep/multi/opt/logo-1920w.webp" alt="Logo for Freeman & Bracey, PLC, Attorneys at Law. Dark blue text on a light tan banner." style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+  <!-- Problems Solved Section -->
+  <section class="problems-section">
+    <h2 class="section-title">Your Problems Solved</h2>
+    <div class="problems-grid">
+      <div class="problem-card">
+        <div class="problem-icon"><strong>?</strong></div>
+        <h3 class="problem-title">How do I make sure my estate is handled properly?</h3>
+        <p class="problem-answer">We guide families through probate & estate administration with clarity and care.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon"><strong>?</strong></div>
+        <h3 class="problem-title">What are my rights in a divorce or custody case?</h3>
+        <p class="problem-answer">Our attorneys help you protect what matters most during challenging family transitions.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon"><strong>?</strong></div>
+        <h3 class="problem-title">Who handles real estate closings I can trust?</h3>
+        <p class="problem-answer">We offer smooth, legally sound title & escrow services you can rely on.</p>
+      </div>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://lirp.cdn-website.com/f9cfa0f4/dms3rep/multi/opt/freeman+banner+home-1920w.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+  <!-- About Section -->
+  <section class="about-section">
+    <h2 class="section-title">Local Legal Support Since 1988</h2>
+    <p class="about-text">We're a team of practical, experienced attorneys who understand that clients don't want fluff—they want solutions. Whether you're navigating probate, preparing for a real estate closing, or dealing with a family law issue, we're here to help with straight answers, clear communication, and local knowledge that matters.</p>
+    <a href="https://www.freemanbraceylaw.com/about" class="hero-cta">Meet the Attorneys <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://lirp.cdn-website.com/f9cfa0f4/dms3rep/multi/opt/Banner-1920w.webp" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+  <!-- Services Section -->
+  <section class="services-section">
+    <h2 class="section-title">Legal Services in Goodlettsville</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <h3 class="service-title">Probate & Estate Administration</h3>
+        <p class="service-description">Guidance through wills, probate court, & asset distribution.</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-title">Estate Planning</h3>
+        <p class="service-description">Wills, powers of attorney, & trusts tailored to your family's needs.</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-title">Divorce & Family Law</h3>
+        <p class="service-description">Legal support for divorce, custody, child support & adoption.</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-title">Conservatorships</h3>
+        <p class="service-description">Protect vulnerable loved ones through proper legal guardianship.</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-title">Business Transactions</h3>
+        <p class="service-description">Contracts, LLC formation & general counsel for small businesses.</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-title">Title & Escrow Services</h3>
+        <p class="service-description">Residential & commercial closings with attorney oversight.</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-title">Personal Injury (Limited)</h3>
+        <p class="service-description">We take a selective number of personal injury cases—or refer you to someone we trust.</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-title">General Litigation</h3>
+      </div>
+    </div>
+    <div style="margin-top: var(--space-lg); text-align: center;">
+      <a href="https://www.freemanbraceylaw.com/practice-areas" class="hero-cta">Explore All Practice Areas <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+    </div>
+  </section>
+
+  <!-- Contact Information Section -->
+  <section class="contact-info-section">
+    <h2 class="section-title">Contact Us</h2>
+    <div class="contact-methods">
+      <div class="contact-item">
+        <a href="tel:(615) 859-1328" class="contact-link">(615) 859-1328</a>
+        <span class="contact-label">Phone</span>
+      </div>
+      <div class="contact-item">
+        <a href="mailto:office@freemanbracey.com" class="contact-link">office@freemanbracey.com</a>
+        <span class="contact-label">Email</span>
+      </div>
+    </div>
+    <div class="social-links">
+      <a href="https://facebook.com/freemanbraceylaw" class="social-link" target="_blank" rel="noopener">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://linkedin.com/company/freeman-bracey-plc" class="social-link" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="stat-number">1988</div>
+    <div class="stat-label">serving since</div>
+  </section>
+
+  <!-- Contact CTA Section -->
+  <section class="contact-cta">
+    <h2 class="section-title">Peace of Mind Starts with a Conversation</h2>
+    <p class="cta-text">We're here to help you navigate life's transitions with clarity & compassion.</p>
+    <a href="https://www.freemanbraceylaw.com/contact" class="hero-cta">Contact Us <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Freeman & Bracey, PLC</span>
+      <span class="footer-copyright">© 2026 Freeman & Bracey, PLC. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.freemanbraceylaw.com/">Home</a>
+      <a href="https://www.freemanbraceylaw.com/about">About</a>
+      <a href="https://www.freemanbraceylaw.com/practice-areas">Practice Areas</a>
+      <a href="https://www.freemanbraceylaw.com/blog">Blog</a>
+      <a href="https://www.freemanbraceylaw.com/contact">Contact</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
