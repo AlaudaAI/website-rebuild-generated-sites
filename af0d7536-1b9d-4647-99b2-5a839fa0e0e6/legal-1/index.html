@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cobb Law Group</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Visual Demo */
+.hero-visual {
+  width: 100%;
+  max-width: 400px;
+}
+
+.scan-container {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: var(--space-xl);
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.id-card {
+  width: 200px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: var(--space-lg) var(--space-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  position: relative;
+  z-index: 2;
+}
+
+.id-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border-color);
+  background: var(--bg-hover);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.id-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.id-avatar i {
+  font-size: 20px;
+  color: var(--text-dim);
+}
+
+.id-text-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  width: 100%;
+}
+
+.id-text-line {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--border-color);
+}
+
+.id-text-line.long { width: 80%; }
+.id-text-line.medium { width: 60%; }
+.id-text-line.short { width: 40%; }
+
+.id-chip {
+  width: 28px;
+  height: 20px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-hover);
+  margin-top: var(--space-sm);
+}
+
+.scan-line {
+  position: absolute;
+  left: 10%;
+  width: 80%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 20px 4px rgba(255, 255, 255, 0.15), 0 0 60px 10px rgba(255, 255, 255, 0.05);
+  z-index: 3;
+  animation: scanMove 3s ease-in-out infinite;
+}
+
+@keyframes scanMove {
+  0% { top: 10%; }
+  50% { top: 85%; }
+  100% { top: 10%; }
+}
+
+/* About Section */
+.about {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.about-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.about-title {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.about-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 700px;
+}
+
+/* Services Grid */
+.services {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.services-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-md);
+}
+
+.service-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: var(--space-lg) var(--space-md);
+  transition: all 0.3s ease;
+}
+
+.service-card:hover {
+  background-color: var(--bg-hover);
+  border-color: var(--text-dim);
+}
+
+.service-name {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+/* Team Section */
+.team {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.team-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.team-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.team-title {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.team-subtitle {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-lg);
+}
+
+.team-member {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: var(--space-lg);
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.team-member:hover {
+  background-color: var(--bg-hover);
+  border-color: var(--text-dim);
+}
+
+.team-member-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 0 auto var(--space-md);
+  border: 2px solid var(--border-color);
+  overflow: hidden;
+  background: var(--bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.team-member-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.team-member-photo i {
+  font-size: 40px;
+  color: var(--text-dim);
+}
+
+.team-member-name {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.team-member-role {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Reviews Section */
+.reviews {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.reviews-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.reviews-title {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-md);
+}
+
+.review-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.review-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.review-author {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.review-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  background: var(--bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.review-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.review-avatar i {
+  font-size: 16px;
+  color: var(--text-dim);
+}
+
+.review-author-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.review-author-name {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.review-date {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--text-dim);
+}
+
+/* Contact Section */
+.contact {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.contact-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.contact-title {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.contact-subtitle {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-muted);
+  max-width: 600px;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.contact-item i {
+  width: 20px;
+  color: var(--text-muted);
+}
+
+.contact-item a {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+  color: var(--text-dim);
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== MOBILE RESPONSIVE =================== */
+@media (max-width: 768px) {
+  :root {
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+    --space-3xl: 64px;
+  }
+
+  .hero {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .hero-headline {
+    font-size: clamp(32px, 8vw, 40px);
+  }
+
+  .hero-subheading {
+    font-size: 16px;
+  }
+
+  .about, .services, .team, .reviews, .contact {
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .reviews-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer {
+    padding: var(--space-lg) var(--space-md);
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .about {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .services {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .team {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .reviews {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .contact {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .about {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .services {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .team {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .reviews {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .contact {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .about {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .services {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .team {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .reviews {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .contact {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="https://cobblawtn.com/" class="brand">
+    <div class="globe-icon"><i class="fas fa-balance-scale"></i></div>
+    <span class="brand-name">Cobb Law Group</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="https://cobblawtn.com/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-balance-scale"></i></div>
+      <span class="brand-name">Cobb Law Group</span>
+    </a>
+    <nav>
+      <a href="https://cobblawtn.com/">HOME</a>
+      <a href="https://cobblawtn.com/about/">ABOUT</a>
+      <a href="https://cobblawtn.com/videos/">VIDEO</a>
+      <a href="https://cobblawtn.com/law/">Areas of Law</a>
+      <a href="https://cobblawtn.com/articles/">ARTICLES</a>
+      <a href="https://cobblawtn.com/make-appointment/">Consultation</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Licensed TN, GA, AL</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Call (615) 649-0049</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Nashville Tennessee Law Firm</span>
+      <h1 class="hero-headline">Experienced & Knowledgeable Hometown Attorneys</h1>
+      <p class="hero-subheading">Positively changing the lives of others and ensuring that all have access to a fair experience in the courts, businesses, schools, and homes.</p>
+      <a href="tel:6156490049" class="hero-cta">Call Now <i class="fas fa-phone" style="font-size:10px;"></i></a>
+    </div>
+    <div class="hero-visual">
+      <div class="scan-container">
+        <div class="id-card">
+          <div class="id-avatar">
+            <img src="https://cobblawtn.com/wp-content/uploads/logo-100.png.webp" alt="Cobb Law Group Logo">
+          </div>
+          <div class="id-text-block">
+            <div class="id-text-line long"></div>
+            <div class="id-text-line medium"></div>
+            <div class="id-text-line short"></div>
+          </div>
+          <div class="id-chip"></div>
+          <div class="id-text-block">
+            <div class="id-text-line medium"></div>
+            <div class="id-text-line long"></div>
+          </div>
+        </div>
+        <div class="scan-line"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about">
+    <span class="about-label">Welcome to Cobb Law Group</span>
+    <h2 class="about-title">Positively changing the lives of others</h2>
+    <p class="about-description">
+      Cobb Law Group is positively changing the lives of others and ensuring that all have access to a fair experience in the courts, businesses, schools, and homes. Our firm is concentrated on a wide array of legal services including civil and criminal trials across the state. We take pride in listening to our clients, identifying individual needs, and solving problems to ensure that all people we serve have access to justice inside the courtroom and in the small business arena for the good of the broader community. Cobb Law Group is licensed to practice law in Tennessee, Georgia, Alabama.
+    </p>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services">
+    <span class="services-label">Areas of Law</span>
+    <div class="services-grid">
+      <div class="service-card">
+        <h3 class="service-name">Bankruptcy</h3>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Business Law</h3>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Criminal Law</h3>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Immigration Law</h3>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Tax Law</h3>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Family Law</h3>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Estate Planning Law</h3>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Conservatorship</h3>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Mediation</h3>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Civil Litigation Law</h3>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Probate Law</h3>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Real Estate Law</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team">
+    <div class="team-header">
+      <span class="team-label">MEET OUR ATTORNEYS</span>
+      <h2 class="team-title">Our Legal Team</h2>
+      <p class="team-subtitle">Serving clients in Hendersonville, Nashville and Memphis</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-member">
+        <div class="team-member-photo">
+          <img src="https://cobblawtn.com/wp-content/uploads/ABPhotoCLG-217.jpg.webp" alt="James Cobb, Attorney at law">
+        </div>
+        <h3 class="team-member-name">James Cobb</h3>
+        <p class="team-member-role">Managing Attorney</p>
+      </div>
+      <div class="team-member">
+        <div class="team-member-photo">
+          <img src="https://cobblawtn.com/wp-content/uploads/COBB_LAW_FIRM-Abigail-Mabry.jpg.webp" alt="COBB_LAW_FIRM-Abigail-Mabry">
+        </div>
+        <h3 class="team-member-name">Abigail Mabry</h3>
+        <p class="team-member-role">Immigration Attorney</p>
+      </div>
+      <div class="team-member">
+        <div class="team-member-photo">
+          <img src="https://cobblawtn.com/wp-content/uploads/COBB-LAW-FIRM-Andrew-Triplett.jpg.webp" alt="Andrew Triplett">
+        </div>
+        <h3 class="team-member-name">Andrew Triplett</h3>
+        <p class="team-member-role">Associate Attorney</p>
+      </div>
+      <div class="team-member">
+        <div class="team-member-photo">
+          <img src="https://cobblawtn.com/wp-content/uploads/COBB-LAW-FIRM-David-Goodman.jpg.webp" alt="COBB-LAW-FIRM-David-Goodman">
+        </div>
+        <h3 class="team-member-name">David Goodman</h3>
+        <p class="team-member-role">General Practice Attorney</p>
+      </div>
+      <div class="team-member">
+        <div class="team-member-photo">
+          <img src="https://cobblawtn.com/wp-content/uploads/COBB-LAW-FIRM-Bailey-Jones.jpg.webp" alt="COBB-LAW-FIRM-Bailey-Jones">
+        </div>
+        <h3 class="team-member-name">Bailey Jones</h3>
+        <p class="team-member-role">Immigration Attorney</p>
+      </div>
+      <div class="team-member">
+        <div class="team-member-photo">
+          <img src="https://cobblawtn.com/wp-content/uploads/COBB-LAW-FIRM-Duane-DeVault.jpg.webp" alt="COBB-LAW-FIRM-Duane-DeVault">
+        </div>
+        <h3 class="team-member-name">Duane DeVault</h3>
+        <p class="team-member-role">Attorney of Counsel</p>
+      </div>
+      <div class="team-member">
+        <div class="team-member-photo">
+          <img src="https://cobblawtn.com/wp-content/uploads/BRYANT-KROLL-ATTORNEY-AT-LAW.jpg" alt="BRYANT-KROLL-ATTORNEY-AT-LAW">
+        </div>
+        <h3 class="team-member-name">Bryant Kroll</h3>
+        <p class="team-member-role">Senior Trial Attorney</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews Section -->
+  <section class="reviews">
+    <span class="reviews-label">Client Reviews</span>
+    <h2 class="reviews-title">What Our Clients Say</h2>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <p class="review-text">This Law Group amazing. Andrew (Attorney) was outstanding in helping with the situation. Professional, knowledgeable, personable, and so kind. I HIGHLY recommend this Law Group for any and all estate planning, wills, trusts. I literally cannot say enough great things about Andrew, the Staff, and the entire Group.</p>
+        <div class="review-author">
+          <div class="review-avatar">
+            <img src="https://lh3.googleusercontent.com/a-/ALV-UjVpltH6IwQJLq6wA-T_wNWSQ5kWeKKzmSIHJeJpT0kfWgmIid0m=s128-c0x00000000-cc-rp-mo-ba3" alt="Treny Biller">
+          </div>
+          <div class="review-author-info">
+            <span class="review-author-name">Treny Biller</span>
+            <span class="review-date">3 months ago</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <p class="review-text">I had a phone consultation with Andrew and he was incredibly helpful. Overall it was a very pleasant experience. If I ever need assistance in the future, I'll definitely know where to turn.</p>
+        <div class="review-author">
+          <div class="review-avatar">
+            <img src="https://lh3.googleusercontent.com/a/ACg8ocLhkHU5KMIHDAZ1VLkSz11566S0FtnCnSAR4h7qD96k2LEnIY8=s128-c0x00000000-cc-rp-mo-ba2" alt="Betty">
+          </div>
+          <div class="review-author-info">
+            <span class="review-author-name">Betty</span>
+            <span class="review-date">3 months ago</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <p class="review-text">Cobb Law Group is great! Andrew and Abbie were very wonderful to work with and made my experience very easy and less stressful. I highly recommend them!</p>
+        <div class="review-author">
+          <div class="review-avatar">
+            <img src="https://lh3.googleusercontent.com/a/ACg8ocL3U9KaxHhC-T5xITbxjK4oNrmENOGdbE_ljCMO-dGsptipiQ=s128-c0x00000000-cc-rp-mo" alt="Michelle Heath">
+          </div>
+          <div class="review-author-info">
+            <span class="review-author-name">Michelle Heath</span>
+            <span class="review-date">8 months ago</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <p class="review-text">I have been so impressed with my Lawyer Andrew J. Triplett with Cobb Law Group, he has been amazing! From day one that I met him he has shown kindness and respect to me and my family. Always explaining in detail what to expect with Conservatorship filing, and how this process works.</p>
+        <div class="review-author">
+          <div class="review-avatar">
+            <img src="https://lh3.googleusercontent.com/a/ACg8ocIDawPw2ozyoxz39zrEvIHMtI4R2E6d81lJp731dwLSszD6yg=s128-c0x00000000-cc-rp-mo" alt="Lisa Clair">
+          </div>
+          <div class="review-author-info">
+            <span class="review-author-name">Lisa Clair</span>
+            <span class="review-date">12 months ago</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <p class="review-text">Just had our Will and Testament completed. Abbie was great! The whole group was pleasant to work with. They are very knowledgeable and helpful. I highly recommend!</p>
+        <div class="review-author">
+          <div class="review-avatar">
+            <img src="https://lh3.googleusercontent.com/a/ACg8ocInN3rfCOyTFoMb3dx86qSLoQbq19Nn8HFWuZsFasO9mi69AA=s128-c0x00000000-cc-rp-mo" alt="Victor Tiller">
+          </div>
+          <div class="review-author-info">
+            <span class="review-author-name">Victor Tiller</span>
+            <span class="review-date">a year ago</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <p class="review-text">David and Andrew were great to work with and took a lot of time and care to draft a contract for me. Communicating and coordinating with them was very easy and they got me a final draft quickly. I'll definitely be contacting them again the next time I need legal services!</p>
+        <div class="review-author">
+          <div class="review-avatar">
+            <img src="https://lh3.googleusercontent.com/a/ACg8ocLe0WzMmtr_w_3JmPP8F2mxbbjEeWhXj1Y0KyK_TyT54sNeAg=s128-c0x00000000-cc-rp-mo" alt="kyle smith">
+          </div>
+          <div class="review-author-info">
+            <span class="review-author-name">kyle smith</span>
+            <span class="review-date">a year ago</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <p class="review-text">When we started with Cobb law group we didn't expect to get the best lawyers of the group. Andrew Triplett was brought in on our case and we are very pleased that he was. Andrew and Abby were very informative and alway there if we had a question. Knew every step we needed to take and through everything we knew we could count on them for advice and guidance. They are both a very good asset to Cobb Law group. We are all very grateful for all the hard work that Cobb Law has done for us. I will recommend them in the future.</p>
+        <div class="review-author">
+          <div class="review-avatar">
+            <img src="https://lh3.googleusercontent.com/a/ACg8ocKC7WUH6drSLYGy8ADCY6dHPVZtzktitKqTJkjrm3wDqAtfaA=s128-c0x00000000-cc-rp-mo" alt="Mildred Duttko">
+          </div>
+          <div class="review-author-info">
+            <span class="review-author-name">Mildred Duttko</span>
+            <span class="review-date">a year ago</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <p class="review-text">James, Rachel and their team are awesome, I will always prefer them for my all closing, estate planning and other related services. They go above and beyond to fulfill your requirements. All staff are very kind and friendly. I love working with them!!</p>
+        <div class="review-author">
+          <div class="review-avatar">
+            <img src="https://lh3.googleusercontent.com/a-/ALV-UjV1HIm_gtqcQLJbkRj3H1vM33jRLf4F8ZwdrT3O7Fs01fopDNmNIg=s128-c0x00000000-cc-rp-mo" alt="Chiranjiv Sharma">
+          </div>
+          <div class="review-author-info">
+            <span class="review-author-name">Chiranjiv Sharma</span>
+            <span class="review-date">a year ago</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <p class="review-text">I am pleased to share a glowing review for my attorney. From the moment I engaged their services meeting Mr.cobb and Andrew and David , they demonstrated exceptional punctuality and efficiency in handling my legal matters. Andrew is very swift and thorough his approach to my case was truly impressive, and I was consistently amazed by the speed and quality of his work.Not only did Andrew meet all deadlines with precision, but he also delivered outstanding results that far exceeded my expectations. His expertise and dedication to providing top-notch legal representation were evident in every interaction, and I felt confident and well-supported throughout the entire process.I highly recommend Cobb law to anyone seeking a knowledgeable and reliable legal professional. Their commitment to excellence, combined with their fast and effective approach, truly sets them apart. Thank you for your outstanding service Andrew David and Mr. Cobb!</p>
+        <div class="review-author">
+          <div class="review-avatar">
+            <img src="https://lh3.googleusercontent.com/a-/ALV-UjUVEeoPQeo1FPB3_1F4L7r_umqomCcxIRB9fSXAuxYre0dhZ3YJ=s128-c0x00000000-cc-rp-mo" alt="official Jose">
+          </div>
+          <div class="review-author-info">
+            <span class="review-author-name">official Jose</span>
+            <span class="review-date">a year ago</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact">
+    <span class="contact-label">Schedule a Consultation</span>
+    <h2 class="contact-title">Contact Cobb Law Group</h2>
+    <p class="contact-subtitle">Contact Cobb Law Group below to schedule your consultation. Let us be a part of your solution. *Consultations Available For Most Legal Matters, Call For Details.</p>
+    <div class="contact-info">
+      <div class="contact-item">
+        <i class="fas fa-phone"></i>
+        <a href="tel:6156490049">(615) 649-0049</a>
+      </div>
+      <div class="contact-item">
+        <i class="fas fa-phone"></i>
+        <a href="tel:8555001334">(855) 500-1334</a>
+      </div>
+      <div class="contact-item">
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Nashville, Hendersonville & Memphis TN</span>
+      </div>
+      <div class="contact-item">
+        <i class="fab fa-google"></i>
+        <a href="https://www.google.com/maps/contrib/109305115463242784747/reviews" target="_blank">Google Business</a>
+      </div>
+      <div class="contact-item">
+        <i class="fab fa-facebook"></i>
+        <a href="https://www.facebook.com/cobblawgrouptn" target="_blank">Facebook</a>
+      </div>
+      <div class="contact-item">
+        <i class="fab fa-twitter"></i>
+        <a href="https://x.com/Cobb_law_group" target="_blank">Twitter</a>
+      </div>
+      <div class="contact-item">
+        <i class="fab fa-instagram"></i>
+        <a href="https://www.instagram.com/cobblawtn/" target="_blank">Instagram</a>
+      </div>
+      <div class="contact-item">
+        <i class="fab fa-youtube"></i>
+        <a href="https://www.youtube.com/@cobblawgrouplp2713" target="_blank">YouTube</a>
+      </div>
+      <div class="contact-item">
+        <i class="fab fa-linkedin"></i>
+        <a href="https://www.linkedin.com/company/cobb-law-group/" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Cobb Law Group</span>
+      <span class="footer-copyright">© 2026 • Cobb Law Group, LLC • All Rights Reserved</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://cobblawtn.com/">HOME</a>
+      <a href="https://cobblawtn.com/about/">ABOUT</a>
+      <a href="https://cobblawtn.com/videos/">VIDEO</a>
+      <a href="https://cobblawtn.com/law/">Areas of Law</a>
+      <a href="https://cobblawtn.com/articles/">ARTICLES</a>
+      <a href="https://cobblawtn.com/make-appointment/">Consultation</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
