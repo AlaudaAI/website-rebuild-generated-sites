@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bare Body Spa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-logo img {
+  height: 40px;
+  width: auto;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://www.barebodyspa.com/Content/beach_girl_w_hat.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(244, 240, 234, 0.8);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Services Section */
+.services {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.services-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.services-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  border: 1px solid var(--border-black);
+}
+
+.service-card {
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--border-black);
+}
+
+.service-card:last-child {
+  border-bottom: none;
+}
+
+.service-name {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: var(--space-sm);
+}
+
+.service-description {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Spanish Section */
+.spanish-section {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+  background-color: var(--bg-cream);
+}
+
+.spanish-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.spanish-headline {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: var(--text-black);
+  margin-bottom: var(--space-sm);
+}
+
+.spanish-subtitle {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: var(--text-black);
+}
+
+/* Testimonials Section */
+.testimonials {
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.testimonials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.testimonial-card {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.testimonial-photo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.testimonial-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.testimonial-author {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+/* Special Offers */
+.special-offers {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.special-offers-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.offer-card {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+  text-align: center;
+}
+
+.offer-image {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto var(--space-sm);
+}
+
+.offer-title {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin-bottom: var(--space-sm);
+  text-transform: uppercase;
+}
+
+.offer-subtitle {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin-bottom: var(--space-sm);
+}
+
+.offer-details {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+}
+
+.offer-price {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: lowercase;
+}
+
+/* Contact Section */
+.contact-info {
+  padding: var(--space-md) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+  text-align: center;
+}
+
+.contact-info-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.contact-phone {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--text-black);
+  text-decoration: none;
+}
+
+.contact-phone:hover {
+  text-decoration: underline;
+}
+
+.social-links {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+}
+
+.social-links a {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  color: var(--text-black);
+  text-decoration: none;
+}
+
+.social-links a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1rem;
+    --space-md: 1rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+  }
+
+  .nav {
+    padding: 1rem;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: 2.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-card {
+    padding: 1rem;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .special-offers-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .social-links {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .contact-info-inner {
+    gap: 1rem;
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .services-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-card:nth-child(2n) {
+    border-right: none;
+  }
+
+  .service-card:nth-child(1),
+  .service-card:nth-child(2) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .special-offers-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .contact-info-inner {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .social-links {
+    flex-direction: row;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .services {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .testimonials {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .special-offers {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Bare Body Spa</a>
+  <ul class="nav-links">
+    <li><a href="https://www.barebodyspa.com/index.html">home</a></li>
+    <li><a href="https://www.barebodyspa.com/AboutUs.html">about us</a></li>
+    <li><a href="https://www.barebodyspa.com/Laser.html">laser hair removal</a></li>
+    <li><a href="https://www.barebodyspa.com/Wrap.html">infrared fitness wrap</a></li>
+    <li><a href="https://www.barebodyspa.com/HydraFacials.html">hydra facials</a></li>
+    <li><a href="https://www.barebodyspa.com/SpaFacials.html">spa facials</a></li>
+    <li><a href="https://www.barebodyspa.com/Careers.html#">careers</a></li>
+    <li><a href="https://www.barebodyspa.com/#book-now">book appointment</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">It's your body<br>Bare makes it better</h1>
+    <p class="hero-subtitle">Personalized laser hair removal in Austin, TX with treatment plans tailored to your skin type, hair type and goals. Bare Body Spa also offers facials and body treatments from our W Koenig Ln location in Central Austin.</p>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="services" id="services">
+  <div class="services-inner">
+    <span class="services-label">our services</span>
+    <div class="services-grid">
+      <div class="service-card">
+        <h3 class="service-name">Laser Hair Removal</h3>
+        <p class="service-description">Personalized laser hair removal with treatment plans tailored to your skin type, hair type and goals</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Infrared Fitness Wrap</h3>
+        <p class="service-description">Infrared sauna therapy to lose weight, detox, and reduce pain. Eliminates heavy ions, metals, and toxins with anti-aging effects</p>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Hydra Facials</h3>
+      </div>
+      <div class="service-card">
+        <h3 class="service-name">Spa Facials</h3>
+      </div>
+    </div>
+  </div>
+</section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.barebodyspa.com/Content/pin.jfif" alt="relocation" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Spanish Section -->
+<section class="spanish-section">
+  <div class="spanish-inner">
+    <h2 class="spanish-headline">¡Hablamos Español!</h2>
+    <p class="spanish-subtitle">We speak Spanish!</p>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <img src="https://www.barebodyspa.com/Content/naomi.jpg" alt="Naomi Picture" class="testimonial-photo">
+        <p class="testimonial-text">"I would definitely 1000% recommend Bare Body Spa! Jeannette is friendly, knowledgeable, & professional. She listened to my needs & helped find the best treatment to meet my expectations. Such a welcoming environment. If you haven't made your appointment yet, what are you waiting for? She offers more than just laser treatments, she has detox wraps & skin care. You will not be disappointed, Jeannette is amazing!!"</p>
+        <div class="testimonial-author">Naomi Castilla Valadez<br>Austin, Texas</div>
+      </div>
+      <div class="testimonial-card">
+        <img src="https://www.barebodyspa.com/Content/testimonial.jpg" alt="Mina" class="testimonial-photo">
+        <p class="testimonial-text">"How did I not know this place existed, and right in my backyard?! The energy in this place (pun fully intended) is fantastic! Jeannette is very knowledgeable and efficient - she told me things I didn't know about laser hair removal. Jeannette is just the right combination of smarts, professionalism, and bubbly - she knows exactly what she's doing and her warm personality almost makes you forget why you're there. What a find, YAY!!"</p>
+        <div class="testimonial-author">Mina Iban<br>Austin, Texas</div>
+      </div>
+      <div class="testimonial-card">
+        <img src="https://www.barebodyspa.com/Content/Angie.JPG" alt="Angie" class="testimonial-photo">
+        <p class="testimonial-text">"Jeannette really takes the time to understand her clients. I have a medical issue and Jeannette really put my mind at ease and educated me about laser hair removal. Don't hesitate, make an appointment! You will NOT be disappointed. And the prices CANNOT be beat!"</p>
+        <div class="testimonial-author">Angie Faulhaber<br>Cedar Park, Texas</div>
+      </div>
+      <div class="testimonial-card">
+        <img src="https://www.barebodyspa.com/Content/Sharon.JPG" alt="Sharon" class="testimonial-photo">
+        <p class="testimonial-text">"I had a wonderful experience at Bare Body Spa Saturday. The spa is clean and has a great vibe. Jeannette is very professional and she is offering some great deals. Thank you for the wonderful Infra-red treatment. It was awesome and I feel great! I will definitely be back again!"</p>
+        <div class="testimonial-author">Sharon Wise<br>Austin, Texas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Special Offers Section -->
+<section class="special-offers">
+  <div class="special-offers-inner">
+    <div class="offer-card">
+      <img src="https://www.barebodyspa.com/Content/MarchSpecial.png" alt="March Special" class="offer-image">
+    </div>
+    <div class="offer-card">
+      <img src="https://www.barebodyspa.com/Content/WrapBody.JPG" alt="Infrared Wrap Picture" class="offer-image">
+      <h3 class="offer-title">FITNESS WRAP</h3>
+      <p class="offer-subtitle">Effortlessly<br>Lose Weight, Detox, and Reduce Pain</p>
+      <div class="offer-details">
+        <strong>INFRARED SAUNA THERAPY</strong><br>
+        • Eliminate Heavy Ions, Metals, and Toxins<br>
+        • Pain Relief<br>
+        • Cellulite Reduction and Smoother Skin<br>
+        • Weight Loss - Accelerate Metabolism<br>
+        • Improved Circulation<br>
+        • Clearer, Softer, Healthier Looking Skin<br>
+        • Anti-Aging Effects on the Skin and Tissues
+      </div>
+      <p class="offer-price">SPECIAL 1-HOUR SESSION<br>$155</p>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-info">
+  <div class="contact-info-inner">
+    <a href="tel:(512) 284-0753" class="contact-phone">(512) 284-0753</a>
+    <div class="social-links">
+      <a href="https://www.instagram.com/barebodyspa/" target="_blank">instagram</a>
+      <a href="https://www.facebook.com/barebodyspa/" target="_blank">facebook</a>
+      <a href="http://www.bbb.org/central-texas/business-reviews/hair-removal-laser-and-electrolysis/bare-body-spa-in-austin-tx-1000113785/#bbbonlineclick" target="_blank">bbb</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Bare Body Spa</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
