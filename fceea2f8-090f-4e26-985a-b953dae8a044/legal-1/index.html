@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stange Law Firm</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+.hero-contact {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.contact-phone {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.contact-phone:hover {
+  opacity: 0.8;
+}
+
+.social-links {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.social-link {
+  color: var(--text-muted);
+  font-size: 16px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.social-link:hover {
+  color: var(--text-primary);
+}
+
+/* Visual Demo */
+.hero-visual {
+  width: 100%;
+  max-width: 400px;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+/* Features Grid */
+.features {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.feature-card {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+.feature-card:last-child {
+  border-bottom: none;
+}
+
+.feature-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.feature-protocol {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.feature-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.feature-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 380px;
+}
+
+/* About Section */
+.about-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-2xl) var(--space-lg);
+}
+
+.about-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.about-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xl);
+  max-width: 800px;
+}
+
+.about-content {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 700px;
+  margin-bottom: var(--space-xl);
+}
+
+.about-content p {
+  margin-bottom: var(--space-lg);
+}
+
+/* Multi-state section */
+.multistate-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-2xl) var(--space-lg);
+}
+
+.state-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+
+.state-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--bg-card);
+}
+
+.state-title {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.state-content {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.state-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.state-content li {
+  margin-bottom: var(--space-xs);
+}
+
+.state-content a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.state-content a:hover {
+  color: var(--text-primary);
+}
+
+.state-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: opacity 0.3s ease;
+}
+
+.state-link:hover {
+  opacity: 0.7;
+}
+
+/* Maps Section */
+.maps-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-2xl) var(--space-lg);
+}
+
+.maps-iframe {
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+.footer-social {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.footer-social .social-link {
+  color: var(--text-muted);
+  font-size: 18px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-social .social-link:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== MOBILE (max-width: 768px) =================== */
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .hero-headline {
+    font-size: clamp(28px, 6vw, 36px);
+  }
+
+  .hero-subheading {
+    font-size: clamp(14px, 2vw, 16px);
+  }
+
+  .hero-contact {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-md);
+  }
+
+  .contact-phone {
+    font-size: 16px;
+  }
+
+  .feature-card {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .about-section {
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  .multistate-section {
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  .maps-section {
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  .footer {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .social-links {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-sm);
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .features {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:last-child {
+    border-right: none;
+  }
+
+  .state-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .feature-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .about-section {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .multistate-section {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .maps-section {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .state-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .feature-card {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="https://stangelawfirm.com/" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">Stange Law Firm</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="https://stangelawfirm.com/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">Stange Law Firm</span>
+    </a>
+    <nav>
+      <a href="https://stangelawfirm.com/firm-overview/">Firm overview</a>
+      <a href="https://stangelawfirm.com/#">Our Professionals</a>
+      <a href="https://stangelawfirm.com/faq/">FAQ</a>
+      <a href="https://stangelawfirm.com/blog/">Blog</a>
+      <a href="https://stangelawfirm.com/contact/">Contact us</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Multi-State Coverage</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Founded 2007</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Multi-State Domestic Relations Law Firm</span>
+      <h1 class="hero-headline">Here To Help You Rebuild Your Life</h1>
+      <p class="hero-subheading">Founded in 2007, our firm was built on a simple but important principle: to provide men and women with responsive, diligent, and communicative representation in domestic relations matters.</p>
+      <a href="https://stangelawfirm.com/contact/" class="hero-cta">Schedule A Consultation <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+      <div class="hero-contact">
+        <a href="tel:855-805-0595" class="contact-phone">855-805-0595</a>
+        <div class="social-links">
+          <a href="https://www.facebook.com/stangelawfirm" class="social-link"><i class="fab fa-facebook"></i></a>
+          <a href="https://www.linkedin.com/company/stange-law-firm-pc?trk=company_search" class="social-link"><i class="fab fa-linkedin"></i></a>
+          <a href="https://x.com/stangelawfirm" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.youtube.com/c/Stangelawfirm" class="social-link"><i class="fab fa-youtube"></i></a>
+          <a href="https://www.pinterest.com/stangelawfirm/" class="social-link"><i class="fab fa-pinterest"></i></a>
+          <a href="https://www.instagram.com/stangelawfirm/" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.tiktok.com/@stangelawfirm" class="social-link"><i class="fab fa-tiktok"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img src="https://5c430fde.delivery.rocketcdn.me/wp-content/uploads/2024/12/State-Missouri.png" alt="Missouri State Map" class="hero-image">
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://5c430fde.delivery.rocketcdn.me/wp-content/uploads/2022/11/SLF-For-Site.png" alt="SLF Icon" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://5c430fde.delivery.rocketcdn.me/wp-content/uploads/2024/12/Nebraska.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://5c430fde.delivery.rocketcdn.me/wp-content/uploads/2024/12/Illinois.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- About Section -->
+  <section class="about-section">
+    <span class="about-label">About Our Firm</span>
+    <h2 class="about-title">Multi-State Domestic Relations Lawyers</h2>
+    <div class="about-content">
+      <p>Through a continued focus on client service and exclusive dedication to domestic relations law, Stange Law Firm has grown into a multi-state firm with an expanding national presence. Our attorneys handle a wide range of matters, offering clients focused experience in these complex and often emotional cases.</p>
+      <p>The firm's insights on domestic law issues have also been recognized by national media outlets, including CNBC, Cosmopolitan, NPR, Univision, MarketWatch, Yahoo! Entertainment, Investment News, and others. These features reflect the firm's broader role in discussing trends and developments on a national level.</p>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://5c430fde.delivery.rocketcdn.me/wp-content/uploads/2025/01/Indiana-NEW.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://5c430fde.delivery.rocketcdn.me/wp-content/uploads/2024/12/Kansas.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Practice Areas Grid -->
+  <section class="features">
+    <div class="feature-card">
+      <p class="feature-protocol">Practice Area 01</p>
+      <h3 class="feature-title">Domestic Relations</h3>
+      <p class="feature-description">We handle only domestic relations and related matters, which enables us to provide in-depth knowledge to address even the most complex, sophisticated, and serious issues for our clients.</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Practice Area 02</p>
+      <h3 class="feature-title">Support</h3>
+      <p class="feature-description">We are focused on protecting the rights of our clients while ensuring that child & spousal support is fairly and accurately calculated.</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Practice Area 03</p>
+      <h3 class="feature-title">Dissolution of Marriage</h3>
+      <p class="feature-description">We are here to help clients rebuild their lives while working through the difficult times and the challenges that come with dissolution and separation.</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Practice Area 04</p>
+      <h3 class="feature-title">Property Division</h3>
+      <p class="feature-description">Married for years with significant holdings or a shorter term marriage and less assets, we are well-prepared to achieve the best possible results when it comes to dividing property.</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Practice Area 05</p>
+      <h3 class="feature-title">Parenting Time/Visitation</h3>
+      <p class="feature-description">We place a great deal of emphasis on seeking parenting time, visitation, and allocation of parental responsibility solutions that protect and foster the valuable parent-child relationship.</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Practice Area 06</p>
+      <h3 class="feature-title">Estate Planning</h3>
+      <p class="feature-description">Estate planning is not just for the wealthy or those nearing retirement. It's for anyone looking for extra life protection, regardless of their financial situation – it's never too early to start.</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Practice Area 07</p>
+      <h3 class="feature-title">Domestic Violence</h3>
+      <p class="feature-description">We provide compassionate service & assertive representation for individuals seeking protections from abusers or others facing false allegations of abuse.</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Practice Area 08</p>
+      <h3 class="feature-title">High Net Worth</h3>
+      <p class="feature-description">We have extensive experience handling high-asset, complex, and challenging dissolution of marriage cases, as well as complex property division.</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Practice Area 09</p>
+      <h3 class="feature-title">Alternative Dispute Resolution</h3>
+      <p class="feature-description">We offer alternative methods for resolving a dissolution that don't require going to trial such as mediation and collaborative law.</p>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://5c430fde.delivery.rocketcdn.me/wp-content/uploads/2024/12/Iowa.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://5c430fde.delivery.rocketcdn.me/wp-content/uploads/2024/12/Oklahoma.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://5c430fde.delivery.rocketcdn.me/wp-content/uploads/2025/01/Texas-NEW.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://5c430fde.delivery.rocketcdn.me/wp-content/uploads/2024/12/Kentucky.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://5c430fde.delivery.rocketcdn.me/wp-content/uploads/2020/05/Tennessee.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://5c430fde.delivery.rocketcdn.me/wp-content/uploads/2020/05/indiana_map_hm2.png" alt="Indiana" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://5c430fde.delivery.rocketcdn.me/wp-content/uploads/2020/04/Group-144.png" alt="Group 144" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://5c430fde.delivery.rocketcdn.me/wp-content/uploads/2026/03/Homepage-Map-March-2026.jpg" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Multi-State Locations -->
+  <section class="multistate-section">
+    <span class="about-label">Our Locations</span>
+    <h2 class="about-title">Multi-State Domestic Relations Law Firm For Your Legal Issues</h2>
+    <div class="state-grid">
+      <div class="state-card">
+        <h3 class="state-title">Stange Law Firm - Missouri</h3>
+        <div class="state-content">
+          <p><strong>Missouri Offices located in:</strong></p>
+          <ul>
+            <li>Saint Louis County: Clayton, MO</li>
+            <li>West St. Louis County: Ellisville, MO</li>
+            <li>Jefferson County: Arnold, MO</li>
+            <li>St. Charles County: St. Charles, MO</li>
+            <li>Franklin County: Union, MO</li>
+            <li>Boone County: Columbia, MO</li>
+            <li>Greene County: Springfield, MO</li>
+            <li>Jackson County: Lee's Summit, MO</li>
+            <li>Jackson County: Kansas City, MO</li>
+          </ul>
+        </div>
+        <a href="https://stangelawfirm.com/firm-overview/" class="state-link">Learn More</a>
+      </div>
+      
+      <div class="state-card">
+        <h3 class="state-title">Stange Law Firm - Illinois</h3>
+        <div class="state-content">
+          <p><strong>Illinois Offices located in:</strong></p>
+          <ul>
+            <li>St. Clair County: Belleville, IL</li>
+            <li>Madison County: Maryville, IL</li>
+            <li>Sangamon County: Springfield, IL</li>
+            <li>McLean County: Bloomington, IL</li>
+            <li>Cook County: Chicago, IL</li>
+          </ul>
+        </div>
+        <a href="https://stangelawfirm.com/firm-overview/" class="state-link">Learn More</a>
+      </div>
+
+      <div class="state-card">
+        <h3 class="state-title">Stange Law Firm - Kansas</h3>
+        <div class="state-content">
+          <p><strong>Kansas Offices located in:</strong></p>
+          <ul>
+            <li>Johnson County: Overland Park, KS</li>
+            <li>Sedgwick County: Wichita, KS</li>
+            <li>Shawnee County: Topeka, KS</li>
+          </ul>
+        </div>
+        <a href="https://stangelawfirm.com/firm-overview/" class="state-link">Learn More</a>
+      </div>
+
+      <div class="state-card">
+        <h3 class="state-title">Stange Law Firm - Oklahoma</h3>
+        <div class="state-content">
+          <p><strong>Oklahoma Offices located in:</strong></p>
+          <ul>
+            <li>Tulsa County: Tulsa, OK</li>
+            <li>Oklahoma County: Oklahoma City, OK</li>
+          </ul>
+        </div>
+        <a href="https://stangelawfirm.com/firm-overview/" class="state-link">Learn More</a>
+      </div>
+
+      <div class="state-card">
+        <h3 class="state-title">Stange Law Firm - Nebraska</h3>
+        <div class="state-content">
+          <p><strong>Nebraska Offices located in:</strong></p>
+          <ul>
+            <li>Douglas County: Omaha, NE</li>
+            <li>Lancaster County: Lincoln, NE</li>
+          </ul>
+        </div>
+        <a href="https://stangelawfirm.com/firm-overview/" class="state-link">Learn More</a>
+      </div>
+
+      <div class="state-card">
+        <h3 class="state-title">Stange Law Firm - Indiana</h3>
+        <div class="state-content">
+          <p><strong>Indiana Offices located in:</strong></p>
+          <ul>
+            <li>Marion County: Indianapolis, IN</li>
+            <li>Marion County: Downtown Indianapolis, IN</li>
+            <li>Allen County: Fort Wayne, IN</li>
+          </ul>
+        </div>
+        <a href="https://stangelawfirm.com/firm-overview/" class="state-link">Learn More</a>
+      </div>
+
+      <div class="state-card">
+        <h3 class="state-title">Stange Law Firm - Iowa</h3>
+        <div class="state-content">
+          <p><strong>Iowa Offices located in:</strong></p>
+          <ul>
+            <li>Polk County: Des Moines, IA</li>
+            <li>Linn County: Cedar Rapids, IA</li>
+          </ul>
+        </div>
+        <a href="https://stangelawfirm.com/firm-overview/" class="state-link">Learn More</a>
+      </div>
+
+      <div class="state-card">
+        <h3 class="state-title">Stange Law Firm - Texas</h3>
+        <div class="state-content">
+          <p><strong>Texas Offices located in:</strong></p>
+          <ul>
+            <li>Harris County: Houston, TX</li>
+            <li>Travis County: Austin, TX</li>
+          </ul>
+        </div>
+        <a href="https://stangelawfirm.com/firm-overview/" class="state-link">Learn More</a>
+      </div>
+
+      <div class="state-card">
+        <h3 class="state-title">Stange Law Firm - Kentucky</h3>
+        <div class="state-content">
+          <p><strong>Kentucky Offices located in:</strong></p>
+          <ul>
+            <li>Jefferson County: Louisville, KY</li>
+            <li>Fayette County: Lexington, KY</li>
+          </ul>
+        </div>
+        <a href="https://stangelawfirm.com/firm-overview/" class="state-link">Learn More</a>
+      </div>
+
+      <div class="state-card">
+        <h3 class="state-title">Stange Law Firm - Tennessee</h3>
+        <div class="state-content">
+          <p><strong>Tennessee Offices located in:</strong></p>
+          <ul>
+            <li>Davidson County: Nashville, TN</li>
+          </ul>
+        </div>
+        <a href="https://stangelawfirm.com/firm-overview/" class="state-link">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Maps Section -->
+  <section class="maps-section">
+    <span class="about-label">Find Us</span>
+    <h2 class="about-title">Our Office Locations</h2>
+    <div class="maps-iframe">
+      <iframe src="https://www.google.com/maps/d/u/1/embed?mid=1sa5RTHdgt_iNf50pOuOUohOrnJlXnmg&amp;ehbc=2E312F&amp;noprof=1" width="100%" height="300" style="border:0" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Stange Law Firm</span>
+      <span class="footer-copyright">© 2026 by Stange Law Firm, PC. All rights reserved.</span>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/stangelawfirm" class="social-link"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.linkedin.com/company/stange-law-firm-pc?trk=company_search" class="social-link"><i class="fab fa-linkedin"></i></a>
+        <a href="https://x.com/stangelawfirm" class="social-link"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.youtube.com/c/Stangelawfirm" class="social-link"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.pinterest.com/stangelawfirm/" class="social-link"><i class="fab fa-pinterest"></i></a>
+        <a href="https://www.instagram.com/stangelawfirm/" class="social-link"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.tiktok.com/@stangelawfirm" class="social-link"><i class="fab fa-tiktok"></i></a>
+      </div>
+    </div>
+    <div class="footer-links">
+      <a href="https://stangelawfirm.com/firm-overview/">Firm overview</a>
+      <a href="https://stangelawfirm.com/#">Our Professionals</a>
+      <a href="https://stangelawfirm.com/faq/">FAQ</a>
+      <a href="https://stangelawfirm.com/blog/">Blog</a>
+      <a href="https://stangelawfirm.com/contact/">Contact us</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
