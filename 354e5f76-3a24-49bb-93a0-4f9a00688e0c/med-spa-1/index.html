@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forever Glow Aesthetics</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url(https://images.squarespace-cdn.com/content/v1/68b113e744061e10fdb7518c/c8b1dad1-ca4b-423d-a92a-5287759b0f9d/iStock-937539876.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(244, 240, 234, 0.7);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  margin-bottom: var(--space-md);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+.hero-cta {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 1.2s forwards;
+}
+
+.hero-cta:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+.hero-stats {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 1.6s forwards;
+}
+
+.hero-stat {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  text-align: center;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* About Section */
+.about {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.about-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.about-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.about-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.about-text p + p {
+  margin-top: var(--space-md);
+}
+
+.about-features {
+  list-style: none;
+  margin-top: var(--space-md);
+}
+
+.about-features li {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-xs);
+  position: relative;
+  padding-left: var(--space-md);
+}
+
+.about-features li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* Content Module */
+.content-module {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.content-module-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.content-module-title {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-sm);
+}
+
+.content-module-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--placeholder-gray);
+}
+
+/* Services Grid */
+.services {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.service-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.service-cell:last-child {
+  border-bottom: none;
+}
+
+.service-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.service-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.service-cell:hover .service-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+.service-content {
+  flex: 1;
+}
+
+.service-name {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: var(--space-xs);
+}
+
+.service-description {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1.6;
+  color: var(--placeholder-gray);
+}
+
+/* Features Section */
+.features {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.features-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.features-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.feature-item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
+}
+
+.feature-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.feature-description {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* Team Section */
+.team {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.team-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.team-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.team-member {
+  display: inline-block;
+}
+
+.team-name {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+}
+
+.team-role {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: var(--placeholder-gray);
+}
+
+/* Stats Section */
+.stats {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.stats-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.stat-item {
+  display: inline-block;
+}
+
+.stat-value {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 300;
+  line-height: 1.2;
+  margin-bottom: var(--space-xs);
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: var(--placeholder-gray);
+}
+
+/* Contact Section */
+.contact {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.contact-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.contact-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.contact-info {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1.8;
+}
+
+.contact-info a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--placeholder-gray);
+  transition: text-decoration-color 0.3s ease;
+}
+
+.contact-info a:hover {
+  text-decoration-color: var(--text-black);
+}
+
+.contact-map {
+  width: 100%;
+  height: 300px;
+  border: 1px solid var(--border-black);
+}
+
+.newsletter {
+  padding: var(--space-md);
+  border: 1px solid var(--border-black);
+}
+
+.newsletter-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 400;
+  line-height: 1.3;
+  margin-bottom: var(--space-sm);
+}
+
+.newsletter-form {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.newsletter-form input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-black);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: var(--space-xs) 0;
+  outline: none;
+}
+
+.newsletter-form button {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-xs) var(--space-sm);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.newsletter-form button:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+    --space-xxl: 4rem;
+  }
+
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+
+  .nav-logo {
+    font-size: 0.7rem;
+  }
+
+  .nav-links {
+    gap: var(--space-sm);
+  }
+
+  .nav-links a {
+    font-size: 0.65rem;
+  }
+
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .hero-stats {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .about-text {
+    font-size: 1.1rem;
+  }
+
+  .service-cell {
+    padding: var(--space-sm);
+  }
+
+  .features-grid {
+    gap: var(--space-md);
+  }
+
+  .contact-inner {
+    gap: var(--space-md);
+  }
+
+  .newsletter-form {
+    flex-direction: column;
+  }
+
+  .newsletter-form button {
+    align-self: flex-start;
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .about-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .service-cell:nth-child(1),
+  .service-cell:nth-child(2) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .service-cell:nth-child(3),
+  .service-cell:nth-child(4) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contact-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .about {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .services {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .features {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .contact {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Forever Glow Aesthetics</a>
+  <ul class="nav-links">
+    <li><a href="https://www.foreverglowtexas.com/services">services</a></li>
+    <li><a href="https://www.foreverglowtexas.com/about">about</a></li>
+    <li><a href="#book-now">book now</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">Confidence, Crafted<br>Just for You</h1>
+    <p class="hero-subtitle">Forever Glow offers Botox, fillers, and tailored skin treatments, designed for natural, refreshed results in the Austin–Leander area.</p>
+    <a href="https://www.foreverglowtexas.com/#book-now" class="hero-cta">book now</a>
+    <div class="hero-stats">
+      <div class="hero-stat">Licensed Injector</div>
+      <div class="hero-stat">Personalized Care</div>
+      <div class="hero-stat">5.0 ★ Google</div>
+      <div class="hero-stat">Inside The Hive</div>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <span class="about-label">001 — philosophy</span>
+    <div class="about-text">
+      <p>At Forever Glow, aesthetic care is personal, transparent, and empowering. Every visit is a conversation about your goals, lifestyle, and comfort, so results look like you, just refreshed.</p>
+      <p>Not a makeover. A mindful tune-up.</p>
+      <ul class="about-features">
+        <li>Licensed, Safety-First Care – Treatments performed by a licensed injector with advanced, evidence-based techniques.</li>
+        <li>Tailored Glow Plans – Designed around your features, timeline, and budget—never a one-size-fits-all template.</li>
+        <li>Natural, Confident Results – Subtle enhancements that refresh, not replace, your look.</li>
+        <li>Transparent Pricing – Clear unit pricing and typical ranges per area, outlined before treatment.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/audio_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Content Module -->
+<section class="content-module">
+  <div class="content-module-inner">
+    <h2 class="content-module-title">Forever Glow Aesthetics</h2>
+    <p class="content-module-subtitle">Confidence, Crafted Just for You</p>
+  </div>
+</section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/audio_white_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Services Grid -->
+<section class="services" id="services">
+  <div class="services-grid">
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/68b113e744061e10fdb7518c/fde484b8-800f-4b09-bf3f-4edfcca2b586/Untitled+%28Facebook+Post%29+%281%29.png" alt="Smiling woman with smooth skin after Botox treatment in Leander, TX — natural, refreshed results.">
+      </div>
+      <div class="service-content">
+        <h3 class="service-name">Botox and Leytebo</h3>
+        <p class="service-description">Natural, refreshed, and confident results crafted just for you.</p>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/68b113e744061e10fdb7518c/76cd5bd7-7a65-4337-a0a1-6c5f8a8ec3b3/iStock-175423194.jpg" alt="Close-up of lips with subtle filler enhancement — natural lip flip results in Leander, TX.">
+      </div>
+      <div class="service-content">
+        <h3 class="service-name">Lip Flip & Filler Enhancements</h3>
+        <p class="service-description">Natural-looking lip enhancement - subtle volume, balanced shape.</p>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/68b113e744061e10fdb7518c/1a105243-08b7-4b03-ba94-5c62c5f1bbbb/iStock-1314903236.jpg" alt="Woman with smooth skin and serene expression after Daxxify treatment — long-lasting Botox alternative in Leander, TX.">
+      </div>
+      <div class="service-content">
+        <h3 class="service-name">Daxxify® (Botox Alternative)</h3>
+        <p class="service-description">Extended smoothness with Daxxify - natural, refreshed appearance.</p>
+      </div>
+    </div>
+    <div class="service-cell">
+      <div class="service-image-wrapper">
+        <img src="https://images.squarespace-cdn.com/content/v1/68b113e744061e10fdb7518c/794a8dfc-9a23-46e6-a586-726f0b9b43fc/iStock-451878815.jpg" alt="Close-up of a woman's face and hand, with her fingers gently touching her chin, showing smooth skin and well-manicured nails.">
+      </div>
+      <div class="service-content">
+        <h3 class="service-name">Masseter / Jawline Slimming</h3>
+        <p class="service-description">Balance your profile and ease jaw tension with masseter Botox.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/image_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Features Section -->
+<section class="features">
+  <div class="features-inner">
+    <h2 class="features-heading">Why Forever Glow: Safe, Licensed Injectables & Natural Results in Leander</h2>
+    <div class="features-grid">
+      <div class="feature-item">
+        <h3 class="feature-title">— personalized glow plans</h3>
+        <p class="feature-description">We start with a true consult, your goals, your comfort, your pace. Every plan is mapped to your features with clarity and without pressure.</p>
+      </div>
+      <div class="feature-item">
+        <h3 class="feature-title">— licensed expertise</h3>
+        <p class="feature-description">All treatments are performed by a licensed injector focused on safety, facial balance, and subtlety. We use evidence-based techniques and discuss risks, benefits, and realistic outcomes before we begin.</p>
+      </div>
+      <div class="feature-item">
+        <h3 class="feature-title">— natural, confident results</h3>
+        <p class="feature-description">Our philosophy: you, refreshed. Expect softened lines, not "frozen." We prioritize harmony and proportion so friends notice you look well-rested, not "done."</p>
+      </div>
+      <div class="feature-item">
+        <h3 class="feature-title">— a comfortable, trusted space</h3>
+        <p class="feature-description">Located inside The Hive in Leander, our studio is designed for calm and care, private, unhurried appointments; thoughtful aftercare; and easy communication if questions pop up.</p>
+      </div>
+      <div class="feature-item">
+        <h3 class="feature-title">— honest guidance & transparent pricing</h3>
+        <p class="feature-description">No upselling. We outline unit price + typical unit ranges by area, explain maintenance timelines, and help you prioritize based on budget and goals. You always decide what feels right.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/image_white_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/liveness_dark.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Team Section -->
+<section class="team">
+  <div class="team-inner">
+    <h2 class="team-heading">Meet Your<br>Licensed Injector</h2>
+    <div class="team-member">
+      <h3 class="team-name">danielle</h3>
+      <p class="team-role">licensed injector</p>
+    </div>
+  </div>
+</section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/modac_mobile_dark.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Stats Section -->
+<section class="stats">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-value">5.0 ★</div>
+      <div class="stat-label">google</div>
+    </div>
+  </div>
+</section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/liveness_light.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/modac_mobile_light.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Contact Section -->
+<section class="contact" id="book-now">
+  <div class="contact-inner">
+    <div>
+      <h2 class="contact-heading">Glow With Us</h2>
+      <div class="newsletter">
+        <h3 class="newsletter-heading">Sign up for exclusive offers, glow tips, and early access to new treatments.</h3>
+        <form class="newsletter-form" onsubmit="event.preventDefault();">
+          <input type="email" placeholder="Email Address" required>
+          <button type="submit">sign up</button>
+        </form>
+      </div>
+    </div>
+    <div>
+      <div class="contact-info">
+        <p><strong>Visit us at:</strong><br>
+        <a href="https://www.google.com/maps?q=11892+Hero+Way+West,+Suite+F,+Leander,+TX+78641">11892 Hero Way West, Suite F<br>
+        Leander, TX 78641</a></p>
+        
+        <p><strong>Phone:</strong> <a href="tel:5129621877">(512)962-1877</a></p>
+        
+        <p><strong>Email:</strong> <a href="mailto:foreverglow.cedarpark@gmail.com?subject=More%20Information">foreverglow.cedarpark@gmail.com</a></p>
+        
+        <p><a href="https://www.facebook.com/foreverglowatx/">Facebook</a> | <a href="https://www.instagram.com/foreverglowaestheticsatx/">Instagram</a></p>
+      </div>
+      
+      <iframe class="contact-map" 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3472.5!2d-97.8!3d30.6!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDM2JzAwLjAiTiA5N8KwNDgnMDAuMCJX!5e0!3m2!1sen!2sus!4v1642000000000!5m2!1sen!2sus" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/qr_light.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Forever Glow Aesthetics</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
