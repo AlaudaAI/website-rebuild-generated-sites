@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thomas H. Bray, Attorney at Law</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .social-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.sidebar .social-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar .social-links a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+.hero-visual {
+  width: 100%;
+  max-width: 400px;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+/* About Section */
+.about {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 800px;
+}
+
+.about-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.about-text {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+}
+
+/* Services Grid */
+.services {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.service-card {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+.service-card:last-child {
+  border-bottom: none;
+}
+
+.service-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.service-protocol {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.service-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.service-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 380px;
+}
+
+/* Team Section */
+.team {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.team-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  max-width: 600px;
+}
+
+.team-photo {
+  width: 200px;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+.team-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.team-name {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.team-role {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.team-bio {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-top: var(--space-md);
+}
+
+/* Stats Section */
+.stats {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.stat-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.stat-number {
+  font-family: var(--font-serif);
+  font-size: clamp(64px, 15vw, 120px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+/* Reviews Section */
+.reviews {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.reviews-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.review-card {
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  border: 1px solid var(--border-color);
+}
+
+.review-text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.review-author {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* Contact Section */
+.contact {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.contact-info {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.contact-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.contact-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.contact-value {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-muted);
+}
+
+.contact-value a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-value a:hover {
+  color: var(--text-muted);
+}
+
+.contact-map {
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.map-iframe {
+  width: 100%;
+  height: 300px;
+  border: none;
+  border-radius: 12px;
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* =================== MOBILE RESPONSIVE STYLES =================== */
+@media (max-width: 768px) {
+  .mobile-header .brand-name {
+    font-size: 12px;
+  }
+  
+  .hero {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .hero-headline {
+    font-size: clamp(28px, 6vw, 36px);
+  }
+  
+  .hero-subheading {
+    font-size: clamp(14px, 2vw, 16px);
+  }
+  
+  .about {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .service-card {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .team {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .team-photo {
+    width: 150px;
+  }
+  
+  .stats {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .reviews {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .contact-info {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .contact-map {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .footer {
+    padding: var(--space-lg) var(--space-md);
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .services {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .service-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .service-card:last-child {
+    border-right: none;
+  }
+
+  .team-member {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .contact {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contact-info {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .service-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .about {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .team {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .stats {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .reviews {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .contact-info {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .contact-map {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .map-iframe {
+    height: 400px;
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .service-card {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="#" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">Thomas H. Bray, Attorney at Law</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="#" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">Thomas H. Bray, Attorney at Law</span>
+    </a>
+    <nav>
+      <a href="https://www.tbraylaw.com/attorney/thomas-h-bray/">Attorney Profile</a>
+      <a href="https://www.tbraylaw.com/practice-areas/">Practice Areas</a>
+      <a href="https://www.tbraylaw.com/client-reviews/">Client Reviews</a>
+      <a href="https://www.tbraylaw.com/contact-us/">Contact Us</a>
+    </nav>
+    <div class="social-links">
+      <a href="https://www.facebook.com/tombraylaw/?ref=hl">Facebook</a>
+      <a href="https://www.linkedin.com/in/tommy-bray-65b31b37">LinkedIn</a>
+      <a href="https://www.google.com/maps/place/Thomas+H.+Bray,+Attorney+at+Law/@35.8462714,-86.3933426,17z/data=!3m1!4b1!4m5!3m4!1s0x0:0xfce05a372b1f0a4!8m2!3d35.8462714!4d-86.3911539">Google Business</a>
+    </div>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">All Systems Operational</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">API v4.2 Active</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Legal Services</span>
+      <h1 class="hero-headline">Experienced Murfreesboro Attorney</h1>
+      <p class="hero-subheading">Years of experience in both criminal and domestic litigation providing the most effective representation for clients in Rutherford and the surrounding counties.</p>
+      <a href="tel:615-962-7606" class="hero-cta">Call Now <i class="fas fa-phone" style="font-size:10px;"></i></a>
+    </div>
+    <div class="hero-visual">
+      <img src="https://threebestrated.com/awards/divorce_lawyers-murfreesboro-2019-clr.svg" alt="Best Divorce lawyers in Murfreesboro" class="hero-image">
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://threebestrated.com/awards/divorce_lawyers-murfreesboro-2020-drk.svg" alt="Best Divorce lawyers in Murfreesboro" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+  <!-- About Section -->
+  <section class="about">
+    <div class="about-content">
+      <h2 class="about-headline">Thomas H. Bray, Attorney at Law</h2>
+      <p class="about-text">Years of experience in both criminal and domestic litigation have provided the knowledge and skill to provide the most effective representation for clients in Rutherford and the surrounding counties. His practice focuses on divorce and family law. He understands that effective representation requires a lawyer to be accessible to clients and responsive to their needs. Thomas H. Bray works closely with clients to explain the law and procedures while developing a legal strategy for their case. Thomas H. Bray believes accessibility and regular communication with clients is crucial to legal representation. A solid understanding of the law and the litigation process is key when your assets, time with your children, or your freedom are on the line.</p>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i16!2i17041!3i25770!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen-US!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9827971966951442707!2y1138853955333386404!2s%2Fg%2F1tls3krg!4m2!1x358462803!2x3431055761!15sgcid%3Adivorce_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=122037" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+  <!-- Services Grid -->
+  <section class="services">
+    <div class="service-card">
+      <p class="service-protocol">Practice Area 01</p>
+      <h3 class="service-title">Divorce & Family Law</h3>
+      <p class="service-description">Represents clients in both contested and uncontested divorces as well as post-divorce modifications and enforcement of alimony and support. Includes Adoptions, Paternity Actions, Guardianships, Grandparent's Rights, child custody battles, parenting plan modification and child support matters.</p>
+    </div>
+    <div class="service-card">
+      <p class="service-protocol">Practice Area 02</p>
+      <h3 class="service-title">Criminal Defense</h3>
+      <p class="service-description">Experience handling defense cases for both misdemeanor and felony charges in General Sessions Criminal Court, Circuit Criminal Court and the Criminal Division of the Court of Appeals. From DUI to Domestic Assault.</p>
+    </div>
+    <div class="service-card">
+      <p class="service-protocol">Practice Area 03</p>
+      <h3 class="service-title">Personal Injury</h3>
+      <p class="service-description">Personal injury representation with years of experience in front of Judges in Rutherford and the surrounding counties.</p>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i16!2i17041!3i25769!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen-US!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9827971966951442707!2y1138853955333386404!2s%2Fg%2F1tls3krg!4m2!1x358462803!2x3431055761!15sgcid%3Adivorce_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=57100" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+  <!-- Team Section -->
+  <section class="team">
+    <div class="team-content">
+      <div class="team-member">
+        <img src="https://avvotbraylaw20.procurrox.com/wp-content/blogs.dir/2074/files/sites/9567/2016/07/attorney-image.jpg" alt="Attorney Thomas H. Bray" class="team-photo">
+        <div class="team-info">
+          <h3 class="team-name">Thomas Bray</h3>
+          <p class="team-role">Attorney at Law</p>
+          <p class="team-bio">Attorney Thomas H. Bray has been practicing law since 2009. As a solo practitioner his practice is diverse, handling family law, personal injury, and criminal cases with years of experience in both criminal law, Divorce and Personal Injury in front of Judges in Rutherford and the surrounding counties.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i16!2i17040!3i25770!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen-US!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9827971966951442707!2y1138853955333386404!2s%2Fg%2F1tls3krg!4m2!1x358462803!2x3431055761!15sgcid%3Adivorce_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=87088" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+  <!-- Stats Section -->
+  <section class="stats">
+    <div class="stat-item">
+      <span class="stat-label">Avvo Rating</span>
+      <div>
+        <span class="stat-number">9.8</span>
+      </div>
+      <p class="service-description">Superb rating based on years of client reviews and peer recognition for exceptional legal representation in Rutherford County and surrounding areas.</p>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i16!2i17040!3i25769!4i256!2m3!1e0!2sm!3i776539984!2m3!1e2!2sspotlit!5i1!3m13!2sen-US!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9827971966951442707!2y1138853955333386404!2s%2Fg%2F1tls3krg!4m2!1x358462803!2x3431055761!15sgcid%3Adivorce_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=22151" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+  <!-- Reviews Section -->
+  <section class="reviews">
+    <h2 class="reviews-headline">Client Reviews</h2>
+    
+    <div class="review-card">
+      <p class="review-text">Admittedly mine was a simple matter, but Mr. Bray treated me as if we were litigating before the SCOTUS. He did what he said he would do, when he said he would do it. If I find myself in need of legal representation in the future, I will not hesitate to call on Mr. Bray…</p>
+      <p class="review-author">— Ryan (5 star review)</p>
+    </div>
+
+    <div class="review-card">
+      <p class="review-text">I would highly recommend Tommy. If ever I need a lawyer again, Tommy will be my first choice!</p>
+      <p class="review-author">— Brittany D.</p>
+    </div>
+
+    <div class="review-card">
+      <p class="review-text">Tommy came recommended from a friend and did not disappoint. He help me with some legal trouble and it worked out well. During the process he kept me informed of all of my options going forward. He even gave some help advice on a different matter. I would highly recommend him.</p>
+      <p class="review-author">— Anonymous (5 star review)</p>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i13!2i2130!3i3221!4i256!2m1!1e1!3m12!2sen-US!3sUS!5e289!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy5lOmx8cC52Om9mZg!4e0!5m1!1e3!23i47083502&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=48997" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+  <!-- Contact Section -->
+  <section class="contact">
+    <div class="contact-info">
+      <h2 class="contact-headline">Contact Us</h2>
+      
+      <div class="contact-item">
+        <span class="contact-label">Phone</span>
+        <div class="contact-value">
+          <a href="tel:615-962-7606">615-962-7606</a>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <span class="contact-label">Email</span>
+        <div class="contact-value">
+          <a href="mailto:tommy@tbraylaw.com">tommy@tbraylaw.com</a>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <span class="contact-label">Address</span>
+        <div class="contact-value">108 N Church Street<br>Murfreesboro, TN 37130</div>
+      </div>
+
+      <div class="contact-item">
+        <span class="contact-label">Free Consultations</span>
+        <div class="contact-value">We offer free consultations to evaluate your case. We will discuss the facts of your case and go over your legal rights as well as what you can do to get the best results out of the situation you are facing.</div>
+      </div>
+    </div>
+    <div class="contact-map">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3234.111419755117!2d-86.39334258473663!3d35.846271380156125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xfce05a372b1f0a4!2sThomas+H.+Bray%2C+Attorney+at+Law!5e0!3m2!1sen!2s!4v1469765492060" 
+        class="map-iframe" 
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Thomas H. Bray, Attorney at Law</span>
+      <span class="footer-copyright">© 2024 Thomas H. Bray, Attorney at Law Systems, Inc. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.tbraylaw.com/">Home</a>
+      <a href="https://www.tbraylaw.com/attorney/thomas-h-bray/">Attorney Profile</a>
+      <a href="https://www.tbraylaw.com/practice-areas/">Practice Areas</a>
+      <a href="https://www.tbraylaw.com/client-reviews/">Client Reviews</a>
+      <a href="https://www.tbraylaw.com/contact-us/">Contact Us</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
