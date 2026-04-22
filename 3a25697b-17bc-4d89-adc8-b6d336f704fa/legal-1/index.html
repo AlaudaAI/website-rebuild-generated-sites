@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stover Law Group</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Hero Visual */
+.hero-visual {
+  width: 100%;
+  max-width: 400px;
+}
+
+.law-container {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: var(--space-xl);
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.law-visual {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.law-logo {
+  width: 120px;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.law-scales {
+  font-size: 48px;
+  color: var(--text-muted);
+  margin: var(--space-md) 0;
+}
+
+.law-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  text-align: center;
+}
+
+.law-title {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.law-tagline {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Features Grid */
+.features {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.feature-card {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+.feature-card:last-child {
+  border-bottom: none;
+}
+
+.feature-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.feature-protocol {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.feature-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.feature-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 380px;
+}
+
+/* Trust Metrics Section */
+.trust-section {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.trust-metrics {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.trust-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.trust-number {
+  font-family: var(--font-serif);
+  font-size: clamp(64px, 15vw, 120px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.trust-number-suffix {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 8vw, 60px);
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.trust-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 400px;
+}
+
+.trust-clients {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.client-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.client-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 50px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.testimonials {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.testimonial-card {
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: var(--space-lg);
+  border: 1px solid var(--border-color);
+}
+
+.testimonial-author {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.testimonial-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* Team Section */
+.team-section {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.team-card {
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: var(--space-lg);
+  border: 1px solid var(--border-color);
+}
+
+.team-name {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.team-role {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.team-bio {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* Contact Section */
+.contact-section {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.contact-info {
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: var(--space-lg);
+  border: 1px solid var(--border-color);
+}
+
+.contact-item {
+  margin-bottom: var(--space-md);
+}
+
+.contact-item:last-child {
+  margin-bottom: 0;
+}
+
+.contact-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-xs);
+}
+
+.contact-value {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.contact-value a {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.contact-value a:hover {
+  text-decoration: underline;
+}
+
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--border-color);
+  border-radius: 50px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  color: var(--text-primary);
+  border-color: var(--text-primary);
+}
+
+.map-container {
+  margin-top: var(--space-lg);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .hero-text {
+    gap: var(--space-md);
+  }
+
+  .hero-headline {
+    font-size: clamp(28px, 6vw, 36px);
+  }
+
+  .hero-subheading {
+    font-size: clamp(14px, 2vw, 16px);
+  }
+
+  .feature-card {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .trust-metrics,
+  .trust-clients {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .testimonials,
+  .team-section,
+  .contact-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .footer {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .client-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:nth-child(even) {
+    border-right: none;
+  }
+
+  .feature-card:nth-last-child(-n+2) {
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .trust-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-metrics {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .feature-card {
+    padding: var(--space-2xl) var(--space-xl);
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:nth-child(3n) {
+    border-right: none;
+  }
+
+  .feature-card:nth-last-child(-n+3) {
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .trust-metrics {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-clients {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-number {
+    font-size: 120px;
+  }
+
+  .testimonials {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .team-section {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .contact-section {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .feature-card {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .feature-card:nth-child(6) {
+    border-right: 1px solid var(--border-color);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <div class="globe-icon"><i class="fas fa-gavel"></i></div>
+    <span class="brand-name">Stover Law Group</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-gavel"></i></div>
+      <span class="brand-name">Stover Law Group</span>
+    </a>
+    <nav>
+      <a href="https://www.wstoverlaw.com/">Home</a>
+      <a href="https://www.wstoverlaw.com/#">Practice Areas</a>
+      <a href="https://www.wstoverlaw.com/reviews">Reviews</a>
+      <a href="https://www.wstoverlaw.com/about">About</a>
+      <a href="https://www.wstoverlaw.com/client-referral-form">Referrals</a>
+      <a href="https://www.wstoverlaw.com/contact">Contact</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Emergency Consultations Available</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Virtual Appointments Available</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Criminal Defense, Family Law, and Civil Litigation Attorney in Nashville, TN</span>
+      <h1 class="hero-headline">Over 25 Years of Experience</h1>
+      <p class="hero-subheading">Navigating Legal Challenges with Stover Law Group. Compassionate and timely assistance for Middle Tennessee residents since 2007.</p>
+      <a href="tel:(615) 613-0541" class="hero-cta">Call Now <i class="fas fa-phone" style="font-size:10px;"></i></a>
+    </div>
+    <div class="hero-visual">
+      <div class="law-container">
+        <div class="law-visual">
+          <img src="https://le-cdn.hibuwebsites.com/366e89e70d9348f8bfde01eefbedb42c/dms3rep/multi/opt/stover-law-group-logo-1920w.png" alt="Stover Law Group" class="law-logo">
+          <div class="law-scales"><i class="fas fa-balance-scale"></i></div>
+          <div class="law-text">
+            <div class="law-title">Stover Law Group</div>
+            <div class="law-tagline">Nashville, TN</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section class="features">
+    <div class="feature-card">
+      <p class="feature-protocol">Practice Area 01</p>
+      <h3 class="feature-title">Personal Injury Law</h3>
+      <p class="feature-description">Dedicated to helping you recover the compensation you deserve with compassionate legal support</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Practice Area 02</p>
+      <h3 class="feature-title">Auto Accident Representation</h3>
+      <p class="feature-description">Comprehensive auto accident representation to ensure your interests are protected and secure compensation for medical bills, lost wages, and other related expenses</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Practice Area 03</p>
+      <h3 class="feature-title">Criminal Defense</h3>
+      <p class="feature-description">Robust representation protecting your rights for cases from misdemeanors to serious felonies with emergency consultations available</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Practice Area 04</p>
+      <h3 class="feature-title">Family Law</h3>
+      <p class="feature-description">Compassionate and knowledgeable representation in cases involving divorce, child custody, support, and more</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Practice Area 05</p>
+      <h3 class="feature-title">Probate and Estate Planning</h3>
+      <p class="feature-description">Help protect your assets and ensure your wishes are honored through drafting wills, establishing trusts, and navigating the probate process</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Practice Area 06</p>
+      <h3 class="feature-title">Civil Litigation</h3>
+      <p class="feature-description">Skilled representation for complex civil disputes involving contracts, property, and other matters through negotiation, mediation, or trial</p>
+    </div>
+  </section>
+
+  <!-- Trust Metrics Section -->
+  <section class="trust-section">
+    <div class="trust-metrics">
+      <span class="trust-label">Experience & Excellence</span>
+      <div>
+        <span class="trust-number">25</span><span class="trust-number-suffix">+</span>
+      </div>
+      <p class="trust-description">Years of experience providing compassionate legal representation across Middle Tennessee. Over 25 years of experience with emergency consultations and virtual appointments available.</p>
+    </div>
+    <div class="trust-clients">
+      <span class="trust-label">Why Choose Us</span>
+      <div class="client-grid">
+        <div class="client-badge">Over 25 Years Experience</div>
+        <div class="client-badge">Emergency Consultations</div>
+        <div class="client-badge">Virtual Appointments</div>
+        <div class="client-badge">Civil Trial Specialist</div>
+        <div class="client-badge">Compassionate Representation</div>
+        <div class="client-badge">Established 2007</div>
+        <div class="client-badge">4.0 Star Rating</div>
+        <div class="client-badge">163 Reviews</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <span class="trust-label">Here's what our satisfied clients are saying...</span>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-author">C J</div>
+        <div class="testimonial-text">Highly recommend...</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-author">Rollie R</div>
+        <div class="testimonial-text">Listen to your lawyer he knows best Great Lawyer 👌🏽</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <span class="trust-label">Our Team</span>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-name">William Stover</div>
+        <div class="team-role">Attorney</div>
+        <div class="team-bio">Civil trial specialist with over 25 years of experience providing compassionate legal representation in personal injury, criminal defense, family law, and civil litigation.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <span class="trust-label">Contact Information</span>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-label">Phone</div>
+          <div class="contact-value"><a href="tel:(615) 613-0541">(615) 613-0541</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">Email</div>
+          <div class="contact-value"><a href="mailto:ws@wstoverlaw.com">ws@wstoverlaw.com</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">Address</div>
+          <div class="contact-value">214 2nd Avenue North<br><br>Nashville,TN37201</div>
+        </div>
+        <div class="social-links">
+          <a href="https://maps.google.com/maps?q=214+2nd+Avenue+North%2C+Nashville%2C+TN+37201%2C+US(NOB)&sll=36.16543,-86.77692" target="_blank"><i class="fas fa-map-marker-alt"></i> Google Business</a>
+          <a href="https://facebook.com/175577205963" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+          <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://www.wstoverlaw.com/&title=Civil%20Litigation%20Attorney%20Nashville,%20TN%20%7C%20Stover%20Law%20Group" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+          <a href="https://twitter.com/intent/tweet?text=https://www.wstoverlaw.com/" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+          <a href="http://pinterest.com/pin/create/button/?url=https://www.wstoverlaw.com/&description=Civil%20Litigation%20Attorney%20Nashville,%20TN%20%7C%20Stover%20Law%20Group" target="_blank"><i class="fab fa-pinterest"></i> Pinterest</a>
+        </div>
+      </div>
+    </div>
+    <div class="map-container">
+      <iframe src="https://maps.google.com/maps?q=214+2nd+Avenue+North%2C+Nashville%2C+TN+37201%2C+US(NOB)&amp;sll=36.16543,-86.77692" width="100%" height="300" style="border:0" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Stover Law Group</span>
+      <span class="footer-copyright">© 2026 The content on this website is owned by us and our licensors. Do not copy any content (including images) without our consent.</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.wstoverlaw.com/">Home</a>
+      <a href="https://www.wstoverlaw.com/#">Practice Areas</a>
+      <a href="https://www.wstoverlaw.com/reviews">Reviews</a>
+      <a href="https://www.wstoverlaw.com/about">About</a>
+      <a href="https://www.wstoverlaw.com/client-referral-form">Referrals</a>
+      <a href="https://www.wstoverlaw.com/contact">Contact</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
