@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Law Office of David L. Scott</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand img {
+  height: 32px;
+  width: auto;
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .brand-link img {
+  height: 38px;
+  width: auto;
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+.hero-visual {
+  width: 100%;
+  max-width: 400px;
+}
+
+.hero-visual img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+/* Features Grid */
+.features {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.feature-card {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+.feature-card:last-child {
+  border-bottom: none;
+}
+
+.feature-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.feature-protocol {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.feature-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.feature-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 380px;
+}
+
+/* Trust Metrics Section */
+.trust-section {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.trust-metrics {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.trust-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.trust-number {
+  font-family: var(--font-serif);
+  font-size: clamp(64px, 15vw, 120px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.trust-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 400px;
+}
+
+.team-section {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.team-name {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.team-role {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.team-bio {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 500px;
+}
+
+.testimonial-section {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  background: var(--bg-card);
+}
+
+.testimonial-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(18px, 3vw, 22px);
+  line-height: 1.4;
+  color: var(--text-primary);
+  position: relative;
+}
+
+.testimonial-quote::before {
+  content: '"';
+  font-size: 2em;
+  color: var(--text-muted);
+  position: absolute;
+  top: -10px;
+  left: -20px;
+}
+
+.testimonial-author {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.contact-section {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.contact-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.contact-subtitle {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 500px;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-item:hover {
+  color: var(--text-primary);
+}
+
+.contact-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.social-links {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: var(--text-primary);
+}
+
+.social-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.approach-section {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.approach-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.approach-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 500px;
+}
+
+.leadership-section {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.leadership-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.leadership-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 500px;
+}
+
+.service-section {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.service-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 5vw, 36px);
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.service-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 500px;
+}
+
+.associations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.associations img {
+  height: 50px;
+  width: auto;
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand img {
+  height: 40px;
+  width: auto;
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .hero-headline {
+    font-size: clamp(28px, 8vw, 36px);
+  }
+  
+  .feature-card {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .trust-metrics {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .team-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .contact-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .approach-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .leadership-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .service-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .testimonial-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .footer {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .associations img {
+    height: 40px;
+  }
+  
+  .social-links {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:nth-child(even) {
+    border-right: none;
+  }
+
+  .trust-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-metrics {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  .feature-card {
+    padding: var(--space-2xl) var(--space-xl);
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:last-child {
+    border-right: none;
+  }
+
+  .trust-section {
+    /* already 2-col from tablet */
+  }
+
+  .trust-metrics {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .team-section {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-number {
+    font-size: 120px;
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .feature-card {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="https://www.attorneydavidscott.com/" class="brand">
+    <img src="https://www.attorneydavidscott.com/assets/images/logo-nav.png" alt="Law Office of David L. Scott">
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="https://www.attorneydavidscott.com/" class="brand-link">
+      <img src="https://www.attorneydavidscott.com/assets/images/logo-nav.png" alt="Law Office of David L. Scott">
+    </a>
+    <nav>
+      <a href="https://www.attorneydavidscott.com/">Home</a>
+      <a href="https://www.attorneydavidscott.com/about/">About</a>
+      <a href="https://www.attorneydavidscott.com/family-law/">Family Law</a>
+      <a href="https://www.attorneydavidscott.com/family-law/divorce/">Divorce</a>
+      <a href="https://www.attorneydavidscott.com/mediation/">Mediation</a>
+      <a href="https://www.attorneydavidscott.com/criminal-defense/">Criminal Defense</a>
+      <a href="https://www.attorneydavidscott.com/blog/">Blog</a>
+      <a href="https://www.attorneydavidscott.com/contact/">Contact</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Available for Consultation</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Murfreesboro Office</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Law Office of David L. Scott</span>
+      <h1 class="hero-headline">clear advice & effective legal solutions</h1>
+      <p class="hero-subheading">in Murfreesboro, TN</p>
+      <a href="https://www.attorneydavidscott.com/contact/" class="hero-cta">get in touch <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+    </div>
+    <div class="hero-visual">
+      <img src="https://www.attorneydavidscott.com/assets/images/section-three-photo.jpg" alt="Courthouse in Murfreesboro Tennessee">
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.attorneydavidscott.com/assets/images/nav-phone.svg" alt="telephone icon" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Approach Section -->
+  <section class="approach-section">
+    <span class="trust-label">Our Approach</span>
+    <h2 class="approach-title">Our service-oriented, keen approach focuses on results.</h2>
+    <p class="approach-description">We understand that each client's situation is unique, and we tailor our legal strategies to meet your specific needs and objectives.</p>
+    <img src="https://www.attorneydavidscott.com/assets/images/section-four-photo.jpg" alt="Adults shaking hands" style="width: 100%; max-width: 400px; border-radius: 16px; margin-top: 1rem;">
+  </section>
+
+  <!-- Features Grid -->
+  <section class="features">
+    <div class="feature-card">
+      <p class="feature-protocol">Practice Area 01</p>
+      <h3 class="feature-title">Family Law</h3>
+      <p class="feature-description">Legal representation for family issues including ending marriages, adoption, custody battles, and other family legal matters.</p>
+      <img src="https://www.attorneydavidscott.com/assets/images/section-five-photo.jpg" alt="Smiling child holding a teddy bear" style="width: 100%; max-width: 200px; border-radius: 8px; margin-top: 1rem;">
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Practice Area 02</p>
+      <h3 class="feature-title">Mediation</h3>
+      <p class="feature-description">Qualified family mediation to help parties compromise, negotiate, and communicate through challenging situations with guided process.</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Practice Area 03</p>
+      <h3 class="feature-title">Criminal Defense</h3>
+      <p class="feature-description">Aggressive defense representation for criminal charges in Tennessee, pursuing every possible defense strategy.</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Practice Area 04</p>
+      <h3 class="feature-title">Divorce</h3>
+      <p class="feature-description">Experienced legal representation for divorce proceedings with a focus on protecting your rights and achieving the best possible outcome.</p>
+      <img src="https://www.attorneydavidscott.com/assets/images/section-six-photo.jpg" alt="Joyful family walking outdoors with a child on a parents' shoulders" style="width: 100%; max-width: 200px; border-radius: 8px; margin-top: 1rem;">
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.attorneydavidscott.com/assets/images/nav-map.svg" alt="map dropper icon" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Leadership Section -->
+  <section class="leadership-section">
+    <span class="trust-label">Leadership</span>
+    <h2 class="leadership-title">Trusted peer leadership</h2>
+    <p class="leadership-description">David Scott has earned recognition from his peers and the community for his dedication to legal excellence and professional service.</p>
+  </section>
+
+  <!-- Trust Metrics Section -->
+  <section class="trust-section">
+    <div class="trust-metrics">
+      <span class="trust-label">Experience</span>
+      <div>
+        <span class="trust-number">25</span>
+      </div>
+      <p class="trust-description">years experience in Family Law, Mediation, and Criminal Defense Law</p>
+    </div>
+    <div class="team-section">
+      <span class="trust-label">Attorney</span>
+      <div class="team-member">
+        <h3 class="team-name">David Scott</h3>
+        <p class="team-role">Attorney</p>
+        <p class="team-bio">Experienced trial lawyer with more than 25 years practicing in Murfreesboro, Tennessee, with extensive experience handling family law, criminal defense, and personal injury cases. Honored as President of the Rutherford/Cannon County Bar Association in 2013.</p>
+        <div class="associations">
+          <img src="https://www.attorneydavidscott.com/assets/images/association-one.svg" alt="Avvo Rating for David Lee Scott">
+          <img src="https://www.attorneydavidscott.com/assets/images/association-two.png" alt="Tennessee Bar Association">
+          <img src="https://www.attorneydavidscott.com/assets/images/association-three.jpg" alt="Rutherford & Cannon County Bar Association">
+        </div>
+      </div>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.attorneydavidscott.com/assets/images/client-logo.svg" alt="client login icon" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Service Section -->
+  <section class="service-section">
+    <span class="trust-label">Our Commitment</span>
+    <h2 class="service-title">We put personal service first.</h2>
+    <p class="service-description">Every client receives dedicated attention and personalized legal representation tailored to their unique circumstances and goals.</p>
+  </section>
+
+  <!-- Testimonial Section -->
+  <section class="testimonial-section">
+    <span class="trust-label">Client Testimonial</span>
+    <img src="https://www.attorneydavidscott.com/assets/images/quotation.svg" alt="Quotation mark" style="width: 30px; height: 30px; margin-bottom: 1rem;">
+    <p class="testimonial-quote">I had a very unusual case that I ask David to handle for me…. David happily and confidently dug in and represented my case. No matter what curve balls were thrown at us, he was ready for them. His reassurance kept me calm during the process. He was Professional, Confident and Knowledgeable in and out of the court room. I could not imagine going through this or anything else in the future without him. He was recommended to me by a friend and I highly recommend him to you.</p>
+    <p class="testimonial-author">— Crystal</p>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <div class="contact-header">
+      <h2 class="contact-title">schedule a consultation</h2>
+      <p class="contact-subtitle">Our focus is on helping you get through your legal troubles. With more than 25 years of experience, we are committed to getting the best legal outcome for you. Contact today for a case evaluation.</p>
+    </div>
+    <div class="contact-info">
+      <a href="tel:+16158967656" class="contact-item">
+        <img src="https://www.attorneydavidscott.com/assets/images/phone.svg" alt="telephone icon" class="contact-icon">
+        <span>(615) 896-7656</span>
+      </a>
+      <a href="mailto:davidscott@attorneydavidscott.com" class="contact-item">
+        <img src="https://www.attorneydavidscott.com/assets/images/envelope.svg" alt="envelope icon" class="contact-icon">
+        <span>davidscott@attorneydavidscott.com</span>
+      </a>
+      <a href="https://www.google.com/maps/place/Law+Office+of+David+L.+Scott/@35.8393173,-86.3931708,15z/data=!4m5!3m4!1s0x0:0x17d4735a35448b18!8m2!3d35.8393505!4d-86.3931664" class="contact-item">
+        <img src="https://www.attorneydavidscott.com/assets/images/map.svg" alt="map drop icon" class="contact-icon">
+        <span>722 S Church St, Murfreesboro, TN 37130</span>
+      </a>
+    </div>
+    <div class="social-links">
+      <a href="https://www.facebook.com/lawofficeofdavidlscott/">
+        <img src="https://www.attorneydavidscott.com/assets/images/facebook-icon.svg" alt="facebook logo" class="social-icon">
+        <span>Facebook</span>
+      </a>
+      <a href="https://twitter.com/davidlscottlaw">
+        <i class="fab fa-twitter" style="font-size:20px;"></i>
+        <span>Twitter</span>
+      </a>
+    </div>
+    <iframe src="https://www.google.com/maps/place/Law+Office+of+David+L.+Scott/@35.8393173,-86.3931708,15z/data=!4m5!3m4!1s0x0:0x17d4735a35448b18!8m2!3d35.8393505!4d-86.3931664" width="100%" height="300" style="border:0; margin-top: 2rem; border-radius: 8px;" allowfullscreen loading="lazy"></iframe>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <img src="https://www.attorneydavidscott.com/assets/images/footer-logo.svg" alt="Law Office of David L. Scott">
+      <span class="footer-copyright">Copyright © 2026</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.attorneydavidscott.com/">Home</a>
+      <a href="https://www.attorneydavidscott.com/about/">About</a>
+      <a href="https://www.attorneydavidscott.com/family-law/">Family Law</a>
+      <a href="https://www.attorneydavidscott.com/family-law/divorce/">Divorce</a>
+      <a href="https://www.attorneydavidscott.com/mediation/">Mediation</a>
+      <a href="https://www.attorneydavidscott.com/criminal-defense/">Criminal Defense</a>
+      <a href="https://www.attorneydavidscott.com/blog/">Blog</a>
+      <a href="https://www.attorneydavidscott.com/contact/">Contact</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
