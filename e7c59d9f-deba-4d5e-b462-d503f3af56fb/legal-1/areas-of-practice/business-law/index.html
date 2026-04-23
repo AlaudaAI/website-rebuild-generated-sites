@@ -1,562 +1,845 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Middle Tennessee Business Law Attorneys</title>
-  <style>
-    :root {
-      --bg-primary: #111115;
-      --bg-secondary: #1a1a20;
-      --bg-hover: #22222a;
-      --bg-card: #16161c;
-      --text-primary: #ffffff;
-      --text-muted: rgba(255, 255, 255, 0.5);
-      --text-dim: rgba(255, 255, 255, 0.35);
-      --border-color: rgba(255, 255, 255, 0.1);
-      --border-light: rgba(255, 255, 255, 0.06);
-      --font-serif: 'Playfair Display', Georgia, serif;
-      --font-sans: 'Inter', -apple-system, sans-serif;
-      --sidebar-width: 280px;
-      --space-xs: 4px;
-      --space-sm: 8px;
-      --space-md: 16px;
-      --space-lg: 32px;
-      --space-xl: 48px;
-      --space-2xl: 64px;
-      --space-3xl: 96px;
-      --section-padding: 80px 20px;
-      --max-width: 1200px;
-      --container-padding: 20px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Law</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  :root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
 
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-    html {
-      scroll-behavior: smooth;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-    body {
-      font-family: var(--font-sans);
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
-      font-size: 16px;
-      line-height: 1.6;
-      overflow-x: hidden;
-      overflow-wrap: break-word;
-    }
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
 
-    /* Navigation */
+  /* Navigation */
+  .mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+  .mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+  .mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+  .mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+  .hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+  .hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+  .sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+  .sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+  .sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+  .sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+  .sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+  .sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+  .sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+  .sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+  .sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+  .mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+  .mobile-nav-overlay.active {
+  display: block;
+}
+
+  .sidebar.active {
+  display: flex;
+}
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: calc(96px + 60px) var(--space-lg) var(--space-3xl);
+    background: var(--text-primary);
+    color: #ffffff;
+  }
+
+  .page-title-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-title-area h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  /* Content Area */
+  .content-area {
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .content-area h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .content-area p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area ul, .content-area ol {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-lg);
+    color: var(--text-muted);
+  }
+
+  .content-area li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  .content-area img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    font-weight: 500;
+  }
+
+  .content-area a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  .contact-section {
+    margin-top: var(--space-3xl);
+    padding: var(--space-xl);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background: var(--bg-secondary);
+  }
+
+  .contact-section h2 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .contact-info {
+    display: grid;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+  }
+
+  .contact-item {
+    color: var(--text-muted);
+  }
+
+  .contact-item strong {
+    color: var(--text-primary);
+  }
+
+  .map-embed {
+    margin-top: var(--space-xl);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .map-embed iframe {
+    width: 100%;
+    height: 300px;
+    border: none;
+  }
+
+  .services-grid {
+    display: grid;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-3xl);
+  }
+
+  .service-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: var(--space-xl);
+  }
+
+  .service-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .service-description {
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* Footer */
+  .footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+  .footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+  .footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+  .footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+  .footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+  .footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+  .footer-links a:hover {
+  color: var(--text-primary);
+}
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
     .mobile-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: var(--space-md) var(--space-lg);
-      border-bottom: 1px solid var(--border-color);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--bg-primary);
+      padding: var(--space-sm) var(--space-md);
     }
-
-    .mobile-header .brand {
-      display: flex;
-      align-items: center;
-      gap: var(--space-sm);
-      text-decoration: none;
-      color: var(--text-primary);
+    
+    .page-title-area {
+      padding: var(--space-3xl) var(--space-md) var(--space-xl);
     }
-
-    .mobile-header .brand .globe-icon {
-      width: 32px;
-      height: 32px;
-      border: 1.5px solid var(--text-primary);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
+    
+    .content-area {
+      padding: var(--space-xl) var(--space-md);
     }
-
-    .mobile-header .brand-name {
-      font-family: var(--font-sans);
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-    }
-
-    .hamburger {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: var(--space-sm);
-    }
-
-    .hamburger span {
-      display: block;
-      width: 22px;
-      height: 1.5px;
-      background: var(--text-primary);
-      transition: all 0.3s ease;
-    }
-
-    .sidebar {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: var(--sidebar-width);
-      height: 100vh;
-      background: var(--bg-primary);
-      border-right: 1px solid var(--border-color);
-      z-index: 200;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: var(--space-xl) var(--space-lg);
-      overflow-y: auto;
-    }
-
-    .sidebar .brand-section {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-xl);
-    }
-
-    .sidebar .brand-link {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      color: var(--text-primary);
-    }
-
-    .sidebar .globe-icon {
-      width: 38px;
-      height: 38px;
-      border: 1.5px solid var(--text-primary);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      flex-shrink: 0;
-    }
-
-    .sidebar .brand-name {
-      font-family: var(--font-sans);
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-
-    .sidebar nav {
-      display: flex;
-      flex-direction: column;
+    
+    .services-grid {
       gap: var(--space-lg);
     }
-
-    .sidebar nav a {
-      font-family: var(--font-sans);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.3s ease;
+    
+    .service-card {
+      padding: var(--space-lg);
     }
-
-    .sidebar nav a:hover {
-      color: var(--text-primary);
+    
+    .contact-section {
+      padding: var(--space-lg);
     }
+  }
 
-    .sidebar .status-section {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-md);
-    }
+  @media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
 
-    .status-indicator {
-      display: flex;
-      align-items: center;
-      gap: var(--space-sm);
-    }
+  .hero-text {
+    flex: 1.2;
+  }
 
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #10b981;
-    }
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
 
-    .status-label {
-      font-family: var(--font-sans);
-      font-size: 11px;
-      font-weight: 400;
-      color: var(--text-muted);
-    }
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
 
-    .mobile-nav-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.7);
-      z-index: 150;
-    }
+  .features {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 
-    .mobile-nav-overlay.active {
-      display: block;
-    }
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
 
-    .sidebar.active {
-      display: flex;
-    }
+  .feature-card:last-child {
+    border-right: none;
+  }
 
-    /* Main Content */
-    .main-content {
-      transition: margin-left 0.3s ease;
-    }
+  .trust-section {
+    grid-template-columns: 1fr 1fr;
+  }
 
-    /* Hero Section */
-    .hero {
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
-      padding: 80px 20px;
-      text-align: center;
-    }
+  .trust-metrics {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
 
-    .hero h1 {
-      font-family: var(--font-serif);
-      font-size: clamp(2rem, 5vw, 3rem);
-      line-height: 1.2;
-      margin-bottom: 32px;
-      font-weight: 700;
-    }
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
 
-    .hero p {
-      font-family: var(--font-sans);
-      font-size: 1.125rem;
-      line-height: 1.6;
-      color: var(--text-muted);
-      margin-bottom: 24px;
-    }
+  @media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
 
-    .hero .nav-links {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
+  .sidebar {
+    display: flex !important;
+  }
 
-    .hero .nav-links a {
-      color: var(--text-primary);
-      text-decoration: none;
-      font-family: var(--font-sans);
-      font-weight: 500;
-      padding: 12px 24px;
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-      transition: background-color 0.3s;
-    }
+  .mobile-nav-overlay {
+    display: none !important;
+  }
 
-    .hero .nav-links a:hover {
-      background-color: var(--bg-hover);
-    }
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
 
-    .hero .nav-links span {
-      color: var(--text-dim);
-    }
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
 
-    /* Content Sections */
-    .content-section {
-      padding: var(--space-2xl) var(--container-padding);
-      border-bottom: 1px solid var(--border-color);
-    }
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
 
-    .content-section:nth-child(even) {
-      background-color: var(--bg-secondary);
-    }
+  .hero-subheading {
+    font-size: 20px;
+  }
 
-    .content-section:nth-child(odd) {
-      background-color: var(--bg-primary);
-    }
+  .hero-visual {
+    max-width: 380px;
+  }
 
-    .container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-    }
+  .features {
+    /* already 3-col from tablet */
+  }
 
-    .content-section h2 {
-      font-family: var(--font-serif);
-      font-size: clamp(1.5rem, 3vw, 2rem);
-      font-weight: 600;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      color: var(--text-primary);
-      margin-bottom: var(--space-lg);
-    }
+  .feature-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
 
-    .content-section p {
-      font-size: 1rem;
-      line-height: 1.7;
-      color: var(--text-muted);
-      margin-bottom: var(--space-lg);
-    }
+  .trust-section {
+    /* already 2-col from tablet */
+  }
 
-    .content-section p:last-child {
-      margin-bottom: 0;
-    }
+  .trust-metrics {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
 
-    /* Footer */
-    .footer {
-      padding: var(--space-xl) var(--container-padding);
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-lg);
-      border-top: 1px solid var(--border-color);
-      background-color: var(--bg-primary);
-    }
+  .trust-clients {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
 
-    .footer-brand {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-sm);
-    }
+  .trust-number {
+    font-size: 120px;
+  }
 
-    .footer-brand-name {
-      font-family: var(--font-sans);
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--text-primary);
-    }
+  .client-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
 
-    .footer-copyright {
-      font-family: var(--font-sans);
-      font-size: 12px;
-      font-weight: 300;
-      color: var(--text-dim);
-    }
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
 
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-md) var(--space-lg);
-    }
+  @media (min-width: 768px) {
+    .page-title-area { padding: calc(96px + 60px) var(--space-2xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl) var(--space-2xl); }
+  }
 
-    .footer-links a {
-      font-family: var(--font-sans);
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .footer-links a:hover {
-      color: var(--text-primary);
-    }
-
-    /* Responsive Design */
-    @media (min-width: 768px) {
-      .hero {
-        padding: var(--space-2xl) var(--space-xl);
-      }
-
-      .content-section {
-        padding: var(--space-2xl) var(--space-xl);
-      }
-
-      .footer {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: flex-end;
-        padding: var(--space-xl) var(--space-xl);
-      }
-    }
-
-    @media (min-width: 1024px) {
-      .mobile-header {
-        display: none;
-      }
-
-      .sidebar {
-        display: flex !important;
-      }
-
-      .mobile-nav-overlay {
-        display: none !important;
-      }
-
-      .main-content {
-        margin-left: var(--sidebar-width);
-        width: calc(100% - var(--sidebar-width));
-      }
-
-      .hero {
-        padding: var(--space-3xl) var(--space-2xl);
-      }
-
-      .content-section {
-        padding: var(--space-3xl) var(--space-2xl);
-      }
-
-      .footer {
-        padding: var(--space-xl) var(--space-2xl);
-      }
-    }
-
-    /* Mobile Navigation JavaScript */
-    .hamburger.active span:nth-child(1) {
-      transform: rotate(45deg) translate(7px, 7px);
-    }
-
-    .hamburger.active span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .hamburger.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(8px, -8px);
-    }
-  </style>
+  @media (min-width: 1024px) {
+    .page-title-area { padding: calc(96px + 80px) var(--space-3xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl); }
+  }
+</style>
 </head>
 <body>
-  <!-- HEADER -->
-  <!-- Mobile Header -->
-  <header class="mobile-header">
-    <a href="#" class="brand">
+
+<!-- HEADER -->
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">KRBS Law</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
       <div class="globe-icon"><i class="fas fa-globe"></i></div>
-      <span class="brand-name">Business Law</span>
+      <span class="brand-name">KRBS Law</span>
     </a>
-    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </header>
-
-  <!-- Mobile Nav Overlay -->
-  <div class="mobile-nav-overlay" id="navOverlay"></div>
-
-  <!-- Sidebar Navigation -->
-  <aside class="sidebar" id="sidebar">
-    <div class="brand-section">
-      <a href="#" class="brand-link">
-        <div class="globe-icon"><i class="fas fa-globe"></i></div>
-        <span class="brand-name">Business Law</span>
-      </a>
-      <nav>
-        <a href="#">Platform</a>
-        <a href="#">Solutions</a>
-        <a href="#">Documentation</a>
-        <a href="#">Enterprise</a>
-      </nav>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/our-team">Our Team</a>
+      <a href="/areas-of-practice">Areas of Practice</a>
+      <a href="/mediation">Mediation</a>
+      <a href="/contact-us">Contact Us</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">All Systems Operational</span>
     </div>
-    <div class="status-section">
-      <div class="status-indicator">
-        <div class="status-dot"></div>
-        <span class="status-label">All Systems Operational</span>
-      </div>
-      <div class="status-indicator">
-        <div class="status-dot"></div>
-        <span class="status-label">API v4.2 Active</span>
-      </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">API v4.2 Active</span>
     </div>
-  </aside>
+  </div>
+</aside>
 
-  <!-- Main Content -->
-  <div class="main-content">
-    <section class="hero" style="background-color: var(--bg-primary); color: var(--text-primary); padding: 80px 20px; text-align: center;">
-      <div style="max-width: 700px; margin: 0 auto;">
-        <h1 style="font-family: var(--font-serif); font-size: 3rem; line-height: 1.2; margin-bottom: 32px; font-weight: 700;">
-          Middle Tennessee business law attorneys versed in a wide-array of services
-        </h1>
-        
-        <div style="font-family: var(--font-sans); font-size: 1.125rem; line-height: 1.6; color: var(--text-muted); max-width: 520px; margin: 0 auto 48px;">
-          <p style="margin-bottom: 24px;">
-            Our lawyers represent a large number of local and regional corporations and business clients in disputes involving breach of contract, there unfair competition, partners and shareholders, business dissolution, trade secrets, directors' and officers' liability, trademark infringement, and franchises. We also represent clients involved in State and Federal litigation or arbitration.
-          </p>
-          
-          <p style="margin-bottom: 24px;">
-            Our attorneys can also assist you in incorporating your business by handling the establishment of a number of organized entities for your business including: Corporations, Limited Liability Companies (LLC), Limited Liability Partnerships and other Partnerships.
-          </p>
-        </div>
-        
-        <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
-          <a href="https://krbslaw.com/areas-of-practice/business-law/#company-formation" style="color: var(--text-primary); text-decoration: none; font-family: var(--font-sans); font-weight: 500; padding: 12px 24px; border: 1px solid var(--border-color); border-radius: 4px; transition: background-color 0.3s;">
-            Company Formation
-          </a>
-          <span style="color: var(--text-dim); align-self: center;">|</span>
-          <a href="https://krbslaw.com/areas-of-practice/business-law/#employment-law" style="color: var(--text-primary); text-decoration: none; font-family: var(--font-sans); font-weight: 500; padding: 12px 24px; border: 1px solid var(--border-color); border-radius: 4px; transition: background-color 0.3s;">
-            Employment Law
-          </a>
-        </div>
-      </div>
-    </section>
-<div style="width:100%;margin:2rem 0"><img src="https://krbslaw.com/areas-of-practice/&quot;https://krbslaw.com/wp-content/uploads/2020/05/areas-of-law-practice-lawyers-murfreesboro.jpg&quot;" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+<!-- Main Content -->
 
+<main class="main-content">
 
-    <section id="company-formation" class="content-section">
-      <div >
-        <h2>Company Formation</h2>
-        <p class="content-text">Deciding the best form of entity for your new business, whether it is a Corporation, Partnership or Limited Liability Company, is the first step in creating a successful business enterprise.  The lawyers at KRBS can establish and manage any number of organized entities for your business, including Non-Profits.</p>
-      </div>
-    </section>
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Business Law</h1>
+  </div>
+</section>
 
-    <section id="employment-law" class="content-section">
-      <div >
-        <h2>Employment Law</h2>
-        <p >Our law firm can provide you with an experienced attorney to represent you or your company in a wide variety of employment matters such as employment agreements, employee termination and wrongful termination, worker's compensation, non-competition agreements, and discrimination.</p>
-        <p >If employment disputes do arise, our goal is to assist you in the resolution of those disputes, and advise you as to how you can prevent these disputes from arising again in the future. We represent both small and large companies and businesses throughout the Middle Tennessee area.</p>
-      </div>
-    </section>
+<div style="width:100%;margin:2rem 0"><img src="https://krbslaw.com/wp-content/uploads/2020/05/areas-of-law-practice-lawyers-murfreesboro.jpg" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
 
-    <footer class="footer">
-      <div class="footer-brand">
-        <span class="footer-brand-name">Business Law</span>
-        <span class="footer-copyright">© 2024 Business Law Systems, Inc. All rights reserved.</span>
-      </div>
-      <div class="footer-links">
-        <a href="#">Platform</a>
-        <a href="#">Solutions</a>
-        <a href="#">Documentation</a>
-        <a href="#">Enterprise</a>
-      </div>
-    </footer>
+<!-- Page Content -->
+<div class="content-area">
+  <h2>Middle Tennessee business law attorneys versed in a wide-array of services</h2>
+  
+  <p>Our lawyers represent a large number of local and regional corporations and business clients in disputes involving breach of contract, there unfair competition, partners and shareholders, business dissolution, trade secrets, directors' and officers' liability, trademark infringement, and franchises. We also represent clients involved in State and Federal litigation or arbitration.</p>
+
+  <p>Our attorneys can also assist you in incorporating your business by handling the establishment of a number of organized entities for your business including: Corporations, Limited Liability Companies (LLC), Limited Liability Partnerships and other Partnerships.</p>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/loading.gif" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <h2>Company Formation</h2>
+  
+  <p>Deciding the best form of entity for your new business, whether it is a Corporation, Partnership or Limited Liability Company, is the first step in creating a successful business enterprise.  The lawyers at KRBS can establish and manage any number of organized entities for your business, including Non-Profits.</p>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <h2>Employment Law</h2>
+  
+  <p>Our law firm can provide you with an experienced attorney to represent you or your company in a wide variety of employment matters such as employment agreements, employee termination and wrongful termination, worker's compensation, non-competition agreements, and discrimination.</p>
+
+  <p>If employment disputes do arise, our goal is to assist you in the resolution of those disputes, and advise you as to how you can prevent these disputes from arising again in the future. We represent both small and large companies and businesses throughout the Middle Tennessee area.</p>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/download.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/download_white.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <h2>Our Legal Services</h2>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <h3 class="service-title">Business Law</h3>
+      <p class="service-description">Corporate and business clients in disputes involving breach of contract, unfair competition, partners and shareholders, business dissolution, trade secrets, directors' and officers' liability, trademark infringement, and franchises</p>
+    </div>
+
+    <div class="service-card">
+      <h3 class="service-title">Company Formation</h3>
+      <p class="service-description">Establishment of organized entities including Corporations, Limited Liability Companies (LLC), Limited Liability Partnerships and other Partnerships</p>
+    </div>
+
+    <div class="service-card">
+      <h3 class="service-title">Employment Law</h3>
+      <p class="service-description">Employment agreements, employee termination and wrongful termination, worker's compensation, non-competition agreements, and discrimination</p>
+    </div>
+
+    <div class="service-card">
+      <h3 class="service-title">Estate Planning</h3>
+      <p class="service-description">Protecting your assets and ensuring that your property is distributed according to your wishes, including charitable giving</p>
+    </div>
+
+    <div class="service-card">
+      <h3 class="service-title">Family Law</h3>
+      <p class="service-description">Divorce, child custody, child support, contempt, dependent neglect, and adoption</p>
+    </div>
+
+    <div class="service-card">
+      <h3 class="service-title">Divorce</h3>
+      <p class="service-description">Contested and uncontested divorce proceedings with experience in complex financial situations</p>
+    </div>
+
+    <div class="service-card">
+      <h3 class="service-title">Child Custody</h3>
+      <p class="service-description">Child custody battles, visitation rights, relocation, and child support matters</p>
+    </div>
+
+    <div class="service-card">
+      <h3 class="service-title">Personal Injury</h3>
+      <p class="service-description">Motor vehicle accidents, work accidents, defective products, falls, wrongful death, head and spinal injury, railroad accidents</p>
+    </div>
+
+    <div class="service-card">
+      <h3 class="service-title">Probate</h3>
+      <p class="service-description">Settling the estate of a deceased person, including distribution of assets and resolution of claims</p>
+    </div>
+
+    <div class="service-card">
+      <h3 class="service-title">Real Estate Law</h3>
+      <p class="service-description">Commercial and residential real estate transactions, purchase agreements, leases, loan documents, liens, restrictive covenants, land use, zoning, subdivision</p>
+    </div>
+
+    <div class="service-card">
+      <h3 class="service-title">Social Security Disability</h3>
+      <p class="service-description">Assistance with Social Security Disability claims, appeals, and hearings before administrative law judges</p>
+    </div>
+
+    <div class="service-card">
+      <h3 class="service-title">Mediation</h3>
+      <p class="service-description">Family law dispute mediation services with Rule 31 Listed Civil Mediator</p>
+    </div>
+
+    <div class="service-card">
+      <h3 class="service-title">Criminal Defense</h3>
+    </div>
+
+    <div class="service-card">
+      <h3 class="service-title">Insurance Defense</h3>
+    </div>
   </div>
 
-  <script>
-    // Mobile navigation toggle
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
-    const navOverlay = document.getElementById('navOverlay');
-    const sidebar = document.getElementById('sidebar');
+  <div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/refresh_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
 
-    hamburgerBtn.addEventListener('click', () => {
-      hamburgerBtn.classList.toggle('active');
-      navOverlay.classList.toggle('active');
-      sidebar.classList.toggle('active');
-    });
+  <div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/refresh_white_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
 
-    navOverlay.addEventListener('click', () => {
-      hamburgerBtn.classList.remove('active');
-      navOverlay.classList.remove('active');
+  <h2>Our Team</h2>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <h3 class="service-title">John Rodgers</h3>
+    </div>
+
+    <div class="service-card">
+      <h3 class="service-title">James Barger</h3>
+    </div>
+
+    <div class="service-card">
+      <h3 class="service-title">Loren Sanderson</h3>
+    </div>
+
+    <div class="service-card">
+      <h3 class="service-title">David Kious</h3>
+    </div>
+  </div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/audio_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <h2>Experience That Matters</h2>
+
+  <div class="service-card">
+    <h3 class="service-title">75+ years of collective experience</h3>
+  </div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/undo_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div style="width:100%;margin:2rem 0"><img src="https://www.gstatic.com/recaptcha/api2/undo_white_2x.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <div class="contact-section">
+    <h2>Contact</h2>
+    
+    <div class="contact-info">
+      <div class="contact-item">
+        <strong>Kious, Rodgers, Barger & Sanderson, PLLC</strong>
+      </div>
+      <div class="contact-item">
+        <strong>Address:</strong> 503 N Maple St., Murfreesboro, TN 37130
+      </div>
+      <div class="contact-item">
+        <strong>Phone:</strong> <a href="tel:6158955566">615-895-5566</a>
+      </div>
+      <div class="contact-item">
+        <strong>Email:</strong> <a href="mailto:admin@krbslaw.com">admin@krbslaw.com</a>
+      </div>
+    </div>
+
+    <div class="map-embed">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3238.8!2d-86.3923469!3d35.8506391!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8863f871e0d5755b%3A0x9f0262dbff88f4ec!2s503%20N%20Maple%20St%2C%20Murfreesboro%2C%20TN%2037130!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">KRBS Law</span>
+      <span class="footer-copyright">© 2024 KRBS Law Systems, Inc. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/our-team">Our Team</a>
+    <a href="/areas-of-practice">Areas of Practice</a>
+    <a href="/areas-of-practice/business-law">Business Law</a>
+    <a href="/areas-of-practice/estate-planning">Estate Planning</a>
+    <a href="/areas-of-practice/family-law">Family Law</a>
+    <a href="/areas-of-practice/personal-injury">Personal Injury</a>
+    <a href="/areas-of-practice/probate">Probate</a>
+    <a href="/areas-of-practice/real-estate-law">Real Estate Law</a>
+    <a href="/areas-of-practice/social-security-disability">Social Security Disability</a>
+    <a href="/mediation">Mediation</a>
+    <a href="/schedule-your-mediation">Schedule Your Mediation</a>
+    <a href="/contact-us">Contact Us</a>
+  </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
       sidebar.classList.remove('active');
-    });
-  </script>
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
 </body>
 </html>
