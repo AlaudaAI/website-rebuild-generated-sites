@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Middle Tennessee Business Law Attorneys</title>
+  <style>
+    :root {
+      --bg-primary: #111115;
+      --bg-secondary: #1a1a20;
+      --bg-hover: #22222a;
+      --bg-card: #16161c;
+      --text-primary: #ffffff;
+      --text-muted: rgba(255, 255, 255, 0.5);
+      --text-dim: rgba(255, 255, 255, 0.35);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --border-light: rgba(255, 255, 255, 0.06);
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --sidebar-width: 280px;
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 16px;
+      --space-lg: 32px;
+      --space-xl: 48px;
+      --space-2xl: 64px;
+      --space-3xl: 96px;
+      --section-padding: 80px 20px;
+      --max-width: 1200px;
+      --container-padding: 20px;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      overflow-wrap: break-word;
+    }
+
+    /* Navigation */
+    .mobile-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-md) var(--space-lg);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-primary);
+    }
+
+    .mobile-header .brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .mobile-header .brand .globe-icon {
+      width: 32px;
+      height: 32px;
+      border: 1.5px solid var(--text-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .mobile-header .brand-name {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--space-sm);
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+
+    .sidebar {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: var(--sidebar-width);
+      height: 100vh;
+      background: var(--bg-primary);
+      border-right: 1px solid var(--border-color);
+      z-index: 200;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: var(--space-xl) var(--space-lg);
+      overflow-y: auto;
+    }
+
+    .sidebar .brand-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xl);
+    }
+
+    .sidebar .brand-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .sidebar .globe-icon {
+      width: 38px;
+      height: 38px;
+      border: 1.5px solid var(--text-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .sidebar .brand-name {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    .sidebar nav a {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .sidebar nav a:hover {
+      color: var(--text-primary);
+    }
+
+    .sidebar .status-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .status-indicator {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+    }
+
+    .status-label {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+
+    .mobile-nav-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 150;
+    }
+
+    .mobile-nav-overlay.active {
+      display: block;
+    }
+
+    .sidebar.active {
+      display: flex;
+    }
+
+    /* Main Content */
+    .main-content {
+      transition: margin-left 0.3s ease;
+    }
+
+    /* Hero Section */
+    .hero {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.2;
+      margin-bottom: 32px;
+      font-weight: 700;
+    }
+
+    .hero p {
+      font-family: var(--font-sans);
+      font-size: 1.125rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .hero .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .hero .nav-links a {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      padding: 12px 24px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+
+    .hero .nav-links a:hover {
+      background-color: var(--bg-hover);
+    }
+
+    .hero .nav-links span {
+      color: var(--text-dim);
+    }
+
+    /* Content Sections */
+    .content-section {
+      padding: var(--space-2xl) var(--container-padding);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .content-section:nth-child(even) {
+      background-color: var(--bg-secondary);
+    }
+
+    .content-section:nth-child(odd) {
+      background-color: var(--bg-primary);
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .content-section h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: var(--space-lg);
+    }
+
+    .content-section p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin-bottom: var(--space-lg);
+    }
+
+    .content-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Footer */
+    .footer {
+      padding: var(--space-xl) var(--container-padding);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+      border-top: 1px solid var(--border-color);
+      background-color: var(--bg-primary);
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .footer-brand-name {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+    }
+
+    .footer-copyright {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--text-dim);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md) var(--space-lg);
+    }
+
+    .footer-links a {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--text-primary);
+    }
+
+    /* Responsive Design */
+    @media (min-width: 768px) {
+      .hero {
+        padding: var(--space-2xl) var(--space-xl);
+      }
+
+      .content-section {
+        padding: var(--space-2xl) var(--space-xl);
+      }
+
+      .footer {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+        padding: var(--space-xl) var(--space-xl);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .mobile-header {
+        display: none;
+      }
+
+      .sidebar {
+        display: flex !important;
+      }
+
+      .mobile-nav-overlay {
+        display: none !important;
+      }
+
+      .main-content {
+        margin-left: var(--sidebar-width);
+        width: calc(100% - var(--sidebar-width));
+      }
+
+      .hero {
+        padding: var(--space-3xl) var(--space-2xl);
+      }
+
+      .content-section {
+        padding: var(--space-3xl) var(--space-2xl);
+      }
+
+      .footer {
+        padding: var(--space-xl) var(--space-2xl);
+      }
+    }
+
+    /* Mobile Navigation JavaScript */
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(7px, 7px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(8px, -8px);
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <!-- Mobile Header -->
+  <header class="mobile-header">
+    <a href="#" class="brand">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">Business Law</span>
+    </a>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <!-- Mobile Nav Overlay -->
+  <div class="mobile-nav-overlay" id="navOverlay"></div>
+
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand-section">
+      <a href="#" class="brand-link">
+        <div class="globe-icon"><i class="fas fa-globe"></i></div>
+        <span class="brand-name">Business Law</span>
+      </a>
+      <nav>
+        <a href="#">Platform</a>
+        <a href="#">Solutions</a>
+        <a href="#">Documentation</a>
+        <a href="#">Enterprise</a>
+      </nav>
+    </div>
+    <div class="status-section">
+      <div class="status-indicator">
+        <div class="status-dot"></div>
+        <span class="status-label">All Systems Operational</span>
+      </div>
+      <div class="status-indicator">
+        <div class="status-dot"></div>
+        <span class="status-label">API v4.2 Active</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <section class="hero" style="background-color: var(--bg-primary); color: var(--text-primary); padding: 80px 20px; text-align: center;">
+      <div style="max-width: 700px; margin: 0 auto;">
+        <h1 style="font-family: var(--font-serif); font-size: 3rem; line-height: 1.2; margin-bottom: 32px; font-weight: 700;">
+          Middle Tennessee business law attorneys versed in a wide-array of services
+        </h1>
+        
+        <div style="font-family: var(--font-sans); font-size: 1.125rem; line-height: 1.6; color: var(--text-muted); max-width: 520px; margin: 0 auto 48px;">
+          <p style="margin-bottom: 24px;">
+            Our lawyers represent a large number of local and regional corporations and business clients in disputes involving breach of contract, there unfair competition, partners and shareholders, business dissolution, trade secrets, directors' and officers' liability, trademark infringement, and franchises. We also represent clients involved in State and Federal litigation or arbitration.
+          </p>
+          
+          <p style="margin-bottom: 24px;">
+            Our attorneys can also assist you in incorporating your business by handling the establishment of a number of organized entities for your business including: Corporations, Limited Liability Companies (LLC), Limited Liability Partnerships and other Partnerships.
+          </p>
+        </div>
+        
+        <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+          <a href="https://krbslaw.com/areas-of-practice/business-law/#company-formation" style="color: var(--text-primary); text-decoration: none; font-family: var(--font-sans); font-weight: 500; padding: 12px 24px; border: 1px solid var(--border-color); border-radius: 4px; transition: background-color 0.3s;">
+            Company Formation
+          </a>
+          <span style="color: var(--text-dim); align-self: center;">|</span>
+          <a href="https://krbslaw.com/areas-of-practice/business-law/#employment-law" style="color: var(--text-primary); text-decoration: none; font-family: var(--font-sans); font-weight: 500; padding: 12px 24px; border: 1px solid var(--border-color); border-radius: 4px; transition: background-color 0.3s;">
+            Employment Law
+          </a>
+        </div>
+      </div>
+    </section>
+<div style="width:100%;margin:2rem 0"><img src="https://krbslaw.com/areas-of-practice/&quot;https://krbslaw.com/wp-content/uploads/2020/05/areas-of-law-practice-lawyers-murfreesboro.jpg&quot;" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+    <section id="company-formation" class="content-section">
+      <div >
+        <h2>Company Formation</h2>
+        <p class="content-text">Deciding the best form of entity for your new business, whether it is a Corporation, Partnership or Limited Liability Company, is the first step in creating a successful business enterprise.  The lawyers at KRBS can establish and manage any number of organized entities for your business, including Non-Profits.</p>
+      </div>
+    </section>
+
+    <section id="employment-law" class="content-section">
+      <div >
+        <h2>Employment Law</h2>
+        <p >Our law firm can provide you with an experienced attorney to represent you or your company in a wide variety of employment matters such as employment agreements, employee termination and wrongful termination, worker's compensation, non-competition agreements, and discrimination.</p>
+        <p >If employment disputes do arise, our goal is to assist you in the resolution of those disputes, and advise you as to how you can prevent these disputes from arising again in the future. We represent both small and large companies and businesses throughout the Middle Tennessee area.</p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-brand">
+        <span class="footer-brand-name">Business Law</span>
+        <span class="footer-copyright">© 2024 Business Law Systems, Inc. All rights reserved.</span>
+      </div>
+      <div class="footer-links">
+        <a href="#">Platform</a>
+        <a href="#">Solutions</a>
+        <a href="#">Documentation</a>
+        <a href="#">Enterprise</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Mobile navigation toggle
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const navOverlay = document.getElementById('navOverlay');
+    const sidebar = document.getElementById('sidebar');
+
+    hamburgerBtn.addEventListener('click', () => {
+      hamburgerBtn.classList.toggle('active');
+      navOverlay.classList.toggle('active');
+      sidebar.classList.toggle('active');
+    });
+
+    navOverlay.addEventListener('click', () => {
+      hamburgerBtn.classList.remove('active');
+      navOverlay.classList.remove('active');
+      sidebar.classList.remove('active');
+    });
+  </script>
+</body>
+</html>
