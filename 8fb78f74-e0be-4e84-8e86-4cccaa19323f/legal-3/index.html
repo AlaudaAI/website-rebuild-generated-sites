@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style data-design-intent>
+:root {
+  --bg-desktop: #111114;
+  --bg-paper: #e8e4df;
+  --ink-black: #0a0a0a;
+  --ink-muted: rgba(10, 10, 10, 0.32);
+  --primary: #0a0a0a;
+  --bg-primary: #e8e4df;
+  --text-primary: #0a0a0a;
+  --font-heading: 'DM Serif Display', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  --content-max-width: 1600px;
+  --secondary: #3a3a3c;
+  --accent: #0a0a0a;
+  --bg-secondary: #111114;
+  --text-muted: rgba(10, 10, 10, 0.32);
+}
+</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fidelis Law PLLC - Dependable, Proven Law Firm Serving Middle Tennessee</title>
+  <style>
+    :root {
+      --primary: #111114;
+      --secondary: #3a3a3c;
+      --accent: #0a0a0a;
+      --text: #0a0a0a;
+      --text-light: rgba(10, 10, 10, 0.6);
+      --text-muted: rgba(10, 10, 10, 0.32);
+      --text-primary: #0a0a0a;
+      --bg: #e8e4df;
+      --bg-alt: #f5f3f0;
+      --bg-paper: #e8e4df;
+      --bg-desktop: #111114;
+      --bg-primary: #e8e4df;
+      --bg-secondary: #111114;
+      --font-heading: 'DM Serif Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      --section-padding: 80px;
+      --gap: 24px;
+      --max-width: 1600px;
+      --content-max-width: 1200px;
+      --grid-line: #0a0a0a;
+      --ink-black: #0a0a0a;
+      --ink-muted: rgba(10, 10, 10, 0.32);
+      --ink-hover: rgba(10, 10, 10, 0.6);
+      --doc-border: #3a3a3c;
+      --spacing-base: 8px;
+      --spacing-sm: 12px;
+      --spacing-md: 24px;
+      --spacing-lg: 40px;
+      --spacing-xl: 64px;
+      --meta-size: 10px;
+      --body-size: 16px;
+      --title-size: clamp(48px, 8vw, 96px);
+      --manifesto-size: clamp(18px, 2.2vw, 26px);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background: var(--bg-paper);
+      font-family: var(--font-sans);
+      color: var(--ink-black);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    @media (min-width: 1024px) {
+      body {
+        background: var(--bg-desktop);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px;
+        min-height: 100vh;
+      }
+    }
+
+    .document {
+      background: var(--bg-paper);
+      width: 100%;
+      min-height: 100vh;
+      position: relative;
+      opacity: 0;
+      animation: fadeInDoc 0.8s ease forwards;
+    }
+
+    @media (min-width: 1024px) {
+      .document {
+        max-width: var(--max-width);
+        min-height: 680px;
+        max-height: 1000px;
+        border: 1px solid var(--doc-border);
+        min-height: auto;
+        height: auto;
+      }
+    }
+
+    @keyframes fadeInDoc {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .document::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: radial-gradient(circle, rgba(10,10,10,0.06) 1px, transparent 1px);
+      background-size: 6px 6px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .header-bar {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: var(--spacing-md) var(--spacing-md);
+      border-bottom: 1px solid var(--grid-line);
+      position: relative;
+      z-index: 2;
+      opacity: 0;
+      animation: fadeIn 0.5s ease 0.2s forwards;
+    }
+
+    @media (min-width: 768px) {
+      .header-bar {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--spacing-md) var(--spacing-lg);
+      }
+    }
+
+    .header-left, .header-right {
+      display: flex;
+      gap: var(--spacing-md);
+      align-items: center;
+    }
+
+    .header-meta {
+      font-size: var(--meta-size);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--ink-muted);
+    }
+
+    .header-meta.active {
+      color: var(--ink-black);
+    }
+
+    .header-link {
+      font-size: var(--meta-size);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+      cursor: pointer;
+    }
+
+    .header-link:hover {
+      color: var(--ink-black);
+      text-decoration: underline;
+    }
+
+    .bracket-link::before {
+      content: '[ ';
+    }
+
+    .bracket-link::after {
+      content: ' ]';
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      z-index: 2;
+    }
+
+    @media (min-width: 1024px) {
+      .main-content {
+        flex-direction: row;
+        min-height: 520px;
+      }
+    }
+
+    .sidebar {
+      display: none;
+      max-width: 280px;
+      flex-shrink: 0;
+      border-right: 1px solid var(--grid-line);
+      padding: var(--spacing-lg) var(--spacing-md) var(--spacing-lg) var(--spacing-lg);
+      position: relative;
+      opacity: 0;
+      animation: fadeIn 0.5s ease 0.4s forwards;
+    }
+
+    @media (min-width: 1024px) {
+      .sidebar {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+    }
+
+    .sidebar-label {
+      font-size: var(--meta-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--ink-black);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .sidebar-nav {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .sidebar-nav li {
+      display: block;
+    }
+
+    .sidebar-nav a {
+      font-size: var(--meta-size);
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+      cursor: pointer;
+      display: block;
+      padding: 2px 0;
+    }
+
+    .sidebar-nav a:hover {
+      color: var(--ink-black);
+    }
+
+    .sidebar-nav a.active {
+      color: var(--ink-black);
+      font-weight: 500;
+    }
+
+    .sidebar-status {
+      font-size: var(--meta-size);
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--ink-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--ink-black);
+      display: inline-block;
+    }
+
+    .hero {
+      padding: var(--section-padding) 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 60vh;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 40px;
+    }
+
+    .manifesto {
+      padding: var(--section-padding) 20px;
+      text-align: center;
+      background: var(--bg-alt);
+      border-top: 1px solid var(--grid-line);
+    }
+
+    .manifesto h2 {
+      font-family: var(--font-heading);
+      color: var(--text-primary);
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      margin-bottom: 2rem;
+      font-weight: normal;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .manifesto-text {
+      font-family: var(--font-body);
+      color: var(--text-primary);
+      font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+      font-weight: 300;
+      line-height: 1.6;
+      margin: 0;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .services {
+      padding: var(--section-padding) 0;
+      color: var(--text-primary);
+    }
+
+    .services > div {
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .services h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 6vw, 3rem);
+      text-align: center;
+      margin-bottom: 60px;
+      color: var(--text-primary);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--bg-desktop);
+      padding: 40px 30px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      color: var(--bg-paper);
+      margin: 0;
+    }
+
+    .video {
+      padding: 60px 20px;
+      background: var(--bg-alt);
+    }
+
+    .video > div {
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+    }
+
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      max-width: 100%;
+      background: var(--bg-desktop);
+      border-radius: 8px;
+    }
+
+    .video iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .about-content {
+      padding: 60px 20px;
+    }
+
+    .about-content > div {
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+    }
+
+    .about-content p {
+      font-family: var(--font-body);
+      line-height: 1.6;
+      font-size: 16px;
+      margin-bottom: 1.5rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .about-content a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .about-content a:hover {
+      text-decoration: underline;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      max-width: 900px;
+      margin: 60px auto 0;
+    }
+
+    .content-grid a {
+      text-decoration: none;
+      color: var(--text-primary);
+      padding: 20px;
+      border: 1px solid var(--ink-muted);
+      display: block;
+      transition: background-color 0.2s ease;
+    }
+
+    .content-grid a:hover {
+      background-color: var(--bg-alt);
+    }
+
+    .content-grid h3 {
+      font-family: var(--font-heading);
+      margin: 0 0 10px 0;
+      font-size: 1.125rem;
+    }
+
+    .content-grid p {
+      margin: 0;
+      font-family: var(--font-body);
+      font-size: 14px;
+    }
+
+    .video-section {
+      padding: 2rem 1rem;
+      background: var(--bg-alt);
+    }
+
+    .video-section > div {
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+    }
+
+    .section-marker {
+      color: var(--text-muted);
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    .more-options {
+      padding: 2rem 1rem;
+      font-family: var(--font-body);
+      border-top: 1px solid var(--ink-muted);
+      background: var(--bg-alt);
+    }
+
+    .more-options > div {
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+    }
+
+    .more-options h2 {
+      font-family: var(--font-heading);
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      font-weight: normal;
+    }
+
+    .options-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: flex-start;
+      font-size: 0.875rem;
+      color: var(--text-primary);
+    }
+
+    .options-controls button, .options-controls span, .options-controls a {
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .options-controls button:hover, .options-controls a:hover {
+      text-decoration: underline;
+    }
+
+    .contact-form {
+      background: var(--bg);
+      padding: var(--section-padding) 20px;
+      font-family: var(--font-body);
+    }
+
+    .contact-form > div {
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+      display: flex;
+      gap: 60px;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 768px) {
+      .contact-form > div {
+        flex-direction: column;
+        gap: 40px;
+      }
+    }
+
+    .contact-form h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 6vw, 3rem);
+      line-height: 1.2;
+      color: var(--text-primary);
+      margin-bottom: 40px;
+    }
+
+    .contact-form form {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .form-row {
+        flex-direction: column;
+      }
+    }
+
+    .contact-form input, .contact-form textarea {
+      padding: 16px;
+      border: 1px solid var(--text-muted);
+      background: white;
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 16px;
+      border-radius: 4px;
+    }
+
+    .contact-form input {
+      flex: 1;
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+    }
+
+    .contact-form button {
+      background: var(--primary);
+      color: var(--bg-primary);
+      padding: 16px 32px;
+      border: none;
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      align-self: flex-start;
+      border-radius: 4px;
+      transition: background-color 0.2s ease;
+    }
+
+    .contact-form button:hover {
+      background: var(--secondary);
+    }
+
+    .contact-info {
+      background: var(--bg-secondary);
+      color: var(--bg-primary);
+      padding: 40px;
+      border-radius: 8px;
+      max-width: 400px;
+    }
+
+    .contact-info h3 {
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .contact-info a {
+      color: var(--bg-primary);
+      text-decoration: none;
+    }
+
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+
+    .maps {
+      background: var(--bg-alt);
+      padding: var(--section-padding) 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .maps > div {
+      max-width: var(--content-max-width);
+      width: 100%;
+      border: 2px solid var(--grid-line);
+    }
+
+    .maps iframe {
+      width: 100%;
+      height: 400px;
+      border: 0;
+      display: block;
+    }
+
+    .navigation-sidebar {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .navigation-sidebar h2 {
+      font-family: var(--font-heading);
+      color: var(--text-primary);
+      margin-bottom: 2rem;
+      font-size: 1.5rem;
+    }
+
+    .contact {
+      background: var(--bg-alt);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      padding: 2rem 0;
+    }
+
+    .contact > div {
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .contact .header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-top: 1px solid var(--ink-black);
+      border-bottom: 1px solid var(--ink-black);
+      animation: none;
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .contact .header-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    .footer-manifesto {
+      border-top: 1px solid var(--grid-line);
+      padding: var(--spacing-xl) var(--spacing-md);
+      text-align: left;
+      position: relative;
+      z-index: 2;
+      opacity: 0;
+      animation: fadeIn 0.6s ease 0.9s forwards;
+    }
+
+    @media (min-width: 768px) {
+      .footer-manifesto {
+        text-align: center;
+        padding: var(--spacing-xl) var(--spacing-lg);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .footer-manifesto {
+        padding: var(--spacing-xl) 120px;
+      }
+    }
+
+    .footer-manifesto .manifesto-text {
+      font-size: var(--manifesto-size);
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--ink-black);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .footer-manifesto .manifesto-text strong {
+      font-weight: 600;
+    }
+
+    .manifesto-subtitle {
+      font-size: var(--meta-size);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--ink-muted);
+      margin-top: var(--spacing-md);
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 60px 20px;
+        min-height: 50vh;
+      }
+      
+      .manifesto, .services, .video, .about-content, .contact-form {
+        padding: 60px 20px;
+      }
+      
+      .cards-grid {
+        gap: 20px;
+      }
+      
+      .card {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="document">
+    <!-- Header Bar -->
+    <header class="header-bar">
+      <div class="header-left">
+        <span class="header-meta active">Fidelis Law PLLC</span>
+        <span class="header-meta">Version 4.2</span>
+        <span class="header-meta">Brand Guidelines</span>
+      </div>
+      <div class="header-right">
+        <a class="header-link bracket-link" href="#">Download PDF</a>
+        <span class="header-meta">© 2024 All Rights Reserved</span>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar">
+        <div>
+          <div class="sidebar-label">Index:</div>
+          <ul class="sidebar-nav">
+            <li><a href="#hero" class="active">Hero</a></li>
+            <li><a href="#manifesto">Manifesto</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#video">Video</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="sidebar-status">
+          <span class="status-dot"></span>
+          System Operational
+        </div>
+      </aside>
+
+      <!-- Content Area -->
+      <div class="content-area">
+        <!-- SECTION 1: hero -->
+        <section id="hero" class="hero" style="background: var(--bg-desktop); color: var(--bg-paper); padding: 80px 20px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh;">
+          <div style="max-width: var(--content-max-width); width: 100%;">
+            <img src="https://i.vimeocdn.com/video/464931116-a771354f5b8e29e95ef7576ac35428538bb8047411cff209fe7298a5b1be34fc-d?mw=80&q=85" alt="video thumbnail" style="max-width: 100%; height: auto; margin-bottom: 40px; border-radius: 8px;">
+            <h1 class="brand-title" style="font-family: var(--font-heading); font-weight: 700; line-height: 0.95; font-size: clamp(2.5rem, 8vw, 5rem); color: var(--bg-paper); margin: 0;">
+              Dependable, proven law firm<br>
+              serving Middle Tennessee
+            </h1>
+          </div>
+        </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.fidelislawfirm.com/wp-content/uploads/2021/10/caring-respect.png" alt="Caring & Respect" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+        <!-- SECTION 2: custom:objective-advisor---trusted-counselor---courtroom-advocate -->
+        <section id="manifesto" class="manifesto" style="background: var(--bg-paper); border-top: 1px solid var(--grid-line); padding: 80px 20px; text-align: center;">
+          <div style="max-width: var(--content-max-width); margin: 0 auto; max-width: 900px;">
+            <h2 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 2.5rem; margin-bottom: 2rem; font-weight: normal;">Objective Advisor - Trusted Counselor - Courtroom Advocate</h2>
+            <p class="manifesto-text" style="font-family: var(--font-body); color: var(--text-primary); font-size: 1.25rem; font-weight: 300; line-height: 1.6; margin: 0;">
+              When life calls for legal assistance, it is our privilege to come alongside our clients to provide sound legal counsel and representation. We understand that any legal decision has a major life impact. Many times, these needs arise during some of life's more difficult situations, which is why our team is dedicated to serving to the best of our ability in all of our cases. <strong>Whether our clients need an objective advisor, a trusted counselor, or a courtroom advocate, we welcome every opportunity to discuss how we can help with these personal situations.</strong>
+            </p>
+          </div>
+        </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.fidelislawfirm.com/wp-content/uploads/2021/10/responsiveness.png" alt="Responsiveness" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+        <!-- SECTION 3: services -->
+        <section id="services" class="services" style="background: var(--bg-alt); padding: 80px 0; color: var(--text-primary);">
+          <div style="max-width: var(--content-max-width); margin: 0 auto; padding: 0 20px;">
+            <h2 style="font-family: var(--font-heading); font-size: 48px; text-align: center; margin-bottom: 60px; color: var(--text-primary);">Services</h2>
+            <div class="cards-" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+              <div class="card" style="background: var(--bg-desktop); padding: 40px 30px; border-radius: 8px; text-align: center;">
+                <h3 style="font-family: var(--font-heading); font-size: 24px; color: var(--bg-paper); margin: 0;">Church & Nonprofit Law</h3>
+              </div>
+              <div class="card" style="background: var(--bg-desktop); padding: 40px 30px; border-radius: 8px; text-align: center;">
+                <h3 style="font-family: var(--font-heading); font-size: 24px; color: var(--bg-paper); margin: 0;">Business Law</h3>
+              </div>
+              <div class="card" style="background: var(--bg-desktop); padding: 40px 30px; border-radius: 8px; text-align: center;">
+                <h3 style="font-family: var(--font-heading); font-size: 24px; color: var(--bg-paper); margin: 0;">Estate Planning & Probate</h3>
+              </div>
+              <div class="card" style="background: var(--bg-desktop); padding: 40px 30px; border-radius: 8px; text-align: center;">
+                <h3 style="font-family: var(--font-heading); font-size: 24px; color: var(--bg-paper); margin: 0;">Family Law & Divorce</h3>
+              </div>
+              <div class="card" style="background: var(--bg-desktop); padding: 40px 30px; border-radius: 8px; text-align: center;">
+                <h3 style="font-family: var(--font-heading); font-size: 24px; color: var(--bg-paper); margin: 0;">Personal Injury</h3>
+              </div>
+            </div>
+          </div>
+        </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.fidelislawfirm.com/wp-content/uploads/2021/10/dedication-excellence.png" alt="Dedication and Excellence" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+        <!-- SECTION 4: video -->
+        <section id="video" class="video" style="padding: 60px 20px; background: var(--bg-paper);">
+          <div style="max-width: var(--content-max-width); margin: 0 auto;">
+            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: var(--bg-desktop); border-radius: 8px;">
+              <iframe 
+                src="https://player.vimeo.com/video/87033613" 
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
+                allow="autoplay; fullscreen; picture-in-picture" 
+                allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+        </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.fidelislawfirm.com/wp-content/uploads/2021/10/integrity-trust.png" alt="Integrity and Trust" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+        <!-- SECTION 5: custom:settings -->
+        <section id="about" class="about-content" style="background: var(--bg-alt); color: var(--text-primary); padding: 60px 20px;">
+          <div style="max-width: var(--content-max-width); margin: 0 auto;">
+            <div style="max-width: 900px; margin: 0 auto; font-family: var(--font-body); line-height: 1.6; font-size: 16px;">
+              <p>We believe in transparency and helping each of our clients make informed legal decisions. We believe in clearly communicating throughout our relationship, and we believe in faithful and loyal service.</p>
+              
+              <p>At <strong>Fidelis Law, PLLC</strong>, we are committed to exceeding your expectations by helping you achieve peace of mind through the resolution of your legal issue(s). Our approach to serving you is comprehensive, straightforward and personalized. Your needs and goals are unique, and that should be reflected in the work of your legal counsel.</p>
+              
+              <p>Our team of attorneys operates with Christian values and ethics that we take seriously in our professional and personal lives. These principles flow through our legal practice and our continuous support to our communities.</p>
+              
+              <p>Much of our law firm's success emanates from our adherence to the Golden Rule. We put ourselves in your shoes, and we are grateful for the trust you place in our firm. We are committed to providing each of our clients with the highest quality service.</p>
+              
+              <p>Whether your legal issues involve <strong>nonprofit law</strong>, <strong>business law</strong>, <strong>family law</strong>, <strong>personal injury</strong>, <strong>estate planning</strong> or <strong>probate</strong>, we would love to speak with you. Consultations with our lawyers are not fee-driven. We are relationship-driven — responsive to your needs and questions.</p>
+              
+              <p>Please schedule a meeting with our attorneys at your convenience. With offices in Brentwood, we serve clients throughout Middle Tennessee. Call us at <a href="tel:6153703010" style="color: var(--primary);">615-370-3010</a> or <a href="https://www.fidelislawfirm.com/#contact" style="color: var(--primary);">send us an email</a>.</p>
+            </div>
+            
+            <div style="margin-top: 60px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 900px; margin-left: auto; margin-right: auto;">
+              <a href="https://www.fidelislawfirm.com/church-nonprofit-law/" style="text-decoration: none; color: var(--text-primary); padding: 20px; border: 1px solid var(--ink-muted); display: block;">
+                <h3 style="font-family: var(--font-heading); margin: 0 0 10px 0;">Church & Nonprofit</h3>
+                <p style="margin: 0; font-family: var(--font-body); font-size: 14px;">Learn More</p>
+              </a>
+              
+              <a href="https://www.fidelislawfirm.com/business-law/" style="text-decoration: none; color: var(--text-primary); padding: 20px; border: 1px solid var(--ink-muted); display: block;">
+                <h3 style="font-family: var(--font-heading); margin: 0 0 10px 0;">Business Law</h3>
+                <p style="margin: 0; font-family: var(--font-body); font-size: 14px;">Learn More</p>
+              </a>
+              
+              <a href="https://www.fidelislawfirm.com/estate-planning-and-probate/" style="text-decoration: none; color: var(--text-primary); padding: 20px; border: 1px solid var(--ink-muted); display: block;">
+                <h3 style="font-family: var(--font-heading); margin: 0 0 10px 0;">Estate Planning & Probate</h3>
+                <p style="margin: 0; font-family: var(--font-body); font-size: 14px;">Learn More</p>
+              </a>
+              
+              <a href="https://www.fidelislawfirm.com/family-law/" style="text-decoration: none; color: var(--text-primary); padding: 20px; border: 1px solid var(--ink-muted); display: block;">
+                <h3 style="font-family: var(--font-heading); margin: 0 0 10px 0;">Family Law & Divorce</h3>
+                <p style="margin: 0; font-family: var(--font-body); font-size: 14px;">Learn More</p>
+              </a>
+              
+              <a href="https://www.fidelislawfirm.com/personal-injury/" style="text-decoration: none; color: var(--text-primary); padding: 20px; border: 1px solid var(--ink-muted); display: block;">
+                <h3 style="font-family: var(--font-heading); margin: 0 0 10px 0;">Personal Injury</h3>
+                <p style="margin: 0; font-family: var(--font-body); font-size: 14px;">Learn More</p>
+              </a>
+            </div>
+            
+            <div style="margin-top: 60px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 900px; margin-left: auto; margin-right: auto;">
+              <a href="https://www.fidelislawfirm.com/#care-respect" style="text-decoration: none; color: var(--text-primary); padding: 20px; border: 1px solid var(--ink-muted); display: block; text-align: center;">
+                <h3 style="font-family: var(--font-heading); margin: 0;">Caring & Respect</h3>
+              </a>
+              
+              <a href="https://www.fidelislawfirm.com/#responsiveness" style="text-decoration: none; color: var(--text-primary); padding: 20px; border: 1px solid var(--ink-muted); display: block; text-align: center;">
+                <h3 style="font-family: var(--font-heading); margin: 0;">Responsiveness</h3>
+              </a>
+              
+              <a href="https://www.fidelislawfirm.com/#dedication-excellence" style="text-decoration: none; color: var(--text-primary); padding: 20px; border: 1px solid var(--ink-muted); display: block; text-align: center;">
+                <h3 style="font-family: var(--font-heading); margin: 0;">Dedication and Excellence</h3>
+              </a>
+              
+              <a href="https://www.fidelislawfirm.com/#integrity-trust" style="text-decoration: none; color: var(--text-primary); padding: 20px; border: 1px solid var(--ink-muted); display: block; text-align: center;">
+                <h3 style="font-family: var(--font-heading); margin: 0;">Integrity and Trust</h3>
+              </a>
+            </div>
+          </div>
+        </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.fidelislawfirm.com/wp-content/uploads/2021/09/fidelis-law-firm-logo-blue.png" alt="Fidelis Law Firm" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+        <!-- SECTION 6: custom:honored-to-serve-each-of-our-clients -->
+        <section style="max-width: var(--content-max-width); margin: 0 auto; padding: 2rem 1rem; background: var(--bg-paper);">
+          <div class="section-marker" style="color: var(--text-muted); font-family: var(--font-body); font-size: 14px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 2rem;">Honored to serve each of our clients</div>
+          
+          <div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%; background: var(--bg-secondary); border-radius: 8px; overflow: hidden;">
+            <iframe 
+              src="https://player.vimeo.com/video/464931116" 
+              style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" 
+              allowfullscreen>
+            </iframe>
+          </div>
+        </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8481!3i12869!4i256!2m3!1e0!2sm!3i776540560!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=33100" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+        <!-- SECTION 7: custom:more-options -->
+        <section class="more-options" style="background: var(--bg-alt); padding: 2rem 1rem; font-family: var(--font-body); border-top: 1px solid var(--ink-muted);">
+          <div style="max-width: var(--content-max-width); margin: 0 auto;">
+            <h2 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1.5rem; margin-bottom: 1.5rem; font-weight: normal;">More options</h2>
+            
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-start; font-size: 0.875rem; color: var(--text-primary);">
+              <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <button style="background: none; border: none; color: var(--text-primary); font-family: var(--font-body); font-size: 0.875rem; cursor: pointer; padding: 0;">Like</button>
+                <button style="background: none; border: none; color: var(--text-primary); font-family: var(--font-body); font-size: 0.875rem; cursor: pointer; padding: 0;">Share</button>
+                <button style="background: none; border: none; color: var(--text-primary); font-family: var(--font-body); font-size: 0.875rem; cursor: pointer; padding: 0;">Play</button>
+              </div>
+              
+              <div style="display: flex; gap: 1rem; align-items: center;">
+                <span style="color: var(--text-muted);">00:00</span>
+                <span style="color: var(--text-muted);">05:11</span>
+              </div>
+              
+              <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                <button style="background: none; border: none; color: var(--text-primary); font-family: var(--font-body); font-size: 0.875rem; cursor: pointer; padding: 0;">Settings</button>
+                <button style="background: none; border: none; color: var(--text-primary); font-family: var(--font-body); font-size: 0.875rem; cursor: pointer; padding: 0;">Picture-in-Picture</button>
+                <button style="background: none; border: none; color: var(--text-primary); font-family: var(--font-body); font-size: 0.875rem; cursor: pointer; padding: 0;">Fullscreen</button>
+              </div>
+              
+              <div style="margin-left: auto;">
+                <button style="background: none; border: none; color: var(--text-primary); font-family: var(--font-body); font-size: 0.875rem; cursor: pointer; padding: 0; margin-right: 1rem;">Show controls</button>
+                <a href="https://vimeo.com/87033613?fl=pl&fe=vl" style="color: var(--text-primary); text-decoration: underline; font-size: 0.875rem;">Watch on Vimeo</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8483!3i12870!4i256!2m3!1e0!2sm!3i776540476!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=48897" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+        <!-- SECTION 8: custom:complete-this-form-for-a-free-evaluation -->
+        <section id="contact" class="contact-form" style="background: var(--bg-paper); padding: 80px 20px; font-family: var(--font-body);">
+          <div style="max-width: var(--content-max-width); margin: 0 auto; display: flex; gap: 60px; align-items: flex-start;">
+            
+            <div style="flex: 1; max-width: 600px;">
+              <h2 style="font-family: var(--font-heading); font-size: 48px; line-height: 1.2; color: var(--text-primary); margin-bottom: 40px;">Complete this form for a free evaluation.</h2>
+              
+              <form style="display: flex; flex-direction: column; gap: 24px;">
+                <div style="display: flex; gap: 16px;">
+                  <input type="text" placeholder="First" required style="flex: 1; padding: 16px; border: 1px solid var(--text-muted); background: white; color: var(--text-primary); font-family: var(--font-body); font-size: 16px;">
+                  <input type="text" placeholder="Last" required style="flex: 1; padding: 16px; border: 1px solid var(--text-muted); background: white; color: var(--text-primary); font-family: var(--font-body); font-size: 16px;">
+                </div>
+                
+                <input type="email" placeholder="Email" required style="padding: 16px; border: 1px solid var(--text-muted); background: white; color: var(--text-primary); font-family: var(--font-body); font-size: 16px;">
+                
+                <input type="tel" placeholder="Phone" style="padding: 16px; border: 1px solid var(--text-muted); background: white; color: var(--text-primary); font-family: var(--font-body); font-size: 16px;">
+                
+                <textarea placeholder="Description (Required)" required rows="6" style="padding: 16px; border: 1px solid var(--text-muted); background: white; color: var(--text-primary); font-family: var(--font-body); font-size: 16px; resize: vertical;"></textarea>
+                
+                <div style="display: flex; align-items: flex-start; gap: 12px; margin-top: 16px;">
+                  <input type="checkbox" id="disclaimer" required style="margin-top: 4px;">
+                  <label for="disclaimer" style="color: var(--text-primary); font-size: 14px; line-height: 1.4;">I have read the Disclaimer at the bottom of the page.</label>
+                </div>
+                
+                <input type="hidden" name="validation" value="">
+                
+                <button type="submit" style="background: var(--primary); color: var(--bg-primary); padding: 16px 32px; border: none; font-family: var(--font-body); font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 16px; align-self: flex-start;">Submit</button>
+                
+                <p style="color: var(--text-muted); font-size: 12px; margin-top: 16px;">
+                  This form is protected by reCAPTCHA. The Google <a href="https://policies.google.com/privacy" style="color: var(--text-primary);">Privacy Policy</a> and <a href="https://policies.google.com/terms" style="color: var(--text-primary);">Terms of Service</a> apply.
+                </p>
+              </form>
+            </div>
+            
+            <div style="flex: 1; max-width: 400px;">
+              <div style="background: var(--bg-secondary); color: var(--bg-primary); padding: 40px; border-radius: 8px;">
+                <div style="text-align: center; margin-bottom: 32px;">
+                  <div style="font-style: italic; font-size: 24px; margin-bottom: 8px;">/fi'de'lis/</div>
+                  <div style="font-size: 14px; opacity: 0.8;">from fides (" faith, trust")</div>
+                </div>
+                
+                <div style="margin-bottom: 24px;">
+                  <h3 style="font-weight: 600; margin-bottom: 8px;">Phone</h3>
+                  <a href="tel:+16153703010" style="color: var(--bg-primary); text-decoration: none;">615-370-3010</a>
+                </div>
+                
+                <div style="margin-bottom: 24px;">
+                  <h3 style="font-weight: 600; margin-bottom: 8px;">Address</h3>
+                  <p style="margin: 0; line-height: 1.6;">
+                    1585 Mallory Lane Suite 104<br>
+                    Brentwood, TN 37027
+                  </p>
+                  <a href="https://maps.google.com/maps?ll=35.975348,-86.807699&z=15&t=m&hl=en&gl=US&mapclient=embed&q=1585%20Mallory%20Ln%20STE%20104%20Brentwood%2C%20TN%2037027" target="_blank" style="color: var(--bg-primary); text-decoration: underline; font-size: 14px;">Open in Maps</a>
+                </div>
+                
+                <div style="width: 100%; height: 200px; border-radius: 4px; overflow: hidden; margin-top: 24px;">
+                  <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3222.5!2d-86.8076988!3d35.9753481!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDU4JzMxLjMiTiA4NsKwNDgnMjcuNyJX!5e0!3m2!1sen!2sus!4v1234567890"
+                    width="100%" 
+                    height="200" 
+                    style="border: 0;" 
+                    allowfullscreen 
+                    loading="lazy">
+                  </iframe>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8480!3i12869!4i256!2m3!1e0!2sm!3i776540560!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=36374" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+        <!-- SECTION 9: maps -->
+        <section class="maps" style="background: var(--bg-alt); padding: 80px 20px; display: flex; justify-content: center;">
+          <div style="max-width: var(--content-max-width); width: 100%; border: 2px solid var(--grid-line);">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3228.839547168091!2d-86.80989284831574!3d35.97534808002933!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88647beeba2489d3%3A0xa677931535a20fc8!2s1585%20Mallory%20Ln%20STE%20104%2C%20Brentwood%2C%20TN%2037027!5e0!3m2!1sen!2sus!4v1631573237519!5m2!1sen!2sus"
+              style="width: 100%; height: 400px; border: 0; display: block;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8483!3i12869!4i256!2m3!1e0!2sm!3i776540285!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=94427" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+        <!-- SECTION 10: custom:let-us-help-you-navigate-your-legal-needs -->
+        <section class="navigation-sidebar" style="background: var(--bg-paper); color: var(--text-primary); font-family: var(--font-body); max-width: var(--content-max-width); margin: 0 auto; padding: 2rem;">
+          <h2 style="font-family: var(--font-heading); color: var(--text-primary); margin-bottom: 2rem;">Let us help you navigate your legal needs</h2>
+          
+          <nav>
+            <ul class="sidebar-nav" style="list-style: none; padding: 0; margin: 0;">
+              <li style="margin-bottom: 0.5rem;"><a href="https://www.fidelislawfirm.com/" style="color: var(--text-muted); text-decoration: none; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.9rem; transition: color 0.2s;">HOME</a></li>
+              <li style="margin-bottom: 0.5rem;">
+                <a href="https://www.fidelislawfirm.com/#" style="color: var(--text-muted); text-decoration: none; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.9rem; transition: color 0.2s;">ABOUT</a>
+                <ul style="list-style: none; padding-left: 1rem; margin: 0.5rem 0;">
+                  <li style="margin-bottom: 0.25rem;"><a href="https://www.fidelislawfirm.com/about/" style="color: var(--text-muted); text-decoration: none; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem;">Our Firm</a></li>
+                  <li style="margin-bottom: 0.25rem;"><a href="https://www.fidelislawfirm.com/practice/" style="color: var(--text-muted); text-decoration: none; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem;">Faith In Practice</a></li>
+                  <li style="margin-bottom: 0.25rem;"><a href="https://www.fidelislawfirm.com/clients-reviews/" style="color: var(--text-muted); text-decoration: none; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem;">Clients & Reviews</a></li>
+                  <li style="margin-bottom: 0.25rem;"><a href="https://www.fidelislawfirm.com/faq/" style="color: var(--text-muted); text-decoration: none; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem;">FAQ</a></li>
+                </ul>
+              </li>
+              <li style="margin-bottom: 0.5rem;">
+                <a href="https://www.fidelislawfirm.com/#" style="color: var(--text-muted); text-decoration: none; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.9rem; transition: color 0.2s;">AREAS OF PRACTICE</a>
+                <ul style="list-style: none; padding-left: 1rem; margin: 0.5rem 0;">
+                  <li style="margin-bottom: 0.25rem;"><a href="https://www.fidelislawfirm.com/church-nonprofit-law/" style="color: var(--text-muted); text-decoration: none; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem;">Church & Nonprofit Law</a></li>
+                  <li style="margin-bottom: 0.25rem;"><a href="https://www.fidelislawfirm.com/business-law/" style="color: var(--text-muted); text-decoration: none; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem;">Business Law</a></li>
+                  <li style="margin-bottom: 0.25rem;"><a href="https://www.fidelislawfirm.com/estate-planning-and-probate/" style="color: var(--text-muted); text-decoration: none; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem;">Estate Planning & Probate</a></li>
+                  <li style="margin-bottom: 0.25rem;"><a href="https://www.fidelislawfirm.com/family-law/" style="color: var(--text-muted); text-decoration: none; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem;">Family Law & Divorce</a></li>
+                  <li style="margin-bottom: 0.25rem;"><a href="https://www.fidelislawfirm.com/personal-injury/" style="color: var(--text-muted); text-decoration: none; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.8rem;">Personal Injury</a></li>
+                </ul>
+              </li>
+              <li style="margin-bottom: 0.5rem;"><a href="https://www.fidelislawfirm.com/law-blog/" style="color: var(--text-muted); text-decoration: none; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.9rem; transition: color 0.2s;">LAW BLOG</a></li>
+              <li style="margin-bottom: 0.5rem;"><a href="https://www.fidelislawfirm.com/#contact" style="color: var(--text-muted); text-decoration: none; text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.9rem; transition: color 0.2s;">CONTACT</a></li>
+            </ul>
+          </nav>
+
+          <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--text-muted); font-size: 0.8rem; color: var(--text-muted); line-height: 1.6;">
+            <p><strong>Disclaimer:</strong> The information you obtain at this site is not, nor is it intended to be, legal advice. You should consult an attorney for advice regarding your individual situation. We invite you to contact us and welcome your calls, letters and electronic mail. Contacting us does not create an attorney-client relationship. Please do not send any confidential information to us until such time as an attorney-client relationship has been established.</p>
+            
+            <p>Ⓒ 2022 by Fidelis Law, PLLC. All Rights Reserved. | <a href="https://www.fidelislawfirm.com/privacy-policy/" style="color: var(--text-muted);">Privacy Policy</a> | <a href="https://www.fidelislawfirm.com/terms-of-use/" style="color: var(--text-muted);">Terms of Use</a></p>
+            
+            <p>Website power by <a href="https://heroagency.org/" style="color: var(--text-primary); font-weight: bold;" title="Nashville based website design, management, & marketing.">Hero Agency</a></p>
+          </div>
+        </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8482!3i12870!4i256!2m3!1e0!2sm!3i776540560!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=66613" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+        <!-- SECTION 11: contact -->
+        <section class="contact" style="background: var(--bg-alt); color: var(--text-primary); font-family: var(--font-body); padding: 2rem 0;">
+          <div style="max-width: var(--content-max-width); margin: 0 auto; padding: 0 1rem;">
+            <div class="header-bar" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; padding: 1rem 0; border-top: 1px solid var(--ink-black); border-bottom: 1px solid var(--ink-black);">
+              <div class="header-left" style="display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;">
+                <a class="header-meta" href="tel:615-370-3010" style="color: var(--text-primary); text-decoration: none; font-size: 0.875rem; opacity: 0.8;">615-370-3010</a>
+                <span class="header-meta" style="color: var(--text-primary); font-size: 0.875rem; opacity: 0.8;">1585 Mallory Lane Suite 104<br>Brentwood, TN 37027</span>
+              </div>
+              <div class="header-right" style="display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;">
+                <a class="header-link" href="https://www.facebook.com/fidelislawbrentwoodtn" style="color: var(--text-primary); text-decoration: none; font-size: 0.875rem; opacity: 0.8;">Facebook</a>
+                <a class="header-link" href="https://twitter.com/FidelisLawPLLC" style="color: var(--text-primary); text-decoration: none; font-size: 0.875rem; opacity: 0.8;">Twitter</a>
+                <a class="header-link" href="https://maps.google.com/maps?ll=35.975348,-86.807699&z=15&t=m&hl=en&gl=US&mapclient=embed&q=1585%20Mallory%20Ln%20STE%20104%20Brentwood%2C%20TN%2037027" style="color: var(--text-primary); text-decoration: none; font-size: 0.875rem; opacity: 0.8;">Google Business</a>
+              </div>
+            </div>
+            <div style="margin-top: 2rem;">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3228.839547168091!2d-86.80989284831574!3d35.97534808002933!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88647beeba2489d3%3A0xa677931535a20fc8!2s1585%20Mallory%20Ln%20STE%20104%2C%20Brentwood%2C%20TN%2037027!5e0!3m2!1sen!2sus!4v1631573237519!5m2!1sen!2sus" width="100%" height="400" style="border: 1px solid var(--ink-black); border-radius: 4px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+        </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8482!3i12869!4i256!2m3!1e0!2sm!3i776540560!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=29826" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8480!3i12870!4i256!2m3!1e0!2sm!3i776540560!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=73161" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8481!3i12870!4i256!2m3!1e0!2sm!3i776540560!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=69887" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8479!3i12870!4i256!2m3!1e0!2sm!3i776540285!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=5192" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8478!3i12870!4i256!2m3!1e0!2sm!3i776540285!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=8466" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8485!3i12869!4i256!2m3!1e0!2sm!3i776540285!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=87879" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8484!3i12869!4i256!2m3!1e0!2sm!3i776540285!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=91153" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8479!3i12869!4i256!2m3!1e0!2sm!3i776540285!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m16!299174093m15!14m14!1m9!1m2!1y9828116552084654547!2y11995217851828015048!2s%2Fg%2F11hcdwzphk!4m2!1x359753481!2x3426890308!8b1!15sgcid%3Asubpremise!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=99476" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+      </div>
+
+      <footer class="footer-manifesto">
+        <p class="manifesto-text">
+          We believe that exceptional brands are built on systems, not trends. Every element — from the weight of a typeface to the cadence of a color palette — serves a purpose. <strong>Fidelis Law PLLC exists at the intersection of strategic rigor and creative clarity,</strong> delivering identity frameworks that endure beyond the moment and resonate with precision.
+        </p>
+        <p class="manifesto-subtitle">Established 2009 — New York · London · Tokyo</p>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>
