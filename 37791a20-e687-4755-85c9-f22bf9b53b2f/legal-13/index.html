@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style data-design-intent>
+:root {
+  --bg-primary: #faf7f2;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #fdf3ec;
+  --text-primary: #1a1a2e;
+  --primary: #1a1a2e;
+  --font-heading: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --content-max-width: 1200px;
+  --accent: #e8724a;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+}
+</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jones, Green, & Tackett Law, PLLC</title>
+  <style>
+    :root {
+      --bg-primary: #faf7f2;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #fdf3ec;
+      --text-primary: #1a1a2e;
+      --text-secondary: #6b7280;
+      --text-tertiary: #9ca3af;
+      --text-muted: #d1d5db;
+      --accent: #e8724a;
+      --accent-hover: #d45a32;
+      --border-light: #f0ede8;
+      --shadow-card: 0 1px 4px rgba(0,0,0,0.04);
+      --shadow-elevated: 0 4px 16px rgba(0,0,0,0.08);
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --spacing-xs: 4px;
+      --spacing-sm: 8px;
+      --spacing-md: 16px;
+      --spacing-lg: 24px;
+      --spacing-xl: 40px;
+      --spacing-2xl: 64px;
+      --spacing-3xl: 96px;
+      --content-max-width: 1200px;
+      --font-heading: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      --section-padding: 80px;
+      --gap: 24px;
+      --max-width: 1200px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-primary);
+      background-color: var(--bg-primary);
+      overflow-wrap: break-word;
+    }
+
+    .container {
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+      padding: 0 var(--spacing-md);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: color 0.2s ease;
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: all 0.25s ease;
+    }
+
+    /* Header */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--spacing-md);
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--text-primary);
+      flex-shrink: 0;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .nav-desktop {
+      display: none;
+      gap: var(--spacing-lg);
+      align-items: center;
+    }
+
+    .nav-desktop a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color 0.2s ease;
+    }
+
+    .nav-desktop a:hover {
+      color: var(--text-primary);
+    }
+
+    .btn-contact {
+      background: var(--text-primary);
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: inline-block;
+      transition: all 0.25s ease;
+    }
+
+    .btn-contact:hover {
+      background: #2d2d44;
+      transform: translateY(-1px);
+    }
+
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    .mobile-nav {
+      display: none;
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-light);
+      padding: var(--spacing-lg) var(--spacing-md);
+    }
+
+    .mobile-nav.open {
+      display: block;
+    }
+
+    .mobile-nav a {
+      display: block;
+      padding: var(--spacing-sm) 0;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .mobile-nav a:hover {
+      color: var(--text-primary);
+    }
+
+    .mobile-nav .btn-contact {
+      display: inline-block;
+      margin-top: var(--spacing-md);
+    }
+
+    /* Hero */
+    .hero {
+      background: var(--bg-primary);
+      padding: var(--section-padding) 0;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-content {
+      order: 2;
+    }
+
+    .firm-logo {
+      order: 1;
+    }
+
+    .hero-headline {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -1px;
+      margin-bottom: 2rem;
+    }
+
+    /* Trust Bar */
+    .trust-bar {
+      background: var(--bg-secondary);
+      padding: var(--spacing-xl) 0;
+    }
+
+    .trust-inner {
+      background: var(--bg-secondary);
+      padding: 2rem 0;
+    }
+
+    .trust-stat {
+      text-align: center;
+    }
+
+    .trust-number {
+      font-size: 3rem;
+      font-weight: bold;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .trust-label {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin-top: 0.5rem;
+    }
+
+    /* Coverage/Services */
+    .coverage {
+      background: var(--bg-primary);
+      padding: var(--section-padding) 0;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--gap);
+    }
+
+    .feature-card {
+      background: var(--bg-secondary);
+      border-radius: var(--radius-md);
+      padding: var(--spacing-lg);
+      box-shadow: var(--shadow-card);
+      transition: all 0.25s ease;
+      text-align: center;
+    }
+
+    .feature-card:hover {
+      box-shadow: var(--shadow-elevated);
+      transform: translateY(-2px);
+    }
+
+    .feature-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      font-family: var(--font-heading);
+    }
+
+    /* Benefits Promo */
+    .benefits-promo {
+      background: var(--bg-tertiary);
+      padding: 48px 24px;
+      border-radius: var(--radius-md);
+      margin: 48px auto;
+      max-width: var(--content-max-width);
+    }
+
+    .promo-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+
+    .promo-desc {
+      font-size: 18px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Testimonials */
+    .testimonials {
+      background: var(--bg-secondary);
+      padding: var(--section-padding) 0;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .testimonial-card {
+      background: var(--bg-primary);
+      padding: 2rem;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-card);
+      border-left: 4px solid var(--accent);
+    }
+
+    .testimonial-quote {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      font-weight: 600;
+      color: var(--accent);
+      text-align: right;
+    }
+
+    /* Team */
+    .team {
+      background: var(--bg-secondary);
+      padding: var(--section-padding) 0;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .team-card {
+      text-align: center;
+      background: var(--bg-primary);
+      padding: 30px;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-card);
+    }
+
+    .team-card img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+    }
+
+    .team-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    .team-card p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+    }
+
+    /* About */
+    .about {
+      background: var(--bg-primary);
+      padding: var(--section-padding) 0;
+    }
+
+    .about h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+      text-align: center;
+    }
+
+    .about nav {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .about h2 {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 0.5rem;
+    }
+
+    .about ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .about li {
+      margin-bottom: 0.5rem;
+    }
+
+    .about a {
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+
+    .about a:hover {
+      color: var(--accent);
+    }
+
+    .about > div > div:last-child {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--text-muted);
+    }
+
+    .about > div > div:last-child a {
+      color: var(--accent);
+      margin-right: 2rem;
+    }
+
+    /* Footer */
+    .footer {
+      background: #111827;
+      padding: var(--spacing-3xl) 0 var(--spacing-lg);
+      color: #9ca3af;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--spacing-xl);
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    .footer-heading {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .footer-contact-item {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      font-size: 0.88rem;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .footer-contact-item i {
+      color: var(--accent);
+      width: 16px;
+    }
+
+    .footer-contact-item a {
+      color: var(--text-primary);
+    }
+
+    .footer-contact-item span {
+      color: var(--text-primary);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #1f2937;
+      padding-top: var(--spacing-lg);
+      text-align: center;
+      font-size: 0.82rem;
+      color: #6b7280;
+    }
+
+    @media (max-width: 768px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .hero-content {
+        order: 1;
+      }
+      
+      .firm-logo {
+        order: 2;
+      }
+      
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .about nav {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .hero-headline {
+        font-size: 2rem;
+      }
+      
+      .about h1 {
+        font-size: 2rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .header-inner {
+        padding: var(--spacing-md) var(--spacing-lg);
+      }
+
+      .nav-desktop {
+        display: flex;
+      }
+
+      .hamburger {
+        display: none;
+      }
+
+      .mobile-nav {
+        display: none !important;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr auto;
+      }
+
+      .hero-content {
+        order: 1;
+      }
+
+      .firm-logo {
+        order: 2;
+      }
+
+      .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .features-grid {
+        grid-template-columns: repeat(5, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">Jones, Green, & Tackett Law<span>.</span></div>
+      <nav class="nav-desktop">
+        <a href="#home">Home</a>
+        <a href="#coverage">Coverage</a>
+        <a href="#benefits">Benefits</a>
+        <a href="#claims">Claims</a>
+        <a href="#faq">FAQ</a>
+        
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div class="mobile-nav" id="mobileNav">
+      <a href="#home">Home</a>
+      <a href="#coverage">Coverage</a>
+      <a href="#benefits">Benefits</a>
+      <a href="#claims">Claims</a>
+      <a href="#faq">FAQ</a>
+      
+    </div>
+  </header>
+
+  <!-- SECTION 1: hero -->
+  <section class="hero" id="home">
+    <div  style="max-width: var(--content-max-width);">
+      <div class="hero-" style="display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; padding: 4rem 0;">
+        <div class="hero-content">
+          <h1 class="hero-headline" style="font-family: var(--font-heading); font-size: 3rem; color: var(--text-primary); margin-bottom: 2rem; line-height: 1.2;">You deserve compassionate, experienced legal representation.</h1>
+          <img src="https://images.squarespace-cdn.com/content/v1/5c60b6d9b91449401e32e0aa/1727704068715-SLHRD13OQZOW28CEU6FN/Courthouse%2Bwith%2BRainbow.jpg?format=2500w" alt="Courthouse+with+Rainbow.jpg" style="width: 100%; height: 400px; object-fit: cover; border-radius: 8px; margin-bottom: 2rem;">
+        </div>
+
+        <div class="firm-logo" style="display: flex; align-items: center; justify-content: center; background: var(--bg-secondary); padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+          <img src="https://images.squarespace-cdn.com/content/v1/5c60b6d9b91449401e32e0aa/1550059629402-NWWVWP7DQ9I27YHR2CYY/LOGO+WHITE+TRANSPARENT.png?format=1500w" alt="Firm Logo" style="max-width: 200px; height: auto;">
+        </div>
+      </div>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://images.squarespace-cdn.com/content/v1/5c60b6d9b91449401e32e0aa/1550063786499-S8BZFMIRF72J4X8FBT1C/tumblr_mn8b8sLRb61rkz363o1_1280.jpg" alt="tumblr_mn8b8sLRb61rkz363o1_1280.jpg" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+  <!-- SECTION 2: stats -->
+  <section class="trust-bar">
+    <div  style="max-width: var(--content-max-width); margin: 0 auto; padding: 0 1rem;">
+      <div class="trust-inner" style="display: flex; justify-content: center; align-items: center; padding: 2rem 0;">
+        <div class="trust-stat" style="text-align: center;">
+          <div class="trust-number" style="font-size: 3rem; font-weight: bold; color: var(--accent); font-family: var(--font-heading); line-height: 1;">28 years</div>
+          <div class="trust-label" style="font-size: 1.1rem; color: var(--text-secondary); font-family: var(--font-body); margin-top: 0.5rem;">collective legal experience</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: services -->
+  <section class="coverage">
+    <div style="max-width: var(--content-max-width); margin: 0 auto; padding: 0 20px;">
+      <div class="features-">
+        <div class="feature-card">
+          <h3 class="feature-title">Adoption</h3>
+        </div>
+
+        <div class="feature-card">
+          <h3 class="feature-title">Appeals</h3>
+        </div>
+
+        <div class="feature-card">
+          <h3 class="feature-title">Business Law</h3>
+        </div>
+
+        <div class="feature-card">
+          <h3 class="feature-title">Child Custody</h3>
+        </div>
+
+        <div class="feature-card">
+          <h3 class="feature-title">Child Support</h3>
+        </div>
+
+        <div class="feature-card">
+          <h3 class="feature-title">Conservatorship</h3>
+        </div>
+
+        <div class="feature-card">
+          <h3 class="feature-title">Contempt</h3>
+        </div>
+
+        <div class="feature-card">
+          <h3 class="feature-title">Contracts</h3>
+        </div>
+
+        <div class="feature-card">
+          <h3 class="feature-title">Criminal Law</h3>
+        </div>
+
+        <div class="feature-card">
+          <h3 class="feature-title">Divorce</h3>
+        </div>
+
+        <div class="feature-card">
+          <h3 class="feature-title">Estate Administration & Probate</h3>
+        </div>
+
+        <div class="feature-card">
+          <h3 class="feature-title">Estate Planning</h3>
+        </div>
+
+        <div class="feature-card">
+          <h3 class="feature-title">Mediation</h3>
+        </div>
+
+        <div class="feature-card">
+          <h3 class="feature-title">Personal Injury</h3>
+        </div>
+
+        <div class="feature-card">
+          <h3 class="feature-title">Real Estate</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: custom:you-deserve-compassionate-experienced-legal-representation -->
+  <section class="benefits-promo" style="background: var(--bg-tertiary); padding: 48px 24px; border-radius: 12px; margin: 48px auto; max-width: var(--content-max-width);">
+    <h3 class="promo-title" style="font-family: var(--font-heading); font-size: 28px; font-weight: 700; color: var(--text-primary); margin-bottom: 16px; line-height: 1.3;">You deserve compassionate, experienced legal representation.</h3>
+    <p class="promo-desc" style="font-family: var(--font-body); font-size: 18px; color: var(--text-secondary); line-height: 1.6; margin: 0;">With over 28 years of collective legal experience, the attorneys of Jones, Green, & Tackett Law, PLLC, bring professional, compassionate legal representation to Robertson, Montgomery, Sumner, Davidson, and Cheatham counties.</p>
+  </section>
+
+  <!-- SECTION 5: testimonials -->
+  <section class="testimonials">
+    <div style="max-width: var(--content-max-width); margin: 0 auto; padding: 80px 20px;">
+      <h2 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 2.5rem; text-align: center; margin-bottom: 60px;">Testimonials</h2>
+      
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"I have used Brandi Jones numerous times in child custody and a case that related from another case. Brandi left no stone unturned and made me and my family feel protected. She is very communicative and no a push over. She is tough, and I still use her today. There is not enough I can say about Brandi except she has earned my trust."</p>
+          <p class="testimonial-author">— Lew</p>
+        </div>
+        
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"Emily and Heather were very professional and handled everything for me pertaining to my mom's estate and closing on the sale of her house. They were always so nice and informative and kept me up to date with all that was going on. Donna was always very nice and professional when I called the office. I would highly recommend this group for any of your legal needs."</p>
+          <p class="testimonial-author">— Dana</p>
+        </div>
+        
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"I couldn't be more pleased with this law firm and all of the wonderful attorneys there. Even in a difficult situation, you will not find a more comfortable atmosphere to help solve any issues. Thank you!!"</p>
+          <p class="testimonial-author">— Heather</p>
+        </div>
+        
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"Emily was the best. She always answered my questions. If she didn't know, she always found out. She went above and beyond. I could email her at eleven o'clock at night and she always took the time to reply. She is an awesome person and I loved her dearly. She fights for what she believes in. I can't say enough good about her."</p>
+          <p class="testimonial-author">— Charity</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: team -->
+  <section class="team">
+    <div style="max-width: var(--content-max-width); margin: 0 auto; padding: 80px 20px;">
+      <h2 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 2.5rem; text-align: center; margin-bottom: 60px;">Our Team</h2>
+      
+      <div class="team-" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; max-width: 900px; margin: 0 auto;">
+        
+        <div class="team-card" style="text-align: center; background: var(--bg-secondary); padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+          <img src="https://images.squarespace-cdn.com/content/v1/5c60b6d9b91449401e32e0aa/1726246212613-9WA840TVK7GK38PUD2KW/A7I07876-Enhanced-NR.jpg?format=2500w" alt="Attorney Brandi Jones" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;">
+          <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1.5rem; margin-bottom: 8px;">Brandi Jones</h3>
+          <p style="font-family: var(--font-body); color: var(--text-secondary); font-size: 1.1rem;">Attorney</p>
+        </div>
+        
+        <div class="team-card" style="text-align: center; background: var(--bg-secondary); padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+          <img src="https://images.squarespace-cdn.com/content/v1/5c60b6d9b91449401e32e0aa/1726246089650-Z96CCU6FKK3RHOWAL3UH/A7I07880-Enhanced-NR-Edit.jpg?format=2500w" alt="Attorney Emily Green" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;">
+          <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1.5rem; margin-bottom: 8px;">Emily Green</h3>
+          <p style="font-family: var(--font-body); color: var(--text-secondary); font-size: 1.1rem;">Attorney</p>
+        </div>
+        
+        <div class="team-card" style="text-align: center; background: var(--bg-secondary); padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+          <img src="https://images.squarespace-cdn.com/content/v1/5c60b6d9b91449401e32e0aa/1726246134451-35YSEUZG2FMDT6AYHSVH/A7I07835-Edit.jpg?format=2500w" alt="Attorney Heather Tackett" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;">
+          <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1.5rem; margin-bottom: 8px;">Heather Tackett</h3>
+          <p style="font-family: var(--font-body); color: var(--text-secondary); font-size: 1.1rem;">Attorney</p>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7: about -->
+  <section class="about">
+    <div style="max-width: var(--content-max-width); margin: 0 auto; padding: 2rem 1rem;">
+      <div style="text-align: center; margin-bottom: 3rem;">
+        <h1 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 2.5rem; margin-bottom: 1rem;">JONES, GREEN, & TACKETT LAW, PLLC</h1>
+      </div>
+      
+      <nav style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 800px; margin: 0 auto;">
+        <div>
+          <h2 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1.25rem; margin-bottom: 1rem; border-bottom: 2px solid var(--accent); padding-bottom: 0.5rem;">Our Attorneys</h2>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 0.5rem;"><a href="https://www.jgtlegal.com/our-team" style="color: var(--text-secondary); text-decoration: none; font-family: var(--font-body);">Our Team</a></li>
+            <li style="margin-bottom: 0.5rem;"><a href="https://www.jgtlegal.com/brandi-l-jones" style="color: var(--text-secondary); text-decoration: none; font-family: var(--font-body);">Brandi L. Jones</a></li>
+            <li style="margin-bottom: 0.5rem;"><a href="https://www.jgtlegal.com/emily-c-green" style="color: var(--text-secondary); text-decoration: none; font-family: var(--font-body);">Emily C. Green</a></li>
+            <li style="margin-bottom: 0.5rem;"><a href="https://www.jgtlegal.com/heather-e-tackett" style="color: var(--text-secondary); text-decoration: none; font-family: var(--font-body);">Heather E. Tackett</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h2 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1.25rem; margin-bottom: 1rem; border-bottom: 2px solid var(--accent); padding-bottom: 0.5rem;">Practice Areas</h2>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 0.5rem;"><a href="https://www.jgtlegal.com/adoption" style="color: var(--text-secondary); text-decoration: none; font-family: var(--font-body);">Adoption</a></li>
+            <li style="margin-bottom: 0.5rem;"><a href="https://www.jgtlegal.com/appeals" style="color: var(--text-secondary); text-decoration: none; font-family: var(--font-body);">Appeals</a></li>
+            <li style="margin-bottom: 0.5rem;"><a href="https://www.jgtlegal.com/business-law" style="color: var(--text-secondary); text-decoration: none; font-family: var(--font-body);">Business Law</a></li>
+            <li style="margin-bottom: 0.5rem;"><a href="https://www.jgtlegal.com/child-custody" style="color: var(--text-secondary); text-decoration: none; font-family: var(--font-body);">Child Custody</a></li>
+            <li style="margin-bottom: 0.5rem;"><a href="https://www.jgtlegal.com/child-support" style="color: var(--text-secondary); text-decoration: none; font-family: var(--font-body);">Child Support</a></li>
+            <li style="margin-bottom: 0.5rem;"><a href="https://www.jgtlegal.com/conservatorship" style="color: var(--text-secondary); text-decoration: none; font-family: var(--font-body);">Conservatorship</a></li>
+            <li style="margin-bottom: 0.5rem;"><a href="https://www.jgtlegal.com/contempt" style="color: var(--text-secondary); text-decoration: none; font-family: var(--font-body);">Contempt</a></li>
+            <li style="margin-bottom: 0.5rem;"><a href="https://www.jgtlegal.com/contracts" style="color: var(--text-secondary); text-decoration: none; font-family: var(--font-body);">Contracts</a></li>
+            <li style="margin-bottom: 0.5rem;"><a href="https://www.jgtlegal.com/criminal-law" style="color: var(--text-secondary); text-decoration: none; font-family: var(--font-body);">Criminal Law</a></li>
+            <li style="margin-bottom: 0.5rem;"><a href="https://www.jgtlegal.com/divorce" style="color: var(--text-secondary); text-decoration: none; font-family: var(--font-body);">Divorce</a></li>
+            <li style="margin-bottom: 0.5rem;"><a href="https://www.jgtlegal.com/estate-administration-probate" style="color: var(--text-secondary); text-decoration: none; font-family: var(--font-body);">Estate Administration & Probate</a></li>
+            <li style="margin-bottom: 0.5rem;"><a href="https://www.jgtlegal.com/estate-planning" style="color: var(--text-secondary); text-decoration: none; font-family: var(--font-body);">Estate Planning</a></li>
+            <li style="margin-bottom: 0.5rem;"><a href="https://www.jgtlegal.com/mediation" style="color: var(--text-secondary); text-decoration: none; font-family: var(--font-body);">Mediation</a></li>
+            <li style="margin-bottom: 0.5rem;"><a href="https://www.jgtlegal.com/personal-injury" style="color: var(--text-secondary); text-decoration: none; font-family: var(--font-body);">Personal Injury</a></li>
+            <li style="margin-bottom: 0.5rem;"><a href="https://www.jgtlegal.com/real-estate" style="color: var(--text-secondary); text-decoration: none; font-family: var(--font-body);">Real Estate</a></li>
+          </ul>
+        </div>
+      </nav>
+      
+      <div style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--text-muted);">
+        <a href="https://www.jgtlegal.com/testimonials" style="color: var(--accent); text-decoration: none; font-family: var(--font-body); margin-right: 2rem;">Testimonials</a>
+        <a href="https://www.jgtlegal.com/contact-us" style="color: var(--accent); text-decoration: none; font-family: var(--font-body);">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 8: contact -->
+  <footer class="footer" id="contact">
+    <div  style="max-width: var(--content-max-width);">
+      <div class="footer-">
+        <div class="footer-about">
+          <h4 class="footer-heading" style="color: var(--text-primary); font-family: var(--font-heading);">Jones, Green, & Tackett Law<span style="color: var(--accent);">.</span></h4>
+          <div class="footer-contact-item">
+            <i class="fas fa-phone-alt"></i>
+            <a href="tel:15500596294" style="color: var(--text-primary); text-decoration: none;">15500596294</a>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span style="color: var(--text-primary);">110 West Sixth Avenue, Springfield, TN 37172</span>
+          </div>
+          <div class="footer-contact-item">
+            <i class="fab fa-facebook"></i>
+            <a href="https://www.facebook.com/JGTLegalTN" target="_blank" style="color: var(--text-primary); text-decoration: none;">Facebook</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom" style="color: var(--text-secondary);">
+        © 2024 Jones, Green, & Tackett Law. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileNav.classList.toggle('open');
+    });
+
+    // Close mobile menu when clicking on links
+    document.querySelectorAll('.mobile-nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        mobileNav.classList.remove('open');
+      });
+    });
+  </script>
+</body>
+</html>
