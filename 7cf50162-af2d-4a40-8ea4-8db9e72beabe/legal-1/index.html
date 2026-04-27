@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style data-design-intent>
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f7f5f2;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --primary: #ffffff;
+  --text-primary: #111115;
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+  --content-max-width: 1200px;
+  --secondary: #1a1a20;
+  --accent: #f0f0f0;
+  --text-muted: rgba(17,17,21,0.7);
+}
+</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Brenda Clark Family Law</title>
+  <style>
+    :root {
+      --primary: #111115;
+      --secondary: #1a1a20;
+      --accent: #22222a;
+      --text: #ffffff;
+      --text-light: rgba(255, 255, 255, 0.7);
+      --bg: #111115;
+      --bg-alt: #1a1a20;
+      --bg-card: #16161c;
+      --font-heading: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --section-padding: 80px 20px;
+      --gap: 20px;
+      --max-width: 1200px;
+      --content-max-width: 1200px;
+      --bg-primary: #111115;
+      --bg-secondary: #1a1a20;
+      --bg-hover: #22222a;
+      --text-primary: #ffffff;
+      --text-muted: rgba(255, 255, 255, 0.7);
+      --text-dim: rgba(255, 255, 255, 0.5);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --border-light: rgba(255, 255, 255, 0.06);
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --sidebar-width: 280px;
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 16px;
+      --space-lg: 32px;
+      --space-xl: 48px;
+      --space-2xl: 64px;
+      --space-3xl: 96px;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Mobile header */
+    .mobile-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-md) var(--space-lg);
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-primary);
+    }
+
+    .mobile-header .brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .mobile-header .brand .globe-icon {
+      width: 32px;
+      height: 32px;
+      border: 1.5px solid var(--text-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .mobile-header .brand-name {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: var(--space-sm);
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: var(--sidebar-width);
+      height: 100vh;
+      background: var(--bg-primary);
+      border-right: 1px solid var(--border-color);
+      z-index: 200;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: var(--space-xl) var(--space-lg);
+      overflow-y: auto;
+    }
+
+    .sidebar .brand-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xl);
+    }
+
+    .sidebar .brand-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .sidebar .globe-icon {
+      width: 38px;
+      height: 38px;
+      border: 1.5px solid var(--text-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .sidebar .brand-name {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    .sidebar nav a {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .sidebar nav a:hover {
+      color: var(--text-primary);
+    }
+
+    .sidebar .status-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .status-indicator {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--text-primary);
+      flex-shrink: 0;
+    }
+
+    .status-label {
+      font-family: var(--font-sans);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* Main content area */
+    .main-content {
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    /* Mobile nav overlay */
+    .mobile-nav-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 150;
+    }
+
+    .mobile-nav-overlay.active {
+      display: block;
+    }
+
+    .sidebar.active {
+      display: flex;
+    }
+
+    /* Footer */
+    .footer {
+      padding: var(--space-xl) var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+      background: var(--bg-secondary);
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .footer-brand-name {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+    }
+
+    .footer-copyright {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--text-dim);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md) var(--space-lg);
+    }
+
+    .footer-links a {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--text-primary);
+    }
+
+    /* Section Styles */
+    .hero {
+      background: var(--bg);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .features {
+      background: var(--bg-alt);
+      padding: var(--section-padding);
+      border-bottom: 1px solid var(--border-color);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+    }
+
+    .features .feature-card {
+      background: var(--bg-primary);
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(17,17,21,0.1);
+      transition: background-color 0.3s ease;
+    }
+
+    .features .feature-card:hover {
+      background: var(--bg-hover);
+    }
+
+    .feature-title {
+      font-family: var(--font-heading);
+      font-size: clamp(22px, 3vw, 28px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--text-primary);
+      margin-bottom: var(--space-md);
+    }
+
+    .feature-description {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    .trust-section {
+      background: var(--bg);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .testimonials {
+      background: var(--bg-alt);
+    }
+
+    .team {
+      background: var(--bg);
+    }
+
+    .contact {
+      background: var(--bg-alt);
+    }
+
+    /* Mobile responsive styles */
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem 1rem;
+      }
+
+      .hero .hero-text {
+        max-width: none;
+        order: 2;
+      }
+
+      .hero .hero-visual {
+        order: 1;
+        margin-bottom: 2rem;
+      }
+
+      .hero-headline {
+        font-size: 2rem !important;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr !important;
+        gap: 40px;
+      }
+
+      .stats- {
+        flex-direction: column !important;
+        gap: 40px !important;
+      }
+
+      .client- {
+        grid-template-columns: 1fr !important;
+      }
+
+      .experience- {
+        grid-template-columns: 1fr !important;
+      }
+
+      .feature-card {
+        padding: 2rem !important;
+      }
+
+      .testimonial-card {
+        padding: 1.5rem !important;
+        margin: 1rem !important;
+      }
+    }
+
+    /* Responsive breakpoints */
+    @media (min-width: 768px) {
+      .features {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero {
+        padding: var(--space-2xl) var(--space-xl);
+      }
+
+      .hero-text {
+        flex: 1.2;
+      }
+
+      .hero-visual {
+        flex: 0.8;
+        max-width: 400px;
+      }
+
+      .footer {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .mobile-header {
+        display: none;
+      }
+
+      .sidebar {
+        display: flex !important;
+      }
+
+      .mobile-nav-overlay {
+        display: none !important;
+      }
+
+      .main-content {
+        margin-left: var(--sidebar-width);
+        width: calc(100% - var(--sidebar-width));
+      }
+
+      .features {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .hero {
+        padding: var(--space-3xl) var(--space-2xl);
+        gap: var(--space-2xl);
+        min-height: 80vh;
+      }
+    }
+
+    /* Image responsiveness */
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Form styles */
+    input, textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--text-primary);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-family: var(--font-body);
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    button {
+      padding: 16px 32px;
+      background: var(--text-primary);
+      color: var(--bg-primary);
+      border: none;
+      border-radius: 4px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: var(--text-muted);
+    }
+
+    /* Grid layouts for contact sections */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    @media (min-width: 768px) {
+      .contact-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Mobile Header -->
+  <header class="mobile-header">
+    <a href="#" class="brand">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">Brenda Clark Law</span>
+    </a>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <!-- Mobile Nav Overlay -->
+  <div class="mobile-nav-overlay" id="navOverlay"></div>
+
+  <!-- Sidebar Navigation -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand-section">
+      <a href="#" class="brand-link">
+        <div class="globe-icon"><i class="fas fa-globe"></i></div>
+        <span class="brand-name">Brenda Clark Law</span>
+      </a>
+      <nav>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Testimonials</a>
+        <a href="#">Contact</a>
+      </nav>
+    </div>
+    <div class="status-section">
+      <div class="status-indicator">
+        <div class="status-dot"></div>
+        <span class="status-label">Free Consultations Available</span>
+      </div>
+      <div class="status-indicator">
+        <div class="status-dot"></div>
+        <span class="status-label">40+ Years Experience</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <section class="hero" style="background: var(--bg-primary); color: var(--text-primary); padding: 4rem 2rem; display: flex; align-items: center; gap: 4rem; max-width: var(--content-max-width); margin: 0 auto;">
+      <div class="hero-text" style="flex: 1; max-width: 600px;">
+        <img src="http://middletnfamilylawyer.com/wp-content/uploads/2024/04/Brenda-Clark-Logo.png" alt="Brenda Clark Logo" style="height: 80px; margin-bottom: 2rem;">
+        <h1 class="hero-headline" style="font-family: var(--font-heading); font-size: 3rem; line-height: 1.2; margin-bottom: 1.5rem; color: var(--text-primary);">Guiding you through the most challenging times in life.</h1>
+      </div>
+      <div class="hero-visual" style="flex: 1; display: flex; justify-content: center;">
+        <img src="https://middletnfamilylawyer.com/wp-content/uploads/2024/05/woman-and-child-preparing-for-divorce-and-custody-in-nashville-tn.png" alt="Woman and child preparing for divorce and custody" style="max-width: 100%; height: auto; border-radius: 8px;">
+      </div>
+    </section>
+
+    <section class="features" style="background: var(--bg-secondary); padding: 64px 16px;">
+      <div style="max-width: var(--content-max-width); margin: 0 auto;">
+        <div class="feature-card" style="background: var(--bg-primary); padding: 40px; border-radius: 8px; box-shadow: 0 4px 16px rgba(17,17,21,0.1);">
+          <p class="feature-protocol" style="color: var(--text-muted); font-family: var(--font-body); font-size: 14px; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 1px;">Leading Nashville Attorney</p>
+          <h3 class="feature-title" style="color: var(--text-primary); font-family: var(--font-heading); font-size: 32px; margin: 0 0 24px 0; line-height: 1.2;">About Brenda</h3>
+          <div class="feature-description" style="color: var(--text-primary); font-family: var(--font-body); line-height: 1.6; margin-bottom: 32px;">
+            <p>Brenda was voted one of the 10 Best Family Attorneys in Nashville because of her deep experience, knowledge of the law, and aggressive advocacy for her clients.</p>
+            
+            <p>Brenda has over 40 years of experience as a trial lawyer and a family mediator. She is a former Senior Counsel for the Office of the Tennessee Attorney General where she handled high-profile, complex cases, including representing 3 Governors.</p>
+            
+            <p>Brenda is deeply experienced in every aspect of the trial process and understands the law inside and out. This makes her an effective and aggressive advocate to help you get the outcomes and resolutions you deserve.</p>
+            
+            <blockquote style="margin: 32px 0; padding: 24px; background: var(--bg-secondary); border-left: 4px solid var(--text-primary); font-style: italic; color: var(--text-primary);">
+              "I pride myself on caring deeply about my clients and on being an aggressive advocate for them, who they trust and know in the bottom of their hearts will fight for them and work hard to get the outcome they deserve."
+            </blockquote>
+            
+            <p><a href="https://middletnfamilylawyer.com/about" style="color: var(--text-primary); text-decoration: underline;">Read More About Brenda</a></p>
+            
+            <div style="margin-top: 32px; text-align: center;">
+              <p style="font-weight: bold; margin-bottom: 16px;">AS SEEN ON INVESTIGATION DISCOVERY CHANNEL</p>
+              <img src="https://middletnfamilylawyer.com/wp-content/uploads/2024/05/As-Seen-on-Investigation-Discovery-TV-Channel.webp" alt="Investigation Discovery Channel" style="max-width: 100%; height: auto;">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" style="background: var(--bg-primary); padding: var(--section-padding);">
+      <div style="max-width: var(--content-max-width); margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--gap);">
+        <div class="feature-card" style="background: var(--bg-alt); padding: 2rem; border-radius: 8px;">
+          <h3 class="feature-title">Divorce</h3>
+          <p class="feature-description">The goal in a divorce is to hopefully resolve it without going to trial, because trial is costly, stressful, and uncertain. But if you do go to trial, Brenda's goal is to be an aggressive advocate on your behalf and fight for you to get a positive result.</p>
+        </div>
+        <div class="feature-card" style="background: var(--bg-alt); padding: 2rem; border-radius: 8px;">
+          <h3 class="feature-title">Child Custody and Parenting Plans</h3>
+          <p class="feature-description">Disputes over legal custody of a child are about which parent has the legal right to make decisions about a child's upbringing. Brenda cares deeply about making sure the best interests of a child are enacted.</p>
+        </div>
+        <div class="feature-card" style="background: var(--bg-alt); padding: 2rem; border-radius: 8px;">
+          <h3 class="feature-title">Child Support Modification and Enforcement</h3>
+          <p class="feature-description">If one parent has a significant change in income, or a child's needs drastically change, the amount of child support may need to be modified. Brenda can help you take legal action to compel payment.</p>
+        </div>
+        <div class="feature-card" style="background: var(--bg-alt); padding: 2rem; border-radius: 8px;">
+          <h3 class="feature-title">Wills</h3>
+          <p class="feature-description">A Will is a legal document that reflects your wishes about what should happen to your assets and property after you have passed away. Brenda will help you make sure your Will is valid, clear, legally sound, and will ensure your wishes are followed correctly.</p>
+        </div>
+        <div class="feature-card" style="background: var(--bg-alt); padding: 2rem; border-radius: 8px;">
+          <h3 class="feature-title">Probate</h3>
+          <p class="feature-description">Probate is the court-supervised process every Will goes through after the person who made it passes away that determines if the Will is valid and legally sound and then acts according to the Will's wishes.</p>
+        </div>
+        <div class="feature-card" style="background: var(--bg-alt); padding: 2rem; border-radius: 8px;">
+          <h3 class="feature-title">Family Mediation</h3>
+          <p class="feature-description">Mediation helps people resolve their disputes without going through the stress of a contested court case, the time that it takes, and the money that it costs. Brenda has a good track record of settling cases.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust-section" style="background: var(--bg-secondary); padding: 80px 20px; text-align: center;">
+      <div style="max-width: var(--content-max-width); margin: 0 auto;">
+        <div class="stats-" style="display: flex; gap: 60px; justify-content: center; align-items: center; flex-wrap: wrap;">
+          <div class="trust-metrics" style="text-align: center;">
+            <h3 class="trust-number" style="font-family: var(--font-heading); font-size: 4rem; color: var(--text-primary); font-weight: 400; margin: 0; line-height: 1;">40+</h3>
+            <p class="trust-label" style="font-family: var(--font-body); color: var(--text-muted); margin: 8px 0 0 0; font-size: 1rem;">years of experience</p>
+          </div>
+          <div class="trust-metrics" style="text-align: center;">
+            <h3 class="trust-number" style="font-family: var(--font-heading); font-size: 4rem; color: var(--text-primary); font-weight: 400; margin: 0; line-height: 1;">38</h3>
+            <p class="trust-label" style="font-family: var(--font-body); color: var(--text-muted); margin: 8px 0 0 0; font-size: 1rem;">years of experience as a trial lawyer</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust-section" style="background: var(--bg-primary); padding: var(--section-padding); text-align: center;">
+      <div style="max-width: var(--content-max-width); margin: 0 auto;">
+        <h2 style="font-family: var(--font-heading); color: var(--text-primary); text-align: center; margin-bottom: 2rem;">Brenda Clark was named one of the best family lawyers in Nashville.</h2>
+        
+        <div class="trust-clients">
+          <span class="trust-label" style="color: var(--text-muted); font-family: var(--font-body);">Recognition & Awards</span>
+          <div class="client-" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; max-width: var(--content-max-width); margin: 0 auto;">
+            <div class="client-badge" style="background: var(--bg-card); color: var(--text-primary); padding: 1rem; border-radius: 8px; text-align: center; font-family: var(--font-body);">Best Family Lawyers Nashville</div>
+            <div class="client-badge" style="background: var(--bg-card); color: var(--text-primary); padding: 1rem; border-radius: 8px; text-align: center; font-family: var(--font-body);">Expertise.com Recognition</div>
+            <div class="client-badge" style="background: var(--bg-card); color: var(--text-primary); padding: 1rem; border-radius: 8px; text-align: center; font-family: var(--font-body);">Family Law Excellence</div>
+          </div>
+        </div>
+        
+        <p style="text-align: center; color: var(--text-muted); font-family: var(--font-body); margin-top: 2rem; font-size: 1.1rem;">Guiding you through the most challenging times in life.</p>
+      </div>
+    </section>
+
+    <section class="testimonials" style="background: var(--bg-secondary); padding: 80px 20px;">
+      <div style="max-width: var(--content-max-width); margin: 0 auto; text-align: center;">
+        <h2 style="font-family: var(--font-heading); font-size: 2.5rem; color: var(--text-primary); margin-bottom: 60px; line-height: 1.2;">Why clients say Brenda is "who you want fighting for you in court."</h2>
+        
+        <blockquote style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--text-primary); line-height: 1.6; font-style: italic; margin: 0; max-width: 800px; margin: 0 auto;">
+          "Brenda is the best attorney that ever lived. She has seen my family through some really tough times. She is our angel. My son absolutely adores her. I'm pretty crazy about her myself. She is who you want fighting for you in court."
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="testimonial-card" style="background: var(--bg-primary); padding: 2rem; border-radius: 8px; margin: 2rem auto; max-width: var(--content-max-width);">
+      <div style="max-width: var(--content-max-width); margin: 0 auto; padding: 0 20px;">
+        <blockquote style="font-family: var(--font-body); font-size: 1.1rem; line-height: 1.6; color: var(--text-primary); margin: 0 0 1.5rem 0; font-style: italic;">
+          "Through it all she never quit fighting for my child. She is a defender of those who are in need of a defender. She is dependable, loyal, unwavering in the face of adversity and has a compassionate, caring nature. These are just a few of the many attributes she has. One other word sums Brenda Clark nicely: WINNER!"
+        </blockquote>
+        <cite style="font-family: var(--font-heading); font-size: 1.2rem; color: var(--text-primary); font-weight: 600; font-style: normal;">
+          Jeni H.
+        </cite>
+      </div>
+    </section>
+
+    <section class="testimonial-card" style="background: var(--bg-alt); padding: 2rem; border-radius: 8px; margin: 2rem auto; max-width: var(--content-max-width);">
+      <div style="max-width: var(--content-max-width); margin: 0 auto; padding: 0 20px;">
+        <blockquote style="margin: 0; font-family: var(--font-body); font-size: 1.1rem; line-height: 1.6; color: var(--text-primary); margin-bottom: 1.5rem;">
+          "In the end we won and our kids won. Brenda stood by us, guiding and fighting for us every step. She is an amazing person and a great attorney, and she was our Guardian Angel. Without her knowledge of the law and the compassion she has, we would not have won our case. We had been trying for years to win our case with no luck, until we found her… She saved our kids. Attorneys are not cheap so you don't want to waste your money on just any attorney, Brenda Clark is a great attorney and someone you need to speak to before choosing an attorney, you can count on her to work hard for you."
+        </blockquote>
+        <cite style="font-family: var(--font-heading); font-size: 1.2rem; color: var(--text-primary); font-style: normal; font-weight: 600;">
+          — Carrie Y.
+        </cite>
+      </div>
+    </section>
+
+    <section class="testimonial-section" style="padding: 80px 20px; background: var(--bg-primary); text-align: center;">
+      <div style="max-width: var(--content-max-width); margin: 0 auto;">
+        <h2 style="font-family: var(--font-heading); font-size: 2.5rem; color: var(--text-primary); margin-bottom: 2rem;">Wanda M.</h2>
+        <div style="margin-bottom: 3rem;">
+          <a href="https://middletnfamilylawyer.com/testimonials" style="display: inline-block; padding: 16px 32px; background: var(--text-primary); color: var(--bg-primary); font-family: var(--font-body); font-weight: 600; text-decoration: none; border-radius: 4px; transition: background-color 0.3s ease;">Read More Testimonials</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="team" style="padding: 80px 20px; background: var(--bg-alt);">
+      <div style="max-width: var(--content-max-width); margin: 0 auto;">
+        <div class="team-card" style="max-width: 700px; margin: 0 auto; text-align: center; background: var(--bg-primary); padding: 60px 40px; border-radius: 8px;">
+          <div style="margin-bottom: 40px;">
+            <img src="https://middletnfamilylawyer.com/wp-content/uploads/2024/04/Brenda-Clark-Family-Attorney.png" alt="Brenda Clark" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; margin: 0 auto 30px;">
+          </div>
+          <h2 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 36px; margin-bottom: 10px;">Brenda Clark</h2>
+          <h3 style="font-family: var(--font-body); color: var(--text-muted); font-size: 20px; font-weight: 500; margin-bottom: 30px;">Family Attorney</h3>
+          <p style="font-family: var(--font-body); color: var(--text-primary); font-size: 18px; line-height: 1.6; max-width: 600px; margin: 0 auto;">Brenda was voted one of the 10 Best Family Attorneys in Nashville because of her deep experience, knowledge of the law, and aggressive advocacy for her clients. She is a former Senior Counsel for the Office of the Tennessee Attorney General where she handled high-profile, complex cases, including representing 3 Governors.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" style="padding: 80px 20px; background: var(--bg-primary);">
+      <div style="max-width: var(--content-max-width); margin: 0 auto; text-align: center;">
+        <h2 style="font-family: var(--font-heading); font-size: 2.5rem; color: var(--text-primary); margin-bottom: 2rem; line-height: 1.2;">Divorce and Child Custody</h2>
+        <div class="feature-card" style="background: var(--bg-alt); padding: 3rem; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+          <p style="font-family: var(--font-body); font-size: 1.25rem; color: var(--text-primary); line-height: 1.6; margin: 0;">Any lawyer can get you divorced. Not every lawyer will be your advocate to make sure you come out of the process better and stronger, and make sure your children are protected.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="wills-and-probate" style="padding: 80px 20px; background: var(--bg-alt);">
+      <div style="max-width: var(--content-max-width); margin: 0 auto;">
+        <div style="text-align: center; margin-bottom: 60px;">
+          <h2 style="font-family: var(--font-heading); font-size: 2.5rem; color: var(--text-primary); margin-bottom: 20px;">Wills and Probate</h2>
+          <p style="font-family: var(--font-body); font-size: 1.125rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 40px;">Any lawyer can write a will or probate an estate. Not every lawyer can make sure your wishes are respected and your family doesn't get torn apart by it.</p>
+          <a href="https://middletnfamilylawyer.com/schedule/" style="display: inline-block; background: var(--text-primary); color: var(--bg-primary); padding: 16px 32px; text-decoration: none; font-family: var(--font-body); font-weight: 600; border-radius: 4px; transition: background 0.3s ease;">Book Your Free Consultation</a>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 60px;">
+          <h3 style="font-family: var(--font-heading); font-size: 2rem; color: var(--text-primary); margin-bottom: 40px;">Experienced, Respected, Trusted. An Aggressive Advocate For You.</h3>
+        </div>
+
+        <div class="experience-" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; margin-bottom: 80px;">
+          <div class="experience-card" style="text-align: center; padding: 30px 20px;">
+            <h4 style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--text-primary); margin-bottom: 16px;">Experienced</h4>
+            <p style="font-family: var(--font-body); color: var(--text-muted); line-height: 1.6;">With over 38 years of experience as a trial lawyer, Brenda knows the law inside-out and is deeply experienced in every phase of the trial process.</p>
+          </div>
+
+          <div class="experience-card" style="text-align: center; padding: 30px 20px;">
+            <h4 style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--text-primary); margin-bottom: 16px;">Respected</h4>
+            <p style="font-family: var(--font-body); color: var(--text-muted); line-height: 1.6;">Brenda is respected by judges and other lawyers for her integrity and knowledge, so nothing detracts from your case or presentation.</p>
+          </div>
+
+          <div class="experience-card" style="text-align: center; padding: 30px 20px;">
+            <h4 style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--text-primary); margin-bottom: 16px;">Trusted</h4>
+            <p style="font-family: var(--font-body); color: var(--text-muted); line-height: 1.6;">Brenda's clients and former clients consider her to be like family because they trust her and know she cares, and she has many honorary grandchildren.</p>
+          </div>
+
+          <div class="experience-card" style="text-align: center; padding: 30px 20px;">
+            <h4 style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--text-primary); margin-bottom: 16px;">An Aggressive Advocate</h4>
+            <p style="font-family: var(--font-body); color: var(--text-muted); line-height: 1.6;">Brenda fights for her clients. While caring with her clients, she has been given nicknames from Bulldog to Shark because she tirelessly advocates for her clients.</p>
+          </div>
+        </div>
+
+        <div style="text-align: center; padding: 40px; background: var(--bg-primary); border-radius: 8px;">
+          <h3 style="font-family: var(--font-heading); font-size: 2rem; color: var(--text-primary); margin: 0;">Over 40 Years of Experience Fighting for Justice</h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- Continue with remaining sections maintaining alternating backgrounds -->
+    <section class="service-detail" style="padding: 60px 20px; background: var(--bg-primary);">
+      <div style="max-width: var(--content-max-width); margin: 0 auto;">
+        <div class="card" style="background: var(--bg-alt); padding: 40px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+          <h2 style="font-family: var(--font-heading); font-size: 2.5rem; color: var(--text-primary); margin-bottom: 24px; text-align: center;">Divorce</h2>
+          <p style="font-family: var(--font-body); font-size: 1.125rem; line-height: 1.7; color: var(--text-primary); text-align: center; max-width: 800px; margin: 0 auto;">The goal in a divorce is to hopefully resolve it without going to trial, because trial is costly, stressful, and uncertain. But if you do go to trial, Brenda's goal is to be an aggressive advocate on your behalf and fight for you to get a positive result, so that you don't just survive this but thrive afterward.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="service-detail" style="padding: 80px 0; background: var(--bg-alt);">
+      <div style="max-width: var(--content-max-width); margin: 0 auto; padding: 0 20px;">
+        <h2 style="font-family: var(--font-heading); font-size: 2.5rem; color: var(--text-primary); margin-bottom: 2rem; line-height: 1.2;">Child custody and parenting plans</h2>
+        <div style="max-width: 700px;">
+          <p style="font-family: var(--font-body); font-size: 1.125rem; line-height: 1.6; color: var(--text-primary); margin: 0;">Disputes over legal custody of a child are about which parent has the legal right to make decisions about a child's upbringing. Sometimes legal custody of a child needs to be changed as circumstances in the child's life or in a parent's life or actions warrants a change in the child's best interest. Brenda cares deeply about making sure the best interests of a child are enacted.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Continue with all remaining sections... -->
+
+    <section class="contact-section" style="padding: 80px 20px; background: var(--bg-primary);">
+      <div style="max-width: var(--content-max-width); margin: 0 auto;">
+        <div class="contact-grid">
+          
+          <!-- Contact Form -->
+          <div>
+            <h2 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 2.5rem; margin-bottom: 40px;">Talk to Brenda</h2>
+            <form style="display: flex; flex-direction: column; gap: 20px;">
+              <div>
+                <label style="font-family: var(--font-body); color: var(--text-primary); display: block; margin-bottom: 8px; font-weight: 500;">Name</label>
+                <input type="text" style="width: 100%; padding: 16px; border: 1px solid var(--border-color); border-radius: 4px; font-family: var(--font-body); background: var(--bg-alt);">
+              </div>
+              <div>
+                <label style="font-family: var(--font-body); color: var(--text-primary); display: block; margin-bottom: 8px; font-weight: 500;">Phone Number</label>
+                <input type="tel" style="width: 100%; padding: 16px; border: 1px solid var(--border-color); border-radius: 4px; font-family: var(--font-body); background: var(--bg-alt);">
+              </div>
+              <div>
+                <label style="font-family: var(--font-body); color: var(--text-primary); display: block; margin-bottom: 8px; font-weight: 500;">Email Address</label>
+                <input type="email" style="width: 100%; padding: 16px; border: 1px solid var(--border-color); border-radius: 4px; font-family: var(--font-body); background: var(--bg-alt);">
+              </div>
+              <div>
+                <label style="font-family: var(--font-body); color: var(--text-primary); display: block; margin-bottom: 8px; font-weight: 500;">Message</label>
+                <textarea rows="5" style="width: 100%; padding: 16px; border: 1px solid var(--border-color); border-radius: 4px; font-family: var(--font-body); background: var(--bg-alt); resize: vertical;"></textarea>
+              </div>
+              <button type="submit">Send Message</button>
+            </form>
+          </div>
+
+          <!-- Contact Information -->
+          <div>
+            <h2 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 2.5rem; margin-bottom: 40px;">Open Monday-Friday from 8am-5pm</h2>
+            
+            <div style="margin-bottom: 40px;">
+              <div style="margin-bottom: 20px;">
+                <a href="mailto:brenda@brendaclarklaw.com" style="font-family: var(--font-body); color: var(--text-primary); font-size: 1.125rem; text-decoration: none;">brenda@brendaclarklaw.com</a>
+              </div>
+              <div style="margin-bottom: 20px;">
+                <a href="tel:6156496841" style="font-family: var(--font-body); color: var(--text-primary); font-size: 1.125rem; text-decoration: none;">(615) 649-6841</a>
+              </div>
+              <div style="margin-bottom: 20px;">
+                <p style="font-family: var(--font-body); color: var(--text-primary); font-size: 1.125rem; margin: 0;">1224 2nd Avenue South, Suite 102<br>Nashville, TN 37210</p>
+              </div>
+            </div>
+
+            <div style="margin-bottom: 40px;">
+              <a href="https://middletnfamilylawyer.com/schedule/" style="display: inline-block; padding: 16px 32px; background: var(--text-primary); color: var(--bg-primary); text-decoration: none; border-radius: 4px; font-family: var(--font-body); font-weight: 500;">Get a Free Consultation</a>
+            </div>
+
+            <div>
+              <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1.5rem; margin-bottom: 20px;">LEARN MORE ABOUT BRENDA</h3>
+              <div style="display: flex; flex-direction: column; gap: 12px;">
+                <a href="https://middletnfamilylawyer.com/about" style="font-family: var(--font-body); color: var(--text-primary); text-decoration: none; padding: 8px 0; border-bottom: 1px solid var(--border-color);">About Brenda</a>
+                <a href="https://middletnfamilylawyer.com/testimonials" style="font-family: var(--font-body); color: var(--text-primary); text-decoration: none; padding: 8px 0; border-bottom: 1px solid var(--border-color);">Why Clients Love Brenda</a>
+                <a href="https://middletnfamilylawyer.com/family-law" style="font-family: var(--font-body); color: var(--text-primary); text-decoration: none; padding: 8px 0; border-bottom: 1px solid var(--border-color);">Family Law Services</a>
+                <a href="https://middletnfamilylawyer.com/wills-probate/" style="font-family: var(--font-body); color: var(--text-primary); text-decoration: none; padding: 8px 0; border-bottom: 1px solid var(--border-color);">Wills and Probate Services</a>
+                <a href="https://middletnfamilylawyer.com/contact" style="font-family: var(--font-body); color: var(--text-primary); text-decoration: none; padding: 8px 0; border-bottom: 1px solid var(--border-color);">Talk to Brenda</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" style="background: var(--bg-alt); padding: var(--section-padding);">
+      <div style="max-width: var(--content-max-width); margin: 0 auto; padding: 80px 20px;">
+        <div class="contact-grid">
+          <div>
+            <h2 style="font-family: var(--font-heading); font-size: 48px; color: var(--text-primary); margin-bottom: 40px; line-height: 1.2;">Contact</h2>
+            <div style="font-family: var(--font-body); font-size: 18px; color: var(--text-muted); line-height: 1.6;">
+              10 Best Family Attorneys in Nashville because of her deep experience, kn
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 32px;">
+            <div>
+              <div style="font-family: var(--font-body); font-size: 14px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Phone</div>
+              <a href="tel:(615) 649-6841" style="font-family: var(--font-body); font-size: 20px; color: var(--text-primary); text-decoration: none; font-weight: 500;">(615) 649-6841</a>
+            </div>
+            <div>
+              <div style="font-family: var(--font-body); font-size: 14px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Email</div>
+              <a href="mailto:brenda@brendaclarklaw.com" style="font-family: var(--font-body); font-size: 20px; color: var(--text-primary); text-decoration: none; font-weight: 500;">brenda@brendaclarklaw.com</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Brenda Clark Law</span>
+      <span class="footer-copyright">© 2024 Brenda Clark Law Systems, Inc. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Testimonials</a>
+      <a href="#">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile navigation
+    const hamburger = document.getElementById('hamburgerBtn');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('navOverlay');
+
+    hamburger.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
+      overlay.classList.toggle('active');
+    });
+
+    overlay.addEventListener('click', () => {
+      sidebar.classList.remove('active');
+      overlay.classList.remove('active');
+    });
+  </script>
+</body>
+</html>
