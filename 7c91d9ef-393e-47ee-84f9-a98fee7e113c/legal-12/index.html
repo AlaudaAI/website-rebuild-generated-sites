@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style data-design-intent>
+:root {
+  --white: #ffffff;
+  --black: #000000;
+  --primary: #000000;
+  --bg-primary: #ffffff;
+  --text-primary: #000000;
+  --font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --content-max-width: 900px;
+  --bg-secondary: #000000;
+  --text-muted: rgba(0,0,0,0.7);
+  --border: 1px solid #000000;
+}
+</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>John Meadows Legal</title>
+  <style>
+    :root {
+      --primary: #000000;
+      --secondary: #000000;
+      --accent: #000000;
+      --text: #000000;
+      --text-light: rgba(0,0,0,0.7);
+      --text-muted: rgba(0,0,0,0.6);
+      --bg: #ffffff;
+      --bg-alt: #f9f9f9;
+      --bg-primary: #ffffff;
+      --bg-secondary: #000000;
+      --white: #ffffff;
+      --black: #000000;
+      --border: 1px solid #000000;
+      --font-heading: 'Playfair Display', Georgia, 'Times New Roman', serif;
+      --font-body: 'Playfair Display', Georgia, 'Times New Roman', serif;
+      --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+      --section-padding: 4rem;
+      --gap: 2rem;
+      --max-width: 1200px;
+      --content-max-width: 1000px;
+      --base: 8px;
+      --body-size: 16px;
+      --body-lh: 1.65;
+      --transition: 0.3s ease;
+      --sidebar-width: 3rem;
+      --text-primary: #000000;
+    }
+
+    /* Reset */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: var(--body-lh);
+      color: var(--text);
+      background-color: var(--bg);
+      overflow-x: hidden;
+      overflow-wrap: break-word;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      display: none;
+    }
+
+    @media (min-width: 1024px) {
+      .sidebar {
+        display: flex;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: var(--sidebar-width);
+        height: 100vh;
+        border-right: var(--border);
+        z-index: 100;
+        background: var(--white);
+        align-items: center;
+        justify-content: center;
+      }
+
+      .sidebar-text {
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.25em;
+        white-space: nowrap;
+        color: var(--black);
+      }
+
+      .main-wrapper {
+        margin-left: var(--sidebar-width);
+      }
+    }
+
+    .main-wrapper {
+      width: 100%;
+    }
+
+    @media (min-width: 1024px) {
+      .main-wrapper {
+        margin-left: var(--sidebar-width);
+        width: calc(100% - var(--sidebar-width));
+      }
+    }
+
+    /* Header / Hero */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      border-bottom: var(--border);
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    @media (min-width: 768px) {
+      .hero {
+        padding: 2.5rem 3rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .hero {
+        padding: 3rem 4rem;
+      }
+    }
+
+    .hero-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    @media (min-width: 768px) {
+      .hero-nav {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    .hero-nav-locations {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+    }
+
+    .hero-nav-locations a {
+      transition: var(--transition);
+    }
+
+    .hero-nav-locations a:hover {
+      font-style: italic;
+      text-decoration: underline;
+    }
+
+    .hero-nav-links {
+      display: flex;
+      gap: 2rem;
+      font-size: 1.05rem;
+    }
+
+    .hero-nav-links a {
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .hero-nav-links a:hover {
+      font-style: italic;
+      text-decoration: underline;
+    }
+
+    .hero-label {
+      position: absolute;
+      top: 6rem;
+      right: 2rem;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      z-index: 5;
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .hero-label {
+        display: block;
+        top: 7rem;
+        right: 4rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .hero-label {
+        top: 8rem;
+        right: 6rem;
+      }
+    }
+
+    .hero-geometric {
+      position: absolute;
+      top: 5%;
+      right: -5%;
+      width: 280px;
+      height: 320px;
+      background: var(--black);
+      clip-path: polygon(30% 0%, 100% 10%, 85% 75%, 50% 100%, 0% 60%);
+      opacity: 0.08;
+      z-index: 1;
+    }
+
+    @media (min-width: 768px) {
+      .hero-geometric {
+        width: 380px;
+        height: 420px;
+        opacity: 0.1;
+        right: 2%;
+        top: 3%;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .hero-geometric {
+        width: 450px;
+        height: 500px;
+        right: 5%;
+      }
+    }
+
+    .hero-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 5;
+    }
+
+    .hero-headline {
+      font-size: clamp(2.8rem, 8vw, 7.5rem);
+      font-weight: 400;
+      line-height: 0.9;
+      text-transform: lowercase;
+      margin-bottom: 2rem;
+      max-width: 900px;
+    }
+
+    .hero-headline .line-italic {
+      font-style: italic;
+      padding-left: clamp(1rem, 5vw, 6rem);
+      display: block;
+    }
+
+    .hero-headline .line {
+      display: block;
+    }
+
+    .hero-bottom {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: auto;
+      padding-top: 3rem;
+    }
+
+    /* Banner Section */
+    .banner {
+      background: var(--bg-alt);
+      border-bottom: var(--border);
+    }
+
+    /* Services Grid */
+    .services {
+      padding: 3rem 1.5rem;
+      border-bottom: var(--border);
+      background: var(--bg);
+    }
+
+    @media (min-width: 768px) {
+      .services {
+        padding: 4rem 3rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .services {
+        padding: 5rem 4rem;
+      }
+    }
+
+    .services-header {
+      margin-bottom: 3rem;
+    }
+
+    .services-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      margin-bottom: 1rem;
+    }
+
+    .services-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 400;
+      line-height: 1.15;
+      max-width: 600px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    @media (min-width: 768px) {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .service-card {
+      border: var(--border);
+      padding: 2.5rem 2rem;
+      position: relative;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--white);
+      color: var(--black);
+      transition: background-color var(--transition), color var(--transition);
+      cursor: pointer;
+      overflow: hidden;
+      margin-top: -1px;
+      margin-left: -1px;
+    }
+
+    .service-card:hover {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .service-card-number {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 4rem;
+      font-weight: 400;
+      opacity: 0.1;
+      line-height: 1;
+    }
+
+    .service-card-geo {
+      position: absolute;
+      bottom: -20px;
+      left: -20px;
+      width: 120px;
+      height: 120px;
+      background: currentColor;
+      clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+      opacity: 0.04;
+    }
+
+    .service-card-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .service-card-title {
+      font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+      font-weight: 500;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .service-card-desc {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      opacity: 0.85;
+    }
+
+    .service-card-arrow {
+      align-self: flex-end;
+      font-size: 1.5rem;
+      position: relative;
+      z-index: 2;
+      margin-top: 1.5rem;
+      transition: transform var(--transition);
+    }
+
+    .service-card:hover .service-card-arrow {
+      transform: translateX(5px);
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      background: var(--bg-alt);
+      padding: var(--section-padding) 2rem;
+      border-bottom: var(--border);
+    }
+
+    @media (min-width: 768px) {
+      .stats-grid {
+        gap: 4rem !important;
+      }
+    }
+
+    /* Attorney Profile */
+    .attorney {
+      display: grid;
+      grid-template-columns: 1fr;
+      border-bottom: var(--border);
+      background: var(--bg);
+    }
+
+    @media (min-width: 768px) {
+      .attorney {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .attorney-left {
+      position: relative;
+      min-height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+      border-bottom: var(--border);
+    }
+
+    @media (min-width: 768px) {
+      .attorney-left {
+        border-bottom: none;
+        border-right: var(--border);
+        min-height: 500px;
+        padding: 4rem;
+      }
+    }
+
+    .attorney-left-label {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+    }
+
+    .attorney-shape {
+      width: 200px;
+      height: 250px;
+      background: var(--black);
+      clip-path: polygon(15% 0%, 85% 5%, 100% 45%, 70% 100%, 0% 85%, 5% 30%);
+    }
+
+    @media (min-width: 768px) {
+      .attorney-shape {
+        width: 260px;
+        height: 320px;
+      }
+    }
+
+    .attorney-right {
+      padding: 3rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    @media (min-width: 768px) {
+      .attorney-right {
+        padding: 4rem 3rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .attorney-right {
+        padding: 5rem 4rem;
+      }
+    }
+
+    .attorney-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      margin-bottom: 1.5rem;
+    }
+
+    .attorney-heading {
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Custom Sections */
+    .criminal-defense,
+    .family-law,
+    .accidents {
+      border-bottom: var(--border);
+    }
+
+    .criminal-defense {
+      background: var(--bg-alt);
+    }
+
+    .family-law {
+      background: var(--bg);
+    }
+
+    .accidents {
+      background: var(--bg-alt);
+    }
+
+    /* Contact Section */
+    .contact {
+      display: grid;
+      grid-template-columns: 1fr;
+      border-bottom: var(--border);
+      background: var(--bg);
+    }
+
+    @media (min-width: 768px) {
+      .contact {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .contact-left {
+      padding: 3rem 2rem;
+      position: relative;
+      border-bottom: var(--border);
+    }
+
+    @media (min-width: 768px) {
+      .contact-left {
+        padding: 4rem 3rem;
+        border-bottom: none;
+        border-right: var(--border);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .contact-left {
+        padding: 5rem 4rem;
+      }
+    }
+
+    .contact-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-heading {
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-text {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      max-width: 420px;
+      margin-bottom: 2rem;
+    }
+
+    .contact-geo {
+      width: 120px;
+      height: 140px;
+      background: var(--black);
+      clip-path: polygon(20% 0%, 100% 15%, 80% 100%, 0% 80%);
+      opacity: 0.08;
+    }
+
+    .contact-right {
+      padding: 3rem 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .contact-right {
+        padding: 4rem 3rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .contact-right {
+        padding: 5rem 4rem;
+      }
+    }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .contact-item h3 {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-item p {
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+
+    .contact-item a {
+      transition: var(--transition);
+    }
+
+    .contact-item a:hover {
+      text-decoration: underline;
+      font-style: italic;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--black);
+      color: var(--white);
+      padding: 2.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+        padding: 3rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .footer {
+        padding: 3rem 4rem;
+      }
+    }
+
+    .footer-name {
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      opacity: 0.6;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-right {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-right a {
+      font-size: 0.85rem;
+      transition: var(--transition);
+      opacity: 0.8;
+    }
+
+    .footer-right a:hover {
+      opacity: 1;
+      text-decoration: underline;
+      font-style: italic;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .criminal-defense div[style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important;
+      }
+      
+      .family-law div[style*="grid"] {
+        grid-template-columns: 1fr !important;
+      }
+      
+      .stats-grid {
+        flex-direction: column !important;
+        gap: 1.5rem !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <!-- Vertical Sidebar -->
+  <aside class="sidebar">
+    <span class="sidebar-text">John Meadows — Established 2003 — Criminal Defense</span>
+  </aside>
+
+  <!-- Main Wrapper -->
+  <div class="main-wrapper">
+
+  <section class="hero">
+    <nav class="hero-nav">
+      <div class="hero-nav-locations">
+        <a href="#">Lebanon</a>
+        <a href="#">Tennessee</a>
+      </div>
+      <div class="hero-nav-links">
+        <a href="#services">Practice</a>
+        <a href="#attorney">Counsel</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <span class="hero-label">Legal Defense</span>
+
+    <div class="hero-geometric"></div>
+
+    <div class="hero-content">
+      <h1 class="hero-headline">
+        <span class="line">trial lawyer -</span>
+        <span class="line-">Lebanon,</span>
+        <span class="line">Tennessee</span>
+      </h1>
+    </div>
+
+    <div class="hero-bottom">
+      <img src="https://nebula.wsimg.com/99996aa39d8e44fba889698f2b7b2ab5?AccessKeyId=96F6F4B79A096E185CE9&disposition=0&alloworigin=1" alt="trial lawyer - Lebanon, Tennessee" style="max-width: 100%; height: auto;" />
+    </div>
+  </section>
+
+  <section class="banner" style="background: var(--bg-primary); padding: 3rem 0; border-top: var(--border);">
+    <div style="max-width: var(--content-max-width); margin: 0 auto; padding: 0 2rem;">
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 2rem;">
+        
+        <div style="text-align: center;">
+          <h2 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 2.5rem; margin: 0 0 1rem 0; font-weight: normal;">trial lawyer - Lebanon, Tennessee</h2>
+          <a href="tel:1.615.784.4848" style="font-family: var(--font-body); color: var(--text-primary); font-size: 2rem; text-decoration: none; font-weight: bold; border: var(--border); padding: 1rem 2rem; display: inline-block;">1.615.784.4848</a>
+        </div>
+
+        <img src="https://nebula.wsimg.com/bc63888bf8f44aa65cf92be4e4586d0d?AccessKeyId=96F6F4B79A096E185CE9&disposition=0&alloworigin=1" alt="Trial lawyer" style="max-width: 100%; height: auto; border: var(--border);">
+
+        <div style="text-align: center; max-width: 600px;">
+          <p style="font-family: var(--font-body); color: var(--text-primary); font-size: 1.25rem; line-height: 1.6; margin: 0;">Are you facing criminal charges? If so, then you need a criminal defense lawyer to fight for you.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://nebula.wsimg.com/a89d500bd636cfb9db2ec33cf2bcf94b?AccessKeyId=96F6F4B79A096E185CE9&disposition=0&alloworigin=1" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+  <section class="services" id="services">
+    <div class="services-header">
+      <p class="services-label">Areas of Practice</p>
+      <h2 class="services-title">We defend individuals facing the most serious criminal allegations</h2>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-card-number">01</span>
+        <div class="service-card-geo"></div>
+        <div class="service-card-content">
+          <h3 class="service-card-title">Criminal Defense</h3>
+          <p class="service-card-desc">Criminal defense lawyer to fight for you when facing criminal charges</p>
+        </div>
+        <span class="service-card-arrow">→</span>
+      </div>
+
+      <div class="service-card">
+        <span class="service-card-number">02</span>
+        <div class="service-card-content">
+          <h3 class="service-card-title">Personal Injury</h3>
+          <p class="service-card-desc">Personal injury trial lawyer to help you get back on your feet after accidents</p>
+        </div>
+        <span class="service-card-arrow">→</span>
+      </div>
+
+      <div class="service-card">
+        <span class="service-card-number">03</span>
+        <div class="service-card-geo"></div>
+        <div class="service-card-content">
+          <h3 class="service-card-title">Family Law</h3>
+          <p class="service-card-desc">Skilled lawyer familiar with the multiple layers of family law for family matters</p>
+        </div>
+        <span class="service-card-arrow">→</span>
+      </div>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://nebula.wsimg.com/6c689de2479e969c473c3a3196e5273d?AccessKeyId=96F6F4B79A096E185CE9&disposition=0&alloworigin=1" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+  <section class="stats-" style="display: flex; gap: 2rem; justify-content: center; max-width: var(--content-max-width); margin: 0 auto; padding: 2rem 1rem;">
+    <div class="stat-item" style="text-align: center;">
+      <h3 class="stat-number" style="font-family: var(--font-heading); font-size: 3rem; font-weight: bold; color: var(--text-primary); margin: 0 0 0.5rem 0;">67</h3>
+      <p class="stat-label" style="font-family: var(--font-body); color: var(--text-muted); margin: 0; text-transform: lowercase;">reviews</p>
+    </div>
+    <div class="stat-item" style="text-align: center;">
+      <h3 class="stat-number" style="font-family: var(--font-heading); font-size: 3rem; font-weight: bold; color: var(--text-primary); margin: 0 0 0.5rem 0;">10.0</h3>
+      <p class="stat-label" style="font-family: var(--font-body); color: var(--text-muted); margin: 0; text-transform: lowercase;">rating</p>
+    </div>
+  </section>
+<div style="width:100%;margin:2rem 0"><img src="https://nebula.wsimg.com/99996aa39d8e44fba889698f2b7b2ab5?AccessKeyId=96F6F4B79A096E185CE9&amp;disposition=0&amp;alloworigin=1" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+  <section class="attorney" id="team">
+    <div class="attorney-left">
+      <span class="attorney-left-label">Trial Lawyer</span>
+      <div class="attorney-shape"></div>
+    </div>
+
+    <div class="attorney-right">
+      <p class="attorney-label">Our Team</p>
+      <h2 class="attorney-heading">John Meadows</h2>
+    </div>
+  </section>
+
+  <section class="criminal-defense" style="padding: 60px 20px; background: var(--bg-primary);">
+    <div style="max-width: var(--content-max-width); margin: 0 auto;">
+      <h2 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 2.5rem; text-align: center; margin-bottom: 40px;">Criminal defense</h2>
+      
+      <div style="text-align: center; margin-bottom: 40px;">
+        <p style="font-family: var(--font-body); color: var(--text-primary); font-size: 1.2rem; line-height: 1.6;">Unfortunately, accidents happen and when they do you need a personal injury trial lawyer to help you get back on your feet.</p>
+      </div>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-bottom: 40px;">
+        <div style="text-align: center;">
+          <img src="https://nebula.wsimg.com/c3806694cc5c26ca899e8e25ac2bc809?AccessKeyId=96F6F4B79A096E185CE9&disposition=0&alloworigin=1" alt="Legal services" style="width: 100%; max-width: 350px; height: auto; border-radius: 8px; margin-bottom: 20px;">
+        </div>
+        
+        <div style="text-align: center;">
+          <img src="https://nebula.wsimg.com/9cf91d99644d5f008ff3abbde343ceaa?AccessKeyId=96F6F4B79A096E185CE9&disposition=0&alloworigin=1" alt="Legal representation" style="width: 100%; max-width: 350px; height: auto; border-radius: 8px; margin-bottom: 20px;">
+        </div>
+      </div>
+      
+      <div style="text-align: center; margin-bottom: 30px;">
+        <a href="https://www.avvo.com/attorneys/37087-tn-john-meadows-1714809.html" style="font-family: var(--font-body); color: var(--text-primary); text-decoration: underline; font-size: 1.1rem;">John Lyons MeadowsReviewsout of 67 reviews</a>
+      </div>
+      
+      <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
+        <a href="https://www.johnmeadowslegal.com/personal-injury-.html" style="display: inline-block; padding: 15px 30px; background: var(--bg-secondary); color: var(--white); font-family: var(--font-body); text-decoration: none; border-radius: 4px; font-size: 1.1rem; transition: opacity 0.3s;">Learn More</a>
+        
+        <a href="https://www.johnmeadowslegal.com/criminal-.html" style="display: inline-block; padding: 15px 30px; background: var(--bg-secondary); color: var(--white); font-family: var(--font-body); text-decoration: none; border-radius: 4px; font-size: 1.1rem; transition: opacity 0.3s;">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="family-law" style="padding: 4rem 2rem; background: var(--bg-primary); color: var(--text-primary);">
+    <div style="max-width: var(--content-max-width); margin: 0 auto; text-align: center;">
+      <h2 style="font-family: var(--font-heading); font-size: 2.5rem; margin-bottom: 2rem; text-transform: lowercase;">family law</h2>
+      
+      <div style="display: grid; gap: 3rem; align-items: center;">
+        <div>
+          <img src="https://nebula.wsimg.com/4c048f9d8cd38808c1a778f8066c3d84?AccessKeyId=96F6F4B79A096E185CE9&disposition=0&alloworigin=1" alt="Family Law" style="width: 100%; max-width: 400px; height: auto; margin: 0 auto 2rem; display: block;">
+          
+          <p style="font-family: var(--font-body); font-size: 1.2rem; line-height: 1.6; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">Breaking up is hard to do. Trust your family matters to a skilled lawyer familiar with the multiple layers of family law.</p>
+          
+          <a href="https://www.johnmeadowslegal.com/family-law.html" style="display: inline-block; padding: 0.75rem 2rem; background: var(--bg-secondary); color: var(--white); text-decoration: none; font-family: var(--font-body); font-weight: bold; margin-bottom: 3rem;">Learn More</a>
+        </div>
+        
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
+          <div style="text-align: center;">
+            <a href="https://www.avvo.com/attorneys/37087-tn-john-meadows-1714809.html" style="text-decoration: none; color: var(--text-primary);">
+              <div style="font-family: var(--font-body); font-weight: bold; margin-bottom: 0.5rem;">John Lyons MeadowsClients' ChoiceAward 2022</div>
+            </a>
+          </div>
+          
+          <div style="text-align: center;">
+            <a href="https://www.avvo.com/attorneys/37087-tn-john-meadows-1714809.html" style="text-decoration: none; color: var(--text-primary);">
+              <div style="font-family: var(--font-heading); font-size: 2rem; font-weight: bold; margin-bottom: 0.25rem;">10.0John Lyons Meadows</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="contact-left">
+      <p class="contact-label">Contact</p>
+      <h2 class="contact-heading">Your defense begins with a single conversation</h2>
+      <p class="contact-text">
+        Time is critical in criminal matters. Contact our office for a confidential consultation. We review every inquiry personally and respond within twenty-four hours. No case is too complex, no situation too urgent.
+      </p>
+      <div class="contact-geo"></div>
+    </div>
+
+    <div class="contact-right">
+      <div class="contact-details">
+        <div class="contact-item">
+          <h3>Phone</h3>
+          <p><a href="tel:615.784.4848">615.784.4848</a></p>
+        </div>
+        <div class="contact-item">
+          <h3>Address</h3>
+          <p>115 East Main Street, Suite A1, Lebanon, TN 37087</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-left">
+      <div class="footer-name">John Meadows</div>
+      <div class="footer-copy">© 2025 John Meadows Legal. ALL RIGHTS RESERVED.</div>
+    </div>
+    <div class="footer-right">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">Twitter</a>
+    </div>
+  </footer>
+
+  </div>
+</body>
+</html>
