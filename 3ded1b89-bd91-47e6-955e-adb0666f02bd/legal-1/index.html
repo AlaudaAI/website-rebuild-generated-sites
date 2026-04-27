@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brad H. Frakes, Attorney At Law</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Visual Demo */
+.hero-visual {
+  width: 100%;
+  max-width: 400px;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+}
+
+/* Features Grid */
+.features {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.feature-card {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+.feature-card:last-child {
+  border-bottom: none;
+}
+
+.feature-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.feature-protocol {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.feature-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.feature-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 380px;
+}
+
+/* Services Grid */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-md);
+  padding: var(--space-lg);
+}
+
+.service-item {
+  padding: var(--space-lg) var(--space-md);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.service-item:hover {
+  background: var(--bg-hover);
+  border-color: var(--text-dim);
+}
+
+.service-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* Trust Metrics Section */
+.trust-section {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.trust-metrics {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.trust-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.trust-number {
+  font-family: var(--font-serif);
+  font-size: clamp(64px, 15vw, 120px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.trust-number-suffix {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 8vw, 60px);
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.trust-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 400px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+}
+
+.stat-item {
+  text-align: center;
+}
+
+/* Team Section */
+.team-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.team-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  object-fit: cover;
+}
+
+.team-info {
+  text-align: center;
+}
+
+.team-name {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.team-role {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.team-bio {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* Reviews Section */
+.reviews-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 36px);
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: var(--space-xl);
+  text-align: center;
+}
+
+.review-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.review-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  object-fit: cover;
+}
+
+.review-author {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.review-stars {
+  color: #FFD700;
+  font-size: 14px;
+  margin-top: var(--space-xs);
+}
+
+.review-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+/* Contact Section */
+.contact-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  text-align: center;
+}
+
+.contact-phone {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 400;
+  color: var(--text-primary);
+  text-decoration: none;
+  margin-bottom: var(--space-md);
+  display: block;
+}
+
+.contact-phone:hover {
+  color: var(--text-muted);
+}
+
+.contact-address {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: var(--space-lg);
+}
+
+.contact-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin: var(--space-lg) 0;
+}
+
+.contact-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+.footer-social {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-social a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== MOBILE (max-width: 768px) =================== */
+@media (max-width: 768px) {
+  .hero {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .hero-headline {
+    font-size: clamp(28px, 6vw, 36px);
+  }
+  
+  .feature-card {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .trust-metrics {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .trust-number {
+    font-size: clamp(48px, 12vw, 72px);
+  }
+  
+  .team-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .reviews-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .contact-section {
+    padding: var(--space-lg) var(--space-md);
+  }
+  
+  .footer {
+    padding: var(--space-lg) var(--space-md);
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:last-child {
+    border-right: none;
+  }
+
+  .trust-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-metrics {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .feature-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .trust-metrics {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-number {
+    font-size: 120px;
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .feature-card {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <div class="globe-icon"><i class="fas fa-balance-scale"></i></div>
+    <span class="brand-name">Brad H. Frakes, Attorney At Law</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-balance-scale"></i></div>
+      <span class="brand-name">Brad H. Frakes, Attorney At Law</span>
+    </a>
+    <nav>
+      <a href="https://bradfrakesfamilylaw.com/family-law-nashville/">Family Law</a>
+      <a href="https://bradfrakesfamilylaw.com/about-brad-frakes-attorney/">About</a>
+      <a href="https://bradfrakesfamilylaw.com/legal-resources/">Legal Resources</a>
+      <a href="https://bradfrakesfamilylaw.com/blog/">Blog</a>
+      <a href="https://bradfrakesfamilylaw.com/reviews/">Reviews</a>
+      <a href="https://bradfrakesfamilylaw.com/contact/">Contact</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Available for Consultation</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Nashville Family Law</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Serving all of Davidson, Williamson, Rutherford, Wilson and Sumner counties.</span>
+      <h1 class="hero-headline">Brad H. Frakes Attorney At Law</h1>
+      <p class="hero-subheading">Experienced & Assertive Divorce & Family Law Attorney</p>
+      <a href="tel:(615)248-7854" class="hero-cta">Call for Consultation <i class="fas fa-phone" style="font-size:10px;"></i></a>
+    </div>
+    <div class="hero-visual">
+      <img src="https://i0.wp.com/bradfrakesfamilylaw.com/wp-content/uploads/logo-2025b.png?resize=600%2C140&ssl=1" alt="Family Law Attorney Nashville" class="hero-image">
+    </div>
+  </section>
+
+  <!-- Additional Images Section -->
+  <section style="padding: var(--space-lg); border-bottom: 1px solid var(--border-color);">
+    <span class="trust-label" style="text-align: center; display: block; margin-bottom: var(--space-lg);">Office Gallery</span>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-md);">
+      <div style="width:100%;margin:1rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i11!2i530!3i802!4i256!2m1!1e1!3m12!2sen!3sUS!5e289!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy5lOmx8cC52Om9mZg!4e0!5m1!1e3!23i47083502&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=40088" alt="" style="width:100%;height:auto;object-fit:cover;max-height:300px;border-radius:8px;border:1px solid var(--border-color)"></div>
+      <div style="width:100%;margin:1rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i11!2i530!3i803!4i256!2m1!1e1!3m12!2sen!3sUS!5e289!12m3!1e37!2m1!1ssmartmaps!12m4!1e26!2m2!1sstyles!2zcy5lOmx8cC52Om9mZg!4e0!5m1!1e3!23i47083502&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=77308" alt="" style="width:100%;height:auto;object-fit:cover;max-height:300px;border-radius:8px;border:1px solid var(--border-color)"></div>
+      <div style="width:100%;margin:1rem 0"><img src="https://bradfrakesfamilylaw.com/wp-content/uploads/LP_PayInvoice_ALL.png" alt="Pay Invoice" style="width:100%;height:auto;object-fit:cover;max-height:300px;border-radius:8px;border:1px solid var(--border-color)"></div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section style="padding: var(--space-lg); border-bottom: 1px solid var(--border-color);">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-md);">
+      <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8486!3i12848!4i256!2m3!1e0!2sm!3i776540560!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828092812117889985!2y3888540749570185295!2s%2Fg%2F1ydpvb1nw!4m2!1x361657415!2x3427196275!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=2121" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+      <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8485!3i12848!4i256!2m3!1e0!2sm!3i776540560!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828092812117889985!2y3888540749570185295!2s%2Fg%2F1ydpvb1nw!4m2!1x361657415!2x3427196275!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=130102" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+      <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8486!3i12849!4i256!2m3!1e0!2sm!3i776540476!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828092812117889985!2y3888540749570185295!2s%2Fg%2F1ydpvb1nw!4m2!1x361657415!2x3427196275!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=33931" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+      <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8483!3i12847!4i256!2m3!1e0!2sm!3i776540716!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828092812117889985!2y3888540749570185295!2s%2Fg%2F1ydpvb1nw!4m2!1x361657415!2x3427196275!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=58725" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+      <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8483!3i12849!4i256!2m3!1e0!2sm!3i776540788!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828092812117889985!2y3888540749570185295!2s%2Fg%2F1ydpvb1nw!4m2!1x361657415!2x3427196275!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=91564" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+      <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8487!3i12847!4i256!2m3!1e0!2sm!3i776540476!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828092812117889985!2y3888540749570185295!2s%2Fg%2F1ydpvb1nw!4m2!1x361657415!2x3427196275!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=25803" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+      <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8484!3i12849!4i256!2m3!1e0!2sm!3i776540788!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828092812117889985!2y3888540749570185295!2s%2Fg%2F1ydpvb1nw!4m2!1x361657415!2x3427196275!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=94654" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+      <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8483!3i12848!4i256!2m3!1e0!2sm!3i776540716!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828092812117889985!2y3888540749570185295!2s%2Fg%2F1ydpvb1nw!4m2!1x361657415!2x3427196275!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=64334" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+      <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8487!3i12848!4i256!2m3!1e0!2sm!3i776540476!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828092812117889985!2y3888540749570185295!2s%2Fg%2F1ydpvb1nw!4m2!1x361657415!2x3427196275!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=31412" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+      <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8482!3i12848!4i256!2m3!1e0!2sm!3i776540788!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828092812117889985!2y3888540749570185295!2s%2Fg%2F1ydpvb1nw!4m2!1x361657415!2x3427196275!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=82865" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+      <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8482!3i12847!4i256!2m3!1e0!2sm!3i776540716!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828092812117889985!2y3888540749570185295!2s%2Fg%2F1ydpvb1nw!4m2!1x361657415!2x3427196275!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=55635" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+      <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8482!3i12849!4i256!2m3!1e0!2sm!3i776540788!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828092812117889985!2y3888540749570185295!2s%2Fg%2F1ydpvb1nw!4m2!1x361657415!2x3427196275!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=88474" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+      <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8486!3i12847!4i256!2m3!1e0!2sm!3i776540560!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828092812117889985!2y3888540749570185295!2s%2Fg%2F1ydpvb1nw!4m2!1x361657415!2x3427196275!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=127583" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+      <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8484!3i12847!4i256!2m3!1e0!2sm!3i776540716!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828092812117889985!2y3888540749570185295!2s%2Fg%2F1ydpvb1nw!4m2!1x361657415!2x3427196275!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=61815" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+      <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8487!3i12849!4i256!2m3!1e0!2sm!3i776540788!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828092812117889985!2y3888540749570185295!2s%2Fg%2F1ydpvb1nw!4m2!1x361657415!2x3427196275!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=103924" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+      <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8484!3i12848!4i256!2m3!1e0!2sm!3i776540716!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828092812117889985!2y3888540749570185295!2s%2Fg%2F1ydpvb1nw!4m2!1x361657415!2x3427196275!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=67424" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+      <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8485!3i12849!4i256!2m3!1e0!2sm!3i776540788!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828092812117889985!2y3888540749570185295!2s%2Fg%2F1ydpvb1nw!4m2!1x361657415!2x3427196275!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=97744" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+      <div style="width:100%;margin:2rem 0"><img src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8485!3i12847!4i256!2m3!1e0!2sm!3i776540560!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828092812117889985!2y3888540749570185295!2s%2Fg%2F1ydpvb1nw!4m2!1x361657415!2x3427196275!15sgcid%3Afamily_law_attorney!2b0!3b0!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=124493" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+    </div>
+  </section>
+
+  <!-- Services Grid -->
+  <section class="features">
+    <div class="feature-card">
+      <p class="feature-protocol">Practice Area 01</p>
+      <h3 class="feature-title">Family Law Expertise</h3>
+      <div class="services-">
+        <div class="service-item">
+          <div class="service-name">Divorce</div>
+        </div>
+        <div class="service-item">
+          <div class="service-name">Legal Separation</div>
+        </div>
+        <div class="service-item">
+          <div class="service-name">Child Custody</div>
+        </div>
+        <div class="service-item">
+          <div class="service-name">Child Support</div>
+        </div>
+      </div>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Practice Area 02</p>
+      <h3 class="feature-title">Specialized Services</h3>
+      <div class="services-">
+        <div class="service-item">
+          <div class="service-name">Paternity</div>
+        </div>
+        <div class="service-item">
+          <div class="service-name">Adoption</div>
+        </div>
+        <div class="service-item">
+          <div class="service-name">Grandparent Visitation</div>
+        </div>
+        <div class="service-item">
+          <div class="service-name">Domestic Violence</div>
+        </div>
+      </div>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Practice Area 03</p>
+      <h3 class="feature-title">Legal Protection</h3>
+      <div class="services-">
+        <div class="service-item">
+          <div class="service-name">Assault</div>
+        </div>
+        <div class="service-item">
+          <div class="service-name">Orders of Protection</div>
+        </div>
+        <div class="service-item">
+          <div class="service-name">Contempt of Court</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="trust-section">
+    <div class="trust-metrics">
+      <span class="trust-label">Client Reviews</span>
+      <div class="stats-">
+        <div class="stat-item">
+          <div>
+            <span class="trust-number">122</span>
+          </div>
+          <p class="trust-description">customer reviews</p>
+        </div>
+        <div class="stat-item">
+          <div>
+            <span class="trust-number">5.0</span>
+          </div>
+          <p class="trust-description">star rating</p>
+        </div>
+        <div class="stat-item">
+          <div>
+            <span class="trust-number">4.9</span>
+          </div>
+          <p class="trust-description">Google rating</p>
+        </div>
+        <div class="stat-item">
+          <div>
+            <span class="trust-number">104</span>
+          </div>
+          <p class="trust-description">Google reviews</p>
+        </div>
+      </div>
+    </div>
+    <div class="trust-metrics">
+      <span class="trust-label">Professional Membership</span>
+      <img src="https://i0.wp.com/bradfrakesfamilylaw.com/wp-content/uploads/ttla-member-2025_2026_rgb.jpg?resize=345%2C300&ssl=1" alt="Tennessee Trail Lawyers Association Member" style="width: 100%; max-width: 300px; height: auto;">
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <span class="trust-label" style="text-align: center; display: block;">Attorney Profile</span>
+    <div class="team-member">
+      <div class="team-info">
+        <h2 class="team-name">Brad Frakes</h2>
+        <p class="team-role">Attorney At Law</p>
+        <p class="team-bio">Serving families and individuals in Nashville and throughout middle Tennessee since 2012, he is dedicated to protecting clients and ensuring that justice is served.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews Section -->
+  <section class="reviews-section">
+    <h2 class="section-title">What Our Clients Say</h2>
+    <div class="review-item">
+      <div class="review-header">
+        <img src="https://ddjkm7nmu27lx.cloudfront.net/422086276/82098ab5126c4ea8aa9204c4ea766655.png" alt="Alex Hoffman" class="review-avatar">
+        <div>
+          <div class="review-author">Alex Hoffman</div>
+          <div class="review-stars">★★★★★</div>
+        </div>
+      </div>
+      <p class="review-text">I've been working with the firm since April this year, and they've been amazing. Sjon-Paul is second to none and will fight for you like no other.</p>
+    </div>
+    <div class="review-item">
+      <p class="review-text">"I cannot express enough how grateful I am for the exceptional service I received from Brad and his incredible legal team. From the moment I reached out for assistance, I was met with professionalism, compassion, and an unwavering commitment to my case. Brad is not just an outstanding attorney; he is a true advocate who genuinely cares about his clients. He took the time to listen to my concerns, explained the legal process in a way that was easy to understand, and provided me with the confidence I needed during a challenging time..."</p>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <h2 class="section-title">Contact Me For a Consultation</h2>
+    <p class="hero-subheading">If you are facing a divorce, child custody, child support, or family law matter, Brad H. Frakes will fight for you!</p>
+    <a href="tel:(615)248-7854" class="contact-phone">(615) 248-7854</a>
+    <p class="contact-address">222 2nd Ave N, Ste 220<br>Nashville, TN 37201</p>
+    <a href="https://bradfrakesfamilylaw.com/contact/" class="contact-cta">Get Help Now!</a>
+    
+    <!-- Google Maps Embed -->
+    <div style="margin: var(--space-lg) 0;">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6442.066828719201!2d-86.7771021!3d36.165741499999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8864665755db53c1%3A0x35f6df3598c3184f!2sBrad%20H.%20Frakes%2C%20Attorney%20At%20Law!5e0!3m2!1sen!2sus!4v1733247161206!5m2!1sen!2sus" width="100%" height="300" style="border:0" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Brad H. Frakes, Attorney At Law</span>
+      <span class="footer-copyright">©2026 Brad H. Frakes, Attorney at Law. All Rights Reserved.</span>
+      
+      <!-- Social Links -->
+      <div class="footer-social">
+        <a href="https://www.google.com/maps/place/Brad+H.+Frakes,+Attorney+At+Law/@36.165722,-86.7792917,17z/data=!4m5!3m4!1s0x8864665755db53c1:0x35f6df3598c3184f!8m2!3d36.1655778!4d-86.777322" target="_blank">
+          <i class="fab fa-google"></i> Google Business
+        </a>
+        <a href="https://www.facebook.com/bradfrakesfamilylaw" target="_blank">
+          <i class="fab fa-facebook"></i> Facebook
+        </a>
+      </div>
+    </div>
+    <div class="footer-links">
+      <a href="https://bradfrakesfamilylaw.com/family-law-nashville/">Family Law</a>
+      <a href="https://bradfrakesfamilylaw.com/about-brad-frakes-attorney/">About</a>
+      <a href="https://bradfrakesfamilylaw.com/legal-resources/">Legal Resources</a>
+      <a href="https://bradfrakesfamilylaw.com/blog/">Blog</a>
+      <a href="https://bradfrakesfamilylaw.com/reviews/">Reviews</a>
+      <a href="https://bradfrakesfamilylaw.com/contact/">Contact</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
