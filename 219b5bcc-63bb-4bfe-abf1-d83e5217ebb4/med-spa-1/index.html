@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurora Medical Spa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+  background-image: url('https://www.datocms-assets.com/135768/1720193409-2.jpg?auto=format,compress&w=584');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(244, 240, 234, 0.8);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Philosophy Section */
+.philosophy {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.philosophy-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.philosophy-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.philosophy-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Project Grid - Treatments */
+.projects {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.projects-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.project-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.project-cell:last-child {
+  border-bottom: none;
+}
+
+.project-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.project-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.project-cell:hover .project-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: var(--space-xs);
+}
+
+.project-number {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.project-name {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+/* Services List */
+.services-list {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-sm);
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.service-item {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  padding: var(--space-xs) 0;
+  border-bottom: 1px solid var(--placeholder-gray);
+}
+
+/* Stats */
+.stats-section {
+  padding: var(--space-lg) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.stats-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-lg);
+  text-align: center;
+}
+
+.stat-item {
+  padding: var(--space-md);
+}
+
+.stat-value {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 300;
+  line-height: 1;
+  margin-bottom: var(--space-xs);
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* Testimonials */
+.testimonials {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.testimonials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonials-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.testimonial-card {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+}
+
+.testimonial-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+}
+
+.testimonial-author {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  text-align: right;
+}
+
+/* Video Section */
+.video-section {
+  padding: var(--space-lg) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.video-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.video-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-lg);
+}
+
+.video-embed {
+  width: 100%;
+  max-width: 800px;
+  aspect-ratio: 16 / 9;
+  margin: 0 auto var(--space-md);
+}
+
+.video-embed iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Inquiry Section */
+.inquiry {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.inquiry-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.inquiry-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.inquiry-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.form-field {
+  position: relative;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  padding: var(--space-sm) 0;
+  color: var(--text-black);
+  outline: none;
+  border-radius: 0;
+  transition: border-bottom-width 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: var(--placeholder-gray);
+  font-style: italic;
+  font-family: var(--font-serif);
+  font-weight: 300;
+}
+
+.form-field select {
+  cursor: pointer;
+  color: var(--placeholder-gray);
+  font-style: italic;
+}
+
+.form-field select.has-value {
+  color: var(--text-black);
+  font-style: normal;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-bottom-width: 2px;
+}
+
+.form-submit {
+  align-self: flex-start;
+}
+
+.form-submit button {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.form-submit button:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.footer-contact {
+  margin-bottom: var(--space-sm);
+}
+
+.footer-contact a {
+  margin-right: var(--space-sm);
+}
+
+.footer-social {
+  margin-bottom: var(--space-sm);
+}
+
+.footer-social a {
+  margin-right: var(--space-sm);
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1rem;
+    --space-lg: 3rem;
+    --space-xl: 4rem;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .hero {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .philosophy {
+    padding: var(--space-lg) var(--pad-x);
+  }
+
+  .projects {
+    padding: var(--space-md) var(--pad-x);
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xs);
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .inquiry {
+    padding: var(--space-lg) var(--pad-x);
+  }
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .philosophy-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .project-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .project-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .project-cell:nth-child(1),
+  .project-cell:nth-child(2) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .inquiry-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .philosophy {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .projects {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .inquiry {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Aurora Medical Spa</a>
+  <ul class="nav-links">
+    <li><a href="https://www.auroramedicalspa.com/">home</a></li>
+    <li><a href="https://www.auroramedicalspa.com/about/">about</a></li>
+    <li><a href="https://www.auroramedicalspa.com/treatments/">treatments</a></li>
+    <li><a href="https://www.auroramedicalspa.com/conditions/">conditions</a></li>
+    <li><a href="https://www.auroramedicalspa.com/gallery/">gallery</a></li>
+    <li><a href="https://www.auroramedicalspa.com/locations/">locations</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-headline">Inspiring Confidence.<br>Empowering All.</h1>
+    <p class="hero-subtitle">001 — Aurora Medical Spa is a source of truly seamless serenity, where every interaction is guided by our dedication to ensuring that you feel inspired, empowered, and more confident than ever.</p>
+  </div>
+</section>
+
+<!-- About/Welcome Section -->
+<section class="philosophy">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">002 — welcome</span>
+    <div class="philosophy-text">
+      <p>As recognized leaders in aesthetic excellence, we're ready to introduce you to a number of cutting-edge cosmetic treatments, all of which create exciting results with minimal downtime.</p>
+      <p>Here at Aurora Medical Spa, we understand that our clients have cosmetic goals and aesthetic aspirations that are as unique and varied as the lives they lead. This is why we work closely with every client who comes through our doors.</p>
+      <p>We'll get to know your goals, learn about your personal schedule, and collaborate with you on the creation of a customized care plan that sees you living your absolute best life.</p>
+    </div>
+  </div>
+</section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.datocms-assets.com/135768/1720023617-logo-footer.svg" alt="Aurora Medical Spa Website Logo" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.datocms-assets.com/135768/1720550654-logomark.svg" alt="Aurora Medical Spa logo" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.datocms-assets.com/135768/1720193409-2.jpg?auto=format,compress&w=584" alt="women looking at a phone" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.datocms-assets.com/135768/1720547359-texture-bgd.jpg?auto=format,compress&w=2200" alt="shadows of leaves" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.datocms-assets.com/135768/1720193400-1.jpg?auto=format,compress&w=584" alt="woman getting a facial" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Treatment Categories -->
+<section class="projects">
+  <div class="projects-grid">
+    <div class="project-cell">
+      <div class="project-image-wrapper">
+        <img src="https://www.datocms-assets.com/135768/1720193521-3.jpg?auto=format,compress&w=1044" alt="The Aurora Rejuvenation Approach">
+      </div>
+      <div class="project-meta">
+        <span class="project-number">001</span>
+        <span class="project-name">the aurora rejuvenation approach</span>
+      </div>
+    </div>
+    <div class="project-cell">
+      <div class="project-image-wrapper">
+        <img src="https://www.datocms-assets.com/135768/1720193528-4.jpg?auto=format,compress&w=1044" alt="Injectables & Dermal Fillers">
+      </div>
+      <div class="project-meta">
+        <span class="project-number">002</span>
+        <span class="project-name">injectables & dermal fillers</span>
+      </div>
+    </div>
+    <div class="project-cell">
+      <div class="project-image-wrapper">
+        <img src="https://www.datocms-assets.com/135768/1720193534-5.jpg?auto=format,compress&w=1044" alt="Body Sculpting">
+      </div>
+      <div class="project-meta">
+        <span class="project-number">003</span>
+        <span class="project-name">body sculpting</span>
+      </div>
+    </div>
+    <div class="project-cell">
+      <div class="project-image-wrapper">
+        <img src="https://www.datocms-assets.com/135768/1720193538-6.jpg?auto=format,compress&w=1044" alt="Skin Rejuvenation">
+      </div>
+      <div class="project-meta">
+        <span class="project-number">004</span>
+        <span class="project-name">skin rejuvenation</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.datocms-assets.com/135768/1720455496-map.jpg?auto=format,compress&w=1245&q=90" alt="map" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.datocms-assets.com/135768/1720193543-7.jpg?auto=format,compress&w=1044" alt="Tab media" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.datocms-assets.com/135768/1720544978-cta.jpg?auto=format,compress&w=2044" alt="Contact us media" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Services List -->
+<section class="services-list">
+  <div class="services-grid">
+    <div class="service-item">BOTOX</div>
+    <div class="service-item">Daxxify</div>
+    <div class="service-item">Lip Filler</div>
+    <div class="service-item">Juvederm</div>
+    <div class="service-item">Juvederm Volbella XC</div>
+    <div class="service-item">Juvederm Vollure XC</div>
+    <div class="service-item">Juvederm Voluma XC</div>
+    <div class="service-item">Juvederm Volux XC</div>
+    <div class="service-item">Juvederm XC</div>
+    <div class="service-item">Restylane</div>
+    <div class="service-item">Restylane Defyne</div>
+    <div class="service-item">Restylane Kysse</div>
+    <div class="service-item">Restylane Refyne</div>
+    <div class="service-item">RHA Fillers</div>
+    <div class="service-item">Sculptra</div>
+    <div class="service-item">Dysport</div>
+    <div class="service-item">Kybella</div>
+    <div class="service-item">SkinVive</div>
+    <div class="service-item">Coolsculpting</div>
+    <div class="service-item">Emsculpt Neo</div>
+    <div class="service-item">Dermaplaning</div>
+    <div class="service-item">Diamond Glow</div>
+    <div class="service-item">Hydrafacial</div>
+    <div class="service-item">Illuminize Peel</div>
+    <div class="service-item">Rejuvenize Peel</div>
+    <div class="service-item">Vi Peel</div>
+    <div class="service-item">Vitalize Peel</div>
+    <div class="service-item">Microneedling</div>
+    <div class="service-item">Latisse</div>
+    <div class="service-item">BBL</div>
+    <div class="service-item">RF Microneedling</div>
+    <div class="service-item">LaseMD</div>
+    <div class="service-item">IPL</div>
+    <div class="service-item">Laser Hair Removal</div>
+    <div class="service-item">Total Skin Solutions</div>
+    <div class="service-item">Weight Loss Injections</div>
+    <div class="service-item">Peptides</div>
+    <div class="service-item">Injectable Testosterone</div>
+    <div class="service-item">B12</div>
+    <div class="service-item">Hormone Replacement Therapy</div>
+    <div class="service-item">Hormone Health Assessment</div>
+    <div class="service-item">InBody 380</div>
+    <div class="service-item">Aura Reality</div>
+  </div>
+</section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.datocms-assets.com/135768/1754506096-face.jpg?auto=format,compress&w=1766" alt="woman in a flowy blouse" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Stats Section -->
+<section class="stats-section">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-value">5 Stars</div>
+      <div class="stat-label">star rating</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">4770</div>
+      <div class="stat-label">reviews</div>
+    </div>
+  </div>
+</section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.datocms-assets.com/135768/1754506123-body.jpg?auto=format,compress&w=1766" alt="woman in a black top standing in a field" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Video Section -->
+<section class="video-section">
+  <div class="video-inner">
+    <h2 class="video-heading">Watch Overview Video</h2>
+    <div class="video-embed">
+      <iframe src="https://www.youtube.com/embed/LQ3troskXnk" allowfullscreen></iframe>
+    </div>
+    <div class="video-embed">
+      <iframe src="https://www.youtube.com/embed/ithczdyvxiQ" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.datocms-assets.com/135768/1720194341-10.jpg?auto=format,compress&w=490" alt="woman in a field with the wind blowing her hair" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <h2 class="testimonials-heading">Words From Our Clients</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-text">As Tina turner would say.."simply the best" and yes, they are definitely better than all the rest! The moment you walk into this place all the girls are so warm and lovely. The business...</div>
+        <div class="testimonial-author">— Kat Ashley Potaniec</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-text">AURORA Medical Spa is definitely TOP NOTCH and actually deserves more than 5 stars ⭐️⭐️⭐️⭐️⭐️ From the time I walked into the front door to the time I left everyone was so professional & friend...</div>
+        <div class="testimonial-author">— Tonya Griffin</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-text">I have had zero idea on how laser hair removal works but I have learned so much already in two days. I just had my first appointment, and it went great! I felt comfortable the whole time and Erika ...</div>
+        <div class="testimonial-author">— Jenna Geyman</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-text">Aurora is the place you want to go for your skin care and consultation on any procedures they offer! The place is immaculate annd bright. The gals from the front desk and all the employees that wor...</div>
+        <div class="testimonial-author">— Lori Gillick</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-text">Love Aurora! I've been going to Aurora in Georgetown for about 3 years now and I have never had a bad experience. The Skin Care Club is their membership service and it's one of the best offers out ...</div>
+        <div class="testimonial-author">— Hailey Goffinet</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-text">This is my second visit to Aurora Medical spa, and it was great. The staff here are lovely and the location is nice and very clean. There's water, coffee and other treats available if you wish, as ...</div>
+        <div class="testimonial-author">— P CP</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-text">I have been going to Aurora, specifically their incredible owner, Kandice, since they opened their doors. I have seen them grow, survive the pandemic, and thrive. They are truly the best. Each staf...</div>
+        <div class="testimonial-author">— Kelly Mantay</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-text">Aurora Med Spa is the bomb! The staff is just amazing. They always make you feel welcomed and comfortable. Can't say enough good things about their services, other than you must try them. It&...</div>
+        <div class="testimonial-author">— Liz A.</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-text">I was greeted by two gorgeous and very nice ladies at the front desk! I went in for my complimentary consultation. It was awesome to say the least. Maira answered all the of the questions I had for...</div>
+        <div class="testimonial-author">— Anna Barrera</div>
+      </div>
+    </div>
+  </div>
+</section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.datocms-assets.com/135768/1723561005-11.jpg?auto=format,compress&w=308" alt="beautiful dark skinned woman" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Inquiry Section -->
+<section class="inquiry">
+  <div class="inquiry-inner">
+    <h2 class="inquiry-heading">Begin Your<br>Transformation<br>Journey</h2>
+    <form class="inquiry-form" onsubmit="event.preventDefault();">
+      <div class="form-field">
+        <input type="text" placeholder="Your name">
+      </div>
+      <div class="form-field">
+        <input type="email" placeholder="Email address">
+      </div>
+      <div class="form-field">
+        <input type="tel" placeholder="Phone number">
+      </div>
+      <div class="form-field">
+        <select onchange="this.classList.toggle('has-value', this.value !== '')">
+          <option value="">Treatment interest</option>
+          <option value="botox">BOTOX</option>
+          <option value="fillers">Dermal Fillers</option>
+          <option value="body">Body Sculpting</option>
+          <option value="skin">Skin Rejuvenation</option>
+          <option value="wellness">Weight Loss & Wellness</option>
+          <option value="consultation">Consultation</option>
+        </select>
+      </div>
+      <div class="form-submit">
+        <button type="submit">schedule consultation</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Aurora Medical Spa</div>
+  <div class="footer-right">
+    <div class="footer-contact">
+      <a href="tel:1720023603">1720023603</a>
+      <a href="mailto:info@auroramedicalspa.com">info@auroramedicalspa.com</a>
+    </div>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/aurora_medspa/">instagram</a>
+      <a href="https://www.facebook.com/auroramedicalspaatx/">facebook</a>
+      <a href="https://www.youtube.com/channel/UCS59NJC6ciii0kNehHh9R2A">youtube</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
