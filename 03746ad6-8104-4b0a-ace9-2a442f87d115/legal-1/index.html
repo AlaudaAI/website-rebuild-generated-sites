@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ryan C. Davis Law, PLLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Visual Demo */
+.hero-visual {
+  width: 100%;
+  max-width: 400px;
+}
+
+.hero-image-container {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: var(--space-xl);
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Features Grid */
+.features {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.feature-card {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+.feature-card:last-child {
+  border-bottom: none;
+}
+
+.feature-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.feature-protocol {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-lg);
+}
+
+.feature-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.feature-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 380px;
+}
+
+/* Charges Section */
+.charges-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.charges-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.charges-text {
+  max-width: 520px;
+}
+
+.charges-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.charge-item {
+  padding: var(--space-md);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* Qualities Section */
+.qualities-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.qualities-visual {
+  width: 100%;
+  max-width: 400px;
+}
+
+.qualities-visual img {
+  width: 100%;
+  border-radius: 16px;
+}
+
+.qualities-text {
+  max-width: 520px;
+}
+
+.qualities-list {
+  margin-top: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.quality-item {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.quality-number {
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-right: var(--space-sm);
+}
+
+/* Video Section */
+.video-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  text-align: center;
+}
+
+.video-container {
+  max-width: 800px;
+  margin: 0 auto;
+  aspect-ratio: 16/9;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.video-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Services Section */
+.services-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+}
+
+.service-item {
+  padding: var(--space-sm);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* Trust Metrics Section */
+.trust-section {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.trust-metrics {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.trust-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.trust-number {
+  font-family: var(--font-serif);
+  font-size: clamp(64px, 15vw, 120px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.trust-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 400px;
+}
+
+.trust-associations {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.associations-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.association-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-sm);
+}
+
+.association-badge img {
+  max-width: 100%;
+  height: 80px;
+  object-fit: contain;
+}
+
+/* Team Section */
+.team-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.team-member {
+  padding: var(--space-lg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  text-align: center;
+  background: var(--bg-card);
+}
+
+.team-name {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+/* Contact Section */
+.contact-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.contact-item i {
+  color: var(--text-primary);
+  width: 20px;
+}
+
+.contact-item a {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.contact-item a:hover {
+  color: var(--text-muted);
+}
+
+.social-links {
+  display: flex;
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.social-links a {
+  color: var(--text-muted);
+  font-size: 20px;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: var(--text-primary);
+}
+
+.maps-container {
+  margin-top: var(--space-xl);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .hero-headline {
+    font-size: 32px;
+  }
+  
+  .hero-subheading {
+    font-size: 16px;
+  }
+  
+  .feature-title {
+    font-size: 22px;
+  }
+  
+  .charges-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .associations-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:last-child {
+    border-right: none;
+  }
+
+  .charges-content {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .charges-list {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .qualities-section {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-metrics {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .associations-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .feature-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .trust-metrics {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-associations {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-number {
+    font-size: 120px;
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .feature-card {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="https://www.ryancdavislaw.com/" class="brand">
+    <div class="globe-icon"><i class="fas fa-balance-scale"></i></div>
+    <span class="brand-name">Ryan C. Davis Law</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="https://www.ryancdavislaw.com/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-balance-scale"></i></div>
+      <span class="brand-name">Ryan C. Davis Law</span>
+    </a>
+    <nav>
+      <a href="https://www.ryancdavislaw.com/#">Practice Areas</a>
+      <a href="https://www.ryancdavislaw.com/testimonials">Testimonials</a>
+      <a href="https://www.ryancdavislaw.com/our-people">Our People</a>
+      <a href="https://www.ryancdavislaw.com/contact">Contact</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Available 24/7</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="hero-label">Nashville Legal Defense</span>
+      <h1 class="hero-headline">Nashville's Trusted Criminal Defense, Divorce & Probate Litigation Attorneys</h1>
+      <p class="hero-subheading">Fight For Your Rights in Court with experienced attorneys who understand there's more to you than the charges you face.</p>
+      <a href="https://www.ryancdavislaw.com/contact" class="hero-cta">Contact Us <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-image-container">
+        <img src="https://lirp.cdn-website.com/a2f403fa/dms3rep/multi/opt/RyanDavisGroupx5c+Background+Removed-1095w.png" alt="Five professionals in business attire stand together, smiling, against a white background.">
+      </div>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://lirp.cdn-website.com/a2f403fa/dms3rep/multi/opt/logo-393w.png" alt="Logo for Ryan C. Davis Law, a law firm, featuring scales of justice over an anchor within a blue circle. Text: "RYAN C. DAVIS LAW PLLC"." style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Features Grid -->
+  <section class="features">
+    <div class="feature-card">
+      <p class="feature-protocol">Legal Area 01</p>
+      <h3 class="feature-title">Criminal Defense</h3>
+      <p class="feature-description">Representation for various criminal charges including DUI, drug crimes, assault, theft, and more</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Legal Area 02</p>
+      <h3 class="feature-title">Divorce</h3>
+      <p class="feature-description">Assistance with divorce and child custody matters</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Legal Area 03</p>
+      <h3 class="feature-title">Probate Litigation</h3>
+      <p class="feature-description">Assistance with probate litigation matters</p>
+    </div>
+    <div class="feature-card">
+      <p class="feature-protocol">Legal Area 04</p>
+      <h3 class="feature-title">Orders of Protection</h3>
+      <p class="feature-description">Assistance when an order of protection has been filed against you</p>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://lirp.cdn-website.com/a2f403fa/dms3rep/multi/opt/pexels-photo-1250452-1920w.jpeg" alt="Adult" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Charges Section -->
+  <section class="charges-section">
+    <div class="charges-content">
+      <div class="charges-text">
+        <span class="hero-label">Your Defense Matters</span>
+        <h2 class="feature-title">Your Criminal Charge Doesn't Have to Define You</h2>
+        <p class="feature-description">Being charged with a crime doesn't make you a bad person. Good people get caught up in difficult situations every day. But a criminal accusation doesn't have to define your future.</p>
+      </div>
+      <div class="charges-list">
+        <div class="charge-item">Drug Crimes</div>
+        <div class="charge-item">DUI</div>
+        <div class="charge-item">Theft</div>
+        <div class="charge-item">Domestic Violence</div>
+        <div class="charge-item">Assault</div>
+        <div class="charge-item">Sex Crimes</div>
+      </div>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://lirp.cdn-website.com/a2f403fa/dms3rep/multi/opt/pexels-photo-618158-1920w.jpeg" alt="Person" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Video Section -->
+  <section class="video-section">
+    <span class="hero-label">Meet Our Team</span>
+    <h2 class="feature-title">Ryan C. Davis Law Introduction</h2>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/x0tgXqCxuDQ" allowfullscreen></iframe>
+    </div>
+  </section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://lirp.cdn-website.com/a2f403fa/dms3rep/multi/opt/pexels-photo-7699331-1920w.jpeg" alt="Woman on phone, sitting near bed, looking concerned, indoors, with natural light." style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <span class="hero-label">Our Team</span>
+    <h2 class="feature-title">Meet Our Legal Team</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <h3 class="team-name">Kennedy Fuller</h3>
+      </div>
+      <div class="team-member">
+        <h3 class="team-name">Will Gobbell</h3>
+      </div>
+      <div class="team-member">
+        <h3 class="team-name">Lizzy Wilson</h3>
+      </div>
+      <div class="team-member">
+        <h3 class="team-name">Allison McClellan</h3>
+      </div>
+      <div class="team-member">
+        <h3 class="team-name">Odalys Gonzalez-Sanchez</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- Qualities Section -->
+  <section class="qualities-section">
+    <div class="qualities-text">
+      <span class="hero-label">Why Choose Us</span>
+      <h2 class="feature-title">3 Qualities to Look for in a Lawyer</h2>
+      <p class="feature-description">Take the time to hire the right criminal, family, and probate lawyer for your case. Look for someone with:</p>
+      <div class="qualities-list">
+        <div class="quality-item">
+          <span class="quality-number">1.</span>Skill: Attorney Ryan Davis has a proven record of helping his clients get favorable outcomes in Nashville, TN and Middle Tennessee courts.
+        </div>
+        <div class="quality-item">
+          <span class="quality-number">2.</span>Empathy: As your lawyer, Ryan Davis understands there is more to you than the crime you are charged with or the accusations against you, and will take the time to listen to you. Everybody has a story.
+        </div>
+        <div class="quality-item">
+          <span class="quality-number">3.</span>Thoroughness: Attorney Ryan Davis is an aggressive defender of his clients' legal rights. When you've been charged with a crime in Nashville, TN, or experiencing a family dispute, you need someone like attorney Ryan Davis to go to bat for you.
+        </div>
+      </div>
+    </div>
+    <div class="qualities-visual">
+      <img src="https://lirp.cdn-website.com/a2f403fa/dms3rep/multi/opt/content2-1-3e9-765h.jpg" alt="Man in suit stands on city street, looking at the camera. Tall buildings in the background with sunlight.">
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services-section">
+    <span class="hero-label">Complete Legal Services</span>
+    <h2 class="feature-title">All Practice Areas</h2>
+    <div class="services-grid">
+      <div class="service-item">Criminal Defense</div>
+      <div class="service-item">DUI</div>
+      <div class="service-item">DWI (Under 21)</div>
+      <div class="service-item">BUI Charges</div>
+      <div class="service-item">Drug Crimes</div>
+      <div class="service-item">Drug Possession</div>
+      <div class="service-item">Drug Paraphernalia</div>
+      <div class="service-item">Marijuana Crimes</div>
+      <div class="service-item">Drug Sales</div>
+      <div class="service-item">Meth Crimes</div>
+      <div class="service-item">Domestic Assault</div>
+      <div class="service-item">Assault</div>
+      <div class="service-item">Stalking & Harassment</div>
+      <div class="service-item">Sexual Battery</div>
+      <div class="service-item">Sexual Exploitation of a Minor</div>
+      <div class="service-item">Rape</div>
+      <div class="service-item">Spousal Rape</div>
+      <div class="service-item">Promoting Prostitution</div>
+      <div class="service-item">Patronizing Prostitution</div>
+      <div class="service-item">Sex Offender Registry Violations</div>
+      <div class="service-item">Sex Offender Registry Litigation</div>
+      <div class="service-item">Tennessee Sex Offender Registry Class Action Lawsuit</div>
+      <div class="service-item">Shoplifting</div>
+      <div class="service-item">Theft</div>
+      <div class="service-item">Robbery</div>
+      <div class="service-item">Vandalism</div>
+      <div class="service-item">Trespassing</div>
+      <div class="service-item">Weapon Offense</div>
+      <div class="service-item">Public Intoxication</div>
+      <div class="service-item">Child Abuse</div>
+      <div class="service-item">Custodial Interference</div>
+      <div class="service-item">Probation Violation</div>
+      <div class="service-item">Criminal Appeals</div>
+      <div class="service-item">Victim Representation</div>
+      <div class="service-item">Family Law</div>
+      <div class="service-item">Adoption</div>
+      <div class="service-item">Divorce</div>
+      <div class="service-item">Child Support</div>
+      <div class="service-item">Child Custody</div>
+      <div class="service-item">Dependency & Neglect</div>
+      <div class="service-item">Conservatorships</div>
+      <div class="service-item">Probate Litigation</div>
+      <div class="service-item">Orders of Protection</div>
+      <div class="service-item">Estate Planning</div>
+      <div class="service-item">Small Business Law</div>
+    </div>
+  </section>
+
+  <!-- Trust Metrics Section -->
+  <section class="trust-section">
+    <div class="trust-metrics">
+      <span class="trust-label">Available For You</span>
+      <div>
+        <span class="trust-number">24/7</span>
+      </div>
+      <p class="trust-description">Call or text (615) 649-0110 (Se habla espanol 1-888-368-2269) now for a consultation with our criminal attorney.</p>
+    </div>
+    <div class="trust-associations">
+      <span class="trust-label">Professional Associations</span>
+      <div class="associations-grid">
+        <div class="association-badge">
+          <img src="https://lirp.cdn-website.com/a2f403fa/dms3rep/multi/opt/DUI-Defense-130w.png" alt="DUI Defense Lawyers Association member badge, red and white with scroll and text.">
+        </div>
+        <div class="association-badge">
+          <img src="https://lirp.cdn-website.com/a2f403fa/dms3rep/multi/opt/TACDL_copy-130w.png" alt="TACDL logo: navy text ">
+        </div>
+        <div class="association-badge">
+          <img src="https://lirp.cdn-website.com/a2f403fa/dms3rep/multi/opt/TBA-130w.jpg" alt="Tennessee Bar Association logo: Lady Justice with scales and sword, beside letters ">
+        </div>
+        <div class="association-badge">
+          <img src="https://lirp.cdn-website.com/a2f403fa/dms3rep/multi/opt/NBA-130w.png" alt="Nashville Bar Association logo: ">
+        </div>
+        <div class="association-badge">
+          <img src="https://lirp.cdn-website.com/a2f403fa/dms3rep/multi/opt/nacdl.org-logo_1-132h.png" alt="National Association of Criminal Defense Lawyers logo: Scales of justice in white on a blue circle.">
+        </div>
+        <div class="association-badge">
+          <img src="https://lirp.cdn-website.com/a2f403fa/dms3rep/multi/opt/LAW-1-130w.png" alt="Lawyers' Association for Women logo: blindfolded figure holding scales and sword, within a circular frame.">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <span class="hero-label">Contact Us</span>
+    <h2 class="feature-title">Contact Us</h2>
+    <div class="contact-info">
+      <div class="contact-item">
+        <i class="fas fa-phone"></i>
+        <a href="tel:(615) 649-0110">(615) 649-0110</a>
+      </div>
+    </div>
+    <div class="social-links">
+      <a href="https://www.youtube.com/watch?v=x0tgXqCxuDQ"><i class="fab fa-youtube"></i></a>
+      <a href="https://facebook.com/ryancdavislaw"><i class="fab fa-facebook"></i></a>
+      <a href="https://instagram.com/ryancdavislaw"><i class="fab fa-instagram"></i></a>
+      <a href="https://linkedin.com/in/ryancdavislaw"><i class="fab fa-linkedin"></i></a>
+      <a href="https://www.google.com/maps/place/2wTbVvUMwPDdVc3PA"><i class="fab fa-google"></i></a>
+    </div>
+    <div class="maps-container">
+      <iframe src="https://maps.app.goo.gl/8jfn4WwGRqQLPz3B6" width="100%" height="300" style="border:0" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Ryan C. Davis Law, PLLC</span>
+      <span class="footer-copyright">Copyright © 2026 Ryan C. Davis Law, PLLC | All Rights Reserved</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.ryancdavislaw.com/">Home</a>
+      <a href="https://www.ryancdavislaw.com/testimonials">Testimonials</a>
+      <a href="https://www.ryancdavislaw.com/our-people">Our People</a>
+      <a href="https://www.ryancdavislaw.com/education-center">Education Center</a>
+      <a href="https://www.ryancdavislaw.com/videos">Videos</a>
+      <a href="https://www.ryancdavislaw.com/mission-statement">Mission Statement</a>
+      <a href="https://www.ryancdavislaw.com/contact">Contact</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
