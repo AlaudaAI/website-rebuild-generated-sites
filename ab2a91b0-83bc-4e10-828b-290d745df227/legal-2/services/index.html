@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style data-design-intent>
+:root {
+  --bg-primary: #f5f0ea;
+  --bg-card: #ffffff;
+  --text-primary: #1a1a1a;
+  --text-secondary: #6b6b6b;
+  --primary: #1a1a1a;
+  --font-heading: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+  --content-max-width: 1200px;
+  --text-muted: #a8a8a8;
+  --border-subtle: #e0dbd4;
+}
+</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Our Services</title>
+  <style>
+    :root {
+      --bg-primary: #f5f0ea;
+      --bg-alt: #ffffff;
+      --bg-card: #ffffff;
+      --text-primary: #1a1a1a;
+      --text-secondary: #6b6b6b;
+      --text-muted: #a8a8a8;
+      --input-bg: #ebe5dc;
+      --border-subtle: #e0dbd4;
+      --nav-text: #ffffff;
+      --shadow-card: 0 8px 40px rgba(0, 0, 0, 0.08);
+      --shadow-card-hover: 0 12px 48px rgba(0, 0, 0, 0.12);
+      --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-heading: var(--font-family);
+      --font-body: var(--font-family);
+      --spacing-xs: 4px;
+      --spacing-sm: 8px;
+      --spacing-md: 16px;
+      --spacing-lg: 24px;
+      --spacing-xl: 32px;
+      --spacing-2xl: 48px;
+      --spacing-3xl: 64px;
+      --spacing-4xl: 96px;
+      --content-max: 1200px;
+      --content-max-width: var(--content-max);
+      --section-padding: var(--spacing-4xl);
+      --gap: var(--spacing-lg);
+      --max-width: var(--content-max);
+      --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-bounce: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      overflow-wrap: break-word;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: var(--spacing-lg) var(--spacing-lg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--text-primary);
+    }
+
+    .nav-logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--nav-text);
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: none;
+      list-style: none;
+      gap: var(--spacing-xl);
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--nav-text);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      position: relative;
+      padding-bottom: 2px;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--nav-text);
+      transition: width var(--transition-smooth);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: var(--spacing-sm);
+    }
+
+    .nav-hamburger span {
+      width: 24px;
+      height: 2px;
+      background: var(--nav-text);
+      transition: var(--transition-smooth);
+      display: block;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--text-primary);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-xl);
+    }
+
+    .mobile-menu.active {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      color: var(--nav-text);
+      text-decoration: none;
+      font-size: 1.5rem;
+      font-weight: 600;
+      transition: opacity var(--transition-smooth);
+    }
+
+    .mobile-menu a:hover {
+      opacity: 0.7;
+    }
+
+    .mobile-menu-close {
+      position: absolute;
+      top: var(--spacing-lg);
+      right: var(--spacing-lg);
+      background: none;
+      border: none;
+      color: var(--nav-text);
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: var(--spacing-sm);
+    }
+
+    /* Sections */
+    .hero {
+      padding-top: calc(var(--section-padding) + 60px);
+      padding-bottom: var(--section-padding);
+    }
+
+    .hero-stat {
+      background: var(--bg-card);
+      padding: var(--spacing-lg);
+      border-radius: 12px;
+      box-shadow: var(--shadow-card);
+      text-align: center;
+      margin: var(--spacing-2xl) auto;
+      max-width: 500px;
+    }
+
+    .hero-stat .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .hero-stat .stat-label {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .services {
+      padding: var(--section-padding) 20px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card-hover);
+    }
+
+    .card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 15px;
+    }
+
+    .card p {
+      font-family: var(--font-body);
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .cards-grid + .cards-grid {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .cards-grid + .cards-grid .card {
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+    }
+
+    .cards-grid + .cards-grid .card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--text-primary);
+      color: var(--nav-text);
+      padding: var(--spacing-3xl) var(--spacing-lg);
+    }
+
+    .footer-inner {
+      max-width: var(--content-max);
+      margin: 0 auto;
+    }
+
+    .footer-brand {
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    .footer-description {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      max-width: 400px;
+      margin-top: var(--spacing-md);
+      line-height: 1.6;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    .footer-links a {
+      color: var(--nav-text);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      opacity: 0.7;
+      transition: opacity var(--transition-smooth);
+    }
+
+    .footer-links a:hover {
+      opacity: 1;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: var(--spacing-lg);
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 767px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .cards-grid + .cards-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .card {
+        padding: 20px;
+      }
+      
+      .cards-grid + .cards-grid .card {
+        padding: 20px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .nav { 
+        padding: var(--spacing-xl) var(--spacing-2xl); 
+      }
+      
+      .nav-links { 
+        display: flex; 
+      }
+      
+      .nav-hamburger { 
+        display: none; 
+      }
+      
+      .hero {
+        padding-top: calc(var(--section-padding) + 80px);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .nav { 
+        padding: var(--spacing-xl) var(--spacing-3xl); 
+      }
+      
+      .nav-logo { 
+        font-size: 1.375rem; 
+      }
+      
+      .nav-links { 
+        gap: var(--spacing-2xl); 
+      }
+    }
+
+    @media (min-width: 1280px) {
+      .nav { 
+        padding: var(--spacing-xl) var(--spacing-4xl); 
+      }
+    }
+  </style>
+  <script>
+    function openMobileMenu() {
+      document.getElementById('mobileMenu').classList.add('active');
+    }
+    
+    function closeMobileMenu() {
+      document.getElementById('mobileMenu').classList.remove('active');
+    }
+  </script>
+</head>
+<body>
+  <!-- HEADER -->
+  <nav class="nav">
+    <a href="/" class="nav-logo">Legal Services</a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/services">Services</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+    <button class="nav-hamburger" aria-label="Open menu" onclick="openMobileMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" aria-label="Close menu" onclick="closeMobileMenu()">✕</button>
+    <a href="/">Home</a>
+    <a href="/services">Services</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+  </div>
+
+  <section class="hero" style="background: var(--bg-primary); padding: 80px 20px;">
+    <div style="max-width: var(--content-max-width); margin: 0 auto;">
+      <div class="hero-stat">
+        <div class="stat-value">1 of only 37</div>
+        <div class="stat-label">attorneys in Tennessee certified as Consumer Bankruptcy Specialist</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="services" style="background: var(--bg-primary);">
+    <div style="max-width: var(--content-max-width); margin: 0 auto;">
+      <h2 style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 700; color: var(--text-primary); text-align: center; margin-bottom: 60px;">Services</h2>
+      
+      <div class="cards-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 40px;">
+        <div class="card" style="background: var(--bg-card); padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 600; color: var(--text-primary); margin-bottom: 15px;">Bankruptcy</h3>
+          <p style="font-family: var(--font-body); color: var(--text-secondary); line-height: 1.6;">Certified Consumer Bankruptcy Specialist with expertise in Chapter 7 and Chapter 13 bankruptcy cases</p>
+        </div>
+        
+        <div class="card" style="background: var(--bg-card); padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 600; color: var(--text-primary); margin-bottom: 15px;">Chapter 7</h3>
+          <p style="font-family: var(--font-body); color: var(--text-secondary); line-height: 1.6;">Stop garnishments and collections, keep property in most cases, reasonable fees</p>
+        </div>
+        
+        <div class="card" style="background: var(--bg-card); padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.5rem; font-weight: 600; color: var(--text-primary); margin-bottom: 15px;">Chapter 13</h3>
+          <p style="font-family: var(--font-body); color: var(--text-secondary); line-height: 1.6;">Stop garnishments, foreclosures, and collections, keep property, lower payments, protect cosigners with no money down</p>
+        </div>
+      </div>
+      
+      <div class="cards-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+        <div class="card" style="background: var(--bg-card); padding: 25px; border-radius: 12px; box-shadow: 0 2px 15px rgba(0,0,0,0.06); text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 600; color: var(--text-primary);">Personal Injury</h3>
+        </div>
+        
+        <div class="card" style="background: var(--bg-card); padding: 25px; border-radius: 12px; box-shadow: 0 2px 15px rgba(0,0,0,0.06); text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 600; color: var(--text-primary);">Divorce</h3>
+        </div>
+        
+        <div class="card" style="background: var(--bg-card); padding: 25px; border-radius: 12px; box-shadow: 0 2px 15px rgba(0,0,0,0.06); text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 600; color: var(--text-primary);">Criminal Cases</h3>
+        </div>
+        
+        <div class="card" style="background: var(--bg-card); padding: 25px; border-radius: 12px; box-shadow: 0 2px 15px rgba(0,0,0,0.06); text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 600; color: var(--text-primary);">Probate</h3>
+        </div>
+        
+        <div class="card" style="background: var(--bg-card); padding: 25px; border-radius: 12px; box-shadow: 0 2px 15px rgba(0,0,0,0.06); text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 600; color: var(--text-primary);">Social Security</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="nav-logo">Legal Services</a>
+        <p class="footer-description">Providing strategic legal counsel and dedicated representation to protect what matters most.</p>
+      </div>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/services">Services</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Legal Services. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
