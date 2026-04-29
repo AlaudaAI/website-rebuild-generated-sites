@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style data-design-intent>
+:root {
+  --bg-primary: #f5f0ea;
+  --bg-card: #ffffff;
+  --text-primary: #1a1a1a;
+  --text-secondary: #6b6b6b;
+  --primary: #1a1a1a;
+  --font-heading: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: var(--font-family);
+  --content-max-width: 520px;
+  --text-muted: #a8a8a8;
+  --nav-text: #ffffff;
+  --font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+}
+</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Brown & Wilson Attorneys</title>
+  <style>
+    :root {
+      --primary: #1a1a1a;
+      --secondary: #6b6b6b;
+      --accent: #f5f0ea;
+      --text: #1a1a1a;
+      --text-light: #6b6b6b;
+      --bg: #f5f0ea;
+      --bg-alt: #ffffff;
+      --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --section-padding: 64px;
+      --gap: 24px;
+      --max-width: 1200px;
+      --bg-primary: #f5f0ea;
+      --bg-card: #ffffff;
+      --text-primary: #1a1a1a;
+      --text-secondary: #6b6b6b;
+      --text-muted: #a8a8a8;
+      --input-bg: #ebe5dc;
+      --border-subtle: #e0dbd4;
+      --nav-text: #ffffff;
+      --shadow-card: 0 8px 40px rgba(0, 0, 0, 0.08);
+      --shadow-card-hover: 0 12px 48px rgba(0, 0, 0, 0.12);
+      --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --spacing-xs: 4px;
+      --spacing-sm: 8px;
+      --spacing-md: 16px;
+      --spacing-lg: 24px;
+      --spacing-xl: 32px;
+      --spacing-2xl: 48px;
+      --spacing-3xl: 64px;
+      --spacing-4xl: 96px;
+      --content-max: 1200px;
+      --content-max-width: 1200px;
+      --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-bounce: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      overflow-wrap: break-word;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: var(--spacing-lg) var(--spacing-lg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--text-primary);
+    }
+
+    .nav-logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--nav-text);
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: none;
+      list-style: none;
+      gap: var(--spacing-xl);
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--nav-text);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      position: relative;
+      padding-bottom: 2px;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--nav-text);
+      transition: width var(--transition-smooth);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: var(--spacing-sm);
+    }
+
+    .nav-hamburger span {
+      width: 24px;
+      height: 2px;
+      background: var(--nav-text);
+      transition: var(--transition-smooth);
+      display: block;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--text-primary);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-xl);
+    }
+
+    .mobile-menu.active {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      color: var(--nav-text);
+      text-decoration: none;
+      font-size: 1.5rem;
+      font-weight: 600;
+      transition: opacity var(--transition-smooth);
+    }
+
+    .mobile-menu a:hover {
+      opacity: 0.7;
+    }
+
+    .mobile-menu-close {
+      position: absolute;
+      top: var(--spacing-lg);
+      right: var(--spacing-lg);
+      background: none;
+      border: none;
+      color: var(--nav-text);
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: var(--spacing-sm);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: calc(var(--spacing-4xl) + 80px) var(--spacing-lg) var(--section-padding) var(--spacing-lg);
+      background: var(--bg-primary);
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-family: var(--font-heading);
+      font-size: 3rem;
+      color: var(--text-primary);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto var(--spacing-xl);
+    }
+
+    .stats-section {
+      padding: var(--spacing-3xl) var(--spacing-lg);
+      background: var(--bg-card);
+      text-align: center;
+    }
+
+    .stat {
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .stat-value {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .stat-label {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+    }
+
+    /* Services Section */
+    .services {
+      padding: var(--section-padding) var(--spacing-lg);
+      background: var(--bg-primary);
+    }
+
+    .services h2 {
+      font-family: var(--font-heading);
+      color: var(--text-primary);
+      margin-bottom: var(--spacing-xl);
+      text-align: center;
+      font-size: 2rem;
+    }
+
+    .services-grid {
+      display: grid;
+      gap: var(--spacing-lg);
+      grid-template-columns: 1fr;
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+    }
+
+    .service-card {
+      background: var(--bg-card);
+      padding: var(--spacing-xl);
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .service-card h3 {
+      font-family: var(--font-heading);
+      color: var(--text-primary);
+      margin-bottom: var(--spacing-md);
+      font-size: 1.25rem;
+    }
+
+    /* Team Section */
+    .team {
+      padding: var(--section-padding) var(--spacing-lg);
+      background: var(--bg-primary);
+    }
+
+    .team-grid {
+      display: grid;
+      gap: var(--spacing-lg);
+      grid-template-columns: 1fr;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      transition: box-shadow var(--transition-smooth);
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-card-hover);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: var(--spacing-lg);
+    }
+
+    .card h3 {
+      font-family: var(--font-heading);
+      color: var(--text-primary);
+      margin: 0 0 8px 0;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .card p {
+      color: var(--text-secondary);
+      font-family: var(--font-body);
+      line-height: 1.5;
+      margin: 0 0 16px 0;
+    }
+
+    .card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .card p:first-of-type {
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+
+    .card div p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin: 4px 0;
+    }
+
+    /* Contact Section */
+    .contact {
+      padding: var(--section-padding) var(--spacing-lg);
+      background: var(--bg-card);
+    }
+
+    .contact h2 {
+      font-family: var(--font-heading);
+      color: var(--text-primary);
+      margin-bottom: var(--spacing-xl);
+      text-align: center;
+      font-size: 2rem;
+    }
+
+    .contact-content {
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact p {
+      color: var(--text-secondary);
+      font-size: 1.125rem;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--text-primary);
+      color: var(--nav-text);
+      padding: var(--spacing-3xl) var(--spacing-lg);
+    }
+
+    .footer-inner {
+      max-width: var(--content-max);
+      margin: 0 auto;
+    }
+
+    .footer-brand {
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    .footer-description {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      max-width: 400px;
+      margin-top: var(--spacing-md);
+      line-height: 1.6;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    .footer-links a {
+      color: var(--nav-text);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      opacity: 0.7;
+      transition: opacity var(--transition-smooth);
+    }
+
+    .footer-links a:hover {
+      opacity: 1;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: var(--spacing-lg);
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+      .stat-value {
+        font-size: 2rem;
+      }
+      .stat-label {
+        font-size: 1rem;
+      }
+      .card img {
+        height: 160px;
+      }
+      .card-body {
+        padding: var(--spacing-md);
+      }
+    }
+
+    @media (min-width: 768px) {
+      .nav { 
+        padding: var(--spacing-xl) var(--spacing-2xl); 
+      }
+      .nav-links { 
+        display: flex; 
+      }
+      .nav-hamburger { 
+        display: none; 
+      }
+      .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .hero {
+        padding-left: var(--spacing-2xl);
+        padding-right: var(--spacing-2xl);
+      }
+      .team {
+        padding-left: var(--spacing-2xl);
+        padding-right: var(--spacing-2xl);
+      }
+      .services {
+        padding-left: var(--spacing-2xl);
+        padding-right: var(--spacing-2xl);
+      }
+      .contact {
+        padding-left: var(--spacing-2xl);
+        padding-right: var(--spacing-2xl);
+      }
+      .stats-section {
+        padding-left: var(--spacing-2xl);
+        padding-right: var(--spacing-2xl);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .nav { 
+        padding: var(--spacing-xl) var(--spacing-3xl); 
+      }
+      .nav-logo { 
+        font-size: 1.375rem; 
+      }
+      .nav-links { 
+        gap: var(--spacing-2xl); 
+      }
+      .team-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .hero {
+        padding-left: var(--spacing-3xl);
+        padding-right: var(--spacing-3xl);
+      }
+      .team {
+        padding-left: var(--spacing-3xl);
+        padding-right: var(--spacing-3xl);
+      }
+      .services {
+        padding-left: var(--spacing-3xl);
+        padding-right: var(--spacing-3xl);
+      }
+      .contact {
+        padding-left: var(--spacing-3xl);
+        padding-right: var(--spacing-3xl);
+      }
+      .stats-section {
+        padding-left: var(--spacing-3xl);
+        padding-right: var(--spacing-3xl);
+      }
+    }
+
+    @media (min-width: 1280px) {
+      .nav { 
+        padding: var(--spacing-xl) var(--spacing-4xl); 
+      }
+      .hero {
+        padding-left: var(--spacing-4xl);
+        padding-right: var(--spacing-4xl);
+      }
+      .team {
+        padding-left: var(--spacing-4xl);
+        padding-right: var(--spacing-4xl);
+      }
+      .services {
+        padding-left: var(--spacing-4xl);
+        padding-right: var(--spacing-4xl);
+      }
+      .contact {
+        padding-left: var(--spacing-4xl);
+        padding-right: var(--spacing-4xl);
+      }
+      .stats-section {
+        padding-left: var(--spacing-4xl);
+        padding-right: var(--spacing-4xl);
+      }
+    }
+
+    /* Mobile Menu JavaScript Functions */
+    function openMobileMenu() {
+      document.getElementById('mobileMenu').classList.add('active');
+    }
+
+    function closeMobileMenu() {
+      document.getElementById('mobileMenu').classList.remove('active');
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <nav class="nav">
+    <a href="/" class="nav-logo">Brown & Wilson Attorneys</a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/services">Services</a></li>
+      <li><a href="/team">Team</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+    <button class="nav-hamburger" aria-label="Open menu" onclick="openMobileMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" aria-label="Close menu" onclick="closeMobileMenu()">✕</button>
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+    <a href="/services">Services</a>
+    <a href="/team">Team</a>
+    <a href="/contact">Contact</a>
+  </div>
+
+  <section class="hero">
+    <h1>Brown & Wilson Attorneys</h1>
+    <p>Certified Specialist in Bankruptcy Law</p>
+  </section>
+
+  <section class="stats-section">
+    <div class="stat">
+      <div class="stat-value">1 of only 37</div>
+      <div class="stat-label">attorneys in Tennessee certified as Consumer Bankruptcy Specialist</div>
+    </div>
+  </section>
+
+  <section class="services">
+    <h2>Our Services</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <h3>Consumer Bankruptcy</h3>
+      </div>
+      <div class="service-card">
+        <h3>General Practice Law</h3>
+      </div>
+      <div class="service-card">
+        <h3>Personal Injury</h3>
+      </div>
+      <div class="service-card">
+        <h3>Divorce</h3>
+      </div>
+      <div class="service-card">
+        <h3>Criminal Cases</h3>
+      </div>
+      <div class="service-card">
+        <h3>Probate</h3>
+      </div>
+      <div class="service-card">
+        <h3>Social Security</h3>
+      </div>
+    </div>
+  </section>
+
+  <section class="team" id="team">
+    <div style="max-width: var(--content-max-width); margin: 0 auto;">
+      <h2 style="font-family: var(--font-heading); color: var(--text-primary); margin-bottom: var(--spacing-xl); text-align: center; font-size: 2rem;">Our Team</h2>
+      
+      <div class="team-grid">
+        
+        <div class="card">
+          <img src="http://www.brownwilsonattorneys.com/images/brown-small.jpg" alt="Nathan Brown">
+          <div class="card-body">
+            <h3>Nathan Brown</h3>
+            <p>Attorney</p>
+            <p>Nathan received a Bachelor of Science degree from Austin Peay State University in 1975, and received a Doctor of Jurisprudence degree from the University of Tennessee College of Law in 1978. He has been engaged in the general practice of law in Dickson County, Tennessee since 1978.</p>
+            <div>
+              <p>Bachelor of Science from Austin Peay State University (1975)</p>
+              <p>Doctor of Jurisprudence from University of Tennessee College of Law (1978)</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="http://www.brownwilsonattorneys.com/images/wilson-small.jpg" alt="Roy Wilson">
+          <div class="card-body">
+            <h3>Roy Wilson</h3>
+            <p>Attorney / Certified Consumer Bankruptcy Specialist</p>
+            <p>Roy received a Bachelor of Science degree from Austin Peay State University in 1976, and received a Doctor of Jurisprudence degree from the University of Tennessee College of Law in 1979. He has been practicing law in Dickson County, Tennessee since 1979, specializing in consumer bankruptcy law since 1989.</p>
+            <div>
+              <p>Bachelor of Science from Austin Peay State University (1976)</p>
+              <p>Doctor of Jurisprudence from University of Tennessee College of Law (1979)</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="http://www.brownwilsonattorneys.com/images/lisa-small.jpg" alt="Lisa Hafner">
+          <div class="card-body">
+            <h3>Lisa Hafner</h3>
+            <p>Office Manager</p>
+            <p>Lisa resides in Dickson County, Tennessee. She has been employed at Brown & Wilson since June 18, 1984. She has responsibility for supervising all office procedures, as well as having accounting and comptroller responsibilities.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="http://www.brownwilsonattorneys.com/images/donna-small.jpg" alt="Donna Wallace">
+          <div class="card-body">
+            <h3>Donna Wallace</h3>
+            <p>Paralegal/Bankruptcy Specialist</p>
+            <p>Donna resides in Hickman County, Tennessee. She has been employed at Brown & Wilson since April 1, 1992. She previously worked in the Legal and Accounting Department of First National Bank.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="http://www.brownwilsonattorneys.com/images/melissa-small.jpg" alt="Melissa Jenkins">
+          <div class="card-body">
+            <h3>Melissa Jenkins</h3>
+            <p>Legal Secretary</p>
+            <p>Melissa resides in Houston County, Tennessee. She received an Associates Degree from Miller-Motte Business College in Clarksville, Tennessee. She has been employed at Brown & Wilson since June 1, 1998.</p>
+            <div>
+              <p>Associates Degree from Miller-Motte Business College</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="contact">
+    <h2>Contact Us</h2>
+    <div class="contact-content">
+      <p>(615)446-4027</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="nav-logo">Brown & Wilson Attorneys</a>
+        <p class="footer-description">Certified Specialist in Bankruptcy Law</p>
+      </div>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/services">Services</a>
+        <a href="/team">Team</a>
+        <a href="/contact">Contact</a>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Brown & Wilson Attorneys. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function openMobileMenu() {
+      document.getElementById('mobileMenu').classList.add('active');
+    }
+
+    function closeMobileMenu() {
+      document.getElementById('mobileMenu').classList.remove('active');
+    }
+  </script>
+</body>
+</html>
