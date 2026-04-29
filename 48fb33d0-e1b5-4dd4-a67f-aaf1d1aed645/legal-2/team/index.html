@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style data-design-intent>
+:root {
+  --bg-primary: #f5f0ea;
+  --bg-card: #ffffff;
+  --text-primary: #1a1a1a;
+  --text-secondary: #6b6b6b;
+  --primary: #1a1a1a;
+  --font-heading: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: var(--font-family);
+  --content-max-width: 520px;
+  --text-muted: #a8a8a8;
+  --font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+  --content-max: 1280px;
+  --border-subtle: #e0dbd4;
+  --shadow-card: 0 2px 8px rgba(0,0,0,0.08);
+}
+</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Our Team - Brown & Wilson</title>
+  <style>
+    :root {
+      --bg-primary: #f5f0ea;
+      --bg-card: #ffffff;
+      --text-primary: #1a1a1a;
+      --text-secondary: #6b6b6b;
+      --text-muted: #a8a8a8;
+      --input-bg: #ebe5dc;
+      --border-subtle: #e0dbd4;
+      --nav-text: #ffffff;
+      --shadow-card: 0 8px 40px rgba(0, 0, 0, 0.08);
+      --shadow-card-hover: 0 12px 48px rgba(0, 0, 0, 0.12);
+      --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-heading: var(--font-family);
+      --font-body: var(--font-family);
+      --spacing-xs: 4px;
+      --spacing-sm: 8px;
+      --spacing-md: 16px;
+      --spacing-lg: 24px;
+      --spacing-xl: 32px;
+      --spacing-2xl: 48px;
+      --spacing-3xl: 64px;
+      --spacing-4xl: 96px;
+      --content-max: 1200px;
+      --content-max-width: var(--content-max);
+      --section-padding: var(--spacing-3xl);
+      --gap: var(--spacing-lg);
+      --max-width: var(--content-max);
+      --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-bounce: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      overflow-wrap: break-word;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: var(--spacing-lg) var(--spacing-lg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--text-primary);
+    }
+
+    .nav-logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--nav-text);
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: none;
+      list-style: none;
+      gap: var(--spacing-xl);
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--nav-text);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      position: relative;
+      padding-bottom: 2px;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--nav-text);
+      transition: width var(--transition-smooth);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: var(--spacing-sm);
+    }
+
+    .nav-hamburger span {
+      width: 24px;
+      height: 2px;
+      background: var(--nav-text);
+      transition: var(--transition-smooth);
+      display: block;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--text-primary);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-xl);
+    }
+
+    .mobile-menu.active {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      color: var(--nav-text);
+      text-decoration: none;
+      font-size: 1.5rem;
+      font-weight: 600;
+      transition: opacity var(--transition-smooth);
+    }
+
+    .mobile-menu a:hover {
+      opacity: 0.7;
+    }
+
+    .mobile-menu-close {
+      position: absolute;
+      top: var(--spacing-lg);
+      right: var(--spacing-lg);
+      background: none;
+      border: none;
+      color: var(--nav-text);
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: var(--spacing-sm);
+    }
+
+    /* Sections */
+    .team {
+      padding: calc(var(--spacing-4xl) + 60px) 0 var(--section-padding);
+      background: var(--bg-primary);
+    }
+
+    /* Cards */
+    .card {
+      background: var(--bg-card);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      transition: box-shadow var(--transition-smooth);
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-card-hover);
+    }
+
+    .card-body {
+      padding: var(--spacing-lg);
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--spacing-xl);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--text-primary);
+      color: var(--nav-text);
+      padding: var(--spacing-3xl) var(--spacing-lg);
+    }
+
+    .footer-inner {
+      max-width: var(--content-max);
+      margin: 0 auto;
+    }
+
+    .footer-brand {
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    .footer-description {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      max-width: 400px;
+      margin-top: var(--spacing-md);
+      line-height: 1.6;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    .footer-links a {
+      color: var(--nav-text);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      opacity: 0.7;
+      transition: opacity var(--transition-smooth);
+    }
+
+    .footer-links a:hover {
+      opacity: 1;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: var(--spacing-lg);
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .team {
+        padding: calc(var(--spacing-3xl) + 40px) 0 var(--spacing-2xl);
+      }
+      
+      h2 {
+        font-size: 2rem !important;
+        margin-bottom: 32px !important;
+      }
+      
+      .card {
+        padding: var(--spacing-lg) !important;
+      }
+      
+      .card-body {
+        padding: 0 !important;
+      }
+      
+      h3 {
+        font-size: 1.25rem !important;
+      }
+      
+      .team-grid {
+        gap: var(--spacing-lg);
+      }
+      
+      .footer {
+        padding: var(--spacing-2xl) var(--spacing-lg);
+      }
+      
+      .nav-logo {
+        font-size: 1.125rem;
+      }
+    }
+
+    /* Responsive */
+    @media (min-width: 768px) {
+      .nav { 
+        padding: var(--spacing-xl) var(--spacing-2xl); 
+      }
+      .nav-links { 
+        display: flex; 
+      }
+      .nav-hamburger { 
+        display: none; 
+      }
+      
+      .team {
+        padding: calc(var(--spacing-4xl) + 80px) 0 var(--section-padding);
+      }
+      
+      .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-2xl);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .nav { 
+        padding: var(--spacing-xl) var(--spacing-3xl); 
+      }
+      .nav-logo { 
+        font-size: 1.375rem; 
+      }
+      .nav-links { 
+        gap: var(--spacing-2xl); 
+      }
+      
+      .team-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (min-width: 1280px) {
+      .nav { 
+        padding: var(--spacing-xl) var(--spacing-4xl); 
+      }
+    }
+
+    /* Mobile Menu JavaScript */
+    function openMobileMenu() {
+      document.getElementById('mobileMenu').classList.add('active');
+    }
+
+    function closeMobileMenu() {
+      document.getElementById('mobileMenu').classList.remove('active');
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <nav class="nav">
+    <a href="/" class="nav-logo">Brown & Wilson</a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/services">Services</a></li>
+      <li><a href="/team">Team</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+    <button class="nav-hamburger" aria-label="Open menu" onclick="openMobileMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" aria-label="Close menu" onclick="closeMobileMenu()">✕</button>
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+    <a href="/services">Services</a>
+    <a href="/team">Team</a>
+    <a href="/contact">Contact</a>
+  </div>
+
+  <!-- SECTION 1: team -->
+  <section class="team" id="team">
+    <div style="max-width: var(--content-max-width); margin: 0 auto; padding: 0 20px;">
+      <h2 style="font-family: var(--font-heading); color: var(--text-primary); text-align: center; margin-bottom: 48px; font-size: 2.5rem; font-weight: 600;">Our Team</h2>
+      
+      <div class="team-grid" style="display: grid; grid-template-columns: 1fr; gap: 32px; margin-bottom: 48px;">
+        <div class="card" style="background: var(--bg-card); border-radius: 8px; padding: 32px; box-shadow: var(--shadow-card);">
+          <div class="card-body">
+            <h3 style="font-family: var(--font-heading); color: var(--text-primary); margin-bottom: 8px; font-size: 1.5rem; font-weight: 600;">Nathan Brown</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 16px; font-weight: 500;">Attorney</p>
+            <p style="color: var(--text-primary); font-family: var(--font-body); line-height: 1.6; margin-bottom: 20px;">Nathan received a Bachelor of Science degree from Austin Peay State University in 1975, and received a Doctor of Jurisprudence degree from the University of Tennessee College of Law in 1978. He has been engaged in the general practice of law in Dickson County, Tennessee since 1978.</p>
+            <div style="margin-top: 16px;">
+              <h4 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1rem; font-weight: 600; margin-bottom: 8px;">Education</h4>
+              <ul style="margin: 0; padding-left: 20px; color: var(--text-secondary); font-family: var(--font-body);">
+                <li style="margin-bottom: 4px;">Bachelor of Science degree from Austin Peay State University</li>
+                <li style="margin-bottom: 4px;">Doctor of Jurisprudence degree from the University of Tennessee College of Law</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="background: var(--bg-card); border-radius: 8px; padding: 32px; box-shadow: var(--shadow-card);">
+          <div class="card-body">
+            <h3 style="font-family: var(--font-heading); color: var(--text-primary); margin-bottom: 8px; font-size: 1.5rem; font-weight: 600;">Roy Wilson</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 16px; font-weight: 500;">Attorney</p>
+            <p style="color: var(--text-primary); font-family: var(--font-body); line-height: 1.6; margin-bottom: 20px;">Roy received a Bachelor of Science degree from Austin Peay State University in 1976, and received a Doctor of Jurisprudence degree from the University of Tennessee College of Law in 1979. He has been practicing law in Dickson County, Tennessee since 1979, specializing in consumer bankruptcy law since 1989.</p>
+            <div style="margin-top: 16px;">
+              <h4 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1rem; font-weight: 600; margin-bottom: 8px;">Education</h4>
+              <ul style="margin: 0; padding-left: 20px; color: var(--text-secondary); font-family: var(--font-body);">
+                <li style="margin-bottom: 4px;">Bachelor of Science degree from Austin Peay State University</li>
+                <li style="margin-bottom: 4px;">Doctor of Jurisprudence degree from the University of Tennessee College of Law</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="background: var(--bg-card); border-radius: 8px; padding: 32px; box-shadow: var(--shadow-card);">
+          <div class="card-body">
+            <h3 style="font-family: var(--font-heading); color: var(--text-primary); margin-bottom: 8px; font-size: 1.5rem; font-weight: 600;">Lisa Hafner</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 16px; font-weight: 500;">Office Manager</p>
+            <p style="color: var(--text-primary); font-family: var(--font-body); line-height: 1.6;">Lisa resides in Dickson County, Tennessee. She has been employed at Brown & Wilson since June 18, 1984. She has responsibility for supervising all office procedures, as well as having accounting and comptroller responsibilities.</p>
+          </div>
+        </div>
+
+        <div class="card" style="background: var(--bg-card); border-radius: 8px; padding: 32px; box-shadow: var(--shadow-card);">
+          <div class="card-body">
+            <h3 style="font-family: var(--font-heading); color: var(--text-primary); margin-bottom: 8px; font-size: 1.5rem; font-weight: 600;">Donna Wallace</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 16px; font-weight: 500;">Paralegal/Bankruptcy Specialist</p>
+            <p style="color: var(--text-primary); font-family: var(--font-body); line-height: 1.6;">Donna resides in Hickman County, Tennessee. She has been employed at Brown & Wilson since April 1, 1992. She previously worked in the Legal and Accounting Department of First National Bank.</p>
+          </div>
+        </div>
+
+        <div class="card" style="background: var(--bg-card); border-radius: 8px; padding: 32px; box-shadow: var(--shadow-card);">
+          <div class="card-body">
+            <h3 style="font-family: var(--font-heading); color: var(--text-primary); margin-bottom: 8px; font-size: 1.5rem; font-weight: 600;">Melissa Jenkins</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 16px; font-weight: 500;">Legal Secretary</p>
+            <p style="color: var(--text-primary); font-family: var(--font-body); line-height: 1.6; margin-bottom: 20px;">Melissa resides in Houston County, Tennessee. She received an Associates Degree from Miller-Motte Business College in Clarksville, Tennessee. She has been employed at Brown & Wilson since June 1, 1998.</p>
+            <div style="margin-top: 16px;">
+              <h4 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1rem; font-weight: 600; margin-bottom: 8px;">Education</h4>
+              <ul style="margin: 0; padding-left: 20px; color: var(--text-secondary); font-family: var(--font-body);">
+                <li style="margin-bottom: 4px;">Associates Degree from Miller-Motte Business College</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="nav-logo">Brown & Wilson</a>
+        <p class="footer-description">Providing strategic legal counsel and dedicated representation to protect what matters most.</p>
+      </div>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/services">Services</a>
+        <a href="/team">Team</a>
+        <a href="/contact">Contact</a>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 Brown & Wilson. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function openMobileMenu() {
+      document.getElementById('mobileMenu').classList.add('active');
+    }
+
+    function closeMobileMenu() {
+      document.getElementById('mobileMenu').classList.remove('active');
+    }
+  </script>
+</body>
+</html>
