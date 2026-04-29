@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style data-design-intent>
+:root {
+  --bg-primary: #f5f0ea;
+  --bg-card: #ffffff;
+  --text-primary: #1a1a1a;
+  --text-secondary: #6b6b6b;
+  --primary: #1a1a1a;
+  --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --content-max-width: 1200px;
+  --text-muted: #a8a8a8;
+  --input-bg: #ebe5dc;
+  --border-subtle: #e0dbd4;
+}
+</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home</title>
+  <style>
+    :root {
+      --primary: #1a1a1a;
+      --secondary: #6b6b6b;
+      --accent: #f5f0ea;
+      --text: #1a1a1a;
+      --text-light: #6b6b6b;
+      --bg: #ffffff;
+      --bg-alt: #f5f0ea;
+      --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --section-padding: 80px;
+      --gap: 24px;
+      --max-width: 1200px;
+      
+      --bg-primary: #f5f0ea;
+      --bg-card: #ffffff;
+      --text-primary: #1a1a1a;
+      --text-secondary: #6b6b6b;
+      --text-muted: #a8a8a8;
+      --input-bg: #ebe5dc;
+      --border-subtle: #e0dbd4;
+      --nav-text: #ffffff;
+      --shadow-card: 0 8px 40px rgba(0, 0, 0, 0.08);
+      --shadow-card-hover: 0 12px 48px rgba(0, 0, 0, 0.12);
+      --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --spacing-xs: 4px;
+      --spacing-sm: 8px;
+      --spacing-md: 16px;
+      --spacing-lg: 24px;
+      --spacing-xl: 32px;
+      --spacing-2xl: 48px;
+      --spacing-3xl: 64px;
+      --spacing-4xl: 96px;
+      --content-max: 1200px;
+      --content-max-width: 1200px;
+      --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-bounce: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      overflow-wrap: break-word;
+    }
+
+    /* Navigation */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: var(--spacing-lg) var(--spacing-lg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      mix-blend-mode: difference;
+    }
+
+    .nav-logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--nav-text);
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: none;
+      list-style: none;
+      gap: var(--spacing-xl);
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--nav-text);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      position: relative;
+      padding-bottom: 2px;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--nav-text);
+      transition: width var(--transition-smooth);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: var(--spacing-sm);
+      mix-blend-mode: normal;
+    }
+
+    .nav-hamburger span {
+      width: 24px;
+      height: 2px;
+      background: var(--nav-text);
+      transition: var(--transition-smooth);
+      display: block;
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--text-primary);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-xl);
+    }
+
+    .mobile-menu.active {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      color: var(--nav-text);
+      text-decoration: none;
+      font-size: 1.5rem;
+      font-weight: 600;
+      transition: opacity var(--transition-smooth);
+    }
+
+    .mobile-menu a:hover {
+      opacity: 0.7;
+    }
+
+    .mobile-menu-close {
+      position: absolute;
+      top: var(--spacing-lg);
+      right: var(--spacing-lg);
+      background: none;
+      border: none;
+      color: var(--nav-text);
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: var(--spacing-sm);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: var(--spacing-4xl) var(--spacing-lg) var(--spacing-3xl);
+      background: var(--bg-alt);
+    }
+
+    .hero-inner {
+      max-width: var(--content-max);
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--spacing-3xl);
+      align-items: center;
+    }
+
+    .hero-content {
+      position: relative;
+    }
+
+    .hero-headline {
+      font-size: clamp(2.25rem, 6vw, 4rem);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    /* Stats Section */
+    .hero-stats {
+      background: var(--bg);
+      padding: var(--spacing-2xl) var(--spacing-lg);
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .stat-label {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+    }
+
+    /* Services Section */
+    .services {
+      background: var(--bg-card);
+      padding: 80px 20px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+    }
+
+    .service-card {
+      background: var(--bg-primary);
+      padding: 32px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .service-title {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+
+    .service-description {
+      font-family: var(--font-body);
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Team Section */
+    .team {
+      background: var(--bg-primary);
+      padding: 80px 20px;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 32px;
+      max-width: var(--content-max-width);
+      margin: 0 auto;
+    }
+
+    .team-member {
+      background: var(--bg-card);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .team-member img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+
+    .team-member-info {
+      padding: 24px;
+    }
+
+    .team-member-name {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .team-member-role {
+      font-family: var(--font-body);
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      margin-bottom: 12px;
+    }
+
+    .team-member-bio {
+      font-family: var(--font-body);
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--text-primary);
+      color: var(--nav-text);
+      padding: var(--spacing-3xl) var(--spacing-lg) var(--spacing-xl);
+    }
+
+    .footer-inner {
+      max-width: var(--content-max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--spacing-2xl);
+    }
+
+    .footer-brand {
+      text-align: center;
+    }
+
+    .footer-brand .nav-logo {
+      font-size: 1.5rem;
+      color: var(--nav-text);
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: var(--spacing-md);
+    }
+
+    .footer-description {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-md);
+      align-items: center;
+    }
+
+    .footer-links a {
+      color: var(--nav-text);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: opacity var(--transition-smooth);
+    }
+
+    .footer-links a:hover {
+      opacity: 0.7;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: var(--spacing-xl);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: var(--spacing-xl);
+    }
+
+    .footer-bottom p {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    /* Responsive: Mobile */
+    @media (max-width: 768px) {
+      .hero {
+        padding: var(--spacing-3xl) var(--spacing-md) var(--spacing-2xl);
+        min-height: 90vh;
+      }
+
+      .hero-headline {
+        font-size: clamp(1.75rem, 8vw, 2.5rem);
+      }
+
+      .hero-stats {
+        padding: var(--spacing-lg) var(--spacing-md);
+      }
+
+      .stat-value {
+        font-size: 1.25rem;
+      }
+
+      .stat-label {
+        font-size: 0.75rem;
+      }
+
+      .services {
+        padding: 60px 16px;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .team {
+        padding: 60px 16px;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .contact {
+        padding: 60px 16px;
+      }
+
+      .nav {
+        padding: var(--spacing-md);
+      }
+
+      .footer {
+        padding: var(--spacing-2xl) var(--spacing-md) var(--spacing-lg);
+      }
+    }
+
+    /* Responsive: Tablet */
+    @media (min-width: 768px) {
+      .nav {
+        padding: var(--spacing-xl) var(--spacing-2xl);
+      }
+
+      .nav-links {
+        display: flex;
+      }
+
+      .nav-hamburger {
+        display: none;
+      }
+
+      .hero {
+        padding: var(--spacing-4xl) var(--spacing-2xl) var(--spacing-3xl);
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--spacing-2xl);
+      }
+
+      .hero-headline {
+        font-size: clamp(2.5rem, 4vw, 3.5rem);
+      }
+
+      .hero-stats {
+        padding: var(--spacing-2xl);
+      }
+
+      .stat-value {
+        font-size: 2rem;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr auto;
+        text-align: left;
+      }
+
+      .footer-brand {
+        text-align: left;
+      }
+
+      .footer-description {
+        margin: 0;
+      }
+
+      .footer-links {
+        flex-direction: row;
+        gap: var(--spacing-xl);
+      }
+    }
+
+    /* Responsive: Desktop */
+    @media (min-width: 1024px) {
+      .nav {
+        padding: var(--spacing-xl) var(--spacing-3xl);
+      }
+
+      .nav-logo {
+        font-size: 1.375rem;
+      }
+
+      .nav-links {
+        gap: var(--spacing-2xl);
+      }
+
+      .hero {
+        padding: 0 var(--spacing-3xl);
+        min-height: 100vh;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: var(--spacing-3xl);
+      }
+
+      .hero-headline {
+        font-size: clamp(3rem, 4.5vw, 4.25rem);
+      }
+
+      .hero-stats {
+        padding: var(--spacing-3xl);
+      }
+
+      .footer {
+        padding: var(--spacing-4xl) var(--spacing-3xl) var(--spacing-2xl);
+      }
+    }
+
+    @media (min-width: 1280px) {
+      .hero {
+        padding: 0 var(--spacing-4xl);
+      }
+
+      .nav {
+        padding: var(--spacing-xl) var(--spacing-4xl);
+      }
+
+      .footer {
+        padding: var(--spacing-4xl) var(--spacing-4xl) var(--spacing-2xl);
+      }
+    }
+
+    /* Mobile Menu JavaScript Functions */
+    function openMobileMenu() {
+      document.getElementById('mobileMenu').classList.add('active');
+    }
+
+    function closeMobileMenu() {
+      document.getElementById('mobileMenu').classList.remove('active');
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <nav class="nav">
+    <a href="/" class="nav-logo">{{title}}</a>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/services">Services</a></li>
+      <li><a href="/team">Team</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+    <button class="nav-hamburger" aria-label="Open menu" onclick="openMobileMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" aria-label="Close menu" onclick="closeMobileMenu()">✕</button>
+    <a href="/">Home</a>
+    <a href="/services">Services</a>
+    <a href="/team">Team</a>
+    <a href="/contact">Contact</a>
+  </div>
+
+  <section class="hero" id="hero">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <h1 class="hero-headline">Certified Specialist in Bankruptcy Law</h1>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero-stats" id="stats" style="max-width: var(--content-max-width); margin: 0 auto; display: flex; align-items: center; gap: 2rem; padding: 2rem 1rem;">
+    <div class="stat-item">
+      <span class="stat-value" style="font-family: var(--font-heading); color: var(--text-primary); font-size: 2rem; font-weight: 700; display: block;">1 of only 37</span>
+      <span class="stat-label" style="font-family: var(--font-body); color: var(--text-secondary); font-size: 0.875rem; display: block;">attorneys in Tennessee certified as Consumer Bankruptcy Specialist</span>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div style="max-width: var(--content-max-width); margin: 0 auto;">
+      <h2 style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 600; color: var(--text-primary); margin-bottom: 48px; text-align: center;">Services</h2>
+      
+      <div class="services-grid">
+        <div class="service-card">
+          <h3 class="service-title">Bankruptcy</h3>
+          <p class="service-description">Chapter 7 and Chapter 13 bankruptcy services with certified consumer bankruptcy specialist</p>
+        </div>
+        
+        <div class="service-card">
+          <h3 class="service-title">Chapter 13</h3>
+          <p class="service-description">Stop garnishments, foreclosures, collections, keep property, lower payments, protect cosigners</p>
+        </div>
+        
+        <div class="service-card">
+          <h3 class="service-title">Chapter 7</h3>
+          <p class="service-description">Stop garnishments and collections, keep property in most cases, reasonable fees</p>
+        </div>
+        
+        <div class="service-card">
+          <h3 class="service-title">Personal Injury</h3>
+        </div>
+        
+        <div class="service-card">
+          <h3 class="service-title">Divorce</h3>
+        </div>
+        
+        <div class="service-card">
+          <h3 class="service-title">Criminal Cases</h3>
+        </div>
+        
+        <div class="service-card">
+          <h3 class="service-title">Probate</h3>
+        </div>
+        
+        <div class="service-card">
+          <h3 class="service-title">Social Security</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="team" id="team">
+    <div style="max-width: var(--content-max-width); margin: 0 auto;">
+      <h2 style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 600; color: var(--text-primary); margin-bottom: 48px; text-align: center;">Team</h2>
+      
+      <div class="team-grid">
+        <div class="team-member">
+          <img src="http://www.brownwilsonattorneys.com/images/brown-small.jpg" alt="Nathan Brown">
+          <div class="team-member-info">
+            <h3 class="team-member-name">Nathan Brown</h3>
+            <p class="team-member-role">Attorney</p>
+            <p class="team-member-bio">Nathan has been engaged in the general practice of law in Dickson County, Tennessee since 1978. He is admitted to practice in all Tennessee State courts, as well as The United States District Court for the Middle District of Tennessee.</p>
+          </div>
+        </div>
+        
+        <div class="team-member">
+          <img src="http://www.brownwilsonattorneys.com/images/wilson-small.jpg" alt="Roy Wilson">
+          <div class="team-member-info">
+            <h3 class="team-member-name">Roy Wilson</h3>
+            <p class="team-member-role">Attorney - Certified Consumer Bankruptcy Specialist</p>
+            <p class="team-member-bio">Roy has been practicing law in Dickson County, Tennessee since 1979, specializing in consumer bankruptcy law since 1989. He is certified as a Consumer Bankruptcy Law Specialist by Tennessee Commission on Continuing Legal Education and Specialization and by the American Board of Certification.</p>
+          </div>
+        </div>
+        
+        <div class="team-member">
+          <img src="http://www.brownwilsonattorneys.com/images/lisa-small.jpg" alt="Lisa Hafner">
+          <div class="team-member-info">
+            <h3 class="team-member-name">Lisa Hafner</h3>
+            <p class="team-member-role">Office Manager</p>
+            <p class="team-member-bio">Lisa has been employed at Brown & Wilson since June 18, 1984. She has responsibility for supervising all office procedures, as well as having accounting and comptroller responsibilities.</p>
+          </div>
+        </div>
+        
+        <div class="team-member">
+          <img src="http://www.brownwilsonattorneys.com/images/donna-small.jpg" alt="Donna Wallace">
+          <div class="team-member-info">
+            <h3 class="team-member-name">Donna Wallace</h3>
+            <p class="team-member-role">Paralegal/Bankruptcy Specialist</p>
+            <p class="team-member-bio">Donna has been employed at Brown & Wilson since April 1, 1992. She previously worked in the Legal and Accounting Department of First National Bank and is a columnist for The Hickman County Times.</p>
+          </div>
+        </div>
+        
+        <div class="team-member">
+          <img src="http://www.brownwilsonattorneys.com/images/melissa-small.jpg" alt="Melissa Jenkins">
+          <div class="team-member-info">
+            <h3 class="team-member-name">Melissa Jenkins</h3>
+            <p class="team-member-role">Legal Secretary</p>
+            <p class="team-member-bio">Melissa has been employed at Brown & Wilson since June 1, 1998. She received an Associates Degree from Miller-Motte Business College in Clarksville, Tennessee.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact" style="background: var(--bg-primary); padding: 80px 20px; text-align: center;">
+    <div style="max-width: var(--content-max-width); margin: 0 auto;">
+      <h2 style="font-family: var(--font-heading); font-size: 2.5rem; font-weight: 600; color: var(--text-primary); margin-bottom: 48px;">Contact Us</h2>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; max-width: 800px; margin: 0 auto;">
+        
+        <div style="background: var(--bg-card); padding: 32px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+          <h3 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 600; color: var(--text-primary); margin-bottom: 16px;">Phone</h3>
+          <a href="tel:(615)446-4027" style="font-family: var(--font-body); font-size: 1.125rem; color: var(--primary); text-decoration: none; font-weight: 500;">(615)446-4027</a>
+        </div>
+        
+        <div style="background: var(--bg-card); padding: 32px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+          <h3 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 600; color: var(--text-primary); margin-bottom: 16px;">Email</h3>
+          <a href="mailto:lisa@brownwilsonattorneys.com" style="font-family: var(--font-body); font-size: 1.125rem; color: var(--primary); text-decoration: none; font-weight: 500;">lisa@brownwilsonattorneys.com</a>
+        </div>
+        
+        <div style="background: var(--bg-card); padding: 32px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+          <h3 style="font-family: var(--font-heading); font-size: 1.25rem; font-weight: 600; color: var(--text-primary); margin-bottom: 16px;">Address</h3>
+          <p style="font-family: var(--font-body); font-size: 1.125rem; color: var(--text-secondary); margin: 0;">40 W toward Memphis</p>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="nav-logo">{{title}}</a>
+        <p class="footer-description">Providing strategic legal counsel and dedicated representation to protect what matters most.</p>
+      </div>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="/services">Services</a>
+        <a href="/team">Team</a>
+        <a href="/contact">Contact</a>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 {{title}}. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function openMobileMenu() {
+      document.getElementById('mobileMenu').classList.add('active');
+    }
+
+    function closeMobileMenu() {
+      document.getElementById('mobileMenu').classList.remove('active');
+    }
+  </script>
+</body>
+</html>
