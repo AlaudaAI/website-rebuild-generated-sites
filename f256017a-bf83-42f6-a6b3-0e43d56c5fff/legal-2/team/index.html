@@ -10,14 +10,13 @@
   --primary: #1a1a1a;
   --font-heading: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-body: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
-  --content-max-width: 520px;
+  --content-max-width: 1200px;
   --text-muted: #a8a8a8;
-  --border-subtle: #e0dbd4;
 }
 </style>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Our Team - Brown and Wilson Attorneys</title>
+  <title>Our Attorneys</title>
   <style>
     :root {
       --bg-primary: #f5f0ea;
@@ -31,8 +30,8 @@
       --shadow-card: 0 8px 40px rgba(0, 0, 0, 0.08);
       --shadow-card-hover: 0 12px 48px rgba(0, 0, 0, 0.12);
       --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-heading: var(--font-family);
+      --font-body: var(--font-family);
       --spacing-xs: 4px;
       --spacing-sm: 8px;
       --spacing-md: 16px;
@@ -42,7 +41,7 @@
       --spacing-3xl: 64px;
       --spacing-4xl: 96px;
       --content-max: 1200px;
-      --content-max-width: 1200px;
+      --content-max-width: var(--content-max);
       --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       --transition-bounce: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
       --section-padding: var(--spacing-3xl);
@@ -195,236 +194,248 @@
       padding: var(--spacing-sm);
     }
 
-    /* Main content */
-    main {
-      padding-top: calc(60px + var(--spacing-lg));
-    }
-
-    /* Hero section */
+    /* Hero Section */
     .hero {
-      padding: var(--section-padding) var(--spacing-lg);
+      padding: calc(var(--section-padding) + 60px) 0 var(--section-padding);
       background: var(--bg-primary);
       text-align: center;
     }
 
     .hero .content-area {
-      max-width: var(--content-max-width);
+      max-width: var(--content-max);
       margin: 0 auto;
-      padding: 2rem 1rem;
+      padding: 0 var(--spacing-lg);
     }
 
     .hero h1 {
       font-family: var(--font-heading);
       color: var(--text-primary);
-      font-size: 2.5rem;
+      font-size: clamp(2.5rem, 6vw, 3.5rem);
       font-weight: 700;
-      margin-bottom: 1rem;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--spacing-lg);
     }
 
-    .hero p {
-      font-family: var(--font-body);
-      color: var(--text-secondary);
-      font-size: 1.125rem;
-      line-height: 1.6;
-      margin-bottom: 2rem;
-    }
-
-    /* Services section */
-    .services {
-      padding: var(--section-padding) var(--spacing-lg);
+    .hero .stat {
       background: var(--bg-card);
+      border-radius: 16px;
+      padding: var(--spacing-xl);
+      box-shadow: var(--shadow-card);
+      display: inline-block;
+      margin-top: var(--spacing-xl);
     }
 
-    .services .content-area {
-      max-width: var(--content-max-width);
-      margin: 0 auto;
-      padding: 2rem 1rem;
-    }
-
-    .services h2 {
+    .hero .stat-value {
       font-family: var(--font-heading);
       color: var(--text-primary);
       font-size: 2rem;
-      font-weight: 600;
-      margin-bottom: 3rem;
+      font-weight: 700;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .hero .stat-label {
+      font-family: var(--font-body);
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+
+    /* Services Section */
+    .services {
+      padding: var(--section-padding) 0;
+      background: var(--bg-primary);
+    }
+
+    .services .content-area {
+      max-width: var(--content-max);
+      margin: 0 auto;
+      padding: 0 var(--spacing-lg);
+    }
+
+    .services h2 {
       text-align: center;
+      margin-bottom: 50px;
+      font-family: var(--font-heading);
+      color: var(--text-primary);
+      font-size: clamp(2rem, 5vw, 2.5rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
     }
 
     .services-grid {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-2xl);
     }
 
-    /* Team section */
-    .team {
-      padding: var(--section-padding) var(--spacing-lg);
-      background: var(--bg-primary);
-    }
-
-    .team .content-area {
-      max-width: var(--content-max-width);
-      margin: 0 auto;
-      padding: 2rem 1rem;
-    }
-
-    .team h2 {
-      font-family: var(--font-heading);
-      color: var(--text-primary);
-      font-size: 2rem;
-      font-weight: 600;
-      margin-bottom: 3rem;
+    .service-card {
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: var(--spacing-xl);
+      box-shadow: var(--shadow-card);
+      transition: box-shadow var(--transition-smooth);
       text-align: center;
     }
 
-    .team-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
-      margin-bottom: 2rem;
+    .service-card:hover {
+      box-shadow: var(--shadow-card-hover);
     }
 
+    .service-card h3 {
+      font-family: var(--font-heading);
+      color: var(--text-primary);
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: var(--spacing-md);
+    }
+
+    /* Team Section */
+    .team {
+      padding: var(--section-padding) 0;
+      background: var(--bg-primary);
+    }
+
+    .content-area {
+      max-width: var(--content-max);
+      margin: 0 auto;
+      padding: 0 var(--spacing-lg);
+    }
+
+    .content-area h2 {
+      text-align: center;
+      margin-bottom: 50px;
+      font-family: var(--font-heading);
+      color: var(--text-primary);
+      font-size: clamp(2rem, 5vw, 2.5rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    /* Cards */
     .card {
       background: var(--bg-card);
-      border-radius: 8px;
-      padding: 2rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border-radius: 16px;
+      padding: var(--spacing-xl);
+      box-shadow: var(--shadow-card);
+      transition: box-shadow var(--transition-smooth);
     }
 
     .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      box-shadow: var(--shadow-card-hover);
+    }
+
+    .card img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: var(--spacing-lg);
+      display: block;
     }
 
     .card h3 {
       font-family: var(--font-heading);
       color: var(--text-primary);
-      font-size: 1.25rem;
+      font-size: 1.5rem;
       font-weight: 600;
-      margin-bottom: 0.5rem;
+      margin-bottom: var(--spacing-sm);
+      line-height: 1.25;
     }
 
-    .card p {
+    .card .card-body p:first-child {
       font-family: var(--font-body);
-      line-height: 1.6;
-    }
-
-    .card p:nth-of-type(1) {
       color: var(--text-secondary);
+      font-size: 1.1rem;
+      margin-bottom: var(--spacing-md);
       font-weight: 500;
-      margin-bottom: 1rem;
     }
 
-    .card p:nth-of-type(2) {
+    .card .card-body p {
+      font-family: var(--font-body);
       color: var(--text-primary);
-      margin-bottom: 1.5rem;
-    }
-
-    .card p:last-of-type {
-      color: var(--text-primary);
-      margin-bottom: 0;
-    }
-
-    .card div {
-      border-top: 1px solid var(--border-subtle);
-      padding-top: 1rem;
-    }
-
-    .card h4 {
-      font-family: var(--font-heading);
-      color: var(--text-primary);
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
+      line-height: 1.6;
+      margin-bottom: var(--spacing-lg);
     }
 
     .card ul {
       font-family: var(--font-body);
       color: var(--text-secondary);
-      font-size: 0.9rem;
-      line-height: 1.5;
-      margin: 0;
-      padding-left: 1rem;
+      line-height: 1.6;
+      padding-left: var(--spacing-lg);
+      margin-bottom: 0;
     }
 
-    .stat-highlight {
-      background: var(--bg-card);
-      border-radius: 8px;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      text-align: center;
+    .card li {
+      margin-bottom: var(--spacing-sm);
     }
 
-    .stat-highlight .stat-value {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 0.5rem;
-      display: block;
+    /* Team Grid */
+    .team .content-area > div {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--spacing-xl);
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
-    .stat-highlight .stat-label {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      line-height: 1.4;
-    }
-
-    /* Contact section */
+    /* Contact Section */
     .contact {
-      padding: var(--section-padding) var(--spacing-lg);
-      background: var(--bg-card);
+      padding: var(--section-padding) 0;
+      background: var(--bg-primary);
     }
 
     .contact .content-area {
-      max-width: var(--content-max-width);
+      max-width: var(--content-max);
       margin: 0 auto;
-      padding: 2rem 1rem;
+      padding: 0 var(--spacing-lg);
     }
 
     .contact h2 {
+      text-align: center;
+      margin-bottom: 50px;
       font-family: var(--font-heading);
       color: var(--text-primary);
-      font-size: 2rem;
-      font-weight: 600;
-      margin-bottom: 3rem;
-      text-align: center;
+      font-size: clamp(2rem, 5vw, 2.5rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
     }
 
     .contact-info {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-
-    .contact-item {
-      background: var(--bg-primary);
-      border-radius: 8px;
-      padding: 1.5rem;
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: var(--spacing-xl);
+      box-shadow: var(--shadow-card);
       text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
     }
 
-    .contact-item h3 {
+    .contact-info h3 {
       font-family: var(--font-heading);
       color: var(--text-primary);
-      font-size: 1.125rem;
+      font-size: 1.5rem;
       font-weight: 600;
-      margin-bottom: 0.5rem;
+      margin-bottom: var(--spacing-lg);
     }
 
-    .contact-item p {
+    .contact-info p {
       font-family: var(--font-body);
-      color: var(--text-secondary);
-      margin: 0;
+      color: var(--text-primary);
+      line-height: 1.6;
+      margin-bottom: var(--spacing-md);
     }
 
-    .contact-item a {
+    .contact-info a {
       color: var(--text-primary);
       text-decoration: none;
     }
 
-    .contact-item a:hover {
+    .contact-info a:hover {
       text-decoration: underline;
     }
 
@@ -481,191 +492,77 @@
 
     /* Responsive */
     @media (max-width: 768px) {
-      .nav {
-        padding: var(--spacing-md) var(--spacing-md);
-      }
-
-      .hero {
-        padding: var(--spacing-2xl) var(--spacing-md);
-      }
-
-      .hero .content-area {
-        padding: 1rem 0;
-      }
-
       .hero h1 {
-        font-size: 2rem;
+        font-size: 2.5rem;
       }
-
-      .services {
-        padding: var(--spacing-2xl) var(--spacing-md);
+      .hero .stat {
+        padding: var(--spacing-lg);
       }
-
-      .services .content-area {
-        padding: 1rem 0;
-      }
-
-      .services h2 {
-        font-size: 1.75rem;
-        margin-bottom: 2rem;
-      }
-
-      .team {
-        padding: var(--spacing-2xl) var(--spacing-md);
-      }
-
-      .team .content-area {
-        padding: 1rem 0;
-      }
-
-      .team h2 {
-        font-size: 1.75rem;
-        margin-bottom: 2rem;
-      }
-
-      .team-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-
-      .card {
-        padding: 1.5rem;
-      }
-
-      .contact {
-        padding: var(--spacing-2xl) var(--spacing-md);
-      }
-
-      .contact .content-area {
-        padding: 1rem 0;
-      }
-
-      .contact h2 {
-        font-size: 1.75rem;
-        margin-bottom: 2rem;
-      }
-
-      .footer {
-        padding: var(--spacing-2xl) var(--spacing-md);
-      }
-
-      .footer-links {
-        flex-direction: column;
-        gap: var(--spacing-md);
-      }
-
-      .stat-highlight {
-        padding: 1rem;
-      }
-
-      .stat-highlight .stat-value {
+      .hero .stat-value {
         font-size: 1.5rem;
+      }
+      .card {
+        padding: var(--spacing-lg);
+        text-align: center;
+      }
+      .card img {
+        margin: 0 auto var(--spacing-lg);
       }
     }
 
     @media (min-width: 768px) {
-      .nav {
-        padding: var(--spacing-xl) var(--spacing-2xl);
+      .nav { 
+        padding: var(--spacing-xl) var(--spacing-2xl); 
       }
-
-      .nav-links {
+      .nav-links { 
+        display: flex; 
+      }
+      .nav-hamburger { 
+        display: none; 
+      }
+      .content-area {
+        padding: 0 var(--spacing-2xl);
+      }
+      .team .content-area > div {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-2xl);
+      }
+      .card {
         display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
       }
-
-      .nav-hamburger {
-        display: none;
-      }
-
-      .services-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .team-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .contact-info {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .hero {
-        padding: var(--section-padding) var(--spacing-2xl);
-      }
-
-      .services {
-        padding: var(--section-padding) var(--spacing-2xl);
-      }
-
-      .team {
-        padding: var(--section-padding) var(--spacing-2xl);
-      }
-
-      .contact {
-        padding: var(--section-padding) var(--spacing-2xl);
+      .card img {
+        margin: 0 auto var(--spacing-lg);
       }
     }
 
     @media (min-width: 1024px) {
-      .nav {
-        padding: var(--spacing-xl) var(--spacing-3xl);
+      .nav { 
+        padding: var(--spacing-xl) var(--spacing-3xl); 
       }
-
-      .nav-logo {
-        font-size: 1.375rem;
+      .nav-logo { 
+        font-size: 1.375rem; 
       }
-
-      .nav-links {
-        gap: var(--spacing-2xl);
+      .nav-links { 
+        gap: var(--spacing-2xl); 
       }
-
-      .services-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .team-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .hero {
-        padding: var(--section-padding) var(--spacing-3xl);
-      }
-
-      .services {
-        padding: var(--section-padding) var(--spacing-3xl);
-      }
-
-      .team {
-        padding: var(--section-padding) var(--spacing-3xl);
-      }
-
-      .contact {
-        padding: var(--section-padding) var(--spacing-3xl);
+      .content-area {
+        padding: 0 var(--spacing-3xl);
       }
     }
 
     @media (min-width: 1280px) {
-      .nav {
-        padding: var(--spacing-xl) var(--spacing-4xl);
+      .nav { 
+        padding: var(--spacing-xl) var(--spacing-4xl); 
       }
-
-      .hero {
-        padding: var(--section-padding) var(--spacing-4xl);
-      }
-
-      .services {
-        padding: var(--section-padding) var(--spacing-4xl);
-      }
-
-      .team {
-        padding: var(--section-padding) var(--spacing-4xl);
-      }
-
-      .contact {
-        padding: var(--section-padding) var(--spacing-4xl);
+      .content-area {
+        padding: 0 var(--spacing-4xl);
       }
     }
 
-    /* Mobile menu JavaScript */
+    /* Mobile Menu JavaScript Functions */
     function openMobileMenu() {
       document.getElementById('mobileMenu').classList.add('active');
     }
@@ -676,14 +573,14 @@
   </style>
 </head>
 <body>
-  <!-- Header -->
+  <!-- HEADER -->
   <nav class="nav">
-    <a href="/" class="nav-logo">Brown and Wilson Attorneys</a>
+    <a href="/" class="nav-logo">Brown & Wilson Attorneys</a>
     <ul class="nav-links">
       <li><a href="/">Home</a></li>
       <li><a href="/about">About</a></li>
-      <li><a href="/services">Services</a></li>
       <li><a href="/team">Team</a></li>
+      <li><a href="/services">Services</a></li>
       <li><a href="/contact">Contact</a></li>
     </ul>
     <button class="nav-hamburger" aria-label="Open menu" onclick="openMobileMenu()">
@@ -697,118 +594,141 @@
     <button class="mobile-menu-close" aria-label="Close menu" onclick="closeMobileMenu()">✕</button>
     <a href="/">Home</a>
     <a href="/about">About</a>
-    <a href="/services">Services</a>
     <a href="/team">Team</a>
+    <a href="/services">Services</a>
     <a href="/contact">Contact</a>
   </div>
 
-  <main>
-    <section class="hero" id="hero">
-      <div class="content-area">
-        <h1>Our Team</h1>
-        <p>Meet the experienced professionals at Brown and Wilson Attorneys</p>
+  <section class="hero">
+    <div class="content-area">
+      <h1>Our Attorneys</h1>
+      <div class="stat">
+        <div class="stat-value">1 of only 37</div>
+        <div class="stat-label">attorneys in the State of Tennessee certified as Consumer Bankruptcy Specialist</div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="team" id="team">
-      <div class="content-area" style="max-width: var(--content-max-width); margin: 0 auto; padding: 2rem 1rem;">
-        <h2 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 2rem; font-weight: 600; margin-bottom: 3rem; text-align: center;">Our Team</h2>
-        
-        <div class="stat-highlight">
-          <span class="stat-value">1 of only 37</span>
-          <div class="stat-label">attorneys in the State of Tennessee certified as Consumer Bankruptcy Specialist</div>
+  <section class="services">
+    <div class="content-area">
+      <h2>Our Services</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <h3>Chapter 13</h3>
         </div>
+        <div class="service-card">
+          <h3>Chapter 7</h3>
+        </div>
+        <div class="service-card">
+          <h3>Personal Injury</h3>
+        </div>
+        <div class="service-card">
+          <h3>Divorce</h3>
+        </div>
+        <div class="service-card">
+          <h3>Criminal Cases</h3>
+        </div>
+        <div class="service-card">
+          <h3>Probate</h3>
+        </div>
+        <div class="service-card">
+          <h3>Social Security</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="team">
+    <div class="content-area" style="max-width: var(--content-max-width); margin: 0 auto; padding: 60px 20px;">
+      <h2 style="text-align: center; margin-bottom: 50px; font-family: var(--font-heading); color: var(--text-primary); font-size: 2.5rem; font-weight: 700;">Our Team</h2>
+      
+      <div style="display: grid; grid-template-columns: 1fr; gap: 30px; max-width: 1000px; margin: 0 auto;">
         
-        <div class="team-grid" style="display: grid; grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2rem;">
-          <div class="card" style="background: var(--bg-card); border-radius: 8px; padding: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s ease, box-shadow 0.2s ease;">
-            <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">Nathan Brown</h3>
-            <p style="font-family: var(--font-body); color: var(--text-secondary); font-weight: 500; margin-bottom: 1rem;">Attorney</p>
-            <p style="font-family: var(--font-body); color: var(--text-primary); line-height: 1.6; margin-bottom: 1.5rem;">Nathan received a Bachelor of Science degree from Austin Peay State University in 1975, and received a Doctor of Jurisprudence degree from the University of Tennessee College of Law in 1978. He has been engaged in the general practice of law in Dickson County, Tennessee since 1978.</p>
-            <div style="border-top: 1px solid var(--border-subtle); padding-top: 1rem;">
-              <h4 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">Education</h4>
-              <ul style="font-family: var(--font-body); color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5; margin: 0; padding-left: 1rem;">
-                <li>Bachelor of Science degree from Austin Peay State University (1975)</li>
-                <li>Doctor of Jurisprudence degree from the University of Tennessee College of Law (1978)</li>
-              </ul>
-            </div>
+        <div class="card" style="background: var(--bg-card); border-radius: 8px; padding: 30px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+          <div class="card-body">
+            <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1.5rem; font-weight: 600; margin-bottom: 8px;">Nathan Brown</h3>
+            <p style="font-family: var(--font-body); color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 16px; font-weight: 500;">Attorney</p>
+            <p style="font-family: var(--font-body); color: var(--text-primary); line-height: 1.6; margin-bottom: 20px;">Received a Bachelor of Science degree from Austin Peay State University in 1975, and received a Doctor of Jurisprudence degree from the University of Tennessee College of Law in 1978. He has been engaged in the general practice of law in Dickson County, Tennessee since 1978.</p>
+            <ul style="font-family: var(--font-body); color: var(--text-secondary); line-height: 1.6; padding-left: 20px;">
+              <li>Bachelor of Science from Austin Peay State University (1975)</li>
+              <li>Doctor of Jurisprudence from University of Tennessee College of Law (1978)</li>
+            </ul>
           </div>
-          
-          <div class="card" style="background: var(--bg-card); border-radius: 8px; padding: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s ease, box-shadow 0.2s ease;">
-            <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">Roy Wilson</h3>
-            <p style="font-family: var(--font-body); color: var(--text-secondary); font-weight: 500; margin-bottom: 1rem;">Consumer Bankruptcy Law Specialist</p>
-            <p style="font-family: var(--font-body); color: var(--text-primary); line-height: 1.6; margin-bottom: 1.5rem;">Roy received a Bachelor of Science degree from Austin Peay State University in 1976, and received a Doctor of Jurisprudence degree from the University of Tennessee College of Law in 1979. He has been practicing law in Dickson County, Tennessee since 1979, specializing in consumer bankruptcy law since 1989.</p>
-            <div style="border-top: 1px solid var(--border-subtle); padding-top: 1rem;">
-              <h4 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">Education</h4>
-              <ul style="font-family: var(--font-body); color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5; margin: 0; padding-left: 1rem;">
-                <li>Bachelor of Science degree from Austin Peay State University (1976)</li>
-                <li>Doctor of Jurisprudence degree from the University of Tennessee College of Law (1979)</li>
-              </ul>
-            </div>
+        </div>
+
+        <div class="card" style="background: var(--bg-card); border-radius: 8px; padding: 30px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+          <div class="card-body">
+            <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1.5rem; font-weight: 600; margin-bottom: 8px;">Roy Wilson</h3>
+            <p style="font-family: var(--font-body); color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 16px; font-weight: 500;">Attorney</p>
+            <p style="font-family: var(--font-body); color: var(--text-primary); line-height: 1.6; margin-bottom: 20px;">Received a Bachelor of Science degree from Austin Peay State University in 1976, and received a Doctor of Jurisprudence degree from the University of Tennessee College of Law in 1979. Prior to attending college, he enlisted in The United States Marine Corps and served with the 11th Marines in Vietnam. He has been practicing law in Dickson County, Tennessee since 1979, specializing in consumer bankruptcy law since 1989.</p>
+            <ul style="font-family: var(--font-body); color: var(--text-secondary); line-height: 1.6; padding-left: 20px;">
+              <li>Bachelor of Science from Austin Peay State University (1976)</li>
+              <li>Doctor of Jurisprudence from University of Tennessee College of Law (1979)</li>
+            </ul>
           </div>
-          
-          <div class="card" style="background: var(--bg-card); border-radius: 8px; padding: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s ease, box-shadow 0.2s ease;">
-            <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">Lisa Hafner</h3>
-            <p style="font-family: var(--font-body); color: var(--text-secondary); font-weight: 500; margin-bottom: 1rem;">Office Manager</p>
+        </div>
+
+        <div class="card" style="background: var(--bg-card); border-radius: 8px; padding: 30px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+          <img src="http://www.brownwilsonattorneys.com/images/lisa-small.jpg" alt="Lisa Hafner" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;">
+          <div class="card-body">
+            <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1.5rem; font-weight: 600; margin-bottom: 8px;">Lisa Hafner</h3>
+            <p style="font-family: var(--font-body); color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 16px; font-weight: 500;">Office Manager</p>
             <p style="font-family: var(--font-body); color: var(--text-primary); line-height: 1.6;">Lisa resides in Dickson County, Tennessee. She has been employed at Brown & Wilson since June 18, 1984. She has responsibility for supervising all office procedures, as well as having accounting and comptroller responsibilities.</p>
           </div>
-          
-          <div class="card" style="background: var(--bg-card); border-radius: 8px; padding: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s ease, box-shadow 0.2s ease;">
-            <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">Donna Wallace</h3>
-            <p style="font-family: var(--font-body); color: var(--text-secondary); font-weight: 500; margin-bottom: 1rem;">Paralegal/Bankruptcy Specialist</p>
+        </div>
+
+        <div class="card" style="background: var(--bg-card); border-radius: 8px; padding: 30px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+          <img src="http://www.brownwilsonattorneys.com/images/donna-small.jpg" alt="Donna Wallace" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;">
+          <div class="card-body">
+            <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1.5rem; font-weight: 600; margin-bottom: 8px;">Donna Wallace</h3>
+            <p style="font-family: var(--font-body); color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 16px; font-weight: 500;">Paralegal/Bankruptcy Specialist</p>
             <p style="font-family: var(--font-body); color: var(--text-primary); line-height: 1.6;">Donna resides in Hickman County, Tennessee. She has been employed at Brown & Wilson since April 1, 1992. She previously worked in the Legal and Accounting Department of First National Bank. She is a columnist for The Hickman County Times.</p>
           </div>
-          
-          <div class="card" style="background: var(--bg-card); border-radius: 8px; padding: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s ease, box-shadow 0.2s ease;">
-            <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">Melissa Jenkins</h3>
-            <p style="font-family: var(--font-body); color: var(--text-secondary); font-weight: 500; margin-bottom: 1rem;">Legal Secretary</p>
-            <p style="font-family: var(--font-body); color: var(--text-primary); line-height: 1.6; margin-bottom: 1.5rem;">Melissa resides in Houston County, Tennessee. She received an Associates Degree from Miller-Motte Business College in Clarksville, Tennessee. She has been employed at Brown & Wilson since June 1, 1998.</p>
-            <div style="border-top: 1px solid var(--border-subtle); padding-top: 1rem;">
-              <h4 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">Education</h4>
-              <ul style="font-family: var(--font-body); color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5; margin: 0; padding-left: 1rem;">
-                <li>Associates Degree from Miller-Motte Business College in Clarksville, Tennessee</li>
-              </ul>
-            </div>
-          </div>
         </div>
-      </div>
-    </section>
 
-    <section class="contact" id="contact">
-      <div class="content-area">
-        <h2>Contact Us</h2>
-        <div class="contact-info">
-          <div class="contact-item">
-            <h3>Phone</h3>
-            <p><a href="tel:(615)446-4027">(615)446-4027</a></p>
-          </div>
-          <div class="contact-item">
-            <h3>Email</h3>
-            <p><a href="mailto:lisa@brownwilsonattorneys.com">lisa@brownwilsonattorneys.com</a></p>
-          </div>
-          <div class="contact-item">
-            <h3>Address</h3>
-            <p>40 W toward Memphis</p>
+        <div class="card" style="background: var(--bg-card); border-radius: 8px; padding: 30px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+          <img src="http://www.brownwilsonattorneys.com/images/melissa-small.jpg" alt="Melissa Jenkins" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;">
+          <div class="card-body">
+            <h3 style="font-family: var(--font-heading); color: var(--text-primary); font-size: 1.5rem; font-weight: 600; margin-bottom: 8px;">Melissa Jenkins</h3>
+            <p style="font-family: var(--font-body); color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 16px; font-weight: 500;">Legal Secretary</p>
+            <p style="font-family: var(--font-body); color: var(--text-primary); line-height: 1.6; margin-bottom: 20px;">Melissa resides in Houston County, Tennessee. She received an Associates Degree from Miller-Motte Business College in Clarksville, Tennessee. She has been employed at Brown & Wilson since June 1, 1998.</p>
+            <ul style="font-family: var(--font-body); color: var(--text-secondary); line-height: 1.6; padding-left: 20px;">
+              <li>Associates Degree from Miller-Motte Business College in Clarksville, Tennessee</li>
+            </ul>
           </div>
         </div>
+
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+
+  <section class="contact">
+    <div class="content-area">
+      <h2>Contact Us</h2>
+      <div class="contact-info">
+        <h3>Brown and Wilson Attorneys</h3>
+        <p>302-1/2 North Main Street<br>Dickson, Tennessee 37055</p>
+        <p><a href="tel:(615)446-4027">(615)446-4027</a></p>
+        <p><a href="mailto:lisa@brownwilsonattorneys.com">lisa@brownwilsonattorneys.com</a></p>
+      </div>
+    </div>
+  </section>
 
   <footer class="footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <a href="/" class="nav-logo">Brown and Wilson Attorneys</a>
+        <a href="/" class="nav-logo">Brown & Wilson Attorneys</a>
         <p class="footer-description">Providing strategic legal counsel and dedicated representation to protect what matters most.</p>
       </div>
       <div class="footer-links">
         <a href="/">Home</a>
         <a href="/about">About</a>
-        <a href="/services">Services</a>
         <a href="/team">Team</a>
+        <a href="/services">Services</a>
         <a href="/contact">Contact</a>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2024 Brown and Wilson Attorneys. All rights reserved.</p>
+        <p>&copy; 2024 Brown & Wilson Attorneys. All rights reserved.</p>
       </div>
     </div>
   </footer>
