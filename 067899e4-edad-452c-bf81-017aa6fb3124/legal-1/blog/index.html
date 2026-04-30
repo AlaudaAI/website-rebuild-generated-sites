@@ -1,0 +1,1035 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  :root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
+
+  /* Navigation */
+  .mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+  .mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+  .mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+  .mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+  .hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+  .hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+  .sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+  .sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+  .sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+  .sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+  .sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+  .sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+  .sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+  .sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+  .sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+  .mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+  .mobile-nav-overlay.active {
+  display: block;
+}
+
+  .sidebar.active {
+  display: flex;
+}
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: calc(96px + 60px) var(--space-lg) var(--space-3xl);
+    background: var(--text-primary);
+    color: #ffffff;
+  }
+
+  .page-title-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-title-area h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  /* Content Area */
+  .content-area {
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .content-area h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .content-area p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area ul, .content-area ol {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-lg);
+    color: var(--text-muted);
+  }
+
+  .content-area li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  .content-area img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    font-weight: 500;
+  }
+
+  .content-area a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  /* Blog specific styles */
+  .blog-post {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: var(--space-xl);
+    margin-bottom: var(--space-xl);
+    border: 1px solid var(--border-color);
+  }
+
+  .blog-post h2 {
+    margin-bottom: var(--space-md);
+  }
+
+  .blog-post .meta {
+    font-size: 14px;
+    color: var(--text-dim);
+    margin-bottom: var(--space-lg);
+  }
+
+  .blog-post .excerpt {
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .sidebar-content {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: var(--space-xl);
+    border: 1px solid var(--border-color);
+    margin-bottom: var(--space-xl);
+  }
+
+  .sidebar-content h3 {
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+    font-size: 1.1rem;
+  }
+
+  .sidebar-content .rating-badge {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+  }
+
+  .sidebar-content .contact-info {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .sidebar-content .contact-info strong {
+    color: var(--text-primary);
+  }
+
+  .blog-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-2xl);
+  }
+
+  /* Services */
+  .services {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: var(--space-xl);
+    margin-bottom: var(--space-xl);
+    border: 1px solid var(--border-color);
+  }
+
+  .services h2 {
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+    font-size: 1.5rem;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .service-item {
+    background: var(--bg-hover);
+    border-radius: 8px;
+    padding: var(--space-lg);
+    border: 1px solid var(--border-color);
+  }
+
+  .service-item h3 {
+    color: var(--text-primary);
+    font-size: 1rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  /* Team */
+  .team {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: var(--space-xl);
+    margin-bottom: var(--space-xl);
+    border: 1px solid var(--border-color);
+  }
+
+  .team h2 {
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+    font-size: 1.5rem;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .team-member {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-lg);
+  }
+
+  .team-member img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border-color);
+  }
+
+  .team-member h3 {
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  /* Testimonials */
+  .testimonials {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: var(--space-xl);
+    margin-bottom: var(--space-xl);
+    border: 1px solid var(--border-color);
+  }
+
+  .testimonials h2 {
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+    font-size: 1.5rem;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .testimonial {
+    background: var(--bg-hover);
+    border-radius: 8px;
+    padding: var(--space-lg);
+    border: 1px solid var(--border-color);
+  }
+
+  .testimonial blockquote {
+    color: var(--text-muted);
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+  }
+
+  .testimonial cite {
+    color: var(--text-primary);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  /* Footer */
+  .footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+  .footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+  .footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+  .footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+  .footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+  .footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+  .footer-links a:hover {
+  color: var(--text-primary);
+}
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .mobile-header {
+      padding: var(--space-sm) var(--space-md);
+    }
+    
+    .sidebar-content {
+      padding: var(--space-lg);
+    }
+    
+    .blog-post {
+      padding: var(--space-lg);
+    }
+    
+    .content-area {
+      padding: var(--space-lg) var(--space-md);
+    }
+    
+    .page-title-area {
+      padding: calc(60px + 40px) var(--space-md) var(--space-lg);
+    }
+    
+    .team-member img {
+      width: 150px;
+      height: 150px;
+    }
+    
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .service-item {
+      padding: var(--space-md);
+    }
+  }
+
+  @media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:last-child {
+    border-right: none;
+  }
+
+  .trust-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-metrics {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .blog-layout {
+    grid-template-columns: 2fr 1fr;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+  @media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .features {
+    /* already 3-col from tablet */
+  }
+
+  .feature-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .trust-section {
+    /* already 2-col from tablet */
+  }
+
+  .trust-metrics {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-clients {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-number {
+    font-size: 120px;
+  }
+
+  .client-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+  @media (min-width: 768px) {
+    .page-title-area { padding: calc(96px + 60px) var(--space-2xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl) var(--space-2xl); }
+  }
+
+  @media (min-width: 1024px) {
+    .page-title-area { padding: calc(96px + 80px) var(--space-3xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="#" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">Blog</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+<div style="width:100%;margin:2rem 0"><img src="https://avvotbraylaw20.procurrox.com/wp-content/blogs.dir/2074/files/sites/9567/2016/09/TN-Bar-w.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="#" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">Blog</span>
+    </a>
+    <nav>
+      <a href="#">Platform</a>
+      <a href="#">Solutions</a>
+      <a href="#">Documentation</a>
+      <a href="#">Enterprise</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">All Systems Operational</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">API v4.2 Active</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Blog</h1>
+  </div>
+</section>
+<div style="width:100%;margin:2rem 0"><img src="https://maps.googleapis.com/maps/api/js/StaticMapService.GetMapImage?1m2&1i4362338&2i6596870&2e1&3u16&4m2&1u300&2u300&5m6&1e0&5sen-US&6sus&10b1&12b1&14i47083502&8e1&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=63121" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Team Section -->
+<div class="content-area">
+  <section class="team">
+    <h2>Our Team</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <img src="https://avvotbraylaw20.procurrox.com/wp-content/blogs.dir/2074/files/sites/9567/2016/07/attorney-image.jpg" alt="Thomas H. Bray">
+        <div>
+          <h3>Thomas H. Bray</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services">
+    <h2>Our Services</h2>
+    <div class="services-grid">
+      <div class="service-item">
+        <h3>Avvo Client Reviews</h3>
+      </div>
+      <div class="service-item">
+        <h3>Brenda (5 star review)</h3>
+      </div>
+      <div class="service-item">
+        <h3>Thumbtack Client Reviews</h3>
+      </div>
+      <div class="service-item">
+        <h3>Avvo Reviews</h3>
+      </div>
+      <div class="service-item">
+        <h3>Lamar (5 star review)</h3>
+      </div>
+      <div class="service-item">
+        <h3>Steve (5 star review)</h3>
+      </div>
+      <div class="service-item">
+        <h3>Thumbtack Reviews</h3>
+      </div>
+      <div class="service-item">
+        <h3>Avvo Rating: 9.8 Superb</h3>
+      </div>
+      <div class="service-item">
+        <h3>Clients' Choice Award 2024</h3>
+      </div>
+      <div class="service-item">
+        <h3>Best Divorce lawyers in Murfreesboro 2019</h3>
+      </div>
+      <div class="service-item">
+        <h3>Best Divorce lawyers in Murfreesboro 2020</h3>
+      </div>
+      <div class="service-item">
+        <h3>Modified comparative injury</h3>
+      </div>
+      <div class="service-item">
+        <h3>Time limits on filing a claim</h3>
+      </div>
+      <div class="service-item">
+        <h3>Monetary limits on claims</h3>
+      </div>
+      <div class="service-item">
+        <h3>Great lawyer. Definitely knows his stuff.</h3>
+      </div>
+      <div class="service-item">
+        <h3>Benjamin (5 star review)</h3>
+      </div>
+      <div class="service-item">
+        <h3>Excellent divorce lawyer</h3>
+      </div>
+      <div class="service-item">
+        <h3>Nikki (5 star review)</h3>
+      </div>
+      <div class="service-item">
+        <h3>Thumbtack Review</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <h2>Client Reviews</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <blockquote>"View all posts by Thomas Bray"</blockquote>
+        <cite>— Client</cite>
+      </div>
+      <div class="testimonial">
+        <blockquote>"Click to share on Facebook"</blockquote>
+        <cite>— Reviewer 2</cite>
+      </div>
+      <div class="testimonial">
+        <blockquote>"Click to share on Twitter"</blockquote>
+        <cite>— Reviewer 3</cite>
+      </div>
+      <div class="testimonial">
+        <blockquote>"Click to share on LinkedIn"</blockquote>
+        <cite>— Reviewer 4</cite>
+      </div>
+      <div class="testimonial">
+        <blockquote>"Click to email a link to a friend"</blockquote>
+        <cite>— Reviewer 5</cite>
+      </div>
+      <div class="testimonial">
+        <blockquote>"Aggravated Domestic Assault and Domestic Assault"</blockquote>
+        <cite>— Reviewer 6</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- Additional Images -->
+  <div style="width:100%;margin:2rem 0"><img src="https://avvotbraylaw20.procurrox.com/wp-content/blogs.dir/2074/files/sites/9567/2018/04/2015-Top-40-300x300.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+  <div style="width:100%;margin:2rem 0"><img src="https://avvotbraylaw20.procurrox.com/wp-content/blogs.dir/2074/files/sites/9567/2016/07/NTL-top-100-member-seal-1.png" alt="" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+  <div style="width:100%;margin:2rem 0"><img src="https://threebestrated.com/awards/divorce_lawyers-murfreesboro-2019-clr.svg" alt="Best Divorce lawyers in Murfreesboro" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+  <div style="width:100%;margin:2rem 0"><img src="https://threebestrated.com/awards/divorce_lawyers-murfreesboro-2020-drk.svg" alt="Best Divorce lawyers in Murfreesboro" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+</div>
+
+<!-- Page Content -->
+<div class="content-area">
+  <div class="blog-layout">
+    <main>
+      <article class="blog-post">
+        <h2><a href="https://www.tbraylaw.com/2026/03/2026-crackdown/">2026 Crackdown</a></h2>
+        <div class="meta">Posted on March 3, 2026 by Thomas Bray</div>
+        <div class="excerpt">
+          <p>Since it is now March 2026, many of the significant legal changes that went into effect at the start of the year are beginning to hit the local courts in Rutherford County.</p>
+          
+          <p>3 Big Legal Changes Affecting Murfreesboro Residents in 2026</p>
+          
+          <p>If you've driven down Broad Street or walked through the Square lately, you know Murfreesboro is growing faster than ever. But as our city evolves, so do the laws that govern us.</p>
+          
+          <p>As we move into the spring of 2026, several significant shifts in Tennessee law have officially taken hold. From stricter DUI enforcement to new protections for families, here is what every Rutherford County resident needs to know right now.</p>
+        </div>
+      </article>
+
+      <article class="blog-post">
+        <h2><a href="https://www.tbraylaw.com/2016/02/aggravated-assault-with-a-handgun/">Aggravated Assault with a Handgun</a></h2>
+        <div class="meta">Posted on February 22, 2016 by Thomas Bray</div>
+        <div class="excerpt">
+          <p>Client charged with Aggravated assault with a handgun. Aggravated Assault is a C-Felony and punishable by 3-15 years in prison and a maximum fine of $10,000.00.</p>
+          
+          <p><strong>Result:</strong> Aggravated Assault charge was reduced from C-Felony to A-misdemeanor simple assault. <strong>No jail Time.</strong> A Conditional Diversion Plea was entered which gives client the ability to have the charge dismissed and expunged (erased) from his record after 11 months 29 days. <strong>Weapon will be returned</strong> upon expiration of 11/29. Client was allowed to keep his handgun carry permit.</p>
+        </div>
+      </article>
+
+      <article class="blog-post">
+        <h2><a href="https://www.tbraylaw.com/2016/02/aggravated-domestic-assault-and-domestic-assault/">Aggravated Domestic Assault and Domestic Assault</a></h2>
+        <div class="meta">Posted on February 13, 2016 by Thomas Bray</div>
+        <div class="excerpt">
+          <p>Client charged with <strong>Aggravated Domestic Assault</strong> and <strong>Domestic Assault</strong> against two different victims. Aggravated Domestic Assault is a C-Felony and is punishable by 3-15 years in prison and a fine of up to $10,000. Domestic Assault is an A-Misdemeanor and carries a penalty of 11 months, 29 days and a fine of up to $2,500.</p>
+          
+          <p>An assault charge is "aggravated" when there are allegations of a deadly weapon being used during the assault or the victim suffered a serious bodily injury.</p>
+          
+          <p><strong>Result:</strong> Aggravated Assault charge reduced from C-felony to A-misdemeanor. <strong>No jail time</strong> on either charge. Mandatory counseling w/ anger management.</p>
+        </div>
+      </article>
+
+      <article class="blog-post">
+        <h2><a href="https://www.tbraylaw.com/2016/01/dui-felony-reckless-endangerment-and-theft-under-500/">DUI, Felony Reckless Endangerment and Theft under $500</a></h2>
+        <div class="meta">Posted on January 17, 2016 by Thomas Bray</div>
+        <div class="excerpt">
+          <p>Client charged with <strong>DUI</strong> and <strong>Felony Reckless Endangerment</strong> as a result of having a minor child in the vehicle at the time of arrest for Driving Under the Influence. Client facing 2-12 years in jail and up to $10,000 fine for Felony Reckless Endangerment. Mandatory enhanced penalties for DUI. Also facing 11 months 29 days and maximum fine of $2,500 for charge of <strong>Theft under $500.</strong></p>
+          
+          <p><strong>Result:</strong> Felony Reckless Endangerment charge <strong>dismissed.</strong> Guilty plea on minimum mandatory penalties for DUI. Conditional plea entered utilizing judicial diversion on charge of Theft Under $500, enabling client to have the charge dismissed and expunged (erased) from their criminal record. All jail time to be served at Workhouse instead of the the Jail. Client received an additional 45 days to report to the Workhouse.</p>
+        </div>
+      </article>
+
+      <article class="blog-post">
+        <h2><a href="https://www.tbraylaw.com/2015/01/evading-arrest-resisting-arrest-and-driving-on-a-suspended-license/">Evading Arrest, Resisting Arrest, and Driving on a Suspended License.</a></h2>
+        <div class="meta">Posted on January 20, 2015 by Thomas Bray</div>
+        <div class="excerpt">
+          <p>Client charged with three criminal offenses in <strong>Rutherford County General Sessions Court.</strong></p>
+          
+          <p>(1) <strong>Evading Arrest, A-Misdemeanor</strong>, which carries a penalty of up to 11 Months 29 days jail time and a maximum fine of $2500.</p>
+          
+          <p>(2) <strong>Resisting Arrest, B-Misdemeanor</strong>, which carries a penalty of up to 6-Months in jail and maximum of fine of $500.</p>
+          
+          <p>(3) <strong>Driving on Suspended License</strong>, B-Misdemeanor, which carries a penalty of 1 year loss of license and up to 6 months jail time with a maximum fine of $500.</p>
+          
+          <p><strong>Result: No jail time. Driving on Suspended dismissed. Client kept license. Telephonic Probation on remaining charges for 11/29.</strong></p>
+        </div>
+      </article>
+    </main>
+
+    <aside>
+      <div class="sidebar-content">
+        <h3>Ratings and Reviews</h3>
+        <div class="rating-badge">
+          <img src="https://images.avvo.com/avvo/cms/images/amos_assets/badges/badge_avvo_rating.png" alt="Lawyer Thomas Bray">
+          <p><strong>9.8</strong><br><strong>Superb</strong></p>
+          <p>Top Attorney<br>Divorce</p>
+        </div>
+        <img src="https://avvotbraylaw20.procurrox.com/wp-content/blogs.dir/2074/files/sites/9567/2016/09/2016-top-40-s-1.png" alt="Top 40 Badge">
+      </div>
+
+      <div class="sidebar-content">
+        <h3>Practice Areas</h3>
+        <ul>
+          <li><a href="https://www.tbraylaw.com/practice-areas/divorce-family-law/">Divorce &amp; Family Law</a></li>
+          <li><a href="https://www.tbraylaw.com/practice-areas/criminal-defense/">Criminal Defense</a></li>
+          <li><a href="https://www.tbraylaw.com/practice-areas/personal-injury/">Personal Injury</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-content">
+        <h3>Contact Us</h3>
+        <div class="contact-info">
+          <p><strong>Call Us 615-962-7606</strong></p>
+          <p><strong>Thomas H. Bray, Attorney at Law</strong></p>
+          <p>108 N Church Street<br>
+          Murfreesboro, TN 37130</p>
+          <p>Fax: 615-962-7617<br>
+          Email: <a href="mailto:tommy@tbraylaw.com">tommy@tbraylaw.com</a></p>
+        <iframe src="https://www.google.com/maps/place/Thomas+H.+Bray,+Attorney+at+Law/@35.8462714,-86.3933426,17z/data=!3m1!4b1!4m5!3m4!1s0x0:0xfce05a372b1f0a4!8m2!3d35.8462714!4d-86.3911539" width="100%" height="300" style="border:0;margin-top:1.5rem" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map"></iframe></div>
+      </div>
+
+      <div class="sidebar-content">
+        <h3>Client Reviews</h3>
+        <blockquote>
+          <p>I would highly recommend Tommy. If ever I need a lawyer again, Tommy will be my first choice!</p>
+          <cite>- Brittany D.</cite>
+        </blockquote>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Blog</span>
+      <span class="footer-copyright">© 2024 Blog Systems, Inc. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+    <a href="https://www.tbraylaw.com/">Home</a>
+<a href="https://www.tbraylaw.com/attorney/thomas-h-bray/">Attorney Profile</a>
+<a href="https://www.tbraylaw.com/practice-areas/">Practice Areas</a>
+<a href="https://www.tbraylaw.com/client-reviews/">Client Reviews</a>
+<a href="https://www.tbraylaw.com/blog/">Blog</a>
+<a href="https://www.tbraylaw.com/contact-us/">Contact Us</a>
+  </div>
+  </footer>
+
+
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+
+</body></html>
