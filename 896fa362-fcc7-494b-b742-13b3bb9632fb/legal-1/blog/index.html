@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog - Boro TN Law</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  :root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
+
+  /* Navigation */
+  .mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+  .mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+  .mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+  .mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+  .hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+  .hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+  .sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+  .sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+  .sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+  .sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+  .sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+  .sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+  .sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+  .sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+  .sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+  .mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+  .mobile-nav-overlay.active {
+  display: block;
+}
+
+  .sidebar.active {
+  display: flex;
+}
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: calc(96px + 60px) var(--space-lg) var(--space-3xl);
+    background: var(--text-primary);
+    color: #ffffff;
+  }
+
+  .page-title-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-title-area h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  /* Content Area */
+  .content-area {
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .content-area h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .content-area p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area ul, .content-area ol {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-lg);
+    color: var(--text-muted);
+  }
+
+  .content-area li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  .content-area img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    font-weight: 500;
+  }
+
+  .content-area a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  /* Blog Posts */
+  .blog-posts {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xl);
+  }
+
+  .blog-post {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: var(--space-3xl);
+  }
+
+  .blog-post:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .blog-post-header {
+    margin-bottom: var(--space-lg);
+  }
+
+  .blog-post-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: none;
+    display: block;
+    margin-bottom: var(--space-sm);
+  }
+
+  .blog-post-title:hover {
+    opacity: 0.8;
+  }
+
+  .blog-post-meta {
+    font-size: 0.875rem;
+    color: var(--text-dim);
+    margin-bottom: var(--space-md);
+  }
+
+  .blog-post-meta span {
+    margin-right: var(--space-md);
+  }
+
+  .blog-post-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .blog-post-excerpt {
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: var(--space-md);
+  }
+
+  .read-more {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    font-weight: 500;
+  }
+
+  .read-more:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  /* Pagination */
+  .pagination {
+    display: flex;
+    gap: var(--space-md);
+    margin-top: var(--space-3xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--border-color);
+  }
+
+  .pagination a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+
+  .pagination a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  .pagination .current {
+    color: var(--text-muted);
+  }
+
+  /* Categories Section */
+  .categories-section {
+    margin-bottom: var(--space-3xl);
+    padding: var(--space-xl);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+  }
+
+  .categories-section h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .categories-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+  }
+
+  .category-item {
+    padding: var(--space-sm) var(--space-md);
+    background: var(--bg-card);
+    border-radius: 8px;
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: background 0.3s ease;
+  }
+
+  .category-item:hover {
+    background: var(--bg-hover);
+  }
+
+  /* Call to Action Section */
+  .cta-section {
+    margin-bottom: var(--space-3xl);
+    padding: var(--space-xl);
+    background: var(--bg-card);
+    border-radius: 12px;
+    text-align: center;
+  }
+
+  .cta-section h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .cta-section p {
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: var(--space-md) var(--space-xl);
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: opacity 0.3s ease;
+  }
+
+  .cta-button:hover {
+    opacity: 0.9;
+  }
+
+  /* Practice Areas Section */
+  .practice-areas-section {
+    margin-bottom: var(--space-3xl);
+    padding: var(--space-xl);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+  }
+
+  .practice-areas-section h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .practice-areas-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .practice-area-item {
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: var(--space-sm);
+    border-radius: 8px;
+    transition: color 0.3s ease, background 0.3s ease;
+  }
+
+  .practice-area-item:hover {
+    color: var(--text-primary);
+    background: var(--bg-hover);
+  }
+
+  /* Contact Form Section */
+  .contact-form-section {
+    margin-bottom: var(--space-3xl);
+    padding: var(--space-xl);
+    background: var(--bg-card);
+    border-radius: 12px;
+  }
+
+  .contact-form-section h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .form-group label {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    padding: var(--space-md);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    outline: none;
+    border-color: var(--text-primary);
+  }
+
+  .submit-button {
+    padding: var(--space-md) var(--space-xl);
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+
+  .submit-button:hover {
+    opacity: 0.9;
+  }
+
+  /* Image Section */
+  .image-section {
+    margin-bottom: var(--space-3xl);
+    text-align: center;
+  }
+
+  .image-section h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-lg);
+  }
+
+  .image-item {
+    text-align: center;
+  }
+
+  .image-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: var(--space-md);
+  }
+
+  .image-caption {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+  }
+
+  /* Footer */
+  .footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+  .footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+  .footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+  .footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+  .footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+  .footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+  .footer-links a:hover {
+  color: var(--text-primary);
+}
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .mobile-header {
+      padding: var(--space-sm) var(--space-md);
+    }
+    
+    .mobile-header .brand-name {
+      font-size: 12px;
+    }
+    
+    .page-title-area {
+      padding: calc(60px + 40px) var(--space-md) var(--space-xl);
+    }
+    
+    .content-area {
+      padding: var(--space-xl) var(--space-md);
+    }
+    
+    .blog-post-title {
+      font-size: 1.25rem;
+    }
+    
+    .categories-section,
+    .cta-section,
+    .practice-areas-section,
+    .contact-form-section,
+    .image-section {
+      padding: var(--space-md);
+      margin-bottom: var(--space-xl);
+    }
+    
+    .footer {
+      flex-direction: column;
+      gap: var(--space-md);
+      padding: var(--space-lg) var(--space-md);
+    }
+    
+    .footer-links {
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .image-gallery {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:last-child {
+    border-right: none;
+  }
+
+  .trust-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-metrics {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+  @media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .features {
+    /* already 3-col from tablet */
+  }
+
+  .feature-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .trust-section {
+    /* already 2-col from tablet */
+  }
+
+  .trust-metrics {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-clients {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-number {
+    font-size: 120px;
+  }
+
+  .client-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+  @media (min-width: 768px) {
+    .page-title-area { padding: calc(96px + 60px) var(--space-2xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl) var(--space-2xl); }
+  }
+
+  @media (min-width: 1024px) {
+    .page-title-area { padding: calc(96px + 80px) var(--space-3xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">Boro TN Law</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">Boro TN Law</span>
+    </a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/about">About Us</a>
+      <a href="/services">Practice Areas</a>
+      <a href="/contact">Contact Us</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">All Systems Operational</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">API v4.2 Active</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Blog</h1>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+  
+  <!-- Image Section -->
+  <div class="image-section">
+    <h2>Our Legal Team</h2>
+    <div class="image-gallery">
+      <div class="image-item">
+        <img src="https://borotnlaw.com/wp-content/uploads/2024/02/Hai-Support.png" alt="Support team">
+        <div class="image-caption">Support team</div>
+      </div>
+      <div class="image-item">
+        <img src="https://verified-bucket.s3.eu-central-1.amazonaws.com/cert/46369835128825.png" alt="Micheal A. Jones Top 40 Under 40 Lawyers">
+        <div class="image-caption">Micheal A. Jones Top 40 Under 40 Lawyers</div>
+      </div>
+      <div class="image-item">
+        <img src="https://borotnlaw.com/wp-content/uploads/2021/11/Car-Accident-Attorney-Murfresboro.jpg" alt="Car Accident Attorney Murfreesboro TN">
+        <div class="image-caption">Car Accident Attorney Murfreesboro TN</div>
+      </div>
+      <div class="image-item">
+        <img src="https://borotnlaw.com/wp-content/uploads/2020/06/child.jpg" alt="Child Custody Lawyer Murfreesboro TN">
+        <div class="image-caption">Child Custody Lawyer Murfreesboro TN</div>
+      </div>
+      <div class="image-item">
+        <img src="https://borotnlaw.com/wp-content/uploads/2020/07/following-1200x630-1.jpg" alt="Criminal Justice Murfreesboro TN">
+        <div class="image-caption">Criminal Justice Murfreesboro TN</div>
+      </div>
+      <div class="image-item">
+        <img src="https://borotnlaw.com/wp-content/uploads/2024/03/Divorce-Lawyer-Murfreesboro-TN-1.jpg" alt="Divorce Lawyer in Murfreesboro Tennessee">
+        <div class="image-caption">Divorce Lawyer in Murfreesboro Tennessee</div>
+      </div>
+      <div class="image-item">
+        <img src="https://borotnlaw.com/wp-content/uploads/2024/02/criminal-defense-attorney-Murfreesboro.jpg" alt="Criminal Defense Attorney Murfreesboro TN">
+        <div class="image-caption">Criminal Defense Attorney Murfreesboro TN</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>The Importance of Legal Representation in Maximizing Your Insurance Claim</h2>
+  <p>When you're involved in a car accident, the aftermath can be overwhelming. Beyond dealing with physical injuries and emotional trauma, you're often left navigating complex insurance processes while trying to recover fair compensation for your damages. This is where the expertise of a skilled car accident attorney becomes invaluable.</p>
+  
+  <h3>The Legal Expertise and Negotiation Skills of a Car Accident Attorney</h3>
+  <p>Car accident attorneys possess specialized knowledge of personal injury law, insurance regulations, and the tactics commonly employed by insurance companies. They understand the true value of your claim and can effectively communicate this to insurance adjusters who might otherwise attempt to minimize your settlement.</p>
+
+  <!-- Contact Form Section -->
+  <div class="contact-form-section">
+    <h2>Contact Us</h2>
+    <form class="contact-form">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" name="firstName" required>
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" name="lastName" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone #</label>
+        <input type="tel" id="phone" name="phone" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="county">What county is your case in?</label>
+        <select id="county" name="county" required>
+          <option value="">Select County</option>
+          <option value="rutherford">Rutherford</option>
+          <option value="davidson">Davidson</option>
+          <option value="wilson">Wilson</option>
+          <option value="cannon">Cannon</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="charges">What have you been charged with?</label>
+        <input type="text" id="charges" name="charges">
+      </div>
+      <div class="form-group">
+        <label for="situation">Briefly describe your situation</label>
+        <textarea id="situation" name="situation" rows="5"></textarea>
+      </div>
+      <button type="submit" class="submit-button">Submit</button>
+    </form>
+  </div>
+
+  <!-- Categories Section -->
+  <div class="categories-section">
+    <h2>Categories</h2>
+    <div class="categories-list">
+      <a href="#" class="category-item">DUI Defense</a>
+      <a href="#" class="category-item">Drug Related Offenses</a>
+      <a href="#" class="category-item">Crimes Against the Person</a>
+      <a href="#" class="category-item">Sex Crimes</a>
+      <a href="#" class="category-item">Property Crimes</a>
+      <a href="#" class="category-item">Other Crimes</a>
+      <a href="#" class="category-item">Divorce and Family Law</a>
+      <a href="#" class="category-item">Probate and Estates</a>
+    </div>
+  </div>
+
+  <!-- Call to Action Section -->
+  <div class="cta-section">
+    <h2>Call Us 24/7</h2>
+    <p>Get a Consultation Right Now</p>
+    <a href="tel:615-410-3064" class="cta-button">Contact a Top-rated Divorce and Family Lawyer in Murfreesboro</a>
+  </div>
+
+  <!-- Practice Areas Section -->
+  <div class="practice-areas-section">
+    <h2>Boro TN Law - Attorneys at Law</h2>
+    <div class="practice-areas-list">
+      <span class="practice-area-item">Head Office</span>
+      <span class="practice-area-item">415 S Maney Ave Suite 1C</span>
+      <span class="practice-area-item">Contact a Trusted Probate Attorney in Murfreesboro TN</span>
+      <span class="practice-area-item">Social Media</span>
+    </div>
+  </div>
+
+  <div class="blog-posts">
+    
+    <article class="blog-post">
+      <div class="blog-post-header">
+        <a href="https://borotnlaw.com/the-most-common-mistakes-people-make-during-divorce-in-murfreesboro-and-how-to-avoid-them/" class="blog-post-title">The Most Common Mistakes People Make During Divorce in Murfreesboro — And How to Avoid Them</a>
+        <div class="blog-post-meta">
+          <span>Category: Divorce Lawyer</span>
+          <span>Date: September 1, 2025</span>
+          <span>Comments: No Comments</span>
+        </div>
+      </div>
+      <img src="https://borotnlaw.com/wp-content/uploads/2025/09/The-Most-Common-Mistakes-People-Make-During-Divorce-in-Murfreesboro-%E2%80%94-And-How-to-Avoid-Them.png" alt="" class="blog-post-image">
+      <div class="blog-post-excerpt">
+        Divorce is one of life's most emotionally challenging transitions. In Murfreesboro, where community ties are close and life can shift quickly, people often make similar
+      </div>
+      <a href="https://borotnlaw.com/the-most-common-mistakes-people-make-during-divorce-in-murfreesboro-and-how-to-avoid-them/" class="read-more">Read More »</a>
+    </article>
+
+    <article class="blog-post">
+      <div class="blog-post-header">
+        <a href="https://borotnlaw.com/when-to-hire-a-family-attorney-in-murfreesboro-key-milestones-that-require-legal-guidance/" class="blog-post-title">When to Hire a Family Attorney in Murfreesboro: Key Milestones That Require Legal Guidance</a>
+        <div class="blog-post-meta">
+          <span>Category: Uncategorized</span>
+          <span>Date: August 6, 2025</span>
+          <span>Comments: No Comments</span>
+        </div>
+      </div>
+      <img src="https://borotnlaw.com/wp-content/uploads/2025/08/When-to-Hire-a-Family-Attorney-in-Murfreesboro-Key-Milestones-That-Require-Legal-Guidance.png" alt="" class="blog-post-image">
+      <div class="blog-post-excerpt">
+        Navigating family challenges can be one of the most emotional and life-altering experiences you'll face. Whether you are considering divorce, dealing with custody issues, or
+      </div>
+      <a href="https://borotnlaw.com/when-to-hire-a-family-attorney-in-murfreesboro-key-milestones-that-require-legal-guidance/" class="read-more">Read More »</a>
+    </article>
+
+    <article class="blog-post">
+      <div class="blog-post-header">
+        <a href="https://borotnlaw.com/what-to-look-for-in-the-best-divorce-lawyer-in-murfreesboro-tn/" class="blog-post-title">What to Look for in the Best Divorce Lawyer in Murfreesboro, TN</a>
+        <div class="blog-post-meta">
+          <span>Category: Divorce Lawyer</span>
+          <span>Date: July 30, 2025</span>
+          <span>Comments: No Comments</span>
+        </div>
+      </div>
+      <img src="https://borotnlaw.com/wp-content/uploads/2025/08/What-to-Look-for-in-the-Best-Divorce-Lawyer-in-Murfreesboro-TN.png" alt="" class="blog-post-image">
+      <div class="blog-post-excerpt">
+        Finding the best divorce lawyer in Murfreesboro, TN isn't just about credentials. It's about trust, empathy, and the ability to guide you through a life-changing
+      </div>
+      <a href="https://borotnlaw.com/what-to-look-for-in-the-best-divorce-lawyer-in-murfreesboro-tn/" class="read-more">Read More »</a>
+    </article>
+
+    <article class="blog-post">
+      <div class="blog-post-header">
+        <a href="https://borotnlaw.com/tennessee-probate-lawyer-simplify-estate-process/" class="blog-post-title">How a Tennessee Probate Lawyer Can Simplify the Estate Process</a>
+        <div class="blog-post-meta">
+          <span>Date: June 16, 2025</span>
+          <span>Comments: No Comments</span>
+        </div>
+      </div>
+      <div class="blog-post-excerpt">
+        Losing a loved one is never easy. Alongside the emotional toll, families are often left to navigate the complex legal process of settling the deceased
+      </div>
+      <a href="https://borotnlaw.com/tennessee-probate-lawyer-simplify-estate-process/" class="read-more">Read More »</a>
+    </article>
+
+    <article class="blog-post">
+      <div class="blog-post-header">
+        <a href="https://borotnlaw.com/car-accident-attorney-maximize-your-insurance-claim/" class="blog-post-title">How a Car Accident Attorney Can Maximize Your Insurance Claim</a>
+        <div class="blog-post-meta">
+          <span>Date: May 3, 2025</span>
+          <span>Comments: No Comments</span>
+        </div>
+      </div>
+      <div class="blog-post-excerpt">
+        Car accidents can be life-altering events, often leaving victims grappling with physical injuries, emotional distress, and financial burdens. In the aftermath of such incidents, navigating
+      </div>
+      <a href="https://borotnlaw.com/car-accident-attorney-maximize-your-insurance-claim/" class="read-more">Read More »</a>
+    </article>
+
+    <article class="blog-post">
+      <div class="blog-post-header">
+        <a href="https://borotnlaw.com/role-of-probate-lawyer-in-estate-planning/" class="blog-post-title">Understanding the Role of a Probate Lawyer in Estate Planning</a>
+        <div class="blog-post-meta">
+          <span>Date: March 15, 2025</span>
+          <span>Comments: No Comments</span>
+        </div>
+      </div>
+      <div class="blog-post-excerpt">
+        When it comes to estate planning, many individuals and families find themselves navigating a complex landscape of legal requirements and emotional considerations. One crucial aspect
+      </div>
+      <a href="https://borotnlaw.com/role-of-probate-lawyer-in-estate-planning/" class="read-more">Read More »</a>
+    </article>
+
+    <article class="blog-post">
+      <div class="blog-post-header">
+        <a href="https://borotnlaw.com/divorce-lawyer-help-navigate-legal-process/" class="blog-post-title">How a Divorce Lawyer Can Help You Navigate the Legal Process</a>
+        <div class="blog-post-meta">
+          <span>Date: February 4, 2025</span>
+          <span>Comments: No Comments</span>
+        </div>
+      </div>
+      <div class="blog-post-excerpt">
+        Divorce is often one of the most challenging and emotionally charged experiences a person can face. The end of a marriage can brings about a
+      </div>
+      <a href="https://borotnlaw.com/divorce-lawyer-help-navigate-legal-process/" class="read-more">Read More »</a>
+    </article>
+
+    <article class="blog-post">
+      <div class="blog-post-header">
+        <a href="https://borotnlaw.com/what-does-civil-litigation-lawyer/" class="blog-post-title">What Does a Civil Litigation Lawyer Do? Understanding Their Role in Your Case</a>
+        <div class="blog-post-meta">
+          <span>Date: December 10, 2024</span>
+          <span>Comments: No Comments</span>
+        </div>
+      </div>
+      <div class="blog-post-excerpt">
+        In the complex world of legal disputes, civil litigation lawyers play a crucial role in navigating the intricacies of the judicial system. Whether it involves
+      </div>
+      <a href="https://borotnlaw.com/what-does-civil-litigation-lawyer/" class="read-more">Read More »</a>
+    </article>
+
+    <article class="blog-post">
+      <div class="blog-post-header">
+        <a href="https://borotnlaw.com/finding-the-best-criminal-lawyer/" class="blog-post-title">The Ultimate Guide to Finding the Best Criminal Lawyer for Your Case</a>
+        <div class="blog-post-meta">
+          <span>Date: October 17, 2024</span>
+          <span>Comments: No Comments</span>
+        </div>
+      </div>
+      <div class="blog-post-excerpt">
+        When faced with criminal charges, the stakes can be incredibly high. The implications of a conviction can extend far beyond legal penalties, affecting personal relationships,
+      </div>
+      <a href="https://borotnlaw.com/finding-the-best-criminal-lawyer/" class="read-more">Read More »</a>
+    </article>
+
+    <article class="blog-post">
+      <div class="blog-post-header">
+        <a href="https://borotnlaw.com/need-car-accident-lawyer-after-crash/" class="blog-post-title">5 Reasons You Should Hire a Car Accident Lawyer After a Crash</a>
+        <div class="blog-post-meta">
+          <span>Category: Car Accident</span>
+          <span>Date: September 20, 2024</span>
+          <span>Comments: No Comments</span>
+        </div>
+      </div>
+      <img src="https://borotnlaw.com/wp-content/uploads/2020/06/automobile.jpg" alt="Car Accident Attorney Murfreesboro TN" class="blog-post-image">
+      <div class="blog-post-excerpt">
+        Car accidents can be life-altering events, leaving victims grappling with physical injuries, emotional distress, and financial burdens. In the chaotic moments following a crash, it
+      </div>
+      <a href="https://borotnlaw.com/need-car-accident-lawyer-after-crash/" class="read-more">Read More »</a>
+    </article>
+
+  </div>
+
+  <div class="pagination">
+    <span class="current">Page 1</span>
+    <a href="https://borotnlaw.com/blog/page/2/">Page 2</a>
+  </div>
+</div>
+
+<footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Boro TN Law</span>
+      <span class="footer-copyright">© 2024 Boro TN Law Systems, Inc. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/about">About Us</a>
+    <a href="/services">Practice Areas</a>
+    <a href="/contact">Contact Us</a>
+  </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>

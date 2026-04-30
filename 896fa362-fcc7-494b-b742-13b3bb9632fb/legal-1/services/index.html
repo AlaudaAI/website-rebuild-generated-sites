@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Practice Areas</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  :root {
+    --bg-primary: #111115;
+    --bg-secondary: #1a1a20;
+    --bg-hover: #22222a;
+    --bg-card: #16161c;
+    --text-primary: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.5);
+    --text-dim: rgba(255, 255, 255, 0.35);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-light: rgba(255, 255, 255, 0.06);
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Inter', -apple-system, sans-serif;
+    --sidebar-width: 280px;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 32px;
+    --space-xl: 48px;
+    --space-2xl: 64px;
+    --space-3xl: 96px;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
+
+  /* Navigation */
+  .mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+  .mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+  .mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+  .mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+  .hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+  .hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+  .sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+  .sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+  .sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+  .sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+  .sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+  .sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+  .sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+  .sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+  .sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+  .mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+  .mobile-nav-overlay.active {
+  display: block;
+}
+
+  .sidebar.active {
+  display: flex;
+}
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: calc(96px + 60px) var(--space-lg) var(--space-3xl);
+    background: var(--text-primary);
+    color: #ffffff;
+  }
+
+  .page-title-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-title-area h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  /* Content Area */
+  .content-area {
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .content-area h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .content-area p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area ul, .content-area ol {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-lg);
+    color: var(--text-muted);
+  }
+
+  .content-area li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  .content-area img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    font-weight: 500;
+  }
+
+  .content-area a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  /* Practice Areas Grid */
+  .practice-areas-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-3xl);
+  }
+
+  .practice-area-card {
+    background: var(--bg-card);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+  }
+
+  .practice-area-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 0;
+  }
+
+  .practice-area-content {
+    padding: var(--space-lg);
+  }
+
+  .practice-area-content h3 {
+    margin-bottom: var(--space-md);
+  }
+
+  .practice-area-content p {
+    margin-bottom: var(--space-md);
+  }
+
+  .practice-area-content a {
+    display: inline-block;
+    padding: var(--space-sm) var(--space-md);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+  }
+
+  .practice-area-content a:hover {
+    background: var(--bg-hover);
+  }
+
+  /* Services Section */
+  .services-section {
+    margin: var(--space-3xl) 0;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .service-card {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: var(--space-lg);
+    border: 1px solid var(--border-color);
+  }
+
+  .service-card h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0;
+  }
+
+  /* Footer */
+  .footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+  .footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+  .footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+  .footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+  .footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+  .footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+  .footer-links a:hover {
+  color: var(--text-primary);
+}
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .page-title-area {
+      padding: var(--space-2xl) var(--space-md) var(--space-xl);
+    }
+    
+    .content-area {
+      padding: var(--space-xl) var(--space-md);
+    }
+    
+    .practice-areas-grid {
+      gap: var(--space-lg);
+    }
+    
+    .services-grid {
+      gap: var(--space-md);
+    }
+    
+    .service-card {
+      padding: var(--space-md);
+    }
+  }
+
+  @media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:last-child {
+    border-right: none;
+  }
+
+  .trust-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-metrics {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .practice-areas-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+  @media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .features {
+    /* already 3-col from tablet */
+  }
+
+  .feature-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .trust-section {
+    /* already 2-col from tablet */
+  }
+
+  .trust-metrics {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-clients {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-number {
+    font-size: 120px;
+  }
+
+  .client-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  .practice-areas-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+  @media (min-width: 768px) {
+    .page-title-area { padding: calc(96px + 60px) var(--space-2xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl) var(--space-2xl); }
+  }
+
+  @media (min-width: 1024px) {
+    .page-title-area { padding: calc(96px + 80px) var(--space-3xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">Boro TN Law</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">Boro TN Law</span>
+    </a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/services">Services</a>
+      <a href="/contact">Contact</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">All Systems Operational</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">API v4.2 Active</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Practice Areas</h1>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+  <h3>Attorney in Murfreesboro, TN</h3>
+
+  <h2>Why Choose Boro TN Law for your Defense?</h2>
+  <p>With any type of legal dispute, you shouldn't pursue the easy path when selecting the right attorney. Experience counts, regardless of the situation. Murfreesboro attorney Boro TN Law is experienced in handling cases in family and divorce law, DUI, drug laws, criminal defense, estates and probates, civil law, family and civil mediation. Michael believes in taking aggressive action to safeguard the rights of clients who come to his office for assistance and inputting customer's needs first.</p>
+
+  <p>At Boro TN Law, Attorneys at Law, we know how challenging it can be to solve criminal, civil, or family disputes. With that in mind, we offer the informative and supportive representation you require to protect your rights, no matter the situation. When you need hard-hitting defense in Murfreesboro, you can count on Boro TN Law, Attorneys at Law. Don't hesitate to know your defense options. Contact Boro TN Law today to find knowledgeable, aggressive representation as soon as possible.</p>
+
+  <h2>Practice Areas</h2>
+
+  <div class="practice-areas-grid">
+    <div class="practice-area-card">
+      <img src="https://borotnlaw.com/wp-content/uploads/2020/07/following-1200x630-1.jpg" alt="Criminal Justice Murfreesboro TN">
+      <div class="practice-area-content">
+        <h3>Criminal Law</h3>
+        <p>Criminal law defines criminal offenses, trial and charging of convicted offenders.</p>
+        <a href="https://borotnlaw.com/practice-areas/criminal-law/">Read More</a>
+      </div>
+    </div>
+
+    <div class="practice-area-card">
+      <img src="https://borotnlaw.com/wp-content/uploads/2020/07/Civil-Litigation.jpg" alt="Civil Litigation Murfreesboro TN">
+      <div class="practice-area-content">
+        <h3>Civil Litigation</h3>
+        <p>Civil litigation is the process where civil disputes are resolved in a court of law.</p>
+        <a href="https://borotnlaw.com/practice-areas/civil-litigation/">Read More</a>
+      </div>
+    </div>
+
+    <div class="practice-area-card">
+      <img src="https://borotnlaw.com/wp-content/uploads/2020/07/Divorce-and-Family-Law.jpg" alt="Divorce and Family Law Murfreesboro TN">
+      <div class="practice-area-content">
+        <h3>Divorce and Family Law</h3>
+        <p>Family and divorce law focuses on resolving disputesbetween individuals and their families</p>
+        <a href="https://borotnlaw.com/practice-areas/divorce-and-family-law/">Read More</a>
+      </div>
+    </div>
+
+    <div class="practice-area-card">
+      <img src="https://borotnlaw.com/wp-content/uploads/2020/07/Probate-And-Estates.jpg" alt="Probate and Estates Murfreesboro TN">
+      <div class="practice-area-content">
+        <h3>Probate and Estates</h3>
+        <p>Probates law focuses on matters related to wills, successions, and estate planning.</p>
+        <a href="https://borotnlaw.com/practice-areas/probate-and-estates/">Read More</a>
+      </div>
+    </div>
+
+    <div class="practice-area-card">
+      <img src="https://borotnlaw.com/wp-content/uploads/2021/11/Car-Accident-Attorney-Murfresboro.jpg" alt="Car Accident Attorney Murfreesboro TN">
+      <div class="practice-area-content">
+        <h3>Car Accident Attorney</h3>
+        <p>Our car accident attorneys have helped victims file injury claims and get the fair compensation they deserve.</p>
+        <a href="https://borotnlaw.com/practice-areas/car-accident/">Read More</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="services-section">
+    <h2>Services</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <h3>Get a Consultation Right Now</h3>
+      </div>
+
+      <div class="service-card">
+        <h3>Head Office</h3>
+      </div>
+
+      <div class="service-card">
+        <h3>415 S Maney Ave Suite 1C</h3>
+      </div>
+
+      <div class="service-card">
+        <h3>DUI Defense</h3>
+      </div>
+
+      <div class="service-card">
+        <h3>Drug Related Offenses</h3>
+      </div>
+
+      <div class="service-card">
+        <h3>Crimes Against the Person</h3>
+      </div>
+
+      <div class="service-card">
+        <h3>Sex Crimes</h3>
+      </div>
+
+      <div class="service-card">
+        <h3>Property Crimes</h3>
+      </div>
+
+      <div class="service-card">
+        <h3>Other Crimes</h3>
+      </div>
+
+      <div class="service-card">
+        <h3>First Name</h3>
+      </div>
+
+      <div class="service-card">
+        <h3>Last Name</h3>
+      </div>
+
+      <div class="service-card">
+        <h3>Phone #</h3>
+      </div>
+
+      <div class="service-card">
+        <h3>Email</h3>
+      </div>
+
+      <div class="service-card">
+        <h3>What county is your case in?</h3>
+      </div>
+
+      <div class="service-card">
+        <h3>What have you been charged with?</h3>
+      </div>
+
+      <div class="service-card">
+        <h3>Briefly describe your situation</h3>
+      </div>
+
+      <div class="service-card">
+        <h3>Contact a Top-rated Divorce and Family Lawyer in Murfreesboro</h3>
+      </div>
+
+      <div class="service-card">
+        <h3>Social Media</h3>
+      </div>
+
+      <div class="service-card">
+        <h3>Contact a Trusted Probate Attorney in Murfreesboro TN</h3>
+      </div>
+    </div>
+  </section>
+
+  <h2>Boro TN Law, Attorneys at Law</h2>
+  <p>Attorney with Legal Expertise you can rely on Boro TN Law, Attorneys at Law.</p>
+  
+  <img src="https://verified-bucket.s3.eu-central-1.amazonaws.com/cert/46369835128825.png" alt="Micheal A. Jones Top 40 Under 40 Lawyers">
+</div>
+
+<footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Boro TN Law</span>
+      <span class="footer-copyright">© 2024 Boro TN Law Systems, Inc. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+    <a href="/services">Services</a>
+    <a href="/contact">Contact</a>
+  </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>
