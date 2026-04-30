@@ -1,0 +1,878 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Child Custody</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  :root {
+    --bg-primary: #111115;
+    --bg-secondary: #1a1a20;
+    --bg-hover: #22222a;
+    --bg-card: #16161c;
+    --text-primary: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.5);
+    --text-dim: rgba(255, 255, 255, 0.35);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-light: rgba(255, 255, 255, 0.06);
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Inter', -apple-system, sans-serif;
+    --sidebar-width: 280px;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 32px;
+    --space-xl: 48px;
+    --space-2xl: 64px;
+    --space-3xl: 96px;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
+
+  /* Navigation */
+  .mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+  .mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+  .mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+  .mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+  .hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+  .hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+  .sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+  .sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+  .sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+  .sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+  .sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+  .sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+  .sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+  .sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+  .sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+  .mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+  .mobile-nav-overlay.active {
+  display: block;
+}
+
+  .sidebar.active {
+  display: flex;
+}
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: calc(96px + 60px) var(--space-lg) var(--space-3xl);
+    background: var(--text-primary);
+    color: #ffffff;
+  }
+
+  .page-title-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-title-area h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  /* Content Area */
+  .content-area {
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .content-area h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .content-area h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .content-area p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area ul, .content-area ol {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-lg);
+    color: var(--text-muted);
+  }
+
+  .content-area li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  .content-area img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    font-weight: 500;
+  }
+
+  .content-area a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  .content-section {
+    margin-bottom: var(--space-3xl);
+    padding-bottom: var(--space-3xl);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .content-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  /* Services Section */
+  .services-section {
+    margin-bottom: var(--space-3xl);
+    padding-bottom: var(--space-3xl);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .service-item {
+    padding: var(--space-md);
+    background: var(--bg-card);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+  }
+
+  .service-name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  /* Footer */
+  .footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+  .footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+  .footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+  .footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+  .footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+  .footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+  .footer-links a:hover {
+  color: var(--text-primary);
+}
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .mobile-header {
+      display: flex;
+    }
+
+    .sidebar {
+      display: none !important;
+    }
+
+    .sidebar.active {
+      display: flex !important;
+    }
+
+    .main-content {
+      margin-left: 0;
+      width: 100%;
+    }
+
+    .page-title-area {
+      padding: calc(60px + 40px) var(--space-md) var(--space-xl);
+    }
+
+    .content-area {
+      padding: var(--space-xl) var(--space-md);
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .footer {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:last-child {
+    border-right: none;
+  }
+
+  .trust-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-metrics {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+  @media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .features {
+    /* already 3-col from tablet */
+  }
+
+  .feature-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .trust-section {
+    /* already 2-col from tablet */
+  }
+
+  .trust-metrics {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-clients {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-number {
+    font-size: 120px;
+  }
+
+  .client-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+  @media (min-width: 768px) {
+    .page-title-area { padding: calc(96px + 60px) var(--space-2xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl) var(--space-2xl); }
+  }
+
+  @media (min-width: 1024px) {
+    .page-title-area { padding: calc(96px + 80px) var(--space-3xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="#" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">Child Custody</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="#" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">Child Custody</span>
+    </a>
+    <nav>
+      <a href="#">Platform</a>
+      <a href="#">Solutions</a>
+      <a href="#">Documentation</a>
+      <a href="#">Enterprise</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">All Systems Operational</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">API v4.2 Active</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Child Custody</h1>
+  </div>
+</section>
+<div style="width:100%;margin:2rem 0"><img src="https://zetterstenlaw.com/wp-content/uploads/2020/04/fmf_64378.jpg" alt="Zettersten & Hammond PLLC" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://zetterstenlaw.com/wp-content/uploads/2020/04/fmf_7714-scaled.jpg" alt="Zettersten & Hammond PLLC" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://zetterstenlaw.com/wp-content/uploads/2020/02/New-logo-1.jpg" alt="New logo (1)" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://nebula.wsimg.com/aadc63d8e8dbd533470bdc4e350bc4af?AccessKeyId=B7351D786AE96FEF6EBB&disposition=0&alloworigin=1" alt="GoDaddy Web Design" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://nebula.wsimg.com/aadc63d8e8dbd533470bdc4e350bc4af?AccessKeyId=B7351D786AE96FEF6EBB&amp;disposition=0&amp;alloworigin=1" alt="GoDaddy Web Design" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Page Content -->
+<div class="content-area">
+  <div class="content-section">
+    <h4>Compassionate Guidance For Child Custody Matters</h4>
+    
+    <p>No legal issues are more critical than ones that involve the relationship you have with your children. At Zettersten &amp; Hammond, we handle child custody and visitation issues with great care and compassion because we understand the tremendous stakes.</p>
+    
+    <p>If you are seeking an experienced child custody lawyer in Brentwood, Murfreesboro or the surrounding area, we are here for you.</p>
+    
+    <h4>A Firm That Puts Children First</h4>
+    
+    <p>We handle child custody and child support matters for a broad range of clients, including married parents who are getting divorced and unmarried parents who are separating. Our clients also include grandparents and other third parties seeking visitation rights with the children they care about, as well as stepparents seeking to adopt.</p>
+    
+    <p>Our clients often seek primary residential custody of their children and wish to maintain a productive relationship with the other parent. We believe that a nasty legal battle serves no one, least of all the children. We do everything in our power to help parents work together to find solutions. We offer mediation services to meet this need.</p>
+    
+    <h4>Child Custody Modifications</h4>
+    
+    <p>When circumstances change, it is sometimes necessary to modify child custody or child support orders. The legal standard for modifications, as in all child custody matters, is doing what is best for the children. If you are seeking a change or trying to stop one you believe would adversely affect the relationship you have with your children, we can represent your interests.</p>
+    
+    <h4>Discuss Your Child Custody Needs With An Experienced Tennessee Attorney</h4>
+    
+    <p>Our lawyers are here to protect your parental rights and the best interests of your children. Contact our law offices online or by telephone at <a href="tel:6158965720">(615) 896-5720</a> to arrange your free initial consultation.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>What's Best For Your Kids</h2>
+    
+    <h4>What's Best For Your Kids?</h4>
+    
+    <p>In Tennessee, the key factor courts consider when making determinations in child custody cases is this: protecting the best interests of the child.</p>
+    
+    <p>At Zettersten &amp; Hammond, we hold this standard dear and work with our clients to establish child custody arrangements that foster positive relationships between children and both parents.</p>
+    
+    <p>We handle complex and sensitive family law matters for clients in Brentwood and Murfreesboro and throughout surrounding areas.</p>
+    
+    <h4>Protecting What Matters Most</h4>
+    
+    <p>A parent engaged in a child custody dispute may rightly wonder, "Will I be able to keep my kids?" The courts will always frame that question in terms of what is best for the children.</p>
+    
+    <p>Parents do not always agree on what is in the best interest of their children. When making this determination, a court will look at factors such as:</p>
+    
+    <ul>
+      <li>Which parent has been the children's primary caregiver</li>
+      <li>Each parent's ability to prepare the children for adulthood</li>
+      <li>Each parent's ability to provide food, shelter and for other needs of the children</li>
+      <li>The parents' work schedules</li>
+      <li>The wishes of children ages 12 and older</li>
+    </ul>
+    
+    <p>In most of cases, children benefit from both parents having a role in their lives. When one parent receives sole physical custody, the other will typically have significant visitation time.</p>
+    
+    <p>We work hard to guide our clients to amicable resolutions to child custody disputes. We offer mediation services to help disputing parents find common ground.</p>
+    
+    <p><strong>Talk To An Attorney Who Understands Child Custody In Tennessee</strong></p>
+    
+    <p>Whether you are married or not, we are here to help you do what is best for your children. Schedule a free initial consultation with our caring child custody lawyers in Brentwood. Contact us online, or call <a href="tel:6158965720">(615) 896-5720</a>.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>Adoption Guide</h2>
+    
+    <h4>Your Guide Through The Adoption Process</h4>
+    
+    <p>If you are seeking to expand your family through adoption, the attorneys at Zettersten &amp; Hammond are here to guide you through the legal process. We take great joy in bringing families together through adoption. As your adoption guide, we are here to make sure we properly handle all the legal details, so that you can move on to this exciting chapter of your life free from nagging legal concerns.</p>
+    
+    <p><strong>Under Tennessee law, you must be at least 18 to adopt a child and at least 21 to adopt a child from foster care. You must also be in good enough mental and physical health to care for a child and have the financial resources parenthood requires.</strong></p>
+    
+    <h4>Stepparent Adoptions</h4>
+    
+    <p>Many of our clients are stepparents who wish to take on the full rights and responsibilities of parenthood. Before a stepparent can adopt, the court must terminate the biological parent's rights. The court typically grants this by written consent, but the parents can contest this in some cases.</p>
+    
+    <p>In a contested proceeding, the court applies the standard of determining what is in the child's best interests. There must be sufficient evidence that the biological parent is unfit for the duties of parenthood.</p>
+    
+    <p>Our family law attorneys can guide you through all aspects of the stepparent adoption process, including the voluntary or contested termination of the biological parent's rights.</p>
+    
+    <h4>Bringing Families Together</h4>
+    
+    <p>Our husband and wife attorney team is here to help your family grow through the adoption process. Speak to us at our convenient offices in Murfreesboro or Brentwood. To schedule your free initial consultation with an experienced Tennessee adoption lawyer, please contact our law offices online or by telephone at <a href="tel:6158965720">(615) 896-5720</a>.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>Dependency &amp; Neglect</h2>
+    
+    <h4>Protect Your Family From Dependency And Neglect Cases</h4>
+    
+    <p>When a Tennessee court begins a dependency or neglect process, the goal is to remove the children from a possibly dangerous environment. When you are a part of it, either as a parent facing an unjust proceeding or a grandparent with serious concerns, you will feel like your choices are limited. At Zettersten &amp; Hammond, we know how important family is, which is why we fight so hard to protect yours.</p>
+    
+    <p><strong>Dependency and neglect proceedings can result from several types of incidents, like:</strong></p>
+    
+    <ul>
+      <li>Children committing a juvenile crime</li>
+      <li>Children being frequently absent from school</li>
+      <li>One or more parents receiving domestic abuse charges</li>
+      <li>One or more parents receiving child abuse charges</li>
+    </ul>
+    
+    <p>Whatever the source of the proceeding, we have the necessary experience to help you do what's best for your family.</p>
+    
+    <h4>Caring Attorneys Who Stand By You Through It All</h4>
+    
+    <p>We know things can move quickly during these kinds of cases, and officers and other officials might not seem interested in your side of things. When we represent you to protect your family, we will make sure that your side of things is heard.</p>
+    
+    <p>Through hearings, strategy meetings and anything in between, we will be with you every step of the way. We want to make sure you do not feel alone in any of this while we fight to keep your family safe.</p>
+    
+    <h4>Let Us Fight For Your Family</h4>
+    
+    <p>Whatever side of a dependency and neglect hearing you are on, you want an experienced lawyer to guide you to the best possible resolution. You can contact us to set up a free consultation by calling 615-896-5720 today. Meet with us at our Brentwood or Murfreesboro offices to begin your case today.</p>
+  </div>
+
+  <div class="content-section">
+    <h2>Contact Information</h2>
+    
+    <p><strong>Offices:</strong></p>
+    <ul>
+      <li>8115 Isabella Ln., Suite 9<br>
+        Brentwood, TN 37027</li>
+      <li>8 Public Square North<br>
+        Murfreesboro, TN 37130</li>
+    </ul>
+    
+    <p><strong>Phone:</strong> <a href="tel:6158965720">(615) 896-5720</a></p>
+    
+    <p><strong>Email:</strong> <a href="mailto:assistant@zetterstenlaw.com">assistant@zetterstenlaw.com</a></p>
+    
+    <p><strong>Hours:</strong></p>
+    <ul>
+      <li><strong>Mon - Thu:</strong> 9:00 AM - 5:00 PM</li>
+      <li><strong>Fri:</strong> 9:00 AM - 4:00 PM</li>
+    </ul>
+  </div>
+
+  <div class="services-section">
+    <h2>Services</h2>
+    <div class="services-grid">
+      <div class="service-item">
+        <h4 class="service-name">Which parent has been the children's primary caregiver</h4>
+      </div>
+      <div class="service-item">
+        <h4 class="service-name">Each parent's ability to prepare the children for adulthood</h4>
+      </div>
+      <div class="service-item">
+        <h4 class="service-name">The parents' work schedules</h4>
+      </div>
+      <div class="service-item">
+        <h4 class="service-name">The wishes of children ages 12 and older</h4>
+      </div>
+      <div class="service-item">
+        <h4 class="service-name">Children committing a juvenile crime</h4>
+      </div>
+      <div class="service-item">
+        <h4 class="service-name">Children being frequently absent from school</h4>
+      </div>
+      <div class="service-item">
+        <h4 class="service-name">One or more parents receiving domestic abuse charges</h4>
+      </div>
+      <div class="service-item">
+        <h4 class="service-name">One or more parents receiving child abuse charges</h4>
+      </div>
+      <div class="service-item">
+        <h4 class="service-name">8115 Isabella Ln., Suite 9</h4>
+      </div>
+      <div class="service-item">
+        <h4 class="service-name">8 Public Square North</h4>
+      </div>
+      <div class="service-item">
+        <h4 class="service-name">Mon</h4>
+      </div>
+      <div class="service-item">
+        <h4 class="service-name">Fri: 9:00 AM</h4>
+      </div>
+      <div class="service-item">
+        <h4 class="service-name">A family home</h4>
+      </div>
+      <div class="service-item">
+        <h4 class="service-name">A vacation home</h4>
+      </div>
+      <div class="service-item">
+        <h4 class="service-name">401(k)s, IRAs, pensions and other retirement assets</h4>
+      </div>
+      <div class="service-item">
+        <h4 class="service-name">Stocks and bonds</h4>
+      </div>
+      <div class="service-item">
+        <h4 class="service-name">Vehicles</h4>
+      </div>
+      <div class="service-item">
+        <h4 class="service-name">Pets</h4>
+      </div>
+      <div class="service-item">
+        <h4 class="service-name">Social Security benefits</h4>
+      </div>
+      <div class="service-item">
+        <h4 class="service-name">Puts more control in your hands</h4>
+      </div>
+      <div class="service-item">
+        <h4 class="service-name">Gets things right the first time</h4>
+      </div>
+      <div class="service-item">
+        <h4 class="service-name">Is typically less expensive than traditional litigation</h4>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="map"><iframe src="https://www.google.com/maps/vt?pb=!1m5!1m4!1i15!2i8483!3i12871!4i256!2m3!1e0!2sm!3i777541184!2m3!1e2!2sspotlit!5i1!3m13!2sen-US!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e0!5m1!1e3!23i47083502!27m15!299174093m14!14m13!1m8!1m2!1y9828113774500122869!2y13785665355490503464!2s%2Fg%2F11jlz4cfpc!4m2!1x359612444!2x3426927890!15sgcid%3Amedical_spa!2b0!3b0!6b0!8b0&amp;key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&amp;token=21037" width="100%" height="300" style="border:0;margin-top:1.5rem" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map"></iframe></section><footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Child Custody</span>
+      <span class="footer-copyright">© 2024 Child Custody Systems, Inc. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+    
+  </div>
+  </footer>
+
+
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+
+</body></html>
