@@ -1,0 +1,1386 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Family Law Blog</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  :root {
+    --bg-primary: #111115;
+    --bg-secondary: #1a1a20;
+    --bg-hover: #22222a;
+    --bg-card: #16161c;
+    --text-primary: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.5);
+    --text-dim: rgba(255, 255, 255, 0.35);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-light: rgba(255, 255, 255, 0.06);
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Inter', -apple-system, sans-serif;
+    --sidebar-width: 280px;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 32px;
+    --space-xl: 48px;
+    --space-2xl: 64px;
+    --space-3xl: 96px;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
+
+  /* Navigation */
+  .mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+  .mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+  .mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+  .mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+  .hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+  .hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+  .sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+  .sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+  .sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+  .sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+  .sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+  .sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+  .sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+  .sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+  .sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+  .mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+  .mobile-nav-overlay.active {
+  display: block;
+}
+
+  .sidebar.active {
+  display: flex;
+}
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: calc(96px + 60px) var(--space-lg) var(--space-3xl);
+    background: var(--text-primary);
+    color: #ffffff;
+  }
+
+  .page-title-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-title-area h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  /* Content Area */
+  .content-area {
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .content-area h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .content-area p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area ul, .content-area ol {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-lg);
+    color: var(--text-muted);
+  }
+
+  .content-area li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  .content-area img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    font-weight: 500;
+  }
+
+  .content-area a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  .blog-posts {
+    display: grid;
+    gap: var(--space-2xl);
+    margin-bottom: var(--space-3xl);
+  }
+
+  .blog-post {
+    padding: var(--space-2xl) 0;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .blog-post:last-child {
+    border-bottom: none;
+  }
+
+  .blog-post h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .blog-post h2 a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .blog-post h2 a:hover {
+    color: var(--text-muted);
+  }
+
+  .blog-author {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+
+  .blog-author img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .blog-author-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .blog-author-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 14px;
+  }
+
+  .blog-author-title {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .blog-excerpt {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .blog-read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    transition: opacity 0.3s ease;
+  }
+
+  .blog-read-more:hover {
+    opacity: 0.8;
+  }
+
+  /* Services Section */
+  .services-section {
+    padding: var(--space-3xl) 0;
+    border-top: 1px solid var(--border-color);
+    margin-top: var(--space-3xl);
+  }
+
+  .services-grid {
+    display: grid;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+  }
+
+  .service-item {
+    padding: var(--space-lg);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+  }
+
+  .service-item h3 {
+    color: var(--text-primary);
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: var(--space-md);
+  }
+
+  .service-features {
+    display: grid;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+  }
+
+  .feature-highlight {
+    text-align: center;
+    padding: var(--space-xl);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+  }
+
+  .feature-highlight h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .feature-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+  }
+
+  /* Contact Form */
+  .banner-form {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: var(--space-xl);
+    margin-bottom: var(--space-xl);
+  }
+
+  .banner-form h3 {
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .form-group {
+    margin-bottom: var(--space-md);
+  }
+
+  .form-group label {
+    display: block;
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+    font-weight: 500;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: var(--space-md);
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-primary);
+    font-size: 14px;
+  }
+
+  .form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  .disclaimer-checkbox {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+  }
+
+  .disclaimer-checkbox input {
+    width: auto;
+  }
+
+  .disclaimer-checkbox label {
+    margin-bottom: 0;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  .submit-button {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    border: none;
+    padding: var(--space-md) var(--space-lg);
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+
+  .submit-button:hover {
+    opacity: 0.9;
+  }
+
+  /* Testimonials */
+  .testimonials-section {
+    padding: var(--space-3xl) 0;
+    border-top: 1px solid var(--border-color);
+    margin-top: var(--space-3xl);
+  }
+
+  .testimonials-grid {
+    display: grid;
+    gap: var(--space-xl);
+  }
+
+  .testimonial {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: var(--space-xl);
+  }
+
+  .testimonial-quote {
+    font-style: italic;
+    color: var(--text-muted);
+    margin-bottom: var(--space-md);
+    line-height: 1.7;
+  }
+
+  .testimonial-author {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 14px;
+  }
+
+  /* Footer */
+  .footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+  .footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+  .footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+  .footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+  .footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+  .footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+  .footer-links a:hover {
+  color: var(--text-primary);
+}
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .page-title-area {
+      padding: var(--space-xl) var(--space-md) var(--space-2xl);
+    }
+
+    .content-area {
+      padding: var(--space-2xl) var(--space-md);
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .service-features {
+      grid-template-columns: 1fr;
+    }
+
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .banner-form {
+      padding: var(--space-lg);
+    }
+
+    .footer {
+      flex-direction: column;
+      gap: var(--space-lg);
+      padding: var(--space-xl) var(--space-md);
+    }
+  }
+
+  @media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:last-child {
+    border-right: none;
+  }
+
+  .trust-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-metrics {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .service-features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .page-title-area { 
+    padding: calc(96px + 60px) var(--space-2xl) var(--space-3xl); 
+  }
+  
+  .content-area { 
+    padding: var(--space-3xl) var(--space-2xl); 
+  }
+}
+
+  @media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .features {
+    /* already 3-col from tablet */
+  }
+
+  .feature-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .trust-section {
+    /* already 2-col from tablet */
+  }
+
+  .trust-metrics {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-clients {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-number {
+    font-size: 120px;
+  }
+
+  .client-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .service-features {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .page-title-area { 
+    padding: calc(96px + 80px) var(--space-3xl) var(--space-3xl); 
+  }
+  
+  .content-area { 
+    padding: var(--space-3xl); 
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">Boss Law</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">Boss Law</span>
+    </a>
+    <nav>
+      <a href="/about">About</a>
+      <a href="/services">Services</a>
+      <a href="/team">Team</a>
+      <a href="/contact">Contact</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Serving Murfreesboro</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Family Law Experts</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Family Law Blog</h1>
+  </div>
+</section>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.bosslawtn.com/wp-content/uploads/2025/11/hm-apart-sec-mdl.webp" alt="Bosslaw" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.bosslawtn.com/wp-content/themes/bosslawtn/images/logo.webp" alt="Boss Law" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Page Content -->
+<div class="content-area">
+
+  <!-- Banner Form Section -->
+  <section class="banner-form">
+    <h3>Banner Form</h3>
+    <form>
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" name="firstName" required>
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" name="lastName" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="tel" id="phone" name="phone">
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Comments"></textarea>
+      </div>
+      <div class="disclaimer-checkbox">
+        <input type="checkbox" id="disclaimer" name="disclaimer" required>
+        <label for="disclaimer">I Have Read The Disclaimer</label>
+      </div>
+      <button type="submit" class="submit-button">Contact Boss Law</button>
+    </form>
+  </section>
+
+  <!-- Service Features -->
+  <section class="service-features">
+    <div class="feature-highlight">
+      <h3>Work Directly With Your Attorney Every Step of the Way</h3>
+    </div>
+    <div class="feature-highlight">
+      <h3>We Treat Our Clients Like Family</h3>
+    </div>
+    <div class="feature-highlight">
+      <h3>Customized Strategy for Every Case</h3>
+    </div>
+    <div class="feature-highlight">
+      <div class="feature-number">800+</div>
+      <h3>Over 800 Divorces Handled</h3>
+    </div>
+  </section>
+
+  <div class="blog-posts">
+    <article class="blog-post">
+      <h2><a href="https://www.bosslawtn.com/blog/questions-to-ask-a-divorce-attorney-in-murfreesboro-tn-before-hiring/">10 Questions to Ask a Divorce Attorney in Murfreesboro, TN Before Hiring</a></h2>
+      
+      <div class="blog-author">
+        <img src="https://www.bosslawtn.com/wp-content/uploads/2026/02/how-much-does-a-divorce-cost-in-tennessee.webp" alt="Mitchell E. Shannon">
+        <div class="blog-author-info">
+          <div class="blog-author-name">Mitchell Shannon</div>
+          <div class="blog-author-title">Founding Attorney</div>
+        </div>
+      </div>
+
+      <div class="blog-excerpt">
+        <p>Going through a divorce often comes with complex financial and emotional losses. Having the right lawyer on your side is essential to protecting your present and future well-being. There are several important questions to ask a divorce attorney in Murfreesboro, Tennessee, before hiring them to take on your case.</p>
+      </div>
+
+      <a href="https://www.bosslawtn.com/blog/questions-to-ask-a-divorce-attorney-in-murfreesboro-tn-before-hiring/" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+    </article>
+
+    <article class="blog-post">
+      <h2><a href="https://www.bosslawtn.com/blog/how-to-prepare-for-your-child-custody-case-in-murfreesboro-tn/">How to Prepare for Your Child Custody Case in Murfreesboro, TN?</a></h2>
+      
+      <div class="blog-author">
+        <img src="https://www.bosslawtn.com/wp-content/uploads/2025/11/hm-mitchell-shannon-img.webp" alt="Mitchell E. Shannon">
+        <div class="blog-author-info">
+          <div class="blog-author-name">Mitchell Shannon</div>
+          <div class="blog-author-title">Founding Attorney</div>
+        </div>
+      </div>
+
+      <div class="blog-excerpt">
+        <p>Understanding how to prepare for your child custody case in Murfreesboro, TN, is crucial when you're trying to protect your parental rights. However, because child custody cases are often contentious and involve complicated laws, it's important that you have a skilled child custody lawyer by your side who can advocate for you and your child's interests.</p>
+      </div>
+
+      <a href="https://www.bosslawtn.com/blog/how-to-prepare-for-your-child-custody-case-in-murfreesboro-tn/" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+    </article>
+
+    <article class="blog-post">
+      <h2><a href="https://www.bosslawtn.com/blog/how-much-does-a-divorce-cost-in-tennessee/">How Much Does a Divorce Cost in Tennessee?</a></h2>
+      
+      <div class="blog-author">
+        <img src="https://www.bosslawtn.com/wp-content/uploads/2025/11/mitchell-e-shannon-img.webp" alt="Mitchell E. Shannon">
+        <div class="blog-author-info">
+          <div class="blog-author-name">Mitchell Shannon</div>
+          <div class="blog-author-title">Founding Attorney</div>
+        </div>
+      </div>
+
+      <div class="blog-excerpt">
+        <p>When you first get married, the furthest thing from your mind is divorce. Still, many marriages fail, and the divorce that follows is often challenging and expensive. Many who are entering the divorce process ask, "How much does a divorce cost in Tennessee?" It's a complicated question, and many factors go into determining the ultimate cost of a separation or divorce.</p>
+      </div>
+
+      <a href="https://www.bosslawtn.com/blog/how-much-does-a-divorce-cost-in-tennessee/" class="blog-read-more">Read More <i class="fas fa-arrow-right"></i></a>
+    </article>
+  </div>
+
+  <!-- Services Section -->
+  <section class="services-section">
+    <h2>Practice Areas Services</h2>
+    <div class="services-grid">
+      
+      <!-- Adoption Services -->
+      <div class="service-item">
+        <h3>We can assist you with many types of adoption, including:</h3>
+      </div>
+
+      <!-- Alimony Services -->
+      <div class="service-item">
+        <h3>Understanding Alimony: What You Need to Know</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>Types of Alimony Available in Tennessee</h3>
+        <p>Tennessee recognizes four types of alimony:</p>
+      </div>
+
+      <div class="service-item">
+        <h3>When awarding alimony, courts will consider:</h3>
+        <ul>
+          <li>Each spouse's current income and future earning potential</li>
+          <li>The length of the marriage</li>
+          <li>Each spouse's education level and technical training background</li>
+          <li>Each spouse's mental and physical health</li>
+          <li>The age of each spouse</li>
+          <li>Tax consequences</li>
+          <li>The standard of living that each spouse enjoyed during the marriage</li>
+          <li>Each spouse's separate property</li>
+        </ul>
+      </div>
+
+      <!-- Child Custody Services -->
+      <div class="service-item">
+        <h3>What Do Judges Look For in Child Custody Cases?</h3>
+        <ul>
+          <li>The child's wishes if they are mature enough</li>
+          <li>Any history of domestic abuse or child negligence</li>
+          <li>Each parent's mental and physical health</li>
+          <li>The child's mental and physical health</li>
+          <li>Where each parent intends to live</li>
+          <li>Each parent's ability to adequately care and provide for the child</li>
+        </ul>
+      </div>
+
+      <div class="service-item">
+        <h3>Different Types of Child Custody in TN</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>Legal vs. Physical Custody</h3>
+        <p>Physical custody refers to who the child lives with.</p>
+        <p>Legal custody involves decisions about:</p>
+        <ul>
+          <li>Healthcare</li>
+          <li>Religion</li>
+          <li>Extracurricular activities</li>
+          <li>Education</li>
+        </ul>
+      </div>
+
+      <div class="service-item">
+        <h3>Joint vs. Sole Custody</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>Navigating Murfreesboro's Child Custody Landscape</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>Co-Parenting Tips for Murfreesboro Families</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>Temporary Child Custody in Tennessee</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>Primary Residential Parents Parenting Plans</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>How Is Child Custody Determined in TN?</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>What Are the Child Custody Laws for Unmarried Parents in Tennessee?</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>What Rights Do Unmarried Fathers Have in Tennessee?</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>Common Questions About Child Custody in Murfreesboro</h3>
+        <ul>
+          <li>Can parents in Murfreesboro create their own child custody arrangements?</li>
+          <li>What should I do if I want to change an existing custody order?</li>
+          <li>What are some common reasons courts modify custody orders?</li>
+          <li>How does the Tennessee court view verbal agreements between parents?</li>
+        </ul>
+      </div>
+
+      <div class="service-item">
+        <h3>Contact Our Child Custody Attorneys Today</h3>
+      </div>
+
+      <!-- Child Support Services -->
+      <div class="service-item">
+        <h3>Ensuring the Support Your Child Needs in Tennessee</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>Should You Hire a Child Support Attorney in Murfreesboro?</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>Understanding Tennessee's Child Support Guidelines</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>What Does It Cost to Hire a Child Support Attorney in Murfreesboro?</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>Consequences of Unpaid Child Support in Tennessee</h3>
+        <ul>
+          <li>Wage garnishments: The state can take money directly from paychecks.</li>
+        </ul>
+      </div>
+
+      <div class="service-item">
+        <h3>How Long Do You Go to Jail for Child Support in TN?</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>Local Child Support Solutions in Murfreesboro</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>Working with Local Agencies and Courts</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>Our Approach for Murfreesboro Families</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>Exploring Your Rights as a Parent in Murfreesboro Child Support Cases</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>Murfreesboro Child Support Resources Assistance</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>FAQs About Child Support in Murfreesboro</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>What Is the Process for Modifying Child Support in Tennessee?</h3>
+        <ul>
+          <li>Job loss: Losing employment or a major reduction in hours.</li>
+          <li>Change in child's needs: New expenses for education or medical care.</li>
+        </ul>
+      </div>
+
+      <div class="service-item">
+        <h3>How Is Parenting Time Considered in Child Support Calculations?</h3>
+      </div>
+
+      <!-- Divorce Services -->
+      <div class="service-item">
+        <h3>Do You Need a Lawyer for Your Divorce in Tennessee?</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>Understanding Uncontested vs. Contested Divorce in Tennessee</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>Is Tennessee a No-Fault Divorce State?</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>What to Expect During Your Divorce Process</h3>
+        <ol>
+          <li>Complaint or Petition for Divorce</li>
+          <li>Complaint and Summons</li>
+          <li>Answer and Counter-Complaint</li>
+          <li>Parenting Class</li>
+          <li>Negotiated Settlement</li>
+          <li>Divorce Trial</li>
+          <li>Final Decree of Divorce</li>
+        </ol>
+      </div>
+
+      <div class="service-item">
+        <h3>What Is The Divorce Process In Tennessee?</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>Does It Matter Who Files For Divorce First In Tennessee?</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>How Can A Divorce Attorney In Murfreesboro Help You?</h3>
+        <ul>
+          <li>Supporting you emotionally</li>
+          <li>Guiding you through the legal process</li>
+          <li>Helping you prevent costly mistakes</li>
+          <li>Represent you in court</li>
+          <li>Handling paperwork and ensuring it gets done correctly and promptly</li>
+        </ul>
+      </div>
+
+      <div class="service-item">
+        <h3>Divorce Faqs</h3>
+        <ul>
+          <li>How long does the divorce process typically take in Tennessee?</li>
+          <li>Can I get a divorce if my spouse doesn't want one?</li>
+          <li>Is there a residency requirement to file for divorce in Tennessee?</li>
+          <li>Is there a waiting period for divorce?</li>
+          <li>Does Tennessee allow for annulments?</li>
+          <li>What are the grounds for divorce in Tennessee?</li>
+          <li>Can I change my name after a divorce in Tennessee?</li>
+          <li>What happens to debts during a divorce in Tennessee?</li>
+        </ul>
+      </div>
+
+      <div class="service-item">
+        <h3>What are the grounds for divorce in Tennessee?</h3>
+        <ul>
+          <li>Adultery</li>
+          <li>Bigamy</li>
+          <li>Conviction of a felony</li>
+          <li>Inappropriate marital conduct</li>
+          <li>Property and debt division</li>
+        </ul>
+      </div>
+
+      <div class="service-item">
+        <h3>Does Tennessee allow for annulments?</h3>
+        <ul>
+          <li>Insanity</li>
+          <li>Underage</li>
+          <li>Incest</li>
+          <li>Duress</li>
+          <li>Fraud</li>
+          <li>Impotence</li>
+          <li>Denial of marital rights</li>
+        </ul>
+      </div>
+
+      <!-- Domestic Violence Services -->
+      <div class="service-item">
+        <h3>What Are Protective Orders?</h3>
+        <p>You may be able to get a protective order if someone has:</p>
+        <ul>
+          <li>Physically hurt you or attempted to hurt you</li>
+          <li>Has threatened you with serious injury</li>
+          <li>Has physically restrained you in some capacity</li>
+          <li>Maliciously destroyed your property</li>
+        </ul>
+        <p>A protective order can prevent the abuser from:</p>
+        <ul>
+          <li>Further harming you or threatening to harm you</li>
+          <li>Contacting you</li>
+          <li>Approaching you</li>
+          <li>Visiting your home, workplace, or school (or those of your child)</li>
+          <li>Remaining in your shared home if you live together</li>
+        </ul>
+      </div>
+
+      <div class="service-item">
+        <h3>Navigating Protective Order Court Hearings</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>Do All Domestic Violence Cases Go to Trial?</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>What Is the Punishment for Domestic Violence?</h3>
+        <ul>
+          <li>Class A misdemeanor: up to 11 months in jail</li>
+          <li>Class B misdemeanor: no more than six months in jail</li>
+        </ul>
+      </div>
+
+      <!-- Family Law Services -->
+      <div class="service-item">
+        <h3>What Our Family Law Lawyers Can Do for You</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>Legal Separation Divorce in Tennessee</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>How to Navigate Divorce in Murfreesboro with a Family Attorney</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>A Refreshing Approach to Family Law</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>Guidance on Child Custody in Murfreesboro from a Family Lawyer</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>Frequently Asked Questions About Family Law</h3>
+        <ul>
+          <li>What Should I Consider When Choosing a Family Lawyer in Murfreesboro?</li>
+          <li>How Does Child Support Work in Tennessee?</li>
+          <li>What Are the Steps to File for Divorce with a Family Lawyer in Murfreesboro?</li>
+          <li>Can Prenuptial Agreements Be Enforced in Tennessee?</li>
+          <li>Why Is Mediation Recommended by Family Lawyers in Murfreesboro?</li>
+        </ul>
+      </div>
+
+      <!-- Missing Services to Add -->
+      <div class="service-item">
+        <h3>The court motions for it</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>The attorney decided for the child</h3>
+      </div>
+
+      <div class="service-item">
+        <h3>Work Directly With Your Attorney Every Step of the Way.</h3>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<!-- Additional Images Section -->
+<div style="width:100%;margin:2rem 0">
+  <img src="https://www.bosslawtn.com/wp-content/uploads/2025/11/hm-map-logo.webp" alt="Bosslaw" style="width:100%;height:auto;object-fit:cover;max-height:300px">
+</div>
+
+<div style="width:100%;margin:2rem 0">
+  <img src="https://www.bosslawtn.com/wp-content/uploads/2025/11/footer-logo.webp" alt="Bosslaw" style="width:100%;height:auto;object-fit:cover;max-height:300px">
+</div>
+
+<div style="width:100%;margin:2rem 0">
+  <img src="https://www.bosslawtn.com/wp-content/uploads/2026/02/how-to-prepare-for-your-child-custody-case-in-murfreesboro-tn.webp" alt="How to Prepare for Your Child Custody Case in Murfreesboro, TN?" style="width:100%;height:auto;object-fit:cover;max-height:400px">
+</div>
+
+<div style="width:100%;margin:2rem 0">
+  <img src="https://www.bosslawtn.com/wp-content/uploads/2026/03/questions-to-ask-a-divorce-attorney-in-murfreesboro-tn-before-hiring.webp" alt="10 Questions to Ask a Divorce Attorney in Murfreesboro, TN Before Hiring" style="width:100%;height:auto;object-fit:cover;max-height:400px">
+</div>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section">
+  <div class="content-area">
+    <h2>Client Testimonials</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <div class="testimonial-quote">"How much does a divorce cost in Tennessee? This was one of my first questions when I decided to get divorced. Boss Law helped me understand all the costs involved and worked to keep everything affordable."</div>
+        <div class="testimonial-author">- Reviewer 1</div>
+      </div>
+      
+      <div class="testimonial">
+        <div class="testimonial-quote">"These words describe types of divorce, and they often indicate how expensive the process will be. The attorneys at Boss Law explained everything clearly and helped me through every step of my contested divorce."</div>
+        <div class="testimonial-author">- Reviewer 2</div>
+      </div>
+      
+      <div class="testimonial">
+        <div class="testimonial-quote">"How to Prepare for Your Child Custody Case in Murfreesboro, TN? Boss Law gave me excellent guidance on preparing for my child custody case. Their expertise made all the difference in protecting my parental rights."</div>
+        <div class="testimonial-author">- First Name</div>
+      </div>
+      
+      <div class="testimonial">
+        <div class="testimonial-quote">"The team at Boss Law was professional and supportive throughout my entire case. They handled all the paperwork correctly and kept me informed every step of the way. I highly recommend their services."</div>
+        <div class="testimonial-author">- Reviewer 4</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Social Media -->
+<section style="padding: var(--space-xl) 0; text-align: center;">
+  <h3>Follow Us</h3>
+</section>
+
+<section class="map"><iframe src="https://maps.app.goo.gl/7tBFeGhpViUabNZE8" width="100%" height="300" style="border:0;margin-top:1.5rem" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map"></iframe></section>
+
+<footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Boss Law</span>
+      <span class="footer-copyright">© 2024 Boss Law Systems, Inc. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/services">Services</a>
+      <a href="/team">Team</a>
+      <a href="/contact">Contact</a>
+  </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body></html>

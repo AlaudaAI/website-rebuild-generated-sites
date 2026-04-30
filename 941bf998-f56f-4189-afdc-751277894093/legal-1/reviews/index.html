@@ -1,0 +1,987 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Reviews &amp; Testimonials</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  :root {
+    --bg-primary: #111115;
+    --bg-secondary: #1a1a20;
+    --bg-hover: #22222a;
+    --bg-card: #16161c;
+    --text-primary: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.5);
+    --text-dim: rgba(255, 255, 255, 0.35);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-light: rgba(255, 255, 255, 0.06);
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Inter', -apple-system, sans-serif;
+    --sidebar-width: 280px;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 32px;
+    --space-xl: 48px;
+    --space-2xl: 64px;
+    --space-3xl: 96px;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
+
+  /* Navigation */
+  .mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+  .mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+  .mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+  .mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+  .hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+  .hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+  .sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+  .sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+  .sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+  .sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+  .sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+  .sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+  .sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+  .sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+  .sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+  .mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+  .mobile-nav-overlay.active {
+  display: block;
+}
+
+  .sidebar.active {
+  display: flex;
+}
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: calc(96px + 60px) var(--space-lg) var(--space-3xl);
+    background: var(--text-primary);
+    color: #111115;
+  }
+
+  .page-title-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-title-area h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  /* Content Area */
+  .content-area {
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .content-area h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .content-area p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area ul, .content-area ol {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-lg);
+    color: var(--text-muted);
+  }
+
+  .content-area li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  .content-area img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    font-weight: 500;
+  }
+
+  .content-area a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  /* Testimonials */
+  .testimonials-grid {
+    display: grid;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-3xl);
+  }
+
+  .testimonial-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: var(--space-xl);
+  }
+
+  .testimonial-quote {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+    line-height: 1.4;
+  }
+
+  .testimonial-text {
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: var(--space-lg);
+  }
+
+  .testimonial-author {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+  }
+
+  /* Why Choose Section */
+  .why-choose-section {
+    margin: var(--space-3xl) 0;
+    padding: var(--space-2xl);
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    display: grid;
+    gap: var(--space-xl);
+  }
+
+  .why-choose-grid {
+    display: grid;
+    gap: var(--space-lg);
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  .why-choose-item {
+    text-align: center;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .why-choose-image {
+    max-width: 300px;
+    margin: 0 auto;
+    display: block;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: var(--space-2xl);
+    text-align: center;
+    margin: var(--space-3xl) 0;
+  }
+
+  .cta-title {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .cta-subtitle {
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+    font-size: 1.1rem;
+  }
+
+  .cta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    align-items: center;
+  }
+
+  .cta-button {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    padding: var(--space-md) var(--space-xl);
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: opacity 0.3s ease;
+  }
+
+  .cta-button:hover {
+    opacity: 0.9;
+  }
+
+  .phone-link {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  /* Services Grid */
+  .services-grid {
+    display: grid;
+    gap: var(--space-md);
+    margin-bottom: var(--space-3xl);
+  }
+
+  .service-item {
+    color: var(--text-muted);
+    font-weight: 500;
+    border-bottom: 1px solid var(--border-color);
+    padding: var(--space-md) 0;
+  }
+
+  /* Footer */
+  .footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+  .footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+  .footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+  .footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+  .footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+  .footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+  .footer-links a:hover {
+  color: var(--text-primary);
+}
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .why-choose-section {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    
+    .cta-buttons {
+      flex-direction: column;
+    }
+    
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .why-choose-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:last-child {
+    border-right: none;
+  }
+
+  .trust-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-metrics {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .why-choose-section {
+    grid-template-columns: 1fr 300px;
+    align-items: center;
+  }
+
+  .cta-buttons {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+  @media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .features {
+    /* already 3-col from tablet */
+  }
+
+  .feature-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .trust-section {
+    /* already 2-col from tablet */
+  }
+
+  .trust-metrics {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-clients {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-number {
+    font-size: 120px;
+  }
+
+  .client-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+  @media (min-width: 768px) {
+    .page-title-area { padding: calc(96px + 60px) var(--space-2xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl) var(--space-2xl); }
+  }
+
+  @media (min-width: 1024px) {
+    .page-title-area { padding: calc(96px + 80px) var(--space-3xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="https://www.bosslawtn.com/" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">Boss Law</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="https://www.bosslawtn.com/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">Boss Law</span>
+    </a>
+    <nav>
+      <a href="https://www.bosslawtn.com/about/">About</a>
+      <a href="https://www.bosslawtn.com/services/">Services</a>
+      <a href="https://www.bosslawtn.com/team/">Team</a>
+      <a href="https://www.bosslawtn.com/contact/">Contact</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">All Systems Operational</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">API v4.2 Active</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+
+<main class="main-content">
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Client Reviews & Testimonials</h1>
+  </div>
+</section>
+<div style="width:100%;margin:2rem 0"><img src="https://www.bosslawtn.com/wp-content/themes/bosslawtn/images/logo.webp" alt="Boss Law" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.rizeupmedia.com/static/RizeUp-Logo-Footer-W.png" alt="rizeup media logo" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.bosslawtn.com/wp-content/plugins/translatepress-multilingual/assets/images/flags/es_MX.png" alt="es_MX" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.bosslawtn.com/wp-content/uploads/2025/11/hm-map-logo.webp" alt="Bosslaw" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.bosslawtn.com/wp-content/uploads/2025/11/footer-logo.webp" alt="Bosslaw" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://www.bosslawtn.com/wp-content/themes/bosslawtn/images/sdbr-start-img.webp" alt="testimonial star rating image" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+<!-- Page Content -->
+<div class="content-area">
+  <h2>Practice Areas Services</h2>
+
+  <div class="services-grid">
+    <div class="service-item">We can assist you with many types of adoption, including:</div>
+    <div class="service-item">Banner Form</div>
+    <div class="service-item">First Name</div>
+    <div class="service-item">Last Name</div>
+    <div class="service-item">Email</div>
+    <div class="service-item">Message</div>
+    <div class="service-item">Comments</div>
+    <div class="service-item">Understanding Alimony: What You Need to Know</div>
+    <div class="service-item">Types of Alimony Available in Tennessee</div>
+    <div class="service-item">Tennessee recognizes four types of alimony:</div>
+    <div class="service-item">When awarding alimony, courts will consider:</div>
+    <div class="service-item">Each spouse's current income and future earning potential</div>
+    <div class="service-item">The length of the marriage</div>
+    <div class="service-item">Each spouse's education level and technical training background</div>
+    <div class="service-item">Each spouse's mental and physical health</div>
+    <div class="service-item">The age of each spouse</div>
+    <div class="service-item">Tax consequences</div>
+    <div class="service-item">The standard of living that each spouse enjoyed during the marriage</div>
+    <div class="service-item">Each spouse's separate property</div>
+    <div class="service-item">What Do Judges Look For in Child Custody Cases?</div>
+    <div class="service-item">Different Types of Child Custody in TN</div>
+    <div class="service-item">Legal vs. Physical Custody</div>
+    <div class="service-item">Joint vs. Sole Custody</div>
+    <div class="service-item">Navigating Murfreesboro's Child Custody Landscape</div>
+    <div class="service-item">Co-Parenting Tips for Murfreesboro Families</div>
+    <div class="service-item">Temporary Child Custody in Tennessee</div>
+    <div class="service-item">Primary Residential Parents Parenting Plans</div>
+    <div class="service-item">How Is Child Custody Determined in TN?</div>
+    <div class="service-item">What Are the Child Custody Laws for Unmarried Parents in Tennessee?</div>
+    <div class="service-item">What Rights Do Unmarried Fathers Have in Tennessee?</div>
+    <div class="service-item">Common Questions About Child Custody in Murfreesboro</div>
+    <div class="service-item">Can parents in Murfreesboro create their own child custody arrangements?</div>
+    <div class="service-item">What should I do if I want to change an existing custody order?</div>
+    <div class="service-item">What are some common reasons courts modify custody orders?</div>
+    <div class="service-item">How does the Tennessee court view verbal agreements between parents?</div>
+    <div class="service-item">Contact Boss Law</div>
+    <div class="service-item">Physical custody refers to who the child lives with.</div>
+    <div class="service-item">The court motions for it</div>
+    <div class="service-item">The attorney decided for the child</div>
+    <div class="service-item">Healthcare</div>
+    <div class="service-item">Religion</div>
+    <div class="service-item">Extracurricular activities</div>
+    <div class="service-item">Education</div>
+    <div class="service-item">The child's wishes if they are mature enough</div>
+    <div class="service-item">Any history of domestic abuse or child negligence</div>
+    <div class="service-item">Each parent's mental and physical health</div>
+    <div class="service-item">The child's mental and physical health</div>
+    <div class="service-item">Where each parent intends to live</div>
+    <div class="service-item">Each parent's ability to adequately care and provide for the child</div>
+    <div class="service-item">Work Directly With Your Attorney Every Step of the Way.</div>
+    <div class="service-item">Contact Our Child Custody Attorneys Today</div>
+    <div class="service-item">I Have Read The Disclaimer</div>
+    <div class="service-item">Ensuring the Support Your Child Needs in Tennessee</div>
+    <div class="service-item">Should You Hire a Child Support Attorney in Murfreesboro?</div>
+    <div class="service-item">Understanding Tennessee's Child Support Guidelines</div>
+    <div class="service-item">What Does It Cost to Hire a Child Support Attorney in Murfreesboro?</div>
+    <div class="service-item">Consequences of Unpaid Child Support in Tennessee</div>
+    <div class="service-item">How Long Do You Go to Jail for Child Support in TN?</div>
+    <div class="service-item">Local Child Support Solutions in Murfreesboro</div>
+    <div class="service-item">Working with Local Agencies and Courts</div>
+    <div class="service-item">Our Approach for Murfreesboro Families</div>
+    <div class="service-item">Exploring Your Rights as a Parent in Murfreesboro Child Support Cases</div>
+    <div class="service-item">Murfreesboro Child Support Resources Assistance</div>
+    <div class="service-item">FAQs About Child Support in Murfreesboro</div>
+    <div class="service-item">What Is the Process for Modifying Child Support in Tennessee?</div>
+    <div class="service-item">How Is Parenting Time Considered in Child Support Calculations?</div>
+    <div class="service-item">Wage garnishments: The state can take money directly from paychecks.</div>
+    <div class="service-item">Job loss: Losing employment or a major reduction in hours.</div>
+    <div class="service-item">Change in child's needs: New expenses for education or medical care.</div>
+    <div class="service-item">Do You Need a Lawyer for Your Divorce in Tennessee?</div>
+    <div class="service-item">Understanding Uncontested vs. Contested Divorce in Tennessee</div>
+    <div class="service-item">Is Tennessee a No-Fault Divorce State?</div>
+    <div class="service-item">What to Expect During Your Divorce Process</div>
+    <div class="service-item">How long does the divorce process typically take in Tennessee?</div>
+    <div class="service-item">Can I get a divorce if my spouse doesn't want one?</div>
+    <div class="service-item">What Is The Divorce Process In Tennessee?</div>
+    <div class="service-item">Does It Matter Who Files For Divorce First In Tennessee?</div>
+    <div class="service-item">How Can A Divorce Attorney In Murfreesboro Help You?</div>
+    <div class="service-item">Divorce Faqs</div>
+    <div class="service-item">Is there a residency requirement to file for divorce in Tennessee?</div>
+    <div class="service-item">Is there a waiting period for divorce?</div>
+    <div class="service-item">Does Tennessee allow for annulments?</div>
+    <div class="service-item">What are the grounds for divorce in Tennessee?</div>
+    <div class="service-item">Can I change my name after a divorce in Tennessee?</div>
+    <div class="service-item">What happens to debts during a divorce in Tennessee?</div>
+    <div class="service-item">Adultery</div>
+    <div class="service-item">Bigamy</div>
+    <div class="service-item">Conviction of a felony</div>
+    <div class="service-item">Inappropriate marital conduct</div>
+    <div class="service-item">Property and debt division</div>
+    <div class="service-item">Complaint or Petition for Divorce</div>
+    <div class="service-item">Complaint and Summons</div>
+    <div class="service-item">Answer and Counter-Complaint</div>
+    <div class="service-item">Parenting Class</div>
+    <div class="service-item">Negotiated Settlement</div>
+    <div class="service-item">Divorce Trial</div>
+    <div class="service-item">Final Decree of Divorce</div>
+    <div class="service-item">Supporting you emotionally</div>
+    <div class="service-item">Guiding you through the legal process</div>
+    <div class="service-item">Helping you prevent costly mistakes</div>
+    <div class="service-item">Represent you in court</div>
+    <div class="service-item">Handling paperwork and ensuring it gets done correctly and promptly</div>
+    <div class="service-item">Insanity</div>
+    <div class="service-item">Underage</div>
+    <div class="service-item">Incest</div>
+    <div class="service-item">Duress</div>
+    <div class="service-item">Fraud</div>
+    <div class="service-item">Impotence</div>
+    <div class="service-item">Denial of marital rights</div>
+    <div class="service-item">What Are Protective Orders?</div>
+    <div class="service-item">Navigating Protective Order Court Hearings</div>
+    <div class="service-item">Do All Domestic Violence Cases Go to Trial?</div>
+    <div class="service-item">What Is the Punishment for Domestic Violence?</div>
+    <div class="service-item">Physically hurt you or attempted to hurt you</div>
+    <div class="service-item">Has threatened you with serious injury</div>
+    <div class="service-item">Has physically restrained you in some capacity</div>
+    <div class="service-item">Maliciously destroyed your property</div>
+    <div class="service-item">Further harming you or threatening to harm you</div>
+    <div class="service-item">Contacting you</div>
+    <div class="service-item">Approaching you</div>
+    <div class="service-item">Visiting your home, workplace, or school (or those of your child)</div>
+    <div class="service-item">Remaining in your shared home if you live together</div>
+    <div class="service-item">Class A misdemeanor: up to 11 months in jail</div>
+    <div class="service-item">Class B misdemeanor: no more than six months in jail</div>
+    <div class="service-item">Follow Us</div>
+    <div class="service-item">What Our Family Law Lawyers Can Do for You</div>
+    <div class="service-item">Legal Separation Divorce in Tennessee</div>
+    <div class="service-item">How to Navigate Divorce in Murfreesboro with a Family Attorney</div>
+    <div class="service-item">A Refreshing Approach to Family Law</div>
+    <div class="service-item">Guidance on Child Custody in Murfreesboro from a Family Lawyer</div>
+    <div class="service-item">Frequently Asked Questions About Family Law</div>
+    <div class="service-item">What Should I Consider When Choosing a Family Lawyer in Murfreesboro?</div>
+    <div class="service-item">How Does Child Support Work in Tennessee?</div>
+    <div class="service-item">What Are the Steps to File for Divorce with a Family Lawyer in Murfreesboro?</div>
+    <div class="service-item">Can Prenuptial Agreements Be Enforced in Tennessee?</div>
+    <div class="service-item">Why Is Mediation Recommended by Family Lawyers in Murfreesboro?</div>
+  </div>
+
+  <h2>Client Testimonials</h2>
+
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <h6 class="testimonial-quote">"Treated me with respect and listened to me."</h6>
+      <p class="testimonial-text">As a single mother, I was trying to keep myself and my children safe from a bad situation. I was worried I wouldn't have a chance because I had very limited income and lawyers are so expensive. Mitch took care of everything and I was able to afford his services. He always treated me with respect and genuinely listened to me. He got me a great outcome and helped me get back some of the confidence that had been taken from me. I will never be able to thank him for all he did!</p>
+      <h5 class="testimonial-author">- Tammara N.</h5>
+    </div>
+
+    <div class="testimonial-card">
+      <h6 class="testimonial-quote">"We felt heard and protected."</h6>
+      <p class="testimonial-text">Boss Law truly cares about the client, not just money or outcomes. Their team is honest, providing options instead of directives. We felt heard and protected. Would highly recommend and wouldn't hesitate to call them again if needed.</p>
+      <h5 class="testimonial-author">- Kim R.</h5>
+    </div>
+
+    <div class="testimonial-card">
+      <h6 class="testimonial-quote">"Amazing to watch him work and fight for you."</h6>
+      <p class="testimonial-text">Best lawyer I've ever had or seen. Amazing to watch him work and fight for you. He is a nice guy and a great man that fights big even for the little people like me.</p>
+      <h5 class="testimonial-author">- Marcus</h5>
+    </div>
+
+    <div class="testimonial-card">
+      <h6 class="testimonial-quote">"Extremely pleased with their support."</h6>
+      <p class="testimonial-text">Boss Law handled my divorce smoothly. The team was helpful, guiding me through the stressful process. I felt supported and was informed at every step. We worked things out together, and I'm pleased with the outcome.</p>
+      <h5 class="testimonial-author">- Anonymous</h5>
+    </div>
+
+    <div class="testimonial-card">
+      <h6 class="testimonial-quote">"Mitch truly cares for his clients &amp; their families."</h6>
+      <p class="testimonial-text">Mitch gave me a fair price. He was compassionate &amp; did an excellent job. Mitch truly cares for his clients &amp; their families. He also represents women in abuse cases through the Domestic Violence Agency at no cost.</p>
+      <h5 class="testimonial-author">- Patti</h5>
+    </div>
+
+    <div class="testimonial-card">
+      <h6 class="testimonial-quote">"Beyond happy to have found a good law firm in Murfreesboro"</h6>
+      <p class="testimonial-text">Beyond happy to have found a good law firm in Murfreesboro. Everyone was helpful and professional throughout our time there. Giselle made our whole process less stressful, couldn't be more grateful!</p>
+      <h5 class="testimonial-author">- Mikayla C.</h5>
+    </div>
+
+    <div class="testimonial-card">
+      <h6 class="testimonial-quote">"If you looking for a caring firm this is the place to be."</h6>
+      <p class="testimonial-text">Mitch and Samantha were incredibly kind and respectful with my case. I was worried based on other reviews but am so glad I trusted my gut. If you looking for a caring firm this is the place to be.</p>
+      <h5 class="testimonial-author">- Hallie C.</h5>
+    </div>
+
+    <div class="testimonial-card">
+      <h6 class="testimonial-quote">"Mitch and Abby were lovely to work with"</h6>
+      <p class="testimonial-text">Mitch and Abby were lovely to work with. They made a hard case seem less stressful. I was surprised at how they really seemed to care about our case. Overall a wonderful place to send your business.</p>
+      <h5 class="testimonial-author">- Hannah M.</h5>
+    </div>
+
+    <div class="testimonial-card">
+      <h6 class="testimonial-quote">"I will undoubtedly enlist Boss Law (Abby) again for any forthcoming needs."</h6>
+      <p class="testimonial-text">Abby's outstanding service to my family far surpasses a five-star rating. I reached out to Abby, and she provided expedient and professional services. Abby ensured I was fully informed by explaining every step of the process. I will undoubtedly enlist Boss Law (Abby) again for any forthcoming needs.</p>
+      <h5 class="testimonial-author">- Korrine G.</h5>
+    </div>
+
+    <div class="testimonial-card">
+      <p class="testimonial-text">Abby and her team helped me through a very challenging time in my life. She helped me with every aspect of my divorce and in the end I got more than I had hoped for. She is compassionate, understanding, kind and gave me hope. I would highly recommend Abby Burnham to any of my friends and family and that's saying something. Thank you!!</p>
+      <h5 class="testimonial-author">- Natali B.</h5>
+    </div>
+  </div>
+
+  <h2>Why Choose Boss Law?</h2>
+
+  <div class="why-choose-section">
+    <div class="why-choose-grid">
+      <div class="why-choose-item">Work Directly With Your Attorney Every Step of the Way</div>
+      <div class="why-choose-item">We Treat Our Clients Like Family</div>
+      <div class="why-choose-item">Customized Strategy for Every Case</div>
+      <div class="why-choose-item">Over 800 Divorces Handled</div>
+    </div>
+    <img src="https://www.bosslawtn.com/wp-content/uploads/2025/11/hm-apart-sec-mdl.webp" alt="Bosslaw" class="why-choose-image">
+  </div>
+
+  <div class="cta-section">
+    <h2 class="cta-title">We Will Walk With You <strong>Every</strong> <strong>Step of The Way</strong></h2>
+    <h6 class="cta-subtitle">Proudly Serving Clients in Murfreesboro, TN and surrounding areas.</h6>
+    <div class="cta-buttons">
+      <a href="https://www.bosslawtn.com/contact-us/" class="cta-button">Get A Free Consultation</a>
+      <a href="tel:6158901548" class="phone-link">Call Us Today 615-890-1548</a>
+    </div>
+  </div>
+</div>
+
+<section class="map"><iframe src="https://maps.app.goo.gl/7tBFeGhpViUabNZE8" width="100%" height="300" style="border:0;margin-top:1.5rem" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map"></iframe></section><footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Boss Law</span>
+      <span class="footer-copyright">© 2024 Boss Law Systems, Inc. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+    <a href="https://www.bosslawtn.com/">Home</a>
+    <a href="https://www.bosslawtn.com/our-firm/">Our Firm</a>
+    <a href="https://www.bosslawtn.com/practice-areas/">Practice Areas</a>
+    <a href="https://www.bosslawtn.com/reviews/">Reviews</a>
+    <a href="https://www.bosslawtn.com/contact-us/">Contact Us</a>
+  </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+
+</body></html>
