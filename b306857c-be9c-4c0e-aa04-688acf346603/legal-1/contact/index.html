@@ -1,0 +1,864 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  :root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
+
+  /* Navigation */
+  .mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+  .mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+  .mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+  .mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+  .hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+  .hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+  .sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+  .sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+  .sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+  .sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+  .sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+  .sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+  .sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+  .sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+  .sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+  .mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+  .mobile-nav-overlay.active {
+  display: block;
+}
+
+  .sidebar.active {
+  display: flex;
+}
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: calc(96px + 60px) var(--space-lg) var(--space-3xl);
+    background: var(--text-primary);
+    color: #ffffff;
+  }
+
+  .page-title-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-title-area h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  /* Content Area */
+  .content-area {
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .content-area h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .content-area p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area ul, .content-area ol {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-lg);
+    color: var(--text-muted);
+  }
+
+  .content-area li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  .content-area img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    font-weight: 500;
+  }
+
+  .content-area a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  /* Contact-specific styles */
+  .contact-grid {
+    display: grid;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-3xl);
+  }
+
+  .contact-section {
+    padding: var(--space-lg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background: var(--bg-card);
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .contact-item {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .contact-item strong {
+    color: var(--text-primary);
+    display: block;
+    margin-bottom: var(--space-sm);
+  }
+
+  .hours-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .hours-list li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--space-sm);
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .hours-list li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  .map-container {
+    width: 100%;
+    height: 300px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    margin-bottom: var(--space-lg);
+  }
+
+  .map-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin-bottom: 0;
+    border-radius: 0;
+  }
+
+  .practice-areas-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .practice-areas-list li {
+    margin-bottom: var(--space-sm);
+    border-bottom: none;
+  }
+
+  .practice-areas-list a {
+    color: var(--text-muted);
+    text-decoration: none;
+    display: block;
+    padding: var(--space-sm) 0;
+    transition: color 0.3s ease;
+  }
+
+  .practice-areas-list a:hover {
+    color: var(--text-primary);
+    text-decoration: underline;
+  }
+
+  /* Social Links */
+  .social-links {
+    display: flex;
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+  }
+
+  .social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .social-links a:hover {
+    color: var(--text-primary);
+    border-color: var(--text-primary);
+  }
+
+  /* Testimonials Section */
+  .testimonials-section {
+    margin-top: var(--space-3xl);
+    margin-bottom: var(--space-3xl);
+  }
+
+  .testimonials-grid {
+    display: grid;
+    gap: var(--space-xl);
+    margin-top: var(--space-lg);
+  }
+
+  .testimonial-card {
+    padding: var(--space-lg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background: var(--bg-card);
+  }
+
+  .testimonial-quote {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-md);
+    font-style: italic;
+  }
+
+  .testimonial-author {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  /* Footer */
+  .footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+  .footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+  .footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+  .footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+  .footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+  .footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+  .footer-links a:hover {
+  color: var(--text-primary);
+}
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .content-area {
+      padding: var(--space-lg) var(--space-md);
+    }
+
+    .page-title-area {
+      padding: calc(96px + 40px) var(--space-md) var(--space-lg);
+    }
+
+    .contact-section {
+      padding: var(--space-md);
+    }
+
+    .map-container {
+      height: 250px;
+    }
+
+    .social-links a {
+      width: 36px;
+      height: 36px;
+    }
+
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:last-child {
+    border-right: none;
+  }
+
+  .trust-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-metrics {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+  }
+
+  .map-container {
+    height: 400px;
+  }
+}
+
+  @media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .features {
+    /* already 3-col from tablet */
+  }
+
+  .feature-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .trust-section {
+    /* already 2-col from tablet */
+  }
+
+  .trust-metrics {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-clients {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-number {
+    font-size: 120px;
+  }
+
+  .client-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  .contact-grid {
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space-3xl);
+  }
+
+  .map-container {
+    height: 500px;
+  }
+}
+
+  @media (min-width: 768px) {
+    .page-title-area { padding: calc(96px + 60px) var(--space-2xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl) var(--space-2xl); }
+  }
+
+  @media (min-width: 1024px) {
+    .page-title-area { padding: calc(96px + 80px) var(--space-3xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl); }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">Boro TN Law</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">Boro TN Law</span>
+    </a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/about">About Us</a>
+      <a href="/practice-areas">Practice Areas</a>
+      <a href="/blog">Blog</a>
+      <a href="/contact">Contact</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Attorney with Legal Expertise you can rely on</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Murfreesboro, TN</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Contact</h1>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+  <h2>Get In Touch</h2>
+  
+  <p>Thank you for choosing the <a href="/">Boro TN Law, Attorneys at Law.</a></p>
+  
+  <p>Feel free to call anytime during normal business hours or email if you need to reach us after hours!</p>
+
+  <div class="contact-grid">
+    <div>
+      <div class="contact-section">
+        <div class="contact-info">
+          <h3>Contact Information</h3>
+          
+          <div class="contact-item">
+            <strong>Address</strong>
+            415 S Maney Ave<br>
+            Suite 1C<br>
+            Murfreesboro, TN 37130
+          </div>
+
+          <div class="contact-item">
+            <strong>Phone</strong>
+            <a href="tel:615-410-3064">615-410-3064</a>
+          </div>
+
+          <div class="contact-item">
+            <strong>Drop us a line!</strong>
+            <a href="mailto:mjones@borotnlaw.com">mjones@borotnlaw.com</a>
+          </div>
+
+          <div class="social-links">
+            <a href="https://www.facebook.com/MAJLaw/" target="_blank" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/micheal-jones-esq-64199bba/" target="_blank" aria-label="LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-section">
+        <h3>Hours</h3>
+        <ul class="hours-list">
+          <li><span>Mon</span><span>09:00 am – 05:00 pm</span></li>
+          <li><span>Tue</span><span>09:00 am – 05:00 pm</span></li>
+          <li><span>Wed</span><span>09:00 am – 05:00 pm</span></li>
+          <li><span>Thu</span><span>09:00 am – 05:00 pm</span></li>
+          <li><span>Fri</span><span>08:00 am – 04:00 pm</span></li>
+          <li><span>Sat</span><span><strong>Closed</strong></span></li>
+          <li><span>Sun</span><span><strong>Closed</strong></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div>
+      <div class="contact-section">
+        <h3>Practice Areas</h3>
+        <ul class="practice-areas-list">
+          <li><a href="/practice-areas/criminal-law">Criminal Law</a></li>
+          <li><a href="/practice-areas/civil-litigation">Civil Litigation</a></li>
+          <li><a href="/practice-areas/divorce-and-family-law">Divorce &amp; Family Law</a></li>
+          <li><a href="/practice-areas/probate-and-estates">Probate &amp; Estates</a></li>
+          <li><a href="/practice-areas/car-accident">Car Accident Attorney</a></li>
+        </ul>
+      </div>
+
+      <div class="contact-section">
+        <h3>Awards &amp; Recognition</h3>
+        <img src="https://verified-bucket.s3.eu-central-1.amazonaws.com/cert/46369835128825.png" alt="Micheal A. Jones Top 40 Under 40 Lawyers">
+        <img src="https://verified-bucket.s3.eu-central-1.amazonaws.com/badge/46369835128825.png" alt="National Trial Lawyers Top 40 Under 40">
+      </div>
+    </div>
+  </div>
+
+  <div class="map-container">
+    <img src="https://maps.googleapis.com/maps/api/js/StaticMapService.GetMapImage?1m2&1i8725217&2i13194479&2e1&3u17&4m2&1u300&2u150&5m6&1e0&5sen-US&6sus&10b1&12b1&14i47083502&8e1&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=84918" alt="">
+  </div>
+
+  <iframe src="https://www.google.com/maps/embed?origin=mfe&amp;pb=!1m4!2m1!1s415+S+Maney+Ave+Suite,+Murfreesboro,+TN+37130!5e0!6i17" width="100%" height="300" style="border:0;margin-top:1.5rem" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map"></iframe>
+
+  <div class="contact-section">
+    <h2>Boro TN Law, Attorneys at Law</h2>
+    <p>Attorney with Legal Expertise you can rely on Boro TN Law, Attorneys at Law.</p>
+  </div>
+</div>
+
+<footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Boro TN Law</span>
+      <span class="footer-copyright">© 2025 Boro TN Law, PLLC. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/about">About Us</a>
+    <a href="/practice-areas">Practice Areas</a>
+    <a href="/blog">Blog</a>
+    <a href="/contact">Contact Us</a>
+  </div>
+  </footer>
+
+
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+
+</body></html>
