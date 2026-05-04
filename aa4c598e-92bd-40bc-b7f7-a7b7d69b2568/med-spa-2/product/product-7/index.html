@@ -1,0 +1,919 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I'm a product</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+  --canvas-bg: #f0eeeb;
+  --page-bg: #111111;
+  --primary-text: #000000;
+  --accent: #c8ff00;
+  --secondary-bg: rgba(255, 255, 255, 0.45);
+  --input-bg: #ffffff;
+  --meta-text: #777777;
+  --border: #000000;
+  --white: #ffffff;
+  --font-sans: 'Inter', -apple-system, Helvetica Neue, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+  --space-unit: 8px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+  --body-size: 15px;
+  --body-lh: 1.6;
+  --hero-size: clamp(36px, 6vw, 80px);
+  --section-header: 11px;
+  --meta-size: 10px;
+  --service-code-size: 9px;
+}
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: var(--body-size);
+    line-height: var(--body-lh);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--page-bg);
+    color: var(--primary-text);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: var(--space-lg);
+    overflow-wrap: break-word;
+  }
+
+  .canvas {
+    background-color: var(--canvas-bg);
+    width: 100%;
+    max-width: 1400px;
+    border-radius: 4px;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5), 0 8px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+  }
+
+  /* ===== NAVIGATION ===== */
+  .main-nav {
+    padding: var(--space-lg) var(--space-lg);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .nav-links a {
+    color: var(--meta-text);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: var(--service-code-size);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: color 0.2s ease;
+  }
+
+  .nav-links a:hover {
+    color: var(--primary-text);
+  }
+
+  /* ===== HEADER GRID ===== */
+  .header-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    padding: var(--space-2xl) var(--space-lg);
+  }
+
+  .header-col {
+    padding: var(--space-md) 0;
+  }
+
+  .highlight-tag {
+    display: inline-block;
+    background-color: var(--accent);
+    padding: 3px 10px;
+    font-family: var(--font-mono);
+    font-size: var(--meta-size);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    margin-bottom: var(--space-md);
+  }
+
+  .meta-label {
+    font-family: var(--font-mono);
+    font-size: var(--meta-size);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--meta-text);
+    margin-bottom: var(--space-sm);
+  }
+
+  .header-col h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: var(--space-sm);
+  }
+
+  .header-col p {
+    font-size: 0.87rem;
+    color: #444;
+    line-height: 1.55;
+  }
+
+  .establishment-dates {
+    font-family: var(--font-mono);
+    font-size: var(--meta-size);
+    color: var(--meta-text);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: var(--space-md);
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--border);
+    background: var(--input-bg);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+    margin-top: var(--space-md);
+  }
+
+  .search-input:focus {
+    border-color: var(--accent);
+  }
+
+  .search-input::placeholder {
+    color: #bbb;
+  }
+
+  /* ===== DIVIDER ===== */
+  .divider {
+    border: none;
+    height: 2px;
+    background-color: var(--border);
+    margin: 0;
+  }
+
+  /* ===== MAIN CONTENT GRID ===== */
+  .main-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: 500px;
+  }
+
+  .left-column {
+    padding: var(--space-2xl) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--border);
+    min-height: 400px;
+  }
+
+  .doc-ref {
+    font-family: var(--font-mono);
+    font-size: var(--service-code-size);
+    color: var(--meta-text);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: var(--space-xl);
+  }
+
+  .hero-headline {
+    font-size: var(--hero-size);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: var(--space-2xl);
+    max-width: 700px;
+  }
+
+  .hero-headline .accent-phrase {
+    background-color: var(--accent);
+    padding: 0 6px;
+    display: inline;
+  }
+
+  .bottom-content {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-xl);
+    flex-wrap: wrap;
+    margin-top: auto;
+  }
+
+  .editorial-desc {
+    max-width: 380px;
+  }
+
+  .editorial-desc p {
+    font-size: 0.87rem;
+    line-height: 1.65;
+    color: #333;
+  }
+
+  .cta-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-shrink: 0;
+  }
+
+  .cta-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    border: none;
+    outline: none;
+  }
+
+  .cta-circle:hover {
+    transform: scale(1.08);
+  }
+
+  .cta-circle .arrow {
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 12px solid var(--white);
+    margin-left: 3px;
+  }
+
+  .cta-label {
+    font-family: var(--font-mono);
+    font-size: var(--service-code-size);
+    color: var(--meta-text);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: center;
+    max-width: 100px;
+    line-height: 1.4;
+  }
+
+  /* ===== RIGHT SIDEBAR ===== */
+  .right-column {
+    background: var(--secondary-bg);
+    padding: var(--space-2xl) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .service-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+  }
+
+  .service-header .highlight-tag {
+    margin-bottom: 0;
+  }
+
+  .section-title {
+    font-size: var(--section-header);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+  }
+
+  .sidebar-meta {
+    font-family: var(--font-mono);
+    font-size: var(--service-code-size);
+    color: var(--meta-text);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    line-height: 1.7;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .service-list {
+    list-style: none;
+    flex-grow: 1;
+  }
+
+  .service-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    gap: var(--space-md);
+  }
+
+  .service-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .service-code {
+    font-family: var(--font-mono);
+    font-size: var(--service-code-size);
+    color: var(--meta-text);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .service-name {
+    font-size: 0.93rem;
+    font-weight: 600;
+    padding: 2px 4px;
+    margin-left: -4px;
+    transition: background-color 0.15s ease;
+  }
+
+  .service-item:hover .service-name {
+    background-color: var(--accent);
+  }
+
+  .service-description {
+    font-size: 0.8rem;
+    color: #666;
+    line-height: 1.4;
+    margin-top: 2px;
+  }
+
+  .service-price {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .live-status {
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+  }
+
+  .status-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--accent);
+    margin-right: var(--space-xs);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .status-text {
+    font-family: var(--font-mono);
+    font-size: var(--meta-size);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--meta-text);
+  }
+
+  .status-detail {
+    font-family: var(--font-mono);
+    font-size: var(--service-code-size);
+    color: var(--meta-text);
+    margin-top: var(--space-xs);
+    letter-spacing: 0.05em;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer-bar {
+    border-top: 2px solid var(--border);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    text-align: center;
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .brand-circle {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--border);
+    flex-shrink: 0;
+  }
+
+  .brand-text {
+    font-size: var(--meta-size);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+  }
+
+  .footer-copy {
+    font-family: var(--font-mono);
+    font-size: var(--service-code-size);
+    color: var(--meta-text);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .footer-social {
+    font-family: var(--font-mono);
+    font-size: var(--service-code-size);
+    color: var(--meta-text);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .footer-social a {
+    color: var(--meta-text);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .footer-social a:hover {
+    color: var(--primary-text);
+  }
+
+  /* ===== RESPONSIVE — MOBILE ===== */
+  @media (max-width: 768px) {
+    body {
+      padding: var(--space-md);
+    }
+
+    .header-grid {
+      padding: var(--space-lg);
+      gap: var(--space-lg);
+    }
+
+    .left-column {
+      padding: var(--space-lg);
+      min-height: 300px;
+    }
+
+    .right-column {
+      padding: var(--space-lg);
+    }
+
+    .hero-headline {
+      font-size: 2rem;
+    }
+
+    .bottom-content {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: var(--space-lg);
+    }
+
+    .editorial-desc {
+      max-width: 100%;
+    }
+
+    .nav-links {
+      flex-direction: column;
+      gap: var(--space-md);
+      align-items: center;
+    }
+
+    .service-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-xs);
+    }
+
+    .service-price {
+      align-self: flex-end;
+    }
+
+    .footer-bar {
+      padding: var(--space-md);
+    }
+
+    .instagram-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ===== RESPONSIVE — TABLET+ ===== */
+  @media (min-width: 768px) {
+    body {
+      padding: var(--space-xl);
+    }
+
+    .header-grid {
+      padding: var(--space-3xl) var(--space-2xl);
+      gap: var(--space-2xl);
+    }
+
+    .left-column {
+      padding: var(--space-3xl) var(--space-2xl);
+    }
+
+    .right-column {
+      padding: var(--space-3xl) var(--space-2xl);
+    }
+
+    .footer-bar {
+      flex-direction: row;
+      justify-content: space-between;
+      padding: var(--space-lg) var(--space-2xl);
+    }
+  }
+
+  /* ===== RESPONSIVE — DESKTOP ===== */
+  @media (min-width: 900px) {
+    body {
+      padding: var(--space-2xl);
+    }
+
+    .header-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: var(--space-2xl);
+      padding: var(--space-3xl) var(--space-2xl);
+    }
+
+    .main-grid {
+      grid-template-columns: 3fr 2fr;
+      min-height: 600px;
+    }
+
+    .left-column {
+      border-bottom: none;
+      border-right: 2px solid var(--border);
+      min-height: 550px;
+    }
+
+    .hero-headline {
+      margin-bottom: var(--space-3xl);
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .header-grid {
+      padding: var(--space-4xl) var(--space-3xl);
+    }
+
+    .left-column {
+      padding: var(--space-3xl);
+    }
+
+    .right-column {
+      padding: var(--space-3xl);
+    }
+
+    .footer-bar {
+      padding: var(--space-lg) var(--space-3xl);
+    }
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: 160px var(--pad-x, 1.5rem) 60px;
+    background: var(--text-black, var(--text-primary, var(--bg-primary, #1a1a1a)));
+    color: var(--bg-cream, var(--nav-text, #ffffff));
+  }
+  .page-title-inner { max-width: 1200px; margin: 0 auto; }
+  .page-title-area h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 600; line-height: 1.1; letter-spacing: -0.03em; }
+
+  /* Content Area */
+  .content-area { padding: 64px var(--pad-x, 1.5rem); max-width: 1200px; margin: 0 auto; }
+  .content-area h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600; line-height: 1.15; margin-bottom: 24px; }
+  .content-area h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 16px; }
+  .content-area p { font-size: 1rem; line-height: 1.7; margin-bottom: 24px; }
+  .content-area ul, .content-area ol { margin-bottom: 24px; padding-left: 24px; }
+  .content-area li { margin-bottom: 8px; line-height: 1.7; }
+  .content-area img { max-width: 100%; height: auto; border-radius: 12px; margin-bottom: 24px; }
+
+  /* Product Specific Styles */
+  .product-image {
+    max-width: 500px;
+    width: 100%;
+    margin: 24px 0;
+  }
+
+  .product-description {
+    background: var(--secondary-bg);
+    padding: 16px;
+    border-left: 4px solid var(--accent);
+    font-family: var(--font-mono);
+    margin: 24px 0;
+  }
+
+  .product-details {
+    margin: 24px 0;
+  }
+
+  .product-meta {
+    font-family: var(--font-mono);
+    font-size: var(--service-code-size);
+    color: var(--meta-text);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+
+  .product-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-text);
+    margin: 16px 0;
+  }
+
+  .add-to-cart {
+    background: var(--accent);
+    color: var(--primary-text);
+    padding: 12px 24px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    margin: 16px 0;
+  }
+
+  .add-to-cart:hover {
+    opacity: 0.8;
+  }
+
+  .product-info {
+    margin: 32px 0;
+  }
+
+  .info-section {
+    margin: 24px 0;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .info-section:last-child {
+    border-bottom: none;
+  }
+
+  .info-section h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+
+  .social-share {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 24px 0;
+  }
+
+  .social-share a {
+    color: var(--meta-text);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: var(--service-code-size);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: color 0.2s ease;
+  }
+
+  .social-share a:hover {
+    color: var(--primary-text);
+  }
+
+  .navigation-menu {
+    margin: 32px 0;
+  }
+
+  .navigation-menu h3 {
+    font-size: var(--section-header);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 16px;
+  }
+
+  .nav-links {
+    list-style: none;
+  }
+
+  .nav-links li {
+    margin-bottom: 8px;
+  }
+
+  .nav-links a {
+    color: var(--meta-text);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: var(--service-code-size);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: color 0.2s ease;
+  }
+
+  .nav-links a:hover {
+    color: var(--primary-text);
+  }
+
+  .instagram-section {
+    margin: 32px 0;
+  }
+
+  .instagram-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+  }
+</style>
+
+<div class="canvas">
+
+<!-- NAVIGATION -->
+<nav class="main-nav">
+  <ul class="nav-links">
+    <li><a href="/">HOME</a></li>
+    <li><a href="/services">SERVICES</a></li>
+    <li><a href="/about">ABOUT</a></li>
+    <li><a href="/policies">POLICIES</a></li>
+    <li><a href="/faq">FAQ</a></li>
+    <li><a href="/locations">LOCATIONS</a></li>
+    <li><a href="/payment-plans">PAYMENT PLANS</a></li>
+  </ul>
+</nav>
+
+<!-- HEADER -->
+
+<hr class="divider">
+
+<div class="main-grid">
+  <div class="left-column">
+    <div class="doc-ref">Face Card Clinics, where beauty meets expertise</div>
+    <div class="hero-headline">I'm a <span class="accent-phrase">product</span></div>
+    
+    <img src="https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/684280647_17931123780257479_3921485425056154458_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=X4nmM3vlAN4Q7kNvwGrMMHU&_nc_oc=AdpyJ6shGyIOCVGu9Ga1iChRPzRhmS1Von6gPC5-oFz74Ge6JPuqYcyJrd4ksGYOPh8&_nc_zt=23&_nc_ht=scontent-den2-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=8arz-dnyXoPbutpXQR49bA&_nc_tpa=Q5bMBQF28jYvvqJtpJcyAJzCi7Auhuk9lm1pLB0ePACtb8S52pBvcODx63e7J2VUmAo3Y_LoQGln2Tdg&oh=00_Af5nmt0JGsEM51NG3qWipPBDW9ALs6aivEM1S7llq72oew&oe=69FECD22" alt="Russian lip technique results" style="max-width: 100%; height: auto; border-radius: 8px; margin-bottom: 24px;">
+    
+    <div class="bottom-content">
+      <div class="editorial-desc">
+        <p>Face Card Clinics, where beauty meets expertise</p>
+      </div>
+      
+      <div class="cta-group">
+        <button class="cta-circle">
+          <div class="arrow"></div>
+        </button>
+        <div class="cta-label">View Details</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="right-column">
+    <div class="service-header">
+      <span class="highlight-tag">ACTIVE</span>
+      <h2 class="section-title">SERVICES</h2>
+    </div>
+    
+    <div class="sidebar-meta">
+      SKU: 632835642834572<br>
+      STATUS: AVAILABLE<br>
+      CATEGORY: AESTHETIC
+    </div>
+
+    <ul class="service-list">
+      <li class="service-item">
+        <div class="service-left">
+          <div class="service-code">RLT-001</div>
+          <div class="service-name">Russian Lip Technique</div>
+          <div class="service-description">Signature technique to enhance shape, height, and definition while keeping results soft, symmetrical, and luxurious</div>
+        </div>
+      </li>
+      <li class="service-item">
+        <div class="service-left">
+          <div class="service-code">LF-002</div>
+          <div class="service-name">Lip Filler</div>
+          <div class="service-description">Lip enhancement services for volume and shape</div>
+        </div>
+      </li>
+    </ul>
+
+    <div class="live-status">
+      <div>
+        <span class="status-dot"></span>
+        <span class="status-text">NOW AVAILABLE</span>
+      </div>
+      <div class="status-detail">Ready for immediate purchase</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- Page Content -->
+<div class="content-area">
+  <img src="https://static.wixstatic.com/media/c4a100_f6c71691c72a4609a75c481009a621f3~mv2.png/v1/fill/w_498,h_498,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/c4a100_f6c71691c72a4609a75c481009a621f3~mv2.png" alt="I'm a product" class="product-image">
+
+  <img src="https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/682683853_17930609355257479_4255005067781603010_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=101&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=iYMbw11FVIoQ7kNvwGGT4OJ&_nc_oc=Adqdlj3ZT3uk-Ym6ZtfwahqkUU-eqB_2K9u9ZU8wOq27Il4tjQbR7n7Vl7T0gcLCb8o&_nc_zt=23&_nc_ht=scontent-den2-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=8arz-dnyXoPbutpXQR49bA&_nc_tpa=Q5bMBQEY9dq76hzxQNSjn9Wrqp-PNQVBsY4mkyUzlpKwqTtwt0gqRki3adneCGwGctxhfTzcQxTPR64z&oh=00_Af5wEmeu-ZaiEQAsUeMAzF1nqvf9UjB5GCUxl8NU60p0xA&oe=69FED24D" alt="Professional lip enhancement results" style="max-width: 100%; height: auto; border-radius: 8px; margin-bottom: 24px;">
+
+  <div class="product-description">
+    I'm a product description. I'm a great place to add more details about your product such as sizing, material, care instructions and cleaning instructions.
+  </div>
+
+  <div class="product-details">
+    <div class="product-meta">SKU: 632835642834572</div>
+    <div class="product-price">40,00 € Price</div>
+    <button class="add-to-cart">Add to Cart</button>
+  </div>
+
+  <div class="product-info">
+    <div class="info-section">
+      <h3>PRODUCT INFO</h3>
+      <p>I'm a product detail. I'm a great place to add more information about your product such as sizing, material, care and cleaning instructions. This is also a great space to write what makes this product special and how your customers can benefit from this item.</p>
+    </div>
+
+    <div class="info-section">
+      <h3>RETURN &amp; REFUND POLICY</h3>
+      <p>I'm a Return and Refund policy. I'm a great place to let your customers know what to do in case they are dissatisfied with their purchase. Having a straightforward refund or exchange policy is a great way to build trust and reassure your customers that they can buy with confidence.</p>
+    </div>
+
+    <div class="info-section">
+      <h3>SHIPPING INFO</h3>
+      <p>I'm a shipping policy. I'm a great place to add more information about your shipping methods, packaging and cost. Providing straightforward information about your shipping policy is a great way to build trust and reassure your customers that they can buy from you with confidence.</p>
+    </div>
+  </div>
+
+  <div class="social-share">
+    <a href="http://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.joannainjects.com%2Fproduct-page%2Fi-m-a-product-7&amp;title=I%27m+a+product">Share on Facebook</a>
+    <a href="http://pinterest.com/pin/create/button/?url=https%3A%2F%2Fwww.joannainjects.com%2Fproduct-page%2Fi-m-a-product-7&amp;media=https%3A%2F%2Fstatic.wixstatic.com%2Fmedia%2Fc4a100_f6c71691c72a4609a75c481009a621f3~mv2.png%2Fv1%2Ffill%2Fw_2000%2Ch_2000%2Cal_c%2Fc4a100_f6c71691c72a4609a75c481009a621f3~mv2.png&amp;description=I%27m+a+product">Pin on Pinterest</a>
+    <a href="https://api.whatsapp.com/send?text=https%3A%2F%2Fwww.joannainjects.com%2Fproduct-page%2Fi-m-a-product-7">Share on WhatsApp</a>
+    <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.joannainjects.com%2Fproduct-page%2Fi-m-a-product-7&amp;text=I%27m+a+product%0A">Share on X</a>
+  </div>
+
+  <div class="navigation-menu">
+    <h3>LOOK AROUND</h3>
+    <ul class="nav-links">
+      <li><a href="/">HOME</a></li>
+      <li><a href="/services">SERVICES</a></li>
+      <li><a href="/about">ABOUT</a></li>
+      <li><a href="/policies">POLICIES</a></li>
+      <li><a href="/faq">FAQ</a></li>
+      <li><a href="/locations">LOCATIONS</a></li>
+      <li><a href="/payment-plans">PAYMENT PLANS</a></li>
+    </ul>
+  </div>
+
+  <div class="instagram-section">
+    <div class="instagram-grid">
+      <img src="https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/684280647_17931123780257479_3921485425056154458_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=100&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&amp;_nc_ohc=X4nmM3vlAN4Q7kNvwGrMMHU&amp;_nc_oc=AdpyJ6shGyIOCVGu9Ga1iChRPzRhmS1Von6gPC5-oFz74Ge6JPuqYcyJrd4ksGYOPh8&amp;_nc_zt=23&amp;_nc_ht=scontent-den2-1.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=8arz-dnyXoPbutpXQR49bA&amp;_nc_tpa=Q5bMBQF28jYvvqJtpJcyAJzCi7Auhuk9lm1pLB0ePACtb8S52pBvcODx63e7J2VUmAo3Y_LoQGln2Tdg&amp;oh=00_Af5nmt0JGsEM51NG3qWipPBDW9ALs6aivEM1S7llq72oew&amp;oe=69FECD22" alt="Sadaf never misses 🏹🖤  She uses our signature Russian lip technique to enhance shape, height, and definition while keeping the results soft, symmetrical, and luxurious. Her artistry is in the details 💉👄  Swipe for more angles.  Book with our trusted lead injector at the Honolulu Location. @sadaf.injects 💉✨   #RussianLips #LipFiller #RussianLipTechnique #HonoluluInjector #lipenhancement">
+      
+      <img src="https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/682683853_17930609355257479_4255005067781603010_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=101&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=iYMbw11FVIoQ7kNvwGGT4OJ&amp;_nc_oc=Adqdlj3ZT3uk-Ym6ZtfwahqkUU-eqB_2K9u9ZU8wOq27Il4tjQbR7n7Vl7T0gcLCb8o&amp;_nc_zt=23&amp;_nc_ht=scontent-den2-1.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=8arz-dnyXoPbutpXQR49bA&amp;_nc_tpa=Q5bMBQEY9dq76hzxQNSjn9Wrqp-PNQVBsY4mkyUzlpKwqTtwt0gqRki3adneCGwGctxhfTzcQxTPR64z&amp;oh=00_Af5wEmeu-ZaiEQAsUeMAzF1nqvf9UjB5GCUxl8NU60p0xA&amp;oe=69FED24D" alt="Perfect lips aren't an accident… they're precision, balance, and knowing exactly when to add just enough.  Subtle volume. Clean shape. Real results you can actually wear every day.  If your lips don't look like you, they're not done right.  Ready for your perfect set? Tap the link in bio or DM us " lips"="" to="" book="" your="" appointment.="" —="" face="" card="" clinics"="">
+    </div>
+  </div>
+</div>
+
+<footer class="footer-bar">
+    <div class="footer-brand">
+      <span class="brand-circle"></span>
+      <span class="brand-text">joannainjects.com</span>
+    </div>
+    <span class="footer-copy">© 2024 Atelier Grooming Collective. All Rights Reserved.</span>
+    <div class="footer-social">
+      <a href="#">[Instagram]</a>
+      <a href="#">[Twitter]</a>
+      <a href="#">[Are.na]</a>
+      <a href="#">[Email]</a>
+    </div>
+  </footer>

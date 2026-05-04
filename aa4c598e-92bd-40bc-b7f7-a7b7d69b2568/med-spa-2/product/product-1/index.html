@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I'm a product</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --canvas-bg: #f0eeeb;
+  --page-bg: #111111;
+  --primary-text: #000000;
+  --accent: #c8ff00;
+  --secondary-bg: rgba(255, 255, 255, 0.45);
+  --input-bg: #ffffff;
+  --meta-text: #777777;
+  --border: #000000;
+  --white: #ffffff;
+  --font-sans: 'Inter', -apple-system, Helvetica Neue, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+  --space-unit: 8px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+  --body-size: 15px;
+  --body-lh: 1.6;
+  --hero-size: clamp(36px, 6vw, 80px);
+  --section-header: 11px;
+  --meta-size: 10px;
+  --service-code-size: 9px;
+}
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: var(--body-size);
+    line-height: var(--body-lh);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--page-bg);
+    color: var(--primary-text);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: var(--space-lg);
+    overflow-wrap: break-word;
+  }
+
+  .canvas {
+    background-color: var(--canvas-bg);
+    width: 100%;
+    max-width: 1400px;
+    border-radius: 4px;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5), 0 8px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+  }
+
+  /* ===== HEADER GRID ===== */
+  .header-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    padding: var(--space-2xl) var(--space-lg);
+  }
+
+  .header-col {
+    padding: var(--space-md) 0;
+  }
+
+  .highlight-tag {
+    display: inline-block;
+    background-color: var(--accent);
+    padding: 3px 10px;
+    font-family: var(--font-mono);
+    font-size: var(--meta-size);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    margin-bottom: var(--space-md);
+  }
+
+  .meta-label {
+    font-family: var(--font-mono);
+    font-size: var(--meta-size);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--meta-text);
+    margin-bottom: var(--space-sm);
+  }
+
+  .header-col h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: var(--space-sm);
+  }
+
+  .header-col p {
+    font-size: 0.87rem;
+    color: #444;
+    line-height: 1.55;
+  }
+
+  .establishment-dates {
+    font-family: var(--font-mono);
+    font-size: var(--meta-size);
+    color: var(--meta-text);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: var(--space-md);
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--border);
+    background: var(--input-bg);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+    margin-top: var(--space-md);
+  }
+
+  .search-input:focus {
+    border-color: var(--accent);
+  }
+
+  .search-input::placeholder {
+    color: #bbb;
+  }
+
+  /* ===== DIVIDER ===== */
+  .divider {
+    border: none;
+    height: 2px;
+    background-color: var(--border);
+    margin: 0;
+  }
+
+  /* ===== MAIN CONTENT GRID ===== */
+  .main-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: 500px;
+  }
+
+  .left-column {
+    padding: var(--space-2xl) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--border);
+    min-height: 400px;
+  }
+
+  .doc-ref {
+    font-family: var(--font-mono);
+    font-size: var(--service-code-size);
+    color: var(--meta-text);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: var(--space-xl);
+  }
+
+  .hero-headline {
+    font-size: var(--hero-size);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: var(--space-2xl);
+    max-width: 700px;
+  }
+
+  .hero-headline .accent-phrase {
+    background-color: var(--accent);
+    padding: 0 6px;
+    display: inline;
+  }
+
+  .bottom-content {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-xl);
+    flex-wrap: wrap;
+    margin-top: auto;
+  }
+
+  .editorial-desc {
+    max-width: 380px;
+  }
+
+  .editorial-desc p {
+    font-size: 0.87rem;
+    line-height: 1.65;
+    color: #333;
+  }
+
+  .cta-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-shrink: 0;
+  }
+
+  .cta-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    border: none;
+    outline: none;
+  }
+
+  .cta-circle:hover {
+    transform: scale(1.08);
+  }
+
+  .cta-circle .arrow {
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 12px solid var(--white);
+    margin-left: 3px;
+  }
+
+  .cta-label {
+    font-family: var(--font-mono);
+    font-size: var(--service-code-size);
+    color: var(--meta-text);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: center;
+    max-width: 100px;
+    line-height: 1.4;
+  }
+
+  /* ===== RIGHT SIDEBAR ===== */
+  .right-column {
+    background: var(--secondary-bg);
+    padding: var(--space-2xl) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .service-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+  }
+
+  .service-header .highlight-tag {
+    margin-bottom: 0;
+  }
+
+  .section-title {
+    font-size: var(--section-header);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+  }
+
+  .sidebar-meta {
+    font-family: var(--font-mono);
+    font-size: var(--service-code-size);
+    color: var(--meta-text);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    line-height: 1.7;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .service-list {
+    list-style: none;
+    flex-grow: 1;
+  }
+
+  .service-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    gap: var(--space-md);
+  }
+
+  .service-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .service-code {
+    font-family: var(--font-mono);
+    font-size: var(--service-code-size);
+    color: var(--meta-text);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .service-name {
+    font-size: 0.93rem;
+    font-weight: 600;
+    padding: 2px 4px;
+    margin-left: -4px;
+    transition: background-color 0.15s ease;
+  }
+
+  .service-description {
+    font-size: 0.8rem;
+    color: #555;
+    line-height: 1.4;
+    margin-top: 2px;
+  }
+
+  .service-item:hover .service-name {
+    background-color: var(--accent);
+  }
+
+  .service-price {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .live-status {
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+  }
+
+  .status-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--accent);
+    margin-right: var(--space-xs);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .status-text {
+    font-family: var(--font-mono);
+    font-size: var(--meta-size);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--meta-text);
+  }
+
+  .status-detail {
+    font-family: var(--font-mono);
+    font-size: var(--service-code-size);
+    color: var(--meta-text);
+    margin-top: var(--space-xs);
+    letter-spacing: 0.05em;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer-bar {
+    border-top: 2px solid var(--border);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    text-align: center;
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .brand-circle {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--border);
+    flex-shrink: 0;
+  }
+
+  .brand-text {
+    font-size: var(--meta-size);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+  }
+
+  .footer-copy {
+    font-family: var(--font-mono);
+    font-size: var(--service-code-size);
+    color: var(--meta-text);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .footer-social {
+    font-family: var(--font-mono);
+    font-size: var(--service-code-size);
+    color: var(--meta-text);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .footer-social a {
+    color: var(--meta-text);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .footer-social a:hover {
+    color: var(--primary-text);
+  }
+
+  /* Gallery Grid */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-md);
+    margin: var(--space-2xl) 0;
+  }
+
+  .gallery-item {
+    aspect-ratio: 1;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.05);
+  }
+
+  .nav-menu {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin: var(--space-lg) 0;
+  }
+
+  .nav-menu a {
+    color: var(--primary-text);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    transition: color 0.2s ease;
+  }
+
+  .nav-menu a:hover {
+    color: var(--meta-text);
+  }
+
+  /* ===== RESPONSIVE — MOBILE ===== */
+  @media (max-width: 768px) {
+    body {
+      padding: var(--space-md);
+    }
+
+    .header-grid {
+      padding: var(--space-xl) var(--space-md);
+      gap: var(--space-lg);
+    }
+
+    .left-column {
+      padding: var(--space-xl) var(--space-md);
+    }
+
+    .right-column {
+      padding: var(--space-xl) var(--space-md);
+    }
+
+    .footer-bar {
+      padding: var(--space-lg) var(--space-md);
+    }
+
+    .hero-headline {
+      font-size: clamp(24px, 8vw, 48px);
+    }
+
+    .bottom-content {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .gallery-grid {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-sm);
+    }
+  }
+
+  /* ===== RESPONSIVE — TABLET+ ===== */
+  @media (min-width: 768px) {
+    body {
+      padding: var(--space-xl);
+    }
+
+    .header-grid {
+      padding: var(--space-3xl) var(--space-2xl);
+      gap: var(--space-2xl);
+    }
+
+    .left-column {
+      padding: var(--space-3xl) var(--space-2xl);
+    }
+
+    .right-column {
+      padding: var(--space-3xl) var(--space-2xl);
+    }
+
+    .footer-bar {
+      flex-direction: row;
+      justify-content: space-between;
+      padding: var(--space-lg) var(--space-2xl);
+    }
+
+    .gallery-grid {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
+    .nav-menu {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .nav-menu a {
+      border-bottom: none;
+      border-right: 1px solid rgba(0, 0, 0, 0.1);
+      padding: var(--space-sm) var(--space-md);
+    }
+
+    .nav-menu a:last-child {
+      border-right: none;
+    }
+  }
+
+  /* ===== RESPONSIVE — DESKTOP ===== */
+  @media (min-width: 900px) {
+    body {
+      padding: var(--space-2xl);
+    }
+
+    .header-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: var(--space-2xl);
+      padding: var(--space-3xl) var(--space-2xl);
+    }
+
+    .main-grid {
+      grid-template-columns: 3fr 2fr;
+      min-height: 600px;
+    }
+
+    .left-column {
+      border-bottom: none;
+      border-right: 2px solid var(--border);
+      min-height: 550px;
+    }
+
+    .hero-headline {
+      margin-bottom: var(--space-3xl);
+    }
+
+    .gallery-grid {
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .header-grid {
+      padding: var(--space-4xl) var(--space-3xl);
+    }
+
+    .left-column {
+      padding: var(--space-3xl);
+    }
+
+    .right-column {
+      padding: var(--space-3xl);
+    }
+
+    .footer-bar {
+      padding: var(--space-lg) var(--space-3xl);
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="canvas">
+
+  <!-- Header -->
+  <div class="header-grid">
+    <div class="header-col">
+      <div class="highlight-tag">PREMIUM</div>
+      <h3>Face Card Clinics, where beauty meets expertise</h3>
+      <p>Precision, balance, and artistry in every treatment. Enhancing your natural beauty with expert techniques and luxurious results.</p>
+      <div class="establishment-dates">EST. 2024 — AUSTIN • HONOLULU</div>
+      <nav>
+        <div class="nav-menu">
+          <a href="/">HOME</a>
+          <a href="/services">SERVICES</a>
+          <a href="/about">ABOUT</a>
+          <a href="/policies">POLICIES</a>
+          <a href="/faq">FAQ</a>
+          <a href="/locations">LOCATIONS</a>
+          <a href="/payment-plans">PAYMENT PLANS</a>
+        </div>
+      </nav>
+    </div>
+
+    <div class="header-col">
+      <div class="meta-label">SERVICES</div>
+      <h3>Russian Lip Technique</h3>
+      <p>Our signature technique enhances shape, height, and definition while keeping results soft, symmetrical, and luxurious.</p>
+    </div>
+
+    <div class="header-col">
+      <div class="meta-label">CONTACT</div>
+      <h3>Book Your Appointment</h3>
+      <p>Experience the Face Card difference with our expert injectors in Austin and Honolulu locations.</p>
+      <input type="text" class="search-input" placeholder="Search services...">
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Main Content -->
+  <div class="main-grid">
+    <div class="left-column">
+      <div class="doc-ref">PRODUCT-001</div>
+      
+      <h1 class="hero-headline">
+        <span class="accent-phrase">Face Card</span> Clinics Product Showcase
+      </h1>
+
+      <div style="margin: var(--space-2xl) 0;">
+        <img src="https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/684280647_17931123780257479_3921485425056154458_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=X4nmM3vlAN4Q7kNvwGrMMHU&_nc_oc=AdpyJ6shGyIOCVGu9Ga1iChRPzRhmS1Von6gPC5-oFz74Ge6JPuqYcyJrd4ksGYOPh8&_nc_zt=23&_nc_ht=scontent-den2-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=8arz-dnyXoPbutpXQR49bA&_nc_tpa=Q5bMBQF28jYvvqJtpJcyAJzCi7Auhuk9lm1pLB0ePACtb8S52pBvcODx63e7J2VUmAo3Y_LoQGln2Tdg&oh=00_Af5nmt0JGsEM51NG3qWipPBDW9ALs6aivEM1S7llq72oew&oe=69FECD22" alt="Russian lip technique results" style="width: 100%; max-width: 400px; height: auto; border-radius: 8px;">
+      </div>
+
+      <div class="bottom-content">
+        <div class="editorial-desc">
+          <p>Discover our comprehensive range of aesthetic treatments designed to enhance your natural beauty. From Russian lip techniques to advanced facial balancing, each service is performed with precision and artistry.</p>
+        </div>
+        
+        <div class="cta-group">
+          <button class="cta-circle">
+            <div class="arrow"></div>
+          </button>
+          <div class="cta-label">APPOINTMENT</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-column">
+      <div class="service-header">
+        <div class="highlight-tag">LIVE</div>
+        <h2 class="section-title">TREATMENTS</h2>
+      </div>
+
+      <div class="sidebar-meta">
+        AVAILABLE LOCATIONS<br>
+        AUSTIN, TX • HONOLULU, HI<br>
+        APPOINTMENTS OPEN
+      </div>
+
+      <ul class="service-list">
+        <li class="service-item">
+          <div class="service-left">
+            <div class="service-code">FCC-001</div>
+            <div class="service-name">Russian Lip Technique</div>
+          </div>
+          <div class="service-price">Premium</div>
+        </li>
+        
+        <li class="service-item">
+          <div class="service-left">
+            <div class="service-code">FCC-002</div>
+            <div class="service-name">Lip Filler</div>
+            <div class="service-description">Enhances natural lip shape, restores volume, and creates effortless confidence</div>
+          </div>
+          <div class="service-price">Standard</div>
+        </li>
+        
+        <li class="service-item">
+          <div class="service-left">
+            <div class="service-code">FCC-003</div>
+            <div class="service-name">Facial Balancing</div>
+            <div class="service-description">Strategic filler in the nose, chin, jaw, and lips creates balance from every angle</div>
+          </div>
+          <div class="service-price">Premium</div>
+        </li>
+        
+        <li class="service-item">
+          <div class="service-left">
+            <div class="service-code">FCC-004</div>
+            <div class="service-name">Dermal Fillers</div>
+            <div class="service-description">Enhances natural features with precision placement and advanced technique</div>
+          </div>
+          <div class="service-price">Standard</div>
+        </li>
+        
+        <li class="service-item">
+          <div class="service-left">
+            <div class="service-code">FCC-005</div>
+            <div class="service-name">Botox/Tox</div>
+            <div class="service-description">Small, consistent treatments to maintain a smoother, more refreshed look</div>
+          </div>
+          <div class="service-price">Standard</div>
+        </li>
+        
+        <li class="service-item">
+          <div class="service-left">
+            <div class="service-code">FCC-006</div>
+            <div class="service-name">Perfect Derma Peel</div>
+            <div class="service-description">Reveals smoother texture, brighter tone, and skin that looks alive again</div>
+          </div>
+          <div class="service-price">Premium</div>
+        </li>
+
+        <li class="service-item">
+          <div class="service-left">
+            <div class="service-code">FCC-007</div>
+            <div class="service-name">Aerolase Neo Elite Laser</div>
+            <div class="service-description">Targets acne, inflammation, and uneven skin without harsh recovery</div>
+          </div>
+          <div class="service-price">Premium</div>
+        </li>
+
+        <li class="service-item">
+          <div class="service-left">
+            <div class="service-code">FCC-008</div>
+            <div class="service-name">Chin Filler</div>
+            <div class="service-description">Strategic enhancement for facial balance and structure</div>
+          </div>
+          <div class="service-price">Standard</div>
+        </li>
+
+        <li class="service-item">
+          <div class="service-left">
+            <div class="service-code">FCC-009</div>
+            <div class="service-name">Jaw Filler</div>
+            <div class="service-description">Sculpts and defines jawline for improved facial structure</div>
+          </div>
+          <div class="service-price">Standard</div>
+        </li>
+
+        <li class="service-item">
+          <div class="service-left">
+            <div class="service-code">FCC-010</div>
+            <div class="service-name">Non-Surgical Nose Augmentation</div>
+            <div class="service-description">Enhances nose shape without surgery as part of full face harmony</div>
+          </div>
+          <div class="service-price">Premium</div>
+        </li>
+
+        <li class="service-item">
+          <div class="service-left">
+            <div class="service-code">FCC-011</div>
+            <div class="service-name">PRP Hair Restoration Therapy</div>
+            <div class="service-description">Uses body's own growth factors to stimulate dormant hair follicles and support stronger, thicker hair</div>
+          </div>
+          <div class="service-price">Premium</div>
+        </li>
+
+        <li class="service-item">
+          <div class="service-left">
+            <div class="service-code">FCC-012</div>
+            <div class="service-name">Cheek Filler</div>
+            <div class="service-description">Strategic enhancement for facial balancing and improved proportions</div>
+          </div>
+          <div class="service-price">Standard</div>
+        </li>
+      </ul>
+
+      <div class="live-status">
+        <div class="status-text">
+          <span class="status-dot"></span>
+          BOOKINGS OPEN
+        </div>
+        <div class="status-detail">Next available: Today</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Navigation Section -->
+  <div style="padding: var(--space-2xl) var(--space-lg);">
+    <div class="meta-label">LOOK AROUND</div>
+    <div class="nav-menu">
+      <a href="/">HOME</a>
+      <a href="/services">SERVICES</a>
+      <a href="/about">ABOUT</a>
+      <a href="/policies">POLICIES</a>
+      <a href="/faq">FAQ</a>
+      <a href="/locations">LOCATIONS</a>
+      <a href="/payment-plans">PAYMENT PLANS</a>
+    </div>
+  </div>
+
+  <!-- Gallery -->
+  <div style="padding: 0 var(--space-lg) var(--space-2xl);">
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/684280647_17931123780257479_3921485425056154458_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=100&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&amp;_nc_ohc=X4nmM3vlAN4Q7kNvwGrMMHU&amp;_nc_oc=AdpyJ6shGyIOCVGu9Ga1iChRPzRhmS1Von6gPC5-oFz74Ge6JPuqYcyJrd4ksGYOPh8&amp;_nc_zt=23&amp;_nc_ht=scontent-den2-1.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=8arz-dnyXoPbutpXQR49bA&amp;_nc_tpa=Q5bMBQF28jYvvqJtpJcyAJzCi7Auhuk9lm1pLB0ePACtb8S52pBvcODx63e7J2VUmAo3Y_LoQGln2Tdg&amp;oh=00_Af5nmt0JGsEM51NG3qWipPBDW9ALs6aivEM1S7llq72oew&amp;oe=69FECD22" alt="Russian lip technique results">
+      </div>
+      
+      <div class="gallery-item">
+        <img src="https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/682683853_17930609355257479_4255005067781603010_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=101&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=iYMbw11FVIoQ7kNvwGGT4OJ&amp;_nc_oc=Adqdlj3ZT3uk-Ym6ZtfwahqkUU-eqB_2K9u9ZU8wOq27Il4tjQbR7n7Vl7T0gcLCb8o&amp;_nc_zt=23&amp;_nc_ht=scontent-den2-1.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=8arz-dnyXoPbutpXQR49bA&amp;_nc_tpa=Q5bMBQEY9dq76hzxQNSjn9Wrqp-PNQVBsY4mkyUzlpKwqTtwt0gqRki3adneCGwGctxhfTzcQxTPR64z&amp;oh=00_Af5wEmeu-ZaiEQAsUeMAzF1nqvf9UjB5GCUxl8NU60p0xA&amp;oe=69FED24D" alt="Perfect lip enhancement results">
+      </div>
+      
+      <div class="gallery-item">
+        <img src="https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/682379791_17930334759257479_6504391279674061033_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=104&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&amp;_nc_ohc=Wf9gVMcczJIQ7kNvwGznvgI&amp;_nc_oc=AdpAk7RotnaHzBHnL13JC0XcJHKehFalpFAS4u26L7g5qEk9P9S-wtukhQ7DfD8p1Zo&amp;_nc_zt=23&amp;_nc_ht=scontent-den2-1.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=8arz-dnyXoPbutpXQR49bA&amp;_nc_tpa=Q5bMBQGRBpzQq15_fwr9d6YWP9HVfo4zl2jlWQHQLdhPLUkLJJWmeRIluOVvRhoYC5Tu8TcXOExmCbA-&amp;oh=00_Af6hK5xTi7-S2BEiW2P4vV_GFHfBlo_L4M3WApamFs5PVQ&amp;oe=69FEC2CB" alt="May special offer">
+      </div>
+      
+      <div class="gallery-item">
+        <img src="https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/683426694_17930030376257479_4570832037827723303_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=105&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=kuepHr3FvvYQ7kNvwE47Khx&amp;_nc_oc=AdpY4M4vz82EOshdgaiDdT0sfbmIKz4pfSiwT8VnztT_JO2MO23_w4Fhz0KH3f4EaH4&amp;_nc_zt=23&amp;_nc_ht=scontent-den2-1.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=8arz-dnyXoPbutpXQR49bA&amp;_nc_tpa=Q5bMBQEz3k6B7SJfvBSyeY71cUUu_JsfyqVS29dVYiApgGsf_LoN2juCp7qQGMDVE0HreOlo2nVnH6fa&amp;oh=00_Af5ypYCwJMKd0Y2oCEL4ANxXqIuhCm_FgpkN1A9p5wQiBQ&amp;oe=69FEB3D8" alt="Precision lip work">
+      </div>
+      
+      <div class="gallery-item">
+        <img src="https://scontent-den2-1.cdninstagram.com/v/t51.71878-15/673139030_1284058059853572_2198525018291511002_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=108&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=L8MS-UW9sFMQ7kNvwFH0ksw&amp;_nc_oc=Adpf8cbLGmqgbQj0aClGGZndKEWmZ9bmslbKQnn0SRRTSzPatYBmaNTnode0HUwcapU&amp;_nc_zt=23&amp;_nc_ht=scontent-den2-1.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=8arz-dnyXoPbutpXQR49bA&amp;_nc_tpa=Q5bMBQE_5k-tvbh4jSZbXBPEmgJS7yHGrIB2YNuW9GJhvcOIVjX9Vj9UBMDrbcQbelivmFpeoRy6vggf&amp;oh=00_Af6_yBPXBsdEf7BexpFY63mPtPWBJgU11Epg3pjO-EdjNg&amp;oe=69FEAC93" alt="Full face harmony results">
+      </div>
+      
+      <div class="gallery-item">
+        <img src="https://scontent-den2-1.cdninstagram.com/v/t51.71878-15/661764594_1316078244002923_5723286592374170095_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=105&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=Tc2q5FS5qwEQ7kNvwEo1w8T&amp;_nc_oc=AdrMO8LfoyFAEgFCI1WfHF7-qeVLfQlZEtrV8zHb1dSVNCxxM_VEUzpJMfmBuV_mFP4&amp;_nc_zt=23&amp;_nc_ht=scontent-den2-1.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=8arz-dnyXoPbutpXQR49bA&amp;_nc_tpa=Q5bMBQF_KUWrkw-QG2fApphkJgT1Q1q7eNoQ4wmWYfYN4Gns7eG312rLEObLVuZ_GkhR8N-ZbE9cQsXd&amp;oh=00_Af5-1dJyHbi4_Ssfn1ejgzKiovq8xoZUWgcJ3x33uvBaTA&amp;oe=69FEC017" alt="Perfect derma peel results">
+      </div>
+      
+      <div class="gallery-item">
+        <img src="https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/673129444_17929365063257479_4602199078608642023_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=111&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&amp;_nc_ohc=FpYFLzYf0nwQ7kNvwHzD2ws&amp;_nc_oc=AdobyZU1mKEE-UFSFLD14pSl-6xVLZeRQBmBMIumg1gbSWg8JwZ4sFlkXcfWd7epzlo&amp;_nc_zt=23&amp;_nc_ht=scontent-den2-1.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=8arz-dnyXoPbutpXQR49bA&amp;_nc_tpa=Q5bMBQHLJlkYZ1ojzp56lDxIpxd8R9-Bn2LpCvicE0FwX9ubkpBEUbWAp--LbGJqqy58rAznkSjHmQHp&amp;oh=00_Af794ZowUl2lt8VC2dAqy5XOB4hCqVokOIJuw56Cc4W7Ug&amp;oe=69FEB9AD" alt="Russian technique transformation">
+      </div>
+      
+      <div class="gallery-item">
+        <img src="https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/682471053_17929531191257479_4463043900846079687_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=102&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=GLS1ziaLOyQQ7kNvwHNXmJc&amp;_nc_oc=Adr2eQIOHIDnD0BGCmWB00nub9Bqzi6g_GtqJbdcAurd0gPa802fHTrgnIr5v_hC9kk&amp;_nc_zt=23&amp;_nc_ht=scontent-den2-1.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=8arz-dnyXoPbutpXQR49bA&amp;_nc_tpa=Q5bMBQGWx5yDOA2GvsQ3apv4URC62m7eaLqX3nMFjGbL7bCvI_lC_92O14_cmRF9GRMKclOknMgYg2Q8&amp;oh=00_Af5exwqkHJniG8vpYliU595YJLUIKp4RvpKDbJAe4vPqWA&amp;oe=69FECBFB" alt="Aerolase Neo Elite laser treatment">
+      </div>
+
+      <div class="gallery-item">
+        <img src="https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/673577485_17928905502257479_8495243408167548791_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=102&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=5PJevNuSyL4Q7kNvwFJfxxd&_nc_oc=AdqQxNu9zxvmLaPbSvSJwmmq0_2eoulr2HglaJnIa3X23AD6tfF1PoHLRaOpyH4Fvw8&_nc_zt=23&_nc_ht=scontent-den2-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=8arz-dnyXoPbutpXQR49bA&_nc_tpa=Q5bMBQGE65AE8-TtO9XJ2_wYWz_kRPqvqYzR_KL4iJQoP-Mh3j-po9CskZl9msOy96EX5b_Jq258k8OD&oh=00_Af4CSAgfSdmpU9xhazsdTB4Vo_51T_qXDvKYm8Sw-V_5Kg&oe=69FECC03" alt="Grand opening guest">
+      </div>
+
+      <div class="gallery-item">
+        <img src="https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/670754488_17928432534257479_997126199072058123_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=110&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=s5EE5con41cQ7kNvwHuMS4x&_nc_oc=AdrE3C3V9mwBmQ9nERQPfDJlhvDntf4DU7XE9hsiz8dW5WwegAvsHHSgDmtFH172DtM&_nc_zt=23&_nc_ht=scontent-den2-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=8arz-dnyXoPbutpXQR49bA&_nc_tpa=Q5bMBQHHqD_pK9OTzvRjErD1_xXCv10b80ZknDtPIpYAhwmXyvibXK6mIRpmf6BZwFr0zqdEuKhJQcul&oh=00_Af7HXnzI6sw2PpjEMdkjbguGxSj0jwpnSOu7o6gSkA5rxQ&oe=69FEDB99" alt="Honolulu location results">
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer-bar">
+    <div class="footer-brand">
+      <span class="brand-circle"></span>
+      <span class="brand-text">joannainjects.com</span>
+    </div>
+    <span class="footer-copy">© 2024 Atelier Grooming Collective. All Rights Reserved.</span>
+    <div class="footer-social">
+      <a href="#">[Instagram]</a>
+      <a href="#">[Twitter]</a>
+      <a href="#">[Are.na]</a>
+      <a href="#">[Email]</a>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>

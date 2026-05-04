@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LINK IN BIO</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --canvas-bg: #f0eeeb;
+  --page-bg: #111111;
+  --primary-text: #000000;
+  --accent: #c8ff00;
+  --secondary-bg: rgba(255, 255, 255, 0.45);
+  --input-bg: #ffffff;
+  --meta-text: #777777;
+  --border: #000000;
+  --white: #ffffff;
+  --font-sans: 'Inter', -apple-system, Helvetica Neue, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+  --space-unit: 8px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+  --body-size: 15px;
+  --body-lh: 1.6;
+  --hero-size: clamp(36px, 6vw, 80px);
+  --section-header: 11px;
+  --meta-size: 10px;
+  --service-code-size: 9px;
+}
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: var(--body-size);
+    line-height: var(--body-lh);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--page-bg);
+    color: var(--primary-text);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: var(--space-lg);
+    overflow-wrap: break-word;
+  }
+
+  .canvas {
+    background-color: var(--canvas-bg);
+    width: 100%;
+    max-width: 1400px;
+    border-radius: 4px;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5), 0 8px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+  }
+
+  /* ===== HEADER GRID ===== */
+  .header-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    padding: var(--space-2xl) var(--space-lg);
+  }
+
+  .header-col {
+    padding: var(--space-md) 0;
+  }
+
+  .highlight-tag {
+    display: inline-block;
+    background-color: var(--accent);
+    padding: 3px 10px;
+    font-family: var(--font-mono);
+    font-size: var(--meta-size);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    margin-bottom: var(--space-md);
+  }
+
+  .meta-label {
+    font-family: var(--font-mono);
+    font-size: var(--meta-size);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--meta-text);
+    margin-bottom: var(--space-sm);
+  }
+
+  .header-col h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: var(--space-sm);
+  }
+
+  .header-col p {
+    font-size: 0.87rem;
+    color: #444;
+    line-height: 1.55;
+  }
+
+  .establishment-dates {
+    font-family: var(--font-mono);
+    font-size: var(--meta-size);
+    color: var(--meta-text);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: var(--space-md);
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--border);
+    background: var(--input-bg);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+    margin-top: var(--space-md);
+  }
+
+  .search-input:focus {
+    border-color: var(--accent);
+  }
+
+  .search-input::placeholder {
+    color: #bbb;
+  }
+
+  /* ===== NAVIGATION ===== */
+  nav {
+    padding: var(--space-md);
+    border-bottom: 1px solid var(--border);
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: var(--space-lg);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  nav a {
+    font-family: var(--font-mono);
+    font-size: var(--meta-size);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--meta-text);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  nav a:hover {
+    color: var(--primary-text);
+  }
+
+  /* ===== DIVIDER ===== */
+  .divider {
+    border: none;
+    height: 2px;
+    background-color: var(--border);
+    margin: 0;
+  }
+
+  /* ===== MAIN CONTENT GRID ===== */
+  .main-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    min-height: 500px;
+  }
+
+  .left-column {
+    padding: var(--space-2xl) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--border);
+    min-height: 400px;
+  }
+
+  .doc-ref {
+    font-family: var(--font-mono);
+    font-size: var(--service-code-size);
+    color: var(--meta-text);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: var(--space-xl);
+  }
+
+  .hero-headline {
+    font-size: var(--hero-size);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: var(--space-2xl);
+    max-width: 700px;
+  }
+
+  .hero-headline .accent-phrase {
+    background-color: var(--accent);
+    padding: 0 6px;
+    display: inline;
+  }
+
+  .bottom-content {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-xl);
+    flex-wrap: wrap;
+    margin-top: auto;
+  }
+
+  .editorial-desc {
+    max-width: 380px;
+  }
+
+  .editorial-desc p {
+    font-size: 0.87rem;
+    line-height: 1.65;
+    color: #333;
+  }
+
+  .cta-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-shrink: 0;
+  }
+
+  .cta-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    border: none;
+    outline: none;
+  }
+
+  .cta-circle:hover {
+    transform: scale(1.08);
+  }
+
+  .cta-circle .arrow {
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 12px solid var(--white);
+    margin-left: 3px;
+  }
+
+  .cta-label {
+    font-family: var(--font-mono);
+    font-size: var(--service-code-size);
+    color: var(--meta-text);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: center;
+    max-width: 100px;
+    line-height: 1.4;
+  }
+
+  /* ===== RIGHT SIDEBAR ===== */
+  .right-column {
+    background: var(--secondary-bg);
+    padding: var(--space-2xl) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .service-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+  }
+
+  .service-header .highlight-tag {
+    margin-bottom: 0;
+  }
+
+  .section-title {
+    font-size: var(--section-header);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+  }
+
+  .sidebar-meta {
+    font-family: var(--font-mono);
+    font-size: var(--service-code-size);
+    color: var(--meta-text);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    line-height: 1.7;
+    margin-bottom: var(--space-2xl);
+  }
+
+  .service-list {
+    list-style: none;
+    flex-grow: 1;
+  }
+
+  .service-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    gap: var(--space-md);
+  }
+
+  .service-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .service-code {
+    font-family: var(--font-mono);
+    font-size: var(--service-code-size);
+    color: var(--meta-text);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .service-name {
+    font-size: 0.93rem;
+    font-weight: 600;
+    padding: 2px 4px;
+    margin-left: -4px;
+    transition: background-color 0.15s ease;
+  }
+
+  .service-desc {
+    font-size: 0.8rem;
+    color: #555;
+    line-height: 1.4;
+    margin-top: 4px;
+  }
+
+  .service-item:hover .service-name {
+    background-color: var(--accent);
+  }
+
+  .service-price {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .live-status {
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+  }
+
+  .status-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--accent);
+    margin-right: var(--space-xs);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .status-text {
+    font-family: var(--font-mono);
+    font-size: var(--meta-size);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--meta-text);
+  }
+
+  .status-detail {
+    font-family: var(--font-mono);
+    font-size: var(--service-code-size);
+    color: var(--meta-text);
+    margin-top: var(--space-xs);
+    letter-spacing: 0.05em;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer-bar {
+    border-top: 2px solid var(--border);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    text-align: center;
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .brand-circle {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--border);
+    flex-shrink: 0;
+  }
+
+  .brand-text {
+    font-size: var(--meta-size);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+  }
+
+  .footer-copy {
+    font-family: var(--font-mono);
+    font-size: var(--service-code-size);
+    color: var(--meta-text);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .footer-social {
+    font-family: var(--font-mono);
+    font-size: var(--service-code-size);
+    color: var(--meta-text);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .footer-social a {
+    color: var(--meta-text);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .footer-social a:hover {
+    color: var(--primary-text);
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: 160px var(--pad-x, 1.5rem) 60px;
+    background: var(--text-black, var(--text-primary, var(--bg-primary, #1a1a1a)));
+    color: var(--bg-cream, var(--nav-text, #ffffff));
+  }
+  .page-title-inner { max-width: 1200px; margin: 0 auto; }
+  .page-title-area h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 600; line-height: 1.1; letter-spacing: -0.03em; }
+
+  /* Content Area */
+  .content-area { padding: 64px var(--pad-x, 1.5rem); max-width: 1200px; margin: 0 auto; }
+  .content-area h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600; line-height: 1.15; margin-bottom: 24px; }
+  .content-area h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 16px; }
+  .content-area p { font-size: 1rem; line-height: 1.7; margin-bottom: 24px; }
+  .content-area ul, .content-area ol { margin-bottom: 24px; padding-left: 24px; }
+  .content-area li { margin-bottom: 8px; line-height: 1.7; }
+  .content-area img { max-width: 100%; height: auto; border-radius: 12px; margin-bottom: 24px; }
+
+  /* Link in Bio specific styles */
+  .linkinbio-intro {
+    text-align: center;
+    margin-bottom: var(--space-3xl);
+  }
+
+  .linkinbio-intro img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: var(--space-lg);
+    object-fit: cover;
+  }
+
+  .cta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    margin: var(--space-2xl) 0;
+  }
+
+  .cta-button {
+    padding: var(--space-md) var(--space-xl);
+    background-color: var(--accent);
+    color: var(--primary-text);
+    text-decoration: none;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+    border-radius: 4px;
+  }
+
+  .cta-button:hover {
+    background-color: #afd600;
+  }
+
+  .social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+    gap: var(--space-lg);
+    margin: var(--space-2xl) 0;
+  }
+
+  .social-link img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
+
+  .testimonial-card {
+    background: var(--secondary-bg);
+    padding: var(--space-xl);
+    margin-bottom: var(--space-xl);
+    border-radius: 8px;
+    border-left: 4px solid var(--accent);
+  }
+
+  .testimonial-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: var(--space-md);
+    object-fit: cover;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-md);
+    margin: var(--space-2xl) 0;
+  }
+
+  .gallery-grid img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .nav-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    margin: var(--space-xl) 0;
+  }
+
+  .nav-list a {
+    color: var(--primary-text);
+    text-decoration: none;
+    padding: var(--space-md);
+    border: 1px solid var(--border);
+    transition: background-color 0.2s ease;
+  }
+
+  .nav-list a:hover {
+    background-color: var(--secondary-bg);
+  }
+
+  /* ===== RESPONSIVE — MOBILE ===== */
+  @media (max-width: 768px) {
+    body {
+      padding: var(--space-sm);
+    }
+
+    .header-grid {
+      padding: var(--space-xl) var(--space-md);
+      gap: var(--space-lg);
+    }
+
+    .left-column {
+      padding: var(--space-xl) var(--space-md);
+      min-height: 300px;
+    }
+
+    .right-column {
+      padding: var(--space-xl) var(--space-md);
+    }
+
+    .hero-headline {
+      font-size: clamp(24px, 8vw, 48px);
+      margin-bottom: var(--space-xl);
+    }
+
+    .bottom-content {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+    }
+
+    .social-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    nav ul {
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .footer-bar {
+      flex-direction: column;
+      padding: var(--space-md);
+    }
+
+    .gallery-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ===== RESPONSIVE — TABLET+ ===== */
+  @media (min-width: 768px) {
+    body {
+      padding: var(--space-xl);
+    }
+
+    .header-grid {
+      padding: var(--space-3xl) var(--space-2xl);
+      gap: var(--space-2xl);
+    }
+
+    .left-column {
+      padding: var(--space-3xl) var(--space-2xl);
+    }
+
+    .right-column {
+      padding: var(--space-3xl) var(--space-2xl);
+    }
+
+    .footer-bar {
+      flex-direction: row;
+      justify-content: space-between;
+      padding: var(--space-lg) var(--space-2xl);
+    }
+
+    .cta-buttons {
+      flex-direction: row;
+    }
+
+    .social-grid {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
+
+  /* ===== RESPONSIVE — DESKTOP ===== */
+  @media (min-width: 900px) {
+    body {
+      padding: var(--space-2xl);
+    }
+
+    .header-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: var(--space-2xl);
+      padding: var(--space-3xl) var(--space-2xl);
+    }
+
+    .main-grid {
+      grid-template-columns: 3fr 2fr;
+      min-height: 600px;
+    }
+
+    .left-column {
+      border-bottom: none;
+      border-right: 2px solid var(--border);
+      min-height: 550px;
+    }
+
+    .hero-headline {
+      margin-bottom: var(--space-3xl);
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .header-grid {
+      padding: var(--space-4xl) var(--space-3xl);
+    }
+
+    .left-column {
+      padding: var(--space-3xl);
+    }
+
+    .right-column {
+      padding: var(--space-3xl);
+    }
+
+    .footer-bar {
+      padding: var(--space-lg) var(--space-3xl);
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="canvas">
+  <!-- Header -->
+  <div class="header-grid">
+    <div class="header-col">
+      <span class="highlight-tag">Face Card Clinics</span>
+      <h3>Face Card Clinics, where beauty meets expertise</h3>
+      <p>Your trusted destination for premium aesthetic treatments and natural beauty enhancement in Austin &amp; Honolulu.</p>
+      <div class="establishment-dates">EST. 2024</div>
+    </div>
+    
+    <div class="header-col">
+      <div class="meta-label">Services</div>
+      <h3>Russian Lip Technique</h3>
+      <p>Signature technique for enhanced shape, height, and definition with soft, symmetrical, luxurious results.</p>
+      <div class="establishment-dates">Honolulu • Austin</div>
+    </div>
+
+    <div class="header-col">
+      <div class="meta-label">Connect</div>
+      <h3>Book Your Appointment</h3>
+      <p>DM us "LIPS" to book your consultation and create a look you're obsessed with.</p>
+      <input type="text" class="search-input" placeholder="Search services...">
+    </div>
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="/">HOME</a></li>
+      <li><a href="/services">SERVICES</a></li>
+      <li><a href="/about">ABOUT</a></li>
+      <li><a href="/policies">POLICIES</a></li>
+      <li><a href="/faq">FAQ</a></li>
+      <li><a href="/locations">LOCATIONS</a></li>
+      <li><a href="/payment-plans">PAYMENT PLANS</a></li>
+    </ul>
+  </nav>
+
+  <hr class="divider">
+
+  <!-- Hero Section -->
+  <div class="page-title-area">
+    <img src="https://static.wixstatic.com/media/c4a100_859fa391e628464f80375d6d302ed850~mv2.jpg/v1/fill/w_1905,h_993,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/c4a100_859fa391e628464f80375d6d302ed850~mv2.jpg" alt="Face Card Clinics - Premium Aesthetic Treatments" style="width: 100%; height: 300px; object-fit: cover; border-radius: 0; margin-bottom: 0;">
+  </div>
+
+  <!-- Main Grid -->
+  <div class="main-grid">
+    <!-- Left Column -->
+    <div class="left-column">
+      <div class="doc-ref">LINK.IN.BIO.2024</div>
+      
+      <h1 class="hero-headline">
+        Ready to upgrade your <span class="accent-phrase">beauty?</span> I can't wait to hear from you
+      </h1>
+
+      <div class="bottom-content">
+        <div class="editorial-desc">
+          <p>HI THERE!</p>
+          <p>Face Card Clinics specializes in precision lip enhancement, facial balancing, and aesthetic treatments. Our expert injectors use advanced techniques like Russian lip method to enhance your natural beauty.</p>
+        </div>
+
+        <div class="cta-group">
+          <button class="cta-circle" onclick="window.location.href='/book-online'">
+            <div class="arrow"></div>
+          </button>
+          <div class="cta-label">BOOK FREE CONSULTATION</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column -->
+    <div class="right-column">
+      <div class="service-header">
+        <span class="highlight-tag">Services</span>
+        <h2 class="section-title">Treatments</h2>
+      </div>
+
+      <div class="sidebar-meta">
+        Honolulu • Austin<br>
+        Premium Aesthetics<br>
+        Expert Injectors
+      </div>
+
+      <ul class="service-list">
+        <li class="service-item">
+          <div class="service-left">
+            <div class="service-code">RS.001</div>
+            <div class="service-name">Russian Lip Technique</div>
+            <div class="service-desc">Signature technique to enhance shape, height, and definition while keeping results soft, symmetrical, and luxurious</div>
+          </div>
+        </li>
+        <li class="service-item">
+          <div class="service-left">
+            <div class="service-code">LF.002</div>
+            <div class="service-name">Lip Filler</div>
+            <div class="service-desc">Enhances natural lip shape, restores volume, and creates balanced proportions</div>
+          </div>
+        </li>
+        <li class="service-item">
+          <div class="service-left">
+            <div class="service-code">FB.003</div>
+            <div class="service-name">Facial Balancing</div>
+            <div class="service-desc">Strategic filler in nose, chin, jaw, and lips to create harmony and balance from every angle</div>
+          </div>
+        </li>
+        <li class="service-item">
+          <div class="service-left">
+            <div class="service-code">BT.004</div>
+            <div class="service-name">Botox/Tox</div>
+            <div class="service-desc">Softens lines and maintains a smoother, refreshed look without looking overdone</div>
+          </div>
+        </li>
+        <li class="service-item">
+          <div class="service-left">
+            <div class="service-code">PD.005</div>
+            <div class="service-name">Perfect Derma Peel</div>
+            <div class="service-desc">Reveals smoother texture, brighter tone, and healthier-looking skin</div>
+          </div>
+        </li>
+        <li class="service-item">
+          <div class="service-left">
+            <div class="service-code">AL.006</div>
+            <div class="service-name">Aerolase Neo Elite Laser</div>
+            <div class="service-desc">Targets acne, inflammation, and uneven skin without harsh recovery. Also used for hair removal</div>
+          </div>
+        </li>
+        <li class="service-item">
+          <div class="service-left">
+            <div class="service-code">NS.007</div>
+            <div class="service-name">Non-surgical Nose Augmentation</div>
+            <div class="service-desc">Strategic filler placement to enhance nose shape and profile</div>
+          </div>
+        </li>
+        <li class="service-item">
+          <div class="service-left">
+            <div class="service-code">CF.008</div>
+            <div class="service-name">Chin Filler</div>
+            <div class="service-desc">Enhances chin projection and facial balance</div>
+          </div>
+        </li>
+        <li class="service-item">
+          <div class="service-left">
+            <div class="service-code">JF.009</div>
+            <div class="service-name">Jaw Filler</div>
+            <div class="service-desc">Sculpts and defines jawline for improved facial structure</div>
+          </div>
+        </li>
+        <li class="service-item">
+          <div class="service-left">
+            <div class="service-code">CK.010</div>
+            <div class="service-name">Cheek Filler</div>
+            <div class="service-desc">Adds volume and structure to enhance facial harmony</div>
+          </div>
+        </li>
+        <li class="service-item">
+          <div class="service-left">
+            <div class="service-code">PR.011</div>
+            <div class="service-name">PRP Hair Restoration Therapy</div>
+            <div class="service-desc">Uses platelet-rich plasma to stimulate dormant hair follicles and support stronger, thicker hair growth</div>
+          </div>
+        </li>
+      </ul>
+
+      <div class="live-status">
+        <div><span class="status-dot"></span><span class="status-text">Live Booking</span></div>
+        <div class="status-detail">Available 24/7 • Instant Confirmation</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page Content -->
+  <div class="content-area">
+    <div class="linkinbio-intro">
+      <img src="https://static.wixstatic.com/media/c4a100_785c24b73c8d4f68a9cee6addc6928e5~mv2.jpg/v1/crop/x_3068,y_382,w_1603,h_2337/fill/w_393,h_574,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/October_121.jpg" alt="Amara">
+      <h2>HI THERE!</h2>
+      <h3>Ready to upgrade your biz? I can´t wait to hear from you</h3>
+      <h6>Amara</h6>
+    </div>
+
+    <div class="cta-buttons">
+      <a href="/book-online" class="cta-button">BOOK FREE CONSULTATION</a>
+      <a href="#newsletter" class="cta-button">SIGN UP THE NEWSLETTER</a>
+      <a href="/services" class="cta-button">SERVICES</a>
+      <a href="/" class="cta-button">WEBSITE</a>
+    </div>
+
+    <h4>REACH OUT</h4>
+    <h2>More ways you can connect with us</h2>
+
+    <div class="social-grid">
+      <a href="https://www.instagram.com/wix" class="social-link">
+        <img src="https://static.wixstatic.com/media/01c3aff52f2a4dffa526d7a9843d46ea.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/01c3aff52f2a4dffa526d7a9843d46ea.png" alt="Instagram">
+      </a>
+      <a href="https://www.facebook.com/wix" class="social-link">
+        <img src="https://static.wixstatic.com/media/0fdef751204647a3bbd7eaa2827ed4f9.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/0fdef751204647a3bbd7eaa2827ed4f9.png" alt="Facebook">
+      </a>
+      <a href="https://www.twitter.com/wix" class="social-link">
+        <img src="https://static.wixstatic.com/media/11062b_bc7125385fcf422cad29fbe20a2b237c~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_bc7125385fcf422cad29fbe20a2b237c~mv2.png" alt="X">
+      </a>
+      <a href="https://il.linkedin.com/company/wix-com?trk=public_jobs_topcard_logo" class="social-link">
+        <img src="https://static.wixstatic.com/media/6ea5b4a88f0b4f91945b40499aa0af00.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/6ea5b4a88f0b4f91945b40499aa0af00.png" alt="LinkedIn">
+      </a>
+      <a href="https://www.youtube.com/user/Wix" class="social-link">
+        <img src="https://static.wixstatic.com/media/78aa2057f0cb42fbbaffcbc36280a64a.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/78aa2057f0cb42fbbaffcbc36280a64a.png" alt="YouTube">
+      </a>
+      <a href="https://www.tiktok.com/@wix?_d=secCgYIASAHKAESPgo8bJWqrWC4Nr%2BRYzP%2BVtrmkW1yv8onKe340Iy%2FTDOE1GiC5K1C6e8qw19A1ZDHAm8CRSncDs9zU2FiADwVGgA%3D&checksum=6ee3b8ed09a7b80754f53d8d9654f3607efacb929e1fe7cb2168ab163f9c106d&language=en&sec_uid=MS4wLjABAAAAYHhFoEGKGLJwnIBxd-QXc1KVcUtlG1sHpsa0HQUHGw4zmND_lFqx6z2IPJH7chg_&sec_user_id=MS4wLjABAAAAgPHZ_FdpBZBJUM3ddmqfpjOvm-vJLKHpFiyv4dstvGcgdF3_apqTw54z5V4uOXel&share_app_id=1233&share_author_id=6795533291946083333&share_link_id=830633BB-5464-41EC-A582-52B78B5041AC&tt_from=copy&u_code=dccm9a1hm10m3e&user_id=6827810298247119878&utm_campaign=client_share&utm_medium=ios&utm_source=copy&source=h5_m&_r=1" class="social-link">
+        <img src="https://static.wixstatic.com/media/11062b_6e7994bdd94b41178720ff1641a0f323~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_6e7994bdd94b41178720ff1641a0f323~mv2.png" alt="TikTok">
+      </a>
+    </div>
+
+    <h4>@theagency</h4>
+
+    <div class="testimonial-card">
+      <img src="https://static.wixstatic.com/media/c4a100_3077ff081d7e41c9adea1e7e06d795aa~mv2.jpg/v1/crop/x_256,y_385,w_1974,h_1977/fill/w_145,h_145,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/pexels-dziana-hasanbekava-7626615.jpg" alt="EMILY LEE">
+      <h3>"October Socials are miracle workers. Revenue has 10x!! Grateful doesn't begin to cover it!"</h3>
+      <p>EMILY LEE - Interior designer</p>
+    </div>
+
+    <div class="testimonial-card">
+      <img src="https://static.wixstatic.com/media/nsplsh_aee27ad11a774295b798300fdc0f7e8a~mv2.jpg/v1/crop/x_801,y_1723,w_2240,h_2240/fill/w_145,h_145,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Image%20by%20Microsoft%20365.jpg" alt="ZARA AL-FARSI">
+      <h3>"Working with October Socials was a game-changer! Sofi's a small business guru who delivers results! 1000% recommend!"</h3>
+      <p>ZARA AL-FARSI - Event Planner</p>
+    </div>
+
+    <div class="testimonial-card">
+      <img src="https://static.wixstatic.com/media/nsplsh_38625077373333584e2d67~mv2.jpg/v1/crop/x_741,y_1046,w_2497,h_2497/fill/w_145,h_145,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Image%20by%20Justin%20Essah.jpg" alt="NINA REYES">
+      <h3>"October Socials brought me clients I never thought I could attract. I never expected to be making this level of revenue, Sofi´s coaching has changed my life!"</h3>
+      <p>NINA REYES - Business Development Manager</p>
+    </div>
+
+    <h3>LOOK AROUND</h3>
+    <ul class="nav-list">
+      <li><a href="/">HOME</a></li>
+      <li><a href="/services">SERVICES</a></li>
+      <li><a href="/about">ABOUT</a></li>
+      <li><a href="/policies">POLICIES</a></li>
+      <li><a href="/faq">FAQ</a></li>
+      <li><a href="/locations">LOCATIONS</a></li>
+      <li><a href="/payment-plans">PAYMENT PLANS</a></li>
+    </ul>
+
+    <div class="gallery-grid">
+      <img src="https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/684280647_17931123780257479_3921485425056154458_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=X4nmM3vlAN4Q7kNvwGrMMHU&_nc_oc=AdpyJ6shGyIOCVGu9Ga1iChRPzRhmS1Von6gPC5-oFz74Ge6JPuqYcyJrd4ksGYOPh8&_nc_zt=23&_nc_ht=scontent-den2-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=8arz-dnyXoPbutpXQR49bA&_nc_tpa=Q5bMBQF28jYvvqJtpJcyAJzCi7Auhuk9lm1pLB0ePACtb8S52pBvcODx63e7J2VUmAo3Y_LoQGln2Tdg&oh=00_Af5nmt0JGsEM51NG3qWipPBDW9ALs6aivEM1S7llq72oew&oe=69FECD22" alt="Russian lip results">
+      <img src="https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/682683853_17930609355257479_4255005067781603010_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=101&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=iYMbw11FVIoQ7kNvwGGT4OJ&_nc_oc=Adqdlj3ZT3uk-Ym6ZtfwahqkUU-eqB_2K9u9ZU8wOq27Il4tjQbR7n7Vl7T0gcLCb8o&_nc_zt=23&_nc_ht=scontent-den2-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=8arz-dnyXoPbutpXQR49bA&_nc_tpa=Q5bMBQEY9dq76hzxQNSjn9Wrqp-PNQVBsY4mkyUzlpKwqTtwt0gqRki3adneCGwGctxhfTzcQxTPR64z&oh=00_Af5wEmeu-ZaiEQAsUeMAzF1nqvf9UjB5GCUxl8NU60p0xA&oe=69FED24D" alt="Perfect lips">
+      <img src="https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/682379791_17930334759257479_6504391279674061033_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=104&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=Wf9gVMcczJIQ7kNvwGznvgI&_nc_oc=AdpAk7RotnaHzBHnL13JC0XcJHKehFalpFAS4u26L7g5qEk9P9S-wtukhQ7DfD8p1Zo&_nc_zt=23&_nc_ht=scontent-den2-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=8arz-dnyXoPbutpXQR49bA&_nc_tpa=Q5bMBQGRBpzQq15_fwr9d6YWP9HVfo4zl2jlWQHQLdhPLUkLJJWmeRIluOVvRhoYC5Tu8TcXOExmCbA-&oh=00_Af6hK5xTi7-S2BEiW2P4vV_GFHfBlo_L4M3WApamFs5PVQ&oe=69FEC2CB" alt="May glow-up special">
+      <img src="https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/683426694_17930030376257479_4570832037827723303_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=105&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=kuepHr3FvvYQ7kNvwE47Khx&_nc_oc=AdpY4M4vz82EOshdgaiDdT0sfbmIKz4pfSiwT8VnztT_JO2MO23_w4Fhz0KH3f4EaH4&_nc_zt=23&_nc_ht=scontent-den2-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=8arz-dnyXoPbutpXQR49bA&_nc_tpa=Q5bMBQEz3k6B7SJfvBSyeY71cUUu_JsfyqVS29dVYiApgGsf_LoN2juCp7qQGMDVE0HreOlo2nVnH6fa&oh=00_Af5ypYCwJMKd0Y2oCEL4ANxXqIuhCm_FgpkN1A9p5wQiBQ&oe=69FEB3D8" alt="Perfect lips precision">
+      <img src="https://scontent-den2-1.cdninstagram.com/v/t51.71878-15/673139030_1284058059853572_2198525018291511002_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=108&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=L8MS-UW9sFMQ7kNvwFH0ksw&_nc_oc=Adpf8cbLGmqgbQj0aClGGZndKEWmZ9bmslbKQnn0SRRTSzPatYBmaNTnode0HUwcapU&_nc_zt=23&_nc_ht=scontent-den2-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=8arz-dnyXoPbutpXQR49bA&_nc_tpa=Q5bMBQE_5k-tvbh4jSZbXBPEmgJS7yHGrIB2YNuW9GJhvcOIVjX9Vj9UBMDrbcQbelivmFpeoRy6vggf&oh=00_Af6_yBPXBsdEf7BexpFY63mPtPWBJgU11Epg3pjO-EdjNg&oe=69FEAC93" alt="Full face harmony">
+      <img src="https://scontent-den2-1.cdninstagram.com/v/t51.71878-15/661764594_1316078244002923_5723286592374170095_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=105&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=Tc2q5FS5qwEQ7kNvwEo1w8T&_nc_oc=AdrMO8LfoyFAEgFCI1WfHF7-qeVLfQlZEtrV8zHb1dSVNCxxM_VEUzpJMfmBuV_mFP4&_nc_zt=23&_nc_ht=scontent-den2-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=8arz-dnyXoPbutpXQR49bA&_nc_tpa=Q5bMBQF_KUWrkw-QG2fApphkJgT1Q1q7eNoQ4wmWYfYN4Gns7eG312rLEObLVuZ_GkhR8N-ZbE9cQsXd&oh=00_Af5-1dJyHbi4_Ssfn1ejgzKiovq8xoZUWgcJ3x33uvBaTA&oe=69FEC017" alt="Perfect derma peel">
+      <img src="https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/673129444_17929365063257479_4602199078608642023_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=111&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=FpYFLzYf0nwQ7kNvwHzD2ws&_nc_oc=AdobyZU1mKEE-UFSFLD14pSl-6xVLZeRQBmBMIumg1gbSWg8JwZ4sFlkXcfWd7epzlo&_nc_zt=23&_nc_ht=scontent-den2-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=8arz-dnyXoPbutpXQR49bA&_nc_tpa=Q5bMBQHLJlkYZ1ojzp56lDxIpxd8R9-Bn2LpCvicE0FwX9ubkpBEUbWAp--LbGJqqy58rAznkSjHmQHp&oh=00_Af794ZowUl2lt8VC2dAqy5XOB4hCqVokOIJuw56Cc4W7Ug&oe=69FEB9AD" alt="Russian technique artistry">
+      <img src="https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/682471053_17929531191257479_4463043900846079687_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=102&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=GLS1ziaLOyQQ7kNvwHNXmJc&_nc_oc=Adr2eQIOHIDnD0BGCmWB00nub9Bqzi6g_GtqJbdcAurd0gPa802fHTrgnIr5v_hC9kk&_nc_zt=23&_nc_ht=scontent-den2-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=8arz-dnyXoPbutpXQR49bA&_nc_tpa=Q5bMBQGWx5yDOA2GvsQ3apv4URC62m7eaLqX3nMFjGbL7bCvI_lC_92O14_cmRF9GRMKclOknMgYg2Q8&oh=00_Af5exwqkHJniG8vpYliU595YJLUIKp4RvpKDbJAe4vPqWA&oe=69FECBFB" alt="Aerolase Neo Elite laser">
+      <img src="https://scontent-den2-1.cdninstagram.com/v/t51.82787-15/673577485_17928905502257479_8495243408167548791_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=102&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=5PJevNuSyL4Q7kNvwFJfxxd&_nc_oc=AdqQxNu9zxvmLaPbSvSJwmmq0_2eoulr2HglaJnIa3X23AD6tfF1PoHLRaOpyH4Fvw8&_nc_zt=23&_nc_ht=scontent-den2-1.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=8arz-dnyXoPbutpXQR49bA&_nc_tpa=Q5bMBQGE65AE8-TtO9XJ2_wYWz_kRPqvqYzR_KL4iJQoP-Mh3j-po9CskZl9msOy96EX5b_Jq258k8OD&oh=00_Af4CSAgfSdmpU9xhazsdTB4Vo_51T_qXDvKYm8Sw-V_5Kg&oe=69FECC03" alt="Austin grand opening">
+    </div>
+  </div>
+
+  <footer class="footer-bar">
+    <div class="footer-brand">
+      <span class="brand-circle"></span>
+      <span class="brand-text">joannainjects.com</span>
+    </div>
+    <span class="footer-copy">© 2024 Atelier Grooming Collective. All Rights Reserved.</span>
+    <div class="footer-social">
+      <a href="#">[Instagram]</a>
+      <a href="#">[Twitter]</a>
+      <a href="#">[Are.na]</a>
+      <a href="#">[Email]</a>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>
