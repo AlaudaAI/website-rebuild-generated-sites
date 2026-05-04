@@ -1,0 +1,703 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=DM+Serif+Display&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+  --bg-desktop: #111114;
+  --bg-paper: #e8e4df;
+  --ink-black: #0a0a0a;
+  --ink-muted: rgba(10, 10, 10, 0.32);
+  --ink-hover: rgba(10, 10, 10, 0.6);
+  --grid-line: #0a0a0a;
+  --doc-border: #3a3a3c;
+  --spacing-base: 8px;
+  --spacing-sm: 12px;
+  --spacing-md: 24px;
+  --spacing-lg: 40px;
+  --spacing-xl: 64px;
+  --meta-size: 10px;
+  --body-size: 16px;
+  --title-size: clamp(48px, 8vw, 96px);
+  --manifesto-size: clamp(18px, 2.2vw, 26px);
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  --font-display: 'DM Serif Display', Georgia, serif;
+}
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-paper);
+    color: var(--ink-black);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
+
+  /* Navigation */
+  .header-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: var(--spacing-md) var(--spacing-md);
+  border-bottom: 1px solid var(--grid-line);
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  animation: fadeIn 0.5s ease 0.2s forwards;
+}
+
+  .header-left, .header-right {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: center;
+}
+
+  .header-meta {
+  font-size: var(--meta-size);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--ink-muted);
+}
+
+  .header-meta.active {
+  color: var(--ink-black);
+}
+
+  .header-link {
+  font-size: var(--meta-size);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--ink-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+  .header-link:hover {
+  color: var(--ink-black);
+  text-decoration: underline;
+}
+
+  .sidebar {
+  display: none;
+  max-width: 280px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--grid-line);
+  padding: var(--spacing-lg) var(--spacing-md) var(--spacing-lg) var(--spacing-lg);
+  position: relative;
+  opacity: 0;
+  animation: fadeIn 0.5s ease 0.4s forwards;
+}
+
+  .sidebar-label {
+  font-size: var(--meta-size);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  color: var(--ink-black);
+  margin-bottom: var(--spacing-md);
+}
+
+  .sidebar-nav {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+  .sidebar-nav li {
+  display: block;
+}
+
+  .sidebar-nav a {
+  font-size: var(--meta-size);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--ink-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  cursor: pointer;
+  display: block;
+  padding: 2px 0;
+}
+
+  .sidebar-nav a:hover {
+  color: var(--ink-black);
+}
+
+  .sidebar-nav a.active {
+  color: var(--ink-black);
+  font-weight: 500;
+}
+
+  .sidebar-status {
+  font-size: var(--meta-size);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--ink-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+}
+
+  .brand-title {
+  font-family: var(--font-sans);
+  font-size: var(--title-size);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  color: var(--ink-black);
+  position: relative;
+  z-index: 3;
+  max-width: 90%;
+  opacity: 0;
+  animation: fadeInTitle 0.7s ease 0.7s forwards;
+}
+
+  /* Hero Section */
+  .hero-section {
+    padding: var(--spacing-xl) var(--spacing-lg);
+    background: var(--ink-black);
+    color: var(--bg-paper);
+    text-align: center;
+  }
+
+  .hero-section h1 {
+    font-size: var(--title-size);
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .hero-section p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: rgba(232, 228, 223, 0.8);
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: calc(96px + 60px) var(--spacing-lg) 96px;
+    background: var(--ink-black);
+    color: var(--bg-paper);
+  }
+
+  .page-title-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-title-area h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  /* Content Area */
+  .content-area {
+    padding: 96px var(--spacing-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .content-area h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--ink-black);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .content-area h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--ink-black);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .content-area p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--ink-muted);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .content-area ul, .content-area ol {
+    margin-bottom: var(--spacing-lg);
+    padding-left: var(--spacing-lg);
+    color: var(--ink-muted);
+  }
+
+  .content-area li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  .content-area img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .content-area a {
+    color: var(--ink-black);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    font-weight: 500;
+  }
+
+  .content-area a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  /* Services Section */
+  .services-section {
+    padding: var(--spacing-xl) var(--spacing-lg);
+    background: rgba(10, 10, 10, 0.03);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .service-item {
+    padding: var(--spacing-lg);
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(10, 10, 10, 0.08);
+  }
+
+  .service-item h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--ink-black);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .service-item p {
+    color: var(--ink-muted);
+    line-height: 1.7;
+  }
+
+  /* Team Section */
+  .team-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .team-member {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+
+  .team-member img {
+    max-width: 200px;
+    border-radius: 12px;
+  }
+
+  .team-info h3 {
+    font-size: 1.5rem;
+    color: var(--ink-black);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .team-role {
+    font-size: 0.9rem;
+    color: var(--ink-black);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .team-bio {
+    color: var(--ink-muted);
+    line-height: 1.7;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .read-more-link {
+    font-size: 0.9rem;
+    color: var(--ink-black);
+    text-decoration: underline;
+    font-weight: 500;
+  }
+
+  /* Contact Section */
+  .contact-section {
+    background: rgba(10, 10, 10, 0.03);
+    padding: var(--spacing-xl);
+    border-radius: 12px;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  .contact-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .contact-label {
+    font-weight: 600;
+    color: var(--ink-black);
+  }
+
+  .contact-value {
+    color: var(--ink-muted);
+  }
+
+  .contact-value a {
+    color: var(--ink-black);
+    text-decoration: underline;
+  }
+
+  /* Footer */
+  .footer-manifesto {
+  border-top: 1px solid var(--grid-line);
+  padding: var(--spacing-xl) var(--spacing-md);
+  text-align: left;
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  animation: fadeIn 0.6s ease 0.9s forwards;
+}
+
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeInTitle {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Responsive */
+  @media (min-width: 768px) {
+  .header-bar {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+
+  .team-member {
+    flex-direction: row;
+  }
+
+  .contact-info {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+  @media (max-width: 768px) {
+    .header-bar {
+      padding: var(--spacing-sm);
+    }
+    
+    .page-title-area {
+      padding: var(--spacing-xl) var(--spacing-sm) var(--spacing-lg);
+    }
+    
+    .content-area {
+      padding: var(--spacing-lg) var(--spacing-sm);
+    }
+    
+    .services-section {
+      padding: var(--spacing-lg) var(--spacing-sm);
+    }
+    
+    .contact-section {
+      padding: var(--spacing-lg) var(--spacing-sm);
+    }
+    
+    .footer-manifesto {
+      padding: var(--spacing-lg) var(--spacing-sm);
+    }
+    
+    .team-member {
+      text-align: center;
+    }
+  }
+
+  @media (min-width: 1024px) {
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+  @media (min-width: 768px) {
+  .brand-title {
+    max-width: 75%;
+  }
+}
+
+  @media (min-width: 768px) {
+  .footer-manifesto {
+    text-align: center;
+    padding: var(--spacing-xl) var(--spacing-lg);
+  }
+}
+
+  @media (min-width: 1024px) {
+  .footer-manifesto {
+    padding: var(--spacing-xl) 120px;
+  }
+}
+
+  @media (min-width: 768px) {
+    .page-title-area { padding: calc(96px + 60px) 64px 96px; }
+    .content-area { padding: 96px 64px; }
+  }
+
+  @media (min-width: 1024px) {
+    .page-title-area { padding: calc(96px + 80px) 96px 96px; }
+    .content-area { padding: 96px; }
+  }
+</style>
+
+
+
+<!-- HEADER -->
+<div class="document">
+
+  <!-- Header Bar -->
+  <header class="header-bar">
+    <div class="header-left">
+      <span class="header-meta active">fidelislawfirm.com</span>
+      <span class="header-meta">Version 4.2</span>
+      <span class="header-meta">Brand Guidelines</span>
+    </div>
+    <div class="header-right">
+      <nav>
+        <a class="header-link" href="/">Home</a>
+        <a class="header-link" href="/about">About</a>
+        <a class="header-link" href="/business-law">Business Law</a>
+        <a class="header-link" href="/family-law">Family Law</a>
+        <a class="header-link" href="/contact">Contact</a>
+      </nav>
+      <a class="header-link bracket-link" href="#">Download PDF</a>
+      <span class="header-meta">© 2024 All Rights Reserved</span>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="main-content">
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div>
+        <div class="sidebar-label">Index:</div>
+        <ul class="sidebar-nav">
+    <li><a href="/">Home</a></li><li><a href="/about" class="active">About</a></li><li><a href="/about/nicholas-m-tidwell">Nicholas M. Tidwell</a></li><li><a href="/about/parker-t-brown">Parker T. Brown</a></li><li><a href="/about/thomas-k-white">Thomas K. White</a></li><li><a href="/about/robert-m-pautienus">Robert M. Pautienus</a></li><li><a href="/business-law">Business Law</a></li><li><a href="/business-law/business-contracts">Business Contracts</a></li><li><a href="/business-law/business-litigation">Business Litigation</a></li><li><a href="/business-law/business-operations">Business Operations</a></li><li><a href="/business-law/buying-and-selling-a-business">Buying and Selling a Business</a></li><li><a href="/business-law/forming-a-business-in-tennessee">Forming a Business in Tennessee</a></li><li><a href="/business-law/mergers-acquisitions">Mergers &amp; Acquisitions</a></li><li><a href="/church-nonprofit-law">Church &amp; Nonprofit Law</a></li><li><a href="/church-nonprofit-law/churches">Churches</a></li><li><a href="/church-nonprofit-law/forming-a-nonprofit">Forming a Nonprofit</a></li><li><a href="/church-nonprofit-law/operating-a-nonprofit">Operating a Nonprofit</a></li><li><a href="/church-nonprofit-law/tax-exemption">Tax Exemption</a></li><li><a href="/estate-planning-and-probate">Estate Planning and Probate</a></li><li><a href="/estate-planning-and-probate/conservatorships-guardianships">Conservatorships &amp; Guardianships</a></li><li><a href="/estate-planning-and-probate/guardianship-conservatorship">Guardianship &amp; Conservatorship</a></li><li><a href="/estate-planning-and-probate/last-will-and-testament">Last Will and Testament</a></li><li><a href="/estate-planning-and-probate/powers-of-attorney">Powers of Attorney</a></li><li><a href="/estate-planning-and-probate/probate-trust">Probate &amp; Trust</a></li><li><a href="/estate-planning-and-probate/revocable-and-irrevocable-trust">Revocable and Irrevocable Trust</a></li><li><a href="/family-law">Family Law</a></li><li><a href="/family-law/adoption">Adoption</a></li><li><a href="/family-law/alimony">Alimony</a></li><li><a href="/family-law/child-custody">Child Custody</a></li><li><a href="/family-law/child-support">Child Support</a></li><li><a href="/family-law/divorce">Divorce</a></li><li><a href="/family-law/property-division">Property Division</a></li><li><a href="/personal-injury">Personal Injury</a></li><li><a href="/practice">Faith in Practice</a></li><li><a href="/clients-reviews">Clients &amp; Reviews</a></li><li><a href="/clients-reviews/estate-planning-and-probate-reviews">Estate Planning and Probate Reviews</a></li><li><a href="/clients-reviews/business-law-reviews">Business Law Reviews</a></li><li><a href="/clients-reviews/family-law-reviews">Family Law Reviews</a></li><li><a href="/clients-reviews/personal-injury-reviews">Personal Injury Reviews</a></li><li><a href="/clients-reviews/nonprofit-church-law-reviews">Nonprofit &amp; Church Law Reviews</a></li><li><a href="/faq">FAQ</a></li><li><a href="/contact">Contact</a></li><li><a href="/law-blog">Law Blog</a></li><li><a href="/privacy-policy">Privacy Policy</a></li><li><a href="/terms-of-use">Terms of Use</a></li><li><a href="/home-2026">Home 2026 - Fidelis Law</a></li><li><a href="/creating-a-well-written-contract-that-provides-value-and-benefits">Creating a well-written contract that provides value and benefits - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/suggestions-for-effectively-managing-a-non-profit-organization">Suggestions for effectively managing a non-profit organization - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/how-can-you-be-an-ideal-stepparent">How can you be an ideal stepparent? - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/keeping-your-nonprofit-legal-while-raising-money">Keeping your nonprofit legal while raising money - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/should-estate-plans-change-with-new-law">Should estate plans change with new law? - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/successful-blended-families-and-stepparent-adoption">Successful blended families and stepparent adoption - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/how-a-new-tax-law-could-alter-prenuptial-agreement-clauses">How a new tax law could alter prenuptial agreement clauses - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/suggestions-for-naming-beneficiaries-when-planning-an-estate">Suggestions for naming beneficiaries when planning an estate - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/how-can-i-avoid-family-conflict-with-my-estate-plans">How can I avoid family conflict with my estate plans? - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/starting-a-nonprofit-an-overview">Starting a nonprofit: an overview - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/how-are-tennessee-parenting-plans-designed">How are Tennessee parenting plans designed? - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/what-advantages-does-a-trademark-provide-for-your-business">What advantages does a trademark provide for your business? - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/easing-your-way-into-your-role-as-a-step-parent">Easing your way into your role as a step-parent - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/how-do-you-make-health-care-decisions-if-you-are-unconscious">How do you make health care decisions if you are unconscious? - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/what-does-a-copyright-protect">What does a copyright protect? - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/using-strategic-presentation-to-protect-business-concepts">Using strategic presentation to protect business concepts - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/preventing-divorce-from-hurting-an-investment-portfolio">Preventing divorce from hurting an investment portfolio - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/what-is-a-qdro-retirement-account-division-in-divorce">What is a QDRO? Retirement Account Division in Divorce - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/protecting-finances-and-long-term-security-during-a-divorce">Protecting finances and long-term security during a divorce - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/what-should-you-be-looking-for-in-an-investment-partner">What should you be looking for in an investment partner? - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/what-is-a-501c3-organization">What is a 501(c)3 organization? - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/why-does-it-matter-if-you-are-a-legal-employee-of-your-church">Why does it matter if you are a legal employee of your church? - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/suggestions-for-choosing-a-legal-guardian-for-your-children">Suggestions for choosing a legal guardian for your children - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/whats-the-best-way-to-divide-retirement-assets-in-divorce">What's the best way to divide retirement assets in divorce? - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/business-owners-what-you-should-know-about-trade-secrets">Business owners: what you should know about trade secrets - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/when-should-you-update-your-will">When should you update your will? - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/when-should-i-make-changes-to-my-estate-plan">When should I make changes to my estate plan? - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/what-can-happen-when-nonprofits-are-noncompliant">What can happen when nonprofits are noncompliant? - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/how-an-attorney-can-help-you-form-your-business">How an attorney can help you form your business - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/what-to-consider-if-you-want-to-leave-unequal-inheritances">What to consider if you want to leave unequal inheritances - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/how-the-elderly-can-protect-their-rights">How the elderly can protect their rights - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/do-churches-or-the-courts-decide-when-disputes-arise">Do churches or the courts decide when disputes arise? - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/divorce-is-it-genetic">Divorce: Is it genetic? - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/3-reasons-to-talk-to-your-parents-about-estate-planning">3 reasons to talk to your parents about estate planning - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/alternative-dispute-resolution-methods-that-keep-you-out-of-court">Alternative dispute resolution methods that keep you out of court - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/how-and-why-religious-organizations-get-tax-exempt-status">How (And Why) Religious Organizations Get Tax-Exempt Status - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/4-ways-your-estate-plan-can-benefit-your-children">4 ways your estate plan can benefit your children - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/adopting-a-stepchild-know-about-termination-of-parental-rights">Adopting a stepchild? Know about termination of parental rights - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/divorcing-tennessee-parents-need-to-ensure-kids-feel-loved">Divorcing Tennessee parents need to ensure kids feel loved - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/goal-oriented-legal-counsel-and-advocacy-across-middle-tennessee">Goal-oriented legal counsel and advocacy across Middle Tennessee - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/does-an-llc-protect-its-owners-from-an-outside-creditor">Does an LLC protect its owners from an outside creditor? - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/who-will-inherit-your-intellectual-property">Who will inherit your intellectual property? - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/contesting-the-validity-of-a-last-will-testament-versus-a-revocable-living-trust">Contesting the Validity of a Last Will &amp; Testament versus a Revocable Living Trust - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/its-almost-time-to-vote">It's almost time to vote - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/step-parent-adoption-in-tennessee">Step parent adoption in Tennessee - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/caution-when-merging">Caution when merging - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/what-it-takes-to-walk-away">What it takes to walk away - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/140-6-miles-to-learn-4-simple-lessons">140.6 miles to learn 4 simple lessons - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/now-later-or-too-late-knowing-the-optimal-time-to-trademark-your-companys-name">Now, later, or too late? Knowing the optimal time to trademark your company's name - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/now-later-or-too-late-knowing-the-optimal-time-to-trademark-your-companys-name-2">Now, later, or too late? Knowing the optimal time to trademark your company's name - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/dont-get-caught-napping">Don't get caught napping! - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/joint-tenancy-a-bitter-inheritance">Joint tenancy: a bitter inheritance - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/can-your-child-support-be-modified">Can your child support be modified? - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/personal-injury-cases-and-subrogation">Personal injury cases and subrogation - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/intellectual-property-assets-protecting-your-trade-secrets">Intellectual property assets: protecting your trade secrets - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/the-hidden-costs-of-litigation">The hidden costs of litigation - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/no-will-big-problem">No will, big problem? - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/child-custody">Child custody - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/adoption">Adoption - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/identifying-intellectual-property-assets">Identifying intellectual property assets - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/advanced-directives">Advanced directives - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/charitable-donations">Charitable donations - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/creditors-of-an-estate">Creditors of an estate - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/pro-bono-public-service">Pro bono &amp; public service - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/press-release-fidelis-law-pllc">Press Release: Fidelis Law, PLLC - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/what-should-i-do-to-prepare-my-small-business-for-sale">What should I do to prepare my small business for sale? - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/how-to-become-certified-as-a-women-owned-small-business-wosb">How to become certified as a Women-Owned Small Business (WOSB) - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/the-ins-and-outs-of-commercial-leases">The ins and outs of commercial leases - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/what-licenses-and-permits-will-you-need-to-do-business-in-tn">What licenses and permits will you need to do business in TN? - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/signing-a-commercial-lease-watch-for-problematic-clauses">Signing a commercial lease? Watch for problematic clauses - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/how-to-encourage-compliance-among-your-employees">How to encourage compliance among your employees - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/estate-planning-crucial-for-single-professionals">Estate planning crucial for single professionals - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/understanding-the-influence-of-designated-beneficiaries">Understanding the influence of designated beneficiaries - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/what-is-a-non-compete-agreement">What is a non-compete agreement? - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/how-do-i-set-up-a-trust-for-my-newborn">How do I set up a trust for my newborn? - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/i-dont-who-does-the-ring-belong-to-if-the-engagement-is-called-off">"I Don't" – Who does the ring belong to if the engagement is called off? - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/the-smart-way-to-save-for-a-childs-education">The smart way to save for a child's education - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/advance-directives-for-your-college-aged-children">Advance directives for your college aged children - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/3-reasons-everyone-should-have-an-estate-plan">3 Reasons Everyone Should Have an Estate Plan - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/why-digital-assets-shouldnt-be-ignored-when-making-a-will">Why digital assets shouldn't be ignored when making a will - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/prenuptial-agreements">Prenuptial Agreements - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/probate-101">Probate 101 - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/conservatorship">Conservatorship - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/adult-adoption-in-tennessee">Adult Adoption in Tennessee - Fidelis Law | Family Law</a></li><li><a href="/show-me-the-money">Show me the money | National Collegiate Athletic Association V. Alston Et Al</a></li><li><a href="/dont-be-confused-by-a-nonprofit-limited-liability-company">Don't be confused by a nonprofit limited liability company - Fidelis Law | Estate Planning, Business and Family Law</a></li><li><a href="/when-to-revisit-your-estate-planning">When to revisit your estate planning - Fidelis Law | Brentwood, TN Law</a></li><li><a href="/the-basics-of-tennessee-child-support">The Basics of Child Support in Tennessee - Fidelis Family Law</a></li><li><a href="/trust-administration-101">Trust Administration 101: Grantors, Trustees, and Beneficiaries - TN Law</a></li><li><a href="/generational-transfers-does-it-matter-when-you-transfer-an-asset-to-the-next-generation">Does It Matter When You Transfer An Asset To The Next Generation?</a></li><li><a href="/what-is-a-probate-asset">What is a probate asset? | Estate Planning, Business and Family Law</a></li><li><a href="/the-importance-of-having-family-legal-counsel-insights-from-fidelis-law">The Importance of Having Family Legal Counsel: Insights from Fidelis Law</a></li><li><a href="/warning-do-you-have-an-ownership-interest-in-a-business">Warning! Do You Have An Ownership Interest In A Business? - Fidelis Law</a></li><li><a href="/common-legal-mistakes-in-forming-a-nonprofit-organization">Common Legal Mistakes in Forming a Nonprofit Organization - Fidelis Law</a></li><li><a href="/law-blog/page/2">The Law Blog - Page 2 of 10 of Fidelis Law Firm | Attorneys in Brentwood, Tennessee</a></li><li><a href="/law-blog/page/3">The Law Blog - Page 3 of 10 of Fidelis Law Firm | Attorneys in Brentwood, Tennessee</a></li><li><a href="/law-blog/page/10">The Law Blog - Page 10 of 10 of Fidelis Law Firm | Attorneys in Brentwood, Tennessee</a></li><li><a href="/law-blog/page/4">The Law Blog - Page 4 of 10 of Fidelis Law Firm | Attorneys in Brentwood, Tennessee</a></li><li><a href="/law-blog/page/9">The Law Blog - Page 9 of 10 of Fidelis Law Firm | Attorneys in Brentwood, Tennessee</a></li><li><a href="/law-blog/page/8">The Law Blog - Page 8 of 10 of Fidelis Law Firm | Attorneys in Brentwood, Tennessee</a></li><li><a href="/law-blog/page/5">The Law Blog - Page 5 of 10 of Fidelis Law Firm | Attorneys in Brentwood, Tennessee</a></li><li><a href="/law-blog/page/7">The Law Blog - Page 7 of 10 of Fidelis Law Firm | Attorneys in Brentwood, Tennessee</a></li><li><a href="/law-blog/page/6">The Law Blog - Page 6 of 10 of Fidelis Law Firm | Attorneys in Brentwood, Tennessee</a></li>
+  </ul>
+      </div>
+      <div class="sidebar-status">
+        <span class="status-dot"></span>
+        System Operational
+      </div>
+    </aside>
+
+    <!-- Content Area -->
+
+<!-- Hero Section -->
+<section class="hero-section">
+  <h1>Fidelis Law</h1>
+  <p>Trusted legal counsel serving Middle Tennessee with integrity and excellence</p>
+</section>
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Our Full-Service Commitment To Our Clients</h1>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+  <h2>About Fidelis Law</h2>
+  
+  <p>As a firm with a "client-focused" and "relationship-driven" purpose, we, at Fidelis Law, are devoted to providing you with the highest quality of legal representation and services. Our clients are our priority.</p>
+  
+  <p>We strive to make ourselves accessible and consultative when you need us, even if it's just for a quick question. Constant fees discourage preventive care and counsel. Our lawyers embrace the title of "counselors at law," and want to get to know you to best serve your interests with individualized care and compassion. Developing a real, trusting relationship requires a mutual understanding, faith and respect – and we don't charge for that process.</p>
+  
+  <p>Our attorneys serve each client based on a pillar of our Christian faith: treating clients throughout the Nashville area and Middle Tennessee as we would like to be treated. We practice absolute transparency, a commitment to legal ethics and communication that you can depend on to make informed decisions.</p>
+  
+  <p>Please read more about each of our attorneys by following the links below.</p>
+
+  <!-- Services Section -->
+  <section class="services-section">
+    <h2>Our Services</h2>
+    <div class="services-grid">
+      <div class="service-item">
+        <h3>Business Law</h3>
+      </div>
+      <div class="service-item">
+        <h3>Estate Planning and Probate</h3>
+      </div>
+      <div class="service-item">
+        <h3>Family Law</h3>
+      </div>
+      <div class="service-item">
+        <h3>Church & Nonprofit Law</h3>
+      </div>
+      <div class="service-item">
+        <h3>Personal Injury</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <h2>Our Team</h2>
+  <div class="team-grid">
+    <div class="team-member">
+      <img src="https://www.fidelislawfirm.com/wp-content/uploads/2021/11/Robert-M-Pautienus-III.jpg" alt="Robert Pautienus III">
+      <div class="team-info">
+        <h3>Robert Pautienus III</h3>
+        <div class="team-role">Managing Partner</div>
+        <div class="team-bio">Robert is the Managing Partner of the law firm and has been practicing law in Tennessee for over 20 years. He is admitted to the United States District Courts for the Middle District of Tennessee, the United States District Courts for the Western District of Tennessee, and the United States Supreme Court.</div>
+        <a href="/about/robert-m-pautienus" class="read-more-link">Read More</a>
+      </div>
+    </div>
+
+    <div class="team-member">
+      <img src="https://www.fidelislawfirm.com/wp-content/uploads/2021/11/Nicholas-M-Tidwell-1.jpg" alt="Nicholas Tidwell">
+      <div class="team-info">
+        <h3>Nicholas Tidwell</h3>
+        <div class="team-role">Partner</div>
+        <div class="team-bio">Nick is a Partner at Fidelis Law. He is licensed to practice in both Tennessee and Texas, as well as admitted to the United States District Courts for the Middle District and Western District of Tennessee; however, he currently serves as a full-time Executive Pastor of a local church where he assists with administration, discipleship, preaching, and teaching.</div>
+        <a href="/about/nicholas-m-tidwell" class="read-more-link">Read More</a>
+      </div>
+    </div>
+
+    <div class="team-member">
+      <img src="https://www.fidelislawfirm.com/wp-content/uploads/2021/11/Thomas-K-White.jpg" alt="Thomas White">
+      <div class="team-info">
+        <h3>Thomas White</h3>
+        <div class="team-role">Attorney</div>
+        <div class="team-bio">Tommy joined the firm in 2014 and has been practicing law in Tennessee since 2009. Tommy has concentrated his practice in all areas of family law and estate planning.</div>
+        <a href="/about/thomas-k-white" class="read-more-link">Read More</a>
+      </div>
+    </div>
+
+    <div class="team-member">
+      <img src="https://www.fidelislawfirm.com/wp-content/uploads/2021/11/Parker-T-Brown.jpg" alt="Parker Brown">
+      <div class="team-info">
+        <h3>Parker Brown</h3>
+        <div class="team-role">Associate</div>
+        <div class="team-bio">Parker is an Associate at the law firm, having passed the Tennessee Bar in 2016. Parker practices in the area of estate planning, probate, church and nonprofit institutions, collections, business planning and formation, and business litigation.</div>
+        <a href="/about/parker-t-brown" class="read-more-link">Read More</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <div class="contact-section">
+    <h2>Schedule A Complimentary Consultation With An Attorney</h2>
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-label">Phone:</div>
+        <div class="contact-value"><a href="tel:615-370-3010">615-370-3010</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Fax:</div>
+        <div class="contact-value">615-371-8769</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Email:</div>
+        <div class="contact-value"><a href="mailto:robert@fidelislawfirm.com">robert@fidelislawfirm.com</a></div>
+      </div>
+    </div>
+    <p>We recognize that reading about someone is not the same as meeting them. If you have a legal matter that you would like to discuss with one of our attorneys, please call us at <a href="tel:615-370-3010">615-370-3010</a> or send us an email to schedule a meeting.</p>
+  </div>
+</div>
+
+<footer class="footer-manifesto">
+    <p class="manifesto-text">
+      We believe that exceptional brands are built on systems, not trends. Every element — from the weight of a typeface to the cadence of a color palette — serves a purpose. <strong>fidelislawfirm.com exists at the intersection of strategic rigor and creative clarity,</strong> delivering identity frameworks that endure beyond the moment and resonate with precision.
+    </p>
+    <p class="manifesto-subtitle">Established 2009 — New York · London · Tokyo</p>
+  </footer>
+
+</div>
+
+<script>
+  // Sidebar navigation active state toggling
+  document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('.sidebar-nav a');
+
+    navLinks.forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        navLinks.forEach(function(l) {
+          l.classList.remove('active');
+        });
+        this.classList.add('active');
+
+        // Update section marker
+        const text = this.textContent.trim();
+        const sectNum = text.substring(0, 2);
+        const sectName = text.substring(5);
+        const marker = document.querySelector('.section-marker');
+        if (marker) {
+          marker.textContent = 'Sect ' + sectNum + ': ' + sectName;
+        }
+      });
+    });
+  });
+</script>
+
+
+</div>
