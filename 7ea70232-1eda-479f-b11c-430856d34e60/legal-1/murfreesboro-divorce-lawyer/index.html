@@ -1,0 +1,948 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Divorce</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  :root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
+
+  /* Navigation */
+  .mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+  .mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+  .mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+  .mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+  .hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+  .hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+  .sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+  .sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+  .sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+  .sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+  .sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+  .sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+  .sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+  .sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+  .sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+  .mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+  .mobile-nav-overlay.active {
+  display: block;
+}
+
+  .sidebar.active {
+  display: flex;
+}
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: calc(96px + 60px) var(--space-lg) var(--space-3xl);
+    background: var(--text-primary);
+    color: #ffffff;
+  }
+
+  .page-title-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-title-area h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  /* Content Area */
+  .content-area {
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .content-area h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .content-area p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area ul, .content-area ol {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-lg);
+    color: var(--text-muted);
+  }
+
+  .content-area li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  .content-area img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    font-weight: 500;
+  }
+
+  .content-area a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  .call-to-action {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: var(--space-xl);
+    margin: var(--space-2xl) 0;
+    border-radius: 12px;
+    text-align: center;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    padding: var(--space-md) var(--space-xl);
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    margin-top: var(--space-md);
+    transition: background 0.3s ease;
+  }
+
+  .cta-button:hover {
+    background: var(--text-muted);
+    color: var(--text-primary);
+  }
+
+  .services-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin: var(--space-lg) 0;
+  }
+
+  .services-list a {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+  }
+
+  .services-list a:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+  }
+
+  .testimonials-section {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: var(--space-xl);
+    margin: var(--space-2xl) 0;
+    border-radius: 12px;
+  }
+
+  .testimonial {
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .testimonial:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  .testimonial-text {
+    font-style: italic;
+    margin-bottom: var(--space-md);
+    color: var(--text-muted);
+  }
+
+  .testimonial-author {
+    font-weight: 500;
+    color: var(--text-primary);
+    font-size: 0.875rem;
+  }
+
+  .why-choose-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    margin: var(--space-2xl) 0;
+  }
+
+  .feature-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: var(--space-xl);
+    border-radius: 12px;
+  }
+
+  .feature-item h3 {
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .stats-highlight {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: var(--space-xl);
+    margin: var(--space-lg) 0;
+    border-radius: 12px;
+  }
+
+  .stat-number {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .stat-label {
+    color: var(--text-muted);
+  }
+
+  /* Footer */
+  .footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+  .footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+  .footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+  .footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+  .footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+  .footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+  .footer-links a:hover {
+  color: var(--text-primary);
+}
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .mobile-header {
+      padding: var(--space-sm) var(--space-md);
+    }
+
+    .page-title-area {
+      padding: calc(70px + 40px) var(--space-md) var(--space-xl);
+    }
+
+    .content-area {
+      padding: var(--space-xl) var(--space-md);
+    }
+
+    .why-choose-section {
+      grid-template-columns: 1fr;
+    }
+
+    .footer {
+      flex-direction: column;
+      gap: var(--space-md);
+      padding: var(--space-lg) var(--space-md);
+    }
+
+    .footer-links {
+      gap: var(--space-sm);
+    }
+
+    .call-to-action {
+      padding: var(--space-lg);
+    }
+
+    .testimonials-section {
+      padding: var(--space-lg);
+    }
+  }
+
+  @media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:last-child {
+    border-right: none;
+  }
+
+  .trust-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-metrics {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .why-choose-section {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+  @media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .features {
+    /* already 3-col from tablet */
+  }
+
+  .feature-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .trust-section {
+    /* already 2-col from tablet */
+  }
+
+  .trust-metrics {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-clients {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-number {
+    font-size: 120px;
+  }
+
+  .client-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  .why-choose-section {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+  @media (min-width: 768px) {
+    .page-title-area { padding: calc(96px + 60px) var(--space-2xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl) var(--space-2xl); }
+  }
+
+  @media (min-width: 1024px) {
+    .page-title-area { padding: calc(96px + 80px) var(--space-3xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl); }
+  }
+</style>
+
+
+
+<!-- HEADER -->
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="#" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">bosslawtn.com</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="#" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">bosslawtn.com</span>
+    </a>
+    <nav>
+      <a href="#">Platform</a>
+      <a href="#">Solutions</a>
+      <a href="#">Documentation</a>
+      <a href="#">Enterprise</a>
+    </nav>
+  </div>
+  
+</aside>
+
+<!-- Main Content -->
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Divorce</h1>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+  <img src="https://www.bosslawtn.com/wp-content/uploads/2026/03/murfreesboro-divorce-lawyer.webp" alt="Murfreesboro Divorce Lawyer-image">
+
+  <h2>Divorce Attorney in Murfreesboro, TN</h2>
+  <p>If separating is the only thing left on which you and your spouse can agree, it might be time to file for divorce. Unfortunately, divorce is an undoubtedly difficult and stressful process. That said, it can be made easier with the help of a skilled attorney.</p>
+
+  <div class="call-to-action">
+    <h3>Contact Boss Law</h3>
+    <p>Boss Law offers comprehensive guidance and personalized representation throughout the divorce process. Our firm can help you finalize your divorce quickly and favorably, with as little stress as possible. We are committed to serving our clients with compassion in their time of need.</p>
+    <a href="/contact-us" class="cta-button">Schedule A consultation</a>
+  </div>
+
+  <h2>Do You Need a Lawyer for Your Divorce in Tennessee?</h2>
+  <p>Going through a divorce procedure is rarely easy. Stress runs high, and couples typically make bad decisions in the heat of the moment. Working with a divorce attorney can help you by reviewing your proposed divorce settlement prior to signing.</p>
+
+  <h2>Understanding Uncontested vs. Contested Divorce in Tennessee</h2>
+  <p>In Tennessee, you may file for uncontested or no-fault divorce – wherein you and your partner are splitting up due to irreconcilable differences but are willing to cooperate to come to an agreement on most matters – or contested divorce. To file contested, you must provide grounds for the divorce.</p>
+
+  <h2>Is Tennessee a No-Fault Divorce State?</h2>
+  <p>Tennessee is not a no-fault divorce state. One person must confirm grounds for a divorce unless both spouses agree to be separate, all of the divorce terms are agreed to, and the court authorizes the settlement terms.</p>
+
+  <h3>Common grounds for divorce include:</h3>
+  <ul>
+    <li>Adultery</li>
+    <li><a href="/murfreesboro-domestic-violence-lawyer">Domestic violence</a></li>
+    <li>Bigamy</li>
+    <li>Conviction of a felony</li>
+    <li>One spouse is incapable of procreation (and the other spouse did not know at the time of the marriage)</li>
+    <li>Inappropriate marital conduct</li>
+  </ul>
+
+  <p>Generally speaking, an uncontested divorce is a simpler and more cost-effective approach. Resolving your divorce through mediation – by compromising and negotiating effectively – can significantly improve the final outcome and give you more control over each decision. Of course, if agreement is simply not possible, our attorneys are completely comfortable in the courtroom. Our team is equipped and ready to represent you before a judge and to fight for a favorable resolution.</p>
+
+  <h2>What to Expect During Your Divorce Process</h2>
+  <p>If you have never filed for divorce before, you might be unsure how to proceed. To start, one spouse must serve the other with divorce papers. Keep in mind that Tennessee has a residency requirement for divorce – you must have lived in the state for at least six months before you can file for divorce here (barring emergency situations, such as domestic abuse).</p>
+
+  <h3>Throughout the process, you will have to make decisions and resolve disputes regarding:</h3>
+  <ul>
+    <li><a href="/murfreesboro-child-custody-lawyer">Child custody</a></li>
+    <li><a href="/murfreesboro-child-support-lawyer">Child support</a></li>
+    <li>Property and debt division</li>
+    <li><a href="/murfreesboro-alimony-lawyer">Alimony</a></li>
+  </ul>
+
+  <p>Every step of the way, our attorneys can be there by your side, helping you overcome each step. Divorce can be a long and cumbersome process – but we can help you make it better.</p>
+
+  <h2>Your Local Guide to Uncontested Divorce in Murfreesboro, TN</h2>
+  <p>In Murfreesboro, navigating the divorce process can feel overwhelming, especially when emotions run high. Many residents face common challenges, such as understanding the legal requirements and managing the stress of separation. Fortunately, the local government provides resources to help you through this difficult time. The <a href="https://www.murfreesborotn.gov/" target="_blank">City of Murfreesboro</a> offers information on family law services, and the Rutherford County Circuit Court can guide you through the necessary legal steps for filing an uncontested divorce.</p>
+
+  <p>One of the most significant pain points for couples in our community is the fear of a lengthy and contentious divorce process. An uncontested divorce can alleviate much of this stress, allowing you and your spouse to reach agreements amicably. This approach not only saves time but also reduces costs, which is particularly important in today's economy. By working together, you can avoid the emotional toll that often accompanies contested divorces.</p>
+
+  <p>Whether you are dealing with child custody arrangements or property division, our attorneys are dedicated to helping you find the best solutions tailored to your unique situation. We understand the importance of a swift resolution and are committed to guiding you through the uncontested divorce process in Murfreesboro with compassion and care.</p>
+
+  <h2>How long does the divorce process typically take in Tennessee?</h2>
+  <p>The length of the divorce process in Tennessee can vary widely based on whether the divorce is contested or uncontested. An uncontested divorce may take a few months, while a contested divorce can take much longer, sometimes over a year.</p>
+
+  <h2>Can I get a divorce if my spouse doesn't want one?</h2>
+  <p>Yes, you can still file for divorce in Tennessee even if your spouse does not want one. While it may make the process more challenging, a divorce can proceed with one party requesting it, as long as the court's requirements are met. If your spouse refuses to cooperate, a contested divorce may be necessary.</p>
+
+  <h2>What Is The Divorce Process In Tennessee?</h2>
+  <p>Here is a brief summary of what the divorce process looks like in Tennessee.</p>
+  <ul>
+    <li><strong>Complaint or Petition for Divorce</strong> – Filing this will start the divorce process. The person filing is called the plaintiff.</li>
+    <li><strong>Complaint and Summons</strong> – The court will issue a Summons, and then both documents will be served to the other spouse. There is a specific process that must be followed – contact our firm to learn more.</li>
+    <li><strong>Answer and Counter-Complaint</strong> – This will be the document that the other spouse will submit, which allows him or her to make a case that might be different than the original petition.</li>
+    <li><strong>Discovery</strong>– This will be a period of time where extensive data gathering occurs regarding marital assets, property, income, etc.</li>
+    <li><strong>Parenting Class</strong> – A divorcing couple with children will be required to take a four-hour parenting-through-divorce class.</li>
+    <li><strong>Negotiated Settlement</strong> – If possible, the divorcing couple will come to a negotiated settlement regarding the matters pertaining to their divorce, which is preferable to a contested trial.</li>
+    <li><strong>Divorce Trial</strong> – If the couple was unable to settle their divorce through negotiations, then the case will need to be litigated in court. Oftentimes, the couple will be required to attend mediation before setting a trial date.</li>
+    <li><strong>Final Decree of Divorce</strong> – While there are still many details to attend to post-divorce, the divorce will be finalized when the judge signs this final decree.</li>
+  </ul>
+
+  <h2>Does It Matter Who Files For Divorce First In Tennessee?</h2>
+  <p>In Tennessee, it does not matter who files for divorce first. The court will treat both spouses equally and make decisions based on the best interests of the parties and the children, if any. However, there are some practical advantages to filing for divorce first. For example, the spouse who files first can choose the location of the divorce and set the proceedings' pace.</p>
+
+  <p>Additionally, the spouse who files first may have a better chance of getting temporary orders, such as restraining orders or orders for child custody, before the other spouse can respond.</p>
+
+  <p>Suppose you are considering filing for divorce in Tennessee. In that case, speaking with an experienced Murfreesboro divorce attorney is essential to discuss your options and ensure your protection.</p>
+
+  <h2>Is Tn A 50/50 Divorce State?</h2>
+  <p>No, Tennessee is not a 50/50 state for the division of marital property in a divorce. However, Tennessee is an equitable distribution state for property division in divorce, but courts must consider a list of aspects in determining which spouse obtains what assets.</p>
+
+  <h2>How Can A Divorce Attorney In Murfreesboro Help You?</h2>
+  <p>When you hire a lawyer to help you with your divorce, it's important to not only hire a legal expert who will assist you with legal matters regarding your divorce but someone who truly cares about you and your unique situation. Our divorce attorneys in <a href="https://en.wikipedia.org/wiki/Murfreesboro,_Tennessee" target="_blank">Murfreesboro</a> are committed to giving your case the distinctive attention that it requires.</p>
+
+  <h3>A divorce lawyer can help you in the following ways:</h3>
+  <ul>
+    <li>Supporting you emotionally</li>
+    <li>Guiding you through the legal process</li>
+    <li>Helping you prevent costly mistakes</li>
+    <li>Represent you in court</li>
+    <li>Handling paperwork and ensuring it gets done correctly and promptly</li>
+  </ul>
+
+  <div class="call-to-action">
+    <h3>Work Directly With Your Attorney Every Step of the Way.</h3>
+    <p>Don't go through a divorce without an experienced lawyer by your side. Contact our divorce attorneys today to schedule a free consultation and to learn more about how we can help you.</p>
+    <a href="tel:6158901548" class="cta-button">Call Now</a>
+    <a href="/contact-us" class="cta-button">Contact Us Today</a>
+  </div>
+
+  <h2>Divorce Faqs</h2>
+
+  <h3>Is there a residency requirement to file for divorce in Tennessee?</h3>
+  <p>Like most other states, Tennessee requires that a spouse is a state resident for at least six months before filing for divorce in Tennessee. If the situation includes abuse or another emergency, then this residency requirement might be waived.</p>
+
+  <h3>Is there a waiting period for divorce?</h3>
+  <p>If it is an uncomplicated divorce, then the process might only take between 2-6 months. Complex divorces can take much longer. There is a mandatory "cooling off" waiting period of 60 days after the divorce is filed. This period is extended to 90 days if there are children involved.</p>
+
+  <h3>Does Tennessee have legal separation?</h3>
+  <p>Tennessee does recognize legal separation, which allows a couple to separate and handle the matters of divorce but still remain legally married.</p>
+
+  <h3>Does Tennessee allow for annulments?</h3>
+  <p>Tennessee does allow for a marriage to be annulled, which legally states that the marriage never took place. It is rare as there are specific requirements to get an annulment, which include:</p>
+  <ul>
+    <li>Insanity</li>
+    <li>Underage</li>
+    <li>Incest</li>
+    <li>Bigamy</li>
+    <li>Duress</li>
+    <li>Fraud</li>
+    <li>Impotence</li>
+    <li>Denial of marital rights</li>
+  </ul>
+
+  <h3>What are the grounds for divorce in Tennessee?</h3>
+  <p>Tennessee recognizes both fault and no-fault grounds for divorce. Fault grounds include adultery, abandonment, cruelty, and substance abuse. No-fault grounds can be established by living apart for at least a year.</p>
+
+  <h3>Can I change my name after a divorce in Tennessee?</h3>
+  <p>Yes, Tennessee allows individuals to request a name change as part of the divorce proceedings. This request can be included in the final decree of divorce.</p>
+
+  <h3>What happens to debts during a divorce in Tennessee?</h3>
+  <p>In Tennessee, marital debts are also subject to equitable distribution. The court will consider various factors to determine how debts will be divided between spouses.</p>
+
+  <p>Contact our firm to learn more about divorce in Tennessee and to discuss your situation with us.</p>
+
+  <div class="call-to-action">
+    <h2>Contact Us Today</h2>
+    <a href="/contact-us" class="cta-button">Contact Boss Law Today!</a>
+  </div>
+
+  <h2>Practice Areas</h2>
+  <div class="services-list">
+    <a href="/murfreesboro-family-law-attorney">Family Law</a>
+    <a href="/murfreesboro-divorce-lawyer">Divorce</a>
+    <a href="/murfreesboro-adoption-lawyer">Adoption</a>
+    <a href="/murfreesboro-child-custody-lawyer">Child Custody</a>
+    <a href="/murfreesboro-child-support-lawyer">Child Support</a>
+    <a href="/murfreesboro-post-divorce-modifications-lawyer">Post-Divorce Modifications</a>
+    <a href="/murfreesboro-alimony-lawyer">Alimony</a>
+    <a href="/murfreesboro-domestic-violence-lawyer">Domestic Violence</a>
+    <a href="/murfreesboro-prenuptial-agreement-lawyer">Prenuptial Agreement</a>
+    <a href="/murfreesboro-fathers-rights-lawyer">Fathers' Rights</a>
+    <a href="/murfreesboro-mothers-rights-lawyer">Mothers' Rights</a>
+    <a href="/murfreesboro-grandparents-rights-lawyer">Grandparents' Rights</a>
+    <a href="/murfreesboro-child-visitation-lawyer">Child Visitation Rights</a>
+    <a href="/murfreesboro-same-sex-divorce-lawyer">Same Sex Divorce</a>
+    <a href="/murfreesboro-lgbtq-child-custody-lawyer">LGBTQ Child Custody</a>
+    <a href="/murfreesboro-high-asset-divorce-lawyer">High Asset Divorce</a>
+    <a href="/murfreesboro-juvenile-defense-lawyer">Juvenile Defense</a>
+  </div>
+
+  <div class="testimonials-section">
+    <h2>Testimonials</h2>
+    <div class="testimonial">
+      <p class="testimonial-text">Best lawyer I've ever had or seen. Amazing to watch him work and fight for you. He is a nice guy and a great man that fights big even for the little people like me.</p>
+      <p class="testimonial-author">- Marcus</p>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-text">Boss Law handled my divorce smoothly. The team was helpful, guiding me through the stressful process. I felt supported and was informed at every step. We worked things out together, and I'm pleased with the outcome.</p>
+      <p class="testimonial-author">- Anonymous</p>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-text">Mitch gave me a fair price. He was compassionate &amp; did an excellent job. Mitch truly cares for his clients &amp; their families. He also represents women in abuse cases through the Domestic Violence Agency at no cost.</p>
+      <p class="testimonial-author">- Patti</p>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-text">As a single mother, I was trying to keep myself and my children safe from a bad situation. I was worried I wouldn't have a chance because I had very limited income and lawyers are so expensive. Mitch took care of everything and I was able to afford his services.</p>
+      <p class="testimonial-author">- Tammara N.</p>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial-text">Boss Law truly cares about the client, not just money or outcomes. Their team is honest, providing options instead of directives. We felt heard and protected. Would highly recommend and wouldn't hesitate to call them again if needed.</p>
+      <p class="testimonial-author">- Kim R.</p>
+    </div>
+  </div>
+
+  <div class="call-to-action">
+    <h2>Take The Next Step</h2>
+    <p>Contact our office today to schedule a complimentary consultation.</p>
+    <a href="/contact-us" class="cta-button">Free Consultation</a>
+  </div>
+
+  <div class="why-choose-section">
+    <h2>Why Choose Boss Law?</h2>
+    <div class="feature-item">
+      <h3>Work Directly With Your Attorney Every Step of the Way</h3>
+    </div>
+    <div class="feature-item">
+      <h3>We Treat Our Clients Like Family</h3>
+    </div>
+    <div class="feature-item">
+      <h3>Customized Strategy for Every Case</h3>
+    </div>
+    <div class="feature-item">
+      <div class="stats-highlight">
+        <div>
+          <div class="stat-number">Over 800</div>
+          <div class="stat-label">Divorces Handled</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <img src="https://www.bosslawtn.com/wp-content/uploads/2025/11/hm-apart-sec-mdl.webp" alt="Bosslaw">
+
+  <div class="call-to-action">
+    <h2>We Will Walk With You Every Step of The Way</h2>
+    <h3>Proudly Serving Clients in Murfreesboro, TN and surrounding areas.</h3>
+    <a href="/contact-us" class="cta-button">Get A Free Consultation</a>
+    <p>Call Us Today <a href="tel:6158901548">615-890-1548</a></p>
+  </div>
+</div>
+
+<section class="map"><iframe src="https://maps.app.goo.gl/7tBFeGhpViUabNZE8" width="100%" height="300" style="border:0;margin-top:1.5rem" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map"></iframe></section><footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">bosslawtn.com</span>
+      <span class="footer-copyright">©2026</span>
+    </div>
+    <div class="footer-links">
+    <li><a href="/">Home</a></li><li><a href="/our-firm">Our Firm</a><ul><li><a href="/areas-served">Area Served</a></li></ul></li><li><a href="/practice-areas">Practice Areas</a><ul><li><a href="/murfreesboro-family-law-attorney">Family Law</a></li><li><a href="/murfreesboro-divorce-lawyer">Divorce</a></li><li><a href="/murfreesboro-adoption-lawyer">Adoption</a></li><li><a href="/murfreesboro-child-custody-lawyer">Child Custody</a></li><li><a href="/murfreesboro-child-support-lawyer">Child Support</a></li><li><a href="/murfreesboro-post-divorce-modifications-lawyer">Post-Divorce Modifications</a></li><li><a href="/murfreesboro-alimony-lawyer">Alimony</a></li><li><a href="https://www.bosslawtn.com/murfreesboro-domestic-violence-lawyer/">Domestic Violence</a></li><li><a href="/murfreesboro-prenuptial-agreement-lawyer">Prenuptial Agreement</a></li><li><a href="https://www.bosslawtn.com/murfreesboro-fathers-rights-lawyer/">Fathers' Rights</a></li><li><a href="https://www.bosslawtn.com/murfreesboro-mothers-rights-lawyer/">Mothers' Rights</a></li><li><a href="/murfreesboro-grandparents-rights-lawyer">Grandparents' Rights</a></li><li><a href="/murfreesboro-child-visitation-lawyer">Child Visitation Rights</a></li><li><a href="/other-practice-areas">Other Murfreesboro Practice Areas</a></li></ul></li><li><a href="/reviews">Reviews</a><ul><li><a href="https://www.bosslawtn.com/case-results/">Case Results</a></li></ul></li><li><a href="/contact-us">Contact Us</a></li><li><a href="/murfreesboro-domestic-violence-lawyer">Domestic Violence</a></li><li><a href="/murfreesboro-fathers-rights-lawyer">Fathers' Rights</a></li><li><a href="/murfreesboro-mothers-rights-lawyer">Mothers' Rights</a></li><li><a href="/attorney/mitchell-e-shannon">Attorney Mitchell Shannon</a></li><li><a href="/attorney/abigail-l-burnham">Attorney Abigail L. Burnham</a></li><li><a href="/attorney/giselle-sutherland">Attorney Giselle Ortega Sutherland</a></li><li><a href="/blog/how-much-does-a-divorce-cost-in-tennessee">How Much Does a Divorce Cost in Tennessee?</a></li><li><a href="/blog/how-to-prepare-for-your-child-custody-case-in-murfreesboro-tn">How to Prepare for Your Child Custody Case in Murfreesboro, TN</a></li><li><a href="/blog/questions-to-ask-a-divorce-attorney-in-murfreesboro-tn-before-hiring">Questions to Ask a Divorce Attorney in Murfreesboro, TN Before Hiring</a></li><li><a href="/es/blog/como-prepararse-para-su-caso-de-custodia-de-menores-en-murfreesboro-tennessee">¿Cómo prepararse para su caso de custodia de menores en Murfreesboro, Tennessee? (2026)</a></li><li><a href="/es/blog/author/mitchell-shannon">Abogado fundador de Boss Law</a></li><li><a href="/blog/author/mitchell-shannon">Founding Attorney of Boss Law</a></li><li><a href="/es/blog/autor/mitchell-shannon">Abogado fundador de Boss Law</a></li><li><a href="/es/blog/cuanto-cuesta-un-divorcio-en-tennessee">¿Cuánto cuesta un divorcio en Tennessee? (2026)</a></li><li><a href="/es/blog/preguntas-que-debes-hacerle-a-un-abogado-especializado-en-divorcios-en-murfreesboro-tennessee-antes-de-contratarlo">10 preguntas que debes hacerle a un abogado especializado en divorcios en Murfreesboro, Tennessee, antes de contratarlo</a></li><li><a href="/woodbury-family-lawyer">Woodbury Family Lawyer - Local Law Firm Near You</a></li><li><a href="/es/abogado-especializado-en-defensa-de-menores-en-murfreesboro">Murfreesboro: Abogado especializado en defensa de menores - Consulta gratuita</a></li><li><a href="/lavergne-child-custody-lawyer">La Vergne Child Custody Lawyer &amp; Visitation Law Firm</a></li><li><a href="/murfreesboro-lgbtq-child-custody-lawyer">Murfreesboro LGBTQ Child Custody Lawyer - Free Consultation</a></li><li><a href="/smyrna-adoption-lawyer">Smyrna Adoption Lawyer Near You - Free Consultation</a></li><li><a href="/smyrna-family-law-attorney">Smyrna Family Law Attorney - Local Law Firm Near You</a></li><li><a href="/es/politica-de-privacidad">Política de privacidad | Murfreesboro Abogado especializado en divorcios Murfreesboro</a></li><li><a href="/murfreesboro-high-asset-divorce-lawyer">Murfreesboro High Asset Divorce Lawyer - Free Consultation</a></li><li><a href="/es/abogado-especializado-en-acuerdos-prenupciales-en-murfreesboro">Murfreesboro: Abogado especializado en acuerdos prenupciales - Consulta gratuita</a></li><li><a href="/murfreesboro-juvenile-defense-lawyer">Murfreesboro Juvenile Defense Lawyer - Free Consultation</a></li><li><a href="/es/abogado-especializado-en-adopciones-en-smyrna">Abogado especializado en adopciones Smyrna cerca de ti: consulta gratuita</a></li><li><a href="/es/abogado-de-familia-en-woodbury">Woodbury Abogado especializado en derecho de familia - Bufete de abogados cerca de ti</a></li><li><a href="/smyrna-divorce-lawyer">Smyrna Divorce Lawyer Near You - Free Consultation</a></li><li><a href="/murfreesboro-same-sex-divorce-lawyer">Murfreesboro Same Sex Divorce Lawyer - Free Consultation</a></li><li><a href="/es/abogado-especializado-en-derechos-de-los-abuelos-en-murfreesboro">Murfreesboro: Abogado especializado en derechos de los abuelos - Consulta gratuita</a></li><li><a href="/disclaimer">Disclaimer - Boss Law</a></li><li><a href="/es/gracias">Gracias - Boss Law</a></li><li><a href="/es/resultados-del-caso">Resultados de casos - Boss Law</a></li><li><a href="/es/abogado-especializado-en-divorcios-en-la-vergne">La Vergne Abogado especializado en divorcios - Consulta gratuita</a></li><li><a href="/es/abogado-especializado-en-pensiones-alimenticias-en-smyrna">Smyrna: Abogado especializado en manutención conyugal - Abogado especializado en pensión alimenticia</a></li><li><a href="/es/abogado-especializado-en-divorcios-entre-personas-del-mismo-sexo-en-murfreesboro">Murfreesboro: Abogado especializado en divorcios entre personas del mismo sexo - Consulta gratuita</a></li><li><a href="/es/abogado-especializado-en-divorcios-en-smyrna">Smyrna: Abogados especializados en divorcios cerca de ti - Consulta gratuita</a></li><li><a href="/lavergne-divorce-lawyer">La Vergne Divorce Lawyer - Free Consultation</a></li><li><a href="/es/abogado-especializado-en-manutencion-infantil-en-smyrna">Smyrna Abogado especializado en manutención infantil - Consulta gratuita</a></li><li><a href="/smyrna-domestic-violence-lawyer">Smyrna Domestic Violence Lawyer | Protective Order Attorney</a></li><li><a href="/smyrna-spousal-support-lawyer">Smyrna Spousal Support Lawyer - Alimony Attorney</a></li><li><a href="/lavergne-domestic-violence-lawyer">La Vergne Domestic Violence Lawyer - Protective Orders Attorney</a></li><li><a href="/es/abogado-especializado-en-custodia-de-menores-lgbtq-en-murfreesboro">Murfreesboro: Abogado especializado en custodia de menores LGBTQ - Consulta gratuita</a></li><li><a href="/es/abogado-especializado-en-custodia-de-menores-en-woodbury">Woodbury: Bufete de abogados especializado en custodia de menores y régimen de visitas</a></li><li><a href="/es/abogado-especializado-en-modificaciones-tras-el-divorcio-en-murfreesboro">Murfreesboro: Abogado especializado en modificaciones tras el divorcio - Consulta gratuita</a></li><li><a href="/es/abogado-especializado-en-derecho-de-familia-en-smyrna">Smyrna: Abogado especializado en derecho de familia - Bufete de abogados cerca de ti</a></li><li><a href="/es/nuestra-empresa">Acerca de nuestro bufete de abogados Murfreesboro | Boss Law</a></li><li><a href="/es/abogado-especializado-en-divorcios-con-patrimonio-elevado-en-murfreesboro">Murfreesboro: Abogados especializados en divorcios con patrimonios elevados - Consulta gratuita</a></li><li><a href="/smyrna-child-support-lawyer">Smyrna Child Support Lawyer - Free Consultation</a></li><li><a href="/es/abogado/abigail-l-burnham">Abogada Abigail L. Burnham - Boss Law</a></li><li><a href="/es/abogado-especializado-en-violencia-domestica-en-smyrna">Abogado especializado en violencia doméstica Smyrna | Abogado especializado en órdenes de protección</a></li><li><a href="/es/abogado-especializado-en-violencia-domestica-en-woodbury">Abogado especializado en violencia doméstica Woodbury | Abogado especializado en órdenes de protección</a></li><li><a href="/es/abogado-especializado-en-adopciones-en-murfreesboro">Murfreesboro: Abogado especializado en adopciones cerca de ti - Consulta gratuita</a></li><li><a href="/privacy-policy">Privacy Policy | Murfreesboro Divorce Lawyer Murfreesboro</a></li><li><a href="/smyrna-prenuptial-agreement-lawyer">Smyrna Prenuptial Agreement Lawyer - Free Consultation</a></li><li><a href="/woodbury-divorce-lawyer">Woodbury Divorce Lawyer - Free Consultation</a></li><li><a href="/site-map">Sitemap - Boss Law</a></li><li><a href="/es/abogado-especializado-en-manutencion-infantil-en-woodbury">Woodbury: Abogado especializado en manutención infantil - Consulta gratuita</a></li><li><a href="/es">Murfreesboro: Bufete de abogados especializado en divorcios y derecho de familia - Boss Law</a></li><li><a href="/es/busqueda-en-el-sitio">Búsqueda en el sitio | Abogado especializado en divorcios Murfreesboro</a></li><li><a href="/es/abogado-especializado-en-manutencion-infantil-en-murfreesboro">Murfreesboro Abogado especializado en manutención infantil - Consulta gratuita</a></li><li><a href="/thank-you">Thank You - Boss Law</a></li><li><a href="/es/abogado-especializado-en-custodia-de-menores-en-la-vergne">La Vergne: Bufete de abogados especializado en custodia de menores y régimen de visitas</a></li><li><a href="/es/abogado/giselle-sutherland">Abogada Giselle Ortega Sutherland: abogada especializada en derecho de familia que habla español en Boss Law</a></li><li><a href="/es/aviso-legal">Aviso legal - Boss Law</a></li><li><a href="/es/contactenos">Contáctenos - Boss Law</a></li><li><a href="/smyrna-child-custody-lawyer">Smyrna Child Custody Lawyer &amp; Visitation Law Firm</a></li><li><a href="/lavergne-family-law-attorney">La Vergne Family Law Attorney - Free Consultation</a></li><li><a href="/es/areas-de-practica">Áreas de práctica - Boss Law</a></li><li><a href="/es/contact-us">Contáctenos - Boss Law</a></li><li><a href="/es/disclaimer">Aviso legal - Boss Law</a></li><li><a href="/es/site-map">Mapa del sitio - Boss Law</a></li><li><a href="/es/privacy-policy">Política de privacidad | Murfreesboro Abogado especializado en divorcios Murfreesboro</a></li><li><a href="/es/practice-areas">Áreas de práctica - Boss Law</a></li><li><a href="/es/reviews">Opiniones y testimonios de clientes - Boss Law</a></li><li><a href="/es/case-results">Resultados de casos - Boss Law</a></li>
+  </div>
+  </footer>
+
+
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>

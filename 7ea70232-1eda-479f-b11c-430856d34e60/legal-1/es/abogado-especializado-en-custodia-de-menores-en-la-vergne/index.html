@@ -1,0 +1,977 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Vergne: Bufete de abogados especializado en custodia de menores y régimen de visitas</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  :root {
+    --bg-primary: #111115;
+    --bg-secondary: #1a1a20;
+    --bg-hover: #22222a;
+    --bg-card: #16161c;
+    --text-primary: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.5);
+    --text-dim: rgba(255, 255, 255, 0.35);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-light: rgba(255, 255, 255, 0.06);
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Inter', -apple-system, sans-serif;
+    --sidebar-width: 280px;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 32px;
+    --space-xl: 48px;
+    --space-2xl: 64px;
+    --space-3xl: 96px;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
+
+  /* Navigation */
+  .mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg-primary);
+  }
+
+  .mobile-header .brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+
+  .mobile-header .brand .globe-icon {
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid var(--text-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  .mobile-header .brand-name {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-sm);
+  }
+
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--text-primary);
+    transition: all 0.3s ease;
+  }
+
+  .sidebar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: var(--bg-primary);
+    border-right: 1px solid var(--border-color);
+    z-index: 200;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: var(--space-xl) var(--space-lg);
+    overflow-y: auto;
+  }
+
+  .sidebar .brand-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .sidebar .brand-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+
+  .sidebar .globe-icon {
+    width: 38px;
+    height: 38px;
+    border: 1.5px solid var(--text-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .sidebar .brand-name {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .sidebar nav a {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .sidebar nav a:hover {
+    color: var(--text-primary);
+  }
+
+  .sidebar .status-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .mobile-nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 150;
+  }
+
+  .mobile-nav-overlay.active {
+    display: block;
+  }
+
+  .sidebar.active {
+    display: flex;
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: calc(96px + 60px) var(--space-lg) var(--space-3xl);
+    background: var(--text-primary);
+    color: #ffffff;
+  }
+
+  .page-title-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-title-area h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  /* Content Area */
+  .content-area {
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .content-area h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .content-area h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+    margin-top: var(--space-lg);
+  }
+
+  .content-area p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area ul, .content-area ol {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-lg);
+    color: var(--text-muted);
+  }
+
+  .content-area li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  .content-area img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    font-weight: 500;
+  }
+
+  .content-area a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  /* Hero Image Section */
+  .hero-image {
+    margin: var(--space-2xl) 0;
+    text-align: center;
+  }
+
+  /* CTA Button */
+  .cta-button {
+    display: inline-block;
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    padding: 12px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    margin: var(--space-md) 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .cta-button:hover {
+    opacity: 0.9;
+    color: var(--bg-primary);
+    text-decoration: none;
+  }
+
+  /* FAQ Section */
+  .faq-section {
+    margin: var(--space-2xl) 0;
+  }
+
+  .faq-item {
+    margin-bottom: var(--space-xl);
+    padding: var(--space-lg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+  }
+
+  .faq-question {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .faq-answer {
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* Stats Section */
+  .stats-section {
+    padding: var(--space-2xl) 0;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    margin: var(--space-2xl) 0;
+  }
+
+  .stat-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: block;
+  }
+
+  .stat-label {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* Testimonials */
+  .testimonials-section {
+    margin: var(--space-2xl) 0;
+  }
+
+  .testimonial {
+    background: var(--bg-card);
+    padding: var(--space-lg);
+    border-radius: 8px;
+    margin-bottom: var(--space-lg);
+    border-left: 3px solid var(--text-primary);
+  }
+
+  .testimonial-text {
+    font-style: italic;
+    color: var(--text-muted);
+    margin-bottom: var(--space-md);
+  }
+
+  .testimonial-author {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  /* Footer */
+  .footer {
+    padding: var(--space-xl) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .footer-brand-name {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .footer-copyright {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--text-dim);
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md) var(--space-lg);
+  }
+
+  .footer-links a {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-links a:hover {
+    color: var(--text-primary);
+  }
+
+  /* Contact Info */
+  .contact-info {
+    background: var(--bg-card);
+    padding: var(--space-lg);
+    border-radius: 8px;
+    margin: var(--space-2xl) 0;
+  }
+
+  .contact-info h3 {
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .contact-info p {
+    margin-bottom: var(--space-sm);
+  }
+
+  .contact-info a {
+    color: var(--text-primary);
+  }
+
+  /* Why Choose Us Section */
+  .why-choose-section {
+    background: var(--bg-card);
+    padding: var(--space-2xl) var(--space-lg);
+    margin: var(--space-2xl) 0;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .why-choose-section h2 {
+    margin-bottom: var(--space-xl);
+  }
+
+  .why-choose-grid {
+    display: grid;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+  }
+
+  .why-choose-item {
+    padding: var(--space-md);
+  }
+
+  .why-choose-item h4 {
+    font-size: 1rem;
+    margin-bottom: var(--space-sm);
+    color: var(--text-primary);
+  }
+
+  .why-choose-item p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 0;
+  }
+
+  /* Banner Form */
+  .banner-form {
+    background: var(--bg-secondary);
+    padding: var(--space-xl) var(--space-lg);
+    margin: var(--space-2xl) 0;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+  }
+
+  .banner-form h2 {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+
+  .form-row {
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .form-group label {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--text-primary);
+  }
+
+  .form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  .form-submit {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: var(--font-sans);
+    transition: opacity 0.3s ease;
+  }
+
+  .form-submit:hover {
+    opacity: 0.9;
+  }
+
+  .legal-notice {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin-top: var(--space-md);
+    line-height: 1.5;
+  }
+
+  .checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    margin-top: var(--space-md);
+  }
+
+  .checkbox-group input[type="checkbox"] {
+    margin-top: 4px;
+  }
+
+  .checkbox-group label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .page-title-area {
+      padding: calc(80px + 40px) var(--space-md) var(--space-xl);
+    }
+
+    .content-area {
+      padding: var(--space-xl) var(--space-md);
+    }
+
+    .banner-form {
+      padding: var(--space-lg) var(--space-md);
+    }
+
+    .why-choose-section {
+      padding: var(--space-xl) var(--space-md);
+    }
+
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-info {
+      padding: var(--space-md);
+    }
+
+    .faq-item {
+      padding: var(--space-md);
+    }
+
+    .testimonial {
+      padding: var(--space-md);
+    }
+
+    .stats-section {
+      padding: var(--space-xl) 0;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .page-title-area { 
+      padding: calc(96px + 60px) var(--space-2xl) var(--space-3xl); 
+    }
+    .content-area { 
+      padding: var(--space-3xl) var(--space-2xl); 
+    }
+    
+    .footer {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .form-row {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .why-choose-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .mobile-header {
+      display: none;
+    }
+
+    .sidebar {
+      display: flex !important;
+    }
+
+    .mobile-nav-overlay {
+      display: none !important;
+    }
+
+    .main-content {
+      margin-left: var(--sidebar-width);
+      width: calc(100% - var(--sidebar-width));
+    }
+
+    .page-title-area { 
+      padding: calc(96px + 80px) var(--space-3xl) var(--space-3xl); 
+    }
+    .content-area { 
+      padding: var(--space-3xl); 
+    }
+
+    .footer {
+      padding: var(--space-xl) var(--space-2xl);
+    }
+
+    .why-choose-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>
+
+<!-- HEADER -->
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="#" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">bosslawtn.com</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+<div style="width:100%;margin:2rem 0"><img src="https://www.bosslawtn.com/wp-content/uploads/2025/11/hm-apart-sec-mdl.webp" alt="Bosslaw" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="#" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">bosslawtn.com</span>
+    </a>
+    <nav>
+      <a href="#">Platform</a>
+      <a href="#">Solutions</a>
+      <a href="#">Documentation</a>
+      <a href="#">Enterprise</a>
+    </nav>
+  </div>
+  
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>La Vergne Abogado especializado en custodia de menores</h1>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+  <div class="hero-image">
+    <img src="https://www.bosslawtn.com/wp-content/uploads/2026/03/top-lavergne-child-custody-lawyer.webp" alt="El mejor abogado especializado en custodia de menores de Laverne">
+  </div>
+
+  <h2>Abogado especializado en custodia de menores en La Vergne, Tennessee</h2>
+  <p>Los casos de custodia de menores en Tennessee se encuentran entre los asuntos de derecho de familia más polémicos y emotivos, en gran parte porque a los padres les preocupa perder la patria potestad. Dado que las leyes de custodia de menores en Tennessee pueden resultar difíciles de entender por cuenta propia, especialmente cuando se trata de proteger a su hijo, es importante que cuente con la ayuda de un abogado comprensivo <strong>La Vergne: abogado especializado en custodia de menores</strong> que pueda defender los intereses de ambos.</p>
+
+  <h2>Abogados especializados en custodia de menores en La Vergne</h2>
+  <p>En <a href="/es/">Ley del jefe</a>, nuestros abogados especializados en derecho de familia llevan años prestando sus servicios a los residentes de La Vergne y a las comunidades de toda la zona de Tennessee. Nuestro equipo es consciente de lo complicados que pueden ser los casos de custodia de menores y trabaja sin descanso para ayudar a las familias a alcanzar acuerdos que les den tranquilidad. Contamos con un profundo conocimiento de la legislación en materia de custodia de menores y mantenemos una sólida relación con los tribunales de La Vergne. Esto nos permite adaptar con especial destreza las estrategias legales a las necesidades de cada cliente.</p>
+
+  <p>Tanto si estás pasando por tu primer conflicto por la custodia de tus hijos durante un <a href="/es/abogado-especializado-en-divorcios-en-la-vergne/">divorcio</a> o si necesita ayuda para modificar un plan de custodia de menores ya existente en La Vergne, nuestro equipo puede guiarle en cada paso de su caso. Nos enorgullece ofrecer nuestros servicios tanto en inglés como en español, y trabajamos para ayudar al mayor número posible de familias a conseguir órdenes de custodia que den prioridad a los intereses de sus hijos.</p>
+
+  <div class="contact-info">
+    <h3>Contacto Ley del jefe</h3>
+    <p><a href="/es/contactenos/">Programa una consulta</a></p>
+  <iframe src="https://maps.app.goo.gl/7tBFeGhpViUabNZE8" width="100%" height="300" style="border:0;margin-top:1.5rem" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map"></iframe></div>
+
+  <h2>Una visión general de la custodia de los hijos en Tennessee</h2>
+  <p>Hubo más de 13 millones de padres con la custodia en todo Estados Unidos, lo que pone de manifiesto lo habituales que son los asuntos de custodia de menores en todo el país. En Tennessee, los tribunales de familia deben dar prioridad a el interés superior del niño al dictar cualquier resolución sobre la custodia. <strong>Al dictar una orden de custodia, el juez de familia establecerá los siguientes tipos de derechos de custodia:</strong></p>
+
+  <ol>
+    <li><strong>Custodia física</strong>. Esto determina qué progenitor tiene derecho a que el niño viva con él o lo visite. Además, exige que el progenitor con la custodia física se haga cargo de las necesidades básicas del niño, lo que incluye proporcionarle comida, alojamiento y ropa.</li>
+    <li><strong>Custodia legal</strong>. Este tipo de custodia determina quién toma las decisiones importantes sobre el niño, como el tipo de atención médica que recibe o a qué escuela asiste.</li>
+  </ol>
+
+  <h2>Cómo se divide la custodia de los hijos en el modelo Tennessee</h2>
+  <p>Al tomar decisiones sobre la custodia, un juez de familia otorgará la custodia exclusiva o compartida en el caso La Vergne. La custodia exclusiva significa que solo uno de los padres tiene los derechos de custodia física o legal, mientras que la custodia compartida permite a los padres repartirse estos derechos. En una situación de custodia exclusiva, el padre que no tiene la custodia puede seguir participando en la crianza compartida con el padre que tiene la custodia mediante un régimen de visitas.</p>
+
+  <p>Dado que los niños suelen salir mejor parados cuando tienen a ambos padres en sus vidas, los tribunales de familia de La Vergne tratan de llegar a acuerdos de custodia compartida siempre que sea posible. Sin embargo, si existen circunstancias atenuantes o si uno de los padres representa un peligro para el niño, es probable que se adopten otras medidas. Un experto <a href="/lavergne-family-law-attorney">abogado de familia</a> Los abogados de Boss Law pueden representarlo a usted y defender los intereses de su hijo durante un caso de custodia infantil La Vergne.</p>
+
+  <h2>Por qué deberías contratar a un abogado especializado en custodia de menores en La Vergne</h2>
+  <p>Cuando contratas a un abogado especializado en custodia de menores en La Vergne, puedes recibir el asesoramiento, la representación y los recursos que necesitas para conseguir el resultado que buscas. Aunque los casos de custodia de menores pueden ser complejos, contar con el abogado adecuado puede marcar una gran diferencia en tu caso. <strong>Los abogados expertos en custodia de menores de Boss Law pueden:</strong></p>
+
+  <ul>
+    <li>Manejar el sistema legal, presentando la documentación de forma correcta y dentro de los plazos establecidos.</li>
+    <li>Negocia con el abogado de la parte contraria y con el otro progenitor.</li>
+    <li>Brindar apoyo y asesoramiento legal durante todo el proceso.</li>
+    <li>Representarle ante los tribunales, si fuera necesario.</li>
+    <li>Ayudarle a modificar un acuerdo de custodia de menores ya existente.</li>
+    <li>Defienda los intereses y las necesidades específicas de su hijo.</li>
+  </ul>
+
+  <div class="why-choose-section">
+    <h2>¿Por qué elegir Boss Law?</h2>
+    <div class="why-choose-grid">
+      <div class="why-choose-item">
+        <h4>Trabaja directamente con tu</h4>
+        <p>Un abogado que te acompaña en cada paso del camino</p>
+      </div>
+      <div class="why-choose-item">
+        <h4>Tratamos a nuestros clientes como</h4>
+        <p>Familia</p>
+      </div>
+      <div class="why-choose-item">
+        <h4>Estrategia personalizada para</h4>
+        <p>Todos los casos</p>
+      </div>
+      <div class="why-choose-item">
+        <h4>Más de 800 casos de divorcio tramitados</h4>
+        <p></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="banner-form">
+    <h2>Formulario de banner</h2>
+    <form>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">Nombre*</label>
+          <input type="text" id="firstName" name="firstName" required>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Apellido*</label>
+          <input type="text" id="lastName" name="lastName" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="email">Correo electrónico*</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Teléfono*</label>
+          <input type="tel" id="phone" name="phone" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="message">Mensaje</label>
+        <textarea id="message" name="message"></textarea>
+      </div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="legal" name="legal" required>
+        <label for="legal">He leído el aviso legal *</label>
+      </div>
+      <button type="submit" class="form-submit">Enviar</button>
+      <div class="legal-notice">
+        <p>Aviso legal: El uso de Internet o de este formulario para comunicarse con el bufete o con cualquier miembro del mismo no establece una relación abogado-cliente. No se debe enviar información confidencial o urgente a través de este formulario.</p>
+      </div>
+    </form>
+  </div>
+
+  <div class="faq-section">
+    <h2>Preguntas frecuentes</h2>
+    
+    <div class="faq-item">
+      <h4 class="faq-question">¿Cuánto cuesta un abogado especializado en custodia de menores en Tennessee?</h4>
+      <div class="faq-answer">
+        <p>El costo de un abogado especializado en custodia de menores en Tennessee depende de los detalles de tu caso concreto. Los casos más complejos suelen ser más costosos, ya que requieren más tiempo y esfuerzo para resolver conflictos complicados. La ubicación de tu caso, la reputación y la experiencia de tu abogado, así como las prácticas de facturación de tu abogado especializado en custodia de menores, también influirán en el costo. Habla con un abogado especializado en custodia de menores en La Vergne para obtener una estimación más precisa de tu caso concreto.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <h4 class="faq-question">¿Qué debes evitar hacer en un caso de custodia de menores en Tennessee?</h4>
+      <div class="faq-answer">
+        <p>Cuando te ves envuelto en un caso de custodia de menores, especialmente si es conflictivo, es importante evitar cualquier acción que pueda llevar al tribunal de familia a fallar en tu contra. Tener arrebatos, utilizar lenguaje soez, hablar mal del otro progenitor o anteponer tus propias necesidades a las de tu hijo pueden tener un impacto negativo en tu caso de custodia. Otros errores incluyen incumplir una orden judicial o impedir que el otro progenitor ejerza su derecho de visita.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <h4 class="faq-question">¿Es difícil obtener la custodia exclusiva en un caso Tennessee?</h4>
+      <div class="faq-answer">
+        <p>Conseguir la custodia exclusiva en un caso de «Tennessee» puede resultar difícil, ya que los tribunales se esfuerzan por dar prioridad al interés superior de los niños, buscando acuerdos de custodia compartida siempre que sea posible. Sin embargo, si puedes demostrar que el otro progenitor es incapaz de cuidar de tu hijo, no puede tomar decisiones acertadas en su nombre o supone un peligro para él, es posible que puedas obtener la custodia legal y física exclusiva en un caso de «Tennessee».</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <h4 class="faq-question">¿Todos los casos de custodia de menores llegan a los tribunales en el sistema Tennessee?</h4>
+      <div class="faq-answer">
+        <p>No todos los casos de custodia de menores deben llegar a los tribunales locales de Tennessee. Si los padres logran llegar a un acuerdo amistoso y justo sobre la custodia de los hijos fuera de los tribunales, pueden presentar dicho acuerdo ante el tribunal para su aprobación y evitar así el litigio. Si la pareja no logra ponerse de acuerdo sobre las condiciones de la custodia —lo cual es lo más habitual en los casos de custodia de menores—, deberá trasladar el procedimiento al tribunal local, donde un juez tomará la decisión definitiva.</p>
+      </div>
+    </div>
+  </div>
+
+  <h2>Póngase en contacto con Boss Law hoy mismo</h2>
+  <p>Los abogados especializados en derecho de familia de Boss Law están listos para defender sus intereses y los de su hijo durante los complicados procedimientos de custodia de menores en La Vergne. Ya sea que necesite modificar una orden judicial existente o se encuentre en medio de un conflicto contencioso, nuestro equipo está aquí para ayudarle a proteger su futuro y el de su hijo. No está solo.</p>
+
+  <p>Para saber cómo podemos ayudarte, <a href="/es/contactenos/">póngase en contacto con nuestra oficina</a> hoy mismo para concertar una consulta.</p>
+
+  <div class="stats-section">
+    <span class="stat-number">800+</span>
+    <span class="stat-label">casos de divorcio tramitados</span>
+  </div>
+
+  <div class="testimonials-section">
+    <h2>Testimonios</h2>
+    
+    <div class="testimonial">
+      <div class="testimonial-text">"El mejor abogado que he tenido o conocido. Es increíble verlo trabajar y luchar por uno. Es un tipo agradable y un gran hombre que lucha con todas sus fuerzas incluso por la gente común como yo."</div>
+      <div class="testimonial-author">- Marcus</div>
+    </div>
+
+    <div class="testimonial">
+      <div class="testimonial-text">"Boss Law gestionó mi divorcio sin complicaciones. El equipo fue muy servicial y me guió a lo largo de todo el estresante proceso. Me sentí respaldada y me mantuvieron informada en todo momento. Resolvimos todo juntos y estoy satisfecha con el resultado."</div>
+      <div class="testimonial-author">- Anónimo</div>
+    </div>
+
+    <div class="testimonial">
+      <div class="testimonial-text">"Mitch me ofreció un precio justo. Se mostró comprensivo e hizo un trabajo excelente. Mitch se preocupa de verdad por sus clientes y sus familias. Además, representa a mujeres en casos de maltrato a través de la Agencia contra la Violencia Doméstica de forma gratuita."</div>
+      <div class="testimonial-author">- Patti</div>
+    </div>
+
+    <div class="testimonial">
+      <div class="testimonial-text">"Como madre soltera, intentaba protegernos a mí y a mis hijos de una situación difícil. Me preocupaba no tener ninguna oportunidad porque mis ingresos eran muy limitados y los abogados son muy caros. Mitch se encargó de todo y pude pagar sus servicios…"</div>
+      <div class="testimonial-author">- Tammara N.</div>
+    </div>
+
+    <div class="testimonial">
+      <div class="testimonial-text">"En Boss Law realmente se preocupan por el cliente, no solo por el dinero o los resultados. Su equipo es honesto y nos ofreció opciones en lugar de imposiciones. Nos sentimos escuchados y protegidos. Los recomiendo encarecidamente y no dudaría en volver a contactarlos si fuera necesario."</div>
+      <div class="testimonial-author">- Kim R.</div>
+    </div>
+  </div>
+
+  <div class="contact-info">
+    <h2>Contáctenos hoy mismo</h2>
+    <p><strong>Teléfono:</strong> <a href="tel:615-890-1548">615-890-1548</a></p>
+    <p><strong>Dirección:</strong> 1423 Kensington Square Court<br>Murfreesboro, TN 37130</p>
+    <p><a href="https://maps.app.goo.gl/7tBFeGhpViUabNZE8">Ver en Google Maps</a></p>
+    <p><a href="/es/contactenos/" class="cta-button">Consulta gratuita</a></p>
+  </div>
+
+  <h3>Áreas de práctica de La Vergne</h3>
+  <ul>
+    <li><a href="/es/abogado-especializado-en-custodia-de-menores-en-la-vergne/">Custodia de los hijos</a></li>
+    <li><a href="/es/abogado-especializado-en-divorcios-en-la-vergne/">Divorcio</a></li>
+    <li><a href="/lavergne-domestic-violence-lawyer">Violencia doméstica</a></li>
+    <li><a href="/lavergne-family-law-attorney">Derecho de familia</a></li>
+  </ul>
+</div>
+
+<footer class="footer">
+  <div class="footer-brand">
+    <span class="footer-brand-name">bosslawtn.com</span>
+    <span class="footer-copyright">©2026</span>
+  </div>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/our-firm">Our Firm</a>
+    <a href="/areas-served">Area Served</a>
+    <a href="/practice-areas">Practice Areas</a>
+    <a href="/murfreesboro-family-law-attorney">Family Law</a>
+    <a href="/murfreesboro-divorce-lawyer">Divorce</a>
+    <a href="/murfreesboro-adoption-lawyer">Adoption</a>
+    <a href="/murfreesboro-child-custody-lawyer">Child Custody</a>
+    <a href="/murfreesboro-child-support-lawyer">Child Support</a>
+    <a href="/murfreesboro-post-divorce-modifications-lawyer">Post-Divorce Modifications</a>
+    <a href="/murfreesboro-alimony-lawyer">Alimony</a>
+    <a href="/murfreesboro-domestic-violence-lawyer">Domestic Violence</a>
+    <a href="/murfreesboro-prenuptial-agreement-lawyer">Prenuptial Agreement</a>
+    <a href="/murfreesboro-fathers-rights-lawyer">Fathers' Rights</a>
+    <a href="/murfreesboro-mothers-rights-lawyer">Mothers' Rights</a>
+    <a href="/murfreesboro-grandparents-rights-lawyer">Grandparents' Rights</a>
+    <a href="/murfreesboro-child-visitation-lawyer">Child Visitation Rights</a>
+    <a href="/other-practice-areas">Other Murfreesboro Practice Areas</a>
+    <a href="/reviews">Reviews</a>
+    <a href="/contact-us">Contact Us</a>
+    <a href="/es/contactenos">Contáctenos</a>
+  </div>
+</footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>

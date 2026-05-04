@@ -1,0 +1,919 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Woodbury: Abogado especializado en manutención infantil - Consulta gratuita</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  :root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
+
+  /* Navigation */
+  .mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+  .mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+  .mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+  .mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+  .hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+  .hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+  .sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+  .sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+  .sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+  .sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+  .sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+  .sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+  .sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+  .sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+  .sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+  .mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+  .mobile-nav-overlay.active {
+  display: block;
+}
+
+  .sidebar.active {
+  display: flex;
+}
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: calc(96px + 60px) var(--space-lg) var(--space-3xl);
+    background: var(--text-primary);
+    color: #ffffff;
+  }
+
+  .page-title-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-title-area h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  /* Content Area */
+  .content-area {
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .content-area h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .content-area p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area ul, .content-area ol {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-lg);
+    color: var(--text-muted);
+  }
+
+  .content-area li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  .content-area img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    font-weight: 500;
+  }
+
+  .content-area a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  /* Contact Form */
+  .contact-form {
+    background: var(--bg-card);
+    padding: var(--space-2xl);
+    border-radius: 12px;
+    margin: var(--space-2xl) 0;
+  }
+
+  .contact-form h3 {
+    margin-bottom: var(--space-lg);
+  }
+
+  .contact-form form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    padding: var(--space-md);
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: 16px;
+  }
+
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder {
+    color: var(--text-muted);
+  }
+
+  .contact-form button {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    padding: var(--space-md) var(--space-lg);
+    border: none;
+    border-radius: 8px;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+
+  .contact-form button:hover {
+    opacity: 0.9;
+  }
+
+  /* Services List */
+  .services-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-md);
+    margin: var(--space-lg) 0;
+  }
+
+  .service-item {
+    padding: var(--space-md);
+    background: var(--bg-card);
+    border-radius: 8px;
+    color: var(--text-muted);
+  }
+
+  /* FAQ Section */
+  .faq-section {
+    margin: var(--space-2xl) 0;
+  }
+
+  .faq-item {
+    margin-bottom: var(--space-xl);
+  }
+
+  .faq-question {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  /* Testimonials */
+  .testimonials-section {
+    margin: var(--space-2xl) 0;
+    padding: var(--space-2xl);
+    background: var(--bg-card);
+    border-radius: 12px;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-lg);
+  }
+
+  .testimonial {
+    padding: var(--space-lg);
+    background: var(--bg-primary);
+    border-radius: 8px;
+    border-left: 3px solid var(--text-primary);
+  }
+
+  .testimonial-text {
+    color: var(--text-muted);
+    margin-bottom: var(--space-md);
+    font-style: italic;
+  }
+
+  .testimonial-author {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  /* Stats */
+  .stats-section {
+    text-align: center;
+    margin: var(--space-2xl) 0;
+    padding: var(--space-2xl);
+    background: var(--bg-card);
+    border-radius: 12px;
+  }
+
+  .stat-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .stat-label {
+    color: var(--text-muted);
+    margin-top: var(--space-sm);
+  }
+
+  /* Footer */
+  .footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+  .footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+  .footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+  .footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+  .footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+  .footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+  .footer-links a:hover {
+  color: var(--text-primary);
+}
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .page-title-area {
+      padding: calc(60px + 30px) var(--space-md) var(--space-lg);
+    }
+    
+    .page-title-area h1 {
+      font-size: clamp(1.5rem, 6vw, 2.5rem);
+    }
+    
+    .content-area {
+      padding: var(--space-lg) var(--space-md);
+    }
+    
+    .contact-form {
+      padding: var(--space-lg);
+    }
+    
+    .testimonials-section {
+      padding: var(--space-lg);
+    }
+    
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+    }
+    
+    .stats-section {
+      padding: var(--space-lg);
+    }
+    
+    .stat-number {
+      font-size: 2rem;
+    }
+    
+    .services-list {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:last-child {
+    border-right: none;
+  }
+
+  .trust-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-metrics {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}
+
+  @media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .features {
+    /* already 3-col from tablet */
+  }
+
+  .feature-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .trust-section {
+    /* already 2-col from tablet */
+  }
+
+  .trust-metrics {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-clients {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-number {
+    font-size: 120px;
+  }
+
+  .client-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+  @media (min-width: 768px) {
+    .page-title-area { padding: calc(96px + 60px) var(--space-2xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl) var(--space-2xl); }
+  }
+
+  @media (min-width: 1024px) {
+    .page-title-area { padding: calc(96px + 80px) var(--space-3xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl); }
+  }
+</style>
+
+
+
+<!-- HEADER -->
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="#" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">bosslawtn.com</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="#" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">bosslawtn.com</span>
+    </a>
+    <nav>
+      <a href="#">Platform</a>
+      <a href="#">Solutions</a>
+      <a href="#">Documentation</a>
+      <a href="#">Enterprise</a>
+    </nav>
+  </div>
+  
+</aside>
+
+<!-- Main Content -->
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Woodbury: Abogado especializado en manutención infantil</h1>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+  
+  <img src="https://www.bosslawtn.com/wp-content/uploads/2026/04/hire-woodbury-child-support-lawyer.webp" alt="Contratar a un abogado especializado en manutención infantil en Woodbury">
+
+  <h2>Abogado especializado en manutención infantil en Woodbury, TN</h2>
+  
+  <p>Si te enfrentas a un caso de manutención infantil tras una separación, un divorcio o <a href="/es/abogado-especializado-en-custodia-de-menores-en-woodbury/">custodia de los hijos</a> Un caso de este tipo puede resultar arduo para todas las partes involucradas. Trabajar con un <strong>Abogado especializado en manutención infantil de Woodbury</strong> Contar con un abogado en quien puedas confiar es fundamental para proteger tus derechos como padre o madre. Él o ella podrá brindarte asesoramiento jurídico claro sobre tus derechos y opciones legales en virtud de la ley Tennessee.</p>
+
+  <h2>Contrate hoy mismo a un abogado especializado en manutención infantil</h2>
+
+  <p>Desde hace más de dos décadas, <a href="/es/">Ley del jefe</a> Se ha dedicado a defender los intereses de las familias Tennessee. Defendemos con firmeza a nuestros clientes que se enfrentan a problemas legales relacionados con la manutención de los hijos. La manutención infantil es uno de los elementos más importantes para ayudar al niño a cubrir los gastos de subsistencia diarios que necesita.</p>
+
+  <p>Tanto si recibes una pensión alimenticia como si la pagas, mereces la ayuda de un abogado de Boss Law. Desde la resolución inicial del juez hasta cualquier modificación que puedas necesitar, los conocimientos y la experiencia de nuestro equipo pueden ayudarte.</p>
+
+  <div class="contact-form">
+    <h3>Contacto <strong>Ley del jefe</strong></h3>
+    <form>
+      <input type="text" placeholder="Nombre*" required="">
+      <input type="text" placeholder="Apellido*" required="">
+      <input type="email" placeholder="Correo electrónico*" required="">
+      <input type="tel" placeholder="Teléfono*" required="">
+      <textarea placeholder="Mensaje"></textarea>
+      <button type="submit">Programa una consulta</button>
+    </form>
+  <iframe src="https://maps.app.goo.gl/7tBFeGhpViUabNZE8" width="100%" height="300" style="border:0;margin-top:1.5rem" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map"></iframe></div>
+
+  <h2>Leyes sobre manutención infantil de Tennessee</h2>
+
+  <p>En 2022, en todo Estados Unidos, hubo <a href="https://www.census.gov/newsroom/press-releases/2022/americas-families-and-living-arrangements.html">10,9 millones de familias</a> encabezada por un padre o una madre soltera. <strong>De estas familias:</strong></p>
+
+  <ul>
+    <li>Alrededor de 44% tenían dos o más hijos menores de 18 años</li>
+    <li>67% tenía al menos un hijo menor de 12 años</li>
+    <li>51% tenía al menos un hijo de entre 12 y 17 años</li>
+  </ul>
+
+  <p>Estos niños necesitan apoyo económico para poder mantener la estabilidad en sus vidas. Durante la separación o <a href="/woodbury-divorce-lawyer/">divorcio</a>, se puede ordenar a uno de los padres que pague una pensión alimenticia. La pensión alimenticia consiste en los pagos que realiza un padre al otro para contribuir económicamente al sustento del hijo.</p>
+
+  <p>Sin embargo, esto no significa que el progenitor que no tiene la custodia no tenga que contribuir a los gastos de manutención del niño. Ambos progenitores tienen la obligación legal de mantener económicamente a sus hijos. El progenitor que no tiene la custodia principal del niño suele ser quien paga la manutención, ya que se supone que el progenitor con la custodia se hace cargo de los gastos diarios del niño.</p>
+
+  <p>Cuando se enfrenta a un caso de manutención infantil, es fundamental contratar a un abogado especializado en manutención infantil con experiencia relevante en casos similares. Este le ayudará a proteger sus derechos como padre o madre y a buscar la opción más favorable para usted y las necesidades específicas de su familia. Boss Law ofrece evaluaciones gratuitas de casos a los padres que viven en Woodbury y las áreas circundantes de Tennessee.</p>
+
+  <h2>Cálculo de la pensión alimenticia en Tennessee</h2>
+
+  <p>El Juzgado del Condado de Cannon, ubicado en el 220 de West Main Street, suele encargarse de los casos de manutención infantil en Woodbury. Para calcular los pagos de manutención infantil, el Juzgado del Condado de Cannon tomará como punto de partida las pautas de manutención infantil de Tennessee. <strong>Esta cifra estimada se calcula sobre la base de:</strong></p>
+
+  <ul>
+    <li>Los ingresos del progenitor que paga la manutención. En 2024, el <a href="https://datausa.io/profile/geo/woodbury-tn/#economy">ingresos medios de los residentes de Woodbury</a> fue de $53 798 para los hombres y de $37 353 para las mujeres.</li>
+    <li>Las necesidades económicas del menor al que se presta apoyo</li>
+  </ul>
+
+  <p>El tribunal puede entonces apartarse de esta estimación basándose en diversos factores, especialmente si el monto estimado del pago resulta injusto para esa familia en particular. <strong>Los tribunales pueden tener en cuenta:</strong></p>
+
+  <ul>
+    <li>Los ingresos de cada progenitor, incluidos los salarios y las inversiones</li>
+    <li>El número de hijos afectados por el caso de manutención infantil</li>
+    <li>Cualquier manutención infantil que se esté pagando por otros hijos no incluidos en el caso</li>
+    <li>El costo del seguro médico</li>
+    <li>El costo de criar a un hijo en Woodbury</li>
+    <li>Otras necesidades económicas específicas que tiene el niño</li>
+  </ul>
+
+  <div class="faq-section">
+    <h2>Preguntas frecuentes</h2>
+
+    <div class="faq-item">
+      <h3 class="faq-question">¿Qué pasa si pierdo mi empleo o cambio de trabajo mientras pago la manutención infantil?</h3>
+      <p>Si pierde su empleo o cambia de trabajo mientras paga la manutención infantil, puede solicitar una modificación de la orden de manutención. Debe hacerlo lo antes posible y solicitarla cada vez que se produzca un cambio importante en su vida que pueda afectar a la manutención infantil, como tener un nuevo hijo, un cambio en los ingresos, una mudanza, una discapacidad o cambios en las necesidades de su hijo. Consulte con su abogado para analizar la posibilidad de solicitar una modificación de su orden de manutención.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 class="faq-question">¿Cómo puedo pagar la manutención infantil en Tennessee?</h3>
+      <p>Para pagar la manutención infantil en el sistema Tennessee, es probable que el tribunal ordene que el pago se deduzca automáticamente de su salario, incluyendo pensiones, bonificaciones u otras fuentes de ingresos. Sin embargo, los tribunales <a href="https://www.tn.gov/content/dam/tn/human-services/documents/Employer_FAQs_Additional_Updates_02_24.pdf">No puedo asumir el control de 50%</a> de tus ingresos netos para los pagos de manutención infantil. Si tú y el otro progenitor de tu hijo llegan a un acuerdo sobre una opción de plan de pago diferente y realizas los pagos a tiempo, esto podría tenerse en cuenta.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 class="faq-question">¿Qué pasa si me niego a pagar la manutención infantil?</h3>
+      <p>Si se niega a pagar la manutención infantil, las consecuencias legales son graves. Una orden de manutención infantil no es opcional; se trata como cualquier otra orden judicial. Si no paga, los tribunales pueden embargar sus devoluciones de impuestos para compensar la manutención infantil que no ha pagado, embargar dinero de sus cuentas bancarias, ejecutar un gravamen o incluso suspender o revocar su licencia de conducir y sus licencias profesionales. Además, se aplican intereses a cualquier pago atrasado.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 class="faq-question">¿Cuándo finaliza la manutención infantil en Tennessee?</h3>
+      <p>En Tennessee, manutención infantil <a href="https://advance.lexis.com/documentpage/?pdmfid=1000516&amp;crid=b48947c8-6832-4e46-9360-726579c57e57&amp;pdistocdocslideraccess=true&amp;config=025054JABlOTJjNmIyNi0wYjI0LTRjZGEtYWE5ZC0zNGFhOWNhMjFlNDgKAFBvZENhdGFsb2cDFQ14bX2GfyBTaI9WcPX5&amp;pddocfullpath=%2Fshared%2Fdocument%2Fstatutes-legislation%2Furn%3AcontentItem%3A50J2-V370-R03N-W1W1-00008-00&amp;pdcomponentid=234180&amp;pdtocnodeidentifier=ABKAAFAAFAAE&amp;ecomp=h2vckkk&amp;prid=00f3ba02-0aea-40dc-96ed-06384985f4f6">termina cuando el niño termina la secundaria</a>. Si el menor fallece o se casa antes de terminar la preparatoria, la manutención se dará por terminada en ese momento. Sin embargo, aunque los pagos futuros de manutención cesen, los pagos pendientes y las costas judiciales deberán seguirse abonando. Si el progenitor obligado al pago sigue teniendo que abonar manutención para otros hijos menores de edad, puede solicitar una modificación de la orden de manutención.</p>
+    </div>
+
+    <div class="faq-item">
+      <h3 class="faq-question">¿Qué gastos relacionados con la crianza de un hijo en Tennessee tienen en cuenta los tribunales durante un proceso de manutención infantil?</h3>
+      <p>En un caso de manutención infantil Tennessee, los tribunales pueden tener en cuenta diversos factores a la hora de determinar los gastos que conlleva la crianza de un hijo. Entre ellos se pueden incluir los gastos de vivienda, alimentación, transporte, ropa y los gastos relacionados con la escuela, como los libros de texto y el dinero para las excursiones. También pueden considerar los gastos de la educación privada, el costo de las actividades extracurriculares del niño, así como su seguro médico y los gastos médicos.</p>
+    </div>
+  </div>
+
+  <h2>Woodbury: Abogado especializado en manutención infantil</h2>
+
+  <p>No tienes que afrontar tu caso de manutención infantil tú solo. Con la ayuda de un abogado especializado en manutención infantil de Boss Law, podrás obtener la ayuda que tú y tu hijo se merecen. <a href="/es/contactenos/">Póngase en contacto con nuestro equipo</a> para descubrir cómo los conocimientos y la experiencia de nuestro equipo pueden ayudarte. Ofrecemos consultas gratuitas a los padres en <a href="https://en.wikipedia.org/wiki/Woodbury,_Tennessee">Woodbury</a> y las localidades de los alrededores en Tennessee.</p>
+
+  <p>Nuestro despacho también ofrece servicios bilingües a los clientes que se sienten más cómodos comunicándose en español.</p>
+
+  <div class="contact-form">
+    <h2>Contáctenos hoy mismo</h2>
+    <form>
+      <input type="text" placeholder="Nombre*" required="">
+      <input type="text" placeholder="Apellido*" required="">
+      <input type="email" placeholder="Correo electrónico*" required="">
+      <input type="tel" placeholder="Teléfono*" required="">
+      <textarea placeholder="Mensaje"></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
+
+  <h2>Áreas de práctica de Woodbury</h2>
+  
+  <div class="services-list">
+    <div class="service-item">Custodia de los hijos</div>
+    <div class="service-item">Manutención infantil</div>
+    <div class="service-item">Adopción</div>
+    <div class="service-item">Acuerdo prenupcial</div>
+    <div class="service-item">Derechos de los padres</div>
+    <div class="service-item">Los derechos de las madres</div>
+    <div class="service-item">Derechos de visita de los hijos</div>
+    <div class="service-item">Violencia doméstica</div>
+    <div class="service-item">Divorcio</div>
+    <div class="service-item">Derecho de familia</div>
+  </div>
+
+  <div class="testimonials-section">
+    <h2>Testimonios</h2>
+    
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <div class="testimonial-text">El mejor abogado que he tenido o conocido. Es increíble verlo trabajar y luchar por uno. Es un tipo agradable y un gran hombre que lucha con todas sus fuerzas incluso por la gente común como yo.</div>
+        <div class="testimonial-author">- Marcus</div>
+      </div>
+      
+      <div class="testimonial">
+        <div class="testimonial-text">Boss Law gestionó mi divorcio sin complicaciones. El equipo fue muy servicial y me guió a lo largo de todo el estresante proceso. Me sentí respaldada y me mantuvieron informada en todo momento. Resolvimos todo juntos y estoy satisfecha con el resultado.</div>
+        <div class="testimonial-author">- Anónimo</div>
+      </div>
+      
+      <div class="testimonial">
+        <div class="testimonial-text">Mitch me ofreció un precio justo. Se mostró comprensivo e hizo un trabajo excelente. Mitch se preocupa de verdad por sus clientes y sus familias. Además, representa a mujeres en casos de maltrato a través de la Agencia contra la Violencia Doméstica de forma gratuita.</div>
+        <div class="testimonial-author">- Patti</div>
+      </div>
+      
+      <div class="testimonial">
+        <div class="testimonial-text">Como madre soltera, intentaba protegernos a mí y a mis hijos de una situación difícil. Me preocupaba no tener ninguna oportunidad porque mis ingresos eran muy limitados y los abogados son muy caros. Mitch se encargó de todo y pude pagar sus servicios…</div>
+        <div class="testimonial-author">- Tammara N.</div>
+      </div>
+      
+      <div class="testimonial">
+        <div class="testimonial-text">En Boss Law realmente se preocupan por el cliente, no solo por el dinero o los resultados. Su equipo es honesto y nos ofreció opciones en lugar de imposiciones. Nos sentimos escuchados y protegidos. Los recomiendo encarecidamente y no dudaría en volver a contactarlos si fuera necesario.</div>
+        <div class="testimonial-author">- Kim R.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-section">
+    <h2>¿Por qué elegir Boss Law?</h2>
+    <div class="stat-number">800+</div>
+    <div class="stat-label">casos de divorcio tramitados</div>
+    
+    <img src="https://www.bosslawtn.com/wp-content/uploads/2025/11/hm-apart-sec-mdl.webp" alt="Boss Law">
+    
+    <p>Trabajamos directamente con usted, tratamos a nuestros clientes como familia, ofrecemos estrategia personalizada para todos los casos.</p>
+  </div>
+
+  <h2>Te acompañaremos <strong>Cada</strong> <strong>Paso a paso</strong></h2>
+  
+  <p>Orgullosos de atender a nuestros clientes en Murfreesboro, TN y sus alrededores.</p>
+  
+  <div class="contact-form">
+    <h2>Contacto <strong>Ley del jefe</strong> ¡Hoy!</h2>
+    <form>
+      <input type="text" placeholder="Nombre*" required="">
+      <input type="text" placeholder="Apellido*" required="">
+      <input type="email" placeholder="Correo electrónico*" required="">
+      <input type="tel" placeholder="Teléfono*" required="">
+      <textarea placeholder="Mensaje"></textarea>
+      <button type="submit">Solicita una consulta gratuita</button>
+    </form>
+    <p>Llámenos hoy mismo <a href="tel:615-890-1548">615-890-1548</a></p>
+    <iframe src="https://maps.app.goo.gl/7tBFeGhpViUabNZE8" width="100%" height="300" style="border:0" allowfullscreen="" loading="lazy"></iframe>
+  </div>
+
+</div>
+
+<footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">bosslawtn.com</span>
+      <span class="footer-copyright">©2026</span>
+    </div>
+    <div class="footer-links">
+    <li><a href="/">Home</a></li><li><a href="/our-firm">Our Firm</a><ul><li><a href="/areas-served">Area Served</a></li></ul></li><li><a href="/practice-areas">Practice Areas</a><ul><li><a href="/murfreesboro-family-law-attorney">Family Law</a></li><li><a href="/murfreesboro-divorce-lawyer">Divorce</a></li><li><a href="/murfreesboro-adoption-lawyer">Adoption</a></li><li><a href="/murfreesboro-child-custody-lawyer">Child Custody</a></li><li><a href="/murfreesboro-child-support-lawyer">Child Support</a></li><li><a href="/murfreesboro-post-divorce-modifications-lawyer">Post-Divorce Modifications</a></li><li><a href="/murfreesboro-alimony-lawyer">Alimony</a></li><li><a href="https://www.bosslawtn.com/murfreesboro-domestic-violence-lawyer/">Domestic Violence</a></li><li><a href="/murfreesboro-prenuptial-agreement-lawyer">Prenuptial Agreement</a></li><li><a href="https://www.bosslawtn.com/murfreesboro-fathers-rights-lawyer/">Fathers' Rights</a></li><li><a href="https://www.bosslawtn.com/murfreesboro-mothers-rights-lawyer/">Mothers' Rights</a></li><li><a href="/murfreesboro-grandparents-rights-lawyer">Grandparents' Rights</a></li><li><a href="/murfreesboro-child-visitation-lawyer">Child Visitation Rights</a></li><li><a href="/other-practice-areas">Other Murfreesboro Practice Areas</a></li></ul></li><li><a href="/reviews">Reviews</a><ul><li><a href="https://www.bosslawtn.com/case-results/">Case Results</a></li></ul></li><li><a href="/contact-us">Contact Us</a></li><li><a href="/murfreesboro-domestic-violence-lawyer">Domestic Violence</a></li><li><a href="/murfreesboro-fathers-rights-lawyer">Fathers' Rights</a></li><li><a href="/murfreesboro-mothers-rights-lawyer">Mothers' Rights</a></li><li><a href="/attorney/mitchell-e-shannon">Attorney Mitchell Shannon</a></li><li><a href="/attorney/abigail-l-burnham">Attorney Abigail L. Burnham</a></li><li><a href="/attorney/giselle-sutherland">Attorney Giselle Ortega Sutherland</a></li><li><a href="/blog/how-much-does-a-divorce-cost-in-tennessee">How Much Does a Divorce Cost in Tennessee?</a></li><li><a href="/blog/how-to-prepare-for-your-child-custody-case-in-murfreesboro-tn">How to Prepare for Your Child Custody Case in Murfreesboro, TN</a></li><li><a href="/blog/questions-to-ask-a-divorce-attorney-in-murfreesboro-tn-before-hiring">Questions to Ask a Divorce Attorney in Murfreesboro, TN Before Hiring</a></li><li><a href="/es/blog/como-prepararse-para-su-caso-de-custodia-de-menores-en-murfreesboro-tennessee">¿Cómo prepararse para su caso de custodia de menores en Murfreesboro, Tennessee? (2026)</a></li><li><a href="/es/blog/author/mitchell-shannon">Abogado fundador de Boss Law</a></li><li><a href="/blog/author/mitchell-shannon">Founding Attorney of Boss Law</a></li><li><a href="/es/blog/autor/mitchell-shannon">Abogado fundador de Boss Law</a></li><li><a href="/es/blog/cuanto-cuesta-un-divorcio-en-tennessee">¿Cuánto cuesta un divorcio en Tennessee? (2026)</a></li><li><a href="/es/blog/preguntas-que-debes-hacerle-a-un-abogado-especializado-en-divorcios-en-murfreesboro-tennessee-antes-de-contratarlo">10 preguntas que debes hacerle a un abogado especializado en divorcios en Murfreesboro, Tennessee, antes de contratarlo</a></li><li><a href="/woodbury-family-lawyer">Woodbury Family Lawyer - Local Law Firm Near You</a></li><li><a href="/es/abogado-especializado-en-defensa-de-menores-en-murfreesboro">Murfreesboro: Abogado especializado en defensa de menores - Consulta gratuita</a></li><li><a href="/lavergne-child-custody-lawyer">La Vergne Child Custody Lawyer &amp; Visitation Law Firm</a></li><li></li><li></li><li><a href="/smyrna-family-law-attorney">Smyrna Family Law Attorney - Local Law Firm Near You</a></li><li><a href="/es/politica-de-privacidad">Política de privacidad | Murfreesboro Abogado especializado en divorcios Murfreesboro</a></li><li></li><li><a href="/es/abogado-especializado-en-acuerdos-prenupciales-en-murfreesboro">Murfreesboro: Abogado especializado en acuerdos prenupciales - Consulta gratuita</a></li><li></li><li><a href="/es/abogado-especializado-en-adopciones-en-smyrna">Abogado especializado en adopciones Smyrna cerca de ti: consulta gratuita</a></li><li><a href="/es/abogado-de-familia-en-woodbury">Woodbury Abogado especializado en derecho de familia - Bufete de abogados cerca de ti</a></li><li></li><li></li><li><a href="/es/abogado-especializado-en-derechos-de-los-abuelos-en-murfreesboro">Murfreesboro: Abogado especializado en derechos de los abuelos - Consulta gratuita</a></li><li><a href="/disclaimer">Disclaimer - Boss Law</a></li><li><a href="/es/gracias">Gracias - Boss Law</a></li><li><a href="/es/resultados-del-caso">Resultados de casos - Boss Law</a></li><li><a href="/es/abogado-especializado-en-divorcios-en-la-vergne">La Vergne Abogado especializado en divorcios - Consulta gratuita</a></li><li><a href="/es/abogado-especializado-en-pensiones-alimenticias-en-smyrna">Smyrna: Abogado especializado en manutención conyugal - Abogado especializado en pensión alimenticia</a></li><li><a href="/es/abogado-especializado-en-divorcios-entre-personas-del-mismo-sexo-en-murfreesboro">Murfreesboro: Abogado especializado en divorcios entre personas del mismo sexo - Consulta gratuita</a></li><li><a href="/es/abogado-especializado-en-divorcios-en-smyrna">Smyrna: Abogados especializados en divorcios cerca de ti - Consulta gratuita</a></li><li></li><li><a href="/es/abogado-especializado-en-manutencion-infantil-en-smyrna">Smyrna Abogado especializado en manutención infantil - Consulta gratuita</a></li><li><a href="/smyrna-domestic-violence-lawyer">Smyrna Domestic Violence Lawyer | Protective Order Attorney</a></li><li><a href="/smyrna-spousal-support-lawyer">Smyrna Spousal Support Lawyer - Alimony Attorney</a></li><li><a href="/lavergne-domestic-violence-lawyer">La Vergne Domestic Violence Lawyer - Protective Orders Attorney</a></li><li><a href="/es/abogado-especializado-en-custodia-de-menores-lgbtq-en-murfreesboro">Murfreesboro: Abogado especializado en custodia de menores LGBTQ - Consulta gratuita</a></li><li><a href="/es/abogado-especializado-en-custodia-de-menores-en-woodbury">Woodbury: Bufete de abogados especializado en custodia de menores y régimen de visitas</a></li><li><a href="/es/abogado-especializado-en-modificaciones-tras-el-divorcio-en-murfreesboro">Murfreesboro: Abogado especializado en modificaciones tras el divorcio - Consulta gratuita</a></li><li><a href="/es/abogado-especializado-en-derecho-de-familia-en-smyrna">Smyrna: Abogado especializado en derecho de familia - Bufete de abogados cerca de ti</a></li><li><a href="/es/nuestra-empresa">Acerca de nuestro bufete de abogados Murfreesboro | Boss Law</a></li><li><a href="/es/abogado-especializado-en-divorcios-con-patrimonio-elevado-en-murfreesboro">Murfreesboro: Abogados especializados en divorcios con patrimonios elevados - Consulta gratuita</a></li><li></li><li><a href="/es/abogado/abigail-l-burnham">Abogada Abigail L. Burnham - Boss Law</a></li><li><a href="/es/abogado-especializado-en-violencia-domestica-en-smyrna">Abogado especializado en violencia doméstica Smyrna | Abogado especializado en órdenes de protección</a></li><li><a href="/es/abogado-especializado-en-violencia-domestica-en-woodbury">Abogado especializado en violencia doméstica Woodbury | Abogado especializado en órdenes de protección</a></li><li><a href="/es/abogado-especializado-en-adopciones-en-murfreesboro">Murfreesboro: Abogado especializado en adopciones cerca de ti - Consulta gratuita</a></li><li><a href="/privacy-policy">Privacy Policy | Murfreesboro Divorce Lawyer Murfreesboro</a></li><li></li><li></li><li><a href="/site-map">Sitemap - Boss Law</a></li><li><a href="/es/abogado-especializado-en-manutencion-infantil-en-woodbury">Woodbury: Abogado especializado en manutención infantil - Consulta gratuita</a></li><li><a href="/es">Murfreesboro: Bufete de abogados especializado en divorcios y derecho de familia - Boss Law</a></li><li><a href="/es/busqueda-en-el-sitio">Búsqueda en el sitio | Abogado especializado en divorcios Murfreesboro</a></li><li><a href="/es/abogado-especializado-en-manutencion-infantil-en-murfreesboro">Murfreesboro Abogado especializado en manutención infantil - Consulta gratuita</a></li><li><a href="/thank-you">Thank You - Boss Law</a></li><li><a href="/es/abogado-especializado-en-custodia-de-menores-en-la-vergne">La Vergne: Bufete de abogados especializado en custodia de menores y régimen de visitas</a></li><li><a href="/es/abogado/giselle-sutherland">Abogada Giselle Ortega Sutherland: abogada especializada en derecho de familia que habla español en Boss Law</a></li><li><a href="/es/aviso-legal">Aviso legal - Boss Law</a></li><li><a href="/es/contactenos">Contáctenos - Boss Law</a></li><li><a href="/smyrna-child-custody-lawyer">Smyrna Child Custody Lawyer &amp; Visitation Law Firm</a></li><li></li><li><a href="/es/areas-de-practica">Áreas de práctica - Boss Law</a></li><li><a href="/es/contact-us">Contáctenos - Boss Law</a></li><li><a href="/es/disclaimer">Aviso legal - Boss Law</a></li><li><a href="/es/site-map">Mapa del sitio - Boss Law</a></li><li><a href="/es/privacy-policy">Política de privacidad | Murfreesboro Abogado especializado en divorcios Murfreesboro</a></li><li><a href="/es/practice-areas">Áreas de práctica - Boss Law</a></li><li><a href="/es/reviews">Opiniones y testimonios de clientes - Boss Law</a></li><li><a href="/es/case-results">Resultados de casos - Boss Law</a></li>
+  </div>
+  </footer>
+
+
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
