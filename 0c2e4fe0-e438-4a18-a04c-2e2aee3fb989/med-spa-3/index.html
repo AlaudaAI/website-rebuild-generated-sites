@@ -1,0 +1,1461 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home | Georgetown, TX | Truly Lifted MedSpa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a6e4f;
+    --bg-emerald: #0d7a58;
+    --text-cream: #f5f0e8;
+    --text-cream-muted: rgba(245, 240, 232, 0.6);
+    --text-cream-subtle: rgba(245, 240, 232, 0.35);
+    --orb-blue: #5cc8f0;
+    --orb-coral: #e8764a;
+    --accent-line: rgba(245, 240, 232, 0.3);
+    --selection-highlight: #e8764a;
+    --base-unit: 8px;
+    --gutter: 4vw;
+    --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    --transition-smooth: 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  ::selection {
+    background: var(--selection-highlight);
+    color: var(--text-cream);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-serif);
+    background-color: var(--bg-primary);
+    color: var(--text-cream);
+    overflow-x: hidden;
+    line-height: 1.6;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  /* Noise texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+  }
+
+  /* Atmospheric Orb - Main */
+  .orb-main {
+    position: fixed;
+    max-width: 500px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, var(--orb-blue) 0%, rgba(92, 200, 240, 0.6) 25%, var(--orb-coral) 70%, rgba(232, 118, 74, 0.0) 100%);
+    filter: blur(60px);
+    mix-blend-mode: screen;
+    opacity: 0.5;
+    z-index: 1;
+    pointer-events: none;
+    top: 15%;
+    right: 10%;
+    animation: orbBreathe 6s ease-in-out infinite;
+    transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  @keyframes orbBreathe {
+    0%, 100% { transform: scale(1) translate(0, 0); }
+    50% { transform: scale(1.1) translate(5px, -5px); }
+  }
+
+  /* Atmospheric Orb - Secondary */
+  .orb-secondary {
+    position: fixed;
+    max-width: 300px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 50%, var(--orb-coral) 0%, rgba(232, 118, 74, 0.3) 40%, rgba(92, 200, 240, 0.0) 100%);
+    filter: blur(80px);
+    mix-blend-mode: screen;
+    opacity: 0.25;
+    z-index: 1;
+    pointer-events: none;
+    bottom: 10%;
+    right: 5%;
+    animation: orbBreathe2 8s ease-in-out infinite;
+  }
+
+  @keyframes orbBreathe2 {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+  }
+
+  /* Content wrapper */
+  .content-wrapper {
+    position: relative;
+    z-index: 10;
+  }
+
+  /* Navigation */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: calc(var(--base-unit) * 3) var(--gutter);
+    position: relative;
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-cream);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: calc(var(--base-unit) * 4);
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--text-cream-muted);
+    text-decoration: none;
+    transition: all var(--transition-smooth);
+    font-style: normal;
+  }
+
+  .nav-links a:hover {
+    font-style: italic;
+    color: var(--text-cream);
+    opacity: 1;
+  }
+
+  /* Hero Section */
+  .hero {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: calc(var(--base-unit) * 8) var(--gutter);
+    position: relative;
+    background-image: url('https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/shutterstock_2042719763-1920w.jpg');
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(10, 110, 79, 0.7);
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+  }
+
+  .hero-tagline {
+    position: relative;
+  }
+
+  .hero-line {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 7vw, 6rem);
+    line-height: 1.1;
+    font-weight: 300;
+    color: var(--text-cream);
+    display: block;
+    margin-bottom: calc(var(--base-unit) * 1);
+  }
+
+  .hero-line:nth-child(1) {
+    padding-left: 0;
+    font-style: italic;
+  }
+
+  .hero-line:nth-child(2) {
+    padding-left: clamp(0px, 5vw, 80px);
+    font-style: normal;
+  }
+
+  .hero-line:nth-child(3) {
+    padding-left: clamp(0px, 10vw, 160px);
+    font-style: italic;
+  }
+
+  .hero-description {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    color: var(--text-cream-muted);
+    margin-top: calc(var(--base-unit) * 4);
+    max-width: 700px;
+    line-height: 1.6;
+  }
+
+  /* Decorative SVG Lines */
+  .hero-decoration {
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    transform: translateY(-50%);
+    max-width: 200px;
+    width: 200px;
+    height: 300px;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .hero-decoration path {
+    fill: none;
+    stroke: var(--accent-line);
+    stroke-width: 1;
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    animation: drawLine 3s ease forwards;
+  }
+
+  .hero-decoration path:nth-child(2) {
+    animation-delay: 0.5s;
+  }
+
+  .hero-decoration path:nth-child(3) {
+    animation-delay: 1s;
+  }
+
+  @keyframes drawLine {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* Services Section */
+  .services {
+    padding: calc(var(--base-unit) * 12) var(--gutter);
+    padding-bottom: calc(var(--base-unit) * 16);
+    position: relative;
+  }
+
+  .services-header {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--text-cream);
+    margin-bottom: calc(var(--base-unit) * 8);
+  }
+
+  .services-list {
+    max-width: 900px;
+    margin-left: auto;
+  }
+
+  .service-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: calc(var(--base-unit) * 3) 0;
+    border-bottom: none;
+    cursor: pointer;
+    transition: transform var(--transition-smooth), opacity var(--transition-smooth);
+    position: relative;
+  }
+
+  .service-item:hover {
+    transform: translateX(-20px);
+  }
+
+  .service-item:hover .service-name {
+    font-style: italic;
+  }
+
+  .service-name {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 400;
+    color: var(--text-cream);
+    transition: font-style var(--transition-smooth);
+    flex-shrink: 0;
+    text-decoration: none;
+  }
+
+  .service-item:nth-child(odd) .service-name {
+    font-style: normal;
+  }
+
+  .service-item:nth-child(even) .service-name {
+    font-style: italic;
+  }
+
+  .service-item:hover .service-name {
+    font-style: italic !important;
+  }
+
+  .service-dots {
+    flex-grow: 1;
+    border-bottom: 1px dotted var(--text-cream-subtle);
+    margin: 0 calc(var(--base-unit) * 2);
+    min-width: 40px;
+    position: relative;
+    top: -4px;
+  }
+
+  .service-price {
+    font-family: var(--font-serif);
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    color: var(--text-cream-muted);
+    flex-shrink: 0;
+    font-weight: 400;
+  }
+
+  .service-description {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--text-cream-muted);
+    margin-top: calc(var(--base-unit) * 1);
+    line-height: 1.4;
+  }
+
+  /* About Section */
+  .about {
+    padding: calc(var(--base-unit) * 12) var(--gutter);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .about-header {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--text-cream);
+    margin-bottom: calc(var(--base-unit) * 6);
+  }
+
+  .about-content {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: var(--text-cream-muted);
+    margin-bottom: calc(var(--base-unit) * 4);
+  }
+
+  /* Team Section */
+  .team {
+    padding: calc(var(--base-unit) * 12) var(--gutter);
+  }
+
+  .team-header {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--text-cream);
+    margin-bottom: calc(var(--base-unit) * 8);
+    text-align: center;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: calc(var(--base-unit) * 6);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .team-card {
+    background: rgba(13, 122, 88, 0.3);
+    border: 1px solid var(--accent-line);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform var(--transition-smooth);
+  }
+
+  .team-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .team-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+  }
+
+  .team-content {
+    padding: calc(var(--base-unit) * 3);
+  }
+
+  .team-name {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--text-cream);
+    margin-bottom: calc(var(--base-unit) * 1);
+  }
+
+  .team-role {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--orb-coral);
+    margin-bottom: calc(var(--base-unit) * 2);
+  }
+
+  .team-bio {
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    color: var(--text-cream-muted);
+    line-height: 1.5;
+  }
+
+  /* Specials Section */
+  .specials {
+    padding: calc(var(--base-unit) * 12) var(--gutter);
+    text-align: center;
+  }
+
+  .specials-header {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--text-cream);
+    margin-bottom: calc(var(--base-unit) * 6);
+  }
+
+  .specials-image {
+    max-width: 700px;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  /* Results Section */
+  .results {
+    padding: calc(var(--base-unit) * 12) var(--gutter);
+    display: flex;
+    align-items: center;
+    gap: calc(var(--base-unit) * 8);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .results-content {
+    flex: 1;
+  }
+
+  .results-header {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--text-cream);
+    margin-bottom: calc(var(--base-unit) * 4);
+  }
+
+  .results-text {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: var(--text-cream-muted);
+    margin-bottom: calc(var(--base-unit) * 4);
+  }
+
+  .results-link {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    color: var(--orb-coral);
+    text-decoration: none;
+    font-style: italic;
+    transition: color var(--transition-smooth);
+  }
+
+  .results-link:hover {
+    color: var(--text-cream);
+  }
+
+  .results-image {
+    flex: 0 0 300px;
+    max-width: 300px;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  /* Payment Section */
+  .payment {
+    padding: calc(var(--base-unit) * 12) var(--gutter);
+    display: flex;
+    align-items: center;
+    gap: calc(var(--base-unit) * 8);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .payment-image {
+    flex: 0 0 300px;
+    max-width: 300px;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  .payment-content {
+    flex: 1;
+  }
+
+  .payment-header {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--text-cream);
+    margin-bottom: calc(var(--base-unit) * 4);
+  }
+
+  .payment-text {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: var(--text-cream-muted);
+    margin-bottom: calc(var(--base-unit) * 4);
+  }
+
+  .payment-link {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    color: var(--orb-coral);
+    text-decoration: none;
+    font-style: italic;
+    transition: color var(--transition-smooth);
+  }
+
+  .payment-link:hover {
+    color: var(--text-cream);
+  }
+
+  /* Blog Section */
+  .blog {
+    padding: calc(var(--base-unit) * 12) var(--gutter);
+  }
+
+  .blog-header {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--text-cream);
+    margin-bottom: calc(var(--base-unit) * 8);
+    text-align: center;
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: calc(var(--base-unit) * 6);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .blog-card {
+    background: rgba(13, 122, 88, 0.3);
+    border: 1px solid var(--accent-line);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform var(--transition-smooth);
+  }
+
+  .blog-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .blog-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .blog-content {
+    padding: calc(var(--base-unit) * 3);
+  }
+
+  .blog-title {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--text-cream);
+    margin-bottom: calc(var(--base-unit) * 2);
+    text-decoration: none;
+    display: block;
+    line-height: 1.3;
+  }
+
+  .blog-title:hover {
+    color: var(--orb-coral);
+  }
+
+  .blog-meta {
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    color: var(--text-cream-muted);
+    margin-bottom: calc(var(--base-unit) * 2);
+  }
+
+  .blog-excerpt {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--text-cream-muted);
+    line-height: 1.5;
+  }
+
+  /* Reviews Section */
+  .reviews {
+    padding: calc(var(--base-unit) * 12) var(--gutter);
+    text-align: center;
+  }
+
+  .reviews-header {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--text-cream);
+    margin-bottom: calc(var(--base-unit) * 2);
+  }
+
+  .reviews-stats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: calc(var(--base-unit) * 4);
+    margin-bottom: calc(var(--base-unit) * 6);
+  }
+
+  .reviews-rating {
+    font-family: var(--font-serif);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--orb-coral);
+  }
+
+  .reviews-count {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    color: var(--text-cream-muted);
+  }
+
+  /* Contact Section */
+  .contact {
+    padding: calc(var(--base-unit) * 12) var(--gutter);
+    background: rgba(13, 122, 88, 0.3);
+    margin: calc(var(--base-unit) * 8) var(--gutter);
+    border-radius: 8px;
+    border: 1px solid var(--accent-line);
+  }
+
+  .contact-header {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--text-cream);
+    margin-bottom: calc(var(--base-unit) * 6);
+    text-align: center;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: calc(var(--base-unit) * 6);
+    max-width: 767px;
+    margin: 0 auto;
+  }
+
+  .contact-item {
+    text-align: center;
+  }
+
+  .contact-label {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text-cream);
+    margin-bottom: calc(var(--base-unit) * 2);
+  }
+
+  .contact-value {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--text-cream-muted);
+    text-decoration: none;
+    transition: color var(--transition-smooth);
+  }
+
+  .contact-value:hover {
+    color: var(--orb-coral);
+  }
+
+  .contact-hours {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--text-cream-muted);
+    line-height: 1.4;
+  }
+
+  /* CTA Floating Button */
+  .cta-orb {
+    position: fixed;
+    bottom: calc(var(--base-unit) * 4);
+    right: calc(var(--base-unit) * 4);
+    max-width: 100px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, var(--orb-blue), var(--orb-coral));
+    border: 1px solid rgba(245, 240, 232, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    transition: all var(--transition-smooth);
+    text-decoration: none;
+  }
+
+  .cta-orb:hover {
+    transform: scale(1.1) rotate(5deg);
+    filter: brightness(1.15);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  }
+
+  .cta-orb span {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.7rem;
+    color: var(--text-cream);
+    text-align: center;
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+  }
+
+  /* Corner Badge */
+  .corner-badge {
+    position: fixed;
+    bottom: calc(var(--base-unit) * 4);
+    left: calc(var(--base-unit) * 4);
+    border: 1px solid var(--accent-line);
+    padding: calc(var(--base-unit) * 2) calc(var(--base-unit) * 2.5);
+    z-index: 1000;
+    max-width: 200px;
+    background: rgba(10, 110, 79, 0.3);
+    backdrop-filter: blur(4px);
+  }
+
+  .corner-badge p {
+    font-family: var(--font-serif);
+    font-size: 0.7rem;
+    color: var(--text-cream-muted);
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  .corner-badge .asterisk {
+    color: var(--orb-coral);
+    font-size: 0.9rem;
+  }
+
+  /* Footer */
+  .footer {
+    background: rgba(13, 122, 88, 0.2);
+    padding: calc(var(--base-unit) * 8) var(--gutter) calc(var(--base-unit) * 4);
+    border-top: 1px solid var(--accent-line);
+    margin-top: calc(var(--base-unit) * 8);
+  }
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: calc(var(--base-unit) * 4);
+    margin-bottom: calc(var(--base-unit) * 6);
+  }
+
+  .footer-column {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--base-unit) * 2);
+  }
+
+  .footer-column h3 {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-cream);
+    margin-bottom: calc(var(--base-unit) * 1);
+  }
+
+  .footer-column a {
+    font-family: var(--font-serif);
+    font-size: 0.9rem;
+    color: var(--text-cream-muted);
+    text-decoration: none;
+    transition: color var(--transition-smooth);
+    line-height: 1.4;
+  }
+
+  .footer-column a:hover {
+    color: var(--orb-coral);
+  }
+
+  .footer-bottom {
+    text-align: center;
+    padding-top: calc(var(--base-unit) * 4);
+    border-top: 1px solid var(--accent-line);
+  }
+
+  .footer-copyright {
+    font-family: var(--font-serif);
+    font-size: 0.85rem;
+    color: var(--text-cream-muted);
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 767px) {
+    .navbar {
+      padding: calc(var(--base-unit) * 2) var(--gutter);
+    }
+
+    .logo {
+      font-size: 1rem;
+    }
+
+    .nav-links {
+      gap: calc(var(--base-unit) * 2);
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+    }
+
+    .hero {
+      min-height: 70vh;
+      padding: calc(var(--base-unit) * 6) var(--gutter);
+    }
+
+    .hero-line {
+      font-size: clamp(2rem, 10vw, 3.5rem);
+    }
+
+    .hero-line:nth-child(2),
+    .hero-line:nth-child(3) {
+      padding-left: 0;
+    }
+
+    .hero-decoration {
+      display: none;
+    }
+
+    .services {
+      padding: calc(var(--base-unit) * 8) var(--gutter);
+      padding-bottom: calc(var(--base-unit) * 20);
+    }
+
+    .services-list {
+      margin-left: 0;
+    }
+
+    .service-item {
+      padding: calc(var(--base-unit) * 2) 0;
+    }
+
+    .service-name {
+      font-size: 1.4rem;
+    }
+
+    .service-price {
+      font-size: 0.9rem;
+    }
+
+    .results, .payment {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .results-image, .payment-image {
+      flex: none;
+      max-width: 100%;
+      order: -1;
+    }
+
+    .blog-grid, .team-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cta-orb {
+      max-width: 80px;
+      width: 80px;
+      height: 80px;
+      bottom: calc(var(--base-unit) * 2.5);
+      right: calc(var(--base-unit) * 2.5);
+    }
+
+    .cta-orb span {
+      font-size: 0.6rem;
+    }
+
+    .corner-badge {
+      display: none;
+    }
+
+    .orb-main {
+      max-width: 300px;
+      width: 300px;
+      height: 300px;
+      right: -10%;
+      top: 20%;
+    }
+
+    .orb-secondary {
+      max-width: 180px;
+      width: 180px;
+      height: 180px;
+    }
+
+    .footer-links {
+      grid-template-columns: 1fr;
+      gap: calc(var(--base-unit) * 3);
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .hero-line {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+    }
+
+    .hero-line:nth-child(2) {
+      padding-left: 40px;
+    }
+
+    .hero-line:nth-child(3) {
+      padding-left: 80px;
+    }
+
+    .services-list {
+      max-width: 700px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .navbar {
+      padding: calc(var(--base-unit) * 4) var(--gutter);
+    }
+
+    .logo {
+      font-size: 1.35rem;
+    }
+
+    .nav-links a {
+      font-size: 1.05rem;
+    }
+
+    .hero {
+      min-height: 85vh;
+      padding: calc(var(--base-unit) * 10) var(--gutter);
+    }
+
+    .services {
+      padding: calc(var(--base-unit) * 14) var(--gutter);
+      padding-bottom: calc(var(--base-unit) * 18);
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .hero-line {
+      font-size: 6.5rem;
+    }
+
+    .hero-line:nth-child(2) {
+      padding-left: 100px;
+    }
+
+    .hero-line:nth-child(3) {
+      padding-left: 200px;
+    }
+
+    .orb-main {
+      max-width: 500px;
+    }
+
+    .orb-secondary {
+      max-width: 300px;
+    }
+  }
+
+  /* Subtle entrance animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hero-line {
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards;
+  }
+
+  .hero-line:nth-child(1) {
+    animation-delay: 0.2s;
+  }
+
+  .hero-line:nth-child(2) {
+    animation-delay: 0.5s;
+  }
+
+  .hero-line:nth-child(3) {
+    animation-delay: 0.8s;
+  }
+
+  .services-header {
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards;
+    animation-delay: 0.3s;
+  }
+
+  .service-item {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+  }
+
+  .service-item:nth-child(1) { animation-delay: 0.5s; }
+  .service-item:nth-child(2) { animation-delay: 0.7s; }
+  .service-item:nth-child(3) { animation-delay: 0.9s; }
+  .service-item:nth-child(4) { animation-delay: 1.1s; }
+  .service-item:nth-child(5) { animation-delay: 1.3s; }
+  .service-item:nth-child(6) { animation-delay: 1.5s; }
+  .service-item:nth-child(7) { animation-delay: 1.7s; }
+  .service-item:nth-child(8) { animation-delay: 1.9s; }
+  .service-item:nth-child(9) { animation-delay: 2.1s; }
+  .service-item:nth-child(10) { animation-delay: 2.3s; }
+  .service-item:nth-child(11) { animation-delay: 2.5s; }
+</style>
+
+
+
+  <!-- Atmospheric Orbs -->
+  <div class="orb-main" id="orbMain"></div>
+  <div class="orb-secondary"></div>
+
+  <!-- Content -->
+  <div class="content-wrapper">
+
+    <!-- HEADER -->
+<nav class="navbar">
+      <a href="#" class="logo">trulyliftedmedspa.com</a>
+      <ul class="nav-links">
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/blog">Blog</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <div class="hero-content">
+        <div class="hero-tagline">
+          <span class="hero-line">Enhancing Skin</span>
+          <span class="hero-line">Health &amp; Beauty</span>
+          <span class="hero-line">With Advanced Treatments</span>
+
+          <!-- Decorative SVG Lines -->
+          
+        </div>
+        <p class="hero-description">
+          Experience the pinnacle of advanced aesthetic and wellness care at Truly Lifted Medspa. Our expert team is dedicated to elevating your journey, offering a fusion of advanced aesthetics and holistic wellness services.
+        </p>
+      </div>
+    
+<div style="width:100%;margin:2rem 0"><img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/shutterstock_2330335471-1920w.jpg" alt="a woman is applying cream to her face ." style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+</section>
+
+    <!-- About Section -->
+    <section class="about">
+      <h2 class="about-header">Our Services</h2>
+      <p class="about-content">
+        Our services blend advanced aesthetics with holistic wellness, offering personalized treatments to enhance your skin health and beauty. From facial treatments to laser skin tightening, our expert team is dedicated to providing exceptional care tailored to your unique needs.
+      </p>
+    </section>
+<div style="width:100%;margin:2rem 0"><img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/5-b300791b-1920w.jpg" alt="A person receiving an injection in their wrist at a medical setting." style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+      <h2 class="services-header">Advanced Treatments</h2>
+
+      <div class="services-list">
+        <div class="service-item">
+          <div>
+            <a href="/facial-treatments" class="service-name">Facials</a>
+            <p class="service-description">Advanced facial treatments to enhance skin health and beauty</p>
+          </div>
+          <span class="service-dots"></span>
+          <span class="service-price">Advanced</span>
+        </div>
+
+        <div class="service-item">
+          <div>
+            <a href="/chemical-peels" class="service-name">Chemical Peels</a>
+            <p class="service-description">Professional chemical peeling treatments for skin rejuvenation</p>
+          </div>
+          <span class="service-dots"></span>
+          <span class="service-price">Professional</span>
+        </div>
+
+        <div class="service-item">
+          <div>
+            <a href="/microneedling-treatments" class="service-name">Microneedling</a>
+          </div>
+          <span class="service-dots"></span>
+          <span class="service-price">Rejuvenating</span>
+        </div>
+
+        <div class="service-item">
+          <div>
+            <a href="/anteage-exosomes" class="service-name">AnteAGE Exosomes</a>
+          </div>
+          <span class="service-dots"></span>
+          <span class="service-price">Revolutionary</span>
+        </div>
+
+        <div class="service-item">
+          <div>
+            <a href="/prf-and-ez-gel" class="service-name">PRF &amp; Ez Gel</a>
+          </div>
+          <span class="service-dots"></span>
+          <span class="service-price">Natural</span>
+        </div>
+
+        <div class="service-item">
+          <div>
+            <a href="/dermal-filler-treatments" class="service-name">Dermal Filler</a>
+          </div>
+          <span class="service-dots"></span>
+          <span class="service-price">Volumizing</span>
+        </div>
+
+        <div class="service-item">
+          <div>
+            <a href="/neuromodulator-injectables" class="service-name">Neuromodulator</a>
+          </div>
+          <span class="service-dots"></span>
+          <span class="service-price">Smoothing</span>
+        </div>
+
+        <div class="service-item">
+          <div>
+            <a href="/bioidentical-hormones" class="service-name">Bioidentical Hormones</a>
+          </div>
+          <span class="service-dots"></span>
+          <span class="service-price">Wellness</span>
+        </div>
+
+        <div class="service-item">
+          <div>
+            <a href="/laser-skin-tightening" class="service-name">Laser Skin Tightening</a>
+          </div>
+          <span class="service-dots"></span>
+          <span class="service-price">Firming</span>
+        </div>
+
+        <div class="service-item">
+          <div>
+            <a href="/nad" class="service-name">NAD+</a>
+          </div>
+          <span class="service-dots"></span>
+          <span class="service-price">Cellular</span>
+        </div>
+
+        <div class="service-item">
+          <div>
+            <a href="/weight-loss-treatments" class="service-name">Weight Loss</a>
+            <p class="service-description">Medical weight loss programs including Semaglutide and Tirzepatide</p>
+          </div>
+          <span class="service-dots"></span>
+          <span class="service-price">Medical</span>
+        </div>
+      </div>
+    
+<div style="width:100%;margin:2rem 0"><img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/7-c2528be3-1920w.jpg" alt="Woman touching her face in a mirror, looking directly at the viewer with a thoughtful expression, white t-shirt." style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/8-b6bdc4d0-1920w.jpg" alt="Woman receiving a facial treatment; pink mask applied to lower face." style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/9-faace876-1920w.jpg" alt="Three blue insulin pens with a measuring tape in the background." style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/6-4ea7bf7f-1920w.jpg" alt="Close-up of a person undergoing a facial microneedling treatment; small device with blue liquid penetrates skin." style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/Truly-lifted-Tico-Mendoza--405-1920w.jpg" alt="a box of restylane and a box of sculptra are sitting on a table ." style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/Truly-lifted-Tico-Mendoza---3-1920w.jpg" alt="a woman is getting a botox injection in her forehead ." style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/Truly-lifted-Tico-Mendoza---4-1920w.jpg" alt="a woman is giving a man a facial treatment in a beauty salon ." style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/Truly-lifted-Tico-Mendoza--401-1920w.jpg" alt="two boxes of juvederm ultra rc sitting on a table" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+<div style="width:100%;margin:2rem 0"><img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/Truly-lifted-Tico-Mendoza---7-1920w.jpg" alt="a woman is standing next to a man laying on a bed getting a facial treatment ." style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+</section>
+<div style="width:100%;margin:2rem 0"><img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/4-62252333-1920w.jpg" alt="Vial of NAD+ with a blue liquid, white label, and background of DNA strands." style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+    <!-- Team Section -->
+    <section class="team" id="team">
+      <h2 class="team-header">Meet Our Team</h2>
+      <div class="team-grid">
+        <div class="team-card">
+          <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/shutterstock_2165963211-1920w.jpg" alt="Charisse Lin" class="team-image">
+          <div class="team-content">
+            <h3 class="team-name">Charisse Lin</h3>
+            <p class="team-role">Owner and Nurse Practitioner</p>
+            <p class="team-bio">Expert injector and owner of Truly Lifted Medspa, known for her skill with injectables and personalized treatment approach.</p>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-content" style="padding-top: calc(var(--base-unit) * 6);">
+            <h3 class="team-name">Thea</h3>
+            <p class="team-role">Front Desk Receptionist</p>
+            <p class="team-bio">Professional and welcoming front desk staff member who helps guide patients through services and makes them feel comfortable.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Specials Section -->
+    <section class="specials">
+      <h2 class="specials-header">Our April Specials!</h2>
+      <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/1-40488ccb-1920w.png" alt="Promotional graphic for February specials: deals on Jeuveau, skin tightening, lip filler, and Skinbetter Science products. Pink floral background." class="specials-image">
+    </section>
+<div style="width:100%;margin:2rem 0"><img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/3-1920w.jpg" alt="Doctor with model uterus, pill bottles, and " style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+    <!-- Results Section -->
+    <section class="results">
+      <div class="results-content">
+        <h2 class="results-header">Check Out Our Transformative Results</h2>
+        <p class="results-text">
+          Explore the transformative journey of our clients on Truly Lifted Medspa's Before and After page. Witness the remarkable results achieved through our personalized treatments, showcased through images capturing the dramatic changes in skin health and beauty.
+        </p>
+        <a href="/before-after" class="results-link">Learn More</a>
+      </div>
+      <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/Truly-lifted-Tico-Mendoza---6-1920w.jpg" alt="a woman is giving a man a treatment on his face ." class="results-image">
+    </section>
+<div style="width:100%;margin:2rem 0"><img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/Truly+Lifted+%282%29+%281%29-1920w.png" alt="Truly Lifted MedSpa Logo" style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+    <!-- Payment Section -->
+    <section class="payment">
+      <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/Truly-lifted-Tico-Mendoza---2-1920w.jpg" alt="two women are sitting at a table talking to each other ." class="payment-image">
+      <div class="payment-content">
+        <h2 class="payment-header">We Offer Flexible Payment Solutions</h2>
+        <p class="payment-text">
+          Our Cherry Payment Plan at Truly Lifted Medspa offers a flexible and convenient way to access our advanced aesthetic and wellness services. With this tailored payment option, you can enjoy the benefits of our treatments while managing your budget effectively.
+        </p>
+        <a href="/cherry-payment-plan" class="payment-link">Learn More</a>
+      </div>
+    </section>
+<div style="width:100%;margin:2rem 0"><img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/Truly-lifted-Tico-Mendoza--2438-1920w.jpg" alt="there is a chair in the middle of the room ." style="width:100%;height:auto;object-fit:cover;max-height:500px"></div>
+
+
+    <!-- Blog Section -->
+    <section class="blog">
+      <h2 class="blog-header">The Beauty Blog: Your Source for Insights &amp; Inspiration</h2>
+      <div class="blog-grid">
+        <article class="blog-card">
+          <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/12-71e0abca-1920w.jpg" alt="Woman receiving facial treatment; therapist holding cream jar and touching her cheek." class="blog-image">
+          <div class="blog-content">
+            <a href="/understanding-skin-laxity-causes-solutions-beyond-the-usual-creams" class="blog-title">Understanding Skin Laxity: Causes &amp; Solutions Beyond the Usual Creams</a>
+            <p class="blog-meta">By Truly Lifted MedSpa • April 28, 2026</p>
+            <p class="blog-excerpt">Dive into why sagging skin happens and discover advanced medspa solutions that go beyond topical skincare.</p>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/11-8ecd3616-1920w.jpg" alt="Person receiving a cosmetic facial injection. A gloved hand injects the woman's face. She has her eyes closed." class="blog-image">
+          <div class="blog-content">
+            <a href="/the-ultimate-comparison-botox-vs-dysport-for-springtime-rejuvenation" class="blog-title">The Ultimate Comparison: Botox vs. Dysport for Springtime Rejuvenation</a>
+            <p class="blog-meta">By Truly Lifted MedSpa • April 22, 2026</p>
+            <p class="blog-excerpt">Wondering which injectable suits your needs? Compare Botox and Dysport for smooth, refreshed skin this spring.</p>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/10-70fdb6ce-1920w.jpg" alt="Man seated on a bed, holding pills from a bottle, bedside lamp glows." class="blog-image">
+          <div class="blog-content">
+            <a href="/how-does-bioidentical-hormone-therapy-improve-mens-vitality-over-40" class="blog-title">How Does Bioidentical Hormone Therapy Improve Men's Vitality Over 40?</a>
+            <p class="blog-meta">By Truly Lifted MedSpa • April 15, 2026</p>
+            <p class="blog-excerpt">Discover the positive impacts of BHRT on energy, libido, and overall wellness for men seeking to rejuvenate after 40.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews">
+      <h2 class="reviews-header">Client Reviews</h2>
+      <div class="reviews-stats">
+        <div class="reviews-rating">5</div>
+        <div class="reviews-count">77 Reviews</div>
+      </div>
+      <p class="about-content">
+        Discover the transformative experiences of our valued clients. Dive into authentic stories that showcase the impact of our services. Real people, real results—explore the power of beauty and wellness through their inspiring testimonials.
+      </p>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+      <h2 class="contact-header">Contact Us</h2>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <h3 class="contact-label">Phone</h3>
+          <a href="tel:(512) 763-5149" class="contact-value">(512) 763-5149</a>
+        </div>
+        <div class="contact-item">
+          <h3 class="contact-label">Email</h3>
+          <a href="mailto:tlc@trulyliftedmedspa.com" class="contact-value">tlc@trulyliftedmedspa.com</a>
+        </div>
+        <div class="contact-item">
+          <h3 class="contact-label">Address</h3>
+          <a href="https://maps.app.goo.gl/53r5XdkN2uhkjeUd8" class="contact-value">2951 FM 1460, Unit #204<br>Georgetown, TX 78626</a>
+        </div>
+        <div class="contact-item">
+          <h3 class="contact-label">Business Hours</h3>
+          <div class="contact-hours">
+            Mon - Fri: 9:00 am - 5:00 pm<br>
+            Saturday: 9:00 am - 3:00 pm<br>
+            Sunday: Closed
+          </div>
+        </div>
+      </div>
+      <iframe src="https://maps.app.goo.gl/53r5XdkN2uhkjeUd8" width="100%" height="300" style="border:0;margin-top:1.5rem" allowfullscreen loading="lazy" title="Map"></iframe>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <div class="footer-column">
+          <h3>Services</h3>
+          <a href="/facial-treatments">Facials</a>
+          <a href="/chemical-peels">Chemical Peels</a>
+          <a href="/microneedling-treatments">Microneedling</a>
+          <a href="/anteage-exosomes">AnteAGE Exosomes</a>
+          <a href="/dermal-filler-treatments">Dermal Fillers</a>
+          <a href="/neuromodulator-injectables">Neuromodulators</a>
+          <a href="/laser-skin-tightening">Laser Skin Tightening</a>
+        </div>
+        <div class="footer-column">
+          <h3>Wellness</h3>
+          <a href="/bioidentical-hormones">Bioidentical Hormones</a>
+          <a href="/nad">NAD+</a>
+          <a href="/weight-loss-treatments">Weight Loss</a>
+          <a href="/prf-and-ez-gel">PRF &amp; EZ Gel</a>
+        </div>
+        <div class="footer-column">
+          <h3>Company</h3>
+          <a href="/about">About Us</a>
+          <a href="/contact">Contact</a>
+          <a href="/conditions-we-treat">Conditions We Treat</a>
+          <a href="/memberships">Memberships</a>
+          <a href="/before-after">Before &amp; After</a>
+          <a href="/blog">Blog</a>
+        </div>
+        <div class="footer-column">
+          <h3>Resources</h3>
+          <a href="/pre-post-care">Pre/Post Care</a>
+          <a href="/cherry-payment-plan">Cherry Payment Plan</a>
+          <a href="/price-list">Price List</a>
+          <a href="/privacy-policy">Privacy Policy</a>
+          <a href="https://instagram.com/trulyliftedmedspa">Instagram</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2024 Truly Lifted MedSpa. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CTA Floating Button -->
+  <a href="/contact" class="cta-orb">
+    <span>Book an<br>Appointment</span>
+  </a>
+
+  <!-- Corner Badge -->
+  <div class="corner-badge">
+    <p><span class="asterisk">✻</span> Experience the pinnacle of advanced aesthetic and wellness care at Truly Lifted Medspa since 2024.</p>
+  </div>
+
+  <script>
+    // Mouse-following parallax for main orb
+    const orbMain = document.getElementById('orbMain');
+    let mouseX = 0;
+    let mouseY = 0;
+    let orbX = 0;
+    let orbY = 0;
+
+    document.addEventListener('mousemove', function(e) {
+      mouseX = (e.clientX / window.innerWidth - 0.5) * 40;
+      mouseY = (e.clientY / window.innerHeight - 0.5) * 40;
+    });
+
+    function animateOrb() {
+      orbX += (mouseX - orbX) * 0.03;
+      orbY += (mouseY - orbY) * 0.03;
+      orbMain.style.transform = `translate(${orbX}px, ${orbY}px)`;
+      requestAnimationFrame(animateOrb);
+    }
+
+    animateOrb();
+  </script>

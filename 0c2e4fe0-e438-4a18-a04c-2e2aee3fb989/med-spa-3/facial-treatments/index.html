@@ -1,0 +1,959 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Facial Treatments</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+  --bg-primary: #0a6e4f;
+  --bg-emerald: #0d7a58;
+  --text-cream: #f5f0e8;
+  --text-cream-muted: rgba(245, 240, 232, 0.6);
+  --text-cream-subtle: rgba(245, 240, 232, 0.35);
+  --orb-blue: #5cc8f0;
+  --orb-coral: #e8764a;
+  --accent-line: rgba(245, 240, 232, 0.3);
+  --selection-highlight: #e8764a;
+  --base-unit: 8px;
+  --gutter: 4vw;
+  --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --transition-smooth: 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+::selection {
+    background: var(--selection-highlight);
+    color: var(--text-cream);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-serif);
+    background-color: var(--bg-primary);
+    color: var(--text-cream);
+    overflow-x: hidden;
+    line-height: 1.6;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  /* Noise texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+  }
+
+  /* Atmospheric Orb - Main */
+  .orb-main {
+    position: fixed;
+    max-width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, var(--orb-blue) 0%, rgba(92, 200, 240, 0.6) 25%, var(--orb-coral) 70%, rgba(232, 118, 74, 0.0) 100%);
+    filter: blur(60px);
+    mix-blend-mode: screen;
+    opacity: 0.5;
+    z-index: 1;
+    pointer-events: none;
+    top: 15%;
+    right: 10%;
+    animation: orbBreathe 6s ease-in-out infinite;
+    transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  @keyframes orbBreathe {
+    0%, 100% { transform: scale(1) translate(0, 0); }
+    50% { transform: scale(1.1) translate(5px, -5px); }
+  }
+
+  /* Atmospheric Orb - Secondary */
+  .orb-secondary {
+    position: fixed;
+    max-width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 50%, var(--orb-coral) 0%, rgba(232, 118, 74, 0.3) 40%, rgba(92, 200, 240, 0.0) 100%);
+    filter: blur(80px);
+    mix-blend-mode: screen;
+    opacity: 0.25;
+    z-index: 1;
+    pointer-events: none;
+    bottom: 10%;
+    right: 5%;
+    animation: orbBreathe2 8s ease-in-out infinite;
+  }
+
+  @keyframes orbBreathe2 {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+  }
+
+  /* Content wrapper */
+  .content-wrapper {
+    position: relative;
+    z-index: 10;
+  }
+
+  /* Navigation */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: calc(var(--base-unit) * 3) var(--gutter);
+    position: relative;
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-cream);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: calc(var(--base-unit) * 4);
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--text-cream-muted);
+    text-decoration: none;
+    transition: all var(--transition-smooth);
+    font-style: normal;
+  }
+
+  .nav-links a:hover {
+    font-style: italic;
+    color: var(--text-cream);
+    opacity: 1;
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: 160px var(--pad-x, 1.5rem) 60px;
+    background: var(--text-black, var(--text-primary, var(--bg-primary, #1a1a1a)));
+    color: var(--bg-cream, var(--nav-text, #ffffff));
+    background-image: url('https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/shutterstock_1790728235-5bfeed0d-1920w.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  
+  .page-title-area::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 110, 79, 0.85);
+    z-index: 1;
+  }
+  
+  .page-title-inner { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    position: relative;
+    z-index: 2;
+  }
+  
+  .page-title-area h1 { 
+    font-size: clamp(2rem, 5vw, 3rem); 
+    font-weight: 600; 
+    line-height: 1.1; 
+    letter-spacing: -0.03em; 
+  }
+
+  /* Content Area */
+  .content-area { 
+    padding: 64px var(--pad-x, 1.5rem); 
+    max-width: 1200px; 
+    margin: 0 auto; 
+  }
+  
+  .content-area h2 { 
+    font-size: clamp(1.5rem, 3vw, 2rem); 
+    font-weight: 600; 
+    line-height: 1.15; 
+    margin-bottom: 24px; 
+    font-style: italic;
+  }
+  
+  .content-area h3 { 
+    font-size: 1.25rem; 
+    font-weight: 600; 
+    margin-bottom: 16px; 
+  }
+  
+  .content-area p { 
+    font-size: 1rem; 
+    line-height: 1.7; 
+    margin-bottom: 24px; 
+    color: var(--text-cream-muted);
+  }
+  
+  .content-area ul, .content-area ol { 
+    margin-bottom: 24px; 
+    padding-left: 24px; 
+  }
+  
+  .content-area li { 
+    margin-bottom: 8px; 
+    line-height: 1.7; 
+  }
+  
+  .content-area img { 
+    max-width: 100%; 
+    height: auto; 
+    border-radius: 12px; 
+    margin-bottom: 24px; 
+  }
+
+  /* Services Section */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: calc(var(--base-unit) * 4);
+    margin-top: calc(var(--base-unit) * 4);
+  }
+
+  .service-card {
+    padding: calc(var(--base-unit) * 4);
+    border: 1px solid var(--accent-line);
+    border-radius: 8px;
+    transition: all var(--transition-smooth);
+  }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--orb-coral);
+  }
+
+  .service-card h3 {
+    color: var(--text-cream);
+    margin-bottom: calc(var(--base-unit) * 2);
+    font-style: italic;
+  }
+
+  .service-card p {
+    color: var(--text-cream-muted);
+    line-height: 1.6;
+  }
+
+  /* Benefits Grid */
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: calc(var(--base-unit) * 3);
+    margin: calc(var(--base-unit) * 6) 0;
+  }
+
+  .benefit-item {
+    padding: calc(var(--base-unit) * 3);
+    text-align: center;
+  }
+
+  .benefit-item h3 {
+    color: var(--orb-coral);
+    margin-bottom: calc(var(--base-unit) * 2);
+    font-style: italic;
+  }
+
+  /* FAQ Section */
+  .faq-item {
+    margin-bottom: calc(var(--base-unit) * 3);
+    border-bottom: 1px solid var(--accent-line);
+    padding-bottom: calc(var(--base-unit) * 3);
+  }
+
+  .faq-item h3 {
+    color: var(--orb-coral);
+    margin-bottom: calc(var(--base-unit) * 2);
+  }
+
+  /* Testimonials */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: calc(var(--base-unit) * 3);
+    margin: calc(var(--base-unit) * 6) 0;
+  }
+
+  .testimonial-card {
+    padding: calc(var(--base-unit) * 3);
+    border: 1px solid var(--accent-line);
+    border-radius: 8px;
+    background: rgba(13, 122, 88, 0.2);
+  }
+
+  .testimonial-card .rating {
+    color: var(--orb-coral);
+    font-size: 1.2rem;
+    margin-bottom: calc(var(--base-unit) * 1);
+  }
+
+  .testimonial-card .author {
+    font-weight: 600;
+    color: var(--text-cream);
+    margin-bottom: calc(var(--base-unit) * 1);
+  }
+
+  .testimonial-card .date {
+    color: var(--text-cream-muted);
+    font-size: 0.9rem;
+    margin-bottom: calc(var(--base-unit) * 2);
+  }
+
+  /* Stats Section */
+  .stats-section {
+    text-align: center;
+    margin: calc(var(--base-unit) * 8) 0;
+    padding: calc(var(--base-unit) * 6);
+    border: 1px solid var(--accent-line);
+    border-radius: 12px;
+    background: rgba(13, 122, 88, 0.1);
+  }
+
+  .stats-grid {
+    display: flex;
+    justify-content: center;
+    gap: calc(var(--base-unit) * 8);
+    margin-top: calc(var(--base-unit) * 4);
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-value {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--orb-coral);
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 1rem;
+    color: var(--text-cream-muted);
+    margin-top: calc(var(--base-unit) * 1);
+  }
+
+  /* CTA Section */
+  .cta-section {
+    text-align: center;
+    padding: calc(var(--base-unit) * 8);
+    margin: calc(var(--base-unit) * 8) 0;
+    background: linear-gradient(135deg, var(--orb-blue) 0%, var(--orb-coral) 100%);
+    border-radius: 12px;
+  }
+
+  .cta-section h2 {
+    color: var(--text-cream);
+    margin-bottom: calc(var(--base-unit) * 3);
+  }
+
+  .cta-section p {
+    color: rgba(245, 240, 232, 0.9);
+    margin-bottom: calc(var(--base-unit) * 4);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: calc(var(--base-unit) * 2) calc(var(--base-unit) * 4);
+    background: var(--text-cream);
+    color: var(--bg-primary);
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all var(--transition-smooth);
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 767px) {
+    .page-title-area {
+      padding: 120px var(--gutter) 40px;
+    }
+    
+    .content-area {
+      padding: 40px var(--gutter);
+    }
+    
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .benefits-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .stats-grid {
+      flex-direction: column;
+      gap: calc(var(--base-unit) * 4);
+    }
+    
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .orb-main {
+      max-width: 300px;
+      height: 300px;
+      right: -10%;
+      top: 20%;
+    }
+
+    .orb-secondary {
+      max-width: 180px;
+      height: 180px;
+    }
+  }
+
+  /* Contact Section */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: calc(var(--base-unit) * 4);
+    margin: calc(var(--base-unit) * 6) 0;
+  }
+
+  .contact-item h3 {
+    color: var(--orb-coral);
+    margin-bottom: calc(var(--base-unit) * 2);
+    font-style: italic;
+  }
+
+  .contact-item a {
+    color: var(--text-cream);
+    text-decoration: none;
+    transition: color var(--transition-smooth);
+  }
+
+  .contact-item a:hover {
+    color: var(--orb-coral);
+  }
+</style>
+
+
+
+<div class="orb-main" id="orbMain"></div>
+<div class="orb-secondary"></div>
+
+<div class="content-wrapper">
+
+<!-- HEADER -->
+<nav class="navbar">
+      <a href="#" class="logo">trulyliftedmedspa.com</a>
+      <li><a href="/about">About Us</a><ul><li><a href="/about">Our Team</a></li></ul></li><li><a href="/">Services</a><ul><li><a href="/facial-treatments">Facials</a></li><li><a href="/chemical-peels">Chemical Peels</a></li><li><a href="/microneedling-treatments">Microneedling</a></li><li><a href="/anteage-exosomes">AnteAGE Exosomes</a></li><li><a href="/">Injectables</a><ul><li><a href="/dermal-filler-treatments">Dermal Filler</a></li><li><a href="/neuromodulator-injectables">Neuromodulator</a></li><li><a href="/prf-and-ez-gel">PRF &amp; Ez Gel</a></li></ul></li><li><a href="/laser-skin-tightening">Laser Skin Tightening</a></li></ul></li><li><a href="/">Wellness</a><ul><li><a href="/bioidentical-hormones">Bioidentical Hormones</a><ul><li><a href="/bioidentical-hormones">BHRT for Women</a></li><li><a href="/bioidentical-hormones">BHRT for Men</a></li></ul></li><li><a href="/nad">NAD+</a></li><li><a href="/weight-loss-treatments">Weight Loss</a></li></ul></li><li><a href="/conditions-we-treat">Conditions We Treat</a></li><li><a href="/">Resources</a><ul><li><a href="/before-after">Before &amp; After</a></li><li><a href="/pre-post-care">Pre/Post Care</a></li><li><a href="/cherry-payment-plan">Cherry Payment Plan</a></li><li><a href="/price-list">Price List</a></li><li><a href="/blog">Blog</a></li></ul></li><li><a href="/contact">Contact</a></li><li><a href="/memberships">Memberships</a></li><li><a href="/privacy-policy">Privacy Policy</a></li><li><a href="/is-microneedling-better-than-at-home-rollers-key-differences-results">
+    
+    Is Microneedling Better Than At-Home Rollers?Differences &amp; Result
+  
+  </a></li><li><a href="/weight-loss-medications-who-qualifies-for-semaglutide-or-tirzepatide-treatment">
+    
+    Who Qualifies for Semaglutide or Tirzepatide Weight Loss?
+  
+  </a></li><li><a href="/understanding-skin-laxity-causes-solutions-beyond-the-usual-creams">
+    
+    Understanding Skin Laxity: Causes &amp; Solutions Beyond Usual Creams
+  
+  </a></li><li><a href="/how-does-bioidentical-hormone-therapy-improve-mens-vitality-over-40">
+    
+    How Bioidentical Hormone Therapy Improve Men's Vitality Over 40?
+  
+  </a></li><li><a href="/achieve-radiant-skin-the-benefits-of-hydrafacial-in-winter">
+    
+    Achieve Radiant Skin: The Benefits of Hydrafacial in Winter
+  
+  </a></li><li><a href="/why-menopause-symptoms-could-mean-its-time-for-bhrt-therapy">
+    
+    Why Menopause Symptoms Could Mean It's Time for BHRT Therapy
+  
+  </a></li><li><a href="/the-complete-guide-to-nad--therapy-boosting-wellness-at-every-age">
+    
+    Complete Guide to NAD+ Therapy: Boosting Wellness at Every Age
+  
+  </a></li><li><a href="/your-spring-ready-glow-must-follow-skin-prep-tips-before-injectables">
+    
+    Spring-Ready Glow: Must-Follow Skin Prep Tips Before Injectables
+  
+  </a></li><li><a href="/new-year-new-confidence-2026s-most-popular-aesthetic-treatments">
+    
+    New Year, New Confidence: 2026's Most Popular Aesthetic Treatments
+  
+  </a></li><li><a href="/celebrate-easter-with-a-fresh-look-top-facial-treatments-to-renew-your-skin">
+    
+    Celebrate Easter with a Fresh Look: Facial Treatments for Skin
+  
+  </a></li><li><a href="/the-science-behind-injectable-fillers-for-hand-rejuvenation">
+    
+    The Science Behind Injectable Fillers for Hand Rejuvenation
+  
+  </a></li><li><a href="/everything-you-need-to-know-about-prf-ez-gel-for-radiant-looking-skin">
+    
+    All You Need to Know About PRF &amp; EZ Gel for Radiant-Looking Skin
+  
+  </a></li><li><a href="/the-ultimate-comparison-botox-vs-dysport-for-springtime-rejuvenation">
+    
+    Comparison: Botox vs. Dysport for Springtime Rejuvenation
+  
+  </a></li><li><a href="/5-signs-you-could-benefit-from-laser-skin-tightening-in-your-40s">
+    
+    5 Signs You Could Benefit from Laser Skin Tightening in Your 40s
+  
+  </a></li><li><a href="/how-long-do-dermal-fillers-last-key-factors-maintenance-tips">
+    
+    How Long Do Dermal Fillers Last? Key Factors &amp; Maintenance Tips
+  
+  </a></li><li><a href="/resolve-to-rejuvenate-setting-your-2026-beauty-wellness-goals">
+    
+    Resolve to Rejuvenate: Setting Your 2026 Beauty &amp; Wellness Goals
+  
+  </a></li><li><a href="/top-post-holiday-detox-treatments-reveal-fresh-healthy-skin-this-january">
+    
+    Top Post-Holiday Detox Treatments: Reveal Fresh, Healthy Skin This January
+  
+  </a></li><li><a href="/the-best-medspa-gift-cards-self-care-ideas-for-christmas-in-georgetown">
+    
+    The Best MedSpa Gift Cards &amp; Self-Care Ideas for Christmas in Georgetown
+  
+  </a></li><li><a href="/mens-aesthetic-treatments-popular-services-for-confidence-wellness">
+    
+    Men's Aesthetic Treatments: Popular Services for Confidence &amp; Wellness
+  
+  </a></li><li><a href="/can-laser-skin-tightening-replace-a-facelift-pros-cons-and-faqs">
+    
+    Can Laser Skin Tightening Replace a Facelift? Pros, Cons, and FAQs
+  
+  </a></li><li><a href="/how-to-prep-your-skin-for-winter-parties-pre-event-facial-filler-guide">
+    
+    How to Prep Your Skin for Winter Parties: Pre-Event Facial &amp; Filler Guide
+  
+  </a></li><li><a href="/what-are-exosome-facials-how-do-they-transform-aging-skin">
+    
+    What Are Exosome Facials &amp; How Do They Transform Aging Skin?
+  
+  </a></li><li><a href="/holiday-ready-skin-top-medspa-treatments-for-a-radiant-thanksgiving-glow">
+    
+    Holiday-Ready Skin: Top MedSpa Treatments for a Radiant Thanksgiving Glow
+  
+  </a></li><li><a href="/hyperpigmentation-vs-melasma-causes-differences-newest-treatment-options">
+    
+    Hyperpigmentation vs. Melasma: Causes, Differences &amp; Newest Treatment Options
+  
+  </a></li><li><a href="/is-microneedling-safe-for-sensitive-skin-what-to-ask-before-your-visit">
+    
+    Is Microneedling Safe for Sensitive Skin? What to Ask Before Your Visit
+  
+  </a></li><li><a href="/how-laser-skin-tightening-works-and-who-its-best-suited-for">
+    
+    How Laser Skin Tightening Works and Who It's Best Suited For
+  
+  </a></li><li><a href="/facial-volume-loss-how-personalized-fillers-can-transform-your-confidence">
+    
+    Facial Volume Loss: How Fillers Can Restore Confidence
+  
+  </a></li><li><a href="/embrace-a-youthful-autumn-treat-fine-lines-wrinkles-with-microneedling">
+    
+    Youthful Autumn: Treat Fine Lines &amp; Wrinkles with Microneedling
+  
+  </a></li><li><a href="/hyperpigmentation-heroes-brighten-dark-spots-for-a-luminous-look">
+    
+    Hyperpigmentation Heroes: Brighten Dark Spots for a Luminous Look
+  
+  </a></li><li><a href="/oily-skin-sos-how-to-achieve-a-balanced-complexion-before-the-holidays">
+    
+    Oily Skin SOS: Achieve a Balanced Complexion Before Holidays
+  
+  </a></li><li><a href="/rejuvenate-restore-stretch-mark-reduction-with-innovative-therapies">
+    
+    Rejuvenate &amp; Restore: Stretch Mark Reduction with Therapies
+  
+  </a></li><li><a href="/smooth-refine-advanced-pore-minimizing-solutions-for-autumn">
+    
+    Smooth &amp; Refine: Advanced Pore-Minimizing Solutions for Autumn
+  
+  </a></li><li><a href="/rosacea-relief-seasonal-skincare-tips-for-sensitive-skin-types">
+    
+    Rosacea Relief: Seasonal Skincare Tips for Sensitive Skin Types
+  
+  </a></li><li><a href="/erase-acne-scars-this-fall-skinpen-microneedling-insights">
+    
+    Erase Acne Scars this Fall: SkinPen Microneedling Insights
+  
+  </a></li><li><a href="/the-science-of-nad--how-cellular-wellness-fuels-a-youthful-you">
+    
+    The Science of NAD+: How Cellular Wellness Fuels a Youthful You
+  
+  </a></li><li><a href="/navigating-hormonal-imbalances-bioidentical-hormone-therapy-explained">
+    
+    Navigating Hormonal Imbalances: Bioidentical Hormone Therapy
+  
+  </a></li><li><a href="/combat-summer-damage-restore-skin-with-hydrating-chemical-peels">
+    
+    Combat Summer Damage: Restore Skin with Hydrating Chemical Peels
+  
+  </a></li><li><a href="/back-to-school-glow-facial-treatments-for-teachers-moms">
+    
+    Back-to-School Glow: Facial Treatments for Teachers &amp; Moms
+  
+  </a></li><li><a href="/microtox-infusion-facial-smooth-skin-all-year-round">
+    
+    Microtox Infusion Facial: Smooth Skin All Year Round
+  
+  </a></li><li><a href="/boost-confidence-with-restylane-juvederm-fillers">
+    
+    Boost Confidence with Restylane &amp; Juvederm Fillers
+  
+  </a></li><li><a href="/laser-skin-tightening-your-solution-to-firm-youthful-skin">
+    
+    Laser Skin Tightening: Your Solution to Firm &amp; Youthful Skin
+  
+  </a></li><li><a href="/achieve-a-youthful-look-with-sculptra-dermal-fillers">
+    
+    Achieve a Youthful Look with Sculptra Dermal Fillers
+  
+  </a></li><li><a href="/glow-from-within-the-benefits-of-anteage-exoso">
+    
+    Glow from Within: The Benefits of AnteAGE Exoso
+  
+  </a></li><li><a href="/summer-ready-skin-the-power-of-microneedling">
+    
+    Summer-Ready Skin: The Power of Microneedling
+  
+  </a></li><li><a href="/embrace-youthful-skin-juvederm-and-restylane-fillers-explained">
+    
+    Embrace Youthful Skin: Juvederm and Restylane Fillers Explained
+  
+  </a></li><li><a href="/skin-rejuvenation-alert-benefits-of-tca-chemical-peels">
+    
+    Skin Rejuvenation Alert: Benefits of TCA Chemical Peels
+  
+  </a></li><li><a href="/smooth-away-wrinkles-why-consider-botox-and-dysport-now">
+    
+    Smooth Away Wrinkles: Why Consider Botox and Dysport Now
+  
+  </a></li><li><a href="/refresh-your-look-for-spring-the-magic-of-dermaplaning">
+    
+    Refresh Your Look for Spring: The Magic of Dermaplaning
+  
+  </a></li><li><a href="/all-about-microtox-infusion-facial-your-secret-to-a-valentine-glow">
+    
+    All About Microtox Infusion Facial: Your Secret to a Valentine Glow
+  
+  </a></li><li><a href="/sustainable-beauty-georgetown-s-eco-friendly-skincare-options">
+    
+    Sustainable Beauty: Georgetown's Eco-Friendly Skincare Options
+  
+  </a></li><li><a href="/advanced-facial-rejuvenation-exosome-therapy-in-georgetown">
+    
+    Advanced Facial Rejuvenation: Exosome Therapy in Georgetown
+  
+  </a></li><li><a href="/integrative-holistic-health-combining-aesthetics-and-wellness">
+    
+    Integrative Holistic Health: Combining Aesthetics and Wellness
+  
+  </a></li><li><a href="/how-personalization-in-skincare-revolutionizes-beauty-care">
+    
+    How Personalization in Skincare Revolutionizes Beauty Care
+  
+  </a></li><li><a href="/enhance-your-well-being-aesthetic-treatments-mental-health">
+    
+    Enhance Your Well-Being: Aesthetic Treatments &amp; Mental Health
+  
+  </a></li><li><a href="/georgetown-s-top-non-invasive-skin-treatments-for-a-fresh-look">
+    
+    Georgetown's Top Non-Invasive Skin Treatments for a Fresh Look
+  
+  </a></li><li><a href="/nourish-your-skin-enhance-your-glow-the-magic-of-hydrafacial">
+    
+    Nourish Your Skin, Enhance Your Glow: The Magic of Hydrafacial
+  
+  </a></li><li><a href="/demystifying-the-process-of-chemical-peels-is-it-right-for-you">
+    
+    Demystifying the Process of Chemical Peels: Is It Right for You?
+  
+  </a></li><li><a href="/injectables-in-enhancing-aesthetics-is-it-right-for-you">
+    
+    Injectables in Enhancing Aesthetics: Is it Right for You?
+  
+  </a></li><li><a href="/mastering-the-art-of-microneedling-efficiency-beyond-conventional-methods">
+    
+    Mastering the Art of Microneedling: Efficiency Beyond Conventional Methods
+  
+  </a></li><li><a href="/why-choose-microtox-infusion-a-deeper-look-at-this-premium-facial-service">
+    
+    Why Choose Microtox Infusion? A Deeper Look at the Facial Service
+  
+  </a></li><li><a href="/rejuvenate-your-skin-with-the-unparalleled-hydrafacial-treatment">
+    
+    Rejuvenate Your Skin with the Unparalleled Hydrafacial Treatment
+  
+  </a></li><li><a href="/unlocking-the-power-of-collagen-with-sculptra-injectables">
+    
+    Unlocking the Power of Collagen with Sculptra Injectables
+  
+  </a></li><li><a href="/understanding-the-power-of-neuromodulators-in-skin-revitalization">
+    
+    Understanding the Power of Neuromodulators in Skin Revitalization
+  
+  </a></li><li><a href="/exploring-semaglutide-the-game-changer-in-weight-loss-regimen">
+    
+    Exploring Semaglutide: The Game Changer in Weight Loss Regimen
+  
+  </a></li><li><a href="/discover-the-benefits-of-dermal-fillers-at-truly-lifted-medspa">
+    
+    Discover the benefits of Dermal Fillers at Truly Lifted MedSpa
+  
+  </a></li>
+    </nav>
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Facial Treatments</h1>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+  <p>Experience the ultimate in facial rejuvenation at Truly Lifted Medspa in Georgetown, close to the city of Round Rock, TX. Our luxurious facial treatments blend advanced skincare techniques with relaxation for a revitalized and radiant complexion.</p>
+
+  <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/shutterstock_2011784516-d51b7990-1920w.jpg" alt="a close up of a woman 's face with her hand on her cheek .">
+
+  <h2>Revitalize Your Skin with Our Facial Treatments</h2>
+  <p>At Truly Lifted Medspa, our facial treatments, including HydraFacial, Dermaplane, and Microtox Infusion facial, offer a holistic approach to skincare. These treatments are designed to refresh and revitalize your skin, leaving you with a radiant complexion.</p>
+  
+  <p>For an even more dazzling look, combine these treatments with our <a href="/microneedling-treatments">Microneedling</a> treatment to enhance your skin's texture and tone. Schedule your appointment today to experience the ultimate in facial rejuvenation.</p>
+
+  <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/shutterstock_2051460932-37aa0d98-1920w.jpg" alt="a woman is smiling and touching her face with her hands .">
+  <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/shutterstock_2254241185-f1a6a9af-1920w.jpg" alt="a woman with a towel wrapped around her head is holding slices of cucumber over her eyes .">
+
+  <h2>Benefits Of Facial Treatments</h2>
+  
+  <div class="benefits-grid">
+    <div class="benefit-item">
+      <h3>Deep Cleansing</h3>
+      <p>Facial treatments provide a deep cleansing experience, effectively removing dirt, oil, and impurities that can clog pores and lead to breakouts, leaving your skin refreshed.</p>
+    </div>
+    <div class="benefit-item">
+      <h3>Exfoliation</h3>
+      <p>These treatments offer gentle yet effective exfoliation, sloughing away dead skin cells to reveal a smoother, brighter complexion, promoting a more youthful appearance.</p>
+    </div>
+    <div class="benefit-item">
+      <h3>Hydration</h3>
+      <p>Facial treatments deeply hydrate the skin, infusing it with essential moisture to improve skin texture and elasticity, leaving your skin feeling soft, supple, and rejuvenated.</p>
+    </div>
+  </div>
+
+  <h2>Hydrafacial</h2>
+  <p>Check out our HydraFacial packages for a rejuvenating skincare experience.</p>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <h3>Signature HydraFacial</h3>
+      <p>Experience our signature HydraFacial, your first step to glowing, hydrated skin with minimal downtime. This treatment deeply cleanses, extracts, and hydrates the skin using super serums filled with antioxidants, peptides, and hyaluronic acids for a revitalized complexion.</p>
+    </div>
+    <div class="service-card">
+      <h3>Deluxe HydraFacial</h3>
+      <p>HydraFacial treatment enhanced with relaxing and rejuvenating Blue or Red LED for a luxurious skincare experience</p>
+    </div>
+    <div class="service-card">
+      <h3>Platinum HydraFacial</h3>
+      <p>Full detox experience combining detoxifying lymphatic drainage with customized boosters and LED therapy</p>
+    </div>
+  </div>
+
+  <p>Choose from our range of HydraFacial packages to elevate your skincare routine.</p>
+
+  <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/Truly-lifted-Tico-Mendoza---7-e43b276d-1920w.jpg" alt="a woman is getting a facial treatment at a spa .">
+  <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/shutterstock_2144918799-1920w.jpg" alt="a woman is getting a facial treatment at a spa .">
+
+  <h2>Dermaplane</h2>
+  <p>Non-invasive exfoliating treatment that removes vellus hair and dead skin cells using a medical-grade blade</p>
+  
+  <p>Dermaplaning is known for its immediate results and is often referred to as the perfect lunchtime treatment due to its quick and convenient nature. It can be performed alone or as a precursor to other skincare treatments, allowing for better product penetration and an overall rejuvenated complexion.</p>
+
+  <h2>Microtox Infusion Facial</h2>
+  <p>Superficial micro-injection procedure delivering hyaluronic acid, neurotoxin, and serums to create smooth texture and reduce pore sizes</p>
+  
+  <p>The tiny, 24-karat gold-plated needles used in the Microtox Infusion Facial device ensure precise delivery and minimal discomfort. By targeting specific areas with this personalized cocktail of ingredients, the Microtox Infusion Facial can address fine lines, wrinkles, and uneven skin tone, leaving you with a rejuvenated and youthful appearance.</p>
+
+  <h2>Additional Services</h2>
+  
+  <div class="services-grid">
+    <div class="service-card">
+      <h3>PRF & Ez Gel</h3>
+    </div>
+  </div>
+
+  <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/shutterstock_2014490891-808c46ec-1920w.jpg" alt="a woman with a towel wrapped around her head is smiling in a bathroom .">
+
+  <h2>FAQs</h2>
+  <p>Navigate your beauty journey seamlessly with answers to common queries in our FAQs section.</p>
+
+  <div class="faq-item">
+    <h3>Are there any side effects of HydraFacial?</h3>
+    <p>While side effects of HydraFacial are rare, they may include temporary redness, tightness, or mild irritation, which typically resolve within a few hours. These are usually mild and transient, and most people can resume their normal activities immediately after the treatment.</p>
+    <p>It's important to follow post-care instructions provided by your skincare professional to ensure optimal results and minimize any potential side effects. If you experience any persistent or severe side effects, it's best to consult with your skincare provider for further evaluation and guidance.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>Can I wear makeup after a Dermaplane treatment?</h3>
+    <p>After a Dermaplane treatment, it is generally recommended to avoid wearing makeup for the rest of the day to allow your skin to heal and breathe. Makeup can potentially clog your pores or irritate your skin, hindering the healing process.</p>
+    <p>By giving your skin a makeup-free break, you allow it to fully absorb the benefits of the treatment, promoting smoother and healthier-looking skin. It's a small sacrifice for the long-term benefits of Dermaplane, ensuring that your skin receives the care and attention it needs to thrive.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>How soon can I see results after an Microtox Infusion Facial?</h3>
+    <p>You may begin to notice initial improvements in your skin's texture and appearance within a few days after an Microtox Infusion Facial. These immediate results can include a smoother, more radiant complexion. Over the following weeks, as your skin continues to respond to the treatment, you can expect to see further enhancements in skin tone, texture, and overall quality.</p>
+    <p>The long-term benefits of an Microtox Infusion Facial, such as reduced fine lines, improved elasticity, and enhanced hydration, become more pronounced with each subsequent treatment, leading to a sustained improvement in your skin's health and vitality.</p>
+  </div>
+
+  <h3>Still Have Questions?</h3>
+  <p><a href="/contact">Contact Us</a></p>
+
+  <div class="stats-section">
+    <h2>Client Reviews</h2>
+    <div class="stats-grid">
+      <div class="stat-item">
+        <span class="stat-value">5</span>
+        <div class="stat-label">star rating</div>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">77</span>
+        <div class="stat-label">reviews</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Testimonials</h2>
+  
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="rating">★★★★★</div>
+      <div class="author">savanna merino</div>
+      <div class="date">May 4, 2026</div>
+      <p>Had a NAD appt with Charisse! Was lovely getting my first NAD treatment started with her! Thea was very helpful, when we first got there—she initially told us about the promo for NAD treatment! Thank you Charisse and Thea for the wonderful experience!</p>
+    </div>
+    <div class="testimonial-card">
+      <div class="rating">★★★★★</div>
+      <div class="author">Tristan Ford</div>
+      <div class="date">May 1, 2026</div>
+      <p>I was helped by Charisse and Thea; and they were very easy to work with and helped guide me through some decisions about wellness that I was considering for some time. I'm glad I chose Truly Lifted and can recommend to anyone in the area.</p>
+    </div>
+    <div class="testimonial-card">
+      <div class="rating">★★★★★</div>
+      <div class="author">Malika</div>
+      <div class="date">Apr 27, 2026</div>
+      <p>Charisse is the best. She so knowledgeable, kind, friendly and welcoming. She always takes her time to understand my needs. I always have a great experience with her and looking forward to my next appointment! Highly recommend!</p>
+    </div>
+    <div class="testimonial-card">
+      <div class="rating">★★★★★</div>
+      <div class="author">Joanna Bullock</div>
+      <div class="date">Mar 24, 2026</div>
+      <p>From the moment you walk in Thea makes you feel Welcomed like family. Cherrise is very skilled and knowledgeable and has a great bedside manor! They also offer specials every month. I would definitely recommend Truly Lifted Med Spa to everyone. Stop by and be treated like royalty.</p>
+    </div>
+    <div class="testimonial-card">
+      <div class="rating">★★★★★</div>
+      <div class="author">Karen C.</div>
+      <div class="date">Mar 20, 2026</div>
+      <p>Simply Amazing!!! It's been 4 weeks since my visit to Truly Lifted. My life is crazy busy and chaotic and it was apparent to Charisse that I was in need of her help!!! After substantial weight loss my face and neck needed rejuvenation and that's what they got! Charisse took the time to address the loss of volume in my skin with a full Density treatment and a treatment for the hair loss from rapid weight loss. She is so patient and knowledgeable and kind. I can't say enough about the professional and hospitable atmosphere of this spa. Thea greets you so warmly from the beginning and Charisse really takes care of you. The whole experience and the results are above what I ever expected. I will definitely be going back!</p>
+    </div>
+    <div class="testimonial-card">
+      <div class="rating">★★★★★</div>
+      <div class="author">elisabetta fiorentino</div>
+      <div class="date">Mar 13, 2026</div>
+      <p>Very nice staff and got me in for and appointment right away! Mu my lips look amazing!</p>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <h2>Illuminate Your Beauty with Truly Lifted Medspa</h2>
+    <p>Experience the rejuvenating power of Truly Lifted Medspa's facials in Georgetown, close to the city of Round Rock, TX. Our personalized treatments are designed to revitalize your skin, leaving you with a radiant glow. Schedule your appointment now to indulge in a luxurious facial tailored to your unique skin needs and discover the true beauty of your skin.</p>
+    <a href="/contact" class="cta-button">Book an Appointment</a>
+  </div>
+
+  <h2>Contact Us</h2>
+  
+  <div class="contact-grid">
+    <div class="contact-item">
+      <h3>Address</h3>
+      <p><a href="https://maps.app.goo.gl/53r5XdkN2uhkjeUd8">2951 FM 1460, Unit #204 Georgetown, TX 78626</a></p>
+    </div>
+    <div class="contact-item">
+      <h3>Phone</h3>
+      <p><a href="tel:(512) 763-5149">(512) 763-5149</a></p>
+    </div>
+    <div class="contact-item">
+      <h3>Email</h3>
+      <p><a href="mailto:tlc@trulyliftedmedspa.com">tlc@trulyliftedmedspa.com</a></p>
+    </div>
+    <div class="contact-item">
+      <h3>Business Hours</h3>
+      <p>Mon - Fri: 9:00 am - 5:00 pm<br>
+      Saturday: 9:00 am - 3:00 pm<br>
+      Sunday: Closed</p>
+    </div>
+  </div>
+
+  <iframe src="https://maps.app.goo.gl/53r5XdkN2uhkjeUd8" width="100%" height="300" style="border:0;margin-top:1.5rem" allowfullscreen loading="lazy"></iframe>
+
+  <p><a href="https://instagram.com/trulyliftedmedspa">instagram</a></p>
+</div>
+
+</div>
+
+<script>
+    // Mouse-following parallax for main orb
+    const orbMain = document.getElementById('orbMain');
+    let mouseX = 0;
+    let mouseY = 0;
+    let orbX = 0;
+    let orbY = 0;
+
+    document.addEventListener('mousemove', function(e) {
+      mouseX = (e.clientX / window.innerWidth - 0.5) * 40;
+      mouseY = (e.clientY / window.innerHeight - 0.5) * 40;
+    });
+
+    function animateOrb() {
+      orbX += (mouseX - orbX) * 0.03;
+      orbY += (mouseY - orbY) * 0.03;
+      orbMain.style.transform = `translate(${orbX}px, ${orbY}px)`;
+      requestAnimationFrame(animateOrb);
+    }
+
+    animateOrb();
+  </script>

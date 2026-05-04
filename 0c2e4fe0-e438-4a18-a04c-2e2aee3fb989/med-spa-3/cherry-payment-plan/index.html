@@ -1,0 +1,595 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cherry Payment Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-primary: #0a6e4f;
+  --bg-emerald: #0d7a58;
+  --text-cream: #f5f0e8;
+  --text-cream-muted: rgba(245, 240, 232, 0.6);
+  --text-cream-subtle: rgba(245, 240, 232, 0.35);
+  --orb-blue: #5cc8f0;
+  --orb-coral: #e8764a;
+  --accent-line: rgba(245, 240, 232, 0.3);
+  --selection-highlight: #e8764a;
+  --base-unit: 8px;
+  --gutter: 4vw;
+  --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --transition-smooth: 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+::selection {
+    background: var(--selection-highlight);
+    color: var(--text-cream);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-serif);
+    background-color: var(--bg-primary);
+    color: var(--text-cream);
+    overflow-x: hidden;
+    line-height: 1.6;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  /* Noise texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+  }
+
+  /* Atmospheric Orb - Main */
+  .orb-main {
+    position: fixed;
+    max-width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, var(--orb-blue) 0%, rgba(92, 200, 240, 0.6) 25%, var(--orb-coral) 70%, rgba(232, 118, 74, 0.0) 100%);
+    filter: blur(60px);
+    mix-blend-mode: screen;
+    opacity: 0.5;
+    z-index: 1;
+    pointer-events: none;
+    top: 15%;
+    right: 10%;
+    animation: orbBreathe 6s ease-in-out infinite;
+    transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  @keyframes orbBreathe {
+    0%, 100% { transform: scale(1) translate(0, 0); }
+    50% { transform: scale(1.1) translate(5px, -5px); }
+  }
+
+  /* Atmospheric Orb - Secondary */
+  .orb-secondary {
+    position: fixed;
+    max-width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 50%, var(--orb-coral) 0%, rgba(232, 118, 74, 0.3) 40%, rgba(92, 200, 240, 0.0) 100%);
+    filter: blur(80px);
+    mix-blend-mode: screen;
+    opacity: 0.25;
+    z-index: 1;
+    pointer-events: none;
+    bottom: 10%;
+    right: 5%;
+    animation: orbBreathe2 8s ease-in-out infinite;
+  }
+
+  @keyframes orbBreathe2 {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+  }
+
+  /* Content wrapper */
+  .content-wrapper {
+    position: relative;
+    z-index: 10;
+  }
+
+  /* Navigation */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: calc(var(--base-unit) * 3) var(--gutter);
+    position: relative;
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-cream);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: calc(var(--base-unit) * 4);
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--text-cream-muted);
+    text-decoration: none;
+    transition: all var(--transition-smooth);
+    font-style: normal;
+  }
+
+  .nav-links a:hover {
+    font-style: italic;
+    color: var(--text-cream);
+    opacity: 1;
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: 160px var(--gutter) 60px;
+    background: var(--bg-primary);
+    color: var(--text-cream);
+    text-align: center;
+  }
+  .page-title-inner { max-width: 1200px; margin: 0 auto; }
+  .page-title-area h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 600; line-height: 1.1; letter-spacing: -0.03em; }
+
+  /* Content Area */
+  .content-area { 
+    padding: 64px var(--gutter); 
+    max-width: 1200px; 
+    margin: 0 auto; 
+  }
+  
+  .content-area h2 { 
+    font-size: clamp(1.5rem, 3vw, 2rem); 
+    font-weight: 600; 
+    line-height: 1.15; 
+    margin-bottom: 24px; 
+    font-style: italic;
+  }
+  
+  .content-area h3 { 
+    font-size: 1.25rem; 
+    font-weight: 600; 
+    margin-bottom: 16px; 
+  }
+  
+  .content-area p { 
+    font-size: 1rem; 
+    line-height: 1.7; 
+    margin-bottom: 24px; 
+    color: var(--text-cream-muted);
+  }
+  
+  .content-area ul, .content-area ol { 
+    margin-bottom: 24px; 
+    padding-left: 24px; 
+  }
+  
+  .content-area li { 
+    margin-bottom: 8px; 
+    line-height: 1.7; 
+  }
+  
+  .content-area img { 
+    max-width: 100%; 
+    height: auto; 
+    border-radius: 12px; 
+    margin: 24px 0; 
+  }
+
+  /* Services Section */
+  .services-section {
+    margin: calc(var(--base-unit) * 8) 0;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: calc(var(--base-unit) * 3);
+    margin-top: calc(var(--base-unit) * 4);
+  }
+
+  .service-card {
+    background: rgba(245, 240, 232, 0.05);
+    border: 1px solid var(--accent-line);
+    border-radius: 8px;
+    padding: calc(var(--base-unit) * 3);
+  }
+
+  .service-card h3 {
+    color: var(--orb-coral);
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+  }
+
+  .service-card p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-cream-muted);
+    margin-bottom: 0;
+  }
+
+  /* Cherry Payment Widget */
+  .cherry-widget {
+    background: rgba(245, 240, 232, 0.05);
+    border: 1px solid var(--accent-line);
+    border-radius: 12px;
+    padding: calc(var(--base-unit) * 4);
+    margin: calc(var(--base-unit) * 6) 0;
+    text-align: center;
+  }
+
+  .cherry-widget h3 {
+    color: var(--orb-coral);
+    margin-bottom: 16px;
+  }
+
+  .cherry-widget .highlight {
+    color: var(--orb-blue);
+    font-weight: 600;
+  }
+
+  /* Testimonials Grid */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: calc(var(--base-unit) * 3);
+    margin: calc(var(--base-unit) * 6) 0;
+  }
+
+  .testimonial-card {
+    background: rgba(245, 240, 232, 0.05);
+    border: 1px solid var(--accent-line);
+    border-radius: 8px;
+    padding: calc(var(--base-unit) * 3);
+  }
+
+  .testimonial-card .reviewer-name {
+    font-weight: 600;
+    color: var(--orb-coral);
+    margin-bottom: 8px;
+  }
+
+  .testimonial-card .review-text {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-cream-muted);
+  }
+
+  /* CTA Button */
+  .cta-button {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--orb-blue), var(--orb-coral));
+    color: var(--text-cream);
+    padding: calc(var(--base-unit) * 2) calc(var(--base-unit) * 4);
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 500;
+    margin: calc(var(--base-unit) * 2) 0;
+    transition: all var(--transition-smooth);
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Stats Section */
+  .stats-section {
+    text-align: center;
+    margin: calc(var(--base-unit) * 8) 0;
+  }
+
+  .stats-grid {
+    display: flex;
+    justify-content: center;
+    gap: calc(var(--base-unit) * 6);
+    margin-top: calc(var(--base-unit) * 4);
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-value {
+    font-size: 3rem;
+    font-weight: 600;
+    color: var(--orb-coral);
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 1rem;
+    color: var(--text-cream-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 767px) {
+    .navbar {
+      padding: calc(var(--base-unit) * 2) var(--gutter);
+    }
+
+    .page-title-area {
+      padding: 120px var(--gutter) 40px;
+    }
+
+    .content-area {
+      padding: 32px var(--gutter);
+    }
+
+    .stats-grid {
+      flex-direction: column;
+      gap: calc(var(--base-unit) * 4);
+    }
+
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .orb-main {
+      max-width: 300px;
+      height: 300px;
+      right: -10%;
+      top: 20%;
+    }
+
+    .orb-secondary {
+      max-width: 180px;
+      height: 180px;
+    }
+  }
+</style>
+
+
+
+<!-- HEADER -->
+<nav class="navbar">
+      <a href="/" class="logo">trulyliftedmedspa.com</a>
+      <ul class="nav-links">
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/">Services</a></li>
+        <li><a href="/">Wellness</a></li>
+        <li><a href="/conditions-we-treat">Conditions We Treat</a></li>
+        <li><a href="/">Resources</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </nav>
+
+<!-- Atmospheric Orbs -->
+<div class="orb-main" id="orbMain"></div>
+<div class="orb-secondary"></div>
+
+<div class="content-wrapper">
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Cherry Payment Plan</h1>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+  <p>A flexible and convenient way to manage your expenses at Truly Lifted Medspa. Enjoy the benefits of our services while spreading the cost over time, making your wellness journey more accessible and affordable.</p>
+
+  <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/shutterstock_2151872281-1920w.jpg" alt="a woman in a crop top and jeans is standing in a kitchen">
+
+  <div class="cherry-widget">
+    <h3>Treat now, pay later</h3>
+    <p><span class="highlight">No hard credit checks</span>, ever</p>
+    <p><span class="highlight">True 0% APR</span> options available</p>
+    <p>Interest-bearing plans with APRs <span class="highlight">as low as 5.99%</span></p>
+    <p><span class="highlight">No hidden fees</span></p>
+  </div>
+
+  <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/shutterstock_679421686-1920w.jpg" alt="a woman in a bathrobe is sitting in a chair while a nurse stands next to her">
+
+  <h2>See an example of what you could pay</h2>
+  <div class="cherry-widget">
+    <p><strong>$250</strong> biweekly for 6 weeks - <span class="highlight">0% APR</span></p>
+    <p><strong>$45.17/month</strong> for 24 months - Lowest Payment</p>
+  </div>
+
+  <h2>How Cherry works</h2>
+  <ol>
+    <li><strong>See if you qualify</strong> - It only takes 60 seconds to complete the application</li>
+    <li><strong>Get care</strong> - Use your approval to pay for your treatment</li>
+    <li><strong>Pay over time</strong> - Choose a plan length that fits your needs with 0% APR options</li>
+  </ol>
+
+  <!-- Services Section -->
+  <div class="services-section">
+    <h2>Our Services</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <h3>Facials</h3>
+      </div>
+      <div class="service-card">
+        <h3>Chemical Peels</h3>
+      </div>
+      <div class="service-card">
+        <h3>Microneedling</h3>
+      </div>
+      <div class="service-card">
+        <h3>AnteAGE Exosomes</h3>
+      </div>
+      <div class="service-card">
+        <h3>Dermal Filler</h3>
+      </div>
+      <div class="service-card">
+        <h3>Neuromodulator</h3>
+      </div>
+      <div class="service-card">
+        <h3>PRF & Ez Gel</h3>
+      </div>
+      <div class="service-card">
+        <h3>Laser Skin Tightening</h3>
+      </div>
+      <div class="service-card">
+        <h3>Bioidentical Hormones</h3>
+        <p>BHRT for Women and BHRT for Men</p>
+      </div>
+      <div class="service-card">
+        <h3>NAD+</h3>
+      </div>
+      <div class="service-card">
+        <h3>Weight Loss</h3>
+      </div>
+    </div>
+  </div>
+
+  <h2>What Our Customers Say</h2>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="reviewer-name">Bryana</div>
+      <div class="review-text">"I was worried the application would take long, I would have paid on my credit card – but it only took a few minutes and I'm so happy I can split my payments up now!"</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="reviewer-name">Alex</div>
+      <div class="review-text">"Cherry was really easy to use and super fast. I can't wait to go back and try different services now that I can split my payments!"</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="reviewer-name">Marie</div>
+      <div class="review-text">"I used this on Monday and it was great. Low down payment and low monthly. You all should try it."</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="reviewer-name">Gabriel</div>
+      <div class="review-text">"Cherry was great, one of the better lending companies I've ever used. Making payments was a lot easier and I appreciate that Cherry was willing to work with me."</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="reviewer-name">Alyssa</div>
+      <div class="review-text">"Cherry is amazing!!! Now we can get everything done!!!"</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="reviewer-name">Cassie</div>
+      <div class="review-text">"I've been putting off these treatments for a long time. I scheduled them all today using Cherry!"</div>
+    </div>
+  </div>
+
+  <h2>Questions?</h2>
+  <h3>What is Cherry?</h3>
+  <p>Cherry is a buy now, pay later company making it fast and easy to pay for health and wellness purchases over time.</p>
+
+  <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/shutterstock_1790728295-1920w.jpg" alt="a woman with flowers in her hair is sitting next to a palm tree">
+
+  <h2>Introducing our Cherry Payment Plan</h2>
+  <p>Our Cherry Payment Plan offers a hassle-free way to budget for your beauty and wellness needs at Truly Lifted Medspa. With this flexible payment option, you can enjoy our range of services without worrying about upfront costs.</p>
+  <p>Whether you're interested in rejuvenating facials or skin-enhancing procedures, our payment plan allows you to spread the cost over manageable installments. Say goodbye to financial barriers and hello to a more convenient and affordable path to your desired results.</p>
+
+  <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/shutterstock_2130357308-1920w.jpg" alt="a woman is looking at her face in a mirror">
+
+  <div class="stats-section">
+    <h2>Client Reviews</h2>
+    <div class="stats-grid">
+      <div class="stat-item">
+        <span class="stat-value">5</span>
+        <span class="stat-label">star rating</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">77</span>
+        <span class="stat-label">reviews</span>
+      </div>
+    </div>
+  </div>
+
+  <h2>Streamline Your Aesthetic Appointment Payments with Truly Lifted Medspa</h2>
+  <p>Embrace the convenience of our Cherry Payment Plan at Truly Lifted Medspa. Start your transformation today with flexible payment options that fit your budget. Take the first step towards your wellness goals and enjoy the freedom to invest in your beauty without financial stress.</p>
+
+  <div style="text-align: center; margin: calc(var(--base-unit) * 6) 0;">
+    <a href="/contact" class="cta-button">Book an Appointment</a>
+  </div>
+
+  <h2>Contact Us</h2>
+  <h3>Address</h3>
+  <p><a href="https://maps.app.goo.gl/53r5XdkN2uhkjeUd8" style="color: var(--orb-blue);">2951 FM 1460, Unit #204 Georgetown, TX 78626</a></p>
+
+  <h3>Phone</h3>
+  <p><a href="tel:(512) 763-5149" style="color: var(--orb-blue);">(512) 763-5149</a></p>
+
+  <h3>Email</h3>
+  <p><a href="mailto:tlc@trulyliftedmedspa.com" style="color: var(--orb-blue);">tlc@trulyliftedmedspa.com</a></p>
+
+  <h3>Business Hours</h3>
+  <p>Mon - Fri: 9:00 am - 5:00 pm<br>
+  Saturday: 9:00 am - 3:00 pm<br>
+  Sunday: Closed</p>
+
+  <h3>Quick Links</h3>
+  <ul>
+    <li><a href="/" style="color: var(--orb-blue);">Home</a></li>
+    <li><a href="/about" style="color: var(--orb-blue);">About Us</a></li>
+    <li><a href="/blog" style="color: var(--orb-blue);">Blog</a></li>
+    <li><a href="/before-after" style="color: var(--orb-blue);">Before &amp; After</a></li>
+    <li><a href="/price-list" style="color: var(--orb-blue);">Price List</a></li>
+    <li><a href="/contact" style="color: var(--orb-blue);">Contact</a></li>
+  </ul>
+
+  <div style="text-align: center; margin-top: calc(var(--base-unit) * 8); padding-top: calc(var(--base-unit) * 4); border-top: 1px solid var(--accent-line);">
+    <p style="font-size: 0.8rem; color: var(--text-cream-subtle);">© 2020-2026 Cherry Technologies Inc. NMLS #2061234, 2 Embarcadero Center, 8th Floor, San Francisco, CA 94111.</p>
+  </div>
+</div>
+
+</div>
+
+<script>
+    // Mouse-following parallax for main orb
+    const orbMain = document.getElementById('orbMain');
+    let mouseX = 0;
+    let mouseY = 0;
+    let orbX = 0;
+    let orbY = 0;
+
+    document.addEventListener('mousemove', function(e) {
+      mouseX = (e.clientX / window.innerWidth - 0.5) * 40;
+      mouseY = (e.clientY / window.innerHeight - 0.5) * 40;
+    });
+
+    function animateOrb() {
+      orbX += (mouseX - orbX) * 0.03;
+      orbY += (mouseY - orbY) * 0.03;
+      orbMain.style.transform = `translate(${orbX}px, ${orbY}px)`;
+      requestAnimationFrame(animateOrb);
+    }
+
+    animateOrb();
+  </script>
+
+
+<section class="map"><iframe src="https://maps.app.goo.gl/53r5XdkN2uhkjeUd8" width="100%" height="300" style="border:0;margin-top:1.5rem" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map"></iframe></section>

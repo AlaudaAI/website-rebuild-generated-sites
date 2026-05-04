@@ -1,0 +1,623 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+  --bg-primary: #0a6e4f;
+  --bg-emerald: #0d7a58;
+  --text-cream: #f5f0e8;
+  --text-cream-muted: rgba(245, 240, 232, 0.6);
+  --text-cream-subtle: rgba(245, 240, 232, 0.35);
+  --orb-blue: #5cc8f0;
+  --orb-coral: #e8764a;
+  --accent-line: rgba(245, 240, 232, 0.3);
+  --selection-highlight: #e8764a;
+  --base-unit: 8px;
+  --gutter: 4vw;
+  --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --transition-smooth: 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+::selection {
+    background: var(--selection-highlight);
+    color: var(--text-cream);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-serif);
+    background-color: var(--bg-primary);
+    color: var(--text-cream);
+    overflow-x: hidden;
+    line-height: 1.6;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  /* Noise texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+  }
+
+  /* Atmospheric Orb - Main */
+  .orb-main {
+    position: fixed;
+    max-width: 500px;
+    width: 100vw;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, var(--orb-blue) 0%, rgba(92, 200, 240, 0.6) 25%, var(--orb-coral) 70%, rgba(232, 118, 74, 0.0) 100%);
+    filter: blur(60px);
+    mix-blend-mode: screen;
+    opacity: 0.5;
+    z-index: 1;
+    pointer-events: none;
+    top: 15%;
+    right: 10%;
+    animation: orbBreathe 6s ease-in-out infinite;
+    transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  @keyframes orbBreathe {
+    0%, 100% { transform: scale(1) translate(0, 0); }
+    50% { transform: scale(1.1) translate(5px, -5px); }
+  }
+
+  /* Atmospheric Orb - Secondary */
+  .orb-secondary {
+    position: fixed;
+    max-width: 300px;
+    width: 60vw;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 50%, var(--orb-coral) 0%, rgba(232, 118, 74, 0.3) 40%, rgba(92, 200, 240, 0.0) 100%);
+    filter: blur(80px);
+    mix-blend-mode: screen;
+    opacity: 0.25;
+    z-index: 1;
+    pointer-events: none;
+    bottom: 10%;
+    right: 5%;
+    animation: orbBreathe2 8s ease-in-out infinite;
+  }
+
+  @keyframes orbBreathe2 {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+  }
+
+  /* Content wrapper */
+  .content-wrapper {
+    position: relative;
+    z-index: 10;
+  }
+
+  /* Navigation */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: calc(var(--base-unit) * 3) var(--gutter);
+    position: relative;
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-cream);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: calc(var(--base-unit) * 4);
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--text-cream-muted);
+    text-decoration: none;
+    transition: all var(--transition-smooth);
+    font-style: normal;
+  }
+
+  .nav-links a:hover {
+    font-style: italic;
+    color: var(--text-cream);
+    opacity: 1;
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: 160px var(--pad-x, 1.5rem) 60px;
+    background: var(--text-black, var(--text-primary, var(--bg-primary, #1a1a1a)));
+    color: var(--bg-cream, var(--nav-text, #ffffff));
+  }
+  .page-title-inner { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+  }
+  .page-title-area h1 { 
+    font-size: clamp(2rem, 5vw, 3rem); 
+    font-weight: 600; 
+    line-height: 1.1; 
+    letter-spacing: -0.03em; 
+  }
+
+  /* Content Area */
+  .content-area { 
+    padding: 64px var(--pad-x, 1.5rem); 
+    max-width: 1200px; 
+    margin: 0 auto; 
+  }
+  .content-area h2 { 
+    font-size: clamp(1.5rem, 3vw, 2rem); 
+    font-weight: 600; 
+    line-height: 1.15; 
+    margin-bottom: 24px; 
+  }
+  .content-area h3 { 
+    font-size: 1.25rem; 
+    font-weight: 600; 
+    margin-bottom: 16px; 
+  }
+  .content-area h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .content-area p { 
+    font-size: 1rem; 
+    line-height: 1.7; 
+    margin-bottom: 24px; 
+  }
+  .content-area ul, .content-area ol { 
+    margin-bottom: 24px; 
+    padding-left: 24px; 
+  }
+  .content-area li { 
+    margin-bottom: 8px; 
+    line-height: 1.7; 
+  }
+  .content-area img { 
+    max-width: 100%; 
+    height: auto; 
+    border-radius: 12px; 
+    margin-bottom: 24px; 
+  }
+
+  /* Team Section Styling */
+  .team-section {
+    margin: 48px 0;
+  }
+
+  .team-member {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 32px;
+    align-items: flex-start;
+  }
+
+  .team-member img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 12px;
+    flex-shrink: 0;
+  }
+
+  .team-member-info h4 {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+  }
+
+  .team-member-role {
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--text-cream-muted);
+    margin-bottom: 12px;
+  }
+
+  .team-member-bio {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* Stats Section */
+  .stats-section {
+    display: flex;
+    gap: 32px;
+    margin: 32px 0;
+    flex-wrap: wrap;
+  }
+
+  .stat-item {
+    text-align: center;
+    padding: 24px;
+    background: rgba(245, 240, 232, 0.05);
+    border-radius: 12px;
+    border: 1px solid var(--accent-line);
+    flex: 1;
+    min-width: 150px;
+  }
+
+  .stat-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--orb-coral);
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-size: 1rem;
+    color: var(--text-cream-muted);
+  }
+
+  /* CTA Floating Button */
+  .cta-orb {
+    position: fixed;
+    bottom: calc(var(--base-unit) * 4);
+    right: calc(var(--base-unit) * 4);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, var(--orb-blue), var(--orb-coral));
+    border: 1px solid rgba(245, 240, 232, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    transition: all var(--transition-smooth);
+    text-decoration: none;
+  }
+
+  .cta-orb:hover {
+    transform: scale(1.1) rotate(5deg);
+    filter: brightness(1.15);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  }
+
+  .cta-orb span {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.7rem;
+    color: var(--text-cream);
+    text-align: center;
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+  }
+
+  /* Footer Styles */
+  .footer {
+    background: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid var(--accent-line);
+    padding: calc(var(--base-unit) * 8) var(--gutter) calc(var(--base-unit) * 4);
+    margin-top: calc(var(--base-unit) * 12);
+  }
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: calc(var(--base-unit) * 6);
+  }
+
+  .footer-section h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: calc(var(--base-unit) * 2);
+    color: var(--text-cream);
+  }
+
+  .footer-section p,
+  .footer-section li {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-cream-muted);
+    margin-bottom: calc(var(--base-unit) * 1);
+  }
+
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer-section a {
+    color: var(--text-cream-muted);
+    text-decoration: none;
+    transition: color var(--transition-smooth);
+  }
+
+  .footer-section a:hover {
+    color: var(--text-cream);
+  }
+
+  .footer-bottom {
+    text-align: center;
+    padding-top: calc(var(--base-unit) * 4);
+    margin-top: calc(var(--base-unit) * 4);
+    border-top: 1px solid var(--accent-line);
+    color: var(--text-cream-subtle);
+    font-size: 0.9rem;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 767px) {
+    .team-member {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .team-member img {
+      width: 120px;
+      height: 120px;
+      align-self: center;
+    }
+
+    .stats-section {
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .orb-main {
+      max-width: 300px;
+      height: 300px;
+      right: -10%;
+      top: 20%;
+    }
+
+    .orb-secondary {
+      max-width: 180px;
+      height: 180px;
+    }
+
+    .footer-content {
+      grid-template-columns: 1fr;
+      gap: calc(var(--base-unit) * 4);
+    }
+  }
+
+  /* Subtle entrance animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .content-area > * {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+  }
+
+  .content-area > *:nth-child(1) { animation-delay: 0.1s; }
+  .content-area > *:nth-child(2) { animation-delay: 0.2s; }
+  .content-area > *:nth-child(3) { animation-delay: 0.3s; }
+  .content-area > *:nth-child(4) { animation-delay: 0.4s; }
+  .content-area > *:nth-child(5) { animation-delay: 0.5s; }
+</style>
+
+
+
+<div class="orb-main" id="orbMain"></div>
+<div class="orb-secondary"></div>
+
+<div class="content-wrapper">
+
+<!-- HEADER -->
+<nav class="navbar">
+      <a href="#" class="logo">trulyliftedmedspa.com</a>
+      <ul class="nav-links">
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </nav>
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>About Us</h1>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+  <p>Truly Lifted Medspa is a sanctuary where innovation meets excellence, offering personalized, advanced aesthetic and wellness services to enhance your natural beauty and well-being.</p>
+
+  <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/shutterstock_2127979655-1920w.jpg" alt="a woman is smiling and touching her face with her hands .">
+
+  <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/shutterstock_633986318-1920w.jpg" alt="the woman is smiling and touching her face with her hand .">
+
+  <h2>Our Journey: How Truly Lifted Medspa Came to Be</h2>
+
+  <p>Charisse Lin, the founder of Truly Lifted Medspa, traces her journey in the aesthetics industry back to her mother's work at Marie France in the Philippines, where they focused on body contouring and facial aesthetics. Witnessing the clients' happiness and transformations sparked Charisse's passion for aesthetics. As she pursued her nursing career, she realized her deep interest in this evolving field.</p>
+
+  <p>During her clinical rotations as an FNP student, Charisse had the privilege of learning from one of the city's top dermatologists, whose mentorship instilled in her the confidence to pursue dermatology. Over the past five years, Charisse has garnered extensive experience at a high-end medical spa in Austin, specializing in skincare, injectables and body treatments.</p>
+
+  <p>Now, as she launches Truly Lifted Medspa, Charisse is excited to bring her expertise to Georgetown, close to the city of Round Rock, TX and the surrounding region. With her education, passion, and experience, Charisse is dedicated to providing the highest quality aesthetic and wellness care to all her clients.</p>
+
+  <h2>Guiding Principles at Truly Lifted Medspa</h2>
+
+  <h3>Expertise</h3>
+  <p>With roots dating back to 2015, we have built a foundation of excellence in aesthetics and wellness.</p>
+
+  <h3>Personalization</h3>
+  <p>Our treatments are personalized to meet the unique needs of each client, ensuring tailored solutions for optimal results.</p>
+
+  <h3>Innovation</h3>
+  <p>We stay at the forefront of industry trends and advancements, offering cutting-edge treatments that enhance skin health and beauty.</p>
+
+  <h3>Compassion</h3>
+  <p>We approach each client with empathy and understanding, creating a supportive environment where they feel valued and cared.</p>
+
+  <h2>Our Team</h2>
+  
+  <div class="team-section">
+    <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/Group-6e50d739-1920w.jpg" alt="A man and two women are posing for a picture together.">
+
+    <div class="team-member">
+      <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/Debbie1-7ed4654e-1920w.jpg" alt="Debbie in a black shirt is smiling for the camera.">
+      <div class="team-member-info">
+        <h4>Debbie Tyson</h4>
+        <div class="team-member-role">Patient Coordinator</div>
+        <div class="team-member-bio">Hi, I'm Debbie! Born and raised in Texas, I've always had a passion for helping people feel radiant and confident in their own skin. When I'm not working, you can find me at my favorite Tex Mex spots—chips and salsa are my love language! And when it's time to unwind, Cabo is my go-to escape. My husband and I stay busy with our two amazing kids and three adorable fur babies. I can't wait to connect with you when you call Truly Lifted MedSpa!</div>
+      </div>
+    </div>
+
+    <div class="team-member">
+      <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/Kennedy-e49410c6-1920w.jpg" alt="Kennedy in a black scrub top is smiling for the camera">
+      <div class="team-member-info">
+        <h4>Dr. Kennedy</h4>
+        <div class="team-member-role">Medical Director</div>
+        <div class="team-member-bio">Hi, I'm Dr. Kennedy! I was raised in Fort Worth, TX. I attended Oklahoma Christian University for undergraduate studies, and then the University of Texas Medical Branch in Galveston, TX for medical school. I specialized in emergency medicine, completing a residency program in Temple, TX at Baylor Scott and White hospital. I have a wonderful and supportive wife, Kristen, and 2 children: Brenden and Adalyn. In my off-time I enjoy outdoor activities such as hiking and fishing, as well as watching hockey and playing games with my kids.</div>
+      </div>
+    </div>
+
+    <h3>Our Founder</h3>
+
+    <div class="team-member">
+      <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/Truly-lifted-Tico-Mendoza---1920w.jpg" alt="Charisse Lin">
+      <div class="team-member-info">
+        <h4>Charisse Lin</h4>
+        <div class="team-member-role">Founder, Aesthetic Nurse Practitioner</div>
+        <div class="team-member-bio">Hi, I am Charisse and I have been a nurse for over ten years with five in the world of aesthetics as a nurse practitioner. Prior to moving to America, I remember my mother working for Marie France in the Philippines where they focused on body contouring and facial aesthetics. During my visits to her workplace, the clients always looked happy and slim. Once I began my nursing career, I realized that I had a deep passion for aesthetics and could eventually specialize in this ever-growing field. During my clinical rotations as an FNP student, I learned from one of the best dermatologists in the city and his mentorship gave me the confidence to pursue dermatology. For the past five years, I have worked at a high-end medical spa in Austin where I have substantial experience in skin care, injectables and body treatments. I am excited to start my own medical spa and begin serving Georgetown and the surrounding region. I believe with my education, passion, and experience I will be able to deliver the highest quality of aesthetic and wellness care to all of my clients. I have two beautiful daughters with my husband Ken who is also a nurse practitioner. Our daughter's names are June and Samantha and they truly are the light of our world. We spend our free time exploring the best of Texas and traveling the country. We all share a love for food and will travel far for a good barbecue!</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Visit Us Today in Georgetown, Close to the City of Round Rock, TX</h2>
+
+  <p>Truly Lifted Medspa proudly serves clients in Georgetown, close to the city of Round Rock, TX, USA. Our commitment to excellence extends to providing exceptional aesthetic and wellness services to the community. Whether you're seeking advanced skincare treatments, injectables or body contouring, our expert team is dedicated to delivering personalized solutions tailored to your unique needs.</p>
+
+  <p>We invite you to experience the transformative power of our services in a welcoming and rejuvenating environment. From enhancing your natural beauty to promoting overall well-being, Truly Lifted Medspa is your trusted partner in achieving your aesthetic and wellness goals.</p>
+
+  <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/Truly-lifted-Tico-Mendoza--2438-1920w.jpg" alt="there is a chair in the middle of the room .">
+
+  <h2>Client Reviews</h2>
+
+  <div class="stats-section">
+    <div class="stat-item">
+      <div class="stat-value">5</div>
+      <div class="stat-label">star rating</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">77</div>
+      <div class="stat-label">reviews</div>
+    </div>
+  </div>
+
+  <h3>Schedule A Consultation For Personalized Care</h3>
+
+  <p>Discover how our expertise in aesthetics and wellness can enhance your natural beauty and well-being at Georgetown, close to the city of Round Rock, TX USA. Contact us today to schedule a consultation and take the first step towards a more confident you.</p>
+</div>
+
+<!-- CTA Orb -->
+<a href="/contact" class="cta-orb">
+  <span>Book<br>Appointment</span>
+</a>
+
+</div>
+
+<!-- FOOTER -->
+<section class="map"><iframe src="https://maps.app.goo.gl/53r5XdkN2uhkjeUd8" width="100%" height="300" style="border:0;margin-top:1.5rem" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map"></iframe></section><footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>Contact Information</h3>
+      <p>Georgetown, TX, USA</p>
+      <p>Phone: (512) 763-5149</p>
+      <p>Email: tlc@trulyliftedmedspa.com</p>
+    </div>
+    <div class="footer-section">
+      <h3>Services</h3>
+      <ul>
+        <li><a href="/facial-treatments">Facial Treatments</a></li>
+        <li><a href="/chemical-peels">Chemical Peels</a></li>
+        <li><a href="/microneedling-treatments">Microneedling</a></li>
+        <li><a href="/dermal-filler-treatments">Dermal Fillers</a></li>
+        <li><a href="/neuromodulator-injectables">Neuromodulators</a></li>
+        <li><a href="/laser-skin-tightening">Laser Skin Tightening</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3>Resources</h3>
+      <ul>
+        <li><a href="/before-after">Before &amp; After</a></li>
+        <li><a href="/pre-post-care">Pre/Post Care</a></li>
+        <li><a href="/cherry-payment-plan">Cherry Payment Plan</a></li>
+        <li><a href="/price-list">Price List</a></li>
+        <li><a href="/blog">Blog</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3>Follow Us</h3>
+      <ul>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Twitter</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Truly Lifted MedSpa. All rights reserved. | <a href="/privacy-policy">Privacy Policy</a></p>
+  </div>
+</footer>
+
+<script>
+    // Mouse-following parallax for main orb
+    const orbMain = document.getElementById('orbMain');
+    let mouseX = 0;
+    let mouseY = 0;
+    let orbX = 0;
+    let orbY = 0;
+
+    document.addEventListener('mousemove', function(e) {
+      mouseX = (e.clientX / window.innerWidth - 0.5) * 40;
+      mouseY = (e.clientY / window.innerHeight - 0.5) * 40;
+    });
+
+    function animateOrb() {
+      orbX += (mouseX - orbX) * 0.03;
+      orbY += (mouseY - orbY) * 0.03;
+      orbMain.style.transform = `translate(${orbX}px, ${orbY}px)`;
+      requestAnimationFrame(animateOrb);
+    }
+
+    animateOrb();
+  </script>

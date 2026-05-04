@@ -1,0 +1,1386 @@
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NAD+ Therapy</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+  --bg-primary: #0a6e4f;
+  --bg-emerald: #0d7a58;
+  --text-cream: #f5f0e8;
+  --text-cream-muted: rgba(245, 240, 232, 0.6);
+  --text-cream-subtle: rgba(245, 240, 232, 0.35);
+  --orb-blue: #5cc8f0;
+  --orb-coral: #e8764a;
+  --accent-line: rgba(245, 240, 232, 0.3);
+  --selection-highlight: #e8764a;
+  --base-unit: 8px;
+  --gutter: 4vw;
+  --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --transition-smooth: 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+::selection {
+    background: var(--selection-highlight);
+    color: var(--text-cream);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-serif);
+    background-color: var(--bg-primary);
+    color: var(--text-cream);
+    overflow-x: hidden;
+    line-height: 1.6;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  /* Noise texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+  }
+
+  /* Atmospheric Orb - Main */
+  .orb-main {
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, var(--orb-blue) 0%, rgba(92, 200, 240, 0.6) 25%, var(--orb-coral) 70%, rgba(232, 118, 74, 0.0) 100%);
+    filter: blur(60px);
+    mix-blend-mode: screen;
+    opacity: 0.5;
+    z-index: 1;
+    pointer-events: none;
+    top: 15%;
+    right: 10%;
+    animation: orbBreathe 6s ease-in-out infinite;
+    transition: transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  @keyframes orbBreathe {
+    0%, 100% { transform: scale(1) translate(0, 0); }
+    50% { transform: scale(1.1) translate(5px, -5px); }
+  }
+
+  /* Atmospheric Orb - Secondary */
+  .orb-secondary {
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 50%, var(--orb-coral) 0%, rgba(232, 118, 74, 0.3) 40%, rgba(92, 200, 240, 0.0) 100%);
+    filter: blur(80px);
+    mix-blend-mode: screen;
+    opacity: 0.25;
+    z-index: 1;
+    pointer-events: none;
+    bottom: 10%;
+    right: 5%;
+    animation: orbBreathe2 8s ease-in-out infinite;
+  }
+
+  @keyframes orbBreathe2 {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+  }
+
+  /* Content wrapper */
+  .content-wrapper {
+    position: relative;
+    z-index: 10;
+  }
+
+  /* Navigation */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: calc(var(--base-unit) * 3) var(--gutter);
+    position: relative;
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-cream);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: calc(var(--base-unit) * 4);
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--text-cream-muted);
+    text-decoration: none;
+    transition: all var(--transition-smooth);
+    font-style: normal;
+  }
+
+  .nav-links a:hover {
+    font-style: italic;
+    color: var(--text-cream);
+    opacity: 1;
+  }
+
+  /* Hero Section */
+  .hero {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: calc(var(--base-unit) * 8) var(--gutter);
+    position: relative;
+  }
+
+  .hero-tagline {
+    position: relative;
+  }
+
+  .hero-line {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 7vw, 6rem);
+    line-height: 1.1;
+    font-weight: 300;
+    color: var(--text-cream);
+    display: block;
+    margin-bottom: calc(var(--base-unit) * 1);
+  }
+
+  .hero-line:nth-child(1) {
+    padding-left: 0;
+    font-style: italic;
+  }
+
+  .hero-line:nth-child(2) {
+    padding-left: clamp(0px, 5vw, 80px);
+    font-style: normal;
+  }
+
+  .hero-line:nth-child(3) {
+    padding-left: clamp(0px, 10vw, 160px);
+    font-style: italic;
+  }
+
+  /* Decorative SVG Lines */
+  .hero-decoration {
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    transform: translateY(-50%);
+    width: 200px;
+    height: 300px;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .hero-decoration path {
+    fill: none;
+    stroke: var(--accent-line);
+    stroke-width: 1;
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    animation: drawLine 3s ease forwards;
+  }
+
+  .hero-decoration path:nth-child(2) {
+    animation-delay: 0.5s;
+  }
+
+  .hero-decoration path:nth-child(3) {
+    animation-delay: 1s;
+  }
+
+  @keyframes drawLine {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* Services Section */
+  .services {
+    padding: calc(var(--base-unit) * 12) var(--gutter);
+    padding-bottom: calc(var(--base-unit) * 16);
+    position: relative;
+  }
+
+  .services-header {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--text-cream);
+    margin-bottom: calc(var(--base-unit) * 8);
+  }
+
+  .services-list {
+    max-width: 900px;
+    margin-left: auto;
+  }
+
+  .service-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: calc(var(--base-unit) * 3) 0;
+    border-bottom: none;
+    cursor: pointer;
+    transition: transform var(--transition-smooth), opacity var(--transition-smooth);
+    position: relative;
+  }
+
+  .service-item:hover {
+    transform: translateX(-20px);
+  }
+
+  .service-item:hover .service-name {
+    font-style: italic;
+  }
+
+  .service-name {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 400;
+    color: var(--text-cream);
+    transition: font-style var(--transition-smooth);
+    flex-shrink: 0;
+  }
+
+  .service-item:nth-child(odd) .service-name {
+    font-style: normal;
+  }
+
+  .service-item:nth-child(even) .service-name {
+    font-style: italic;
+  }
+
+  .service-item:hover .service-name {
+    font-style: italic !important;
+  }
+
+  .service-dots {
+    flex-grow: 1;
+    border-bottom: 1px dotted var(--text-cream-subtle);
+    margin: 0 calc(var(--base-unit) * 2);
+    min-width: 40px;
+    position: relative;
+    top: -4px;
+  }
+
+  .service-price {
+    font-family: var(--font-serif);
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    color: var(--text-cream-muted);
+    flex-shrink: 0;
+    font-weight: 400;
+  }
+
+  /* CTA Floating Button */
+  .cta-orb {
+    position: fixed;
+    bottom: calc(var(--base-unit) * 4);
+    right: calc(var(--base-unit) * 4);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, var(--orb-blue), var(--orb-coral));
+    border: 1px solid rgba(245, 240, 232, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    transition: all var(--transition-smooth);
+    text-decoration: none;
+  }
+
+  .cta-orb:hover {
+    transform: scale(1.1) rotate(5deg);
+    filter: brightness(1.15);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  }
+
+  .cta-orb span {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.7rem;
+    color: var(--text-cream);
+    text-align: center;
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+  }
+
+  /* Corner Badge */
+  .corner-badge {
+    position: fixed;
+    bottom: calc(var(--base-unit) * 4);
+    left: calc(var(--base-unit) * 4);
+    border: 1px solid var(--accent-line);
+    padding: calc(var(--base-unit) * 2) calc(var(--base-unit) * 2.5);
+    z-index: 1000;
+    max-width: 200px;
+    background: rgba(10, 110, 79, 0.3);
+    backdrop-filter: blur(4px);
+  }
+
+  .corner-badge p {
+    font-family: var(--font-serif);
+    font-size: 0.7rem;
+    color: var(--text-cream-muted);
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  .corner-badge .asterisk {
+    color: var(--orb-coral);
+    font-size: 0.9rem;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 767px) {
+    .navbar {
+      padding: calc(var(--base-unit) * 2) var(--gutter);
+    }
+
+    .logo {
+      font-size: 1rem;
+    }
+
+    .nav-links {
+      gap: calc(var(--base-unit) * 2);
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+    }
+
+    .hero {
+      min-height: 70vh;
+      padding: calc(var(--base-unit) * 6) var(--gutter);
+    }
+
+    .hero-line {
+      font-size: clamp(2rem, 10vw, 3.5rem);
+    }
+
+    .hero-line:nth-child(2),
+    .hero-line:nth-child(3) {
+      padding-left: 0;
+    }
+
+    .hero-decoration {
+      display: none;
+    }
+
+    .services {
+      padding: calc(var(--base-unit) * 8) var(--gutter);
+      padding-bottom: calc(var(--base-unit) * 20);
+    }
+
+    .services-list {
+      margin-left: 0;
+    }
+
+    .service-item {
+      padding: calc(var(--base-unit) * 2) 0;
+    }
+
+    .service-name {
+      font-size: 1.4rem;
+    }
+
+    .service-price {
+      font-size: 0.9rem;
+    }
+
+    .cta-orb {
+      width: 80px;
+      height: 80px;
+      bottom: calc(var(--base-unit) * 2.5);
+      right: calc(var(--base-unit) * 2.5);
+    }
+
+    .cta-orb span {
+      font-size: 0.6rem;
+    }
+
+    .corner-badge {
+      display: none;
+    }
+
+    .orb-main {
+      width: 300px;
+      height: 300px;
+      right: -10%;
+      top: 20%;
+    }
+
+    .orb-secondary {
+      width: 180px;
+      height: 180px;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .hero-line {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+    }
+
+    .hero-line:nth-child(2) {
+      padding-left: 40px;
+    }
+
+    .hero-line:nth-child(3) {
+      padding-left: 80px;
+    }
+
+    .services-list {
+      max-width: 700px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .navbar {
+      padding: calc(var(--base-unit) * 4) var(--gutter);
+    }
+
+    .logo {
+      font-size: 1.35rem;
+    }
+
+    .nav-links a {
+      font-size: 1.05rem;
+    }
+
+    .hero {
+      min-height: 85vh;
+      padding: calc(var(--base-unit) * 10) var(--gutter);
+    }
+
+    .services {
+      padding: calc(var(--base-unit) * 14) var(--gutter);
+      padding-bottom: calc(var(--base-unit) * 18);
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .hero-line {
+      font-size: 6.5rem;
+    }
+
+    .hero-line:nth-child(2) {
+      padding-left: 100px;
+    }
+
+    .hero-line:nth-child(3) {
+      padding-left: 200px;
+    }
+  }
+
+  /* Subtle entrance animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .hero-line {
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards;
+  }
+
+  .hero-line:nth-child(1) {
+    animation-delay: 0.2s;
+  }
+
+  .hero-line:nth-child(2) {
+    animation-delay: 0.5s;
+  }
+
+  .hero-line:nth-child(3) {
+    animation-delay: 0.8s;
+  }
+
+  .services-header {
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards;
+    animation-delay: 0.3s;
+  }
+
+  .service-item {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+  }
+
+  .service-item:nth-child(1) { animation-delay: 0.5s; }
+  .service-item:nth-child(2) { animation-delay: 0.7s; }
+  .service-item:nth-child(3) { animation-delay: 0.9s; }
+  .service-item:nth-child(4) { animation-delay: 1.1s; }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: 160px var(--gutter) 60px;
+    background: var(--bg-primary);
+    color: var(--text-cream);
+  }
+  .page-title-inner { max-width: 1200px; margin: 0 auto; }
+  .page-title-area h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 600; line-height: 1.1; letter-spacing: -0.03em; }
+
+  /* Content Area */
+  .content-area { 
+    padding: 64px var(--gutter); 
+    max-width: 1200px; 
+    margin: 0 auto; 
+  }
+  .content-area h2 { 
+    font-size: clamp(1.5rem, 3vw, 2rem); 
+    font-weight: 600; 
+    line-height: 1.15; 
+    margin-bottom: 24px; 
+    font-style: italic;
+  }
+  .content-area h3 { 
+    font-size: 1.25rem; 
+    font-weight: 600; 
+    margin-bottom: 16px; 
+  }
+  .content-area p { 
+    font-size: 1rem; 
+    line-height: 1.7; 
+    margin-bottom: 24px; 
+    color: var(--text-cream-muted);
+  }
+  .content-area ul, .content-area ol { 
+    margin-bottom: 24px; 
+    padding-left: 24px; 
+  }
+  .content-area li { 
+    margin-bottom: 8px; 
+    line-height: 1.7; 
+    color: var(--text-cream-muted);
+  }
+  .content-area img { 
+    max-width: 100%; 
+    height: auto; 
+    border-radius: 12px; 
+    margin-bottom: 24px; 
+  }
+
+  /* Benefits section styling */
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 32px;
+    margin: 40px 0;
+  }
+
+  .benefit-card {
+    padding: 32px;
+    background: rgba(245, 240, 232, 0.05);
+    border: 1px solid var(--accent-line);
+    border-radius: 12px;
+    transition: transform var(--transition-smooth);
+  }
+
+  .benefit-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .benefit-card h3 {
+    color: var(--text-cream);
+    font-style: italic;
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+  }
+
+  .benefit-card p {
+    color: var(--text-cream-muted);
+    line-height: 1.7;
+  }
+
+  /* FAQ styling */
+  .faq-section {
+    max-width: 800px;
+    margin: 40px auto;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--accent-line);
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+  }
+
+  .faq-question {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-cream);
+    margin-bottom: 16px;
+  }
+
+  .faq-answer {
+    color: var(--text-cream-muted);
+    line-height: 1.7;
+  }
+
+  /* Testimonial styling */
+  .testimonials {
+    background: rgba(245, 240, 232, 0.03);
+    padding: 64px var(--gutter);
+    margin: 40px 0;
+    border-radius: 12px;
+  }
+
+  .testimonial-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .testimonial-header h2 {
+    font-size: 2.5rem;
+    font-style: italic;
+  }
+
+  .testimonial-rating {
+    font-size: 3rem;
+    color: var(--orb-coral);
+    margin-bottom: 8px;
+  }
+
+  .testimonial-count {
+    color: var(--text-cream-muted);
+    font-size: 1.2rem;
+  }
+
+  .testimonial-card {
+    background: rgba(245, 240, 232, 0.05);
+    padding: 32px;
+    border: 1px solid var(--accent-line);
+    border-radius: 12px;
+    margin-bottom: 24px;
+  }
+
+  .testimonial-author {
+    font-weight: 600;
+    color: var(--text-cream);
+    margin-bottom: 8px;
+  }
+
+  .testimonial-text {
+    color: var(--text-cream-muted);
+    line-height: 1.7;
+  }
+
+  .testimonial-date {
+    color: var(--text-cream-subtle);
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+  }
+
+  /* Contact section */
+  .contact-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    padding: 64px 0;
+    border-top: 1px solid var(--accent-line);
+    margin-top: 64px;
+  }
+
+  .contact-info h3 {
+    color: var(--text-cream);
+    font-style: italic;
+    margin-bottom: 16px;
+  }
+
+  .contact-info p,
+  .contact-info a {
+    color: var(--text-cream-muted);
+    text-decoration: none;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .contact-info a:hover {
+    color: var(--text-cream);
+    font-style: italic;
+  }
+
+  /* Pre-care and post-care sections */
+  .care-section {
+    background: rgba(245, 240, 232, 0.05);
+    padding: 40px;
+    border-radius: 12px;
+    margin: 32px 0;
+  }
+
+  .care-section h3 {
+    color: var(--text-cream);
+    font-style: italic;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+  }
+
+  .care-section p {
+    color: var(--text-cream-muted);
+    line-height: 1.7;
+  }
+
+  /* CTA section */
+  .cta-section {
+    text-align: center;
+    padding: 64px 0;
+    background: linear-gradient(135deg, rgba(92, 200, 240, 0.1), rgba(232, 118, 74, 0.1));
+    border-radius: 12px;
+    margin: 40px 0;
+  }
+
+  .cta-section h2 {
+    font-size: 2.5rem;
+    font-style: italic;
+    margin-bottom: 24px;
+  }
+
+  .cta-section p {
+    font-size: 1.2rem;
+    margin-bottom: 32px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, var(--orb-blue), var(--orb-coral));
+    color: var(--text-cream);
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: transform var(--transition-smooth);
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Image layout for treatment process */
+  .treatment-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin: 40px 0;
+  }
+
+  /* Footer */
+  .footer {
+    background: var(--bg-emerald);
+    padding: 64px var(--gutter) 24px;
+    margin-top: 80px;
+    color: var(--text-cream-muted);
+    border-top: 1px solid var(--accent-line);
+  }
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+  }
+
+  .footer-section h3 {
+    color: var(--text-cream);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    font-style: italic;
+  }
+
+  .footer-section p,
+  .footer-section a {
+    color: var(--text-cream-muted);
+    text-decoration: none;
+    line-height: 1.6;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .footer-section a:hover {
+    color: var(--text-cream);
+    font-style: italic;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--accent-line);
+    font-size: 0.9rem;
+    color: var(--text-cream-subtle);
+  }
+</style>
+
+
+
+<div class="orb-main" id="orbMain"></div>
+<div class="orb-secondary"></div>
+
+<div class="content-wrapper">
+<!-- HEADER -->
+<nav class="navbar">
+      <a href="#" class="logo">trulyliftedmedspa.com</a>
+      <li><a href="/about">About Us</a><ul><li><a href="/about">Our Team</a></li></ul></li><li><a href="/">Services</a><ul><li><a href="/facial-treatments">Facials</a></li><li><a href="/chemical-peels">Chemical Peels</a></li><li><a href="/microneedling-treatments">Microneedling</a></li><li><a href="/anteage-exosomes">AnteAGE Exosomes</a></li><li><a href="/">Injectables</a><ul><li><a href="/dermal-filler-treatments">Dermal Filler</a></li><li><a href="/neuromodulator-injectables">Neuromodulator</a></li><li><a href="/prf-and-ez-gel">PRF &amp; Ez Gel</a></li></ul></li><li><a href="/laser-skin-tightening">Laser Skin Tightening</a></li></ul></li><li><a href="/">Wellness</a><ul><li><a href="/bioidentical-hormones">Bioidentical Hormones</a><ul><li><a href="/bioidentical-hormones">BHRT for Women</a></li><li><a href="/bioidentical-hormones">BHRT for Men</a></li></ul></li><li><a href="/nad">NAD+</a></li><li><a href="/weight-loss-treatments">Weight Loss</a></li></ul></li><li><a href="/conditions-we-treat">Conditions We Treat</a></li><li><a href="/">Resources</a><ul><li><a href="/before-after">Before &amp; After</a></li><li><a href="/pre-post-care">Pre/Post Care</a></li><li><a href="/cherry-payment-plan">Cherry Payment Plan</a></li><li><a href="/price-list">Price List</a></li><li><a href="/blog">Blog</a></li></ul></li><li><a href="/contact">Contact</a></li><li><a href="/memberships">Memberships</a></li><li><a href="/privacy-policy">Privacy Policy</a></li><li><a href="/is-microneedling-better-than-at-home-rollers-key-differences-results">
+    
+    Is Microneedling Better Than At-Home Rollers?Differences &amp; Result
+  
+  </a></li><li><a href="/weight-loss-medications-who-qualifies-for-semaglutide-or-tirzepatide-treatment">
+    
+    Who Qualifies for Semaglutide or Tirzepatide Weight Loss?
+  
+  </a></li><li><a href="/understanding-skin-laxity-causes-solutions-beyond-the-usual-creams">
+    
+    Understanding Skin Laxity: Causes &amp; Solutions Beyond Usual Creams
+  
+  </a></li><li><a href="/how-does-bioidentical-hormone-therapy-improve-mens-vitality-over-40">
+    
+    How Bioidentical Hormone Therapy Improve Men's Vitality Over 40?
+  
+  </a></li><li><a href="/achieve-radiant-skin-the-benefits-of-hydrafacial-in-winter">
+    
+    Achieve Radiant Skin: The Benefits of Hydrafacial in Winter
+  
+  </a></li><li><a href="/why-menopause-symptoms-could-mean-its-time-for-bhrt-therapy">
+    
+    Why Menopause Symptoms Could Mean It's Time for BHRT Therapy
+  
+  </a></li><li><a href="/the-complete-guide-to-nad--therapy-boosting-wellness-at-every-age">
+    
+    Complete Guide to NAD+ Therapy: Boosting Wellness at Every Age
+  
+  </a></li><li><a href="/your-spring-ready-glow-must-follow-skin-prep-tips-before-injectables">
+    
+    Spring-Ready Glow: Must-Follow Skin Prep Tips Before Injectables
+  
+  </a></li><li><a href="/new-year-new-confidence-2026s-most-popular-aesthetic-treatments">
+    
+    New Year, New Confidence: 2026's Most Popular Aesthetic Treatments
+  
+  </a></li><li><a href="/celebrate-easter-with-a-fresh-look-top-facial-treatments-to-renew-your-skin">
+    
+    Celebrate Easter with a Fresh Look: Facial Treatments for Skin
+  
+  </a></li><li><a href="/the-science-behind-injectable-fillers-for-hand-rejuvenation">
+    
+    The Science Behind Injectable Fillers for Hand Rejuvenation
+  
+  </a></li><li><a href="/everything-you-need-to-know-about-prf-ez-gel-for-radiant-looking-skin">
+    
+    All You Need to Know About PRF &amp; EZ Gel for Radiant-Looking Skin
+  
+  </a></li><li><a href="/the-ultimate-comparison-botox-vs-dysport-for-springtime-rejuvenation">
+    
+    Comparison: Botox vs. Dysport for Springtime Rejuvenation
+  
+  </a></li><li><a href="/5-signs-you-could-benefit-from-laser-skin-tightening-in-your-40s">
+    
+    5 Signs You Could Benefit from Laser Skin Tightening in Your 40s
+  
+  </a></li><li><a href="/how-long-do-dermal-fillers-last-key-factors-maintenance-tips">
+    
+    How Long Do Dermal Fillers Last? Key Factors &amp; Maintenance Tips
+  
+  </a></li><li><a href="/resolve-to-rejuvenate-setting-your-2026-beauty-wellness-goals">
+    
+    Resolve to Rejuvenate: Setting Your 2026 Beauty &amp; Wellness Goals
+  
+  </a></li><li><a href="/top-post-holiday-detox-treatments-reveal-fresh-healthy-skin-this-january">
+    
+    Top Post-Holiday Detox Treatments: Reveal Fresh, Healthy Skin This January
+  
+  </a></li><li><a href="/the-best-medspa-gift-cards-self-care-ideas-for-christmas-in-georgetown">
+    
+    The Best MedSpa Gift Cards &amp; Self-Care Ideas for Christmas in Georgetown
+  
+  </a></li><li><a href="/mens-aesthetic-treatments-popular-services-for-confidence-wellness">
+    
+    Men's Aesthetic Treatments: Popular Services for Confidence &amp; Wellness
+  
+  </a></li><li><a href="/can-laser-skin-tightening-replace-a-facelift-pros-cons-and-faqs">
+    
+    Can Laser Skin Tightening Replace a Facelift? Pros, Cons, and FAQs
+  
+  </a></li><li><a href="/how-to-prep-your-skin-for-winter-parties-pre-event-facial-filler-guide">
+    
+    How to Prep Your Skin for Winter Parties: Pre-Event Facial &amp; Filler Guide
+  
+  </a></li><li><a href="/what-are-exosome-facials-how-do-they-transform-aging-skin">
+    
+    What Are Exosome Facials &amp; How Do They Transform Aging Skin?
+  
+  </a></li><li><a href="/holiday-ready-skin-top-medspa-treatments-for-a-radiant-thanksgiving-glow">
+    
+    Holiday-Ready Skin: Top MedSpa Treatments for a Radiant Thanksgiving Glow
+  
+  </a></li><li><a href="/hyperpigmentation-vs-melasma-causes-differences-newest-treatment-options">
+    
+    Hyperpigmentation vs. Melasma: Causes, Differences &amp; Newest Treatment Options
+  
+  </a></li><li><a href="/is-microneedling-safe-for-sensitive-skin-what-to-ask-before-your-visit">
+    
+    Is Microneedling Safe for Sensitive Skin? What to Ask Before Your Visit
+  
+  </a></li><li><a href="/how-laser-skin-tightening-works-and-who-its-best-suited-for">
+    
+    How Laser Skin Tightening Works and Who It's Best Suited For
+  
+  </a></li><li><a href="/facial-volume-loss-how-personalized-fillers-can-transform-your-confidence">
+    
+    Facial Volume Loss: How Fillers Can Restore Confidence
+  
+  </a></li><li><a href="/embrace-a-youthful-autumn-treat-fine-lines-wrinkles-with-microneedling">
+    
+    Youthful Autumn: Treat Fine Lines &amp; Wrinkles with Microneedling
+  
+  </a></li><li><a href="/hyperpigmentation-heroes-brighten-dark-spots-for-a-luminous-look">
+    
+    Hyperpigmentation Heroes: Brighten Dark Spots for a Luminous Look
+  
+  </a></li><li><a href="/oily-skin-sos-how-to-achieve-a-balanced-complexion-before-the-holidays">
+    
+    Oily Skin SOS: Achieve a Balanced Complexion Before Holidays
+  
+  </a></li><li><a href="/rejuvenate-restore-stretch-mark-reduction-with-innovative-therapies">
+    
+    Rejuvenate &amp; Restore: Stretch Mark Reduction with Therapies
+  
+  </a></li><li><a href="/smooth-refine-advanced-pore-minimizing-solutions-for-autumn">
+    
+    Smooth &amp; Refine: Advanced Pore-Minimizing Solutions for Autumn
+  
+  </a></li><li><a href="/rosacea-relief-seasonal-skincare-tips-for-sensitive-skin-types">
+    
+    Rosacea Relief: Seasonal Skincare Tips for Sensitive Skin Types
+  
+  </a></li><li><a href="/erase-acne-scars-this-fall-skinpen-microneedling-insights">
+    
+    Erase Acne Scars this Fall: SkinPen Microneedling Insights
+  
+  </a></li><li><a href="/the-science-of-nad--how-cellular-wellness-fuels-a-youthful-you">
+    
+    The Science of NAD+: How Cellular Wellness Fuels a Youthful You
+  
+  </a></li><li><a href="/navigating-hormonal-imbalances-bioidentical-hormone-therapy-explained">
+    
+    Navigating Hormonal Imbalances: Bioidentical Hormone Therapy
+  
+  </a></li><li><a href="/combat-summer-damage-restore-skin-with-hydrating-chemical-peels">
+    
+    Combat Summer Damage: Restore Skin with Hydrating Chemical Peels
+  
+  </a></li><li><a href="/back-to-school-glow-facial-treatments-for-teachers-moms">
+    
+    Back-to-School Glow: Facial Treatments for Teachers &amp; Moms
+  
+  </a></li><li><a href="/microtox-infusion-facial-smooth-skin-all-year-round">
+    
+    Microtox Infusion Facial: Smooth Skin All Year Round
+  
+  </a></li><li><a href="/boost-confidence-with-restylane-juvederm-fillers">
+    
+    Boost Confidence with Restylane &amp; Juvederm Fillers
+  
+  </a></li><li><a href="/laser-skin-tightening-your-solution-to-firm-youthful-skin">
+    
+    Laser Skin Tightening: Your Solution to Firm &amp; Youthful Skin
+  
+  </a></li><li><a href="/achieve-a-youthful-look-with-sculptra-dermal-fillers">
+    
+    Achieve a Youthful Look with Sculptra Dermal Fillers
+  
+  </a></li><li><a href="/glow-from-within-the-benefits-of-anteage-exoso">
+    
+    Glow from Within: The Benefits of AnteAGE Exoso
+  
+  </a></li><li><a href="/summer-ready-skin-the-power-of-microneedling">
+    
+    Summer-Ready Skin: The Power of Microneedling
+  
+  </a></li><li><a href="/embrace-youthful-skin-juvederm-and-restylane-fillers-explained">
+    
+    Embrace Youthful Skin: Juvederm and Restylane Fillers Explained
+  
+  </a></li><li><a href="/skin-rejuvenation-alert-benefits-of-tca-chemical-peels">
+    
+    Skin Rejuvenation Alert: Benefits of TCA Chemical Peels
+  
+  </a></li><li><a href="/smooth-away-wrinkles-why-consider-botox-and-dysport-now">
+    
+    Smooth Away Wrinkles: Why Consider Botox and Dysport Now
+  
+  </a></li><li><a href="/refresh-your-look-for-spring-the-magic-of-dermaplaning">
+    
+    Refresh Your Look for Spring: The Magic of Dermaplaning
+  
+  </a></li><li><a href="/all-about-microtox-infusion-facial-your-secret-to-a-valentine-glow">
+    
+    All About Microtox Infusion Facial: Your Secret to a Valentine Glow
+  
+  </a></li><li><a href="/sustainable-beauty-georgetown-s-eco-friendly-skincare-options">
+    
+    Sustainable Beauty: Georgetown's Eco-Friendly Skincare Options
+  
+  </a></li><li><a href="/advanced-facial-rejuvenation-exosome-therapy-in-georgetown">
+    
+    Advanced Facial Rejuvenation: Exosome Therapy in Georgetown
+  
+  </a></li><li><a href="/integrative-holistic-health-combining-aesthetics-and-wellness">
+    
+    Integrative Holistic Health: Combining Aesthetics and Wellness
+  
+  </a></li><li><a href="/how-personalization-in-skincare-revolutionizes-beauty-care">
+    
+    How Personalization in Skincare Revolutionizes Beauty Care
+  
+  </a></li><li><a href="/enhance-your-well-being-aesthetic-treatments-mental-health">
+    
+    Enhance Your Well-Being: Aesthetic Treatments &amp; Mental Health
+  
+  </a></li><li><a href="/georgetown-s-top-non-invasive-skin-treatments-for-a-fresh-look">
+    
+    Georgetown's Top Non-Invasive Skin Treatments for a Fresh Look
+  
+  </a></li><li><a href="/nourish-your-skin-enhance-your-glow-the-magic-of-hydrafacial">
+    
+    Nourish Your Skin, Enhance Your Glow: The Magic of Hydrafacial
+  
+  </a></li><li><a href="/demystifying-the-process-of-chemical-peels-is-it-right-for-you">
+    
+    Demystifying the Process of Chemical Peels: Is It Right for You?
+  
+  </a></li><li><a href="/injectables-in-enhancing-aesthetics-is-it-right-for-you">
+    
+    Injectables in Enhancing Aesthetics: Is it Right for You?
+  
+  </a></li><li><a href="/mastering-the-art-of-microneedling-efficiency-beyond-conventional-methods">
+    
+    Mastering the Art of Microneedling: Efficiency Beyond Conventional Methods
+  
+  </a></li><li><a href="/why-choose-microtox-infusion-a-deeper-look-at-this-premium-facial-service">
+    
+    Why Choose Microtox Infusion? A Deeper Look at the Facial Service
+  
+  </a></li><li><a href="/rejuvenate-your-skin-with-the-unparalleled-hydrafacial-treatment">
+    
+    Rejuvenate Your Skin with the Unparalleled Hydrafacial Treatment
+  
+  </a></li><li><a href="/unlocking-the-power-of-collagen-with-sculptra-injectables">
+    
+    Unlocking the Power of Collagen with Sculptra Injectables
+  
+  </a></li><li><a href="/understanding-the-power-of-neuromodulators-in-skin-revitalization">
+    
+    Understanding the Power of Neuromodulators in Skin Revitalization
+  
+  </a></li><li><a href="/exploring-semaglutide-the-game-changer-in-weight-loss-regimen">
+    
+    Exploring Semaglutide: The Game Changer in Weight Loss Regimen
+  
+  </a></li><li><a href="/discover-the-benefits-of-dermal-fillers-at-truly-lifted-medspa">
+    
+    Discover the benefits of Dermal Fillers at Truly Lifted MedSpa
+  
+  </a></li>
+    </nav>
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>NAD+ Therapy</h1>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+  
+  <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/shutterstock_2527469497-7b6121e8-1920w.jpg" alt="Two bottles of nad + are sitting next to each other on a table.">
+
+  <p>Experience the rejuvenating power of NAD+ therapy at Truly Lifted MedSpa in Georgetown, close to the city of Round Rock, TX. Our NAD+ treatments enhance energy levels, mental clarity, and overall wellness. Rediscover vitality with this innovative service, designed to support cellular health and combat the effects of aging. Visit us today and feel revitalized.</p>
+
+  <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/patient-consultation-cotton-with-doctor-vaccine-wellness-safety-from-virus-healthcare-hospital-disinfect-woman-vaccination-with-smile-help-with-medicine-arm-1920w.jpeg" alt="A woman is getting an injection in her arm by a doctor.">
+
+  <h2>NAD+ Therapy for Renewed Vitality and Wellness</h2>
+
+  <p>NAD+ therapy is a cutting-edge treatment that focuses on enhancing your body's natural ability to repair and rejuvenate at the cellular level. This therapy involves administering NAD+ (nicotinamide adenine dinucleotide), a vital coenzyme found in every cell. It plays a crucial role in energy production and metabolic processes.</p>
+
+  <p>Our NAD+ therapy sessions are tailored to each individual, ensuring you receive the precise support your body needs. The treatment includes a comprehensive consultation to understand your unique wellness goals and requirements, followed by customized NAD+ administration under expert supervision.</p>
+
+  <p>Ideal candidates for NAD+ therapy are individuals looking to boost overall wellness and improve cellular function. Whether you're seeking better mental clarity or enhanced vitality, NAD+ therapy provides a personalized approach to rejuvenating your well-being.</p>
+
+  <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/full-shot-couple-doing-workout-exercises-1920w.jpg" alt="A man and a woman are jogging next to a body of water.">
+
+  <h2>Benefits Of NAD+</h2>
+
+  <div class="benefits-">
+    <div class="benefit-card">
+      <h3>Boosts Cellular Energy</h3>
+      <p>NAD+ therapy enhances your body's cellular energy production, helping you feel more vibrant and revitalized. By supporting metabolic processes, it provides a natural boost for sustained energy levels throughout the day.</p>
+    </div>
+
+    <div class="benefit-card">
+      <h3>Enhances Mental Clarity</h3>
+      <p>Experience sharper focus and improved cognitive function with NAD+ therapy. This treatment supports brain health, helping to clear mental fog and enhance memory, making you feel more alert and focused.</p>
+    </div>
+
+    <div class="benefit-card">
+      <h3>Supports Overall Wellness</h3>
+      <p>Promote optimal health and well-being with NAD+ therapy. By aiding in cellular repair and regeneration, it supports your body's natural processes, leading to improved vitality and a stronger sense of wellness.</p>
+    </div>
+  </div>
+
+  <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/female-doctor-with-syringe-vaccinating-patient+%281%29-1920w.jpeg" alt="A woman is getting a shot from a doctor wearing a mask and gloves.">
+
+  <h2>Benefits Of Microneedling With Exosomes</h2>
+
+  <div class="benefits-">
+    <div class="benefit-card">
+      <h3>Reduces Downtime</h3>
+      <p>Using AnteAGE Exosomes with Skinpen microneedling significantly reduces post-treatment downtime, allowing you to return to your daily activities faster with enhanced healing and recovery.</p>
+    </div>
+
+    <div class="benefit-card">
+      <h3>Minimizes Redness and Swelling</h3>
+      <p>This advanced topical solution effectively reduces redness and swelling, ensuring a more comfortable and serene post-treatment experience, leaving your skin calmed and soothed.</p>
+    </div>
+
+    <div class="benefit-card">
+      <h3>Boosts Collagen and Elasticity</h3>
+      <p>Promotes better cellular communication and accelerate cell turnover, leading to increased collagen production and enhanced skin elasticity for a firmer, more youthful appearance.</p>
+    </div>
+  </div>
+
+  <h2>What To Expect from Our NAD+ Treatment?</h2>
+
+  <p>The NAD+ therapy process begins with a personalized consultation to assess your health goals and needs. Our experts design a customized plan to ensure optimal results, aligning the treatment with your specific wellness objectives.</p>
+
+  <p>During the session, NAD+ is administered via intramuscular injection allowing for efficient absorption directly into the bloodstream. This method ensures that the coenzyme reaches your cells quickly, aiding in energy production and cellular repair. The process is conducted in a comfortable, relaxing setting under professional supervision.</p>
+
+  <p>After the infusion, clients typically relax and let the body absorb the benefits of NAD+. The entire process is designed to be seamless and rejuvenating, supporting your journey towards enhanced vitality and well-being.</p>
+
+  <div class="treatment-images">
+    <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/female-doctor-with-syringe-vaccinating-patient-1920w.jpeg" alt="A doctor is giving a woman an injection in her arm.">
+    <img src="https://lirp.cdn-website.com/56132a39/dms3rep/multi/opt/side-view-people-training-together-16201a73-1920w.jpg" alt="A group of people are standing with their arms in the air">
+  </div>
+
+  <h2>Pre &amp; Post Treatment Care</h2>
+
+  <div class="care-section">
+    <h3>Pre-Treatment Care</h3>
+    <p>Before your NAD+ therapy session, ensure you're well-hydrated and have eaten a light meal. Avoid alcohol and strenuous activity for at least 24 hours prior. If you're taking any medications, inform your provider to rule out potential interactions.</p>
+  </div>
+
+  <div class="care-section">
+    <h3>Post-Treatment Care</h3>
+    <p>After your session, continue to hydrate and rest. Avoid intense physical activities for the remainder of the day to allow your body to fully absorb the benefits. Monitor how you feel and report any unusual symptoms to your provider. Maintaining a healthy lifestyle, including balanced nutrition and regular hydration, will help prolong the effects of NAD+ therapy.</p>
+  </div>
+
+  <h2>FAQs</h2>
+
+  <p>Navigate your beauty journey seamlessly with answers to common queries in our FAQs section.</p>
+
+  <div class="faq-section">
+    <div class="faq-item">
+      <div class="faq-question">Is NAD+ therapy safe for all age groups?</div>
+      <div class="faq-answer">NAD+ therapy is generally safe for healthy adults when administered by qualified professionals, but it is not recommended for all age groups. Clinical research on its safety in children, pregnant or breastfeeding women, and older adults with certain medical conditions is limited. Therefore, NAD+ therapy should be approached cautiously in these populations. Prior to receiving treatment, a comprehensive health assessment and consultation are essential to identify any potential risks or contraindications. Always consult with a trusted healthcare provider to determine if NAD+ therapy is appropriate for your specific age group and individual health profile to ensure safety.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">How soon can I expect to feel the effects?</div>
+      <div class="faq-answer">The timeframe for experiencing the effects of NAD+ therapy can vary from person to person. Some individuals report feeling improvements in energy, mental clarity, or overall well-being within a few hours to days after their initial session. Others may notice more gradual changes over several sessions as NAD+ levels build up in the body. Factors such as your general health, metabolism, lifestyle, and specific wellness goals all play a role in how quickly you may see benefits. Consulting with your provider will help set realistic expectations and determine the optimal treatment plan for noticeable results.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">How long does each NAD+ therapy session take?</div>
+      <div class="faq-answer">Each NAD+ therapy session typically lasts between one to two hours, depending on the personalized treatment plan and the dosage administered. The therapy is conducted in a comfortable setting, allowing you to relax during the infusion. Our team ensures a seamless experience, making the session both productive and rejuvenating while accommodating your schedule.</div>
+    </div>
+  </div>
+
+  <div class="faq-section" style="text-align: center; margin-top: 32px;">
+    <h3>Still Have Questions?</h3>
+    <a href="/contact" class="cta-button">Contact Us</a>
+  </div>
+
+  <div class="testimonials">
+    <div class="testimonial-header">
+      <h2>Client Reviews</h2>
+      <div class="testimonial-rating">5</div>
+      <div class="testimonial-count">77 Reviews</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-date">May 4, 2026</div>
+      <div class="testimonial-author">savanna merino</div>
+      <div class="testimonial-text">Had a NAD appt with Charisse! Was lovely getting my first NAD treatment started with her! Thea was very helpful, when we first got there—she initially told us about the promo for NAD treatment! Thank you Charisse and Thea for the wonderful experience!</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-date">May 1, 2026</div>
+      <div class="testimonial-author">Tristan Ford</div>
+      <div class="testimonial-text">I was helped by Charisse and Thea; and they were very easy to work with and helped guide me through some decisions about wellness that I was considering for some time. I'm glad I chose Truly Lifted and can recommend to anyone in the area.</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-date">Apr 27, 2026</div>
+      <div class="testimonial-author">Malika</div>
+      <div class="testimonial-text">Charisse is the best. She so knowledgeable, kind, friendly and welcoming. She always takes her time to understand my needs. I always have a great experience with her and looking forward to my next appointment! Highly recommend!</div>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <h2>Harness the Power of NAD+</h2>
+    <p>Unlock the benefits of NAD+ therapy and recharge your energy levels. This innovative treatment supports cellular health, helping you feel more vibrant and focused. Ideal for those seeking enhanced wellness and mental clarity, NAD+ therapy is your key to revitalizing your daily life. Embrace the change and transform your well-being—harness the power of NAD+ today!</p>
+    <a href="/contact" class="cta-button">Book an Appointment</a>
+  </div>
+
+  <div class="contact-section">
+    <div class="contact-info">
+      <h3>Address</h3>
+      <a href="https://maps.app.goo.gl/53r5XdkN2uhkjeUd8">2951 FM 1460, Unit #204 Georgetown, TX 78626</a>
+    </div>
+
+    <div class="contact-info">
+      <h3>Phone</h3>
+      <a href="tel:(512) 763-5149">(512) 763-5149</a>
+    </div>
+
+    <div class="contact-info">
+      <h3>Email</h3>
+      <a href="mailto:tlc@trulyliftedmedspa.com">tlc@trulyliftedmedspa.com</a>
+    </div>
+
+    <div class="contact-info">
+      <h3>Business Hours</h3>
+      <p>Mon - Fri: 9:00 am - 5:00 pm</p>
+      <p>Saturday: 9:00 am - 3:00 pm</p>
+      <p>Sunday: Closed</p>
+    </div>
+  <iframe src="https://maps.app.goo.gl/53r5XdkN2uhkjeUd8" width="100%" height="300" style="border:0;margin-top:1.5rem" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map"></iframe></div>
+
+</div>
+
+<a href="/contact" class="cta-orb">
+  <span>Book<br>Now</span>
+</a>
+
+<div class="corner-badge">
+  <p><span class="asterisk">*</span> New client special pricing available</p>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>Contact Information</h3>
+      <p>2951 FM 1460, Unit #204</p>
+      <p>Georgetown, TX 78626</p>
+      <a href="tel:(512) 763-5149">(512) 763-5149</a>
+      <a href="mailto:tlc@trulyliftedmedspa.com">tlc@trulyliftedmedspa.com</a>
+    </div>
+    
+    <div class="footer-section">
+      <h3>Services</h3>
+      <a href="/facial-treatments">Facial Treatments</a>
+      <a href="/chemical-peels">Chemical Peels</a>
+      <a href="/microneedling-treatments">Microneedling</a>
+      <a href="/dermal-filler-treatments">Dermal Fillers</a>
+      <a href="/neuromodulator-injectables">Neuromodulators</a>
+      <a href="/laser-skin-tightening">Laser Skin Tightening</a>
+    </div>
+    
+    <div class="footer-section">
+      <h3>Wellness</h3>
+      <a href="/bioidentical-hormones">Bioidentical Hormones</a>
+      <a href="/nad">NAD+ Therapy</a>
+      <a href="/weight-loss-treatments">Weight Loss</a>
+      <a href="/conditions-we-treat">Conditions We Treat</a>
+    </div>
+    
+    <div class="footer-section">
+      <h3>Resources</h3>
+      <a href="/before-after">Before &amp; After</a>
+      <a href="/pre-post-care">Pre/Post Care</a>
+      <a href="/price-list">Price List</a>
+      <a href="/blog">Blog</a>
+      <a href="/memberships">Memberships</a>
+      <a href="/privacy-policy">Privacy Policy</a>
+    </div>
+  </div>
+  
+  <div class="footer-bottom">
+    <p>© 2024 Truly Lifted MedSpa. All rights reserved.</p>
+  </div>
+</footer>
+
+</div>
+
+<script>
+    // Mouse-following parallax for main orb
+    const orbMain = document.getElementById('orbMain');
+    let mouseX = 0;
+    let mouseY = 0;
+    let orbX = 0;
+    let orbY = 0;
+
+    document.addEventListener('mousemove', function(e) {
+      mouseX = (e.clientX / window.innerWidth - 0.5) * 40;
+      mouseY = (e.clientY / window.innerHeight - 0.5) * 40;
+    });
+
+    function animateOrb() {
+      orbX += (mouseX - orbX) * 0.03;
+      orbY += (mouseY - orbY) * 0.03;
+      orbMain.style.transform = `translate(${orbX}px, ${orbY}px)`;
+      requestAnimationFrame(animateOrb);
+    }
+
+    animateOrb();
+  </script>
+
+
