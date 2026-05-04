@@ -1,0 +1,927 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Reviews</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  :root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
+
+  /* Navigation */
+  .mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+  .mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+  .mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+  .mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+  .hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+}
+
+  .hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+  .sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+  .sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+  .sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+  .sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+  .sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+  .sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+  .sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+  .sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+  .sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+  .mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+  .mobile-nav-overlay.active {
+  display: block;
+}
+
+  .sidebar.active {
+  display: flex;
+}
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: calc(96px + 60px) var(--space-lg) var(--space-3xl);
+    background: var(--text-primary);
+    color: #ffffff;
+  }
+
+  .page-title-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-title-area h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  /* Content Area */
+  .content-area {
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .content-area h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .content-area p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area ul, .content-area ol {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-lg);
+    color: var(--text-muted);
+  }
+
+  .content-area li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  .content-area img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    font-weight: 500;
+  }
+
+  .content-area a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  /* Reviews Grid */
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-3xl);
+  }
+
+  .review-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: var(--space-lg);
+  }
+
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--space-md);
+  }
+
+  .review-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .review-stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  .review-stars .star {
+    color: #fbbf24;
+    font-size: 14px;
+  }
+
+  .review-content {
+    color: var(--text-muted);
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: var(--space-md);
+  }
+
+  .review-author {
+    font-size: 0.875rem;
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  /* Rating Section */
+  .rating-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-3xl);
+    padding: var(--space-xl);
+    background: var(--bg-card);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+  }
+
+  .rating-stat {
+    text-align: center;
+  }
+
+  .rating-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: block;
+  }
+
+  .rating-label {
+    font-size: 1.125rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  /* Services Section */
+  .services-section {
+    margin: var(--space-3xl) 0;
+    padding: var(--space-xl);
+    background: var(--bg-card);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+  }
+
+  .services-section h2 {
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+    text-align: center;
+  }
+
+  .service-item {
+    color: var(--text-muted);
+    padding: var(--space-md);
+    text-align: center;
+    font-weight: 500;
+  }
+
+  /* Map Container */
+  .map-container {
+    margin: var(--space-3xl) 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+  }
+
+  .map-container iframe {
+    width: 100%;
+    height: 400px;
+    border: none;
+    display: block;
+  }
+
+  /* Badges */
+  .badges-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--space-lg);
+    margin: var(--space-3xl) 0;
+    text-align: center;
+  }
+
+  .badge img {
+    max-width: 100%;
+    height: auto;
+    max-height: 120px;
+  }
+
+  /* Footer */
+  .footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+  .footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+  .footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+  .footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+  .footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+}
+
+  .footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+  .footer-links a:hover {
+  color: var(--text-primary);
+}
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .mobile-header .brand-name {
+      font-size: 12px;
+    }
+    
+    .page-title-area {
+      padding: calc(60px + 40px) var(--space-md) var(--space-xl);
+    }
+    
+    .content-area {
+      padding: var(--space-xl) var(--space-md);
+    }
+    
+    .rating-section {
+      padding: var(--space-md);
+    }
+    
+    .rating-number {
+      font-size: 2rem;
+    }
+    
+    .review-card {
+      padding: var(--space-md);
+    }
+    
+    .footer {
+      flex-direction: column;
+      gap: var(--space-md);
+      padding: var(--space-lg) var(--space-md);
+    }
+  }
+
+  @media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-text {
+    flex: 1.2;
+  }
+
+  .hero-visual {
+    flex: 0.8;
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .features {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .feature-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .feature-card:last-child {
+    border-right: none;
+  }
+
+  .trust-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-metrics {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .reviews-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .rating-section {
+    flex-direction: row;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+  @media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+    min-height: 80vh;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 20px;
+  }
+
+  .hero-visual {
+    max-width: 380px;
+  }
+
+  .features {
+    /* already 3-col from tablet */
+  }
+
+  .feature-card {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .trust-section {
+    /* already 2-col from tablet */
+  }
+
+  .trust-metrics {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-clients {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-number {
+    font-size: 120px;
+  }
+
+  .client-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+
+  .reviews-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+  @media (min-width: 768px) {
+    .page-title-area { padding: calc(96px + 60px) var(--space-2xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl) var(--space-2xl); }
+  }
+
+  @media (min-width: 1024px) {
+    .page-title-area { padding: calc(96px + 80px) var(--space-3xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl); }
+  }
+</style>
+
+
+
+<!-- HEADER -->
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="#" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">Thomas H. Bray, Attorney at Law</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="#" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">Thomas H. Bray, Attorney at Law</span>
+    </a>
+    <nav>
+      <a href="#">Platform</a>
+      <a href="#">Solutions</a>
+      <a href="#">Documentation</a>
+      <a href="#">Enterprise</a>
+    </nav>
+  </div>
+  
+</aside>
+
+<!-- Main Content -->
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Client Reviews</h1>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+  <!-- Rating Overview -->
+  <div class="rating-section">
+    <div class="rating-stat">
+      <span class="rating-number">9.8</span>
+      <span class="rating-label">Avvo Rating - Superb</span>
+    </div>
+  </div>
+
+  <!-- Services Section -->
+  <div class="services-section">
+    <h2>Practice Areas</h2>
+    <div class="service-item">Divorce & Family Law</div>
+    <div class="service-item">Criminal Defense</div>
+    <div class="service-item">Personal Injury</div>
+  </div>
+
+  <!-- Client Reviews -->
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-header">
+        <h3 class="review-title">Amazing &amp; Intelligent.</h3>
+        <div class="review-stars">
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+        </div>
+      </div>
+      <div class="review-content">
+        Tommy is someone I have known for many years now. He is my attorney and through this relationship I would also call him a friend. He helped me on a case that I though had no end in sight. Finally we found victory and some peace and I have to hands down say that was all thanks to Tommy. His quick wit and caring attitude got us a long way!
+      </div>
+      <div class="review-author">- Ashley</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <h3 class="review-title">Amazing!</h3>
+        <div class="review-stars">
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+        </div>
+      </div>
+      <div class="review-content">
+        Mr. Bray was very compassionate to my divorce. Though this was a difficult time in my life, the paper work and process was painless with Tommy. He was willing to fight for my needs and reassured me as much as I needed it. We finished my divorce being granted all we asked for.
+      </div>
+      <div class="review-author">- Cathy</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <h3 class="review-title">Outstanding attorney</h3>
+        <div class="review-stars">
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+        </div>
+      </div>
+      <div class="review-content">
+        Mr. Bray is one of the best. He is also very kind and extra helpful, he is not in it just for the money. He won all my court cases for me because Mr. Bray is very knowledgeable in his field of law.
+      </div>
+      <div class="review-author">- Nicole</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <h3 class="review-title">Passionate, Simple &amp; Great Divorce Attorney!</h3>
+        <div class="review-stars">
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+        </div>
+      </div>
+      <div class="review-content">
+        Mr. Bray and his friendly staff was awesome! My divorce finalized in a timely mannered and with no hassle. My Bray was always of top of things and keep me informed on what to expect. I am pleased with his experience, prompt response and professionalism. I would definitely recommend family and friends for his legal service. Thank you!
+      </div>
+      <div class="review-author">- Samantha</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <h3 class="review-title">Awesome Attorney – Highly Recommend</h3>
+        <div class="review-stars">
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+        </div>
+      </div>
+      <div class="review-content">
+        Tommy was very professional and knowledgeable, very easy to work with and always willing to answer my questions. He made my divorce as painless as possible. I would highly recommend him to anyone considering a divorce.
+      </div>
+      <div class="review-author">- Heather</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <h3 class="review-title">Best decision I made was to hire Tommy</h3>
+        <div class="review-stars">
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+        </div>
+      </div>
+      <div class="review-content">
+        Tommy was by far everything I was looking for in an attorney and handled by custody case perfectly. He stayed up to date on my case, always got back with me in a reasonable amount of time, and was thorough. The biggest difference between lawyers that I have seen is how thoroughly they "know" the case and prepare for things. Tommy always knew the details and was always for more prepared than many other attorneys I've seen.
+      </div>
+      <div class="review-author">- rtorres2007</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <h3 class="review-title">Best Lawyer Ever!</h3>
+        <div class="review-stars">
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+        </div>
+      </div>
+      <div class="review-content">
+        Mr. Bray was amazing. I wanted a divorce, but I also wanted NOT to have to deal with my ex as he's awfully intimidating. Mr. Bray was definitely not intimidated by him and worked to finalize the divorce as quickly as possible–I never even had to step inside the court room. He was thoughtful throughout the entire process, trying to give me as much guidance as I needed, but not pushing me to ask for more in the divorce.
+      </div>
+      <div class="review-author">- Brenda</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <h3 class="review-title">Outstanding</h3>
+        <div class="review-stars">
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+        </div>
+      </div>
+      <div class="review-content">
+        Tommy is an outstanding attorney that knows family law and the local venue well. He is what I would call a velvet hammer. In other words, he is subtle but very powerful in front of the judge. He makes his point well and covers all of the bases.
+      </div>
+      <div class="review-author">- Chris</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-header">
+        <h3 class="review-title">Positive experience in difficult circumstances</h3>
+        <div class="review-stars">
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+          <i class="fas fa-star star"></i>
+        </div>
+      </div>
+      <div class="review-content">
+        There was one word I thought of when trying to describe the impression I got of Tommy Bray from working with him on my case: Conscientious. If you're looking for an attorney who will take the time to understand your case, and whose focus will be on results instead of billable hours, Tommy Bray fits the bill, no pun intended.
+      </div>
+      <div class="review-author">- Andrew</div>
+    </div>
+  </div>
+
+  <!-- Badges and Recognition -->
+  <div class="badges-section">
+    <div class="badge">
+      <img src="https://avvotbraylaw20.procurrox.com/wp-content/blogs.dir/2074/files/sites/9567/2016/09/2016-top-40-s-1.png" alt="Top 40 Attorney Award">
+    </div>
+    <div class="badge">
+      <img src="https://avvotbraylaw20.procurrox.com/wp-content/blogs.dir/2074/files/sites/9567/2016/09/TN-Bar-w.png" alt="Tennessee Bar Association">
+    </div>
+  </div>
+
+  <!-- Map -->
+  <div class="map-container">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3234.111419755117!2d-86.39334258473663!3d35.846271380156125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xfce05a372b1f0a4!2sThomas+H.+Bray%2C+Attorney+at+Law!5e0!3m2!1sen!2s!4v1469765492060" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+
+</div>
+
+<footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Thomas H. Bray, Attorney at Law</span>
+      <span class="footer-copyright">© 2026</span>
+    </div>
+    <div class="footer-links">
+    </div>
+  </footer>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
