@@ -1,0 +1,859 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gracias</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  :root {
+    --bg-primary: #111115;
+    --bg-secondary: #1a1a20;
+    --bg-hover: #22222a;
+    --bg-card: #16161c;
+    --text-primary: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.5);
+    --text-dim: rgba(255, 255, 255, 0.35);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-light: rgba(255, 255, 255, 0.06);
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Inter', -apple-system, sans-serif;
+    --sidebar-width: 280px;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 32px;
+    --space-xl: 48px;
+    --space-2xl: 64px;
+    --space-3xl: 96px;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
+
+  /* Navigation */
+  .mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg-primary);
+  }
+
+  .mobile-header .brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+
+  .mobile-header .brand .globe-icon {
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid var(--text-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  .mobile-header .brand-name {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-sm);
+  }
+
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--text-primary);
+    transition: all 0.3s ease;
+  }
+
+  .sidebar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: var(--bg-primary);
+    border-right: 1px solid var(--border-color);
+    z-index: 200;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: var(--space-xl) var(--space-lg);
+    overflow-y: auto;
+  }
+
+  .sidebar .brand-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .sidebar .brand-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+
+  .sidebar .globe-icon {
+    width: 38px;
+    height: 38px;
+    border: 1.5px solid var(--text-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .sidebar .brand-name {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .sidebar nav a {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .sidebar nav a:hover {
+    color: var(--text-primary);
+  }
+
+  .sidebar .status-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .mobile-nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 150;
+  }
+
+  .mobile-nav-overlay.active {
+    display: block;
+  }
+
+  .sidebar.active {
+    display: flex;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: calc(96px + 60px) var(--space-lg) var(--space-3xl);
+    background: var(--text-primary);
+    color: #111115;
+  }
+
+  .page-title-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-title-area h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  /* Content Area */
+  .content-area {
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .content-area h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .content-area p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area ul, .content-area ol {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-lg);
+    color: var(--text-muted);
+  }
+
+  .content-area li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  .content-area img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    font-weight: 500;
+  }
+
+  .content-area a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  /* Thank You Section */
+  .thank-you-message {
+    text-align: center;
+    padding: var(--space-2xl) 0;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .thank-you-message p {
+    font-size: 1.125rem;
+    color: var(--text-primary);
+  }
+
+  /* Contact Form Section */
+  .contact-form-section {
+    padding: var(--space-2xl) 0;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .form-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .form-container input,
+  .form-container textarea {
+    padding: var(--space-md);
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border-radius: 8px;
+    font-family: var(--font-sans);
+    font-size: 16px;
+  }
+
+  .form-container input::placeholder,
+  .form-container textarea::placeholder {
+    color: var(--text-muted);
+  }
+
+  .form-container button {
+    padding: var(--space-md) var(--space-xl);
+    background: var(--text-primary);
+    color: #111115;
+    border: none;
+    border-radius: 8px;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+
+  .form-container button:hover {
+    opacity: 0.9;
+  }
+
+  /* Practice Areas Section */
+  .practice-areas-section {
+    padding: var(--space-2xl) 0;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .practice-areas-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .practice-areas-list a {
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--border-light);
+    transition: color 0.3s ease;
+  }
+
+  .practice-areas-list a:hover {
+    color: var(--text-primary);
+  }
+
+  /* Testimonials Section */
+  .testimonials-section {
+    padding: var(--space-2xl) 0;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .testimonial-card {
+    padding: var(--space-lg);
+    background: var(--bg-card);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+  }
+
+  .testimonial-text {
+    font-style: italic;
+    margin-bottom: var(--space-md);
+    line-height: 1.6;
+  }
+
+  .testimonial-author {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  /* Why Choose Section */
+  .why-choose-section {
+    padding: var(--space-2xl) 0;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .feature-item {
+    text-align: center;
+    padding: var(--space-lg);
+  }
+
+  .feature-item h3 {
+    font-size: 1.125rem;
+    margin-bottom: var(--space-sm);
+    color: var(--text-primary);
+  }
+
+  /* CTA Section */
+  .cta-section {
+    padding: var(--space-2xl) 0;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .cta-section h2 {
+    margin-bottom: var(--space-lg);
+  }
+
+  .cta-button {
+    display: inline-block;
+    padding: var(--space-md) var(--space-xl);
+    background: var(--text-primary);
+    color: #111115;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: opacity 0.3s ease;
+  }
+
+  .cta-button:hover {
+    opacity: 0.9;
+  }
+
+  /* Stats Section */
+  .stats-section {
+    padding: var(--space-2xl) 0;
+    text-align: center;
+  }
+
+  .stat-item {
+    margin-bottom: var(--space-lg);
+  }
+
+  .stat-number {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+  }
+
+  .stat-label {
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.875rem;
+  }
+
+  /* Footer */
+  .footer {
+    padding: var(--space-xl) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .footer-brand-name {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .footer-copyright {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--text-dim);
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md) var(--space-lg);
+  }
+
+  .footer-links a {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-links a:hover {
+    color: var(--text-primary);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .page-title-area {
+      padding: calc(96px + 40px) var(--space-md) var(--space-2xl);
+    }
+
+    .content-area {
+      padding: var(--space-2xl) var(--space-md);
+    }
+
+    .contact-form-section {
+      padding: var(--space-xl) 0;
+    }
+
+    .practice-areas-section,
+    .testimonials-section,
+    .why-choose-section,
+    .cta-section,
+    .stats-section {
+      padding: var(--space-xl) 0;
+    }
+
+    .footer {
+      padding: var(--space-lg) var(--space-md);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .page-title-area { 
+      padding: calc(96px + 60px) var(--space-2xl) var(--space-3xl); 
+    }
+    
+    .content-area { 
+      padding: var(--space-3xl) var(--space-2xl); 
+    }
+
+    .practice-areas-list {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .testimonials-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .features-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .footer {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .mobile-header {
+      display: none;
+    }
+
+    .sidebar {
+      display: flex !important;
+    }
+
+    .mobile-nav-overlay {
+      display: none !important;
+    }
+
+    .main-content {
+      margin-left: var(--sidebar-width);
+      width: calc(100% - var(--sidebar-width));
+    }
+
+    .page-title-area { 
+      padding: calc(96px + 80px) var(--space-3xl) var(--space-3xl); 
+    }
+    
+    .content-area { 
+      padding: var(--space-3xl); 
+    }
+
+    .practice-areas-list {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .testimonials-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .footer {
+      padding: var(--space-xl) var(--space-2xl);
+    }
+  }
+</style>
+
+
+
+<!-- HEADER -->
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">bosslawtn.com</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">bosslawtn.com</span>
+    </a>
+    <nav>
+      <a href="/">Inicio</a>
+      <a href="/other-practice-areas">Áreas de práctica</a>
+      <a href="/reviews">Opiniones</a>
+      <a href="/contact-us">Contacto</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Consulta gratuita</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">615-890-1548</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Gracias</h1>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+
+  <!-- Thank You Message -->
+  <section class="thank-you-message">
+    <p>¡Gracias por contactarnos! Nos pondremos en contacto contigo en breve.</p>
+  </section>
+
+  <!-- Contact Form Section -->
+  <section class="contact-form-section">
+    <h2>Contáctenos hoy mismo</h2>
+    <div class="form-container">
+      <h3>Formulario de banner</h3>
+      <form>
+        <input type="text" placeholder="Nombre*" required="">
+        <input type="text" placeholder="Apellido*" required="">
+        <input type="email" placeholder="Correo electrónico*" required="">
+        <input type="tel" placeholder="Teléfono*" required="">
+        <textarea placeholder="Mensaje" rows="5"></textarea>
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1617.691594075667!2d-86.3712745502623!3d35.8150730803717!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8863f868b72070a9%3A0x65c9e84de817e521!2sBoss%20Law!5e0!3m2!1sen!2sin!4v1762765824093!5m2!1sen!2sin" width="100%" height="300" style="border:0;margin-top:1.5rem" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map"></iframe>
+  </section>
+
+  <!-- Practice Areas -->
+  <section class="practice-areas-section">
+    <h2>Áreas de práctica</h2>
+    <div class="practice-areas-list">
+      <a href="/es/abogado-especializado-en-derecho-de-familia-en-murfreesboro/">Derecho de familia</a>
+      <a href="/es/abogado-especializado-en-divorcios-en-murfreesboro/">Divorcio</a>
+      <a href="/es/abogado-especializado-en-adopciones-en-murfreesboro/">Adopción</a>
+      <a href="/es/abogado-especializado-en-custodia-de-menores-en-murfreesboro/">Custodia de los hijos</a>
+      <a href="/es/abogado-especializado-en-manutencion-infantil-en-murfreesboro/">Manutención infantil</a>
+      <a href="/es/abogado-especializado-en-modificaciones-tras-el-divorcio-en-murfreesboro/">Modificaciones tras el divorcio</a>
+      <a href="/es/abogado-especializado-en-pensiones-alimenticias-en-murfreesboro/">Pensión alimenticia</a>
+      <a href="/es/abogado-especializado-en-violencia-domestica-en-murfreesboro/">Violencia doméstica</a>
+      <a href="/es/abogado-especializado-en-acuerdos-prenupciales-en-murfreesboro/">Acuerdo prenupcial</a>
+      <a href="/es/abogado-especializado-en-derechos-de-los-padres-en-murfreesboro/">Derechos de los padres</a>
+      <a href="/es/abogado-especializado-en-derechos-de-las-madres-en-murfreesboro/">Los derechos de las madres</a>
+      <a href="/es/abogado-especializado-en-derechos-de-los-abuelos-en-murfreesboro/">Derechos de los abuelos</a>
+      <a href="/es/abogado-especializado-en-derechos-de-visita-en-murfreesboro/">Derecho de visita</a>
+      <a href="/es/abogado-especializado-en-divorcios-entre-personas-del-mismo-sexo-en-murfreesboro/">Divorcio entre personas del mismo sexo</a>
+      <a href="/es/abogado-especializado-en-custodia-de-menores-lgbtq-en-murfreesboro/">Custodia de menores LGBTQ</a>
+      <a href="/es/abogado-especializado-en-divorcios-con-patrimonio-elevado-en-murfreesboro/">Divorcio con un patrimonio elevado</a>
+      <a href="/es/abogado-especializado-en-defensa-de-menores-en-murfreesboro/">Defensa de menores</a>
+      <a href="/es/otras-areas-de-practica/">Otras áreas de práctica</a>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials-section">
+    <h2>Testimonios</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-text">El mejor abogado que he tenido o conocido. Es increíble verlo trabajar y luchar por uno. Es un tipo agradable y un gran hombre que lucha con todas sus fuerzas incluso por la gente común como yo.</p>
+        <p class="testimonial-author">- Marcus</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">Boss Law gestionó mi divorcio sin complicaciones. El equipo fue muy servicial y me guió a lo largo de todo el estresante proceso. Me sentí respaldada y me mantuvieron informada en todo momento. Resolvimos todo juntos y estoy satisfecha con el resultado.</p>
+        <p class="testimonial-author">- Anónimo</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">Mitch me ofreció un precio justo. Se mostró comprensivo e hizo un trabajo excelente. Mitch se preocupa de verdad por sus clientes y sus familias. Además, representa a mujeres en casos de maltrato a través de la Agencia contra la Violencia Doméstica de forma gratuita.</p>
+        <p class="testimonial-author">- Patti</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">Como madre soltera, intentaba protegernos a mí y a mis hijos de una situación difícil. Me preocupaba no tener ninguna oportunidad porque mis ingresos eran muy limitados y los abogados son muy caros. Mitch se encargó de todo y pude pagar sus servicios…</p>
+        <p class="testimonial-author">- Tammara N.</p>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">En Boss Law realmente se preocupan por el cliente, no solo por el dinero o los resultados. Su equipo es honesto y nos ofreció opciones en lugar de imposiciones. Nos sentimos escuchados y protegidos. Los recomiendo encarecidamente y no dudaría en volver a contactarlos si fuera necesario.</p>
+        <p class="testimonial-author">- Kim R.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <h2>Da el siguiente paso</h2>
+    <p>Póngase en contacto con nuestra oficina hoy mismo para concertar una consulta gratuita.</p>
+    <a href="/contact-us" class="cta-button">Consulta gratuita</a>
+  </section>
+
+  <!-- Why Choose Section -->
+  <section class="why-choose-section">
+    <h2>¿Por qué elegir Boss Law?</h2>
+    <div class="features-grid">
+      <div class="feature-item">
+        <h3>Trabaja directamente con tu</h3>
+        <p>Un abogado que te acompaña en cada paso del camino</p>
+      </div>
+      <div class="feature-item">
+        <h3>Tratamos a nuestros clientes como</h3>
+        <p>Familia</p>
+      </div>
+      <div class="feature-item">
+        <h3>Estrategia personalizada para</h3>
+        <p>Todos los casos</p>
+      </div>
+    </div>
+    <img src="https://www.bosslawtn.com/wp-content/uploads/2025/11/hm-apart-sec-mdl.webp" alt="Boss Law">
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <h2>Te acompañaremos Cada Paso a paso</h2>
+    <p style="color: var(--text-muted); margin-bottom: var(--space-xl);">Orgullosos de atender a nuestros clientes en Murfreesboro, TN y sus alrededores.</p>
+    <div class="stat-item">
+      <div class="stat-number">800+</div>
+      <div class="stat-label">casos de divorcio tramitados</div>
+    </div>
+    <a href="/contact-us" class="cta-button">Solicita una consulta gratuita</a>
+    <p style="margin-top: var(--space-lg);">Llámenos hoy mismo <a href="tel:615-890-1548">615-890-1548</a></p>
+  </section>
+
+  <!-- Final Contact Section -->
+  <section class="contact-form-section">
+    <h2>Contacto Ley del jefe ¡Hoy!</h2>
+    <div class="form-container">
+      <p>Los campos marcados con un * son obligatorios</p>
+      <form>
+        <input type="text" placeholder="Nombre*" required="">
+        <input type="text" placeholder="Apellido*" required="">
+        <input type="email" placeholder="Correo electrónico*" required="">
+        <input type="tel" placeholder="Teléfono*" required="">
+        <textarea placeholder="Mensaje" rows="5"></textarea>
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+  </section>
+
+</div>
+
+<footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">bosslawtn.com</span>
+      <span class="footer-copyright">© 2026 Boss Law • Todos los derechos reservados.</span>
+    </div>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/contact-us">Contact Us</a>
+      <a href="/reviews">Reviews</a>
+      <a href="/other-practice-areas">Practice Areas</a>
+      <a href="/attorney/mitchell-e-shannon">Attorney Mitchell Shannon</a>
+      <a href="/attorney/giselle-sutherland">Attorney Giselle Ortega Sutherland</a>
+      <a href="/es/politica-de-privacidad">Política de privacidad</a>
+      <a href="/disclaimer">Disclaimer</a>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>

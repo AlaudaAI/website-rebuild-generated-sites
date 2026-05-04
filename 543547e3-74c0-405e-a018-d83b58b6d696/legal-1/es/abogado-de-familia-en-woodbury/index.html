@@ -1,0 +1,749 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Woodbury Abogado especializado en derecho de familia</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  :root {
+    --bg-primary: #111115;
+    --bg-secondary: #1a1a20;
+    --bg-hover: #22222a;
+    --bg-card: #16161c;
+    --text-primary: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.5);
+    --text-dim: rgba(255, 255, 255, 0.35);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-light: rgba(255, 255, 255, 0.06);
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Inter', -apple-system, sans-serif;
+    --sidebar-width: 280px;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 32px;
+    --space-xl: 48px;
+    --space-2xl: 64px;
+    --space-3xl: 96px;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
+
+  /* Navigation */
+  .mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg-primary);
+  }
+
+  .mobile-header .brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+
+  .mobile-header .brand .globe-icon {
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid var(--text-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  .mobile-header .brand-name {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-sm);
+  }
+
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--text-primary);
+    transition: all 0.3s ease;
+  }
+
+  .sidebar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: var(--bg-primary);
+    border-right: 1px solid var(--border-color);
+    z-index: 200;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: var(--space-xl) var(--space-lg);
+    overflow-y: auto;
+  }
+
+  .sidebar .brand-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .sidebar .brand-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+
+  .sidebar .globe-icon {
+    width: 38px;
+    height: 38px;
+    border: 1.5px solid var(--text-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .sidebar .brand-name {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .sidebar nav a {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .sidebar nav a:hover {
+    color: var(--text-primary);
+  }
+
+  .sidebar .status-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .mobile-nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 150;
+  }
+
+  .mobile-nav-overlay.active {
+    display: block;
+  }
+
+  .sidebar.active {
+    display: flex;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: calc(96px + 60px) var(--space-lg) var(--space-3xl);
+    background: var(--text-primary);
+    color: #ffffff;
+  }
+
+  .page-title-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-title-area h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  /* Content Area */
+  .content-area {
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .content-area h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .content-area p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area ul, .content-area ol {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-lg);
+    color: var(--text-muted);
+  }
+
+  .content-area li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  .content-area img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    font-weight: 500;
+  }
+
+  .content-area a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  .hero-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .practice-areas-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+  }
+
+  .practice-area {
+    color: var(--text-muted);
+    padding: var(--space-md);
+    background: var(--bg-card);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    margin-bottom: var(--space-sm);
+  }
+
+  .testimonials {
+    margin: var(--space-3xl) 0;
+  }
+
+  .testimonials h2 {
+    margin-bottom: var(--space-xl);
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .testimonial-card {
+    background: var(--bg-card);
+    padding: var(--space-lg);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+  }
+
+  .testimonial-text {
+    margin-bottom: var(--space-md);
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .testimonial-author {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .stats-section {
+    margin: var(--space-3xl) 0;
+    padding: var(--space-xl);
+    background: var(--bg-card);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+  }
+
+  .stat-label {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+  }
+
+  .contact-section {
+    margin: var(--space-3xl) 0;
+    padding: var(--space-xl);
+    background: var(--bg-card);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+  }
+
+  .contact-button {
+    display: inline-block;
+    padding: var(--space-md) var(--space-xl);
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: opacity 0.3s ease;
+  }
+
+  .contact-button:hover {
+    opacity: 0.9;
+  }
+
+  /* Footer */
+  .footer {
+    padding: var(--space-xl) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .footer-brand-name {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .footer-copyright {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--text-dim);
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md) var(--space-lg);
+  }
+
+  .footer-links a {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-links a:hover {
+    color: var(--text-primary);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .page-title-area h1 {
+      font-size: 2rem;
+    }
+    
+    .content-area h2 {
+      font-size: 1.5rem;
+    }
+    
+    .content-area {
+      padding: var(--space-lg);
+    }
+    
+    .stat-number {
+      font-size: 2rem;
+    }
+    
+    .contact-button {
+      padding: var(--space-md) var(--space-lg);
+    }
+    
+    .hamburger {
+      display: flex;
+    }
+    
+    .sidebar {
+      display: none !important;
+    }
+    
+    .mobile-nav-overlay {
+      display: block !important;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .page-title-area { 
+      padding: calc(96px + 60px) var(--space-2xl) var(--space-3xl); 
+    }
+    
+    .content-area { 
+      padding: var(--space-3xl) var(--space-2xl); 
+    }
+    
+    .testimonials-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .footer {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .mobile-header {
+      display: none;
+    }
+
+    .sidebar {
+      display: flex !important;
+    }
+
+    .mobile-nav-overlay {
+      display: none !important;
+    }
+
+    .main-content {
+      margin-left: var(--sidebar-width);
+      width: calc(100% - var(--sidebar-width));
+    }
+
+    .page-title-area { 
+      padding: calc(96px + 80px) var(--space-3xl) var(--space-3xl); 
+    }
+    
+    .content-area { 
+      padding: var(--space-3xl); 
+    }
+
+    .testimonials-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .footer {
+      padding: var(--space-xl) var(--space-2xl);
+    }
+  }
+</style>
+
+
+
+<!-- HEADER -->
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">bosslawtn.com</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">bosslawtn.com</span>
+    </a>
+    <nav>
+      <a href="#">Platform</a>
+      <a href="#">Solutions</a>
+      <a href="#">Documentation</a>
+      <a href="#">Enterprise</a>
+    </nav>
+  </div>
+  
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Woodbury Abogado especializado en derecho de familia</h1>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+  <img src="https://www.bosslawtn.com/wp-content/uploads/2026/03/woodbury-family-lawyer.webp" alt="Abogado especializado en derecho de familia de Woodbury-imagen" class="hero-image">
+
+  <h2>Abogado especializado en derecho de familia en Woodbury, Tennessee</h2>
+  
+  <p>Hay pocas situaciones legales más complicadas desde el punto de vista emocional que aquellas en las que están involucrados miembros de una familia. Dado que estos casos suelen implicar una intrincada red de cuestiones interrelacionadas, necesitas un defensor legal que te respalde y que se preocupe por ti como ser humano. Ya sea que te enfrentes a la división de bienes de una vivienda cerca del parque Brown Spurlock o a problemas de custodia de menores en tu casa de la calle McFerrin, un Abogado especializado en derecho de familia de Woodbury está aquí para ayudarte.</p>
+
+  <h3>Confíe en el equipo de Boss Law</h3>
+
+  <p>Desde 2004, Boss Law ha estado ayudando a familias de toda la región de Tennessee a alcanzar soluciones amistosas y favorables para una amplia gama de asuntos legales. Nuestro equipo está dirigido por un graduado de la Universidad Estatal de Middle Tennessee y de la Facultad de Derecho de Nashville, por lo que nos sentimos como en casa en el juzgado del condado de Cannon, situado en West Main Street, en Woodbury. Contamos con experiencia en la gestión de casos en esta localidad y podemos aprovecharla para beneficiar su caso de derecho de familia y los intereses de usted y sus seres queridos.</p>
+
+  <p>Además, los miembros de nuestro equipo hablan español con fluidez, lo que significa que estamos aquí para atender a personas y familias de todos los orígenes. Nos esforzamos por ayudar a nuestros clientes a superar estos momentos difíciles hasta que se alcance la luz al final del túnel y el futuro vuelva a parecer prometedor. Estamos aquí para ocuparnos de todos los aspectos legales de su caso, de modo que usted pueda centrarse en lo que más importa: la seguridad y la protección de sus seres queridos y de todo lo que le es querido.</p>
+
+  <div class="contact-section">
+    <h3>Contacto Ley del jefe</h3>
+    <a href="/contact-us" class="contact-button">Programa una consulta</a>
+    <iframe src="https://maps.app.goo.gl/7tBFeGhpViUabNZE8" width="100%" height="300" style="border:0;margin-top:1.5rem" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map"></iframe>
+  </div>
+
+  <h2>¿Por qué elegir Boss Law?</h2>
+  
+  <p>Con más de 20 años de experiencia, Boss Law se especializa en derecho de familia y está comprometido con el éxito de sus clientes. Nuestro equipo entiende las complejidades emocionales y legales de los casos familiares y trabaja incansablemente para proteger sus derechos e intereses. Ofrecemos representación compasiva pero agresiva cuando es necesario, siempre con el objetivo de obtener los mejores resultados posibles para usted y su familia.</p>
+
+  <h2>Nuestras principales áreas de práctica en derecho de familia en Woodbury, TN</h2>
+
+  <p>El estado de Tennessee presenta una tasa global de divorcios de 2,9 casos por cada 1.000 habitantes, y una tasa de divorcios de 9,1 por cada mujer miembro de la población. Aunque el divorcio suele ser el ámbito más habitual del derecho de familia, en Boss Law también estamos aquí para ayudar a nuestros clientes con los siguientes asuntos legales:</p>
+
+  <div class="practice-areas-grid">
+    <div class="practice-area"><strong>Derecho de familia:</strong> Family law services including custody, support, and family-related legal matters</div>
+    
+    <div class="practice-area"><strong>Divorcio:</strong> Divorce proceedings and related legal services</div>
+    
+    <div class="practice-area"><strong>Custodia de los hijos:</strong> Child custody arrangements and modifications</div>
+    
+    <div class="practice-area"><strong>Manutención infantil:</strong> Child support determination and enforcement</div>
+    
+    <div class="practice-area"><strong>Pensión alimenticia:</strong> Spousal support and alimony matters</div>
+    
+    <div class="practice-area"><strong>División de bienes:</strong> En un divorcio, Tennessee se rige por el principio de distribución equitativa, lo que significa que todos los bienes gananciales se dividirán a partes iguales entre la pareja.</div>
+    
+    <div class="practice-area"><strong>Divorcios de personas con un elevado patrimonio:</strong> En los casos de personas con un elevado patrimonio que solicitan el divorcio, las cuestiones propias de los casos de divorcio habituales cobran aún mayor relevancia.</div>
+    
+    <div class="practice-area"><strong>El divorcio del empresario:</strong> Cuando una empresa es propiedad de uno de los cónyuges o de ambos y se produce un divorcio, es comprensible que desee proteger su negocio.</div>
+    
+    <div class="practice-area"><strong>Adopción:</strong> Legal adoption services and proceedings</div>
+    
+    <div class="practice-area"><strong>Paternidad:</strong> Las demandas de paternidad son casos complejos. Ya seas el hijo, la madre o el presunto padre de un niño, necesitas contratar a un abogado especializado en derecho de familia.</div>
+    
+    <div class="practice-area"><strong>Modificaciones tras el divorcio:</strong> Post-divorce modifications to existing orders</div>
+    
+    <div class="practice-area"><strong>Violencia doméstica:</strong> Domestic violence legal protection and representation</div>
+    
+    <div class="practice-area"><strong>Acuerdo prenupcial:</strong> Prenuptial agreement drafting and review</div>
+    
+    <div class="practice-area"><strong>Derechos de los padres:</strong> Father's rights legal representation</div>
+    
+    <div class="practice-area"><strong>Los derechos de las madres:</strong> Mother's rights legal representation</div>
+    
+    <div class="practice-area"><strong>Derechos de los abuelos:</strong> Grandparent rights legal services</div>
+    
+    <div class="practice-area"><strong>Derechos de visita de los hijos:</strong> Child visitation rights and arrangements</div>
+  </div>
+
+  <h3>Contrate hoy mismo a un abogado especializado en derecho de familia de Boss Law</h3>
+
+  <p>Si se enfrenta a un problema de derecho de familia en Woodbury, es necesario que contrate a un abogado especializado en derecho de familia con experiencia en el sistema judicial del condado de Cannon. Entendemos que a muchas personas les preocupa cómo estos casos afectarán a sus seres queridos, especialmente en situaciones de divorcio y custodia de los hijos. Nos dedicamos a encontrar soluciones seguras y amistosas que le ayuden a seguir adelante con confianza. Póngase en contacto con nuestras oficinas hoy mismo para programar tu consulta gratuita.</p>
+
+  <div class="stats-section">
+    <div class="stat-number">800+</div>
+    <div class="stat-label">divorce cases handled</div>
+  </div>
+
+  <section class="testimonials">
+    <h2>Testimonios</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-text">El mejor abogado que he tenido o conocido. Es increíble verlo trabajar y luchar por uno. Es un tipo agradable y un gran hombre que lucha con todas sus fuerzas incluso por la gente común como yo.</div>
+        <div class="testimonial-author">- Marcus</div>
+      </div>
+      
+      <div class="testimonial-card">
+        <div class="testimonial-text">Boss Law gestionó mi divorcio sin complicaciones. El equipo fue muy servicial y me guió a lo largo de todo el estresante proceso. Me sentí respaldada y me mantuvieron informada en todo momento. Resolvimos todo juntos y estoy satisfecha con el resultado.</div>
+        <div class="testimonial-author">- Anónimo</div>
+      </div>
+      
+      <div class="testimonial-card">
+        <div class="testimonial-text">Mitch me ofreció un precio justo. Se mostró comprensivo e hizo un trabajo excelente. Mitch se preocupa de verdad por sus clientes y sus familias. Además, representa a mujeres en casos de maltrato a través de la Agencia contra la Violencia Doméstica de forma gratuita.</div>
+        <div class="testimonial-author">- Patti</div>
+      </div>
+      
+      <div class="testimonial-card">
+        <div class="testimonial-text">Como madre soltera, intentaba protegernos a mí y a mis hijos de una situación difícil. Me preocupaba no tener ninguna oportunidad porque mis ingresos eran muy limitados y los abogados son muy caros. Mitch se encargó de todo y pude pagar sus servicios…</div>
+        <div class="testimonial-author">- Tammara N.</div>
+      </div>
+      
+      <div class="testimonial-card">
+        <div class="testimonial-text">En Boss Law realmente se preocupan por el cliente, no solo por el dinero o los resultados. Su equipo es honesto y nos ofreció opciones en lugar de imposiciones. Nos sentimos escuchados y protegidos. Los recomiendo encarecidamente y no dudaría en volver a contactarlos si fuera necesario.</div>
+        <div class="testimonial-author">- Kim R.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="contact-section">
+    <h3>Da el siguiente paso</h3>
+    <p>Póngase en contacto con nuestra oficina hoy mismo para concertar una consulta gratuita.</p>
+    <a href="/contact-us" class="contact-button">Consulta gratuita</a>
+  </div>
+
+  <h3>Te acompañaremos Cada Paso a paso</h3>
+  <p>Orgullosos de atender a nuestros clientes en Murfreesboro, TN y sus alrededores.</p>
+  <p><a href="tel:615-890-1548">Llámanos hoy mismo 615-890-1548</a></p>
+
+  <img src="https://www.bosslawtn.com/wp-content/uploads/2025/11/hm-apart-sec-mdl.webp" alt="Bosslaw">
+
+  <div class="contact-section">
+    <h3>Contacto Ley del jefe ¡Hoy!</h3>
+    <p>Los campos marcados con un * son obligatorios</p>
+    <p>"*" indica los campos obligatorios</p>
+    <p>Nombre*</p>
+    <p>Apellido*</p>
+    <p>Correo electrónico*</p>
+    <p>Teléfono*</p>
+    <p>Mensaje</p>
+    <p>Aviso legal | Política de privacidad</p>
+    <p>Aviso legal: El uso de Internet o de este formulario para comunicarse con el bufete o con cualquier miembro del mismo no establece una relación abogado-cliente. No se debe enviar información confidencial o urgente a través de este formulario.</p>
+    <p>He leído el aviso legal *</p>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-brand">
+    <span class="footer-brand-name">bosslawtn.com</span>
+    <span class="footer-copyright">©2026</span>
+  </div>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/contact-us">Contact Us</a>
+    <a href="/reviews">Reviews</a>
+    <a href="/other-practice-areas">Practice Areas</a>
+    <a href="/attorney/mitchell-e-shannon">Attorney Mitchell Shannon</a>
+    <a href="/attorney/giselle-sutherland">Attorney Giselle Ortega Sutherland</a>
+    <a href="/es/politica-de-privacidad">Política de privacidad</a>
+    <a href="/disclaimer">Disclaimer</a>
+  </div>
+</footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  // Close sidebar on resize to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
