@@ -1,0 +1,704 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adoption — Jones, Green, &amp; Tackett Law, PLLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  :root {
+    --bg-primary: #111115;
+    --bg-secondary: #1a1a20;
+    --bg-hover: #22222a;
+    --bg-card: #16161c;
+    --text-primary: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.5);
+    --text-dim: rgba(255, 255, 255, 0.35);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-light: rgba(255, 255, 255, 0.06);
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Inter', -apple-system, sans-serif;
+    --sidebar-width: 280px;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 32px;
+    --space-xl: 48px;
+    --space-2xl: 64px;
+    --space-3xl: 96px;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
+
+  /* Navigation */
+  .mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg-primary);
+  }
+
+  .mobile-header .brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+
+  .mobile-header .brand .globe-icon {
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid var(--text-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  .mobile-header .brand-name {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-sm);
+  }
+
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--text-primary);
+    transition: all 0.3s ease;
+  }
+
+  .sidebar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: var(--bg-primary);
+    border-right: 1px solid var(--border-color);
+    z-index: 200;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: var(--space-xl) var(--space-lg);
+    overflow-y: auto;
+  }
+
+  .sidebar .brand-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .sidebar .brand-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+
+  .sidebar .globe-icon {
+    width: 38px;
+    height: 38px;
+    border: 1.5px solid var(--text-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .sidebar .brand-name {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .sidebar nav a {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .sidebar nav a:hover {
+    color: var(--text-primary);
+  }
+
+  .sidebar .status-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .mobile-nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 150;
+  }
+
+  .mobile-nav-overlay.active {
+    display: block;
+  }
+
+  .sidebar.active {
+    display: flex;
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: calc(96px + 60px) var(--space-lg) var(--space-3xl);
+    background: var(--text-primary);
+    color: #ffffff;
+  }
+
+  .page-title-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-title-area h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--bg-primary);
+  }
+
+  /* Content Area */
+  .content-area {
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .content-area h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .content-area p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area ul, .content-area ol {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-lg);
+    color: var(--text-muted);
+  }
+
+  .content-area li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  .content-area img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    font-weight: 500;
+  }
+
+  .content-area a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  /* Practice Areas List */
+  .practice-areas-section {
+    margin-top: var(--space-3xl);
+    padding-top: var(--space-2xl);
+    border-top: 1px solid var(--border-color);
+  }
+
+  .practice-areas-section h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .practice-areas-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm) var(--space-md);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .practice-areas-grid li {
+    margin: 0;
+  }
+
+  .practice-areas-grid a {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    border: 1px solid var(--border-color);
+    padding: 6px 14px;
+    border-radius: 4px;
+    transition: color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .practice-areas-grid a:hover {
+    color: var(--text-primary);
+    border-color: rgba(255,255,255,0.3);
+  }
+
+  .practice-areas-grid a.active {
+    color: var(--text-primary);
+    border-color: rgba(255,255,255,0.5);
+  }
+
+  /* Content layout with image */
+  .adoption-content-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xl);
+  }
+
+  .adoption-text-block {
+    flex: 1;
+  }
+
+  .adoption-image-block {
+    flex: 1;
+    max-width: 100%;
+  }
+
+  .adoption-image-block img {
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+    border-radius: 12px;
+    display: block;
+  }
+
+  /* Contact info */
+  .contact-info-bar {
+    margin-top: var(--space-2xl);
+    padding: var(--space-lg);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md) var(--space-2xl);
+    align-items: center;
+  }
+
+  .contact-info-bar p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  .contact-info-bar a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .contact-info-bar a:hover {
+    text-decoration: underline;
+  }
+
+  /* Footer */
+  .footer {
+    padding: var(--space-xl) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    border-top: 1px solid var(--border-color);
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .footer-brand-name {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .footer-copyright {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--text-dim);
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md) var(--space-lg);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-links li {
+    margin: 0;
+  }
+
+  .footer-links a {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-links a:hover {
+    color: var(--text-primary);
+  }
+
+  /* Responsive */
+  @media (min-width: 768px) {
+    .page-title-area {
+      padding: calc(96px + 60px) var(--space-2xl) var(--space-3xl);
+    }
+
+    .content-area {
+      padding: var(--space-3xl) var(--space-2xl);
+    }
+
+    .adoption-content-wrap {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+
+    .adoption-image-block {
+      max-width: 420px;
+      flex-shrink: 0;
+    }
+
+    .footer {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: var(--space-xl) var(--space-2xl);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .mobile-header {
+      display: none;
+    }
+
+    .sidebar {
+      display: flex !important;
+    }
+
+    .mobile-nav-overlay {
+      display: none !important;
+    }
+
+    .main-content {
+      margin-left: var(--sidebar-width);
+      width: calc(100% - var(--sidebar-width));
+    }
+
+    .page-title-area {
+      padding: calc(96px + 80px) var(--space-3xl) var(--space-3xl);
+    }
+
+    .content-area {
+      padding: var(--space-3xl);
+    }
+
+    .footer {
+      padding: var(--space-xl) var(--space-2xl);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .page-title-area {
+      padding: calc(64px + 40px) var(--space-md) var(--space-2xl);
+    }
+
+    .content-area {
+      padding: var(--space-2xl) var(--space-md);
+    }
+
+    .adoption-content-wrap {
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    .adoption-image-block {
+      max-width: 100%;
+    }
+
+    .adoption-image-block img {
+      max-width: 100%;
+    }
+
+    .contact-info-bar {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      padding: var(--space-md);
+    }
+
+    .practice-areas-grid {
+      gap: var(--space-xs) var(--space-sm);
+    }
+
+    .practice-areas-grid a {
+      font-size: 11px;
+      padding: 5px 10px;
+    }
+
+    .footer {
+      flex-direction: column;
+      padding: var(--space-lg) var(--space-md);
+      gap: var(--space-md);
+    }
+
+    .footer-links {
+      gap: var(--space-sm) var(--space-md);
+    }
+
+    .content-area h2 {
+      font-size: 1.4rem;
+    }
+
+    .content-area h3 {
+      font-size: 1.1rem;
+    }
+
+    .mobile-header .brand-name {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+    }
+  }
+</style>
+
+
+
+<!-- HEADER -->
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">Jones, Green, &amp; Tackett Law, PLLC</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">Jones, Green, &amp; Tackett Law, PLLC</span>
+    </a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/our-team">Our Team</a>
+      <a href="/adoption">Adoption</a>
+      <a href="/divorce">Divorce</a>
+      <a href="/child-custody">Child Custody</a>
+      <a href="/contact-us">Contact Us</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div style="font-size:11px; color: var(--text-muted); letter-spacing:0.1em;">110 West Sixth Avenue<br>Springfield, TN 37172</div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Adoption</h1>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+
+  <div class="adoption-content-wrap">
+    <div class="adoption-text-block">
+      <h2>Adoption</h2>
+      <p>Assistance with adopting a new child and defending parents against termination of parental rights, including step-parent adoptions, adult adoptions, open and closed adoptions, and paternity registry.</p>
+      <p>Adopting a child is one of the most exciting and important times of your life. But it can also be confusing and emotional. You need a compassionate, dedicated attorney to walk you through your options and protect your interests. Our attorneys are experienced both in assisting families adopting a new child and defending parents against termination of their parental rights.</p>
+      <p>For all of your adoptions questions, <a href="/contact-us">contact us</a> for a free consultation with one of our attorneys. We offer representation and service in the following areas:</p>
+      <ul>
+        <li>Termination of Parental Rights</li>
+        <li>Step-Parent Adoptions</li>
+        <li>Adult Adoptions</li>
+        <li>Open Adoptions</li>
+        <li>Closed Adoptions</li>
+        <li>Paternity Registry</li>
+      </ul>
+    </div>
+    <div class="adoption-image-block">
+      <img src="https://images.squarespace-cdn.com/content/v1/5c60b6d9b91449401e32e0aa/1550255583245-AMKBD8ZCF5EX9PEVTGDZ/adoption_springfield_tn_attorney_lawyer" alt="adoption_springfield_tn_attorney_lawyer">
+    </div>
+  </div>
+
+  <div class="contact-info-bar">
+    <p>110 West Sixth Avenue, Springfield, TN 37172</p>
+    <p><a href="tel:6156671073">(615) 667-1073</a> Office &nbsp;|&nbsp; <a href="tel:6154335103">(615) 433-5103</a> Fax</p>
+    <p><a href="https://www.facebook.com/JGTLegalTN" target="_blank" rel="noopener"><i class="fab fa-facebook"></i> Facebook</a></p>
+  </div>
+
+  <div class="practice-areas-section">
+    <h3>Practice Areas</h3>
+    <ul class="practice-areas-grid">
+      <li><a href="/adoption" class="active">Adoption</a></li>
+      <li><a href="/appeals">Appeals</a></li>
+      <li><a href="/business-law">Business Formation</a></li>
+      <li><a href="/child-custody">Child Custody</a></li>
+      <li><a href="/child-support">Child Support</a></li>
+      <li><a href="/conservatorship">Conservatorship</a></li>
+      <li><a href="/contempt">Contempt</a></li>
+      <li><a href="/contracts">Contracts</a></li>
+      <li><a href="/criminal-law">Criminal Law</a></li>
+      <li><a href="/divorce">Divorce</a></li>
+      <li><a href="/estate-administration-probate">Estate Administration &amp; Probate</a></li>
+      <li><a href="/estate-planning">Estate Planning</a></li>
+      <li><a href="/mediation">Mediation</a></li>
+      <li><a href="/personal-injury">Personal Injury</a></li>
+      <li><a href="/real-estate">Real Estate</a></li>
+    </ul>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-brand">
+    <span class="footer-brand-name">Jones, Green, &amp; Tackett Law, PLLC</span>
+    <span class="footer-copyright">© 2026 Jones, Green, &amp; Tackett Law, PLLC. All rights reserved.</span>
+  </div>
+  <div class="footer-links">
+    <li><a href="/">Home</a></li><li><a href="/our-team">Our Team</a></li><li><a href="/contact-us">Contact Us</a></li><li><a href="/contempt">Contempt</a></li><li><a href="/testimonials">Testimonials</a></li><li><a href="/mediation">Mediation</a></li><li><a href="/child-custody">Child Custody</a></li><li><a href="/real-estate">Real Estate</a></li><li><a href="/brandi-l-jones">Brandi L. Jones</a></li><li><a href="/new-page">New Page</a></li><li><a href="/home-alt-bedford">Home Alt Bedford</a></li><li><a href="/adoption">Adoption</a></li><li><a href="/child-support">Child Support</a></li><li><a href="/business-law">Business Formation</a></li><li><a href="/personal-injury">Personal Injury</a></li><li><a href="/criminal-law">Criminal Law</a></li><li><a href="/appeals">Appeals</a></li><li><a href="/divorce">Divorce</a></li><li><a href="/heather-e-tackett">Heather E. Tackett</a></li><li><a href="/estate-planning">Estate Planning</a></li><li><a href="/emily-c-green">Emily C. Green</a></li><li><a href="/conservatorship">Conservatorship</a></li><li><a href="/contracts">Contracts</a></li><li><a href="/estate-administration-probate">Estate Administration &amp; Probate</a></li>
+  </div>
+</footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>

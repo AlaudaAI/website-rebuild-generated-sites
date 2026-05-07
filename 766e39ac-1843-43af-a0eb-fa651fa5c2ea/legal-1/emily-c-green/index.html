@@ -1,0 +1,861 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emily C. Green</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  :root {
+    --bg-primary: #111115;
+    --bg-secondary: #1a1a20;
+    --bg-hover: #22222a;
+    --bg-card: #16161c;
+    --text-primary: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.5);
+    --text-dim: rgba(255, 255, 255, 0.35);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-light: rgba(255, 255, 255, 0.06);
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Inter', -apple-system, sans-serif;
+    --sidebar-width: 280px;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 32px;
+    --space-xl: 48px;
+    --space-2xl: 64px;
+    --space-3xl: 96px;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
+
+  /* Navigation */
+  .mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg-primary);
+  }
+
+  .mobile-header .brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+
+  .mobile-header .brand .globe-icon {
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid var(--text-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  .mobile-header .brand-name {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-sm);
+  }
+
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--text-primary);
+    transition: all 0.3s ease;
+  }
+
+  .sidebar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: var(--bg-primary);
+    border-right: 1px solid var(--border-color);
+    z-index: 200;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: var(--space-xl) var(--space-lg);
+    overflow-y: auto;
+  }
+
+  .sidebar .brand-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .sidebar .brand-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+
+  .sidebar .globe-icon {
+    width: 38px;
+    height: 38px;
+    border: 1.5px solid var(--text-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .sidebar .brand-name {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .sidebar nav a {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .sidebar nav a:hover {
+    color: var(--text-primary);
+  }
+
+  .sidebar .status-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .mobile-nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 150;
+  }
+
+  .mobile-nav-overlay.active {
+    display: block;
+  }
+
+  .sidebar.active {
+    display: flex;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: calc(96px + 60px) var(--space-lg) var(--space-3xl);
+    background: var(--text-primary);
+    color: #111115;
+  }
+
+  .page-title-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-title-area h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: #111115;
+  }
+
+  /* Content Area */
+  .content-area {
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .content-area h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .content-area p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area ul, .content-area ol {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-lg);
+    color: var(--text-muted);
+  }
+
+  .content-area li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  .content-area img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    font-weight: 500;
+  }
+
+  .content-area a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  /* Attorney profile layout */
+  .attorney-profile {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xl);
+  }
+
+  .attorney-top {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xl);
+  }
+
+  .attorney-photo {
+    flex-shrink: 0;
+  }
+
+  .attorney-photo img {
+    width: 100%;
+    max-width: 380px;
+    height: auto;
+    border-radius: 12px;
+    display: block;
+  }
+
+  .attorney-details {
+    flex: 1;
+  }
+
+  .attorney-details h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    margin-bottom: var(--space-lg);
+    color: var(--text-primary);
+  }
+
+  .two-col-lists {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xl);
+  }
+
+  .list-block h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+    letter-spacing: 0.02em;
+  }
+
+  .list-block ul {
+    list-style: disc;
+    padding-left: var(--space-lg);
+    color: var(--text-muted);
+    margin-bottom: 0;
+  }
+
+  .list-block ul li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  /* Bio section */
+  .attorney-bio {
+    border-top: 1px solid var(--border-color);
+    padding-top: var(--space-2xl);
+  }
+
+  .attorney-bio p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  /* Publications */
+  .publications-section {
+    border-top: 1px solid var(--border-color);
+    padding-top: var(--space-2xl);
+  }
+
+  .publications-section h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .publications-section ul {
+    list-style: disc;
+    padding-left: var(--space-lg);
+    color: var(--text-muted);
+    margin-bottom: 0;
+  }
+
+  .publications-section ul li {
+    margin-bottom: var(--space-md);
+    line-height: 1.7;
+  }
+
+  /* Testimonials */
+  .testimonials-section {
+    border-top: 1px solid var(--border-color);
+    padding-top: var(--space-2xl);
+    margin-top: var(--space-2xl);
+  }
+
+  .testimonials-section h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .testimonial-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .testimonial-quote {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  .testimonial-author {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+  }
+
+  /* Divider */
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: var(--space-2xl) 0;
+  }
+
+  /* Services Section */
+  .services-section {
+    border-top: 1px solid var(--border-color);
+    padding-top: var(--space-2xl);
+  }
+
+  .services-section h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .services-list {
+    list-style: disc;
+    padding-left: var(--space-lg);
+    color: var(--text-muted);
+    margin-bottom: 0;
+  }
+
+  .services-list li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  /* Footer */
+  .footer {
+    padding: var(--space-xl) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    border-top: 1px solid var(--border-color);
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .footer-brand-name {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .footer-copyright {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--text-dim);
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md) var(--space-lg);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-links li {
+    margin: 0;
+  }
+
+  .footer-links a {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-links a:hover {
+    color: var(--text-primary);
+  }
+
+  /* Responsive */
+  @media (min-width: 768px) {
+    .page-title-area {
+      padding: calc(96px + 60px) var(--space-2xl) var(--space-3xl);
+    }
+    .content-area {
+      padding: var(--space-3xl) var(--space-2xl);
+    }
+    .attorney-top {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+    .attorney-photo img {
+      max-width: 320px;
+    }
+    .two-col-lists {
+      flex-direction: row;
+    }
+    .testimonials-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .footer {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: var(--space-xl) var(--space-2xl);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .mobile-header {
+      display: none;
+    }
+    .sidebar {
+      display: flex !important;
+    }
+    .mobile-nav-overlay {
+      display: none !important;
+    }
+    .main-content {
+      margin-left: var(--sidebar-width);
+      width: calc(100% - var(--sidebar-width));
+    }
+    .page-title-area {
+      padding: calc(96px + 80px) var(--space-3xl) var(--space-3xl);
+    }
+    .content-area {
+      padding: var(--space-3xl);
+    }
+    .testimonials-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .footer {
+      padding: var(--space-xl) var(--space-2xl);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .sidebar {
+      display: none !important;
+    }
+    .sidebar.active {
+      display: flex !important;
+    }
+    .mobile-nav-overlay.active {
+      display: block !important;
+    }
+    .main-content {
+      margin-left: 0;
+      width: 100%;
+    }
+    .page-title-area {
+      padding: calc(64px + 32px) var(--space-md) var(--space-xl);
+    }
+    .page-title-area h1 {
+      font-size: 1.75rem;
+    }
+    .content-area {
+      padding: var(--space-xl) var(--space-md);
+    }
+    .attorney-top {
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+    .attorney-photo img {
+      max-width: 100%;
+    }
+    .two-col-lists {
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+    .attorney-details h2 {
+      font-size: 1.4rem;
+    }
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+    }
+    .testimonial-card {
+      padding: var(--space-md);
+    }
+    .footer {
+      flex-direction: column;
+      padding: var(--space-lg) var(--space-md);
+      gap: var(--space-md);
+    }
+    .footer-links {
+      gap: var(--space-sm) var(--space-md);
+    }
+    .publications-section ul li {
+      font-size: 0.9rem;
+    }
+  }
+</style>
+
+
+
+<!-- HEADER -->
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="#" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">Jones, Green, &amp; Tackett Law, PLLC</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="#" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">Jones, Green, &amp; Tackett Law, PLLC</span>
+    </a>
+    <nav>
+      <a href="/">Platform</a>
+      <a href="/our-team">Solutions</a>
+      <a href="/contact-us">Documentation</a>
+      <a href="/divorce">Enterprise</a>
+    </nav>
+  </div>
+  
+</aside>
+
+<div class="main-content">
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Emily C. Green</h1>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+  <div class="attorney-profile">
+
+    <!-- Top: Photo + Lists -->
+    <div class="attorney-top">
+      <div class="attorney-photo">
+        <img src="https://images.squarespace-cdn.com/content/v1/5c60b6d9b91449401e32e0aa/0e4030c8-719d-455e-92c8-9c646fd9f0ae/A7I07860.jpg" alt="Emily C. Green, Attorney at Law">
+      </div>
+      <div class="attorney-details">
+        <h2>Emily C. Green | Attorney at Law</h2>
+        <div class="two-col-lists">
+          <div class="list-block">
+            <h3>Emily's Practice Areas:</h3>
+            <ul>
+              <li>Trusts &amp; Estate Planning</li>
+              <li>Wills &amp; Powers of Attorney</li>
+              <li>Probate &amp; Estate Administration</li>
+              <li>Conservatorships</li>
+              <li>Business Formation</li>
+              <li>Contracts, Drafting &amp; Review</li>
+              <li>Estate Administration &amp; Probate</li>
+            </ul>
+          </div>
+          <div class="list-block">
+            <h3>Active Memberships</h3>
+            <ul>
+              <li>Alderman Ward 6, City of Springfield, TN</li>
+              <li>Willow Oak Center for Arts and Learning, Board Member</li>
+              <li>Glenn Federation of Women's Clubs, President</li>
+              <li>Robertson County Career Women, Treasurer</li>
+              <li>Robertson County Bar Association</li>
+              <li>Tennessee Bar Association</li>
+              <li>Robertson County Chamber of Commerce, Member</li>
+              <li>Phi Delta Phi, International Legal Honor Society</li>
+              <li>Pi Kappa Lambda, National Music Honor Society</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bio -->
+    <div class="attorney-bio">
+      <p>Emily grew up in Springfield, Tennessee. After graduating from Aaron Academy in Hendersonville, Tennessee, Emily attended Vanderbilt University where she graduated magna cum laude with a Bachelor of Music in Harp and highest honors in music history and literature.</p>
+      <p>Emily received her Juris Doctorate from Vanderbilt University Law School where she was awarded the Dean's Scholarship. While in law school, Emily clerked at the United States District Court for the Middle District of Tennessee and the Tennessee Department of Children's Services.</p>
+      <p>After graduating law school and being admitted to the Tennessee bar in 2014, Emily returned home to Springfield, Tennessee, where she practiced with a local firm prior to co-founding Jones, Green, &amp; Tackett Law, PLLC.</p>
+      <p>Emily has built her practice on the philosophy that the legal process is a partnership between attorney and client. To that end, she strives to provide attentive, compassionate, and zealous representation, ensuring that clients are always apprised of the status of their case and the next step in the legal process.</p>
+      <p>When she is not working, Emily enjoys playing the harp, traveling, and staying active in the local community.</p>
+    </div>
+
+    <!-- Publications -->
+    <div class="publications-section">
+      <h3>Publications</h3>
+      <ul>
+        <li>Music and Emotion in Victim-Impact Evidence, 16 Vand. J. Ent. &amp; Tech. 169 (2014).</li>
+        <li>Authenticating Identity: The Quest for Personal Validation through Authenticity in Music. 7 Vanderbilt Undergraduate Research Journal (2011). Presented at the Society for Ethnomusicology Southeast and Caribbean Conference (2011).</li>
+      </ul>
+    </div>
+
+    <!-- Services -->
+    <div class="services-section">
+      <h3>Services</h3>
+      <ul class="services-list">
+        <li>Estate Administration &amp; Probate</li>
+      </ul>
+    </div>
+
+    <!-- Client Testimonials -->
+    <div class="testimonials-section">
+      <h2>CLIENT TESTIMONIALS</h2>
+      <div class="testimonials-grid">
+
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"My husband and I just finalized our Estate package with Emily Green. Emily was wonderful to work with, very personable, knowledgeable, and patient to work with. She answered all over our questions (and we had a lot), and was thrilled to answer them. Now that we have signed our documents we feel even more prepared in life. Thank you Emily for all your help and to your amazing team."</p>
+          <span class="testimonial-author">— Kayla from Springfield, TN</span>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"There are no adequate words to express our gratitude for the services provided us by Emily Green of Jones, Green, &amp; Tackett Law PLLC. Not only did she provide excellent, wise, and professional guidance throughout our legal process, she conducted herself with sincere care and understanding, a rarity in the legal world today. Thank you, Emily Green, for everything."</p>
+          <span class="testimonial-author">— Suzann from Pleasant View, TN</span>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"Emily is an amazing person and attorney. Dealing with the loss of our father and then a family divided, she was right there. She is such a good listener and guided my sister and me through the most difficult of situations. I could never have gotten through this without her."</p>
+          <span class="testimonial-author">— Terri from Illinois</span>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"Emily is one of the most caring people that I've ever met. I would give her 10 stars if I could. She is so capable and so helpful in all situations. She went above and beyond for my family, and I'm so grateful!"</p>
+          <span class="testimonial-author">— Heather from Hendersonville, TN</span>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"Emily Green did an exceptional job drawing up my will and last will and testament recently. She took time and personalized as well as considered scenarios for a failsafe Will. Additionally, my spouses. She took as much time needed to explain the laws and the process for us to be completely satisfied with what we wished to have in place. She came highly recommended by dear close friends of ours and we in return would recommend her services to any of you reading this review."</p>
+          <span class="testimonial-author">— Jack from Springfield, TN</span>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"Emily was the best. She always answered my questions. If she didn't know, she always found out. She went above and beyond. I could email her at eleven o'clock at night and she always took the time to reply. She is an awesome person and I loved her dearly. She fights for what she believes in. I can't say enough good about her."</p>
+          <span class="testimonial-author">— Charity from Springfield, TN</span>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"I couldn't have asked for a more professional attorney. Emily was also compassionate during a difficult time in my life. That makes for a perfect attorney. Wouldn't have wanted anyone else."</p>
+          <span class="testimonial-author">— Betty from Springfield, TN</span>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"Emily not only was open and honest with me, she also was quick in communicating with me. She was supportive when I needed it and helped me to stand up for myself and my children. I cannot imagine going through what I had to without her."</p>
+          <span class="testimonial-author">— Rachel from White House, TN</span>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-brand">
+    <span class="footer-brand-name">Jones, Green, &amp; Tackett Law, PLLC</span>
+    <span class="footer-copyright">© 2026 Jones, Green, &amp; Tackett Law, PLLC. All rights reserved.</span>
+  </div>
+  <ul class="footer-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/our-team">Our Team</a></li>
+    <li><a href="/contact-us">Contact Us</a></li>
+    <li><a href="/contempt">Contempt</a></li>
+    <li><a href="/testimonials">Testimonials</a></li>
+    <li><a href="/mediation">Mediation</a></li>
+    <li><a href="/child-custody">Child Custody</a></li>
+    <li><a href="/real-estate">Real Estate</a></li>
+    <li><a href="/brandi-l-jones">Brandi L. Jones</a></li>
+    <li><a href="/new-page">New Page</a></li>
+    <li><a href="/home-alt-bedford">Home Alt Bedford</a></li>
+    <li><a href="/adoption">Adoption</a></li>
+    <li><a href="/child-support">Child Support</a></li>
+    <li><a href="/business-law">Business Formation</a></li>
+    <li><a href="/personal-injury">Personal Injury</a></li>
+    <li><a href="/criminal-law">Criminal Law</a></li>
+    <li><a href="/appeals">Appeals</a></li>
+    <li><a href="/divorce">Divorce</a></li>
+    <li><a href="/heather-e-tackett">Heather E. Tackett</a></li>
+    <li><a href="/estate-planning">Estate Planning</a></li>
+    <li><a href="/emily-c-green">Emily C. Green</a></li>
+    <li><a href="/conservatorship">Conservatorship</a></li>
+    <li><a href="/contracts">Contracts</a></li>
+    <li><a href="/estate-administration-probate">Estate Administration &amp; Probate</a></li>
+  </ul>
+</footer>
+
+</div>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>

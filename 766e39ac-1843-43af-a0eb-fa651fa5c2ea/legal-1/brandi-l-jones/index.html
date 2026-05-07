@@ -1,0 +1,725 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brandi L. Jones</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  :root {
+    --bg-primary: #111115;
+    --bg-secondary: #1a1a20;
+    --bg-hover: #22222a;
+    --bg-card: #16161c;
+    --text-primary: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.5);
+    --text-dim: rgba(255, 255, 255, 0.35);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-light: rgba(255, 255, 255, 0.06);
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Inter', -apple-system, sans-serif;
+    --sidebar-width: 280px;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 32px;
+    --space-xl: 48px;
+    --space-2xl: 64px;
+    --space-3xl: 96px;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
+
+  /* Navigation */
+  .mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg-primary);
+  }
+
+  .mobile-header .brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+
+  .mobile-header .brand .globe-icon {
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid var(--text-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  .mobile-header .brand-name {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-sm);
+  }
+
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--text-primary);
+    transition: all 0.3s ease;
+  }
+
+  .sidebar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: var(--bg-primary);
+    border-right: 1px solid var(--border-color);
+    z-index: 200;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: var(--space-xl) var(--space-lg);
+    overflow-y: auto;
+  }
+
+  .sidebar .brand-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .sidebar .brand-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+
+  .sidebar .globe-icon {
+    width: 38px;
+    height: 38px;
+    border: 1.5px solid var(--text-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .sidebar .brand-name {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .sidebar nav a {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .sidebar nav a:hover {
+    color: var(--text-primary);
+  }
+
+  .sidebar .status-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .mobile-nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 150;
+  }
+
+  .mobile-nav-overlay.active {
+    display: block;
+  }
+
+  .sidebar.active {
+    display: flex;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: calc(96px + 60px) var(--space-lg) var(--space-3xl);
+    background: var(--text-primary);
+    color: #ffffff;
+  }
+
+  .page-title-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-title-area h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: #111115;
+  }
+
+  /* Content Area */
+  .content-area {
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .content-area h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .content-area p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area ul, .content-area ol {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-lg);
+    color: var(--text-muted);
+  }
+
+  .content-area li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  .content-area img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    font-weight: 500;
+  }
+
+  .content-area a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  /* Attorney Profile Layout */
+  .attorney-profile {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xl);
+    margin-bottom: var(--space-3xl);
+  }
+
+  .attorney-photo {
+    max-width: 380px;
+    width: 100%;
+  }
+
+  .attorney-photo img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    display: block;
+    margin-bottom: 0;
+  }
+
+  .attorney-details {
+    flex: 1;
+  }
+
+  .attorney-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+    font-style: italic;
+  }
+
+  .practice-columns {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-lg);
+  }
+
+  .practice-section {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: var(--space-lg);
+  }
+
+  .practice-section h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: var(--space-md);
+  }
+
+  .practice-section ul {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+  }
+
+  .practice-section ul li {
+    color: var(--text-muted);
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 0.95rem;
+  }
+
+  .practice-section ul li:last-child {
+    border-bottom: none;
+  }
+
+  /* Bio paragraphs */
+  .attorney-bio {
+    margin-top: var(--space-2xl);
+  }
+
+  /* Divider */
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: var(--space-3xl) 0;
+  }
+
+  /* Testimonials */
+  .testimonials-section h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .testimonial-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .testimonial-card blockquote {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--text-muted);
+    font-style: italic;
+    border-left: 2px solid rgba(255,255,255,0.2);
+    padding-left: var(--space-md);
+    margin: 0;
+  }
+
+  .testimonial-author {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* Footer */
+  .footer {
+    padding: var(--space-xl) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    border-top: 1px solid var(--border-color);
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .footer-brand-name {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .footer-copyright {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--text-dim);
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md) var(--space-lg);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-links a {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-links a:hover {
+    color: var(--text-primary);
+  }
+
+  /* Responsive */
+  @media (min-width: 768px) {
+    .page-title-area { padding: calc(96px + 60px) var(--space-2xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl) var(--space-2xl); }
+    .attorney-profile { flex-direction: row; align-items: flex-start; }
+    .attorney-photo { max-width: 320px; flex-shrink: 0; }
+    .practice-columns { flex-direction: row; }
+    .testimonials-grid { grid-template-columns: 1fr 1fr; }
+    .footer {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: var(--space-xl) var(--space-2xl);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .mobile-header { display: none; }
+    .sidebar { display: flex !important; }
+    .mobile-nav-overlay { display: none !important; }
+    .main-content {
+      margin-left: var(--sidebar-width);
+      max-width: calc(100% - var(--sidebar-width));
+    }
+    .page-title-area { padding: calc(96px + 80px) var(--space-3xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl); }
+    .footer { padding: var(--space-xl) var(--space-2xl); }
+    .testimonials-grid { grid-template-columns: 1fr 1fr 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .sidebar {
+      display: none !important;
+    }
+    .sidebar.active {
+      display: flex !important;
+    }
+    .mobile-nav-overlay {
+      display: none;
+    }
+    .mobile-nav-overlay.active {
+      display: block !important;
+    }
+    .mobile-header {
+      display: flex;
+    }
+    .main-content {
+      margin-left: 0;
+      max-width: 100%;
+    }
+    .page-title-area {
+      padding: calc(64px + 32px) var(--space-md) var(--space-2xl);
+    }
+    .content-area {
+      padding: var(--space-2xl) var(--space-md);
+    }
+    .attorney-profile {
+      flex-direction: column;
+    }
+    .attorney-photo {
+      max-width: 100%;
+    }
+    .practice-columns {
+      flex-direction: column;
+    }
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+    }
+    .footer {
+      flex-direction: column;
+      padding: var(--space-xl) var(--space-md);
+    }
+    .attorney-title {
+      font-size: 1.4rem;
+    }
+    .mobile-header .brand-name {
+      font-size: 11px;
+    }
+  }
+</style>
+
+
+
+<!-- HEADER -->
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="#" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">Jones, Green, &amp; Tackett Law, PLLC</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="#" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">Jones, Green, &amp; Tackett Law, PLLC</span>
+    </a>
+    <nav>
+      <a href="#">Platform</a>
+      <a href="#">Solutions</a>
+      <a href="#">Documentation</a>
+      <a href="#">Enterprise</a>
+    </nav>
+  </div>
+  
+</aside>
+
+<div class="main-content">
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Brandi L. Jones</h1>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+
+  <!-- Attorney Profile -->
+  <div class="attorney-profile">
+    <div class="attorney-photo">
+      <img src="https://images.squarespace-cdn.com/content/v1/5c60b6d9b91449401e32e0aa/677a605c-0be8-4fa2-be18-706eb6fe1d58/A7I07876-Enhanced-NR.jpg" alt="Brandi L. Jones">
+    </div>
+    <div class="attorney-details">
+      <p class="attorney-title">Brandi L. Jones | Attorney at Law</p>
+
+      <div class="practice-columns">
+        <div class="practice-section">
+          <h3>Brandi's practice areas:</h3>
+          <ul>
+            <li>Criminal Defense</li>
+            <li>Divorce &amp; Post-Divorce Modification</li>
+            <li>Child Custody &amp; Child Support</li>
+            <li>Juvenile Law</li>
+            <li>Civil Litigation</li>
+            <li>Civil Appeals</li>
+            <li>Personal Injury</li>
+          </ul>
+        </div>
+        <div class="practice-section">
+          <h3>Active Memberships:</h3>
+          <ul>
+            <li>Robertson County Bar Association</li>
+            <li>Montgomery County Bar Association</li>
+            <li>Tennessee Bar Association</li>
+            <li>TN High School Mock Trial</li>
+            <li>Robertson County Chamber of Commerce</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bio -->
+  <div class="attorney-bio">
+    <p>Brandi Jones was raised in rural East Tennessee and obtained a Bachelors in English from Lincoln Memorial University. She also has a Masters in English from Tennessee Technological University, where she graduated with the highest academic honors, while teaching freshman English classes. In 2011, Brandi received her Juris Doctorate from the Nashville School of Law and was admitted to the Tennessee bar.</p>
+    <p>Prior to entering the legal profession, Brandi also worked as a Claims Examiner for the State of Tennessee. She worked full time as a Center Director at Sylvan Learning Center of the Cumberlands while attending law school and has over a decade of experience in education. She is currently adjunct professor of law at Austin Peay State University, teaching Family Law, Juvenile Law, and Civil Procedure, and adjunct professor of English through the Regents Online Degree Program through the state of Tennessee.</p>
+    <p>Upon graduating law school, Brandi worked as a solo practitioner and as an associate attorney for firms in Clarksville and Springfield before co-founding Jones, Green, &amp; Tackett Law, PLLC, where she now practices in a variety of areas. With her education background, Brandi finds it especially important to help clients understand the legal process and strives to guide them every step of the way. Brandi loves spending time with her children and participating in many local events and activities in Clarksville.</p>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- Client Testimonials -->
+  <div class="testimonials-section">
+    <h2>CLIENT TESTIMONIALS</h2>
+    <div class="testimonials-grid">
+
+      <div class="testimonial-card">
+        <blockquote>"Best decision I made was to have Mrs. Brandi represent me after a few consultations with different attorneys I knew immediately she was the one I had a long rough year with a nasty divorce / custody i felt bullied and threatened with trial due to certain circumstances with the opposing law firm . We went to mediation and I am more than happy with the outcome i can breathe again and move on with the next chapter in my life . I couldn't have done it without her ! I have two children who I love more than anything one is special needs I am his biggest advocate and always will be At the end of the day it's not about who did this or that or money or revenge it's about doing the right thing . Highly highly recommend! If I ever need an attorney again she's my go to."</blockquote>
+        <span class="testimonial-author">— Khala</span>
+      </div>
+
+      <div class="testimonial-card">
+        <blockquote>"Brandi Jones went above and beyond my expectations. She handled my special case delicately and diligently. I could not of asked for a more patient and understanding lawyer to represent me during one of the hardest times of my life. I would recommend this firm as a whole to anyone."</blockquote>
+        <span class="testimonial-author">— Adam from Springfield, TN</span>
+      </div>
+
+      <div class="testimonial-card">
+        <blockquote>"I highly recommend Brandi Jones. My husband and I have used her for multiple custody issues and for adoption. She has been amazing through it all. You will not find a better attorney that will fight for you the way Brandi will. She is great with communication and gives you helpful advise. We will never use anyone else!!!"</blockquote>
+        <span class="testimonial-author">— Jennifer from Springfield, TN</span>
+      </div>
+
+      <div class="testimonial-card">
+        <blockquote>"Highly recommend Brandi Jones! She was considerate and straight forward at the same time! Any adoption needs you have, she is your lady! We are forever thankful for her!"</blockquote>
+        <span class="testimonial-author">— A. Williams</span>
+      </div>
+
+      <div class="testimonial-card">
+        <blockquote>"I have used Brandi Jones numerous times in child custody and a case that related from another case. Brandi left no stone unturned and made me and my family feel protected. She is very communicative and no a push over. She is tough, and I still use her today. There is not enough I can say about Brandi except she has earned my trust."</blockquote>
+        <span class="testimonial-author">— Lew of Springfield, TN</span>
+      </div>
+
+      <div class="testimonial-card">
+        <blockquote>"I hired Brandi to represent me in a divorce proceeding. I feel like she did an excellent job in handling my case. She is knowledgeable of the law and she guided me through the whole process. While I didn't get everything I wanted, the case was settled amicably. She was up against a tough opposing attorney, and she more then held her own. If you provide her the tool's and evidence, and cooperation that any attorney need's to represent you, she will do an excellent job for you."</blockquote>
+        <span class="testimonial-author">— Frank from Clarksville, TN</span>
+      </div>
+
+      <div class="testimonial-card">
+        <blockquote>"Brandi was excellent to work with in our case. We felt confident from the first time we met with her. The office is very comfortable, modern, and bright. When we complimented the office the first time we met her, her response was "usually when people are here it isn't always for a good reason, so we want them to feel comfortable". It meant a lot. She knew we were going in with heavy hearts and she provided us an atmosphere that felt safe. When the case was finished and we sat in her office for the last time, it was bitter sweet. Brandi was fabulous and she got our family on the other side. We couldn't have done it without her."</blockquote>
+        <span class="testimonial-author">— Abby</span>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Jones, Green, &amp; Tackett Law, PLLC</span>
+      <span class="footer-copyright">© 2026 Jones, Green, &amp; Tackett Law, PLLC. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+    <li><a href="/">Home</a></li><li><a href="/our-team">Our Team</a></li><li><a href="/contact-us">Contact Us</a></li><li><a href="/contempt">Contempt</a></li><li><a href="/testimonials">Testimonials</a></li><li><a href="/mediation">Mediation</a></li><li><a href="/child-custody">Child Custody</a></li><li><a href="/real-estate">Real Estate</a></li><li><a href="/brandi-l-jones">Brandi L. Jones</a></li><li><a href="/new-page">New Page</a></li><li><a href="/home-alt-bedford">Home Alt Bedford</a></li><li><a href="/adoption">Adoption</a></li><li><a href="/child-support">Child Support</a></li><li><a href="/business-law">Business Formation</a></li><li><a href="/personal-injury">Personal Injury</a></li><li><a href="/criminal-law">Criminal Law</a></li><li><a href="/appeals">Appeals</a></li><li><a href="/divorce">Divorce</a></li><li><a href="/heather-e-tackett">Heather E. Tackett</a></li><li><a href="/estate-planning">Estate Planning</a></li><li><a href="/emily-c-green">Emily C. Green</a></li><li><a href="/conservatorship">Conservatorship</a></li><li><a href="/contracts">Contracts</a></li><li><a href="/estate-administration-probate">Estate Administration &amp; Probate</a></li>
+  </div>
+</footer>
+
+</div>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
