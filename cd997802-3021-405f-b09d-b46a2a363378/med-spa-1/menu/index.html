@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu — Hong Kong Massage Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Page Title Area */
+.page-title-area {
+  padding: 160px var(--pad-x) 60px;
+  background: var(--text-black);
+  color: var(--bg-cream);
+}
+
+.page-title-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-title-area h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+}
+
+/* Content Area */
+.content-area {
+  padding: 64px var(--pad-x);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Book Now Button */
+.book-btn {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-bottom: var(--space-lg);
+}
+
+.book-btn:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Service Section */
+.service-section {
+  margin-bottom: var(--space-lg);
+  border-top: 1px solid var(--border-black);
+  padding-top: var(--space-md);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.service-image-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.service-image-wrapper img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  filter: grayscale(30%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.service-section:hover .service-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(0.99);
+}
+
+.service-content h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-sm);
+}
+
+.service-content .service-desc {
+  font-family: var(--font-serif);
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  font-weight: 300;
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+  color: var(--text-black);
+}
+
+.price-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.price-list li {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(26,26,26,0.15);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price-list li:last-child {
+  border-bottom: none;
+}
+
+/* Add-ons Section */
+.addons-section {
+  margin-bottom: var(--space-lg);
+  border-top: 1px solid var(--border-black);
+  padding-top: var(--space-md);
+}
+
+.addons-section h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-sm);
+}
+
+.addons-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
+}
+
+.addons-image-wrapper {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.addons-image-wrapper img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  filter: grayscale(30%);
+  transition: filter 0.7s ease;
+}
+
+.addons-image-wrapper img:hover {
+  filter: grayscale(0%);
+}
+
+.addon-price-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.addon-price-list li {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(26,26,26,0.15);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.addon-price-list li:last-child {
+  border-bottom: none;
+}
+
+.addon-desc {
+  font-family: var(--font-serif);
+  font-size: clamp(0.85rem, 1.3vw, 1rem);
+  font-weight: 300;
+  line-height: 1.5;
+  color: rgba(26,26,26,0.7);
+  margin-top: 0.2rem;
+  display: block;
+}
+
+.addon-price-list li {
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.addon-price-list li > span:first-child {
+  font-weight: 700;
+}
+
+.addon-item-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.addon-price-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  margin-left: var(--space-sm);
+}
+
+/* Value Statement */
+.value-statement {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) 0;
+  margin-bottom: var(--space-lg);
+}
+
+.value-statement p {
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  font-weight: 300;
+  line-height: 1.7;
+  max-width: 700px;
+  margin-bottom: var(--space-sm);
+}
+
+.value-statement p:last-child {
+  margin-bottom: 0;
+}
+
+.value-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-sm) 0;
+}
+
+.value-list li {
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  font-weight: 300;
+  line-height: 1.7;
+  padding: 0.25rem 0;
+}
+
+/* Trust Badges */
+.trust-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  align-items: center;
+  margin-bottom: var(--space-lg);
+  border-top: 1px solid var(--border-black);
+  padding-top: var(--space-md);
+}
+
+.trust-badges img {
+  max-width: 220px;
+  height: auto;
+}
+
+/* Contact Strip */
+.contact-strip {
+  border-top: 1px solid var(--border-black);
+  padding-top: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.contact-strip p {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+.contact-strip a {
+  border-bottom: 1px solid var(--border-black);
+  transition: opacity 0.3s ease;
+}
+
+.contact-strip a:hover {
+  opacity: 0.6;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .service-section {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+    align-items: start;
+  }
+
+  .addons-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .service-image-wrapper img {
+    height: 400px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1.25rem;
+  }
+
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs);
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .nav-links a {
+    font-size: 0.65rem;
+  }
+
+  .page-title-area {
+    padding: 140px var(--pad-x) 40px;
+  }
+
+  .content-area {
+    padding: 40px var(--pad-x);
+  }
+
+  .service-section {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+
+  .service-image-wrapper img {
+    height: 220px;
+  }
+
+  .addons-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .addons-image-wrapper img {
+    height: 220px;
+  }
+
+  .trust-badges img {
+    max-width: 160px;
+  }
+
+  .book-btn {
+    width: 100%;
+    text-align: center;
+    margin-bottom: var(--space-md);
+  }
+
+  .footer {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .footer-right {
+    gap: var(--space-sm);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Hong Kong Massage Studio</a>
+  <ul class="nav-links">
+    <li><a href="/">Hong Kong Massage Studio</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/menu">Menu</a></li>
+    <li><a href="/contact">Contact</a></li>
+    <li><a href="/privacy-policy">Privacy Policy</a></li>
+    <li><a href="/credits">Credits</a></li>
+  </ul>
+</nav>
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Menu</h1>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+
+  <!-- Book Now -->
+  <a class="book-btn" href="https://go.bychronos.com/l/pflugerville-78660-hong-kong-massage-803436/a/services" target="_blank" rel="noopener">Book Now</a>
+
+  <!-- Deep Tissue / Sport Massage -->
+  <div class="service-section" id="deep-tissue">
+    <div class="service-image-wrapper">
+      <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUDP0CzjA5W3-beYTK5ChXRoaLBY6qwgMuSWVuYPBtugld3QID1hxjjdBL017uhMymLVfUbol21kV4xWrDMbG8Z1n6Rg-MU_G9_NnKB18wbG8i0PAqtzRtGAoQbfVKuYz-EeYxMFbBBJJukY4y6BOKbUDw0wNT-3al5_8iU4F2SRitweztMiesl1SgMC6aHekTqupRepv1JZYJAMdXY4b6BCdl4nJ_oTkYHR0xo=w1280" alt="Therapist performing deep tissue massage on back">
+    </div>
+    <div class="service-content">
+      <h2>Deep Tissue / Sport Massage</h2>
+      <p class="service-desc">Available in 45, 60, 90, 120, and 180 minute sessions. Prices range from $70 to $250.</p>
+      <ul class="price-list">
+        <li><span>45 Minutes</span><span>$70</span></li>
+        <li><span>60 Minutes</span><span>$80</span></li>
+        <li><span>90 Minutes</span><span>$120</span></li>
+        <li><span>120 Minutes</span><span>$160</span></li>
+        <li><span>180 Minutes</span><span>$250</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Classical Swedish Massage -->
+  <div class="service-section" id="swedish">
+    <div class="service-image-wrapper">
+      <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUDp1xOVKKqYNYSDPxUs4a1RnaS79qQVXEmWly547VcsNXYPMFxOI5CVHM35k79wxG2J2G_UTGeEq1JTY-Dc2SkogSGivBOVdI00A8vwXOAe9q28FjQRdZWCzTb0obX-T_82H9UKpmmyamH_yBTGoQXX6M--C23IMiSedmpck8W-xR5Z3AgLbjWOyH-dF1AkBQo6BD-eYWSkQyG_9eMOeiXVGIvB_Ou8VSQ3=w1280" alt="Therapist performing swedish massage">
+    </div>
+    <div class="service-content">
+      <h2>Classical Swedish Massage</h2>
+      <p class="service-desc">Available in 30, 45, 60, 90, 120, and 180 minute sessions. Prices range from $50 to $230.</p>
+      <ul class="price-list">
+        <li><span>30 Minutes</span><span>$50</span></li>
+        <li><span>45 Minutes</span><span>$60</span></li>
+        <li><span>60 Minutes</span><span>$70</span></li>
+        <li><span>90 Minutes</span><span>$110</span></li>
+        <li><span>120 Minutes</span><span>$150</span></li>
+        <li><span>180 Minutes</span><span>$230</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Traditional Thai Massage -->
+  <div class="service-section" id="thai">
+    <div class="service-image-wrapper">
+      <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUDYBHhweVvtsto0VmewiLZRzhv7AeeYuHyjui1KfLulKIOLdi7kmFPqW0Ch6_ls1KSXNMAf7Y6mhl0Ya7LTVoZTZ85Mwuok-hkvbYEjCAFCCcar0mGOm76Sm_QJpfgUpamOnci4ZKksMrI_XeDUp2M4062gxqgASUxUP5-rngCviipdJN4I7i28WEP7VaIqThft-WHh7ZVvCLfuWZMh5lKBgwUr2NP7sF_m=w1280" alt="Therapist performing thai massage stretching">
+    </div>
+    <div class="service-content">
+      <h2>Traditional Thai Massage</h2>
+      <p class="service-desc">Available in 45, 65, 90, and 120 minute sessions. Prices range from $70 to $190.</p>
+      <ul class="price-list">
+        <li><span>45 Minutes</span><span>$70</span></li>
+        <li><span>65 Minutes</span><span>$90</span></li>
+        <li><span>90 Minutes</span><span>$140</span></li>
+        <li><span>120 Minutes</span><span>$190</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Chair Massage -->
+  <div class="service-section" id="chair">
+    <div class="service-image-wrapper">
+      <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUAiAUYdJpaGykYji4rmW9dqgNHyCfjM_F8n91o5GmD31P6ZHE2IEK0nRYz6gvn3rlhFCvdFtDWXPVuBO2FwQ9OrmeGzlgI104k8w9PavZb4bFJ9UVwJFLzSbKm_aHBhR2TZeh6nctVHNSnXPnARM_oezzNmSdWEGvKuAI5EMfM8CuND9fbxjkotHPCiWgDD8aqhah_KORb3Nd30McpH7InaqAbQk0A56LnkzPQ=w1280" alt="Therapist performing chair massage">
+    </div>
+    <div class="service-content">
+      <h2>Chair Massage</h2>
+      <p class="service-desc">Available in 10, 15, 20, and 30 minute sessions. Prices range from $20 to $45.</p>
+      <ul class="price-list">
+        <li><span>10 Minutes</span><span>$20</span></li>
+        <li><span>15 Minutes</span><span>$25</span></li>
+        <li><span>20 Minutes</span><span>$30</span></li>
+        <li><span>30 Minutes</span><span>$45</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Add-ons -->
+  <div class="addons-section" id="addons">
+    <h2>Add-ons</h2>
+    <div class="addons-grid">
+      <div class="addons-image-wrapper">
+        <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUDd2B9tqnRabYeJRMSifUgIWmn5PG-C2KHdHTH0TXwbHPwitYDAsmSCBK09ONAjJ_GIphlyt5qN7BLSMLUPVWvze_kFpYNUHjwrLl_UzQkpE5fkf74uUEiYqRyWk5aqKaLXWIlgzwZboFFWo0X9CQXErWpJqxYkQg7cIzeLbl24B7Wxx0s1y3vBxLZVnZfpwetP0-Y00B9u7DYT9kYPKZUsuFfauHAOJ2_bauA=w1280" alt="Massage items and decorations including towels, candles, and flower">
+      </div>
+      <div>
+        <ul class="addon-price-list">
+          <li>
+            <div class="addon-item-content">
+              <span>Hot Stone Add-on</span>
+              <span class="addon-desc">Add-on to any massage service. Free of charge.</span>
+            </div>
+            <span class="addon-price-label">Free</span>
+          </li>
+          <li>
+            <div class="addon-item-content">
+              <span>Coconut Oil Add-on</span>
+              <span class="addon-desc">Add-on to any massage service. Free of charge.</span>
+            </div>
+            <span class="addon-price-label">Free</span>
+          </li>
+          <li>
+            <div class="addon-item-content">
+              <span>4 Hands Massage</span>
+              <span class="addon-desc">Add-on upgrade. Priced at double the base session rate.</span>
+            </div>
+            <span class="addon-price-label">Double</span>
+          </li>
+          <li>
+            <div class="addon-item-content">
+              <span>CBD Oil Therapy</span>
+              <span class="addon-desc">Add-on to any massage service. Additional $15.</span>
+            </div>
+            <span class="addon-price-label">Add $15</span>
+          </li>
+          <li>
+            <div class="addon-item-content">
+              <span>Essential Oil Therapy</span>
+              <span class="addon-desc">Add-on to any massage service. Additional $10.</span>
+            </div>
+            <span class="addon-price-label">Add $10</span>
+          </li>
+          <li>
+            <div class="addon-item-content">
+              <span>Scrub Therapy</span>
+              <span class="addon-desc">Add-on to any massage service. Additional $20.</span>
+            </div>
+            <span class="addon-price-label">Add $20</span>
+          </li>
+          <li>
+            <div class="addon-item-content">
+              <span>Cupping Therapy</span>
+              <span class="addon-desc">Add-on to any massage service for an additional $25, or standalone session for $30.</span>
+            </div>
+            <span class="addon-price-label">Add $25</span>
+          </li>
+          <li>
+            <div class="addon-item-content">
+              <span>Cupping Therapy Standalone</span>
+            </div>
+            <span class="addon-price-label">$30</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Book Now (bottom) -->
+  <a class="book-btn" href="https://go.bychronos.com/l/pflugerville-78660-hong-kong-massage-803436/a/services" target="_blank" rel="noopener">Book Now</a>
+
+  <!-- Value Statement -->
+  <div class="value-statement">
+    <p>We understand that some clients compare prices, and we respect that. But your health and comfort deserve more than the cheapest option.</p>
+    <p>Our rates reflect:</p>
+    <ul class="value-list">
+      <li>• High hygiene standards</li>
+      <li>• Respectful, licensed therapists with 5-10 years experiences</li>
+      <li>• Professional draping</li>
+      <li>• A no-rush, full-session experience. Your time starts only when you are ready</li>
+    </ul>
+    <p>We treat both our clients and staff with care and integrity, and that means a better massage for you, every time.</p>
+  </div>
+
+  <!-- Trust Badges -->
+  <div class="trust-badges">
+    <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUBoBzZ6_Pwb_0v4zbJrmT_vAZ1cn3KT1UL1RsB-Yefss4Zle-RA7gpLhms9S7Q5MhXyr_g8e4XscEke0XOceqfwsd-EG9Ip7f-_SQioSPt-2fLHSM2Lt2hBoYXKaALwzmMbAPSR2iNiIkR6SCUSicV-i8RwMERTYZLvEJ_RzvOISpkPJihGRcD1ot-TQBiRRLkr9ES44nXw7qt4OWK101muzQpLqt0waJ07=w1280" alt="Hong Kong Massage Logo">
+    <a href="https://respectmassage.com/" target="_blank" rel="noopener">
+      <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUCnDXzG65aNwaqney5cv1CP44e4FAZpMH0Uqj3CaWxATvtWV_8lM_SUHO8LovjNhYiH76CDMMRhagDe42-kyWyqIwS3QSLHKkRfYil0aUJQwH1rm4T2wxPnpTjP0fBvP-EddtA-wnU6kSmyAJpV6VWlBa8hhNbY5uUlJ4IfsjY1gQKRGqV02WZ2Pojc7Zu9-tQBxHtsG8lkZ0aH0KJvyI3lCsZzD3guOYcDdvs=w1280" alt="Respect Massage Zero Tolerance logo">
+    </a>
+  </div>
+
+  <!-- Contact Strip -->
+  <div class="contact-strip">
+    <p>Contact us: <a href="tel:5128840865">(512) 884-0865</a> &nbsp;|&nbsp; Location: 1202 FM 685 #B4, Pflugerville, TX 78660.</p>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Hong Kong Massage Studio</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>

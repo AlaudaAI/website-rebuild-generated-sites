@@ -1,0 +1,563 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Hong Kong Massage Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Page Title Area */
+.page-title-area {
+  padding: 160px var(--pad-x) 60px;
+  background: var(--text-black);
+  color: var(--bg-cream);
+}
+.page-title-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.page-title-area h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+}
+
+/* Content Area */
+.content-area {
+  padding: 64px var(--pad-x);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Contact Grid */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+
+/* Section Labels */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+  opacity: 0.6;
+}
+
+/* Hours & Appointments Block */
+.hours-block {
+  border-top: 1px solid var(--border-black);
+  padding-top: var(--space-md);
+}
+
+.hours-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-md);
+}
+
+.book-btn {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  margin-bottom: var(--space-md);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.book-btn:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+.contact-phone {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 300;
+  margin-bottom: var(--space-sm);
+}
+
+.contact-phone a {
+  border-bottom: 1px solid var(--border-black);
+  padding-bottom: 2px;
+  transition: opacity 0.3s ease;
+}
+
+.contact-phone a:hover {
+  opacity: 0.6;
+}
+
+.hours-list {
+  list-style: none;
+  margin-bottom: var(--space-md);
+}
+
+.hours-list li {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  line-height: 1.7;
+  border-bottom: 1px solid rgba(26,26,26,0.15);
+  padding: 0.5rem 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.hours-note {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: var(--space-md);
+  font-style: italic;
+}
+
+/* Social Links */
+.social-links {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: var(--space-sm);
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border-black);
+  transition: background-color 0.3s ease;
+  overflow: hidden;
+}
+
+.social-link:hover {
+  background-color: rgba(26,26,26,0.08);
+}
+
+.social-link img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+/* Visit Us Block */
+.visit-block {
+  border-top: 1px solid var(--border-black);
+  padding-top: var(--space-md);
+}
+
+.visit-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.6rem, 3.5vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-sm);
+}
+
+.visit-address {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  line-height: 1.7;
+  margin-bottom: var(--space-md);
+}
+
+/* Visit Images */
+.visit-images {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.visit-images img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  filter: grayscale(20%);
+  transition: filter 0.5s ease;
+}
+
+.visit-images img:hover {
+  filter: grayscale(0%);
+}
+
+/* Logo + Badge Row */
+.brand-row {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid rgba(26,26,26,0.15);
+}
+
+.brand-row img {
+  max-height: 80px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Map embed */
+.map-wrapper {
+  margin-top: var(--space-md);
+  border: 1px solid var(--border-black);
+  overflow: hidden;
+}
+
+.map-wrapper iframe {
+  width: 100%;
+  height: 340px;
+  border: 0;
+  display: block;
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+  }
+
+  .visit-images {
+    grid-template-columns: 1fr;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .visit-images img {
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1.5rem;
+  }
+
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs);
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .nav-links a {
+    font-size: 0.65rem;
+  }
+
+  .page-title-area {
+    padding: 120px var(--pad-x) 40px;
+  }
+
+  .content-area {
+    padding: 40px var(--pad-x);
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .hours-heading,
+  .visit-heading {
+    font-size: clamp(1.4rem, 6vw, 2rem);
+  }
+
+  .visit-images img {
+    height: 220px;
+  }
+
+  .brand-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .brand-row img {
+    max-height: 60px;
+  }
+
+  .map-wrapper iframe {
+    height: 260px;
+  }
+
+  .social-links {
+    gap: var(--space-xs);
+  }
+
+  .book-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .footer {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .footer-right {
+    gap: var(--space-sm);
+  }
+}
+</style>
+
+
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Hong Kong Massage Studio</a>
+  <ul class="nav-links">
+    <li><a href="/">Hong Kong Massage Studio</a></li><li><a href="/about">About</a></li><li><a href="/menu">Menu</a></li><li><a href="/contact">Contact</a></li><li><a href="/privacy-policy">Privacy Policy</a></li><li><a href="/credits">Credits</a></li>
+  </ul>
+</nav>
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Contact Us</h1>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+  <div class="contact-grid">
+
+    <!-- Hours & Appointments -->
+    <div class="hours-block">
+      <p class="section-label">hours &amp; appointments</p>
+      <h2 class="hours-heading">Hours &amp; Appointments</h2>
+
+      <a class="book-btn" href="https://go.bychronos.com/l/pflugerville-78660-hong-kong-massage-803436/a/services" target="_blank" rel="noopener">Book Appointment Online</a>
+
+      <p class="contact-phone">Contact us: <a href="tel:5128840865">(512) 884-0865</a></p>
+
+      <ul class="hours-list">
+        <li>
+          <span>Monday to Thursday</span>
+          <span>8:50 am – 9:30 pm</span>
+        </li>
+        <li>
+          <span>Friday to Sunday</span>
+          <span>8:50 am – 10:00 pm</span>
+        </li>
+      </ul>
+
+      <p class="hours-note">Feel free to check out our social media anytime!</p>
+
+      <div class="social-links">
+        <a class="social-link" href="https://www.google.com/url?q=https%3A%2F%2Fwww.facebook.com%2Fprofile.php%3Fid%3D61560237153491&sa=D&sntz=1&usg=AOvVaw1fkalzEXI2i1D7VGljpVPp" target="_blank" rel="noopener" aria-label="Facebook">
+          <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUDI7uLeW7Yk02rWTotFHbM3LtK8leJ4Ei54LfiC9hI8RTtPPNdmUHXVkDOXl1zKvXcpgOMmfGqeqH5LBuGnxqcdZqx3ihSDK9TG2iRWU_9HMbkzoRDdpc54Xsms7baOQcpZJGyStzZ6SdeL123DffxxZmkbUlixURbR-vz2yU_C_so1qAjlG4B884EpF91-S1UdSCJ_UXEDJw" alt="Facebook">
+        </a>
+        <a class="social-link" href="http://maps.app.goo.gl/6QygM47wSJYP4etd7" target="_blank" rel="noopener" aria-label="Google Maps">
+          <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUBZTef8PJ0aPmlk_GydfZ2aFsx3Ah_5tUPOomvAIceFrPUWttmUwFXC_X0SWeNHHcYcyY-1IKc0qXNAuAbXdOVLRmP_ss_QC25vzrQLZ29bP2YO7uyeomuXfKLEKDGkGS0t-y2e-efI01v7cp047UfN-9ocBIDVoVirw_-ZmSqI3qXzPLqqRyaevAap7EK3Sewvm8KHTzB6lg" alt="Link">
+        </a>
+        <a class="social-link" href="https://www.google.com/url?q=https%3A%2F%2Fwww.instagram.com%2Fhkms.pflugerville%2F&sa=D&sntz=1&usg=AOvVaw1duXyDLSAvrPgjrmv0kHd2" target="_blank" rel="noopener" aria-label="Instagram">
+          <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUAA5TMClyjXUzbSV7UIh4KAIuwytdzwVNybWV327UBUbfxxZc9ATWGbHDMjQIngLF3hY6q0osPdBv931WtcyBrZslTrUCzT-HIV2la48z-kvGmz8t9GfP1efx18cN3rhv1A1vbKUTo1FHskbZUmJcB6jgpqCFeFPJl-U2bP6Jx8MzExovAZxnG7bCJKQKPeCAobisNfxu0mdy57" alt="Instagram">
+        </a>
+        <a class="social-link" href="https://www.google.com/url?q=https%3A%2F%2Fwww.tiktok.com%2F%40hongkongmassagestudio&sa=D&sntz=1&usg=AOvVaw2_duI1GVORaEXXbY_44RY3" target="_blank" rel="noopener" aria-label="TikTok">
+          <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUDv4vEgBRosgTXJfHqLpTWAgU7QgMrMHqepaJenPLjxvkiaWT5Mlp_LKbg3ZNOAf9fPScTdKbgaDJ6F1zzpySBEgQcz_vA5vs_Zp2qR5SCpNbxI1MBxgR4WrRu1t41zAvpU6PoF5mzXZboUh8M9C2tjcZDMeM6zCc1obOKovlHh7W7b4fAMMb8n_z-v5wJqw2M3dVAQlxg7lXmx" alt="TikTok">
+        </a>
+      </div>
+    </div>
+
+    <!-- Visit Us -->
+    <div class="visit-block">
+      <p class="section-label">visit us</p>
+      <h2 class="visit-heading">Visit Us</h2>
+
+      <p class="visit-address">We are located at 1202 FM 685 #B4, Pflugerville, TX 78660. We're looking forward to your visit!</p>
+
+      <div class="visit-images">
+        <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUDixBA6T7CtRBPV1FKX9QQ-iK-Do-XpXLHNofOoEahpX8FGiVM1rrxpcnlbqmpW6vyianISdFF3rvfm7FHMGfeH43606jAdwtjflv3rYXTs_ba1P5xWs25atZYM6vV7vQSCjBkuUM2Apxvc0dnMg-rQ3fjWaBM-gbo57N1LX1C8hyNMtjg0c8xWrys_WgppOdLifZrJPjGyc5ZmhQ41WCH8Ectslj_zCWqF4nM=w1280" alt="The front door picture of Hong Kong Massage Studio">
+      </div>
+
+      <p class="contact-phone">Contact us: <a href="tel:5128840865">(512) 884-0865</a></p>
+      <p class="visit-address">Location: 1202 FM 685 #B4, Pflugerville, TX 78660.</p>
+
+      <div class="map-wrapper">
+        <iframe src="https://www.google.com/maps/embed?origin=mfe&amp;pb=!1m12!1m8!1m3!1d3439.6127525770903!2d-97.607593!3d30.447075!3m2!1i1024!2i768!4f13.1!2m1!1s30.447115,-97.607643!6i17!3m1!1sen-US!5m1!1sen-US" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Hong Kong Massage Studio location map">
+        </iframe>
+      </div>
+
+      <div class="brand-row">
+        <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUBoBzZ6_Pwb_0v4zbJrmT_vAZ1cn3KT1UL1RsB-Yefss4Zle-RA7gpLhms9S7Q5MhXyr_g8e4XscEke0XOceqfwsd-EG9Ip7f-_SQioSPt-2fLHSM2Lt2hBoYXKaALwzmMbAPSR2iNiIkR6SCUSicV-i8RwMERTYZLvEJ_RzvOISpkPJihGRcD1ot-TQBiRRLkr9ES44nXw7qt4OWK101muzQpLqt0waJ07=w1280" alt="Hong Kong Massage Logo">
+        <a href="https://respectmassage.com/" target="_blank" rel="noopener">
+          <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUCnDXzG65aNwaqney5cv1CP44e4FAZpMH0Uqj3CaWxATvtWV_8lM_SUHO8LovjNhYiH76CDMMRhagDe42-kyWyqIwS3QSLHKkRfYil0aUJQwH1rm4T2wxPnpTjP0fBvP-EddtA-wnU6kSmyAJpV6VWlBa8hhNbY5uUlJ4IfsjY1gQKRGqV02WZ2Pojc7Zu9-tQBxHtsG8lkZ0aH0KJvyI3lCsZzD3guOYcDdvs=w1280" alt="Respect Massage Zero Tolerance logo">
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Hong Kong Massage Studio</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
