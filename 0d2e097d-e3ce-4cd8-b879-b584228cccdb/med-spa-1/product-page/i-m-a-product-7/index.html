@@ -1,0 +1,925 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I'm a product | Joanna Injects Website</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Page Title Area */
+.page-title-area {
+  padding: 160px var(--pad-x, 1.5rem) 60px;
+  background: var(--text-black, #1a1a1a);
+  color: var(--bg-cream, #f4f0ea);
+}
+.page-title-inner { max-width: 1200px; margin: 0 auto; }
+.page-title-area h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  font-family: var(--font-serif);
+}
+
+/* Product Section */
+.product-section {
+  padding: var(--space-xl) var(--pad-x);
+  border-bottom: 1px solid var(--border-black);
+}
+
+.product-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.product-image-col {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.product-image-wrapper {
+  max-width: 480px;
+  width: 100%;
+}
+
+.product-image-wrapper img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.product-info-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.product-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+}
+
+.product-sku {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--placeholder-gray);
+}
+
+.product-price {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 400;
+  margin-top: var(--space-xs);
+}
+
+.product-description {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  line-height: 1.8;
+  letter-spacing: 0.03em;
+  color: var(--placeholder-gray);
+  border: 1px solid var(--border-black);
+  padding: var(--space-sm);
+  background: transparent;
+  margin-top: var(--space-sm);
+}
+
+.product-quantity-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  margin-top: var(--space-sm);
+}
+
+.product-quantity-input {
+  width: 80px;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  padding: 0.5rem;
+  color: var(--text-black);
+  outline: none;
+  margin-top: 0.5rem;
+}
+
+.product-add-to-cart {
+  margin-top: var(--space-sm);
+  align-self: flex-start;
+}
+
+.product-add-to-cart button {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: var(--text-black);
+  border: 1px solid var(--border-black);
+  color: var(--bg-cream);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.product-add-to-cart button:hover {
+  background-color: transparent;
+  color: var(--text-black);
+}
+
+/* Product Accordion */
+.product-accordion {
+  margin-top: var(--space-md);
+  border-top: 1px solid var(--border-black);
+}
+
+.accordion-item {
+  border-bottom: 1px solid var(--border-black);
+}
+
+.accordion-header {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: var(--space-sm) 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+}
+
+.accordion-header::after {
+  content: '+';
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+
+.accordion-header.open::after {
+  content: '−';
+}
+
+.accordion-body {
+  display: none;
+  padding: 0 0 var(--space-sm) 0;
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+.accordion-body.open {
+  display: block;
+}
+
+/* Share Section */
+.share-section {
+  margin-top: var(--space-md);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--border-black);
+}
+
+.share-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+  margin-bottom: var(--space-xs);
+}
+
+.share-links {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.share-links a {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  text-transform: lowercase;
+  border: 1px solid var(--border-black);
+  padding: 0.4rem 0.8rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.share-links a:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Services Section */
+.services-section {
+  padding: var(--space-xl) var(--pad-x);
+  border-bottom: 1px solid var(--border-black);
+}
+
+.services-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.services-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-md);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.service-item {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-sm) 0;
+}
+
+.service-item:first-child {
+  border-top: 1px solid var(--border-black);
+}
+
+.service-name {
+  font-family: var(--font-serif);
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.25rem;
+}
+
+.service-desc {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  line-height: 1.8;
+  letter-spacing: 0.03em;
+  color: var(--placeholder-gray);
+}
+
+/* Gallery Section */
+.gallery-section {
+  padding: var(--space-xl) var(--pad-x);
+  border-bottom: 1px solid var(--border-black);
+}
+
+.gallery-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.gallery-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-md);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+}
+
+.gallery-item {
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  position: relative;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(20%);
+  transition: filter 0.5s ease, transform 0.5s ease;
+}
+
+.gallery-item:hover img {
+  filter: grayscale(0%);
+  transform: scale(1.03);
+}
+
+/* Look Around / Nav Section */
+.look-around-section {
+  padding: var(--space-xl) var(--pad-x);
+  border-bottom: 1px solid var(--border-black);
+}
+
+.look-around-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.look-around-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-md);
+}
+
+.look-around-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  list-style: none;
+}
+
+.look-around-links li a {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 300;
+  letter-spacing: 0.03em;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 2px;
+}
+
+.look-around-links li a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--text-black);
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.look-around-links li a:hover::after {
+  width: 100%;
+}
+
+/* Instagram Section */
+.instagram-section {
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.instagram-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.instagram-link-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-top: var(--space-md);
+}
+
+.instagram-link-wrap a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--border-black);
+  padding-bottom: 2px;
+}
+
+.instagram-icon {
+  width: 26px;
+  height: 26px;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1rem;
+    --space-xl: 3rem;
+    --space-lg: 2rem;
+  }
+
+  .nav {
+    padding: 1rem var(--pad-x);
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .page-title-area {
+    padding: 120px var(--pad-x) 40px;
+  }
+
+  .product-inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .product-image-wrapper {
+    max-width: 100%;
+  }
+
+  .product-add-to-cart button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .product-add-to-cart {
+    align-self: stretch;
+  }
+
+  .share-links {
+    flex-direction: column;
+  }
+
+  .share-links a {
+    text-align: center;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .look-around-links {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .footer {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .footer-right {
+    gap: var(--space-sm);
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .product-inner {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .look-around-links {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1440px) {
+  .gallery-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+</style>
+
+
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Face Card Clinics</a>
+  <li><a href="/">HOME</a></li><li><a href="/services">SERVICES</a></li><li><a href="/about">ABOUT</a></li><li><a href="/policies">POLICIES</a></li><li><a href="/faq">FAQ</a></li><li><a href="/locations">LOCATIONS</a></li><li><a href="/payment-plans">PAYMENT PLANS</a></li><li><a href="/book-online">Book Online</a></li><li><a href="/product-page/i-m-a-product-6">I'm a product | Joanna Injects Website</a></li><li><a href="/product-page/i-m-a-product-3">I'm a product | Joanna Injects Website</a></li><li><a href="/product-page/i-m-a-product-5">I'm a product | Joanna Injects Website</a></li><li><a href="/product-page/i-m-a-product-7">I'm a product | Joanna Injects Website</a></li><li><a href="/product-page/i-m-a-product-1">I'm a product | Joanna Injects Website</a></li><li><a href="/product-page/i-m-a-product">I'm a product | Joanna Injects Website</a></li><li><a href="/product-page/i-m-a-product-2">I'm a product | Joanna Injects Website</a></li><li><a href="/product-page/i-m-a-product-4">I'm a product | Joanna Injects Website</a></li><li><a href="/post/template-the-ultimate-guide-to-writing-the-ultimate-guide">Rebel Marketing: How to Challenge Conventions and Win Big.</a></li><li><a href="/profile/ellizabel10144318/profile">Eliz Abel | Profile</a></li><li><a href="/post/how-to-build-your-brand">Bold Branding Blueprint: Where Strategy Meets Edge in Marketing.</a></li><li><a href="/blank">New Page | Joanna Injects Website</a></li><li><a href="/service-page/grab-a-coffee-30-minute-consult">Grab a Coffee 30 Minute Consult | Joanna Injects Website</a></li><li><a href="/faq/categories/coaching">Coaching</a></li><li><a href="/post/your-title-what-s-your-blog-about">The Anti-Playbook: Marketing Strategies That Defy Convention.</a></li><li><a href="/faq/categories/lifestyle">Lifestyle</a></li><li><a href="/booking-calendar/grab-a-coffee-30-minute-consult">Grab a Coffee 30 Minute Consult - Joanna Injects Website</a></li><li><a href="/post/how-to-attract-more-customers">Maverick Moves: Shaping Your Story into an Industry-Defining Brand.</a></li><li><a href="/faq/categories/business">Business</a></li><li><a href="/post/attract-more-qualified-clients-with-these-tips">Defying the Norm: Strategies to Break the Mold in Your Industry.</a></li><li><a href="/linkinbio">LINK IN BIO | Joanna Injects Website</a></li><li><a href="/post/template-how-to-write-a-tips-blog-post">From Underdog to Industry Icon: Lessons in Disruptive Branding. </a></li><li><a href="/faq/categories/mindset">Mindset</a></li><li><a href="/faq-ex59">Common Questions | Botox &amp; Fillers in Honolulu - Joanna Injects Aesthetics</a></li><li><a href="/post/template-product-review">Rule Breakers and Trend Makers: How to Outshine the Competition.</a></li><li><a href="/faq/categories/resources">Resources</a></li><li><a href="/profile/ellizabel10144318/followers">Eliz Abel | Followers</a></li><li><a href="/shop-canva-templates">404 Error: Page Not Found</a></li><li><a href="/faq/hashtags/1">Common Questions | Botox &amp; Fillers in Honolulu - Joanna Injects Aesthetics</a></li><li><a href="/faq/hashtags/2">Common Questions | Botox &amp; Fillers in Honolulu - Joanna Injects Aesthetics</a></li><li><a href="/faq/hashtags/3">Common Questions | Botox &amp; Fillers in Honolulu - Joanna Injects Aesthetics</a></li><li><a href="/faq/hashtags/4">Common Questions | Botox &amp; Fillers in Honolulu - Joanna Injects Aesthetics</a></li><li><a href="/faq/hashtags/5">Common Questions | Botox &amp; Fillers in Honolulu - Joanna Injects Aesthetics</a></li>
+</nav>
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>I'm a product</h1>
+  </div>
+</section>
+
+<!-- Product Section -->
+<section class="product-section">
+  <div class="product-inner">
+    <div class="product-image-col">
+      <div class="product-image-wrapper">
+        <img src="https://static.wixstatic.com/media/c4a100_f6c71691c72a4609a75c481009a621f3~mv2.png/v1/fill/w_498,h_498,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/c4a100_f6c71691c72a4609a75c481009a621f3~mv2.png" alt="I'm a product">
+      </div>
+    </div>
+    <div class="product-info-col">
+      <h1 class="product-title">I'm a product</h1>
+      <p class="product-sku">SKU: 632835642834572</p>
+      <p class="product-price">40,00 €</p>
+      <div class="product-description">I'm a product description. I'm a great place to add more details about your product such as sizing, material, care instructions and cleaning instructions.</div>
+
+      <p class="product-quantity-label">Quantity*</p>
+      <input class="product-quantity-input" type="number" min="1" value="1" aria-label="Quantity">
+
+      <div class="product-add-to-cart">
+        <button type="button">Add to Cart</button>
+      </div>
+
+      <div class="product-accordion">
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">PRODUCT INFO</div>
+          <div class="accordion-body">
+            I'm a product detail. I'm a great place to add more information about your product such as sizing, material, care and cleaning instructions. This is also a great space to write what makes this product special and how your customers can benefit from this item.
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">RETURN &amp; REFUND POLICY</div>
+          <div class="accordion-body">
+            I'm a Return and Refund policy. I'm a great place to let your customers know what to do in case they are dissatisfied with their purchase. Having a straightforward refund or exchange policy is a great way to build trust and reassure your customers that they can buy with confidence.
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">SHIPPING INFO</div>
+          <div class="accordion-body">
+            I'm a shipping policy. I'm a great place to add more information about your shipping methods, packaging and cost. Providing straightforward information about your shipping policy is a great way to build trust and reassure your customers that they can buy from you with confidence.
+          </div>
+        </div>
+      </div>
+
+      <div class="share-section">
+        <p class="share-label">share</p>
+        <div class="share-links">
+          <a href="http://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.joannainjects.com%2Fproduct-page%2Fi-m-a-product-7&amp;title=I%27m+a+product" target="_blank" rel="noopener">Share on Facebook</a>
+          <a href="http://pinterest.com/pin/create/button/?url=https%3A%2F%2Fwww.joannainjects.com%2Fproduct-page%2Fi-m-a-product-7&amp;media=https%3A%2F%2Fstatic.wixstatic.com%2Fmedia%2Fc4a100_f6c71691c72a4609a75c481009a621f3~mv2.png%2Fv1%2Ffill%2Fw_2000%2Ch_2000%2Cal_c%2Fc4a100_f6c71691c72a4609a75c481009a621f3~mv2.png&amp;description=I%27m+a+product" target="_blank" rel="noopener">Pin on Pinterest</a>
+          <a href="https://api.whatsapp.com/send?text=https%3A%2F%2Fwww.joannainjects.com%2Fproduct-page%2Fi-m-a-product-7" target="_blank" rel="noopener">Share on WhatsApp</a>
+          <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.joannainjects.com%2Fproduct-page%2Fi-m-a-product-7&amp;text=I%27m+a+product%0A" target="_blank" rel="noopener">Share on X</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="services-section">
+  <div class="services-inner">
+    <p class="services-label">face card clinics — services</p>
+    <div class="services-grid">
+      <div class="service-item">
+        <p class="service-name">Lip Filler</p>
+        <p class="service-desc">Dermal filler injections for the lips, including the signature Russian lip technique focusing on lift, shape, and definition over volume.</p>
+      </div>
+      <div class="service-item">
+        <p class="service-name">Russian Lip Technique</p>
+        <p class="service-desc">Advanced lip filler method that enhances the cupid's bow, adds height, and creates a soft structured shape without looking overfilled.</p>
+      </div>
+      <div class="service-item">
+        <p class="service-name">Facial Balancing</p>
+        <p class="service-desc">Strategic filler placement in areas such as the nose, chin, jaw, cheeks, and lips to create facial harmony and proportion.</p>
+      </div>
+      <div class="service-item">
+        <p class="service-name">Chin Filler</p>
+        <p class="service-desc">Dermal filler injections to the chin area to enhance facial balance and profile.</p>
+      </div>
+      <div class="service-item">
+        <p class="service-name">Jaw Filler</p>
+        <p class="service-desc">Dermal filler injections to the jaw to create a more structured and defined jawline.</p>
+      </div>
+      <div class="service-item">
+        <p class="service-name">Cheek Filler</p>
+        <p class="service-desc">Dermal filler injections to the cheeks to enhance structure and refine facial proportions.</p>
+      </div>
+      <div class="service-item">
+        <p class="service-name">Non-Surgical Nose Augmentation</p>
+        <p class="service-desc">Non-surgical rhinoplasty using dermal filler to reshape and refine the nose without surgery.</p>
+      </div>
+      <div class="service-item">
+        <p class="service-name">Botox / Tox</p>
+        <p class="service-desc">Neurotoxin injections to soften lines and maintain a smoother, more refreshed look done subtly and with intention.</p>
+      </div>
+      <div class="service-item">
+        <p class="service-name">Perfect Derma Peel</p>
+        <p class="service-desc">A chemical peel treatment designed to reveal smoother texture, brighter tone, and more vibrant skin.</p>
+      </div>
+      <div class="service-item">
+        <p class="service-name">Aerolase Neo Elite Laser</p>
+        <p class="service-desc">Advanced laser treatment targeting acne, inflammation, uneven skin, and hair removal beneath the surface without harsh recovery.</p>
+      </div>
+      <div class="service-item">
+        <p class="service-name">Laser Hair Removal</p>
+        <p class="service-desc">Laser hair removal services using the Aerolase Neo Elite device.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery Section -->
+<section class="gallery-section">
+  <div class="gallery-inner">
+    <p class="gallery-label">face card clinics — where beauty meets expertise</p>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-2.cdninstagram.com/v/t51.71878-15/686879972_2065964857331428_6634777409116577601_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=107&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=f4CiD4G9pGkQ7kNvwHY_QVH&amp;_nc_oc=AdrlQT_4KGK7FzY5l609fvGmdDgNTAr0iTSrN0wZ25KF8eDOLAbNT4ILHLn2CvrQH7s&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-2.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQFbox8w_44188Bh8V08KF5tJlR41qqSGqRbnzQlktEG-HeVa7a_IH-JwdghiH5oEtAys-LigVaL&amp;oh=00_Af62CZSSjhp4gjhcaY3iIK0NqJNJWQU-r9v2k-zktUJJNQ&amp;oe=6A0285B6" alt="Guys, laser isn't just for the girls — The Face Card Clinics">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-2.cdninstagram.com/v/t51.82787-15/684280647_17931123780257479_3921485425056154458_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=100&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&amp;_nc_ohc=2Tpx-oOlTXUQ7kNvwE3Om7p&amp;_nc_oc=Adri0rJ4E8Wr-zBJtYlYEHPZe252gtG5pjYNhgNK3JiVrYmCcBjcmVd-YIv7NwWzCmU&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-2.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQFQU4Ra6hueVQSQB_th-z6UL0L8ql46cOjLvuSkxy2c9_pKzC9v6sVHeKLSFEIL7Fi5h9_qucvu&amp;oh=00_Af56qhuEJeg3mP2-wqBOwUDPvoB_NvqRVDEao8wyrqsiPA&amp;oe=6A028962" alt="Sadaf never misses — Russian lip technique">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-2.cdninstagram.com/v/t51.82787-15/682683853_17930609355257479_4255005067781603010_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=101&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=zvI187tN4KEQ7kNvwEimbgR&amp;_nc_oc=AdpDRxrKDkNL1Yooi8FAcpwzgP_TV_S6gg_hYjvLNcamKZth2pSZg9BJs1MvbZl5s3k&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-2.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQHmRno3sogvLO4cAoA5HJBHMgJGBSxGE1o8LEY4dUtSD1Rr3zR7yoYgV3srl5WxOcltAg5vORBb&amp;oh=00_Af62KhTk-RAeE8HQstPgIPZyoo7XjLv93XRDGIC1BCMpDQ&amp;oe=6A028E8D" alt="Perfect lips aren't an accident — Face Card Clinics">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-3.cdninstagram.com/v/t51.82787-15/682379791_17930334759257479_6504391279674061033_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=104&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&amp;_nc_ohc=gX3TUtv4ro0Q7kNvwEiJkIJ&amp;_nc_oc=Adp4K1weNWA6z2RtG98lWXW0xbrJm6PlNvzv9TKIOtRRZtKaslN7oHzgDLhnUfknDD0&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-3.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQGMbc_gF4Dmmn2z74HsthjMY5yLild0t-jqGg5WgkOk87cP7e1WS0RJ3Pckw0ey83ecmGiQs63L&amp;oh=00_Af7N5_2JWQUeus2dqyKBp-YlIWu4wPTfvrXVdiqc9rQhqw&amp;oe=6A027F0B" alt="May glow-up season is here — Get $50 off any filler service at Facecard Clinics for any appointment in May">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-2.cdninstagram.com/v/t51.82787-15/683426694_17930030376257479_4570832037827723303_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=105&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=ml0cFO-_Q64Q7kNvwEgU4jV&amp;_nc_oc=AdpD80aWL6GEhg5QGuFUZ3rS2CgIGHnWfKG9W4_DOqmrJPdCFjrKEGCtDlych-cuFnM&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-2.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQE3D8vGNwdOVox1O81X6j73AUBNWf5HUAafrsloHU_e1eoN72EEuyE1u_QnV6llsz6etIPQ1dxI&amp;oh=00_Af4VMemq9UjKikbHnsENZJh3kM7lzdxN9sb1Tcox6P3fhQ&amp;oe=6A02A858" alt="Perfect lips aren't luck — Face Card Clinics">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-3.cdninstagram.com/v/t51.71878-15/673139030_1284058059853572_2198525018291511002_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=108&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=KBsiJ7TxEXkQ7kNvwEWaTXw&amp;_nc_oc=AdqYbjgb1RU8ADm2RTr24L262Wmx_1RcufmWhTvnVUPof_TXUUH5lCO2qeq9F9QaJ4g&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-3.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQG9JeHeImYdGgk9SadBgiYiIpiOqSAU-dp2-zWyj3Hja3McCt2iFyrio_yNWeGWOSNcqUP9VsNu&amp;oh=00_Af5XitbTYRJC77Ko9hEqSztF8qdNHhocbZpl_d1HfVsi5Q&amp;oe=6A02A113" alt="Full face harmony — Face Card Clinics">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-2.cdninstagram.com/v/t51.71878-15/661764594_1316078244002923_5723286592374170095_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=105&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=0J8vr7d0g0EQ7kNvwEESCHC&amp;_nc_oc=AdrDA6IVxQYD0Gf1dJH7v8IIj6zPYoGgDALnVurQqMnV7D9AhzV12WEIOqoQ69Z6o2Y&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-2.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQHLlGco5nGwhII8u_6fYJXFMkFNIWe9wUWQ8SNUo_tBjMDlGDnPakrgVBnSJYMt0Pmt_sRsjtYc&amp;oh=00_Af5fINSrKUUoBvnTGGb4G0kQUhP6_tCEX7hqLYaXiv4MGw&amp;oe=6A027C57" alt="The perfect derma peel — The Face Card Clinics">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-1.cdninstagram.com/v/t51.82787-15/673129444_17929365063257479_4602199078608642023_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=111&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&amp;_nc_ohc=FbWDZKjV6UoQ7kNvwESh4BX&amp;_nc_oc=AdqJJMh-LhCU8IepM_Q0usn7JH33HIU1qRm6g7nikNsjOhK0mrwR_iKiYLm2LVZA4SE&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-1.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQEe0pDlE7cTP4Bpt6_KHwCN87d10kJZR8_vkZhy6iHIgBe35TqK_Qb2PoSmNPTXAPbBf8CacnQ6&amp;oh=00_Af6mFSVgpvQqNfytRS5oE_SIzZq9yhiGiKX6gCMJla82Dw&amp;oe=6A0275ED" alt="Flat to lifted — Russian technique by @sadaf.injects">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-3.cdninstagram.com/v/t51.82787-15/682471053_17929531191257479_4463043900846079687_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=102&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=zJ8M95VrG5YQ7kNvwHPNqw_&amp;_nc_oc=AdpCmULbYMxIojIlcwA_iECc6RawkfP9aXsR__TJQefK_SoRcIItEIf8IpKvmpWAZtk&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-3.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQHIF8EZQFlnDayc-7S2--WI3HqEV0Gyr9Arw6A1iGcgplc6NOaKQURN3ipnGLdOMJ-2aMrC9RBY&amp;oh=00_Af4Yhhpo481JNolhrMrE6Uxe9PoYAp7vTr_0iEd4SW-xIg&amp;oe=6A02883B" alt="Aerolase Neo Elite laser — Face Card Clinics">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-3.cdninstagram.com/v/t51.82787-15/673577485_17928905502257479_8495243408167548791_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=102&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=cXYrtVICl9sQ7kNvwEhixTL&amp;_nc_oc=AdqT0ga5nrVDNvla-yC7sw5KMVYNx-3aC_kCVHBajyBIecSWwiUju_yp-fAjQWOsczc&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-3.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQHuk54P0cAPMSUwOF6MpflY0tg8dEdefPTxrXyLuE1_63DstRQGL3IUwT0HIuZD9c286_lC6XjT&amp;oh=00_Af7Fs6n5WCfynqrWkDx8k7IQFIYdhCzIbxicYxCaWaR0bw&amp;oe=6A028843" alt="Grand opening guest — Face Card Clinics Austin">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-1.cdninstagram.com/v/t51.82787-15/670754488_17928432534257479_997126199072058123_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=110&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&amp;_nc_ohc=bY6_TdEnuB8Q7kNvwGZqKEk&amp;_nc_oc=AdqNlfyh9BcyK8u9izdS-U9EZMWqhPI0d_PSlw6B204MwTdpXNL6ybllvb8LrAuwzG8&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-1.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQFFOo3avmhapW6h6rWY0vDeOFJ-yPCYCAZYfHMWM0ICj4piGM8a7pvWXh1f2fsgjlO96h03jQQH&amp;oh=00_Af5gysDmCFtcbcRUsMd5O0U6pXYS8vEOa4Uk3J-3pOJ2QA&amp;oe=6A0297D9" alt="2 sessions 2 MLs — Honolulu location @sadaf.injects">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-3.cdninstagram.com/v/t51.71878-15/671753076_2493797547757225_5867108886658749306_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=106&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=OcDQTm747-YQ7kNvwGCQNXS&amp;_nc_oc=Adq4E50ZdDJpGjpCJ0QrzguHhKjMMFMNtZMCDXZwpf2660y1pM7Ly91e65RtQmoGuDY&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-3.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQHlv2DZ7jLc67Iv5dPM73V2KAn-n_wGAz_Nfw1R0vFXe38oV7Bz3bZejk5NKfuac3AqwZo6JhgB&amp;oh=00_Af6tQjcZYLRzPqyCeToCqp9KxXRHE5IaETFmcpGWWNnP5w&amp;oe=6A028A06" alt="Your future skin will thank you — Face Card Clinics">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-1.cdninstagram.com/v/t51.82787-15/670686566_17928163449257479_8647824238677157496_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=103&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=BdNVYpEzYGYQ7kNvwERlhFl&amp;_nc_oc=AdrRZ5q7EhdkgDyO3aVjwcttPmJ2wbXToHbFUEA-SO9bVZd042LGGuc7Kv5JFInSVKU&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-1.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQEFsjv_g3Qi8SpERGIJHMrYEwAJdIF9nJCilttDPEYshTB2iFhbT7oXHQm9vwv-sy95LidsaD5v&amp;oh=00_Af5uogWRkMNV0J08gguS-fDTAkCP3-_XB22M6zKGAtNXkQ&amp;oe=6A028806" alt="Lookin so good — @txlashes.atx">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-3.cdninstagram.com/v/t51.82787-15/670754594_17927981385257479_8465454151948682357_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=108&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&amp;_nc_ohc=loMGabBeGOUQ7kNvwGv4SQ5&amp;_nc_oc=AdpXmk2p-E1ToBAefJFNjm-a2GG63CRb3O-6x8_CurmQnSyId8QyYb8MrNdY2pW_N-U&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-3.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQFTZkujGc6w7S7cN3PwGC95HwxV-eBs8uAotLLy-xf5lMez9P4kH-E6-Rw0JiDeCCYGRtLvWLQY&amp;oh=00_Af7W_8W0F1mqTmkjOkL5uyNSCl5Yc99p3cVfphFMZnGu5Q&amp;oe=6A0270A6" alt="Results speak — Face Card Clinics">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-3.cdninstagram.com/v/t51.71878-15/670146414_1872599126778836_3200250271862606898_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=102&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=F43TbDRbRScQ7kNvwG7VMAU&amp;_nc_oc=Adqf23HEB5SkOTgm1FszNeLQgPAzrJTjg3TCsIaxvPZtvj2P5JSCD4l3j8ZHsLRhxQ4&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-3.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQF2vFFyMY1Lq9kUuHtLybMa2rap916o0l8tc1mIDpEDg1nLuK5EoLH_1rYN_RIWj8iDdEPp_RT2&amp;oh=00_Af7Qbzdu6jTSmHn0DNIxDqWaYv3nCG-kz4qjD5-RBeQ2jw&amp;oe=6A02A44A" alt="1ml Russian lip transformation — Face Card Clinics">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-2.cdninstagram.com/v/t51.82787-15/669795227_17927863317257479_2135118604085618424_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=105&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=rOqGm_yVZcUQ7kNvwFFj4C2&amp;_nc_oc=AdqVBuXXeAxnzl4ZiiSI0i1f7Eu7QLUkIlmyF6GJxrUvPJEZl1rkgrBy60gWrQF88UY&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-2.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQGeaEDbwuF6tNRs525HMoW4NY7BsrxSgbIhA3DFKYbGXqkd0ItbV7Me--bvE-4XypZACmuSZH6S&amp;oh=00_Af6TM2vldrPieKjwYHh0CPFfd_ZM1urZmILbRWjPSwp3wA&amp;oe=6A0293F1" alt="Not bigger. Just better. — Face Card Clinics">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-3.cdninstagram.com/v/t51.82787-15/658060540_17927737068257479_7064207831181454627_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=102&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&amp;_nc_ohc=UhmKrssQxAIQ7kNvwEqQsDr&amp;_nc_oc=AdowCTS1KPROsidWSkBxTi1E4RlnjMyNqs4kteVSZiXDZBXhNl8E1SiqPGTsFZ5pqq0&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-3.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQGBdzhGBwDffG3n4bNMMrgybTNQZR8w1OcfoDOAsAyLzhgbU-d7TpYowsHkq6wCcOz02rc4VEZu&amp;oh=00_Af417VD_ZZ5ygI5czkZAWxXF4teKL663WobzWHld_HX11w&amp;oe=6A02815B" alt="Not all lip filler is created equal — Russian lips">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-2.cdninstagram.com/v/t51.82787-15/670994140_17927434782257479_643587333630085573_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=107&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=jo5n9nktbm4Q7kNvwECvqVv&amp;_nc_oc=AdqAIKVUkI1wgqmLSZzgJ7GSBqyrNkOycG7g4YiuDEkSlkXEAO0U4gO_lsbzTb1d1is&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-2.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQGVL8a_2d7oN0CulzPOEBDvApESE8RZ-lqJ0EHc1LXyRkbjEbbVC8RbrqpiihfpTRM1epUzqmSI&amp;oh=00_Af6pY8TiztkaRGsHs5YCVaak26pP7780Qf6s34jsRs_16Q&amp;oe=6A02A84D" alt="Soft, balanced, and made to fit you — Joanna Injects">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-2.cdninstagram.com/v/t51.82787-15/660789784_17927021454257479_1921405186265098273_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=105&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&amp;_nc_ohc=ugZ-sZ-GCq0Q7kNvwH4_Ok4&amp;_nc_oc=Adr6fMEsAHG21wLmQr4ku7aFttGJ4N3x9lhbp386yLxCwDXrOoLgULvFzoh0VVStIy0&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-2.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQF0Ts1u_RUb3buWqScFa08aSWDZOdLDaAuVBHI-0jp0RsiXMoDum7KqcTohD4AK46RCnsfImiQq&amp;oh=00_Af4ei6bNQM4sgRDUm74SQJLR9P1dmIWchwAqgc0taiEGZw&amp;oe=6A028BFA" alt="Face Card Clinics gallery">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-2.cdninstagram.com/v/t51.71878-15/662011747_1281044370835989_7177688740427813422_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=101&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=QA2EolAckusQ7kNvwF9WXbC&amp;_nc_oc=Adp3jWBT4DBSynEYDyKwN7buUu-4kn1sXHofUFVUUX-CHPckVeFdN7zyDW6VLQ31Mkk&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-2.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQGqlPCtZ_IVb2QpWZaDAiI0wSBPibruF1qwMfZEFAXHWdzqRD1khVUrZIm8XguYGJlqNWZDjwa0&amp;oh=00_Af53lVQrrzeVMPjozSInqwlnlbdEGGTvxnmA0buo3JPsVw&amp;oe=6A0299B0" alt="Aerolase Neo targets acne at the source — Joanna Injects">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-3.cdninstagram.com/v/t51.71878-15/658076528_1462144748788506_355151516208472497_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=106&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=oQHfw7UFf4wQ7kNvwEt5D9d&amp;_nc_oc=AdrWyWE_PZkdIcxv4kBQfIKaBnICdVFPLJ-4pr_y4BSMWrXil2YbUK87-xOXapsBnA8&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-3.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQGVQqrMj2rI8i7m-Sl4vUbKRVqP-ZuznbzoaIi8rVN__ssRRNZvN61fo6zqU0-XnawSVjLmgrg3&amp;oh=00_Af66tR9gIlJrzIHR2DC4NG844J6U0GPdfYZXk4hIUiAMnw&amp;oe=6A02A79B" alt="Modern lips, done right — Joanna Injects">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-3.cdninstagram.com/v/t51.82787-15/671147120_17928351132257479_4135051561199443405_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=106&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=RLyxcrR_8KAQ7kNvwFLX_ol&amp;_nc_oc=AdqYJ-8h_wQosVSdN92qlvaX4HGSIxaj0l0pu2eBHSzBsMtVpl_hMJUYOpUgJ10D8Og&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-3.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQHd2udyj8jCwkilLj1ZyYUsCUOq9k5bIE8IAi11DDrdyD6cmnva857K1Z3BbukVcO_HR49JLaEq&amp;oh=00_Af5WUS6vLY2HPOZO6oS9ugdF2MgMDGOTF7i1ft4ER7O06g&amp;oe=6A02935D" alt="Refined lips, balanced chin, sculpted jaw">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-3.cdninstagram.com/v/t51.71878-15/658210375_800042333178429_6350492991262043312_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=106&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=69d3vJ90nLEQ7kNvwGSb97S&amp;_nc_oc=AdpcvPQXRTsMVd17gUp-ZoJMVrpxyhP3OrPJhLpNmKIfHToA21wPwTwWWxqa0FLJvqc&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-3.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQEZ329g8BdJS4ocxfiLl5_eTOT6UrzPk0UalXdSlBtQCKUAxzaTyZgx_dFcQCiRiwfiD_5rrWm6&amp;oh=00_Af7R_BmkFAs9kUz0zpBbq3oKjjwbTxfa1j1Tf6CYgGm-Qg&amp;oe=6A029E81" alt="Balance, but make it seamless — Joanna Injects">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-1.cdninstagram.com/v/t51.82787-15/658535514_17926405083257479_3687076038185811713_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=103&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=BUqElSlIRq0Q7kNvwHC21nV&amp;_nc_oc=AdprsvvbuKIVzEryC5-YdntBdCoXAnT6VLxGY3t1P3vd3HT7iAWn1VA5zJwZhF7l-Kg&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-1.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQGr38ZuLpG59KuR8E773N-2AxDD8pgdaXVkOQsVR66f8-M6D5hpTy5no7TzTQ7AZF3q7tlpca48&amp;oh=00_Af7wglXwlt8LgkeaWS2mbxYW6sMgJju50bbnqNPVzRXjcQ&amp;oe=6A02948D" alt="It's never just one set of hands — Joanna Injects">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-2.cdninstagram.com/v/t51.71878-15/658791068_812523241317454_538908848151101023_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=107&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=s7R5NXPI3NsQ7kNvwEScjZg&amp;_nc_oc=Adp4dILTtlOFiWB1o-TKox9ATcWpnhf0lY7UTLOiGnd_q5FDvSy2-pXQsJG2yAh2FO4&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-2.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQF9BhJI2-UNDr0ScLvO3velF_JzqhQiDhMV_85xrqGHGz4z6R9w9OGKSnS1KKWpH6jP8xhVK0Ls&amp;oh=00_Af7VRvFqaq5BtIDiU5raGRtopWm3N45Ks7Gq_TKFMfFDyw&amp;oe=6A0281F1" alt="Loyal client moved from Hawaii to Texas — Joanna Injects">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-3.cdninstagram.com/v/t51.71878-15/657910121_1313606960631623_5046427707087580375_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=104&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=kWI9N-8QSSsQ7kNvwE-VH2R&amp;_nc_oc=AdrqmmzA3_iytxSpbDfGMSKqkjGA0JRXGwB0pLARFjSDyDjdtQh5UEnAVasSz44E7xk&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-3.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQHIOLuMM6e2UdXZ_oNj40PKPF7sV7GignHLgKvTmRY4m085pRtXka67XfU6na9tBqmLnbL1_VtE&amp;oh=00_Af42Zd79C3M49L0stlPvaQmDeLvMqf1EF1_HVUQzI9Cp3Q&amp;oe=6A027E77" alt="Men care about how they look too — Joanna Injects">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-2.cdninstagram.com/v/t51.71878-15/657327227_1586253579349757_3286148278757521523_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=105&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=dYbypKP14BwQ7kNvwGx4HYK&amp;_nc_oc=Ado6iRj6c6JBF3uF_bZ3JEQNiW4UM575uPmMcLX0xRRD8pSGkTEXEO66s2oQiV2_n-o&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-2.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQG36DfNsFaabOhHNXkYBi7D37hhrJ6zlN4RsshsGHniMYbojXhzQAcfcohezU0kPJK3waM3340S&amp;oh=00_Af5eeybP3qr9XSUFWepqgFUosiAD45Xobm9Xd2kOuXK-Ww&amp;oe=6A029F55" alt="Delicate. Defined. Never overdone. — Joanna Injects">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-1.cdninstagram.com/v/t51.82787-15/656851466_17925043104257479_7181351278793315972_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=109&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=lHBh-prXiMYQ7kNvwHKpjT9&amp;_nc_oc=Adrz1FcvVsoO7ocwYmU_zUBMnP0pyYDvpDG8UfI7WcEJ_DVNyDDNg5GjKOMpMyFlr78&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-1.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQHCVVfSQAshDjPlOBQS2k2aBemmlVGhOwC1S67NruHlRR-cSuVRzHRS9BOzOe6w4TFR2UlQYeFb&amp;oh=00_Af5938UmL6xAmnmjfe6-p8OIKJLitqzOgdFE-Z_Rt0Jjew&amp;oe=6A029BE8" alt="If you're going to invest in your beauty, make sure it's balanced — Joanna Injects">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-2.cdninstagram.com/v/t51.71878-15/655577635_1019463260411954_5849493097325499938_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=105&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=Tf1Sova2Jy4Q7kNvwHgngpk&amp;_nc_oc=AdpZRisAdWD6sfVqCniaKP2sQ19shXeQCN2NiY-FJtQcJ7waESINiCNHEfQVm4WH7qg&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-2.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQH3kgvfn5HpyJGdom8IPGYuIbJjhVTkmbTjWoH4lHvprddalYtp1StQcztg0Rfhe2YxvnVxCfMk&amp;oh=00_Af6wMZdNPFjP8yrddVbno3K6mJMKPAriA-oVD1Lz7OUGqw&amp;oe=6A029F63" alt="It's not always about adding more — Joanna Injects">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-1.cdninstagram.com/v/t51.71878-15/654026594_946479774596510_8179326103040193924_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=109&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=IbH0OnYK_bgQ7kNvwEmcMbS&amp;_nc_oc=AdqWELJLuRnR-7qKd4i7hKIZnWnkOCf0kgM0Qt9LAIRnDg3dujeCmUNyuMfIIyYT71I&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-1.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQHYixvDFS8XZ0_j7RhtiBYaBqFeybPTEL5Ac0NVunj3Odzscrl4Tznrv9XONyPSajr1NOCETxPl&amp;oh=00_Af7Qdust4dHYzMBRI8EETtuQfFECjo7MU6VgyS--_lwCXA&amp;oe=6A028DD3" alt="You can keep guessing what she gets done — Joanna Injects">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Look Around Section -->
+<section class="look-around-section">
+  <div class="look-around-inner">
+    <p class="look-around-label">look around</p>
+    <ul class="look-around-links">
+      <li><a href="/">HOME</a></li>
+      <li><a href="/services">SERVICES</a></li>
+      <li><a href="/about">ABOUT</a></li>
+      <li><a href="/policies">POLICIES</a></li>
+      <li><a href="/faq">FAQ</a></li>
+      <li><a href="/locations">LOCATIONS</a></li>
+      <li><a href="/payment-plans">PAYMENT PLANS</a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- Instagram Section -->
+<section class="instagram-section">
+  <div class="instagram-inner">
+    <div class="instagram-link-wrap">
+      <a href="https://www.instagram.com/joanna.injects/" target="_blank" rel="noopener">
+        <img class="instagram-icon" src="https://static.wixstatic.com/media/11062b_cef3b719166a4815b446d4dcfcb6120d~mv2.png/v1/fill/w_26,h_26,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_cef3b719166a4815b446d4dcfcb6120d~mv2.png" alt="Instagram">
+      </a>
+      <a href="https://www.instagram.com/joanna.injects/" target="_blank" rel="noopener">@joanna.injects</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Face Card Clinics</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+<script>
+  function toggleAccordion(header) {
+    var body = header.nextElementSibling;
+    var isOpen = body.classList.contains('open');
+    // Close all
+    var allHeaders = document.querySelectorAll('.accordion-header');
+    var allBodies = document.querySelectorAll('.accordion-body');
+    allHeaders.forEach(function(h) { h.classList.remove('open'); });
+    allBodies.forEach(function(b) { b.classList.remove('open'); });
+    // Open clicked if it wasn't open
+    if (!isOpen) {
+      header.classList.add('open');
+      body.classList.add('open');
+    }
+  }
+</script>

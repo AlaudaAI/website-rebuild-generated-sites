@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services | Face Card Clinics</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Page Title Area */
+.page-title-area {
+  padding: 160px var(--pad-x) 60px;
+  background: var(--text-black);
+  color: var(--bg-cream);
+}
+.page-title-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.page-title-area h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+}
+.page-title-area .page-title-sub {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  margin-top: var(--space-sm);
+  opacity: 0.7;
+}
+
+/* Intro Section */
+.intro-section {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+.intro-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  align-items: center;
+}
+.intro-text-block .intro-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--space-sm);
+}
+.intro-text-block h2 {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+.intro-image-wrapper {
+  width: 100%;
+  max-width: 400px;
+}
+.intro-image-wrapper img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  filter: grayscale(20%);
+  transition: filter 0.7s ease;
+}
+.intro-image-wrapper img:hover {
+  filter: grayscale(0%);
+}
+
+/* Services Section */
+.services-section {
+  padding: var(--space-xl) var(--pad-x);
+}
+.services-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.services-section-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--border-black);
+  padding-bottom: var(--space-sm);
+}
+
+/* Service Category */
+.service-category {
+  margin-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--border-black);
+  padding-bottom: var(--space-xl);
+}
+.service-category:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.service-category-header {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+.category-number {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  opacity: 0.5;
+}
+.category-title {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+.service-items-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
+}
+.service-item {
+  border: 1px solid var(--border-black);
+  padding: var(--space-sm) var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition: background-color 0.3s ease;
+}
+.service-item:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+.service-item-name {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+.service-item-desc {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
+/* Category with image layout */
+.category-with-image {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  align-items: start;
+}
+.category-image-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+.category-image-wrapper img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  filter: grayscale(30%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+.category-image-wrapper img:hover {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+/* CTA Banner */
+.cta-banner {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+  padding: var(--space-xl) var(--pad-x);
+  text-align: center;
+}
+.cta-banner-inner {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.cta-banner-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: lowercase;
+  margin-bottom: var(--space-md);
+  opacity: 0.7;
+}
+.cta-banner h2 {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  line-height: 1.2;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-md);
+}
+.cta-button {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  border: 1px solid var(--bg-cream);
+  color: var(--bg-cream);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.cta-button:hover {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+}
+
+/* Instagram Feed Section */
+.instagram-section {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+.instagram-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.instagram-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: lowercase;
+  margin-bottom: var(--space-md);
+  border-bottom: 1px solid var(--border-black);
+  padding-bottom: var(--space-sm);
+}
+.instagram-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+}
+.instagram-item {
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+}
+.instagram-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(20%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+.instagram-item img:hover {
+  filter: grayscale(0%);
+  transform: scale(1.03);
+}
+.instagram-caption {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.03em;
+  margin-top: var(--space-sm);
+  line-height: 1.6;
+  opacity: 0.7;
+}
+.instagram-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+  margin-top: var(--space-md);
+  border-bottom: 1px solid var(--border-black);
+  padding-bottom: 2px;
+  transition: opacity 0.3s ease;
+}
+.instagram-link:hover {
+  opacity: 0.6;
+}
+
+/* Look Around Nav */
+.look-around-section {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+.look-around-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.look-around-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: lowercase;
+  margin-bottom: var(--space-md);
+}
+.look-around-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  list-style: none;
+}
+.look-around-nav a {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  letter-spacing: 0.04em;
+  position: relative;
+  padding-bottom: 3px;
+}
+.look-around-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: var(--text-black);
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+.look-around-nav a:hover::after {
+  width: 100%;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .intro-inner {
+    grid-template-columns: 1.2fr 1fr;
+    gap: var(--space-xl);
+  }
+
+  .service-items-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-category-header {
+    grid-template-columns: auto 1fr;
+    align-items: baseline;
+    gap: var(--space-md);
+  }
+
+  .category-with-image {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .instagram-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .service-items-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .instagram-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1440px) {
+  .service-items-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1.5rem;
+    --space-xl: 3rem;
+    --space-lg: 2rem;
+  }
+
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+
+  .page-title-area {
+    padding: 120px var(--pad-x) 40px;
+  }
+
+  .intro-inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .intro-image-wrapper {
+    max-width: 100%;
+  }
+
+  .service-category-header {
+    grid-template-columns: 1fr;
+    gap: var(--space-xs);
+  }
+
+  .service-items-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .category-with-image {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .instagram-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .look-around-nav {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .footer {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .cta-banner {
+    padding: var(--space-lg) var(--pad-x);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Face Card Clinics</a>
+  <ul class="nav-links">
+    <li><a href="/">home</a></li>
+    <li><a href="/services">services</a></li>
+    <li><a href="/about">about</a></li>
+    <li><a href="/policies">policies</a></li>
+    <li><a href="/faq">faq</a></li>
+    <li><a href="/locations">locations</a></li>
+    <li><a href="/payment-plans">payment plans</a></li>
+    <li><a href="/book-online">book online</a></li>
+  </ul>
+</nav>
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Services</h1>
+    <p class="page-title-sub">Face Card Clinics — where beauty meets expertise</p>
+  </div>
+</section>
+
+<!-- Intro / Hi there! -->
+<section class="intro-section">
+  <div class="intro-inner">
+    <div class="intro-text-block">
+      <p class="intro-label">hi there!</p>
+      <h2>Face Card Clinics is where beauty meets expertise. Founded by a master's educated nurse with aesthetics training, we offer advanced aesthetic treatments designed to enhance your natural beauty.—without breaking the bank.</h2>
+    </div>
+    <div class="intro-image-wrapper">
+      <img src="https://static.wixstatic.com/media/945224_f550cd0137544011ad18a7f4d1fa098e~mv2.jpeg/v1/fill/w_483,h_600,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/945224_f550cd0137544011ad18a7f4d1fa098e~mv2.jpeg" alt="Joanna Injects Aesthetics is where beauty meets expertise. Founded by a master's educated nurse with specialized aesthetics training, we offer advanced aesthetic treatments designed to enhance your natural beauty—without breaking the bank.">
+    </div>
+  </div>
+</section>
+
+<!-- OUR SERVICES -->
+<section class="services-section">
+  <div class="services-inner">
+    <p class="services-section-label">our services</p>
+
+    <!-- RUSSIAN LIP FILLER -->
+    <div class="service-category">
+      <div class="service-category-header">
+        <span class="category-number">01.</span>
+        <h2 class="category-title">Russian Lip Filler</h2>
+      </div>
+      <div class="category-with-image">
+        <div class="service-items-grid" style="grid-template-columns: 1fr;">
+          <div class="service-item">
+            <span class="service-item-name">Russian Lip Filler – Half Syringe</span>
+            <p class="service-item-desc">Russian lip technique to enhance shape, height, and definition while keeping results soft, symmetrical, and luxurious.</p>
+          </div>
+          <div class="service-item">
+            <span class="service-item-name">Russian Lip Filler – Full Syringe</span>
+            <p class="service-item-desc">Full syringe Russian lip filler treatment.</p>
+          </div>
+          <div class="service-item">
+            <span class="service-item-name">Strip Lips</span>
+          </div>
+        </div>
+        <div class="category-image-wrapper">
+          <img src="https://static.wixstatic.com/media/945224_d893473c3e9442c8ab0cf4c5b18d77ea~mv2.jpg/v1/crop/x_101,y_0,w_1333,h_2048/fill/w_414,h_636,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_5033_JPG.jpg" alt="Glossy pink lips after lip filler treatment at Joanna Injects Aesthetics in Honolulu.">
+        </div>
+      </div>
+    </div>
+
+    <!-- NEUROMODULATOR / Injectables -->
+    <div class="service-category">
+      <div class="service-category-header">
+        <span class="category-number">02.</span>
+        <h2 class="category-title">Neuromodulator</h2>
+      </div>
+      <p style="font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.08em; text-transform: lowercase; margin-bottom: var(--space-sm);">01. Injectables</p>
+      <div class="service-items-grid">
+        <div class="service-item">
+          <span class="service-item-name">Xeomin</span>
+          <p class="service-item-desc">Neuromodulator injectable treatment.</p>
+        </div>
+        <div class="service-item">
+          <span class="service-item-name">Jeuveau</span>
+          <p class="service-item-desc">Neuromodulator injectable treatment.</p>
+        </div>
+        <div class="service-item">
+          <span class="service-item-name">Letybo</span>
+          <p class="service-item-desc">Neuromodulator injectable treatment.</p>
+        </div>
+        <div class="service-item">
+          <span class="service-item-name">LeJets TLE</span>
+          <p class="service-item-desc">Neuromodulator injectable treatment.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FACIAL FILLER -->
+    <div class="service-category">
+      <div class="service-category-header">
+        <span class="category-number">03.</span>
+        <h2 class="category-title">Facial Filler</h2>
+      </div>
+      <div class="service-items-grid">
+        <div class="service-item">
+          <span class="service-item-name">Chin Filler</span>
+          <p class="service-item-desc">Facial filler treatment targeting the chin area.</p>
+        </div>
+        <div class="service-item">
+          <span class="service-item-name">Cheeks Filler</span>
+          <p class="service-item-desc">Facial filler treatment targeting the cheeks.</p>
+        </div>
+        <div class="service-item">
+          <span class="service-item-name">Jaw Filler</span>
+          <p class="service-item-desc">Facial filler treatment targeting the jaw.</p>
+        </div>
+        <div class="service-item">
+          <span class="service-item-name">Non Surgical Nose Augmentation</span>
+          <p class="service-item-desc">Non-surgical nose reshaping using facial filler.</p>
+        </div>
+        <div class="service-item">
+          <span class="service-item-name">Facial Balancing</span>
+          <p class="service-item-desc">Facial filler treatment for overall facial balancing.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEOXYCHOLIC ACID FAT DISSOLVER -->
+    <div class="service-category">
+      <div class="service-category-header">
+        <span class="category-number">04.</span>
+        <h2 class="category-title">Deoxycholic Acid Fat Dissolver</h2>
+      </div>
+      <div class="service-items-grid">
+        <div class="service-item">
+          <span class="service-item-name">Deoxycholic Acid Fat Dissolver – Underchin</span>
+          <p class="service-item-desc">Fat dissolving injection targeting the underchin area.</p>
+        </div>
+        <div class="service-item">
+          <span class="service-item-name">Deoxycholic Acid Fat Dissolver – Bra Fat</span>
+          <p class="service-item-desc">Fat dissolving injection targeting bra fat.</p>
+        </div>
+        <div class="service-item">
+          <span class="service-item-name">Deoxycholic Acid Fat Dissolver – Abdomen</span>
+          <p class="service-item-desc">Fat dissolving injection targeting the abdomen.</p>
+        </div>
+        <div class="service-item">
+          <span class="service-item-name">Deoxycholic Acid Fat Dissolver – Underarms</span>
+          <p class="service-item-desc">Fat dissolving injection targeting the underarms.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- VITAMIN SHOTS -->
+    <div class="service-category">
+      <div class="service-category-header">
+        <span class="category-number">05.</span>
+        <h2 class="category-title">Vitamin Shots</h2>
+      </div>
+      <div class="service-items-grid">
+        <div class="service-item">
+          <span class="service-item-name">Biotin Shot</span>
+          <p class="service-item-desc">Vitamin shot containing biotin.</p>
+        </div>
+        <div class="service-item">
+          <span class="service-item-name">Vitamin B12 Shot</span>
+          <p class="service-item-desc">Vitamin B12 injectable shot.</p>
+        </div>
+        <div class="service-item">
+          <span class="service-item-name">Lipo C Shot</span>
+          <p class="service-item-desc">Lipo C vitamin injectable shot.</p>
+        </div>
+        <div class="service-item">
+          <span class="service-item-name">NAD+ Shot</span>
+          <p class="service-item-desc">NAD+ vitamin injectable shot.</p>
+        </div>
+        <div class="service-item">
+          <span class="service-item-name">Glutathione Shot</span>
+          <p class="service-item-desc">Glutathione vitamin injectable shot.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SKIN BOOSTERS -->
+    <div class="service-category">
+      <div class="service-category-header">
+        <span class="category-number">06.</span>
+        <h2 class="category-title">Skin Boosters</h2>
+      </div>
+      <div class="service-items-grid" style="grid-template-columns: 1fr;">
+        <div class="service-item">
+          <span class="service-item-name">Rejuran Healer</span>
+          <p class="service-item-desc">Skin booster treatment using Rejuran Healer.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA Banner -->
+<section class="cta-banner">
+  <div class="cta-banner-inner">
+    <p class="cta-banner-label">let's get you flawless ⚡</p>
+    <h2>Ready to enhance your natural beauty?</h2>
+    <a href="https://abcfu.myaestheticrecord.com/online-booking" class="cta-button">Book Consultation</a>
+  </div>
+</section>
+
+<!-- Instagram Feed -->
+<section class="instagram-section">
+  <div class="instagram-inner">
+    <p class="instagram-label">from our feed</p>
+    <div class="instagram-grid">
+      <div>
+        <div class="instagram-item">
+          <img src="https://scontent-lga3-2.cdninstagram.com/v/t51.71878-15/686879972_2065964857331428_6634777409116577601_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=107&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=f4CiD4G9pGkQ7kNvwHY_QVH&_nc_oc=AdrlQT_4KGK7FzY5l609fvGmdDgNTAr0iTSrN0wZ25KF8eDOLAbNT4ILHLn2CvrQH7s&_nc_zt=23&_nc_ht=scontent-lga3-2.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&_nc_tpa=Q5bMBQFbox8w_44188Bh8V08KF5tJlR41qqSGqRbnzQlktEG-HeVa7a_IH-JwdghiH5oEtAys-LigVaL&oh=00_Af62CZSSjhp4gjhcaY3iIK0NqJNJWQU-r9v2k-zktUJJNQ&oe=6A0285B6" alt="Guys, laser isn't just for the girls 👀 Those stubborn spots, like between the brows ..gotta go too. Clean it up without the constant tweezing. Book your session today ✨ — The Face Card Clinics ❤️‍🔥">
+        </div>
+        <p class="instagram-caption">Guys, laser isn't just for the girls 👀 Those stubborn spots, like between the brows ..gotta go too. Clean it up without the constant tweezing. Book your session today ✨ — The Face Card Clinics ❤️‍🔥</p>
+      </div>
+      <div>
+        <div class="instagram-item">
+          <img src="https://scontent-lga3-2.cdninstagram.com/v/t51.82787-15/684280647_17931123780257479_3921485425056154458_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=2Tpx-oOlTXUQ7kNvwE3Om7p&_nc_oc=Adri0rJ4E8Wr-zBJtYlYEHPZe252gtG5pjYNhgNK3JiVrYmCcBjcmVd-YIv7NwWzCmU&_nc_zt=23&_nc_ht=scontent-lga3-2.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&_nc_tpa=Q5bMBQFQU4Ra6hueVQSQB_th-z6UL0L8ql46cOjLvuSkxy2c9_pKzC9v6sVHeKLSFEIL7Fi5h9_qucvu&oh=00_Af56qhuEJeg3mP2-wqBOwUDPvoB_NvqRVDEao8wyrqsiPA&oe=6A028962" alt="Sadaf never misses 🏹🖤 She uses our signature Russian lip technique to enhance shape, height, and definition while keeping the results soft, symmetrical, and luxurious. Her artistry is in the details 💉👄 Swipe for more angles. Book with our trusted lead injector at the Honolulu Location. @sadaf.injects 💉✨ #RussianLips #LipFiller #RussianLipTechnique #HonoluluInjector #lipenhancement">
+        </div>
+        <p class="instagram-caption">Sadaf never misses 🏹🖤 She uses our signature Russian lip technique to enhance shape, height, and definition while keeping the results soft, symmetrical, and luxurious. Her artistry is in the details 💉👄 Book with our trusted lead injector at the Honolulu Location. @sadaf.injects 💉✨ #RussianLips #LipFiller #RussianLipTechnique #HonoluluInjector #lipenhancement</p>
+      </div>
+    </div>
+    <a href="https://www.instagram.com/joanna.injects/" class="instagram-link">
+      <img src="https://static.wixstatic.com/media/11062b_cef3b719166a4815b446d4dcfcb6120d~mv2.png/v1/fill/w_26,h_26,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_cef3b719166a4815b446d4dcfcb6120d~mv2.png" alt="Instagram" style="width: 20px; height: 20px;">
+      follow us on instagram
+    </a>
+  </div>
+</section>
+
+<!-- Look Around -->
+<section class="look-around-section">
+  <div class="look-around-inner">
+    <p class="look-around-label">look around</p>
+    <ul class="look-around-nav">
+      <li><a href="/">Home</a></li>
+      <li><a href="/services">Services</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/policies">Policies</a></li>
+      <li><a href="/faq">FAQ</a></li>
+      <li><a href="/locations">Locations</a></li>
+      <li><a href="/payment-plans">Payment Plans</a></li>
+    </ul>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Face Card Clinics</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>

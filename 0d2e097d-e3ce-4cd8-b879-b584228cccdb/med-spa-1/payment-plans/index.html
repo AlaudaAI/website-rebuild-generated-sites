@@ -1,0 +1,1056 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Plans</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Page Title Area */
+.page-title-area {
+  padding: 160px var(--pad-x, 1.5rem) 60px;
+  background: var(--text-black, #1a1a1a);
+  color: var(--bg-cream, #f4f0ea);
+}
+.page-title-inner { max-width: 1200px; margin: 0 auto; }
+.page-title-area h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 300;
+  font-family: var(--font-serif);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+}
+.page-title-area .page-title-sub {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-top: var(--space-sm);
+  opacity: 0.7;
+}
+
+/* Content Area */
+.content-area {
+  padding: 64px var(--pad-x, 1.5rem);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Cherry Intro */
+.cherry-intro {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--border-black);
+  padding-bottom: var(--space-xl);
+}
+
+.cherry-intro-image {
+  width: 100%;
+  max-height: 400px;
+  overflow: hidden;
+}
+
+.cherry-intro-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cherry-intro-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+.cherry-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  opacity: 0.6;
+}
+
+.cherry-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.cherry-features {
+  list-style: none;
+  padding: 0;
+  margin-top: var(--space-sm);
+}
+
+.cherry-features li {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  padding: var(--space-xs) 0;
+  border-bottom: 1px solid rgba(26,26,26,0.15);
+  line-height: 1.6;
+}
+
+.cherry-features li:last-child {
+  border-bottom: none;
+}
+
+.cherry-cta-row {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  margin-top: var(--space-sm);
+}
+
+.btn-outline {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-xs) var(--space-sm);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: inline-block;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-outline:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+.btn-solid {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: var(--text-black);
+  border: 1px solid var(--border-black);
+  color: var(--bg-cream);
+  padding: var(--space-xs) var(--space-sm);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.btn-solid:hover {
+  background-color: transparent;
+  color: var(--text-black);
+}
+
+/* Stats Section */
+.stats-section {
+  margin-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--border-black);
+  padding-bottom: var(--space-xl);
+}
+
+.stats-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-md);
+  opacity: 0.6;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border: 1px solid var(--border-black);
+}
+
+.stat-cell {
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--border-black);
+}
+
+.stat-cell:last-child {
+  border-bottom: none;
+}
+
+.stat-value {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  margin-bottom: var(--space-xs);
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  opacity: 0.7;
+}
+
+/* How Cherry Works */
+.how-cherry {
+  margin-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--border-black);
+  padding-bottom: var(--space-xl);
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-md);
+  opacity: 0.6;
+}
+
+.how-cherry-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border: 1px solid var(--border-black);
+}
+
+.how-cherry-step {
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--border-black);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.how-cherry-step:last-child {
+  border-bottom: none;
+}
+
+.step-number {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  opacity: 0.5;
+}
+
+.step-title {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.25;
+}
+
+.step-desc {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1.7;
+  opacity: 0.7;
+}
+
+/* Services Section */
+.services-section {
+  margin-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--border-black);
+  padding-bottom: var(--space-xl);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border: 1px solid var(--border-black);
+  margin-top: var(--space-md);
+}
+
+.service-card {
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--border-black);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.service-card:last-child {
+  border-bottom: none;
+}
+
+.service-name {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.25;
+}
+
+.service-desc {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1.7;
+  opacity: 0.7;
+}
+
+/* Testimonials */
+.testimonials-section {
+  margin-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--border-black);
+  padding-bottom: var(--space-xl);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border: 1px solid var(--border-black);
+  margin-top: var(--space-md);
+}
+
+.testimonial-card {
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--border-black);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.testimonial-card:last-child {
+  border-bottom: none;
+}
+
+.testimonial-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.testimonial-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.testimonial-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.testimonial-name {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.testimonial-quote {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* FAQ Section */
+.faq-section {
+  margin-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--border-black);
+  padding-bottom: var(--space-xl);
+}
+
+.faq-item {
+  border-bottom: 1px solid rgba(26,26,26,0.2);
+  padding: var(--space-sm) 0;
+}
+
+.faq-question {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-xs);
+  text-transform: lowercase;
+}
+
+.faq-answer {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.faq-answer a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Disclaimer */
+.disclaimer {
+  margin-bottom: var(--space-xl);
+}
+
+.disclaimer p {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.8;
+  opacity: 0.6;
+  margin-bottom: var(--space-xs);
+}
+
+.disclaimer a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Gallery */
+.gallery-section {
+  margin-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--border-black);
+  padding-bottom: var(--space-xl);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--border-black);
+  margin-top: var(--space-md);
+}
+
+.gallery-cell {
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  border-right: 1px solid var(--border-black);
+}
+
+.gallery-cell:nth-child(2n) {
+  border-right: none;
+}
+
+.gallery-cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(20%);
+  transition: filter 0.6s ease, transform 0.6s ease;
+}
+
+.gallery-cell:hover img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .cherry-intro {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+
+  .cherry-intro-image {
+    max-height: 600px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .stat-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .stat-cell:last-child {
+    border-right: none;
+  }
+
+  .how-cherry-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .how-cherry-step {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .how-cherry-step:last-child {
+    border-right: none;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .testimonial-card:nth-child(2n-1) {
+    border-right: 1px solid var(--border-black);
+  }
+
+  .testimonial-card:nth-child(1),
+  .testimonial-card:nth-child(2) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .testimonial-card:nth-child(3),
+  .testimonial-card:nth-child(4) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .testimonial-card:nth-child(5),
+  .testimonial-card:nth-child(6) {
+    border-bottom: none;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .service-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-card:last-child {
+    border-right: none;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .cherry-intro-image {
+    max-height: 700px;
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .cherry-headline {
+    font-size: 3.5rem;
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1.5rem;
+    --space-xl: 3rem;
+    --space-lg: 2rem;
+  }
+
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+
+  .page-title-area {
+    padding: 100px var(--pad-x) 40px;
+  }
+
+  .content-area {
+    padding: 40px var(--pad-x);
+  }
+
+  .cherry-intro {
+    grid-template-columns: 1fr;
+  }
+
+  .cherry-intro-image {
+    max-height: 280px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-cell {
+    border-bottom: 1px solid var(--border-black);
+    border-right: none;
+  }
+
+  .stat-cell:last-child {
+    border-bottom: none;
+  }
+
+  .how-cherry-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .how-cherry-step {
+    border-bottom: 1px solid var(--border-black);
+    border-right: none;
+  }
+
+  .how-cherry-step:last-child {
+    border-bottom: none;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .testimonial-card {
+    border-bottom: 1px solid var(--border-black);
+    border-right: none;
+  }
+
+  .testimonial-card:last-child {
+    border-bottom: none;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-card {
+    border-bottom: 1px solid var(--border-black);
+    border-right: none;
+  }
+
+  .service-card:last-child {
+    border-bottom: none;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cherry-cta-row {
+    flex-direction: column;
+  }
+
+  .btn-solid,
+  .btn-outline {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .footer {
+    flex-direction: column;
+  }
+}
+</style>
+
+
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Face Card Clinics</a>
+  <ul class="nav-links">
+    <li><a href="/">HOME</a></li>
+    <li><a href="/services">SERVICES</a></li>
+    <li><a href="/about">ABOUT</a></li>
+    <li><a href="/policies">POLICIES</a></li>
+    <li><a href="/faq">FAQ</a></li>
+    <li><a href="/locations">LOCATIONS</a></li>
+    <li><a href="/payment-plans">PAYMENT PLANS</a></li>
+  </ul>
+</nav>
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Payment Plans</h1>
+    <p class="page-title-sub">treat now, pay later — Face Card Clinics, where beauty meets expertise</p>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+
+  <!-- Cherry Intro: Treat Now Pay Later -->
+  <section class="cherry-intro">
+    <div class="cherry-intro-image">
+      <img src="https://files.withcherry.com/widgets/images/dental/12.png" alt="satisfied customer">
+    </div>
+    <div class="cherry-intro-text">
+      <span class="cherry-label">financing options</span>
+      <h2 class="cherry-headline">Treat now, pay later</h2>
+      <ul class="cherry-features">
+        <li><strong>No hard credit checks</strong>, ever</li>
+        <li><strong>True 0% APR</strong> options available</li>
+        <li>Interest-bearing plans with APRs <strong>as low as 5.99%</strong></li>
+        <li><strong>No hidden fees</strong></li>
+      </ul>
+      <div class="cherry-cta-row">
+        <a href="https://withcherry.com/" class="btn-solid" target="_blank" rel="noopener">See if you qualify</a>
+        <a href="https://withcherry.com/" class="btn-outline" target="_blank" rel="noopener">Manage your account</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <p class="stats-label">cherry financing at a glance</p>
+    <div class="stats-grid">
+      <div class="stat-cell">
+        <div class="stat-value">0%</div>
+        <div class="stat-label">APR available on payment plans</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-value">5.99%</div>
+        <div class="stat-label">lowest interest-bearing APR available</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-value">60 seconds</div>
+        <div class="stat-label">time to complete Cherry financing application</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- See an example -->
+  <section class="stats-section">
+    <p class="stats-label">See an example of what you could pay</p>
+    <div style="border: 1px solid var(--border-black); padding: var(--space-md);">
+      <p style="font-family: var(--font-serif); font-weight: 300; font-size: 1.1rem; line-height: 1.7; margin-bottom: var(--space-sm);">Get personalized options</p>
+      <ul style="list-style: none; padding: 0;">
+        <li style="font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.03em; padding: 0.5rem 0; border-bottom: 1px solid rgba(26,26,26,0.15);">No hard credit checks, ever</li>
+        <li style="font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.03em; padding: 0.5rem 0; border-bottom: 1px solid rgba(26,26,26,0.15);">60 seconds to apply</li>
+        <li style="font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.03em; padding: 0.5rem 0;">0% APR and other promotional rates subject to eligibility. See footer for details.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- How Cherry Works -->
+  <section class="how-cherry">
+    <p class="section-label">How Cherry works</p>
+    <div class="how-cherry-grid">
+      <div class="how-cherry-step">
+        <span class="step-number">01</span>
+        <div class="step-title">See if you qualify</div>
+        <div class="step-desc">It only takes 60 seconds to complete the application</div>
+      </div>
+      <div class="how-cherry-step">
+        <span class="step-number">02</span>
+        <div class="step-title">Get care</div>
+        <div class="step-desc">Use your approval to pay for your treatment</div>
+      </div>
+      <div class="how-cherry-step">
+        <span class="step-number">03</span>
+        <div class="step-title">Pay over time</div>
+        <div class="step-desc">Choose a plan length that fits your needs with 0% APR options</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services-section">
+    <p class="section-label">services available with financing</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-name">Lip Filler (Russian Lip Technique)</div>
+        <div class="service-desc">Signature Russian lip technique to enhance shape, height, and definition while keeping results soft, symmetrical, and luxurious.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Laser Hair Removal</div>
+        <div class="service-desc">Laser treatment for stubborn spots including between the brows and other areas.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Russian Lip Technique</div>
+        <div class="service-desc">Signature Russian lip filler technique to enhance shape, height, and definition while keeping results soft, symmetrical, and luxurious.</div>
+      </div>
+      <div class="service-card">
+        <div class="service-name">Lip Filler</div>
+        <div class="service-desc">Lip enhancement using filler injections.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials: What Our Customers Say -->
+  <section class="testimonials-section">
+    <p class="section-label">What Our Customers Say</p>
+    <div class="testimonials-grid">
+
+      <div class="testimonial-card">
+        <div class="testimonial-header">
+          <div class="testimonial-avatar">
+            <img src="https://master-cherry-storage.s3.us-west-2.amazonaws.com/static/widgets/images/1.png" alt="profile picture of Bryana">
+          </div>
+          <span class="testimonial-name">Bryana</span>
+        </div>
+        <p class="testimonial-quote">"I was worried the application would take long, I would have paid on my credit card – but it only took a few minutes and I'm so happy I can split my payments up now!"</p>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-header">
+          <div class="testimonial-avatar">
+            <img src="https://master-cherry-storage.s3.us-west-2.amazonaws.com/static/widgets/images/2.png" alt="profile picture of Alex">
+          </div>
+          <span class="testimonial-name">Alex</span>
+        </div>
+        <p class="testimonial-quote">"Cherry was really easy to use and super fast. I can't wait to go back and try different services now that I can split my payments!"</p>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-header">
+          <div class="testimonial-avatar">
+            <img src="https://master-cherry-storage.s3.us-west-2.amazonaws.com/static/widgets/images/3.png" alt="profile picture of Marie">
+          </div>
+          <span class="testimonial-name">Marie</span>
+        </div>
+        <p class="testimonial-quote">"I used this on Monday and it was great. Low down payment and low monthly. You all should try it."</p>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-header">
+          <div class="testimonial-avatar">
+            <img src="https://master-cherry-storage.s3.us-west-2.amazonaws.com/static/widgets/images/6.png" alt="profile picture of Gabriel">
+          </div>
+          <span class="testimonial-name">Gabriel</span>
+        </div>
+        <p class="testimonial-quote">"Cherry was great, one of the better lending companies I've ever used. Making payments was a lot easier and I appreciate that Cherry was willing to work with me."</p>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-header">
+          <div class="testimonial-avatar">
+            <img src="https://master-cherry-storage.s3.us-west-2.amazonaws.com/static/widgets/images/5.png" alt="profile picture of Alyssa">
+          </div>
+          <span class="testimonial-name">Alyssa</span>
+        </div>
+        <p class="testimonial-quote">"Cherry is amazing!!! Now we can get everything done!!"</p>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-header">
+          <div class="testimonial-avatar">
+            <img src="https://master-cherry-storage.s3.us-west-2.amazonaws.com/static/widgets/images/4.png" alt="profile picture of Cassie">
+          </div>
+          <span class="testimonial-name">Cassie</span>
+        </div>
+        <p class="testimonial-quote">"I've been putting off these treatments for a long time. I scheduled them all today using Cherry!"</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FAQ / Questions -->
+  <section class="faq-section">
+    <p class="section-label">Questions?</p>
+    <div class="faq-item">
+      <div class="faq-question">What is Cherry?</div>
+      <div class="faq-answer"><a href="https://withcherry.com/" target="_blank" rel="noopener">Cherry</a> is a buy now, pay later company making it fast and easy to pay for health and wellness purchases over time.</div>
+    </div>
+    <div style="display: flex; gap: var(--space-sm); flex-wrap: wrap; margin-top: var(--space-md);">
+      <a href="https://withcherry.com/" class="btn-outline" target="_blank" rel="noopener">View all FAQs</a>
+      <a href="https://withcherry.com/" class="btn-outline" target="_blank" rel="noopener">Visit help center</a>
+    </div>
+  </section>
+
+  <!-- Gallery section with Instagram images -->
+  <section class="gallery-section">
+    <p class="section-label">from our clinic</p>
+    <div class="gallery-grid">
+      <div class="gallery-cell">
+        <img src="https://scontent-lga3-2.cdninstagram.com/v/t51.71878-15/686879972_2065964857331428_6634777409116577601_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=107&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=f4CiD4G9pGkQ7kNvwHY_QVH&amp;_nc_oc=AdrlQT_4KGK7FzY5l609fvGmdDgNTAr0iTSrN0wZ25KF8eDOLAbNT4ILHLn2CvrQH7s&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-2.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQFbox8w_44188Bh8V08KF5tJlR41qqSGqRbnzQlktEG-HeVa7a_IH-JwdghiH5oEtAys-LigVaL&amp;oh=00_Af62CZSSjhp4gjhcaY3iIK0NqJNJWQU-r9v2k-zktUJJNQ&amp;oe=6A0285B6" alt="Book your laser session today — The Face Card Clinics">
+      </div>
+      <div class="gallery-cell">
+        <img src="https://scontent-lga3-2.cdninstagram.com/v/t51.82787-15/684280647_17931123780257479_3921485425056154458_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=100&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&amp;_nc_ohc=2Tpx-oOlTXUQ7kNvwE3Om7p&amp;_nc_oc=Adri0rJ4E8Wr-zBJtYlYEHPZe252gtG5pjYNhgNK3JiVrYmCcBjcmVd-YIv7NwWzCmU&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-2.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQFQU4Ra6hueVQSQB_th-z6UL0L8ql46cOjLvuSkxy2c9_pKzC9v6sVHeKLSFEIL7Fi5h9_qucvu&amp;oh=00_Af56qhuEJeg3mP2-wqBOwUDPvoB_NvqRVDEao8wyrqsiPA&amp;oe=6A028962" alt="Sadaf never misses — Russian lip technique at the Honolulu Location">
+      </div>
+      <div class="gallery-cell">
+        <img src="https://static.wixstatic.com/media/c4a100_ff22fc99cf2d4d9a9867863f53dcb333~mv2.jpg/v1/fill/w_762,h_948,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/c4a100_ff22fc99cf2d4d9a9867863f53dcb333~mv2.jpg" alt="Face Card Clinics">
+      </div>
+      <div class="gallery-cell">
+        <img src="https://static.wixstatic.com/media/c4a100_817bc6e046214655b2818e251326124b~mv2.jpg/v1/crop/x_0,y_256,w_4149,h_5712/fill/w_377,h_519,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/kaboompics_dark-classy-aesthetic-fashion-beautiful-asian-female-entrepreneur-in-black-suit.jpg" alt="Face Card Clinics">
+      </div>
+    </div>
+    <div style="margin-top: var(--space-md); display: flex; align-items: center; gap: var(--space-sm);">
+      <a href="https://www.instagram.com/joanna.injects/" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+        <img src="https://static.wixstatic.com/media/11062b_cef3b719166a4815b446d4dcfcb6120d~mv2.png/v1/fill/w_26,h_26,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_cef3b719166a4815b446d4dcfcb6120d~mv2.png" alt="Instagram" style="width: 26px; height: 26px; border-radius: 0;">
+        <span style="font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.05em; text-transform: lowercase;">@joanna.injects</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Disclaimer -->
+  <section class="disclaimer">
+    <p>These are examples only. 0% APR and other promotional rates subject to eligibility. Exact terms and APR depend on credit score and other factors. For example, a $400 payment plan with Cherry may cost $100/month over 3 months at 0% APR with down payment in the amount of monthly payment due at the time of purchase. Not every provider that uses Cherry will offer the payment plan terms listed above.</p>
+    <p>Payment options through Cherry Technologies, Inc. are issued by the following lending partners: <a href="https://withcherry.com/lending-partners" target="_blank" rel="noopener">withcherry.com/lending-partners</a>. See <a href="https://withcherry.com/terms" target="_blank" rel="noopener">withcherry.com/terms</a> for details. Iowa only: Borrowers are subject to Iowa state specific underwriting criteria. APR for all Iowa borrowers is capped at 20.99%.</p>
+    <p>Copyright © 2020-2026 Cherry Technologies Inc. NMLS #2061234, 2 Embarcadero Center, 8th Floor, San Francisco, CA 94111.</p>
+  </section>
+
+  <!-- Look Around Navigation -->
+  <section style="border-top: 1px solid var(--border-black); padding-top: var(--space-md); margin-bottom: var(--space-xl);">
+    <p class="section-label">look around</p>
+    <nav style="display: flex; flex-wrap: wrap; gap: var(--space-sm);">
+      <a href="/" class="btn-outline">HOME</a>
+      <a href="/services" class="btn-outline">SERVICES</a>
+      <a href="/about" class="btn-outline">ABOUT</a>
+      <a href="/policies" class="btn-outline">POLICIES</a>
+      <a href="/faq" class="btn-outline">FAQ</a>
+      <a href="/locations" class="btn-outline">LOCATIONS</a>
+      <a href="/payment-plans" class="btn-outline">PAYMENT PLANS</a>
+    </nav>
+  </section>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Face Card Clinics</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>

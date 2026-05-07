@@ -1,0 +1,811 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I'm a product | Joanna Injects Website</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Page Title Area */
+.page-title-area {
+  padding: 160px var(--pad-x) 60px;
+  background: var(--text-black);
+  color: var(--bg-cream);
+}
+.page-title-inner { max-width: 1200px; margin: 0 auto; }
+.page-title-area .breadcrumb {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+  color: rgba(244, 240, 234, 0.6);
+  margin-bottom: var(--space-sm);
+}
+.page-title-area .breadcrumb a {
+  color: rgba(244, 240, 234, 0.6);
+}
+.page-title-area .breadcrumb a:hover {
+  color: var(--bg-cream);
+}
+.page-title-area h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+}
+
+/* Product Layout */
+.product-section {
+  padding: var(--space-xl) var(--pad-x);
+  border-bottom: 1px solid var(--border-black);
+}
+
+.product-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.product-image-wrap {
+  width: 100%;
+  max-width: 498px;
+  margin: 0 auto;
+}
+
+.product-image-wrap img {
+  width: 100%;
+  height: auto;
+}
+
+.product-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.product-name {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+}
+
+.product-sku {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+  color: var(--placeholder-gray);
+}
+
+.product-price {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.product-description-short {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  line-height: 1.8;
+  color: var(--placeholder-gray);
+  letter-spacing: 0.03em;
+  border-left: 1px solid var(--border-black);
+  padding-left: var(--space-sm);
+}
+
+.product-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-row label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+}
+
+.form-row select,
+.form-row input[type="number"] {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-black);
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  padding: var(--space-xs) 0;
+  color: var(--text-black);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  max-width: 200px;
+  border-radius: 0;
+}
+
+.add-to-cart-btn {
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: var(--text-black);
+  border: 1px solid var(--border-black);
+  color: var(--bg-cream);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-top: var(--space-xs);
+}
+
+.add-to-cart-btn:hover {
+  background: transparent;
+  color: var(--text-black);
+}
+
+/* Product Info Accordion */
+.product-accordion {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-xl) var(--pad-x);
+  border-bottom: 1px solid var(--border-black);
+}
+
+.accordion-item {
+  border-top: 1px solid var(--border-black);
+}
+
+.accordion-item:last-child {
+  border-bottom: 1px solid var(--border-black);
+}
+
+.accordion-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: var(--space-sm) 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+}
+
+.accordion-title::after {
+  content: '+';
+  font-size: 1.2rem;
+  font-weight: 300;
+  transition: transform 0.3s ease;
+}
+
+.accordion-item.open .accordion-title::after {
+  transform: rotate(45deg);
+}
+
+.accordion-body {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  line-height: 1.7;
+  font-weight: 300;
+  padding: 0 0 var(--space-md);
+  display: none;
+  max-width: 700px;
+}
+
+.accordion-item.open .accordion-body {
+  display: block;
+}
+
+/* Share Section */
+.share-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.share-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+}
+
+.share-link {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+  border: 1px solid var(--border-black);
+  padding: 4px 10px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.share-link:hover {
+  background: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Look Around / Gallery */
+.gallery-section {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.gallery-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-md);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.gallery-item {
+  overflow: hidden;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  filter: grayscale(20%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.gallery-item:hover img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+.gallery-caption {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.04em;
+  line-height: 1.6;
+  color: var(--placeholder-gray);
+  padding-top: var(--space-xs);
+}
+
+/* Services Section */
+.services-section {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+  border-bottom: 1px solid var(--border-black);
+}
+
+.services-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.service-card {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.service-card-name {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.service-card-desc {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+/* Look Around Nav */
+.look-around-section {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.look-around-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.look-around-title {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-md);
+}
+
+.look-around-nav {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.look-around-nav li a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+  border-bottom: 1px solid transparent;
+  transition: border-bottom-color 0.3s ease;
+  padding-bottom: 2px;
+}
+
+.look-around-nav li a:hover {
+  border-bottom-color: var(--border-black);
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .product-inner {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+
+  .product-image-wrap {
+    margin: 0;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .product-accordion {
+    padding: var(--space-xl) 0;
+  }
+
+  .share-section {
+    padding: var(--space-md) 0;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .product-accordion {
+    padding: var(--space-xl) 0;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1.5rem;
+  }
+
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs);
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .page-title-area {
+    padding: 120px var(--pad-x) 40px;
+  }
+
+  .product-section {
+    padding: var(--space-md) var(--pad-x);
+  }
+
+  .product-inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .product-image-wrap {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .product-name {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+  }
+
+  .product-accordion {
+    padding: var(--space-md) var(--pad-x);
+  }
+
+  .gallery-section {
+    padding: var(--space-md) var(--pad-x);
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-item img {
+    height: 260px;
+  }
+
+  .services-section {
+    padding: var(--space-md) var(--pad-x);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .look-around-section {
+    padding: var(--space-md) var(--pad-x);
+  }
+
+  .look-around-nav {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .share-section {
+    padding: var(--space-sm) var(--pad-x);
+    gap: var(--space-xs);
+  }
+
+  .footer {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .footer-right {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .add-to-cart-btn {
+    width: 100%;
+    text-align: center;
+    align-self: stretch;
+  }
+
+  .form-row select,
+  .form-row input[type="number"] {
+    max-width: 100%;
+  }
+}
+</style>
+
+
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Face Card Clinics</a>
+  <li><a href="/">HOME</a></li><li><a href="/services">SERVICES</a></li><li><a href="/about">ABOUT</a></li><li><a href="/policies">POLICIES</a></li><li><a href="/faq">FAQ</a></li><li><a href="/locations">LOCATIONS</a></li><li><a href="/payment-plans">PAYMENT PLANS</a></li><li><a href="/book-online">Book Online</a></li><li><a href="/product-page/i-m-a-product-6">I'm a product | Joanna Injects Website</a></li><li><a href="/product-page/i-m-a-product-3">I'm a product | Joanna Injects Website</a></li><li><a href="/product-page/i-m-a-product-5">I'm a product | Joanna Injects Website</a></li><li><a href="/product-page/i-m-a-product-7">I'm a product | Joanna Injects Website</a></li><li><a href="/product-page/i-m-a-product-1">I'm a product | Joanna Injects Website</a></li><li><a href="/product-page/i-m-a-product">I'm a product | Joanna Injects Website</a></li><li><a href="/product-page/i-m-a-product-2">I'm a product | Joanna Injects Website</a></li><li><a href="/product-page/i-m-a-product-4">I'm a product | Joanna Injects Website</a></li><li><a href="/post/template-the-ultimate-guide-to-writing-the-ultimate-guide">Rebel Marketing: How to Challenge Conventions and Win Big.</a></li><li><a href="/profile/ellizabel10144318/profile">Eliz Abel | Profile</a></li><li><a href="/post/how-to-build-your-brand">Bold Branding Blueprint: Where Strategy Meets Edge in Marketing.</a></li><li><a href="/blank">New Page | Joanna Injects Website</a></li><li><a href="/service-page/grab-a-coffee-30-minute-consult">Grab a Coffee 30 Minute Consult | Joanna Injects Website</a></li><li><a href="/faq/categories/coaching">Coaching</a></li><li><a href="/post/your-title-what-s-your-blog-about">The Anti-Playbook: Marketing Strategies That Defy Convention.</a></li><li><a href="/faq/categories/lifestyle">Lifestyle</a></li><li><a href="/booking-calendar/grab-a-coffee-30-minute-consult">Grab a Coffee 30 Minute Consult - Joanna Injects Website</a></li><li><a href="/post/how-to-attract-more-customers">Maverick Moves: Shaping Your Story into an Industry-Defining Brand.</a></li><li><a href="/faq/categories/business">Business</a></li><li><a href="/post/attract-more-qualified-clients-with-these-tips">Defying the Norm: Strategies to Break the Mold in Your Industry.</a></li><li><a href="/linkinbio">LINK IN BIO | Joanna Injects Website</a></li><li><a href="/post/template-how-to-write-a-tips-blog-post">From Underdog to Industry Icon: Lessons in Disruptive Branding. </a></li><li><a href="/faq/categories/mindset">Mindset</a></li><li><a href="/faq-ex59">Common Questions | Botox &amp; Fillers in Honolulu - Joanna Injects Aesthetics</a></li><li><a href="/post/template-product-review">Rule Breakers and Trend Makers: How to Outshine the Competition.</a></li><li><a href="/faq/categories/resources">Resources</a></li><li><a href="/profile/ellizabel10144318/followers">Eliz Abel | Followers</a></li><li><a href="/shop-canva-templates">404 Error: Page Not Found</a></li><li><a href="/faq/hashtags/1">Common Questions | Botox &amp; Fillers in Honolulu - Joanna Injects Aesthetics</a></li><li><a href="/faq/hashtags/2">Common Questions | Botox &amp; Fillers in Honolulu - Joanna Injects Aesthetics</a></li><li><a href="/faq/hashtags/3">Common Questions | Botox &amp; Fillers in Honolulu - Joanna Injects Aesthetics</a></li><li><a href="/faq/hashtags/4">Common Questions | Botox &amp; Fillers in Honolulu - Joanna Injects Aesthetics</a></li><li><a href="/faq/hashtags/5">Common Questions | Botox &amp; Fillers in Honolulu - Joanna Injects Aesthetics</a></li>
+</nav>
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <p class="breadcrumb"><a href="/">Home</a> / I'm a product</p>
+    <h1>I'm a product</h1>
+  </div>
+</section>
+
+<!-- Product Section -->
+<section class="product-section">
+  <div class="product-inner">
+    <div class="product-image-wrap">
+      <img src="https://static.wixstatic.com/media/c4a100_4abf91bd863841b29f9a86e509832c0c~mv2.png/v1/fill/w_498,h_498,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/c4a100_4abf91bd863841b29f9a86e509832c0c~mv2.png" alt="I'm a product">
+    </div>
+    <div class="product-details">
+      <h1 class="product-name">I'm a product</h1>
+      <p class="product-sku">SKU: 366615376135191</p>
+      <p class="product-price">7,50 €</p>
+      <p class="product-description-short">I'm a product description. I'm a great place to add more details about your product such as sizing, material, care instructions and cleaning instructions.</p>
+      <div class="product-form">
+        <div class="form-row">
+          <label for="size">Size*</label>
+          <select id="size" name="size">
+            <option value="">Select</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="quantity">Quantity*</label>
+          <input type="number" id="quantity" name="quantity" value="1" min="1">
+        </div>
+        <button class="add-to-cart-btn" type="button">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Product Accordion Info -->
+<div style="max-width:1200px; margin:0 auto; padding:0 var(--pad-x);">
+  <div class="accordion-item open">
+    <div class="accordion-title" onclick="toggleAccordion(this)">PRODUCT INFO</div>
+    <div class="accordion-body">
+      I'm a product detail. I'm a great place to add more information about your product such as sizing, material, care and cleaning instructions. This is also a great space to write what makes this product special and how your customers can benefit from this item.
+    </div>
+  </div>
+  <div class="accordion-item">
+    <div class="accordion-title" onclick="toggleAccordion(this)">RETURN &amp; REFUND POLICY</div>
+    <div class="accordion-body">
+      I'm a Return and Refund policy. I'm a great place to let your customers know what to do in case they are dissatisfied with their purchase. Having a straightforward refund or exchange policy is a great way to build trust and reassure your customers that they can buy with confidence.
+    </div>
+  </div>
+  <div class="accordion-item">
+    <div class="accordion-title" onclick="toggleAccordion(this)">SHIPPING INFO</div>
+    <div class="accordion-body">
+      I'm a shipping policy. I'm a great place to add more information about your shipping methods, packaging and cost. Providing straightforward information about your shipping policy is a great way to build trust and reassure your customers that they can buy from you with confidence.
+    </div>
+  </div>
+</div>
+
+<!-- Share Section -->
+<div class="share-section" style="max-width:1200px; margin:0 auto; padding: var(--space-md) var(--pad-x);">
+  <span class="share-label">share:</span>
+  <a href="http://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.joannainjects.com%2Fproduct-page%2Fi-m-a-product-4&amp;title=I%27m+a+product" class="share-link" target="_blank" rel="noopener noreferrer">Facebook</a>
+  <a href="http://pinterest.com/pin/create/button/?url=https%3A%2F%2Fwww.joannainjects.com%2Fproduct-page%2Fi-m-a-product-4&amp;media=https%3A%2F%2Fstatic.wixstatic.com%2Fmedia%2Fc4a100_4abf91bd863841b29f9a86e509832c0c~mv2.png%2Fv1%2Ffill%2Fw_2000%2Ch_2000%2Cal_c%2Fc4a100_4abf91bd863841b29f9a86e509832c0c~mv2.png&amp;description=I%27m+a+product" class="share-link" target="_blank" rel="noopener noreferrer">Pinterest</a>
+  <a href="https://api.whatsapp.com/send?text=https%3A%2F%2Fwww.joannainjects.com%2Fproduct-page%2Fi-m-a-product-4" class="share-link" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+  <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.joannainjects.com%2Fproduct-page%2Fi-m-a-product-4&amp;text=I%27m+a+product%0A" class="share-link" target="_blank" rel="noopener noreferrer">X</a>
+</div>
+
+<!-- Services Section -->
+<section class="services-section">
+  <div class="services-inner">
+    <p class="section-label">our services</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <p class="service-card-name">Lip Filler (Russian Lip Technique)</p>
+        <p class="service-card-desc">Signature Russian lip technique to enhance shape, height, and definition while keeping results soft, symmetrical, and luxurious.</p>
+      </div>
+      <div class="service-card">
+        <p class="service-card-name">Laser Hair Removal</p>
+        <p class="service-card-desc">Laser treatments for areas such as between the brows and other stubborn spots.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery Section -->
+<section class="gallery-section">
+  <div class="gallery-inner">
+    <p class="section-label">from the clinic</p>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-2.cdninstagram.com/v/t51.71878-15/686879972_2065964857331428_6634777409116577601_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=107&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=f4CiD4G9pGkQ7kNvwHY_QVH&amp;_nc_oc=AdrlQT_4KGK7FzY5l609fvGmdDgNTAr0iTSrN0wZ25KF8eDOLAbNT4ILHLn2CvrQH7s&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-2.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQFbox8w_44188Bh8V08KF5tJlR41qqSGqRbnzQlktEG-HeVa7a_IH-JwdghiH5oEtAys-LigVaL&amp;oh=00_Af62CZSSjhp4gjhcaY3iIK0NqJNJWQU-r9v2k-zktUJJNQ&amp;oe=6A0285B6" alt="Guys, laser isn't just for the girls 👀 Those stubborn spots, like between the brows ..gotta go too. Clean it up without the constant tweezing. Book your session today ✨ — The Face Card Clinics ❤️‍🔥">
+        <p class="gallery-caption">Guys, laser isn't just for the girls 👀 Those stubborn spots, like between the brows ..gotta go too. Clean it up without the constant tweezing. Book your session today ✨ — The Face Card Clinics ❤️‍🔥</p>
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-2.cdninstagram.com/v/t51.82787-15/684280647_17931123780257479_3921485425056154458_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=100&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&amp;_nc_ohc=2Tpx-oOlTXUQ7kNvwE3Om7p&amp;_nc_oc=Adri0rJ4E8Wr-zBJtYlYEHPZe252gtG5pjYNhgNK3JiVrYmCcBjcmVd-YIv7NwWzCmU&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-2.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQFQU4Ra6hueVQSQB_th-z6UL0L8ql46cOjLvuSkxy2c9_pKzC9v6sVHeKLSFEIL7Fi5h9_qucvu&amp;oh=00_Af56qhuEJeg3mP2-wqBOwUDPvoB_NvqRVDEao8wyrqsiPA&amp;oe=6A028962" alt="Sadaf never misses 🏹🖤 She uses our signature Russian lip technique to enhance shape, height, and definition while keeping the results soft, symmetrical, and luxurious. Her artistry is in the details 💉👄">
+        <p class="gallery-caption">Sadaf never misses 🏹🖤 She uses our signature Russian lip technique to enhance shape, height, and definition while keeping the results soft, symmetrical, and luxurious. Her artistry is in the details 💉👄 Book with our trusted lead injector at the Honolulu Location. @sadaf.injects 💉✨</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Look Around Section -->
+<section class="look-around-section">
+  <div class="look-around-inner">
+    <p class="look-around-title">LOOK AROUND</p>
+    <ul class="look-around-nav">
+      <li><a href="/">HOME</a></li>
+      <li><a href="/services">SERVICES</a></li>
+      <li><a href="/about">ABOUT</a></li>
+      <li><a href="/policies">POLICIES</a></li>
+      <li><a href="/faq">FAQ</a></li>
+      <li><a href="/locations">LOCATIONS</a></li>
+      <li><a href="/payment-plans">PAYMENT PLANS</a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- Instagram social -->
+<div style="padding: var(--space-md) var(--pad-x); border-top: 1px solid var(--border-black); max-width:1200px; margin:0 auto;">
+  <a href="https://www.instagram.com/joanna.injects/" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.05em; text-transform:lowercase;">
+    <img src="https://static.wixstatic.com/media/11062b_cef3b719166a4815b446d4dcfcb6120d~mv2.png/v1/fill/w_26,h_26,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_cef3b719166a4815b446d4dcfcb6120d~mv2.png" alt="Instagram" style="width:26px;height:26px;">
+    @joanna.injects
+  </a>
+</div>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Face Card Clinics</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+<script>
+  function toggleAccordion(el) {
+    var item = el.parentElement;
+    var isOpen = item.classList.contains('open');
+    var allItems = document.querySelectorAll('.accordion-item');
+    allItems.forEach(function(i) { i.classList.remove('open'); });
+    if (!isOpen) {
+      item.classList.add('open');
+    }
+  }
+</script>

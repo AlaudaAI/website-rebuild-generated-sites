@@ -1,0 +1,911 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I'm a product | Joanna Injects Website</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Page Title Area */
+.page-title-area {
+  padding: 160px var(--pad-x, 1.5rem) 60px;
+  background: var(--text-black, #1a1a1a);
+  color: var(--bg-cream, #f4f0ea);
+}
+.page-title-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.page-title-area h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  font-family: var(--font-serif);
+}
+.page-title-area .breadcrumb {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+  color: rgba(244,240,234,0.6);
+  margin-bottom: var(--space-sm);
+}
+.page-title-area .breadcrumb a {
+  color: rgba(244,240,234,0.6);
+}
+.page-title-area .breadcrumb a:hover {
+  color: var(--bg-cream);
+}
+
+/* Product Layout */
+.product-section {
+  padding: var(--space-lg) var(--pad-x);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.product-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+.product-image-wrap {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.product-image-wrap img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.product-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.product-sku {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+  color: var(--placeholder-gray);
+}
+
+.product-name {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+}
+
+.product-price {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  margin-top: var(--space-xs);
+}
+
+.product-description-short {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  line-height: 1.7;
+  letter-spacing: 0.03em;
+  color: var(--placeholder-gray);
+  border: 1px solid var(--border-black);
+  padding: var(--space-sm);
+  background: rgba(26,26,26,0.03);
+  border-radius: 2px;
+  margin-top: var(--space-xs);
+}
+
+.product-option-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+  color: var(--text-black);
+}
+
+.product-option-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: var(--space-xs);
+}
+
+.product-select {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.1rem;
+  padding: var(--space-xs) 0;
+  color: var(--placeholder-gray);
+  font-style: italic;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.product-qty-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-xs);
+}
+
+.qty-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.qty-input {
+  width: 60px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.1rem;
+  padding: var(--space-xs) 0;
+  text-align: center;
+  outline: none;
+}
+
+.add-to-cart-btn {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: var(--text-black);
+  color: var(--bg-cream);
+  border: 1px solid var(--border-black);
+  padding: var(--space-sm) var(--space-lg);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-top: var(--space-sm);
+  width: 100%;
+  text-align: center;
+}
+
+.add-to-cart-btn:hover {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+}
+
+/* Product Info Accordion */
+.product-accordion {
+  border-top: 1px solid var(--border-black);
+  margin-top: var(--space-md);
+}
+
+.accordion-item {
+  border-bottom: 1px solid var(--border-black);
+}
+
+.accordion-header {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  padding: var(--space-sm) 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+}
+
+.accordion-header::after {
+  content: '+';
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.accordion-header.open::after {
+  content: '−';
+}
+
+.accordion-body {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  padding-bottom: var(--space-sm);
+  display: none;
+}
+
+.accordion-body.open {
+  display: block;
+}
+
+/* Share Row */
+.share-row {
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.share-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+  color: var(--placeholder-gray);
+}
+
+.share-link {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+  color: var(--text-black);
+  border-bottom: 1px solid var(--border-black);
+  padding-bottom: 1px;
+  transition: opacity 0.2s;
+}
+
+.share-link:hover {
+  opacity: 0.5;
+}
+
+/* Services Section */
+.services-section {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.services-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.services-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-md);
+  color: var(--placeholder-gray);
+}
+
+.services-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin-bottom: var(--space-md);
+  letter-spacing: 0.03em;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-md);
+}
+
+.service-card {
+  border: 1px solid var(--border-black);
+  padding: var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.service-card-name {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.service-card-desc {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--placeholder-gray);
+}
+
+/* Instagram Feed / Gallery Section */
+.gallery-section {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.gallery-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.gallery-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-md);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background-color: var(--border-black);
+}
+
+.gallery-cell {
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  background-color: var(--bg-cream);
+}
+
+.gallery-cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(20%);
+  transition: filter 0.6s ease, transform 0.6s ease;
+}
+
+.gallery-cell:hover img {
+  filter: grayscale(0%);
+  transform: scale(1.03);
+}
+
+/* Look Around / Nav Section */
+.look-around-section {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.look-around-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.look-around-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-md);
+  color: var(--placeholder-gray);
+}
+
+.look-around-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin-bottom: var(--space-md);
+  letter-spacing: 0.03em;
+}
+
+.look-around-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  list-style: none;
+}
+
+.look-around-links li a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  border: 1px solid var(--border-black);
+  padding: 10px var(--space-sm);
+  display: inline-block;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.look-around-links li a:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Instagram social link */
+.instagram-follow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-top: var(--space-md);
+}
+
+.instagram-follow a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+}
+
+.instagram-follow img {
+  width: 26px;
+  height: 26px;
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .product-layout {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+  }
+
+  .product-image-wrap {
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Mobile breakpoint */
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1.5rem;
+    --space-lg: 2.5rem;
+    --space-xl: 3.5rem;
+  }
+
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+  }
+
+  .nav-logo {
+    font-size: 0.7rem;
+  }
+
+  .page-title-area {
+    padding: 120px var(--pad-x) 40px;
+  }
+
+  .page-title-area h1 {
+    font-size: clamp(1.6rem, 7vw, 2.2rem);
+  }
+
+  .product-section {
+    padding: var(--space-md) var(--pad-x);
+  }
+
+  .product-layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .product-image-wrap {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .product-name {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+
+  .add-to-cart-btn {
+    padding: var(--space-sm);
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .look-around-links {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .share-row {
+    gap: var(--space-xs);
+  }
+
+  .footer {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .footer-right {
+    gap: var(--space-sm);
+  }
+}
+</style>
+
+
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Face Card Clinics</a>
+  <li><a href="/">HOME</a></li><li><a href="/services">SERVICES</a></li><li><a href="/about">ABOUT</a></li><li><a href="/policies">POLICIES</a></li><li><a href="/faq">FAQ</a></li><li><a href="/locations">LOCATIONS</a></li><li><a href="/payment-plans">PAYMENT PLANS</a></li><li><a href="/book-online">Book Online</a></li><li><a href="/product-page/i-m-a-product-6">I'm a product | Joanna Injects Website</a></li><li><a href="/product-page/i-m-a-product-3">I'm a product | Joanna Injects Website</a></li><li><a href="/product-page/i-m-a-product-5">I'm a product | Joanna Injects Website</a></li><li><a href="/product-page/i-m-a-product-7">I'm a product | Joanna Injects Website</a></li><li><a href="/product-page/i-m-a-product-1">I'm a product | Joanna Injects Website</a></li><li><a href="/product-page/i-m-a-product">I'm a product | Joanna Injects Website</a></li><li><a href="/product-page/i-m-a-product-2">I'm a product | Joanna Injects Website</a></li><li><a href="/product-page/i-m-a-product-4">I'm a product | Joanna Injects Website</a></li><li><a href="/post/template-the-ultimate-guide-to-writing-the-ultimate-guide">Rebel Marketing: How to Challenge Conventions and Win Big.</a></li><li><a href="/profile/ellizabel10144318/profile">Eliz Abel | Profile</a></li><li><a href="/post/how-to-build-your-brand">Bold Branding Blueprint: Where Strategy Meets Edge in Marketing.</a></li><li><a href="/blank">New Page | Joanna Injects Website</a></li><li><a href="/service-page/grab-a-coffee-30-minute-consult">Grab a Coffee 30 Minute Consult | Joanna Injects Website</a></li><li><a href="/faq/categories/coaching">Coaching</a></li><li><a href="/post/your-title-what-s-your-blog-about">The Anti-Playbook: Marketing Strategies That Defy Convention.</a></li><li><a href="/faq/categories/lifestyle">Lifestyle</a></li><li><a href="/booking-calendar/grab-a-coffee-30-minute-consult">Grab a Coffee 30 Minute Consult - Joanna Injects Website</a></li><li><a href="/post/how-to-attract-more-customers">Maverick Moves: Shaping Your Story into an Industry-Defining Brand.</a></li><li><a href="/faq/categories/business">Business</a></li><li><a href="/post/attract-more-qualified-clients-with-these-tips">Defying the Norm: Strategies to Break the Mold in Your Industry.</a></li><li><a href="/linkinbio">LINK IN BIO | Joanna Injects Website</a></li><li><a href="/post/template-how-to-write-a-tips-blog-post">From Underdog to Industry Icon: Lessons in Disruptive Branding. </a></li><li><a href="/faq/categories/mindset">Mindset</a></li><li><a href="/faq-ex59">Common Questions | Botox &amp; Fillers in Honolulu - Joanna Injects Aesthetics</a></li><li><a href="/post/template-product-review">Rule Breakers and Trend Makers: How to Outshine the Competition.</a></li><li><a href="/faq/categories/resources">Resources</a></li><li><a href="/profile/ellizabel10144318/followers">Eliz Abel | Followers</a></li><li><a href="/shop-canva-templates">404 Error: Page Not Found</a></li><li><a href="/faq/hashtags/1">Common Questions | Botox &amp; Fillers in Honolulu - Joanna Injects Aesthetics</a></li><li><a href="/faq/hashtags/2">Common Questions | Botox &amp; Fillers in Honolulu - Joanna Injects Aesthetics</a></li><li><a href="/faq/hashtags/3">Common Questions | Botox &amp; Fillers in Honolulu - Joanna Injects Aesthetics</a></li><li><a href="/faq/hashtags/4">Common Questions | Botox &amp; Fillers in Honolulu - Joanna Injects Aesthetics</a></li><li><a href="/faq/hashtags/5">Common Questions | Botox &amp; Fillers in Honolulu - Joanna Injects Aesthetics</a></li>
+</nav>
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <p class="breadcrumb"><a href="/">Home</a> / I'm a product</p>
+    <h1>I'm a product</h1>
+  </div>
+</section>
+
+<!-- Product Section -->
+<section class="product-section">
+  <div class="product-layout">
+
+    <!-- Product Image -->
+    <div class="product-image-wrap">
+      <img src="https://static.wixstatic.com/media/c4a100_df16ca374119469ea2080622447cbc69~mv2.png/v1/fill/w_498,h_498,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/c4a100_df16ca374119469ea2080622447cbc69~mv2.png" alt="I'm a product">
+    </div>
+
+    <!-- Product Info -->
+    <div class="product-details">
+      <p class="product-sku">SKU: 364215375135191</p>
+      <h1 class="product-name">I'm a product</h1>
+      <p class="product-price">20,00 €</p>
+
+      <div class="product-description-short">
+        I'm a product description. I'm a great place to add more details about your product such as sizing, material, care instructions and cleaning instructions.
+      </div>
+
+      <div class="product-option-group">
+        <p class="product-option-label">Color*</p>
+        <select class="product-select">
+          <option value="" disabled="" selected="">select a color</option>
+        </select>
+      </div>
+
+      <div class="product-qty-row">
+        <span class="qty-label">Quantity*</span>
+        <input class="qty-input" type="number" value="1" min="1">
+      </div>
+
+      <button class="add-to-cart-btn">Add to Cart</button>
+
+      <!-- Accordion -->
+      <div class="product-accordion">
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">PRODUCT INFO</div>
+          <div class="accordion-body">
+            I'm a product detail. I'm a great place to add more information about your product such as sizing, material, care and cleaning instructions. This is also a great space to write what makes this product special and how your customers can benefit from this item.
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">RETURN &amp; REFUND POLICY</div>
+          <div class="accordion-body">
+            I'm a Return and Refund policy. I'm a great place to let your customers know what to do in case they are dissatisfied with their purchase. Having a straightforward refund or exchange policy is a great way to build trust and reassure your customers that they can buy with confidence.
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header" onclick="toggleAccordion(this)">SHIPPING INFO</div>
+          <div class="accordion-body">
+            I'm a shipping policy. I'm a great place to add more information about your shipping methods, packaging and cost. Providing straightforward information about your shipping policy is a great way to build trust and reassure your customers that they can buy from you with confidence.
+          </div>
+        </div>
+      </div>
+
+      <!-- Share Row -->
+      <div class="share-row">
+        <span class="share-label">share:</span>
+        <a class="share-link" href="http://www.facebook.com/sharer.php?u=https%3A%2F%2Fwww.joannainjects.com%2Fproduct-page%2Fi-m-a-product-1&amp;title=I%27m+a+product" target="_blank" rel="noopener noreferrer">facebook</a>
+        <a class="share-link" href="http://pinterest.com/pin/create/button/?url=https%3A%2F%2Fwww.joannainjects.com%2Fproduct-page%2Fi-m-a-product-1&amp;media=https%3A%2F%2Fstatic.wixstatic.com%2Fmedia%2Fc4a100_df16ca374119469ea2080622447cbc69~mv2.png%2Fv1%2Ffill%2Fw_2000%2Ch_2000%2Cal_c%2Fc4a100_df16ca374119469ea2080622447cbc69~mv2.png&amp;description=I%27m+a+product" target="_blank" rel="noopener noreferrer">pinterest</a>
+        <a class="share-link" href="https://api.whatsapp.com/send?text=https%3A%2F%2Fwww.joannainjects.com%2Fproduct-page%2Fi-m-a-product-1" target="_blank" rel="noopener noreferrer">whatsapp</a>
+        <a class="share-link" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.joannainjects.com%2Fproduct-page%2Fi-m-a-product-1&amp;text=I%27m+a+product%0A" target="_blank" rel="noopener noreferrer">x</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="services-section">
+  <div class="services-inner">
+    <p class="services-label">face card clinics — treatments</p>
+    <h2 class="services-heading">OUR SERVICES</h2>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <p class="service-card-name">Lip Filler</p>
+        <p class="service-card-desc">Lip enhancement including Russian lip technique for shape, height, and definition with soft, symmetrical results.</p>
+      </div>
+
+      <div class="service-card">
+        <p class="service-card-name">Russian Lips</p>
+        <p class="service-card-desc">Signature Russian lip technique to enhance shape, height, and definition while keeping results soft, symmetrical, and luxurious.</p>
+      </div>
+
+      <div class="service-card">
+        <p class="service-card-name">Facial Balancing</p>
+        <p class="service-card-desc">Strategic filler in the nose, chin, jaw, and lips to create balance from every angle.</p>
+      </div>
+
+      <div class="service-card">
+        <p class="service-card-name">Chin Filler</p>
+        <p class="service-card-desc">Dermal filler applied to the chin area as part of full face harmony and facial balancing.</p>
+      </div>
+
+      <div class="service-card">
+        <p class="service-card-name">Jaw Filler</p>
+        <p class="service-card-desc">Dermal filler applied to the jaw area as part of facial balancing treatments.</p>
+      </div>
+
+      <div class="service-card">
+        <p class="service-card-name">Non-Surgical Nose Augmentation</p>
+        <p class="service-card-desc">Non-surgical nose filler treatment to enhance facial harmony.</p>
+      </div>
+
+      <div class="service-card">
+        <p class="service-card-name">Laser Hair Removal</p>
+        <p class="service-card-desc">Laser treatment for unwanted hair removal including facial areas such as between the brows.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Gallery Section (Instagram Feed) -->
+<section class="gallery-section">
+  <div class="gallery-inner">
+    <p class="gallery-label">face card clinics — from the feed</p>
+    <div class="gallery-grid">
+      <div class="gallery-cell">
+        <img src="https://scontent-lga3-2.cdninstagram.com/v/t51.71878-15/686879972_2065964857331428_6634777409116577601_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=107&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=f4CiD4G9pGkQ7kNvwHY_QVH&amp;_nc_oc=AdrlQT_4KGK7FzY5l609fvGmdDgNTAr0iTSrN0wZ25KF8eDOLAbNT4ILHLn2CvrQH7s&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-2.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQFbox8w_44188Bh8V08KF5tJlR41qqSGqRbnzQlktEG-HeVa7a_IH-JwdghiH5oEtAys-LigVaL&amp;oh=00_Af62CZSSjhp4gjhcaY3iIK0NqJNJWQU-r9v2k-zktUJJNQ&amp;oe=6A0285B6" alt="Guys, laser isn't just for the girls 👀 Those stubborn spots, like between the brows ..gotta go too. Clean it up without the constant tweezing.  Book your session today ✨ — The Face Card Clinics ❤️‍🔥">
+      </div>
+      <div class="gallery-cell">
+        <img src="https://scontent-lga3-2.cdninstagram.com/v/t51.82787-15/684280647_17931123780257479_3921485425056154458_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=100&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&amp;_nc_ohc=2Tpx-oOlTXUQ7kNvwE3Om7p&amp;_nc_oc=Adri0rJ4E8Wr-zBJtYlYEHPZe252gtG5pjYNhgNK3JiVrYmCcBjcmVd-YIv7NwWzCmU&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-2.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQFQU4Ra6hueVQSQB_th-z6UL0L8ql46cOjLvuSkxy2c9_pKzC9v6sVHeKLSFEIL7Fi5h9_qucvu&amp;oh=00_Af56qhuEJeg3mP2-wqBOwUDPvoB_NvqRVDEao8wyrqsiPA&amp;oe=6A028962" alt="Sadaf never misses 🏹🖤  She uses our signature Russian lip technique to enhance shape, height, and definition while keeping the results soft, symmetrical, and luxurious.">
+      </div>
+      <div class="gallery-cell">
+        <img src="https://scontent-lga3-2.cdninstagram.com/v/t51.82787-15/682683853_17930609355257479_4255005067781603010_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=101&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=zvI187tN4KEQ7kNvwEimbgR&amp;_nc_oc=AdpDRxrKDkNL1Yooi8FAcpwzgP_TV_S6gg_hYjvLNcamKZth2pSZg9BJs1MvbZl5s3k&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-2.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQHmRno3sogvLO4cAoA5HJBHMgJGBSxGE1o8LEY4dUtSD1Rr3zR7yoYgV3srl5WxOcltAg5vORBb&amp;oh=00_Af62KhTk-RAeE8HQstPgIPZyoo7XjLv93XRDGIC1BCMpDQ&amp;oe=6A028E8D" alt="Perfect lips aren't an accident… they're precision, balance, and knowing exactly when to add just enough.  Subtle volume. Clean shape. Real results you can actually wear every day.">
+      </div>
+      <div class="gallery-cell">
+        <img src="https://scontent-lga3-3.cdninstagram.com/v/t51.82787-15/682379791_17930334759257479_6504391279674061033_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=104&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&amp;_nc_ohc=gX3TUtv4ro0Q7kNvwEiJkIJ&amp;_nc_oc=Adp4K1weNWA6z2RtG98lWXW0xbrJm6PlNvzv9TKIOtRRZtKaslN7oHzgDLhnUfknDD0&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-3.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQGMbc_gF4Dmmn2z74HsthjMY5yLild0t-jqGg5WgkOk87cP7e1WS0RJ3Pckw0ey83ecmGiQs63L&amp;oh=00_Af7N5_2JWQUeus2dqyKBp-YlIWu4wPTfvrXVdiqc9rQhqw&amp;oe=6A027F0B" alt="May glow-up season is here ✨Subtle tweaks, fresh confidence—just in time for summer.   Get $50 off any filler service at Facecard Clinics for any appointment in May.">
+      </div>
+      <div class="gallery-cell">
+        <img src="https://scontent-lga3-2.cdninstagram.com/v/t51.82787-15/683426694_17930030376257479_4570832037827723303_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=105&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=ml0cFO-_Q64Q7kNvwEgU4jV&amp;_nc_oc=AdpD80aWL6GEhg5QGuFUZ3rS2CgIGHnWfKG9W4_DOqmrJPdCFjrKEGCtDlych-cuFnM&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-2.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQE3D8vGNwdOVox1O81X6j73AUBNWf5HUAafrsloHU_e1eoN72EEuyE1u_QnV6llsz6etIPQ1dxI&amp;oh=00_Af4VMemq9UjKikbHnsENZJh3kM7lzdxN9sb1Tcox6P3fhQ&amp;oe=6A02A858" alt="Perfect lips aren't luck… they're precision, balance, and knowing exactly when to stop.  At Face Card Clinics, it's never about overfilling.">
+      </div>
+      <div class="gallery-cell">
+        <img src="https://scontent-lga3-3.cdninstagram.com/v/t51.71878-15/673139030_1284058059853572_2198525018291511002_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=108&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=KBsiJ7TxEXkQ7kNvwEWaTXw&amp;_nc_oc=AdqYbjgb1RU8ADm2RTr24L262Wmx_1RcufmWhTvnVUPof_TXUUH5lCO2qeq9F9QaJ4g&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-3.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQG9JeHeImYdGgk9SadBgiYiIpiOqSAU-dp2-zWyj3Hja3McCt2iFyrio_yNWeGWOSNcqUP9VsNu&amp;oh=00_Af5XitbTYRJC77Ko9hEqSztF8qdNHhocbZpl_d1HfVsi5Q&amp;oe=6A02A113" alt="How beautiful is this after result of full face harmony? 🤍  Strategic filler in the nose, chin, jaw, and lips creates balance from every angle.">
+      </div>
+    </div>
+
+    <div class="instagram-follow">
+      <a href="https://www.instagram.com/joanna.injects/" target="_blank" rel="noopener noreferrer">
+        <img src="https://static.wixstatic.com/media/11062b_cef3b719166a4815b446d4dcfcb6120d~mv2.png/v1/fill/w_26,h_26,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_cef3b719166a4815b446d4dcfcb6120d~mv2.png" alt="Instagram">
+        follow on instagram
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Look Around Section -->
+<section class="look-around-section">
+  <div class="look-around-inner">
+    <p class="look-around-label">navigate</p>
+    <h2 class="look-around-heading">LOOK AROUND</h2>
+    <ul class="look-around-links">
+      <li><a href="/">HOME</a></li>
+      <li><a href="/services">SERVICES</a></li>
+      <li><a href="/about">ABOUT</a></li>
+      <li><a href="/policies">POLICIES</a></li>
+      <li><a href="/faq">FAQ</a></li>
+      <li><a href="/locations">LOCATIONS</a></li>
+      <li><a href="/payment-plans">PAYMENT PLANS</a></li>
+    </ul>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Face Card Clinics</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+<script>
+  function toggleAccordion(header) {
+    var body = header.nextElementSibling;
+    var isOpen = body.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.accordion-body').forEach(function(b) {
+      b.classList.remove('open');
+    });
+    document.querySelectorAll('.accordion-header').forEach(function(h) {
+      h.classList.remove('open');
+    });
+    // Open clicked if it was closed
+    if (!isOpen) {
+      body.classList.add('open');
+      header.classList.add('open');
+    }
+  }
+</script>

@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grab a Coffee 30 Minute Consult | Joanna Injects Website</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Page Title Area */
+.page-title-area {
+  padding: 160px var(--pad-x) 60px;
+  background: var(--text-black);
+  color: var(--bg-cream);
+}
+
+.page-title-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-title-area h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+}
+
+.page-title-meta {
+  margin-top: var(--space-sm);
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.page-title-meta span {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: rgba(244, 240, 234, 0.7);
+}
+
+.page-title-meta .meta-price {
+  color: var(--bg-cream);
+}
+
+.book-btn {
+  display: inline-block;
+  margin-top: var(--space-md);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  border: 1px solid var(--bg-cream);
+  color: var(--bg-cream);
+  padding: var(--space-sm) var(--space-md);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.book-btn:hover {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+}
+
+/* Content Area */
+.content-area {
+  padding: 64px var(--pad-x);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Service Detail Block */
+.service-detail {
+  border-bottom: 1px solid var(--border-black);
+  padding-bottom: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.service-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.service-detail-text h2 {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  line-height: 1.15;
+  margin-bottom: var(--space-sm);
+}
+
+.service-detail-text p {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: var(--space-sm);
+}
+
+/* Services Section */
+.services-section {
+  border-top: 1px solid var(--border-black);
+  padding-top: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.services-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-md);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
+  border: 1px solid var(--border-black);
+}
+
+.service-card {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
+}
+
+.service-card:last-child {
+  border-bottom: none;
+}
+
+.service-card-content {}
+
+.service-card-title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+.service-card-desc {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: rgba(26,26,26,0.75);
+}
+
+.service-card-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.service-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(30%);
+  transition: filter 0.6s ease, transform 0.6s ease;
+}
+
+.service-card:hover .service-card-img img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+/* Look Around Nav */
+.look-around-section {
+  border-top: 1px solid var(--border-black);
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.look-around-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-md);
+}
+
+.look-around-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  list-style: none;
+}
+
+.look-around-links li a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  border: 1px solid var(--border-black);
+  padding: 0.5rem 1rem;
+  display: inline-flex;
+  align-items: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 44px;
+}
+
+.look-around-links li a:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+/* Gallery Grid */
+.gallery-section {
+  border-top: 1px solid var(--border-black);
+  padding-top: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.gallery-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-md);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  border: 1px solid var(--border-black);
+}
+
+.gallery-item {
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(20%);
+  transition: filter 0.6s ease, transform 0.6s ease;
+}
+
+.gallery-item:hover img {
+  filter: grayscale(0%);
+  transform: scale(1.03);
+}
+
+/* Promo Banner */
+.promo-banner {
+  border: 1px solid var(--border-black);
+  padding: var(--space-md);
+  margin-bottom: var(--space-lg);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.promo-banner-text h3 {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.2rem, 2.5vw, 1.75rem);
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+}
+
+.promo-banner-text p {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+  color: rgba(26,26,26,0.6);
+  line-height: 1.7;
+}
+
+.promo-banner-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+
+.promo-banner-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Social */
+.social-section {
+  border-top: 1px solid var(--border-black);
+  padding-top: var(--space-md);
+  margin-bottom: var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.social-section a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.social-section a img {
+  width: 20px;
+  height: 20px;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .service-detail-grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .service-card {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .service-card:nth-child(2n) {
+    border-right: none;
+  }
+
+  .service-card:nth-child(1),
+  .service-card:nth-child(2) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .promo-banner {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1440px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  :root {
+    --pad-x: 1.25rem;
+  }
+
+  .nav {
+    padding: var(--space-sm) var(--pad-x);
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .page-title-area {
+    padding: 120px var(--pad-x) 40px;
+  }
+
+  .content-area {
+    padding: 40px var(--pad-x);
+  }
+
+  .service-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-card {
+    border-bottom: 1px solid var(--border-black);
+    border-right: none;
+  }
+
+  .service-card:last-child {
+    border-bottom: none;
+  }
+
+  .service-card:nth-child(1),
+  .service-card:nth-child(2) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .promo-banner {
+    grid-template-columns: 1fr;
+  }
+
+  .look-around-links {
+    gap: 0.5rem;
+  }
+
+  .look-around-links li a {
+    font-size: 0.65rem;
+    padding: 0.4rem 0.75rem;
+    min-height: 40px;
+  }
+
+  .footer {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<nav class="nav">
+  <a href="#" class="nav-logo">Face Card Clinics</a>
+  <ul class="nav-links">
+    <li><a href="/">HOME</a></li>
+    <li><a href="/services">SERVICES</a></li>
+    <li><a href="/about">ABOUT</a></li>
+    <li><a href="/policies">POLICIES</a></li>
+    <li><a href="/faq">FAQ</a></li>
+    <li><a href="/locations">LOCATIONS</a></li>
+    <li><a href="/payment-plans">PAYMENT PLANS</a></li>
+    <li><a href="/book-online">Book Online</a></li>
+  </ul>
+</nav>
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Grab a Coffee 30 Minute Consult</h1>
+    <div class="page-title-meta">
+      <span>30 min</span>
+      <span class="meta-price">Free</span>
+    </div>
+    <a href="/booking-calendar/grab-a-coffee-30-minute-consult" class="book-btn">Book Now</a>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+
+  <!-- Service Detail -->
+  <div class="service-detail">
+    <div class="service-detail-grid">
+      <div class="service-detail-text">
+        <h2>Grab a Coffee 30 Minute Consult</h2>
+        <p>A free 30-minute consultation session.</p>
+        <p>Face Card Clinics, where beauty meets expertise</p>
+      </div>
+      <div class="service-card-img">
+        <img src="https://scontent-lga3-2.cdninstagram.com/v/t51.71878-15/686879972_2065964857331428_6634777409116577601_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=107&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=f4CiD4G9pGkQ7kNvwHY_QVH&_nc_oc=AdrlQT_4KGK7FzY5l609fvGmdDgNTAr0iTSrN0wZ25KF8eDOLAbNT4ILHLn2CvrQH7s&_nc_zt=23&_nc_ht=scontent-lga3-2.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&_nc_tpa=Q5bMBQFbox8w_44188Bh8V08KF5tJlR41qqSGqRbnzQlktEG-HeVa7a_IH-JwdghiH5oEtAys-LigVaL&oh=00_Af62CZSSjhp4gjhcaY3iIK0NqJNJWQU-r9v2k-zktUJJNQ&oe=6A0285B6" alt="Guys, laser isn't just for the girls 👀 Those stubborn spots, like between the brows ..gotta go too. Clean it up without the constant tweezing. Book your session today ✨ — The Face Card Clinics">
+      </div>
+    </div>
+  </div>
+
+  <!-- Promo Banner -->
+  <div class="promo-banner">
+    <div class="promo-banner-text">
+      <h3>May glow-up season is here ✨ Subtle tweaks, fresh confidence—just in time for summer.</h3>
+      <p>Get $50 off any filler service at Facecard Clinics for any appointment in May.<br>Excludes half syringe lip filler. Cannot be combined with other offers.</p>
+    </div>
+    <div class="promo-banner-img">
+      <img src="https://scontent-lga3-3.cdninstagram.com/v/t51.82787-15/682379791_17930334759257479_6504391279674061033_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=104&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=gX3TUtv4ro0Q7kNvwEiJkIJ&_nc_oc=Adp4K1weNWA6z2RtG98lWXW0xbrJm6PlNvzv9TKIOtRRZtKaslN7oHzgDLhnUfknDD0&_nc_zt=23&_nc_ht=scontent-lga3-3.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&_nc_tpa=Q5bMBQGMbc_gF4Dmmn2z74HsthjMY5yLild0t-jqGg5WgkOk87cP7e1WS0RJ3Pckw0ey83ecmGiQs63L&oh=00_Af7N5_2JWQUeus2dqyKBp-YlIWu4wPTfvrXVdiqc9rQhqw&oe=6A027F0B" alt="May glow-up season is here ✨Subtle tweaks, fresh confidence—just in time for summer. Get $50 off any filler service at Facecard Clinics for any appointment in May.">
+    </div>
+  </div>
+
+  <!-- Services Section -->
+  <div class="services-section">
+    <p class="services-label">our services</p>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-card-img">
+          <img src="https://scontent-lga3-2.cdninstagram.com/v/t51.71878-15/686879972_2065964857331428_6634777409116577601_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=107&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=f4CiD4G9pGkQ7kNvwHY_QVH&amp;_nc_oc=AdrlQT_4KGK7FzY5l609fvGmdDgNTAr0iTSrN0wZ25KF8eDOLAbNT4ILHLn2CvrQH7s&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-2.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQFbox8w_44188Bh8V08KF5tJlR41qqSGqRbnzQlktEG-HeVa7a_IH-JwdghiH5oEtAys-LigVaL&amp;oh=00_Af62CZSSjhp4gjhcaY3iIK0NqJNJWQU-r9v2k-zktUJJNQ&amp;oe=6A0285B6" alt="Grab a Coffee 30 Minute Consult">
+        </div>
+        <div class="service-card-content">
+          <div class="service-card-title">Grab a Coffee 30 Minute Consult</div>
+          <div class="service-card-desc">A free 30-minute consultation session.</div>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-card-img">
+          <img src="https://scontent-lga3-2.cdninstagram.com/v/t51.82787-15/684280647_17931123780257479_3921485425056154458_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&_nc_ohc=2Tpx-oOlTXUQ7kNvwE3Om7p&_nc_oc=Adri0rJ4E8Wr-zBJtYlYEHPZe252gtG5pjYNhgNK3JiVrYmCcBjcmVd-YIv7NwWzCmU&_nc_zt=23&_nc_ht=scontent-lga3-2.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&_nc_tpa=Q5bMBQFQU4Ra6hueVQSQB_th-z6UL0L8ql46cOjLvuSkxy2c9_pKzC9v6sVHeKLSFEIL7Fi5h9_qucvu&oh=00_Af56qhuEJeg3mP2-wqBOwUDPvoB_NvqRVDEao8wyrqsiPA&oe=6A028962" alt="Lip Filler">
+        </div>
+        <div class="service-card-content">
+          <div class="service-card-title">Lip Filler</div>
+          <div class="service-card-desc">Lip enhancement including the signature Russian lip technique for shape, height, and definition with soft, symmetrical, and luxurious results.</div>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-card-img">
+          <img src="https://scontent-lga3-3.cdninstagram.com/v/t51.71878-15/673139030_1284058059853572_2198525018291511002_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=108&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=KBsiJ7TxEXkQ7kNvwEWaTXw&_nc_oc=AdqYbjgb1RU8ADm2RTr24L262Wmx_1RcufmWhTvnVUPof_TXUUH5lCO2qeq9F9QaJ4g&_nc_zt=23&_nc_ht=scontent-lga3-3.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&_nc_tpa=Q5bMBQG9JeHeImYdGgk9SadBgiYiIpiOqSAU-dp2-zWyj3Hja3McCt2iFyrio_yNWeGWOSNcqUP9VsNu&oh=00_Af5XitbTYRJC77Ko9hEqSztF8qdNHhocbZpl_d1HfVsi5Q&oe=6A02A113" alt="Facial Balancing">
+        </div>
+        <div class="service-card-content">
+          <div class="service-card-title">Facial Balancing</div>
+          <div class="service-card-desc">Strategic filler in the nose, chin, jaw, and lips to create balance and harmony from every angle.</div>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-card-img">
+          <img src="https://scontent-lga3-2.cdninstagram.com/v/t51.82787-15/682683853_17930609355257479_4255005067781603010_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=101&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=zvI187tN4KEQ7kNvwEimbgR&_nc_oc=AdpDRxrKDkNL1Yooi8FAcpwzgP_TV_S6gg_hYjvLNcamKZth2pSZg9BJs1MvbZl5s3k&_nc_zt=23&_nc_ht=scontent-lga3-2.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&_nc_tpa=Q5bMBQHmRno3sogvLO4cAoA5HJBHMgJGBSxGE1o8LEY4dUtSD1Rr3zR7yoYgV3srl5WxOcltAg5vORBb&oh=00_Af62KhTk-RAeE8HQstPgIPZyoo7XjLv93XRDGIC1BCMpDQ&oe=6A028E8D" alt="Laser Hair Removal">
+        </div>
+        <div class="service-card-content">
+          <div class="service-card-title">Laser Hair Removal</div>
+          <div class="service-card-desc">Laser treatments for stubborn spots including between the brows and other areas.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Gallery Section -->
+  <div class="gallery-section">
+    <p class="gallery-label">from our feed</p>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-2.cdninstagram.com/v/t51.82787-15/683426694_17930030376257479_4570832037827723303_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=105&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&_nc_ohc=ml0cFO-_Q64Q7kNvwEgU4jV&_nc_oc=AdpD80aWL6GEhg5QGuFUZ3rS2CgIGHnWfKG9W4_DOqmrJPdCFjrKEGCtDlych-cuFnM&_nc_zt=23&_nc_ht=scontent-lga3-2.cdninstagram.com&edm=ANo9K5cEAAAA&_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&_nc_tpa=Q5bMBQE3D8vGNwdOVox1O81X6j73AUBNWf5HUAafrsloHU_e1eoN72EEuyE1u_QnV6llsz6etIPQ1dxI&oh=00_Af4VMemq9UjKikbHnsENZJh3kM7lzdxN9sb1Tcox6P3fhQ&oe=6A02A858" alt="Perfect lips aren't luck… they're precision, balance, and knowing exactly when to stop. — Face Card Clinics">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-2.cdninstagram.com/v/t51.82787-15/684280647_17931123780257479_3921485425056154458_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=100&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0FST1VTRUxfSVRFTS5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&amp;_nc_ohc=2Tpx-oOlTXUQ7kNvwE3Om7p&amp;_nc_oc=Adri0rJ4E8Wr-zBJtYlYEHPZe252gtG5pjYNhgNK3JiVrYmCcBjcmVd-YIv7NwWzCmU&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-2.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQFQU4Ra6hueVQSQB_th-z6UL0L8ql46cOjLvuSkxy2c9_pKzC9v6sVHeKLSFEIL7Fi5h9_qucvu&amp;oh=00_Af56qhuEJeg3mP2-wqBOwUDPvoB_NvqRVDEao8wyrqsiPA&amp;oe=6A028962" alt="Sadaf never misses — Russian lip technique at the Honolulu Location">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-2.cdninstagram.com/v/t51.82787-15/682683853_17930609355257479_4255005067781603010_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=101&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=zvI187tN4KEQ7kNvwEimbgR&amp;_nc_oc=AdpDRxrKDkNL1Yooi8FAcpwzgP_TV_S6gg_hYjvLNcamKZth2pSZg9BJs1MvbZl5s3k&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-2.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQHmRno3sogvLO4cAoA5HJBHMgJGBSxGE1o8LEY4dUtSD1Rr3zR7yoYgV3srl5WxOcltAg5vORBb&amp;oh=00_Af62KhTk-RAeE8HQstPgIPZyoo7XjLv93XRDGIC1BCMpDQ&amp;oe=6A028E8D" alt="How beautiful is this after result of full face harmony? — Face Card Clinics">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-3.cdninstagram.com/v/t51.82787-15/682379791_17930334759257479_6504391279674061033_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=104&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiRkVFRC5iZXN0X2ltYWdlX3VybGdlbi5DMyJ9&amp;_nc_ohc=gX3TUtv4ro0Q7kNvwEiJkIJ&amp;_nc_oc=Adp4K1weNWA6z2RtG98lWXW0xbrJm6PlNvzv9TKIOtRRZtKaslN7oHzgDLhnUfknDD0&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-3.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQGMbc_gF4Dmmn2z74HsthjMY5yLild0t-jqGg5WgkOk87cP7e1WS0RJ3Pckw0ey83ecmGiQs63L&amp;oh=00_Af7N5_2JWQUeus2dqyKBp-YlIWu4wPTfvrXVdiqc9rQhqw&amp;oe=6A027F0B" alt="Perfect lips aren't an accident — Face Card Clinics">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-2.cdninstagram.com/v/t51.82787-15/683426694_17930030376257479_4570832037827723303_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=105&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=ml0cFO-_Q64Q7kNvwEgU4jV&amp;_nc_oc=AdpD80aWL6GEhg5QGuFUZ3rS2CgIGHnWfKG9W4_DOqmrJPdCFjrKEGCtDlych-cuFnM&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-2.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQE3D8vGNwdOVox1O81X6j73AUBNWf5HUAafrsloHU_e1eoN72EEuyE1u_QnV6llsz6etIPQ1dxI&amp;oh=00_Af4VMemq9UjKikbHnsENZJh3kM7lzdxN9sb1Tcox6P3fhQ&amp;oe=6A02A858" alt="May glow-up season is here — Face Card Clinics">
+      </div>
+      <div class="gallery-item">
+        <img src="https://scontent-lga3-3.cdninstagram.com/v/t51.71878-15/673139030_1284058059853572_2198525018291511002_n.jpg?stp=dst-jpg_e35_tt6&amp;_nc_cat=108&amp;ccb=7-5&amp;_nc_sid=18de74&amp;efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzMifQ%3D%3D&amp;_nc_ohc=KBsiJ7TxEXkQ7kNvwEWaTXw&amp;_nc_oc=AdqYbjgb1RU8ADm2RTr24L262Wmx_1RcufmWhTvnVUPof_TXUUH5lCO2qeq9F9QaJ4g&amp;_nc_zt=23&amp;_nc_ht=scontent-lga3-3.cdninstagram.com&amp;edm=ANo9K5cEAAAA&amp;_nc_gid=cZHAbbomO1GRgxhcJ0CZ_g&amp;_nc_tpa=Q5bMBQG9JeHeImYdGgk9SadBgiYiIpiOqSAU-dp2-zWyj3Hja3McCt2iFyrio_yNWeGWOSNcqUP9VsNu&amp;oh=00_Af5XitbTYRJC77Ko9hEqSztF8qdNHhocbZpl_d1HfVsi5Q&amp;oe=6A02A113" alt="Guys, laser isn't just for the girls — The Face Card Clinics">
+      </div>
+    </div>
+  </div>
+
+  <!-- Look Around -->
+  <div class="look-around-section">
+    <p class="look-around-label">LOOK AROUND</p>
+    <ul class="look-around-links">
+      <li><a href="/">HOME</a></li>
+      <li><a href="/services">SERVICES</a></li>
+      <li><a href="/about">ABOUT</a></li>
+      <li><a href="/policies">POLICIES</a></li>
+      <li><a href="/faq">FAQ</a></li>
+      <li><a href="/locations">LOCATIONS</a></li>
+      <li><a href="/payment-plans">PAYMENT PLANS</a></li>
+    </ul>
+  </div>
+
+  <!-- Social -->
+  <div class="social-section">
+    <a href="https://www.instagram.com/joanna.injects/" target="_blank" rel="noopener noreferrer">
+      <img src="https://static.wixstatic.com/media/11062b_cef3b719166a4815b446d4dcfcb6120d~mv2.png/v1/fill/w_26,h_26,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_cef3b719166a4815b446d4dcfcb6120d~mv2.png" alt="Instagram">
+      instagram
+    </a>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <div class="footer-left">© 2024 Face Card Clinics</div>
+  <div class="footer-right">
+    <span>zurich</span>
+    <span>copenhagen</span>
+    <span>tokyo</span>
+  </div>
+</footer>
+
+</body>
+</html>
