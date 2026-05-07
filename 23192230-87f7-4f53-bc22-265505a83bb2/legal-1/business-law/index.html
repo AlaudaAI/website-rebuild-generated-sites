@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Formation — Jones, Green, &amp; Tackett Law, PLLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  :root {
+    --bg-primary: #111115;
+    --bg-secondary: #1a1a20;
+    --bg-hover: #22222a;
+    --bg-card: #16161c;
+    --text-primary: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.5);
+    --text-dim: rgba(255, 255, 255, 0.35);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-light: rgba(255, 255, 255, 0.06);
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Inter', -apple-system, sans-serif;
+    --sidebar-width: 280px;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 32px;
+    --space-xl: 48px;
+    --space-2xl: 64px;
+    --space-3xl: 96px;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
+
+  /* Navigation */
+  .mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg-primary);
+  }
+
+  .mobile-header .brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+
+  .mobile-header .brand .globe-icon {
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid var(--text-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  .mobile-header .brand-name {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-sm);
+  }
+
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--text-primary);
+    transition: all 0.3s ease;
+  }
+
+  .sidebar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: var(--bg-primary);
+    border-right: 1px solid var(--border-color);
+    z-index: 200;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: var(--space-xl) var(--space-lg);
+    overflow-y: auto;
+  }
+
+  .sidebar .brand-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .sidebar .brand-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+
+  .sidebar .globe-icon {
+    width: 38px;
+    height: 38px;
+    border: 1.5px solid var(--text-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .sidebar .brand-name {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .sidebar nav a {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .sidebar nav a:hover {
+    color: var(--text-primary);
+  }
+
+  .sidebar .status-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .mobile-nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 150;
+  }
+
+  .mobile-nav-overlay.active {
+    display: block;
+  }
+
+  .sidebar.active {
+    display: flex;
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: calc(96px + 60px) var(--space-lg) var(--space-3xl);
+    background: var(--text-primary);
+    color: #111115;
+  }
+
+  .page-title-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-title-area h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: #111115;
+  }
+
+  /* Content Area */
+  .content-area {
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .content-area h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .content-area p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area ul, .content-area ol {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-lg);
+    color: var(--text-muted);
+  }
+
+  .content-area li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  .content-area img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    font-weight: 500;
+  }
+
+  .content-area a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  /* Business content layout */
+  .business-layout {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xl);
+  }
+
+  .business-intro {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .business-intro-image {
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .business-services-list {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-lg);
+    color: var(--text-muted);
+  }
+
+  .business-services-list li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  .business-bottom-image {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 12px;
+    margin-top: var(--space-md);
+  }
+
+  @media (min-width: 768px) {
+    .business-intro {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: var(--space-2xl);
+    }
+
+    .business-intro-image {
+      flex: 1;
+      max-width: 380px;
+    }
+
+    .business-intro-text {
+      flex: 1.2;
+    }
+  }
+
+  /* Services Section */
+  .services-section {
+    padding: var(--space-3xl) var(--space-lg);
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .services-section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .services-section h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: var(--space-lg);
+  }
+
+  .service-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    transition: background 0.3s ease;
+  }
+
+  .service-card:hover {
+    background: var(--bg-hover);
+  }
+
+  .service-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .service-card p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  /* Contact Section */
+  .contact-section {
+    padding: var(--space-3xl) var(--space-lg);
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border-color);
+  }
+
+  .contact-section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .contact-section h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .contact-section p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .contact-cta-link {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    text-decoration: none;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 12px 24px;
+    transition: background 0.3s ease, border-color 0.3s ease;
+  }
+
+  .contact-cta-link:hover {
+    background: var(--bg-hover);
+    border-color: rgba(255,255,255,0.2);
+  }
+
+  /* Footer */
+  .footer {
+    padding: var(--space-xl) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    border-top: 1px solid var(--border-color);
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .footer-brand-name {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .footer-copyright {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--text-dim);
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md) var(--space-lg);
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer-links li {
+    margin: 0;
+  }
+
+  .footer-links a {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-links a:hover {
+    color: var(--text-primary);
+  }
+
+  /* Responsive */
+  @media (min-width: 768px) {
+    .page-title-area { padding: calc(96px + 60px) var(--space-2xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl) var(--space-2xl); }
+    .services-section { padding: var(--space-3xl) var(--space-2xl); }
+    .contact-section { padding: var(--space-3xl) var(--space-2xl); }
+  }
+
+  @media (max-width: 768px) {
+    .page-title-area {
+      padding: calc(64px + 40px) var(--space-md) var(--space-2xl);
+    }
+
+    .content-area {
+      padding: var(--space-2xl) var(--space-md);
+    }
+
+    .business-intro {
+      flex-direction: column;
+    }
+
+    .business-intro-image {
+      max-width: 100%;
+    }
+
+    .services-section {
+      padding: var(--space-2xl) var(--space-md);
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-section {
+      padding: var(--space-2xl) var(--space-md);
+    }
+
+    .footer {
+      padding: var(--space-lg) var(--space-md);
+      flex-direction: column;
+    }
+
+    .mobile-header .brand-name {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+    }
+
+    .business-bottom-image {
+      max-width: 100%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .mobile-header {
+      display: none;
+    }
+
+    .sidebar {
+      display: flex !important;
+    }
+
+    .mobile-nav-overlay {
+      display: none !important;
+    }
+
+    .main-content {
+      margin-left: var(--sidebar-width);
+      width: calc(100% - var(--sidebar-width));
+    }
+
+    .page-title-area { padding: calc(96px + 80px) var(--space-3xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl); }
+    .services-section { padding: var(--space-3xl); }
+    .contact-section { padding: var(--space-3xl); }
+
+    .footer {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: var(--space-xl) var(--space-2xl);
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">Jones, Green, &amp; Tackett Law, PLLC</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">Jones, Green, &amp; Tackett Law, PLLC</span>
+    </a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/our-team">Our Team</a>
+      <a href="/contact">Contact Us</a>
+      <a href="/adoption">Adoption</a>
+      <a href="/appeals">Appeals</a>
+      <a href="/business-law">Business Formation</a>
+      <a href="/child-custody">Child Custody</a>
+      <a href="/child-support">Child Support</a>
+      <a href="/conservatorship">Conservatorship</a>
+      <a href="/contempt">Contempt</a>
+      <a href="/contracts">Contracts</a>
+      <a href="/criminal-law">Criminal Law</a>
+      <a href="/divorce">Divorce</a>
+      <a href="/estate-administration-probate">Estate Administration &amp; Probate</a>
+      <a href="/estate-planning">Estate Planning</a>
+      <a href="/mediation">Mediation</a>
+      <a href="/personal-injury">Personal Injury</a>
+      <a href="/real-estate">Real Estate</a>
+      <a href="/testimonials">Testimonials</a>
+    </nav>
+  </div>
+  <div class="status-section">
+  </div>
+</aside>
+
+<!-- Main Content -->
+<div class="main-content">
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Business Formation</h1>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+  <div class="business-layout">
+
+    <div class="business-intro">
+      <img class="business-intro-image" src="https://images.squarespace-cdn.com/content/v1/5c60b6d9b91449401e32e0aa/679dac9b-1d1d-4933-9f22-91aed4b120e0/A7I07805.jpg" alt="Business Formation attorneys at Jones, Green, &amp; Tackett Law, PLLC">
+      <div class="business-intro-text">
+        <h2>Business Formation</h2>
+        <p>Whether you have decided to open your own business or whether you have been in business for years, you need an experienced, reasonable attorney who can walk you through your questions and help you create a business plan or legal documents that suit your particular situation.</p>
+        <p>Our experienced attorneys can assist you with your business law needs. <a href="/contact">Contact us</a> today to learn more about services, which include the following areas:</p>
+        <ul class="business-services-list">
+          <li>Business Formation (Limited Liability Companies, Corporations, Partnerships)</li>
+          <li>Non-Profit Formation</li>
+          <li>Contract Drafting</li>
+          <li>Employment Agreements</li>
+        </ul>
+      </div>
+    </div>
+
+    <div>
+      <img class="business-bottom-image" src="https://images.squarespace-cdn.com/content/v1/5c60b6d9b91449401e32e0aa/1550257590240-X0JM1DUAL7BWAVY6QGNN/business_law_attorney_lawyer_springfield_TN" alt="business_law_attorney_lawyer_springfield_TN">
+    </div>
+
+  </div>
+</div>
+
+<!-- Services Section -->
+<section class="services-section">
+  <div class="services-section-inner">
+    <h2>Our Business Law Services</h2>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <h3>Business Formation</h3>
+        <p>Assistance with Limited Liability Companies, Corporations, and Partnerships.</p>
+      </div>
+
+      <div class="service-card">
+        <h3>Non-Profit Formation</h3>
+        <p>Assistance with forming non-profit organizations.</p>
+      </div>
+
+      <div class="service-card">
+        <h3>Contract Drafting</h3>
+        <p>Drafting of legal contracts for business needs.</p>
+      </div>
+
+      <div class="service-card">
+        <h3>Employment Agreements</h3>
+        <p>Drafting and review of employment agreements.</p>
+      </div>
+
+      <div class="service-card">
+        <h3>Estate Administration &amp; Probate</h3>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-section">
+  <div class="contact-section-inner">
+    <h2>Contact Us</h2>
+    <p>Ready to discuss your business law needs? Our experienced attorneys are here to help. Reach out to us today.</p>
+    <a href="/contact" class="contact-cta-link">Contact Us</a>
+  </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Jones, Green, &amp; Tackett Law, PLLC</span>
+      <span class="footer-copyright">© 2026 Jones, Green, &amp; Tackett Law, PLLC. All rights reserved.</span>
+    </div>
+    <ul class="footer-links">
+    <li><a href="/">Home</a></li><li><a href="/our-team">Our Team</a></li><li><a href="/contact">Contact Us</a></li><li><a href="/contempt">Contempt</a></li><li><a href="/testimonials">Testimonials</a></li><li><a href="/mediation">Mediation</a></li><li><a href="/child-custody">Child Custody</a></li><li><a href="/real-estate">Real Estate</a></li><li><a href="/brandi-l-jones">Brandi L. Jones</a></li><li><a href="/home-alt-bedford">Home Alt — Bedford</a></li><li><a href="/adoption">Adoption</a></li><li><a href="/child-support">Child Support</a></li><li><a href="/business-law">Business Formation</a></li><li><a href="/personal-injury">Personal Injury</a></li><li><a href="/criminal-law">Criminal Law</a></li><li><a href="/appeals">Appeals</a></li><li><a href="/divorce">Divorce</a></li><li><a href="/heather-e-tackett">Heather E. Tackett</a></li><li><a href="/estate-planning">Estate Planning</a></li><li><a href="/emily-c-green">Emily C. Green</a></li><li><a href="/conservatorship">Conservatorship</a></li><li><a href="/contracts">Contracts</a></li><li><a href="/estate-administration-probate">Estate Administration &amp; Probate</a></li><li><a href="/new-page">New Page</a></li>
+  </ul>
+</footer>
+
+</div>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>

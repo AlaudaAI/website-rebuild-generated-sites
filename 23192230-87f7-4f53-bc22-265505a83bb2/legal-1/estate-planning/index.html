@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estate Planning — Jones, Green, &amp; Tackett Law, PLLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  :root {
+    --bg-primary: #111115;
+    --bg-secondary: #1a1a20;
+    --bg-hover: #22222a;
+    --bg-card: #16161c;
+    --text-primary: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.5);
+    --text-dim: rgba(255, 255, 255, 0.35);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-light: rgba(255, 255, 255, 0.06);
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Inter', -apple-system, sans-serif;
+    --sidebar-width: 280px;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 32px;
+    --space-xl: 48px;
+    --space-2xl: 64px;
+    --space-3xl: 96px;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
+
+  /* Navigation */
+  .mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg-primary);
+  }
+
+  .mobile-header .brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+
+  .mobile-header .brand .globe-icon {
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid var(--text-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  .mobile-header .brand-name {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-sm);
+  }
+
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--text-primary);
+    transition: all 0.3s ease;
+  }
+
+  .sidebar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: var(--bg-primary);
+    border-right: 1px solid var(--border-color);
+    z-index: 200;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: var(--space-xl) var(--space-lg);
+    overflow-y: auto;
+  }
+
+  .sidebar .brand-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .sidebar .brand-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+
+  .sidebar .globe-icon {
+    width: 38px;
+    height: 38px;
+    border: 1.5px solid var(--text-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .sidebar .brand-name {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .sidebar nav a {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .sidebar nav a:hover {
+    color: var(--text-primary);
+  }
+
+  .sidebar .status-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .mobile-nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 150;
+  }
+
+  .mobile-nav-overlay.active {
+    display: block;
+  }
+
+  .sidebar.active {
+    display: flex;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: calc(96px + 60px) var(--space-lg) var(--space-3xl);
+    background: var(--text-primary);
+    color: #111115;
+  }
+
+  .page-title-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-title-area h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: #111115;
+  }
+
+  /* Content Area */
+  .content-area {
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .content-area h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .content-area p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area ul, .content-area ol {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-lg);
+    color: var(--text-muted);
+  }
+
+  .content-area li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  .content-area img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    font-weight: 500;
+  }
+
+  .content-area a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  .content-area strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  /* Hero image block */
+  .content-hero-img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: var(--space-lg);
+    display: block;
+    object-fit: cover;
+    max-height: 480px;
+  }
+
+  /* Section divider */
+  .content-divider {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: var(--space-2xl) 0;
+  }
+
+  /* Trust item */
+  .trust-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: var(--space-lg);
+    margin-bottom: var(--space-lg);
+  }
+
+  .trust-item p {
+    margin-bottom: 0;
+  }
+
+  /* Services section */
+  .services-section {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: var(--space-3xl) var(--space-lg);
+  }
+
+  .services-section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .services-section h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .service-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: var(--space-lg);
+    transition: background 0.3s ease, border-color 0.3s ease;
+  }
+
+  .service-card:hover {
+    background: var(--bg-hover);
+    border-color: rgba(255,255,255,0.2);
+  }
+
+  .service-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+  }
+
+  .service-card p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin-bottom: 0;
+  }
+
+  /* Footer */
+  .footer {
+    padding: var(--space-xl) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    border-top: 1px solid var(--border-color);
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .footer-brand-name {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .footer-copyright {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--text-dim);
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md) var(--space-lg);
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer-links a {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-links a:hover {
+    color: var(--text-primary);
+  }
+
+  /* Main content offset */
+  .main-content {
+    min-height: 100vh;
+  }
+
+  /* Responsive */
+  @media (min-width: 768px) {
+    .page-title-area { padding: calc(96px + 60px) var(--space-2xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl) var(--space-2xl); }
+    .services-section { padding: var(--space-3xl) var(--space-2xl); }
+    .footer {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: var(--space-xl) var(--space-2xl);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .mobile-header {
+      display: none;
+    }
+    .sidebar {
+      display: flex !important;
+    }
+    .mobile-nav-overlay {
+      display: none !important;
+    }
+    .main-content {
+      margin-left: var(--sidebar-width);
+      width: calc(100% - var(--sidebar-width));
+    }
+    .page-title-area { padding: calc(96px + 80px) var(--space-3xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl); }
+    .services-section { padding: var(--space-3xl); }
+    .footer {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: var(--space-xl) var(--space-2xl);
+    }
+  }
+
+  @media (max-width: 768px) {
+    :root {
+      --space-lg: 20px;
+      --space-xl: 32px;
+      --space-2xl: 48px;
+      --space-3xl: 64px;
+    }
+
+    .mobile-header {
+      padding: var(--space-md);
+    }
+
+    .mobile-header .brand-name {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+    }
+
+    .page-title-area {
+      padding: calc(64px + 40px) var(--space-md) var(--space-2xl);
+    }
+
+    .page-title-area h1 {
+      font-size: 1.75rem;
+    }
+
+    .content-area {
+      padding: var(--space-2xl) var(--space-md);
+    }
+
+    .content-area h2 {
+      font-size: 1.35rem;
+    }
+
+    .content-area p,
+    .content-area li {
+      font-size: 0.95rem;
+    }
+
+    .content-hero-img {
+      max-height: 260px;
+      border-radius: 8px;
+    }
+
+    .services-section {
+      padding: var(--space-2xl) var(--space-md);
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-sm);
+    }
+
+    .service-card {
+      padding: var(--space-md);
+    }
+
+    .trust-item {
+      padding: var(--space-md);
+    }
+
+    .footer {
+      flex-direction: column;
+      padding: var(--space-xl) var(--space-md);
+      gap: var(--space-md);
+    }
+
+    .footer-links {
+      gap: var(--space-sm) var(--space-md);
+    }
+
+    .sidebar {
+      width: 85vw;
+      max-width: 320px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">Jones, Green, &amp; Tackett Law, PLLC</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">Jones, Green, &amp; Tackett Law, PLLC</span>
+    </a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/our-team">Our Team</a>
+      <a href="/contact">Contact Us</a>
+      <a href="/adoption">Adoption</a>
+      <a href="/appeals">Appeals</a>
+      <a href="/business-law">Business Formation</a>
+      <a href="/child-custody">Child Custody</a>
+      <a href="/child-support">Child Support</a>
+      <a href="/conservatorship">Conservatorship</a>
+      <a href="/contempt">Contempt</a>
+      <a href="/contracts">Contracts</a>
+      <a href="/criminal-law">Criminal Law</a>
+      <a href="/divorce">Divorce</a>
+      <a href="/estate-administration-probate">Estate Administration &amp; Probate</a>
+      <a href="/estate-planning">Estate Planning</a>
+      <a href="/mediation">Mediation</a>
+      <a href="/personal-injury">Personal Injury</a>
+      <a href="/real-estate">Real Estate</a>
+      <a href="/testimonials">Testimonials</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div style="font-size:11px; color: var(--text-muted); letter-spacing: 0.15em; text-transform: uppercase;">110 West Sixth Avenue<br>Springfield, TN 37172</div>
+  </div>
+</aside>
+
+<main class="main-content">
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Estate Planning</h1>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+
+  <img class="content-hero-img" src="https://images.squarespace-cdn.com/content/v1/5c60b6d9b91449401e32e0aa/b59894c8-c6c7-4ae3-8844-9e2874879aba/A7I07813-Edit.jpg" alt="Estate Planning">
+
+  <p>Estate planning comes in all shapes and sizes depending on your individual situation and objectives. We encourage you to <a href="/contact">contact</a> our estate attorney, <a href="/emily-c-green">Emily C. Green</a>, to discuss your situation, learn more, and formulate an estate plan specific to your circumstances.</p>
+
+  <hr class="content-divider">
+
+  <h2>Last Will and Testament</h2>
+  <p>A Last Will and Testament spells our your wishes on how you would like your assets to be distributed after your death and who you want to be responsible for overseeing the distributions. A Last Will and Testament also enables you to appoint a Guardian for your minor children in the event something happens to both of their parents. If you do not have a Last Will and Testament, the State of Tennessee will determine how your property is distributed, which may not be what you desire. We always recommend having a Last Will and Testament to ensure that your wishes are carried out and to help your family through an already stressful time.</p>
+
+  <hr class="content-divider">
+
+  <h2>Powers of Attorney</h2>
+  <p>A Power of Attorney is a document that allows you to designate an agent and give authority to an agent to act on your behalf in the event that you are unable to do so yourself due to mental or physical disability. This document only has legal power while you are living and can be revoked at any time. The most commonly utilized powers of attorney are a General Durable Power of Attorney, which allows your agent to handle all of your personal and financial affairs, and a Durable Healthcare Power of Attorney, which allows your agent to access your medical information and make medical decisions on your behalf. Given that we are increasingly likely to suffer from an incapacity before our death, these Powers of Attorney are essential to any estate plan to ensure that your loved ones will be able to step in and take care of you if it becomes necessary without the expense and stress of pursuing a Conservatorship through the Court.</p>
+
+  <hr class="content-divider">
+
+  <h2>Living Will</h2>
+  <p>Not to be confused with a Last Will and Testament, a Living Will is essentially an advance medical directive that addresses your desires regarding life-sustaining medical treatment if you are in an irreversible coma and a terminal condition. Similar to the Powers of Attorney, a Living Will has no legal power after your death.</p>
+
+  <hr class="content-divider">
+
+  <h2>Trusts</h2>
+  <p>A Trust is a document that can be used to transfer property from a Grantor to a Beneficiary. These can be powerful vehicles when they are utilized properly. When property is placed into a Trust, the ownership of the property is transferred to the Trust and is managed by the Trustee and the rules set out in the Trust documents. The Trustee is then obligated to uphold the terms of the Trust and distribute the property accordingly.</p>
+
+  <p>There are a variety of Trusts, but the most common types utilized in estate planning are previewed here:</p>
+
+  <ul>
+    <li><strong>Revocable Living Trust (Grantor's Trust)</strong> — This Trust is the most flexible type and perhaps the most used Trust in estate planning. While the Grantor lives, they can use the assets of the Trust and modify the Trust at any time. When the Grantor dies, the successor Trustee will immediately take control and manage and transfer title and ownership of the property without the necessity of probating the estate with the Court. In addition to some cost-saving measures, this can also provide a greater degree of privacy and a more seamless transition after your death.</li>
+    <li><strong>Irrevocable Trust</strong> — This Trust is less common because it requires that the Grantor completely give ownership and control of certain property over to a Trustee for the benefit of a Beneficiary, who cannot be the Grantor. As the title implies, an Irrevocable Trust cannot be modified at all. This quality, however, provides certain benefits for estate planning purposes, particularly if you have concerns about Federal Inheritance Taxes.</li>
+    <li><strong>Supplemental Needs Trust (SNT)</strong> — A Supplemental Needs Trust can be used to provide financial assistance to an individual without affecting his or her qualification for and receipt of government assistance such as Supplemental Security Income (SSI) and Medicaid. Since SSI and Medicaid are designed to provide support for shelter, food, and medical expenses, a Supplemental Needs Trust is designed to only provide financial support to the beneficiary for things other than shelter, food, and certain medical expenses. An SNT is an irrevocable trust and cannot be modified once it is set up.</li>
+  </ul>
+
+  <img src="https://images.squarespace-cdn.com/content/v1/5c60b6d9b91449401e32e0aa/1550284995482-ZMNOCWEVX4I3YZG1JZY2/estate_planning_attorney_lawyer_springfield_nashville_tn_will" alt="estate_planning_attorney_lawyer_springfield_nashville_tn_will">
+
+</div>
+
+<!-- Services Section -->
+<section class="services-section">
+  <div class="services-section-inner">
+    <h2>Related Services</h2>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <h3>Estate Planning</h3>
+        <p>Estate planning services including Last Will and Testament, Powers of Attorney, Living Will, and Trusts (Revocable Living Trust, Irrevocable Trust, and Supplemental Needs Trust).</p>
+      </div>
+
+      <div class="service-card">
+        <h3>Estate Administration &amp; Probate</h3>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-brand">
+    <span class="footer-brand-name">Jones, Green, &amp; Tackett Law, PLLC</span>
+    <span class="footer-copyright">© 2026 Jones, Green, &amp; Tackett Law, PLLC. All rights reserved.</span>
+  </div>
+  <ul class="footer-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/our-team">Our Team</a></li>
+    <li><a href="/contact">Contact Us</a></li>
+    <li><a href="/contempt">Contempt</a></li>
+    <li><a href="/testimonials">Testimonials</a></li>
+    <li><a href="/mediation">Mediation</a></li>
+    <li><a href="/child-custody">Child Custody</a></li>
+    <li><a href="/real-estate">Real Estate</a></li>
+    <li><a href="/brandi-l-jones">Brandi L. Jones</a></li>
+    <li><a href="/home-alt-bedford">Home Alt — Bedford</a></li>
+    <li><a href="/adoption">Adoption</a></li>
+    <li><a href="/child-support">Child Support</a></li>
+    <li><a href="/business-law">Business Formation</a></li>
+    <li><a href="/personal-injury">Personal Injury</a></li>
+    <li><a href="/criminal-law">Criminal Law</a></li>
+    <li><a href="/appeals">Appeals</a></li>
+    <li><a href="/divorce">Divorce</a></li>
+    <li><a href="/heather-e-tackett">Heather E. Tackett</a></li>
+    <li><a href="/estate-planning">Estate Planning</a></li>
+    <li><a href="/emily-c-green">Emily C. Green</a></li>
+    <li><a href="/conservatorship">Conservatorship</a></li>
+    <li><a href="/contracts">Contracts</a></li>
+    <li><a href="/estate-administration-probate">Estate Administration &amp; Probate</a></li>
+    <li><a href="/new-page">New Page</a></li>
+  </ul>
+</footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
+
+</body>
+</html>

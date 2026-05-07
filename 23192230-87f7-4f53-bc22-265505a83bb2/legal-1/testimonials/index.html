@@ -1,0 +1,927 @@
+I need to analyze what's missing and what needs to be fixed:
+
+1. **MISSING**: Service card for "Estate Administration & Probate" (no description, show name only)
+2. **ADD**: `@media (max-width: 768px)` mobile-responsive styles
+3. **ADD**: Additional sections (hero, services, team, contact) as available
+
+The testimonials grid div has a broken class `testimonials-` — I'll fix that to `testimonials-grid`.
+
+Let me also add a services section and ensure the mobile styles are added.
+
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Testimonials — Jones, Green, &amp; Tackett Law, PLLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  :root {
+    --bg-primary: #111115;
+    --bg-secondary: #1a1a20;
+    --bg-hover: #22222a;
+    --bg-card: #16161c;
+    --text-primary: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.5);
+    --text-dim: rgba(255, 255, 255, 0.35);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-light: rgba(255, 255, 255, 0.06);
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Inter', -apple-system, sans-serif;
+    --sidebar-width: 280px;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 32px;
+    --space-xl: 48px;
+    --space-2xl: 64px;
+    --space-3xl: 96px;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
+
+  /* Navigation */
+  .mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg-primary);
+  }
+
+  .mobile-header .brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+
+  .mobile-header .brand .globe-icon {
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid var(--text-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  .mobile-header .brand-name {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-sm);
+  }
+
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--text-primary);
+    transition: all 0.3s ease;
+  }
+
+  .sidebar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: var(--bg-primary);
+    border-right: 1px solid var(--border-color);
+    z-index: 200;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: var(--space-xl) var(--space-lg);
+    overflow-y: auto;
+  }
+
+  .sidebar .brand-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .sidebar .brand-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+
+  .sidebar .globe-icon {
+    width: 38px;
+    height: 38px;
+    border: 1.5px solid var(--text-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .sidebar .brand-name {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .sidebar nav a {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .sidebar nav a:hover {
+    color: var(--text-primary);
+  }
+
+  .sidebar .status-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .mobile-nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 150;
+  }
+
+  .mobile-nav-overlay.active {
+    display: block;
+  }
+
+  .sidebar.active {
+    display: flex;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: calc(96px + 60px) var(--space-lg) var(--space-3xl);
+    background: var(--text-primary);
+    color: #111115;
+  }
+
+  .page-title-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-title-area h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: #111115;
+  }
+
+  .page-title-area .page-subtitle {
+    font-size: 1.1rem;
+    color: rgba(17,17,21,0.65);
+    margin-top: 12px;
+    font-weight: 400;
+  }
+
+  /* Content Area */
+  .content-area {
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .content-area h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    font-weight: 500;
+  }
+
+  .content-area a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  /* Hero Image Banner */
+  .testimonials-hero-image {
+    width: 100%;
+    max-height: 420px;
+    object-fit: cover;
+    display: block;
+    border-radius: 0;
+    margin-bottom: 0;
+  }
+
+  /* Testimonials Section Intro */
+  .testimonials-intro {
+    font-family: var(--font-serif);
+    font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text-primary);
+    margin-bottom: var(--space-2xl);
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  /* Testimonials Grid */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    margin-top: var(--space-2xl);
+  }
+
+  .testimonial-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    transition: border-color 0.3s ease;
+  }
+
+  .testimonial-card:hover {
+    border-color: rgba(255,255,255,0.25);
+  }
+
+  .testimonial-quote-icon {
+    font-size: 2rem;
+    color: rgba(255,255,255,0.15);
+    line-height: 1;
+    font-family: Georgia, serif;
+  }
+
+  .testimonial-text {
+    font-size: 0.97rem;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.75);
+    font-style: italic;
+    flex: 1;
+  }
+
+  .testimonial-author {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--border-light);
+  }
+
+  /* Services Section */
+  .services-section {
+    padding: var(--space-3xl) var(--space-lg);
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .services-section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .services-section h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+  }
+
+  .service-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: var(--space-md) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    transition: border-color 0.3s ease;
+  }
+
+  .service-card:hover {
+    border-color: rgba(255,255,255,0.25);
+  }
+
+  .service-card-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 0.01em;
+  }
+
+  .service-card-description {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+
+  /* Contact Section */
+  .contact-section {
+    padding: var(--space-3xl) var(--space-lg);
+    border-top: 1px solid var(--border-color);
+  }
+
+  .contact-section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .contact-section h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .contact-section p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-md);
+  }
+
+  .contact-section a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    font-weight: 500;
+  }
+
+  .contact-section a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  /* Footer */
+  .footer {
+    padding: var(--space-xl) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    border-top: 1px solid var(--border-color);
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .footer-brand-name {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .footer-copyright {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--text-dim);
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md) var(--space-lg);
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer-links a {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-links a:hover {
+    color: var(--text-primary);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .mobile-header {
+      display: flex;
+    }
+    .sidebar {
+      display: none !important;
+    }
+    .sidebar.active {
+      display: flex !important;
+    }
+    .mobile-nav-overlay.active {
+      display: block !important;
+    }
+    .main-content {
+      margin-left: 0;
+      width: 100%;
+    }
+    .page-title-area {
+      padding: calc(64px + 40px) var(--space-md) var(--space-2xl);
+    }
+    .page-title-area h1 {
+      font-size: 1.75rem;
+    }
+    .content-area {
+      padding: var(--space-2xl) var(--space-md);
+    }
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+      margin-top: var(--space-lg);
+    }
+    .testimonial-card {
+      padding: var(--space-md);
+    }
+    .services-section {
+      padding: var(--space-2xl) var(--space-md);
+    }
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+    .contact-section {
+      padding: var(--space-2xl) var(--space-md);
+    }
+    .footer {
+      padding: var(--space-lg) var(--space-md);
+      flex-direction: column;
+    }
+    .footer-links {
+      gap: var(--space-sm) var(--space-md);
+    }
+    .testimonials-hero-image {
+      max-height: 220px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .page-title-area { padding: calc(96px + 60px) var(--space-2xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl) var(--space-2xl); }
+    .testimonials-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .services-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .footer {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: var(--space-xl) var(--space-2xl);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .mobile-header {
+      display: none;
+    }
+    .sidebar {
+      display: flex !important;
+    }
+    .mobile-nav-overlay {
+      display: none !important;
+    }
+    .main-content {
+      margin-left: var(--sidebar-width);
+      width: calc(100% - var(--sidebar-width));
+    }
+    .page-title-area { padding: calc(96px + 80px) var(--space-3xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl); }
+    .testimonials-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    .services-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    .footer {
+      padding: var(--space-xl) var(--space-2xl);
+    }
+  }
+</style>
+
+
+
+<!-- HEADER -->
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">Jones, Green, &amp; Tackett Law, PLLC</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">Jones, Green, &amp; Tackett Law, PLLC</span>
+    </a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/our-team">Our Team</a>
+      <a href="/testimonials">Testimonials</a>
+      <a href="/contact">Contact Us</a>
+      <a href="/divorce">Divorce</a>
+      <a href="/child-custody">Child Custody</a>
+      <a href="/adoption">Adoption</a>
+      <a href="/estate-planning">Estate Planning</a>
+    </nav>
+  </div>
+  <div class="status-section">
+  </div>
+</aside>
+
+<main class="main-content">
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Testimonials</h1>
+    <p class="page-subtitle">Don't take our word for it, hear from our satisfied clients.</p>
+  </div>
+</section>
+
+<!-- Hero Image -->
+<img src="https://images.squarespace-cdn.com/content/v1/5c60b6d9b91449401e32e0aa/eec1a112-6d4d-48db-97b1-d5cc74bc43d9/A7I07866.jpg" alt="Jones, Green, &amp; Tackett Law Office" class="testimonials-hero-image">
+
+<!-- Testimonials Content -->
+<div class="content-area">
+
+  <div class="testimonials-grid">
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">I couldn't be more pleased with this law firm and all of the wonderful attorneys there. Even in a difficult situation, you will not find a more comfortable atmosphere to help solve any issues. Thank you!!</p>
+      <div class="testimonial-author">— Heather from Hendersonville, TN</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">There are no adequate words to express our gratitude for the services provided us by Emily Green of Jones, Green, &amp; Tackett Law PLLC. Not only did she provide excellent, wise, and professional guidance throughout our legal process, she conducted herself with sincere care and understanding, a rarity in the legal world today. Thank you, Emily Green, for everything.</p>
+      <div class="testimonial-author">— Suzann from Pleasant View</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">Highly ⭐⭐⭐⭐⭐ recommended Jones, Green &amp; Tackett PLLC Law firm. Ms. Green worked with me on my divorce case for about a year &amp; she is awesome young lady . I'm glad I found her &amp; got to have her work for me. She's very nice, always explains everything so I can understand what's happening or what was going to happen &amp; went over all the steps to know what to expect in my case. If you need a great family lawyer please check her out. You want be disappointed. Also have to say Donna is a nice lady she works at the front desk &amp; is always there to help you when you call or walk in for assistance . Thanks Jones, Green &amp; Tackett PLLC Law firm for all you did for me.</p>
+      <div class="testimonial-author">— Katie from Goodlettsville, TN</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">Heather Tackett is my lawyer. She filed my divorce quickly and the process has been so easy and very understood, very thorough, and sugar coats nothing!! Would recommend this law firm to any and everyone.</p>
+      <div class="testimonial-author">— Laci from Springfield, TN</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">These ladies are awesome, patient and SMART! I chose my attorney because she is female. She then started this business with ALL OTHER FEMALES! Mrs. Donna is always sweet! Great work, great demeanor. I was treated fairly, felt like someone was listening and was never made to feel like my case was just like everyone else's! I was given great advice and I am so glad that these women are NOT any of their male lawyer neighbors!!!</p>
+      <div class="testimonial-author">— Crista from Springfield, TN</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">Emily is an amazing person and attorney. Dealing with the loss of our father and then a family divided, she was right there. She is such a good listener and guided my sister and me through the most difficult of situations. I could never have gotten through this without her.</p>
+      <div class="testimonial-author">— Terri from Illinois</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">Brandi Jones was wonderful to work with and did an excellent job of representing me and guiding me through my court process. Highly recommend!</p>
+      <div class="testimonial-author">— Misha</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">I hired Brandi to represent me in a divorce proceeding. I feel like she did an excellent job in handling my case. She is knowledgeable of the law and she guided me through the whole process. While I didn't get everything I wanted, the case was settled amicably. She was up against a tough opposing attorney, and she more then held her own. If you provide her the tool's and evidence, and cooperation that any attorney need's to represent you, she will do an excellent job for you.</p>
+      <div class="testimonial-author">— Frank from Clarksville, TN</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">All I can tell you is this law firm is the best I could ever recommend. Emily has become a friend ...not just an attorney...I have worked with two of the attorneys and they not only represent their clients with the highest degree of professionalism and knowledge but with kindness and compassionate. Brandi and Emily are the best! Haven't worked with Heather yet, but I have heard good things...bravo and bravo again...🙂</p>
+      <div class="testimonial-author">— Debby from Nashville, TN</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">Emily and Heather were absolutely amazing. We are forever grateful for their hard work and dedication. We would recommend them to anyone.</p>
+      <div class="testimonial-author">— Joseph from Springfield, TN</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">Planning for your children's future in the event of your own demise would not normally be categorized as a good day... that being said, Emily Green did an amazing job of explaining everything in great detail and making sure I was comfortable and okay through the whole process. In fact, every attorney in that office treated me with the utmost respect and hospitality.</p>
+      <div class="testimonial-author">— Tony from Cross Plains, TN</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">Attorney Brandi L. Jones was an invaluable resource when it came to protecting my rights as a mother in the courtroom. She is accessible, responsive, patient with every question/concern, and tough in the courtroom! Her attention to detail and knowledge of laws are unsurpassed! Her hard work and diligence resulted in a favorable outcomes in my case. I feel honored to recommend Brandi along with her firm, Jones, Green &amp; Tackett Law to anyone in need of legal services! Best in the business!</p>
+      <div class="testimonial-author">— Jessica from Springfield, TN</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">Brandi was excellent to work with in our case. We felt confident from the first time we met with her. The office is very comfortable, modern, and bright. When we complimented the office the first time we met her, her response was "usually when people are here it isn't always for a good reason, so we want them to feel comfortable". It meant a lot. She knew we were going in with heavy hearts and she provided us an atmosphere that felt safe. When the case was finished and we sat in her office for the last time, it was bitter sweet. Brandi was fabulous and she got our family on the other side. We couldn't have done it without her.</p>
+      <div class="testimonial-author">— Abby</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">Emily Green is amazing!!! I won't ever use another team for any of my legal needs. She personifies professionalism while at the same time being compassionate and gentle through very tough circumstances. I can't say enough good things about Emily and Jones, Green, &amp; Tackett Law.</p>
+      <div class="testimonial-author">— Shea from White House, TN</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">Emily and her staff were wonderful to work with. Emily walked us through our estate planning and was thorough and thoughtful in addressing our needs.</p>
+      <div class="testimonial-author">— Kristie from Springfield</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">During a very difficult and sad time, Emily helped us get through the business and human side of what has to be done. God bless her!</p>
+      <div class="testimonial-author">— Janet from White House, TN</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">I have used Brandi Jones numerous times in child custody and a case that related from another case. Brandi left no stone unturned and made me and my family feel protected. She is very communicative and no a push over. She is tough, and I still use her today. There is not enough I can say about Brandi except she has earned my trust.</p>
+      <div class="testimonial-author">— Lew of Springfield, TN</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">I couldn't have asked for a more professional attorney. Emily was also compassionate during a difficult time in my life. That makes for a perfect attorney. Wouldn't have wanted anyone else.</p>
+      <div class="testimonial-author">— Betty from Springfield, TN</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">Emily Green did an exceptional job drawing up my will and last will and testament recently. She took time and personalized as well as considered scenarios for a failsafe Will. Additionally, my spouses. She took as much time needed to explain the laws and the process for us to be completely satisfied with what we wished to have in place. She came highly recommended by dear close friends of ours and we in return would recommend her services to any of you reading this review.</p>
+      <div class="testimonial-author">— Jack in Springfield, TN</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">Emily was the best. She always answered my questions. If she didn't know, she always found out. She went above and beyond. I could email her at eleven o'clock at night and she always took the time to reply. She is an awesome person and I loved her dearly. She fights for what she believes in. I can't say enough good about her.</p>
+      <div class="testimonial-author">— Charity from Springfield, TN</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">I highly recommend Brandi Jones. My husband and I have used her for multiple custody issues and for adoption. She has been amazing through it all. You will not find a better attorney that will fight for you the way Brandi will. She is great with communication and gives you helpful advise. We will never use anyone else!!!</p>
+      <div class="testimonial-author">— Jennifer from Springfield, TN</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">Brandi Jones went above and beyond my expectations. She handled my special case delicately and diligently. I could not of asked for a more patient and understanding lawyer to represent me during one of the hardest times of my life. I would recommend this firm as a whole to anyone.</p>
+      <div class="testimonial-author">— Adam from Springfield, TN</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">Emily and Heather were very professional and handled everything for me pertaining to my mom's estate and closing on the sale of her house. They were always so nice and informative and kept me up to date with all that was going on. Donna was always very nice and professional when I called the office. I would highly recommend this group for any of your legal needs.</p>
+      <div class="testimonial-author">— Dana from Springfield, TN</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">Emily was great. I live out of town and had to take care of a personal matter in Tennessee and she was so helpful!</p>
+      <div class="testimonial-author">— Kathy from Ohio</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">Heather was a joy to work with and became a blessing to our family. Thank you, Heather.</p>
+      <div class="testimonial-author">— David, Springfield, TN</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">Ms. Jones: Thank you for listening. Thank you for allowing me the opportunity to voice my story and past experiences and let it be known. I feel you provided more defense, communication, understanding and a sincere commitment to do all in your power to work out my plea.</p>
+      <div class="testimonial-author">— Daniel from Springfield, TN</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">My husband and I just finalized our Estate package with Emily Green. Emily was wonderful to work with, very personable, knowledgeable, and patient to work with. She answered all over our questions (and we had a lot), and was thrilled to answer them. Now that we have signed our documents we feel even more prepared in life. Thank you Emily for all your help and to your amazing team.</p>
+      <div class="testimonial-author">— Kayla</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">Emily not only was open and honest with me, she also was quick in communicating with me. She was supportive when I needed it and helped me to stand up for myself and my children. I cannot imagine going through what I had to without her.</p>
+      <div class="testimonial-author">— Rachel from White House, TN</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">Emily was wonderful! She helped me out so much during a difficult time in my life. I would highly recommend her. Plus she always smile and was cheerful.</p>
+      <div class="testimonial-author">— Melissa, Springfield, TN</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">I was very pleased with the knowledge, compassion and professionalism Emily displayed during our transaction. She was extremely patient and answered all of my questions without hesitation. I highly recommend Emily for any of your legal needs.</p>
+      <div class="testimonial-author">— Veronica from Goodlettsville, TN</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">Brandi is by far the best attorney I have ever worked with. She has always looked out for my best interests. Brandi's communication skills are stellar, as well as her professionalism. I have worked with attorneys before that may or may not respond when you need, but she has always been quick to respond. She will not leave you hanging and guessing like other attorneys I have had times past. She will get the job done, you will not be disappointed!</p>
+      <div class="testimonial-author">— Ken from Springfield, TN</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">Highly recommend Brandi Jones! She was considerate and straight forward at the same time! Any adoption needs you have, she is your lady! We are forever thankful for her!</p>
+      <div class="testimonial-author">— A. Williams</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">Best decision I made was to have Mrs. Brandi represent me after a few consultations with different attorneys I knew immediately she was the one I had a long rough year with a nasty divorce / custody i felt bullied and threatened with trial due to certain circumstances with the opposing law firm . We went to mediation and I am more than happy with the outcome i can breathe again and move on with the next chapter in my life . I couldn't have done it without her ! I have two children who I love more than anything one is special needs I am his biggest advocate and always will be At the end of the day it's not about who did this or that or money or revenge it's about doing the right thing. Highly highly recommend! If I ever need an attorney again she's my go to 😉</p>
+      <div class="testimonial-author">— Khala from Springfield, TN</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote-icon">"</div>
+      <p class="testimonial-text">Brandi Jones went above and beyond my expectations. She handled my special case delicately and diligently. I could not of asked for a more patient and understanding lawyer to represent me during one of the hardest times of my life. I would recommend this firm as a whole to anyone.</p>
+      <div class="testimonial-author">— Adam from Springfield, TN</div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Services Section -->
+<section class="services-section">
+  <div class="services-section-inner">
+    <h2>Our Services</h2>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-card-name">Estate Administration &amp; Probate</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-section">
+  <div class="contact-section-inner">
+    <h2>Contact Us</h2>
+    <p>Ready to speak with one of our attorneys? <a href="/contact">Contact us today</a> to schedule a consultation.</p>
+  </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Jones, Green, &amp; Tackett Law, PLLC</span>
+      <span class="footer-copyright">© 2026 Jones, Green, &amp; Tackett Law, PLLC. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+    <li><a href="/">Home</a></li><li><a href="/our-team">Our Team</a></li><li><a href="/contact">Contact Us</a></li><li><a href="/contempt">Contempt</a></li><li><a href="/testimonials">Testimonials</a></li><li><a href="/mediation">Mediation</a></li><li><a href="/child-custody">Child Custody</a></li><li><a href="/real-estate">Real Estate</a></li><li><a href="/brandi-l-jones">Brandi L. Jones</a></li><li><a href="/home-alt-bedford">Home Alt — Bedford</a></li><li><a href="/adoption">Adoption</a></li><li><a href="/child-support">Child Support</a></li><li><a href="/business-law">Business Formation</a></li><li><a href="/personal-injury">Personal Injury</a></li><li><a href="/criminal-law">Criminal Law</a></li><li><a href="/appeals">Appeals</a></li><li><a href="/divorce">Divorce</a></li><li><a href="/heather-e-tackett">Heather E. Tackett</a></li><li><a href="/estate-planning">Estate Planning</a></li><li><a href="/emily-c-green">Emily C. Green</a></li><li><a href="/conservatorship">Conservatorship</a></li><li><a href="/contracts">Contracts</a></li><li><a href="/estate-administration-probate">Estate Administration &amp; Probate</a></li><li><a href="/new-page">New Page</a></li>
+  </div>
+</footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>

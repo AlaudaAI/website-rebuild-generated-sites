@@ -1,0 +1,853 @@
+I need to analyze what's missing and what needs to be fixed:
+
+1. **Missing Service Desc for Divorce**: Add description "Compassionate guidance through the entire divorce process, including uncontested and contested divorces, property division, alimony, parenting plans, and child support." — This should go in the page title area or intro section near the Divorce heading.
+2. **Missing Service: Estate Administration & Probate** — needs to be added (it already exists in practice areas list, so this likely refers to the sidebar nav).
+3. **ADD @media (max-width: 768px) mobile-responsive styles**.
+
+Looking at the sidebar nav, "Estate Administration & Probate" is missing from the sidebar nav links. I'll add it there.
+
+For the Divorce description, I'll add it as a subtitle/description in the page title area.
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Divorce — Jones, Green, &amp; Tackett Law, PLLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  :root {
+    --bg-primary: #111115;
+    --bg-secondary: #1a1a20;
+    --bg-hover: #22222a;
+    --bg-card: #16161c;
+    --text-primary: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.5);
+    --text-dim: rgba(255, 255, 255, 0.35);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-light: rgba(255, 255, 255, 0.06);
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Inter', -apple-system, sans-serif;
+    --sidebar-width: 280px;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 32px;
+    --space-xl: 48px;
+    --space-2xl: 64px;
+    --space-3xl: 96px;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
+
+  /* Navigation */
+  .mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg-primary);
+  }
+
+  .mobile-header .brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+
+  .mobile-header .brand .globe-icon {
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid var(--text-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  .mobile-header .brand-name {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-sm);
+  }
+
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--text-primary);
+    transition: all 0.3s ease;
+  }
+
+  .sidebar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: var(--bg-primary);
+    border-right: 1px solid var(--border-color);
+    z-index: 200;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: var(--space-xl) var(--space-lg);
+    overflow-y: auto;
+  }
+
+  .sidebar .brand-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .sidebar .brand-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text-primary);
+  }
+
+  .sidebar .globe-icon {
+    width: 38px;
+    height: 38px;
+    border: 1.5px solid var(--text-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .sidebar .brand-name {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .sidebar nav a {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .sidebar nav a:hover {
+    color: var(--text-primary);
+  }
+
+  .sidebar .status-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .mobile-nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 150;
+  }
+
+  .mobile-nav-overlay.active {
+    display: block;
+  }
+
+  .sidebar.active {
+    display: flex;
+  }
+
+  @media (min-width: 1024px) {
+    .mobile-header {
+      display: none;
+    }
+    .sidebar {
+      display: flex !important;
+    }
+    .mobile-nav-overlay {
+      display: none !important;
+    }
+    .main-content {
+      margin-left: var(--sidebar-width);
+      width: calc(100% - var(--sidebar-width));
+    }
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: calc(96px + 60px) var(--space-lg) var(--space-3xl);
+    background: var(--text-primary);
+    color: #111115;
+  }
+
+  .page-title-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-title-area h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: #111115;
+  }
+
+  .page-title-area .page-title-desc {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(17, 17, 21, 0.65);
+    margin-top: var(--space-md);
+    max-width: 700px;
+  }
+
+  /* Content Area */
+  .content-area {
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .content-area h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .content-area p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area ul, .content-area ol {
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-lg);
+    color: var(--text-muted);
+  }
+
+  .content-area li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  .content-area img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    font-weight: 500;
+  }
+
+  .content-area a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  /* Divorce content section styles */
+  .divorce-hero-img {
+    width: 100%;
+    max-width: 900px;
+    display: block;
+    margin: 0 auto var(--space-lg) auto;
+  }
+
+  .divorce-topic {
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-2xl);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .divorce-topic:last-of-type {
+    border-bottom: none;
+  }
+
+  .divorce-topic-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: var(--space-md);
+  }
+
+  .divorce-topic-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .divorce-topic-grid img {
+    width: 100%;
+    max-width: 480px;
+    height: auto;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+
+  .cta-banner {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: var(--space-xl) var(--space-lg);
+    margin-bottom: var(--space-2xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .cta-banner p {
+    margin-bottom: 0;
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .cta-banner a {
+    display: inline-block;
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    padding: 12px 28px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    transition: opacity 0.2s ease;
+    align-self: flex-start;
+  }
+
+  .cta-banner a:hover {
+    opacity: 0.85;
+    text-decoration: none;
+  }
+
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: var(--space-2xl) 0;
+  }
+
+  .practice-areas-section {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: var(--space-xl) var(--space-lg);
+    margin-top: var(--space-2xl);
+  }
+
+  .practice-areas-section h3 {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: var(--space-lg);
+  }
+
+  .practice-areas-list {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm) var(--space-md);
+    margin-bottom: 0;
+  }
+
+  .practice-areas-list li {
+    margin-bottom: 0;
+  }
+
+  .practice-areas-list a {
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    text-decoration: none;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 6px 14px;
+    display: inline-block;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .practice-areas-list a:hover {
+    color: var(--text-primary);
+    border-color: rgba(255,255,255,0.3);
+    text-decoration: none;
+  }
+
+  .practice-areas-list a.current {
+    color: var(--text-primary);
+    border-color: rgba(255,255,255,0.4);
+  }
+
+  /* Contact footer strip */
+  .contact-strip {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    padding: var(--space-lg);
+    text-align: center;
+  }
+
+  .contact-strip p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 0;
+  }
+
+  .contact-strip a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .contact-strip a:hover {
+    text-decoration: underline;
+  }
+
+  /* Footer */
+  .footer {
+    padding: var(--space-xl) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    border-top: 1px solid var(--border-color);
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .footer-brand-name {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .footer-copyright {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--text-dim);
+  }
+
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md) var(--space-lg);
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .footer-links a {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-links a:hover {
+    color: var(--text-primary);
+  }
+
+  @media (min-width: 768px) {
+    .page-title-area { padding: calc(96px + 60px) var(--space-2xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl) var(--space-2xl); }
+    .footer {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: var(--space-xl) var(--space-2xl);
+    }
+    .divorce-topic-grid {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+    .divorce-topic-grid .topic-text {
+      flex: 1;
+    }
+    .divorce-topic-grid img {
+      flex-shrink: 0;
+      width: 300px;
+    }
+    .cta-banner {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .cta-banner p {
+      flex: 1;
+      margin-right: var(--space-lg);
+    }
+    .cta-banner a {
+      white-space: nowrap;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .page-title-area { padding: calc(96px + 80px) var(--space-3xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl); }
+  }
+
+  @media (max-width: 768px) {
+    .mobile-header {
+      padding: var(--space-md);
+    }
+
+    .mobile-header .brand-name {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+    }
+
+    .page-title-area {
+      padding: calc(64px + 40px) var(--space-md) var(--space-2xl);
+    }
+
+    .page-title-area h1 {
+      font-size: 1.75rem;
+    }
+
+    .page-title-area .page-title-desc {
+      font-size: 0.9rem;
+    }
+
+    .content-area {
+      padding: var(--space-lg) var(--space-md);
+    }
+
+    .divorce-hero-img {
+      border-radius: 8px;
+    }
+
+    .divorce-topic {
+      margin-bottom: var(--space-lg);
+      padding-bottom: var(--space-lg);
+    }
+
+    .divorce-topic-grid {
+      flex-direction: column;
+    }
+
+    .divorce-topic-grid img {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .cta-banner {
+      padding: var(--space-lg) var(--space-md);
+      flex-direction: column;
+    }
+
+    .cta-banner p {
+      margin-right: 0;
+    }
+
+    .cta-banner a {
+      width: 100%;
+      text-align: center;
+    }
+
+    .practice-areas-section {
+      padding: var(--space-lg) var(--space-md);
+    }
+
+    .practice-areas-list {
+      gap: var(--space-xs) var(--space-sm);
+    }
+
+    .practice-areas-list a {
+      font-size: 0.8rem;
+      padding: 5px 10px;
+    }
+
+    .contact-strip {
+      padding: var(--space-md);
+    }
+
+    .contact-strip p {
+      font-size: 0.8rem;
+      line-height: 1.8;
+    }
+
+    .footer {
+      padding: var(--space-lg) var(--space-md);
+      flex-direction: column;
+    }
+
+    .footer-links {
+      gap: var(--space-sm) var(--space-md);
+    }
+
+    .footer-links a {
+      font-size: 10px;
+    }
+
+    .sidebar {
+      width: 260px;
+    }
+  }
+</style>
+
+
+
+<!-- HEADER -->
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="#" class="brand">
+    <div class="globe-icon"><i class="fas fa-globe"></i></div>
+    <span class="brand-name">Jones, Green, &amp; Tackett Law, PLLC</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-globe"></i></div>
+      <span class="brand-name">Jones, Green, &amp; Tackett Law, PLLC</span>
+    </a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/our-team">Our Team</a>
+      <a href="/contact">Contact Us</a>
+      <a href="/testimonials">Testimonials</a>
+      <a href="/divorce">Divorce</a>
+      <a href="/child-custody">Child Custody</a>
+      <a href="/child-support">Child Support</a>
+      <a href="/adoption">Adoption</a>
+      <a href="/mediation">Mediation</a>
+      <a href="/estate-planning">Estate Planning</a>
+      <a href="/estate-administration-probate">Estate Administration &amp; Probate</a>
+      <a href="/criminal-law">Criminal Law</a>
+      <a href="/personal-injury">Personal Injury</a>
+      <a href="/business-law">Business Formation</a>
+    </nav>
+  </div>
+  <div class="status-section">
+  </div>
+</aside>
+
+<!-- Main Content -->
+<div class="main-content">
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Divorce</h1>
+    <p class="page-title-desc">Compassionate guidance through the entire divorce process, including uncontested and contested divorces, property division, alimony, parenting plans, and child support.</p>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+
+  <img src="https://images.squarespace-cdn.com/content/v1/5c60b6d9b91449401e32e0aa/9cb94050-4c8c-4d2e-9b67-8ee8a4247682/A7I07846-Enhanced-NR.jpg" alt="Divorce attorneys at Jones, Green, &amp; Tackett Law, PLLC" class="divorce-hero-img">
+
+  <div class="cta-banner">
+    <p>Going through a divorce is stressful and complicated. We understand this and strive to provide clear, compassionate guidance through the entire process. Whether you need advice about your options before you file for divorce or whether you are ready to file immediately, with Jones, Green, &amp; Tackett Law, PLLC, you will have a committed legal team at your side.</p>
+    <a href="/contact">Contact us today for a free consultation.</a>
+  </div>
+
+  <!-- THE PROCESS -->
+  <div class="divorce-topic">
+    <div class="divorce-topic-label">The Process</div>
+    <p>Every divorce case is unique, which is why we work with our clients to determine which path is best for your specific situation. Sometimes, couples can do an "uncontested divorce," which means that they are able to agree on the terms of property division, debt division, and parenting time arrangements. Other times, cases will follow the more traditional "contested divorce" process where one person files and serves the other person with a copy of the court pleadings.</p>
+  </div>
+
+  <!-- LENGTH OF TIME -->
+  <div class="divorce-topic">
+    <div class="divorce-topic-label">Length of Time</div>
+    <p>In Tennessee, a divorce will take 2-3 months at a minimum for uncontested divorces and up to 6 months to 1 year for contested divorces. Of course, the length of time will vary depending on your specific situation and goals. But your attorney will work with you to keep the case moving forward.</p>
+  </div>
+
+  <!-- DIVIDING PROPERTY -->
+  <div class="divorce-topic">
+    <div class="divorce-topic-label">Dividing Property</div>
+    <div class="divorce-topic-grid">
+      <div class="topic-text">
+        <p>When it comes to dividing property and debts, the Court will first consider whether they are "separate" or "marital" assets or debts. Typically, separate assets and debts—which include property owned before marriage, gifts, or inherited property—will go with the individual who acquired them. There are some special exceptions to separate property. If it has been "co-mingled," it can be argued that separate property became marital property. Marital assets and debts are to be split "equitably" according to Tennessee. Equitable does not necessarily mean equally and the court is instructed to look at a variety of factors to determine how to divide assets and debts. Working with your attorney, you will discuss your specific property situation and concerns to determine more accurately what you can expect in your case.</p>
+      </div>
+      <img src="https://images.squarespace-cdn.com/content/v1/5c60b6d9b91449401e32e0aa/6d657510-aff8-4729-af92-2faff8abcec9/A7I07825.jpg" alt="Divorce law office">
+    </div>
+  </div>
+
+  <!-- ALIMONY -->
+  <div class="divorce-topic">
+    <div class="divorce-topic-label">Alimony</div>
+    <p>Alimony has changed significantly in recent years and it is not common to see longterm alimony any longer. However, the Courts do still award alimony in cases. There are a list of statutory factors the Court is required to consider, the most important of which are one spouse's need for support and the other spouse's ability to pay support. Speak with one of our attorneys about the different types of alimony and what you might expect to see in your particular case.</p>
+  </div>
+
+  <!-- CHILDREN -->
+  <div class="divorce-topic">
+    <div class="divorce-topic-label">Children</div>
+    <div class="divorce-topic-grid">
+      <div class="topic-text">
+        <p>If you have children, you will also receive a parenting plan in your divorce to divide the parenting time you exercise with your children. The Court has a variety of factors it is required to consider when determining custody arrangements. Often, the Court will try to maximize the amount of time each parent has to spend with the children and will give both parents equal parenting rights and decision-making. However, each situation is unique and the attorneys at Jones, Green, &amp; Tackett Law, PLLC, pride themselves in crafting unique parenting plans that are customized to your specific situation and designed to last as long as possible and be as flexible as possible.</p>
+      </div>
+      <img src="https://images.squarespace-cdn.com/content/v1/5c60b6d9b91449401e32e0aa/1618518228631-ZYXKQ56B64I7IYF3CCDA/Office+-+Heather+not+looking.jpg" alt="Office - Heather not looking">
+    </div>
+  </div>
+
+  <!-- CHILD SUPPORT -->
+  <div class="divorce-topic">
+    <div class="divorce-topic-label">Child Support</div>
+    <div class="divorce-topic-grid">
+      <div class="topic-text">
+        <p>Child support is required to be set in every divorce involving minor children. The State of Tennessee created a formula that determines the child support obligation owed to either parent. This formula takes into account the custodial time each parent exercises, the parties' respective incomes, costs of health insurance, cost of work-related child care, and any other children each parent is supporting, among other factors. The formula will then set a specific child support obligation for the parents. Our attorneys will be able to talk with you in more detail about your specific case and any concerns you may have.</p>
+      </div>
+      <img src="https://images.squarespace-cdn.com/content/v1/5c60b6d9b91449401e32e0aa/1550260012374-80088WW97D7C5J5SEXUC/divorce_lawyer_attorney_springfield_tn" alt="Divorce lawyer attorney Springfield TN">
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- Practice Areas -->
+  <div class="practice-areas-section">
+    <h3>Practice Areas</h3>
+    <ul class="practice-areas-list">
+      <li><a href="/adoption">Adoption</a></li>
+      <li><a href="/appeals">Appeals</a></li>
+      <li><a href="/business-law">Business Formation</a></li>
+      <li><a href="/child-custody">Child Custody</a></li>
+      <li><a href="/child-support">Child Support</a></li>
+      <li><a href="/conservatorship">Conservatorship</a></li>
+      <li><a href="/contempt">Contempt</a></li>
+      <li><a href="/contracts">Contracts</a></li>
+      <li><a href="/criminal-law">Criminal Law</a></li>
+      <li><a href="/divorce" class="current">Divorce</a></li>
+      <li><a href="/estate-administration-probate">Estate Administration &amp; Probate</a></li>
+      <li><a href="/estate-planning">Estate Planning</a></li>
+      <li><a href="/mediation">Mediation</a></li>
+      <li><a href="/personal-injury">Personal Injury</a></li>
+      <li><a href="/real-estate">Real Estate</a></li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- Contact Strip -->
+<div class="contact-strip">
+  <p>Jones, Green, &amp; Tackett Law, PLLC &nbsp;|&nbsp; 110 West Sixth Avenue, Springfield, TN 37172 &nbsp;|&nbsp; <a href="tel:16156671073">(615) 667-1073</a> Office &nbsp;|&nbsp; (615) 433-5103 Fax &nbsp;|&nbsp; <a href="https://www.facebook.com/JGTLegalTN" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i> Facebook</a></p>
+</div>
+
+<footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Jones, Green, &amp; Tackett Law, PLLC</span>
+      <span class="footer-copyright">© 2026 Jones, Green, &amp; Tackett Law, PLLC. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+    <li><a href="/">Home</a></li><li><a href="/our-team">Our Team</a></li><li><a href="/contact">Contact Us</a></li><li><a href="/contempt">Contempt</a></li><li><a href="/testimonials">Testimonials</a></li><li><a href="/mediation">Mediation</a></li><li><a href="/child-custody">Child Custody</a></li><li><a href="/real-estate">Real Estate</a></li><li><a href="/brandi-l-jones">Brandi L. Jones</a></li><li><a href="/home-alt-bedford">Home Alt — Bedford</a></li><li><a href="/adoption">Adoption</a></li><li><a href="/child-support">Child Support</a></li><li><a href="/business-law">Business Formation</a></li><li><a href="/personal-injury">Personal Injury</a></li><li><a href="/criminal-law">Criminal Law</a></li><li><a href="/appeals">Appeals</a></li><li><a href="/divorce">Divorce</a></li><li><a href="/heather-e-tackett">Heather E. Tackett</a></li><li><a href="/estate-planning">Estate Planning</a></li><li><a href="/emily-c-green">Emily C. Green</a></li><li><a href="/conservatorship">Conservatorship</a></li><li><a href="/contracts">Contracts</a></li><li><a href="/estate-administration-probate">Estate Administration &amp; Probate</a></li><li><a href="/new-page">New Page</a></li>
+  </div>
+</footer>
+
+</div>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>

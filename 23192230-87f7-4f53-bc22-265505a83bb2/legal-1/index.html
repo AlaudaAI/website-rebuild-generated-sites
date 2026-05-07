@@ -1,0 +1,1293 @@
+Looking at the issues:
+
+1. **Missing**: Estate Administration & Probate service is already in the HTML — it exists in the services list. But checking the team grid, it has `class="team-"` instead of `class="team-grid"`. Similarly, testimonials has `class="testimonials-"` instead of `class="testimonials-grid"`.
+2. **Missing**: Facebook social link needs to be added to sidebar and/or footer.
+3. **Missing**: `@media (max-width: 768px)` block needed.
+4. The stat "28+" is already present in the HTML.
+
+Let me fix all these issues and return the complete HTML:
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jones, Green, &amp; Tackett Law, PLLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Mobile header */
+.mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+}
+
+.mobile-header .brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.mobile-header .brand .globe-icon {
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.mobile-header .brand .globe-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.mobile-header .brand-name {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-sm);
+  min-width: 44px;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  z-index: 200;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl) var(--space-lg);
+  overflow-y: auto;
+}
+
+.sidebar .brand-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sidebar .brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.sidebar .globe-icon {
+  width: 38px;
+  height: 38px;
+  border: 1.5px solid var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.sidebar .globe-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.sidebar .brand-name {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.sidebar nav a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav a:hover {
+  color: var(--text-primary);
+}
+
+.sidebar .status-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.status-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.sidebar-social {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.sidebar-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 13px;
+  transition: all 0.3s ease;
+}
+
+.sidebar-social a:hover {
+  color: var(--text-primary);
+  border-color: var(--text-primary);
+}
+
+/* Main content area */
+.main-content {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Hero Section */
+.hero {
+  border-bottom: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.35;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.hero-logo {
+  max-width: 260px;
+  height: auto;
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 700px;
+}
+
+.hero-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 8vw, 48px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hero-subheading {
+  font-family: var(--font-sans);
+  font-size: clamp(14px, 2vw, 16px);
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+  min-height: 44px;
+}
+
+.hero-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* Features Grid — Practice Areas */
+.features {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.features-header {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.features-header .section-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-md);
+}
+
+.features-header h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.services-list {
+  padding: var(--space-xl) var(--space-lg);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.service-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  transition: color 0.3s ease;
+  padding: var(--space-xs) 0;
+  min-height: 44px;
+}
+
+.service-item:hover {
+  color: var(--text-primary);
+}
+
+.service-item i {
+  font-size: 8px;
+  color: var(--text-dim);
+  flex-shrink: 0;
+}
+
+/* Team Section */
+.team-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.team-header .section-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-md);
+}
+
+.team-header h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.team-header p {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-muted);
+  max-width: 520px;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.team-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.team-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.team-card-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.team-card-body {
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.team-card-name {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.team-card-role {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Trust / Stats Section */
+.trust-section {
+  border-bottom: 1px solid var(--border-color);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.trust-metrics {
+  padding: var(--space-xl) var(--space-lg);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.trust-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.trust-number {
+  font-family: var(--font-serif);
+  font-size: clamp(64px, 15vw, 120px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.trust-number-suffix {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 8vw, 60px);
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.trust-description {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 400px;
+}
+
+.trust-contact {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.trust-contact-img {
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 8px;
+  opacity: 0.7;
+}
+
+.trust-contact-title {
+  font-family: var(--font-serif);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.trust-contact-desc {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 380px;
+}
+
+.trust-contact-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 14px 32px;
+  border: 1px solid var(--text-primary);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  width: fit-content;
+  min-height: 44px;
+}
+
+.trust-contact-cta:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+.trust-contact-phone {
+  font-family: var(--font-serif);
+  font-size: clamp(20px, 3vw, 26px);
+  font-weight: 400;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.trust-contact-phone:hover {
+  color: var(--text-muted);
+}
+
+.trust-contact-address {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+
+/* Testimonials Section */
+.testimonials-section {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.testimonials-section .section-label {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: var(--space-md);
+}
+
+.testimonials-section h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.testimonial-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  transition: background-color 0.3s ease;
+}
+
+.testimonial-card:hover {
+  background-color: var(--bg-hover);
+}
+
+.testimonial-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.testimonial-author {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* Footer */
+.footer {
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  border-top: 1px solid var(--border-color);
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-brand-name {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.footer-copyright {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm) var(--space-md);
+  list-style: none;
+}
+
+.footer-links li {
+  list-style: none;
+}
+
+.footer-links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--text-primary);
+}
+
+.footer-social {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.footer-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 13px;
+  transition: all 0.3s ease;
+}
+
+.footer-social a:hover {
+  color: var(--text-primary);
+  border-color: var(--text-primary);
+}
+
+/* Mobile nav overlay */
+.mobile-nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 150;
+}
+
+.mobile-nav-overlay.active {
+  display: block;
+}
+
+.sidebar.active {
+  display: flex;
+}
+
+/* =================== MOBILE (max-width: 768px) =================== */
+@media (max-width: 768px) {
+  :root {
+    --space-lg: 20px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+    --space-3xl: 64px;
+  }
+
+  .mobile-header {
+    padding: var(--space-md);
+  }
+
+  .mobile-header .brand-name {
+    font-size: 10px;
+    letter-spacing: 0.05em;
+  }
+
+  .hero {
+    min-height: 70vh;
+  }
+
+  .hero-content {
+    padding: var(--space-xl) var(--space-md);
+    gap: var(--space-lg);
+  }
+
+  .hero-logo {
+    max-width: 180px;
+  }
+
+  .hero-headline {
+    font-size: clamp(28px, 7vw, 38px);
+  }
+
+  .hero-subheading {
+    font-size: 14px;
+  }
+
+  .hero-cta {
+    padding: 12px 24px;
+    font-size: 10px;
+  }
+
+  .features-header {
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  .services-list {
+    padding: var(--space-lg) var(--space-md);
+    grid-template-columns: 1fr;
+    gap: var(--space-xs);
+  }
+
+  .service-item {
+    font-size: 14px;
+    min-height: 48px;
+  }
+
+  .team-section {
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .trust-metrics {
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  .trust-number {
+    font-size: clamp(64px, 20vw, 96px);
+  }
+
+  .trust-contact {
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  .trust-contact-img {
+    max-width: 100%;
+  }
+
+  .testimonials-section {
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .testimonial-card {
+    padding: var(--space-md);
+  }
+
+  .testimonial-quote {
+    font-size: 14px;
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-md);
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .footer-links {
+    gap: var(--space-xs) var(--space-sm);
+  }
+
+  .footer-links a {
+    font-size: 10px;
+  }
+}
+
+/* =================== TABLET (768px+) =================== */
+@media (min-width: 768px) {
+  .hero-content {
+    padding: var(--space-2xl) var(--space-xl);
+  }
+
+  .hero-headline {
+    font-size: clamp(42px, 5vw, 56px);
+  }
+
+  .services-list {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .trust-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-metrics {
+    border-bottom: none;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+}
+
+/* =================== DESKTOP (1024px+) =================== */
+@media (min-width: 1024px) {
+  .mobile-header {
+    display: none;
+  }
+
+  .sidebar {
+    display: flex !important;
+  }
+
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+  }
+
+  .hero {
+    min-height: 80vh;
+  }
+
+  .hero-content {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+  }
+
+  .hero-logo {
+    max-width: 320px;
+  }
+
+  .hero-headline {
+    font-size: clamp(56px, 5vw, 76px);
+  }
+
+  .hero-subheading {
+    font-size: 16px;
+  }
+
+  .features {
+    display: block;
+  }
+
+  .features-header {
+    padding: var(--space-2xl) var(--space-2xl);
+  }
+
+  .services-list {
+    padding: var(--space-2xl) var(--space-2xl);
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--space-lg) var(--space-xl);
+  }
+
+  .team-section {
+    padding: var(--space-3xl) var(--space-2xl);
+    gap: var(--space-2xl);
+  }
+
+  .trust-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .trust-metrics {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-contact {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .trust-number {
+    font-size: 120px;
+  }
+
+  .testimonials-section {
+    padding: var(--space-3xl) var(--space-2xl);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-2xl);
+  }
+}
+
+/* =================== LARGE DESKTOP (1440px+) =================== */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 84px;
+  }
+
+  .hero-content {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .features-header {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .services-list {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .team-section {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .trust-metrics {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .trust-contact {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .testimonials-section {
+    padding: var(--space-3xl) var(--space-3xl);
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-3xl);
+  }
+}
+</style>
+
+
+
+<!-- HEADER -->
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <div class="globe-icon"><img src="https://images.squarespace-cdn.com/content/v1/5c60b6d9b91449401e32e0aa/1550059629402-NWWVWP7DQ9I27YHR2CYY/LOGO+WHITE+TRANSPARENT.png?format=1500w" alt="Jones, Green, &amp; Tackett Law, PLLC"></div>
+    <span class="brand-name">Jones, Green, &amp; Tackett Law, PLLC</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <div class="globe-icon"><img src="https://images.squarespace-cdn.com/content/v1/5c60b6d9b91449401e32e0aa/1550059629402-NWWVWP7DQ9I27YHR2CYY/LOGO+WHITE+TRANSPARENT.png?format=1500w" alt="Jones, Green, &amp; Tackett Law, PLLC"></div>
+      <span class="brand-name">Jones, Green, &amp; Tackett Law, PLLC</span>
+    </a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/our-team">Our Team</a>
+      <a href="/contact">Contact Us</a>
+      <a href="/testimonials">Testimonials</a>
+    </nav>
+  </div>
+  <div class="status-section">
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Robertson • Montgomery • Sumner</span>
+    </div>
+    <div class="status-indicator">
+      <div class="status-dot"></div>
+      <span class="status-label">Davidson • Cheatham Counties</span>
+    </div>
+    <div class="sidebar-social">
+      <a href="https://www.facebook.com/JGTLegalTN" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <img class="hero-image" src="https://images.squarespace-cdn.com/content/v1/5c60b6d9b91449401e32e0aa/1727704068715-SLHRD13OQZOW28CEU6FN/Courthouse%2Bwith%2BRainbow.jpg?format=2500w" alt="Courthouse with Rainbow">
+    <div class="hero-content">
+      <a href="/">
+        <img class="hero-logo" src="https://images.squarespace-cdn.com/content/v1/5c60b6d9b91449401e32e0aa/1550059629402-NWWVWP7DQ9I27YHR2CYY/LOGO+WHITE+TRANSPARENT.png?format=1500w" alt="JONES, GREEN, &amp; TACKETT LAW, PLLC">
+      </a>
+      <div class="hero-text">
+        <span class="hero-label">Jones, Green, &amp; Tackett Law, PLLC</span>
+        <h1 class="hero-headline">You deserve compassionate, experienced legal representation.</h1>
+        <p class="hero-subheading">With over 28 years of collective legal experience, the attorneys of Jones, Green, &amp; Tackett Law, PLLC, bring professional, compassionate legal representation to Robertson, Montgomery, Sumner, Davidson, and Cheatham counties.</p>
+        <a href="/contact" class="hero-cta">Contact Us <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Practice Areas -->
+  <section class="features">
+    <div class="features-header">
+      <p class="section-label">Practice Areas</p>
+      <h2>Areas of Law We Handle</h2>
+    </div>
+    <div class="services-list">
+      <a href="/adoption" class="service-item"><i class="fas fa-circle"></i> Adoption</a>
+      <a href="/appeals" class="service-item"><i class="fas fa-circle"></i> Appeals</a>
+      <a href="/business-law" class="service-item"><i class="fas fa-circle"></i> Business Formation</a>
+      <a href="/child-custody" class="service-item"><i class="fas fa-circle"></i> Child Custody</a>
+      <a href="/child-support" class="service-item"><i class="fas fa-circle"></i> Child Support</a>
+      <a href="/conservatorship" class="service-item"><i class="fas fa-circle"></i> Conservatorship</a>
+      <a href="/contempt" class="service-item"><i class="fas fa-circle"></i> Contempt</a>
+      <a href="/contracts" class="service-item"><i class="fas fa-circle"></i> Contracts</a>
+      <a href="/criminal-law" class="service-item"><i class="fas fa-circle"></i> Criminal Law</a>
+      <a href="/divorce" class="service-item"><i class="fas fa-circle"></i> Divorce</a>
+      <a href="/estate-administration-probate" class="service-item"><i class="fas fa-circle"></i> Estate Administration &amp; Probate</a>
+      <a href="/estate-planning" class="service-item"><i class="fas fa-circle"></i> Estate Planning</a>
+      <a href="/mediation" class="service-item"><i class="fas fa-circle"></i> Mediation</a>
+      <a href="/personal-injury" class="service-item"><i class="fas fa-circle"></i> Personal Injury</a>
+      <a href="/real-estate" class="service-item"><i class="fas fa-circle"></i> Real Estate</a>
+    </div>
+  </section>
+
+  <!-- Our Team Section -->
+  <section class="team-section">
+    <div class="team-header">
+      <p class="section-label">Our Team</p>
+      <h2>OUR TEAM</h2>
+      <p>When you partner with our attorneys, you have a legal team on your side every step of the way.</p>
+    </div>
+    <div class="team-grid">
+      <a href="/brandi-l-jones" class="team-card">
+        <img class="team-card-img" src="https://images.squarespace-cdn.com/content/v1/5c60b6d9b91449401e32e0aa/1726246212613-9WA840TVK7GK38PUD2KW/A7I07876-Enhanced-NR.jpg?format=2500w" alt="Attorney Brandi Jones">
+        <div class="team-card-body">
+          <span class="team-card-name">Brandi L. Jones</span>
+          <span class="team-card-role">Attorney</span>
+        </div>
+      </a>
+      <a href="/emily-c-green" class="team-card">
+        <img class="team-card-img" src="https://images.squarespace-cdn.com/content/v1/5c60b6d9b91449401e32e0aa/1726246089650-Z96CCU6FKK3RHOWAL3UH/A7I07880-Enhanced-NR-Edit.jpg?format=2500w" alt="Attorney Emily Green">
+        <div class="team-card-body">
+          <span class="team-card-name">Emily C. Green</span>
+          <span class="team-card-role">Attorney</span>
+        </div>
+      </a>
+      <a href="/heather-e-tackett" class="team-card">
+        <img class="team-card-img" src="https://images.squarespace-cdn.com/content/v1/5c60b6d9b91449401e32e0aa/1726246134451-35YSEUZG2FMDT6AYHSVH/A7I07835-Edit.jpg?format=2500w" alt="Attorney Heather Tackett">
+        <div class="team-card-body">
+          <span class="team-card-name">Heather E. Tackett</span>
+          <span class="team-card-role">Attorney</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Stats + Contact Section -->
+  <section class="trust-section">
+    <div class="trust-metrics">
+      <span class="trust-label">Collective Experience</span>
+      <div>
+        <span class="trust-number">28</span><span class="trust-number-suffix">+</span>
+      </div>
+      <p class="trust-description">years of collective legal experience serving Robertson, Montgomery, Sumner, Davidson, and Cheatham counties.</p>
+    </div>
+    <div class="trust-contact">
+      <img class="trust-contact-img" src="https://images.squarespace-cdn.com/content/v1/5c60b6d9b91449401e32e0aa/1550063786499-S8BZFMIRF72J4X8FBT1C/tumblr_mn8b8sLRb61rkz363o1_1280.jpg" alt="Contact Us Today">
+      <p class="trust-label">Contact Us Today</p>
+      <p class="trust-contact-title">You have lots of questions.</p>
+      <p class="trust-contact-desc">That's why we offer a free initial consultation with one of our attorneys.</p>
+      <a href="tel:6156671073" class="trust-contact-phone">(615) 667-1073</a>
+      <p class="trust-contact-address">110 West Sixth Avenue, Springfield, TN 37172</p>
+      <a href="/contact" class="trust-contact-cta">Contact Us <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials-section">
+    <div>
+      <p class="section-label">Testimonials</p>
+      <h2>What Our Clients Say</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"I have used Brandi Jones numerous times in child custody and a case that related from another case. Brandi left no stone unturned and made me and my family feel protected. She is very communicative and no a push over. She is tough, and I still use her today. There is not enough I can say about Brandi except she has earned my trust."</p>
+        <span class="testimonial-author">— Lew of Springfield, TN</span>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"Emily and Heather were very professional and handled everything for me pertaining to my mom's estate and closing on the sale of her house. They were always so nice and informative and kept me up to date with all that was going on. Donna was always very nice and professional when I called the office. I would highly recommend this group for any of your legal needs."</p>
+        <span class="testimonial-author">— Dana from Springfield, TN</span>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"I couldn't be more pleased with this law firm and all of the wonderful attorneys there. Even in a difficult situation, you will not find a more comfortable atmosphere to help solve any issues. Thank you!!"</p>
+        <span class="testimonial-author">— Heather from Hendersonville, TN</span>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-quote">"Emily was the best. She always answered my questions. If she didn't know, she always found out. She went above and beyond. I could email her at eleven o'clock at night and she always took the time to reply. She is an awesome person and I loved her dearly. She fights for what she believes in. I can't say enough good about her."</p>
+        <span class="testimonial-author">— Charity from Springfield, TN</span>
+      </div>
+    </div>
+    <div>
+      <a href="/testimonials" class="hero-cta">Read More Testimonials <i class="fas fa-arrow-right" style="font-size:10px;"></i></a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="footer-brand-name">Jones, Green, &amp; Tackett Law, PLLC</span>
+      <span class="footer-copyright">© 2026 Jones, Green, &amp; Tackett Law, PLLC. All rights reserved.</span>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/JGTLegalTN" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      </div>
+    </div>
+    <div class="footer-links">
+      <li><a href="/">Home</a></li><li><a href="/our-team">Our Team</a></li><li><a href="/contact">Contact Us</a></li><li><a href="/contempt">Contempt</a></li><li><a href="/testimonials">Testimonials</a></li><li><a href="/mediation">Mediation</a></li><li><a href="/child-custody">Child Custody</a></li><li><a href="/real-estate">Real Estate</a></li><li><a href="/brandi-l-jones">Brandi L. Jones</a></li><li><a href="/home-alt-bedford">Home Alt — Bedford</a></li><li><a href="/adoption">Adoption</a></li><li><a href="/child-support">Child Support</a></li><li><a href="/business-law">Business Formation</a></li><li><a href="/personal-injury">Personal Injury</a></li><li><a href="/criminal-law">Criminal Law</a></li><li><a href="/appeals">Appeals</a></li><li><a href="/divorce">Divorce</a></li><li><a href="/heather-e-tackett">Heather E. Tackett</a></li><li><a href="/estate-planning">Estate Planning</a></li><li><a href="/emily-c-green">Emily C. Green</a></li><li><a href="/conservatorship">Conservatorship</a></li><li><a href="/contracts">Contracts</a></li><li><a href="/estate-administration-probate">Estate Administration &amp; Probate</a></li><li><a href="/new-page">New Page</a></li>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sidebar = document.getElementById('sidebar');
+  const navOverlay = document.getElementById('navOverlay');
+
+  hamburgerBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+    navOverlay.classList.toggle('active');
+  });
+
+  navOverlay.addEventListener('click', function() {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  });
+
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      sidebar.classList.remove('active');
+      navOverlay.classList.remove('active');
+    }
+  });
+</script>
