@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hong Kong Massage Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-cream: #f4f0ea;
+  --text-black: #1a1a1a;
+  --border-black: #1a1a1a;
+  --placeholder-gray: rgba(26, 26, 26, 0.3);
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 6rem;
+  --space-xxl: 10rem;
+  --pad-x: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--text-black);
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Navigation */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #ffffff;
+  transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.hero-headline {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 480px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.8s forwards;
+}
+
+.hero-cta {
+  display: inline-block;
+  margin-top: var(--space-lg);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  background: transparent;
+  border: 1px solid var(--border-black);
+  color: var(--text-black);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  opacity: 0;
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 1.1s forwards;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.hero-cta:hover {
+  background-color: var(--text-black);
+  color: var(--bg-cream);
+}
+
+.hero-meta {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-top: var(--space-md);
+  opacity: 0;
+  animation: fadeInUp 1s cubic-bezier(0.25, 0.1, 0.25, 1) 1.4s forwards;
+}
+
+.hero-meta a {
+  border-bottom: 1px solid var(--border-black);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Philosophy Section */
+.philosophy {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-xl) var(--pad-x);
+}
+
+.philosophy-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.philosophy-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+.philosophy-text {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  line-height: 1.55;
+  max-width: 700px;
+}
+
+.philosophy-text p + p {
+  margin-top: var(--space-md);
+}
+
+/* Project Grid */
+.projects {
+  padding: var(--space-lg) var(--pad-x);
+}
+
+.projects-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 1px solid var(--border-black);
+}
+
+.project-cell {
+  border-bottom: 1px solid var(--border-black);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.project-cell:last-child {
+  border-bottom: none;
+}
+
+.project-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.project-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+.project-cell:hover .project-image-wrapper img {
+  filter: grayscale(0%);
+  transform: scale(0.98);
+}
+
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: var(--space-xs);
+}
+
+.project-number {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.project-name {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.project-description {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-top: var(--space-sm);
+}
+
+/* Inquiry Section reused as About / Commitment */
+.inquiry {
+  padding: var(--space-xl) var(--pad-x);
+  border-top: 1px solid var(--border-black);
+}
+
+.inquiry-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+.inquiry-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.inquiry-body {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.65;
+}
+
+.inquiry-body p + p {
+  margin-top: var(--space-md);
+}
+
+.respect-block {
+  margin-top: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.respect-link {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--border-black);
+  align-self: flex-start;
+  padding-bottom: 2px;
+}
+
+.video-wrapper {
+  margin-top: var(--space-md);
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--border-black);
+}
+
+.video-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border-black);
+  padding: var(--space-md) var(--pad-x);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  letter-spacing: 0.03em;
+}
+
+.footer-right {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.footer-logo {
+  height: 32px;
+  width: auto;
+}
+
+.footer-badge img {
+  height: 36px;
+  width: auto;
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+  :root {
+    --pad-x: 3rem;
+  }
+
+  .philosophy-inner {
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-lg);
+  }
+
+  .projects-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .project-cell {
+    border-bottom: none;
+    border-right: 1px solid var(--border-black);
+  }
+
+  .project-cell:nth-child(2n) {
+    border-right: none;
+  }
+
+  .project-cell:nth-child(1),
+  .project-cell:nth-child(2),
+  .project-cell:nth-child(3),
+  .project-cell:nth-child(4) {
+    border-bottom: 1px solid var(--border-black);
+  }
+
+  .project-cell:nth-last-child(-n+2) {
+    border-bottom: none;
+  }
+
+  .inquiry-inner {
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+  :root {
+    --pad-x: 4rem;
+  }
+
+  .philosophy {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .projects {
+    padding: var(--space-xl) var(--pad-x);
+  }
+
+  .inquiry {
+    padding: var(--space-xxl) var(--pad-x);
+  }
+
+  .nav-links {
+    gap: var(--space-lg);
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+  .hero-headline {
+    font-size: 5.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <a href="/" class="nav-logo">hong kong massage studio</a>
+  <ul class="nav-links">
+    <li><a href="/">home</a></li>
+    <li><a href="/menu">menu</a></li>
+    <li><a href="/about">about</a></li>
+    <li><a href="/contact">contact</a></li>
+  </ul>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <h1 class="hero-headline">Hong Kong Massage Studio<br>(U Quality Spa)</h1>
+  <p class="hero-subtitle">Licensed Massage Therapy. Professional Standards.</p>
+  <a class="hero-cta" href="https://go.bychronos.com/l/pflugerville-78660-hong-kong-massage-803436/a/services" target="_blank" rel="noopener">Book Appointment Online</a>
+  <div class="hero-meta">
+    <a href="http://maps.app.goo.gl/6QygM47wSJYP4etd7" target="_blank" rel="noopener">Location: 1202 FM 685 #B4, Pflugerville, TX 78660</a>
+    &nbsp;|&nbsp;
+    <a href="tel:+15128840865">Contact us: (512) 884-0865</a>
+    <br>
+    Monday to Thursday: 8:50 am - 9:30 pm | Friday to Sunday: 8:50 am - 10:00 pm.
+  </div>
+</section>
+
+<!-- Services Section (We are specialized in...) -->
+<section class="philosophy" id="services">
+  <div class="philosophy-inner">
+    <span class="philosophy-label">We are specialized in...</span>
+    <div class="philosophy-text">
+      <p>We are a dedicated team of licensed massage therapists committed to helping you relieve stress, manage pain, and restore your energy.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Service Cards Grid -->
+<section class="projects" id="treatments">
+  <div class="projects-grid">
+    <div class="project-cell">
+      <div class="project-image-wrapper">
+        <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUCM2Y9J7_xLzDibnem2dr7EL22hrQIPM1uMJUJnF6q9b9Ej9nFJd7I-DZKGH1Si8IsllxzfnYv9p8bsQXYQo6ULB3oycfZraHlCX6_rEImlJM5VCQ5xKFBiFjpqDxCCv25LgP61gv4bu0jnCpFgY8RSmg1_xioUxWSc33TJFGJXPYbfUte3LmGCVwccWQvb7yUTu0Cwx6tvtc5NT7vafUwv_6mxE4WvZdzCXp0=w1280" alt="Therapist performing deep tissue massage on back">
+      </div>
+      <div class="project-meta">
+        <span class="project-number">001</span>
+        <span class="project-name">deep tissue massage</span>
+      </div>
+      <p class="project-description">Deep Tissue Massage targets inner muscle layers to release chronic tension. Using slower strokes and firm, direct pressure, this technique breaks down stiffness and painful "knots." It is ideal for relieving specific issues like stiff necks or lower back pain, helping you move more freely.</p>
+    </div>
+    <div class="project-cell">
+      <div class="project-image-wrapper">
+        <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUBkDpS-JITM2vtdKIyyPg6IXo9nuPAH_JKVPhG6OCQHOs6wEBmDWU3mMUUULp527pLYq_baD0XQJoYMVfMTL2FCuHiH0vIwLXobcG96etl_cXSIdPm_BVb0FiS2SD74fVMePJJg-wPRTO85oKk_AJ-LlE125pd2ndOymhMGWtRJFqFQKsvaw381i0tXmW9PQX1N4HjFaPau4kFmryIIngRQB2pqNGIY7WGB=w1280" alt="Therapist performing thai massage stretching">
+      </div>
+      <div class="project-meta">
+        <span class="project-number">002</span>
+        <span class="project-name">traditional thai massage</span>
+      </div>
+      <p class="project-description">Traditional Thai Massage is an active therapy often described as "assisted yoga." Performed while you remain fully clothed, the therapist uses rhythmic compression and gentle stretching to improve your flexibility. This leaves you feeling energized and aligned without the use of oils or lotions.</p>
+    </div>
+    <div class="project-cell">
+      <div class="project-image-wrapper">
+        <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUAHfqjYh1ir3H9nd60wnl_XjdCFnXSYdVhs6B8LMjTk2pdeGsOMAiue1LsaE76X7R-vOVro4f2HOcbdk6WQO2kQwOL-HZB0WvSaNeb2fBZXKNRCmvSS4WqvaJ0jIWGVEWx53AKJku96Eobi0rGlTkswX75tGFBQDLIUYrq-hrD7UI0nPL6fFFOheGzip2b_Xdly0UU9ElIkHNtnwRBXj05V4JbXqYzKtkxFxIg=w1280" alt="A couple receiving massage">
+      </div>
+      <div class="project-meta">
+        <span class="project-number">003</span>
+        <span class="project-name">couples massage</span>
+      </div>
+      <p class="project-description">Couples Massage lets you share a relaxing experience side-by-side with a partner, friend, or family member. Two therapists work simultaneously in a private room, tailoring each person's massage to their specific needs. It is the perfect way to bond while you unwind together.</p>
+    </div>
+    <div class="project-cell">
+      <div class="project-image-wrapper">
+        <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUDAI0OGnEQAVxFqojZerPw_xdwXC5gPxfL6768Qg7qwGYNK5Uo3Umx42SMAWR2sRl7tyYR2eTg7RjYxXQaLDvszIWI4HoT2v-OUsdgyQU3rjNRM97KJg7j42tor8s2N3JTy7TAj5_HaVgl2fgByEscw8eMBn27oYWDbLzKFqMb0v0xCaTiFZ2EzP3Bqqvk4LZlJyDiTNAlvXlWy46D2IfRraxrX8aTUH7feWk0=w1280" alt="Therapist performing cupping therapy">
+      </div>
+      <div class="project-meta">
+        <span class="project-number">004</span>
+        <span class="project-name">cupping therapy</span>
+      </div>
+      <p class="project-description">Cupping Therapy uses special cups to create suction on the skin, increasing blood flow to relieve deep tension and promote repair. This technique is excellent for reducing pain and stiffness. Please note that temporary circular marks may appear as a sign of released stagnation and natural healing.</p>
+    </div>
+    <div class="project-cell">
+      <div class="project-image-wrapper">
+        <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUBj5eR7zci5cRuDUej-s1SIiAdDXMOHn1fIncsqzADUnfcR3DC49jtf65TOklzZos4AdUppwn8b6rLtItdoMccsrTqGqatQAEFH5Z45oOW1RGP89d1umnw7u4-QOUQOM-M2peIEmWFcXKBMfsT6qQUaIF2XF1630sQ82xWiRq2YtPrlxamy5AZITxuJUDZkCnF5h_UzEgFbwF7_Kr78i2P3g6LWjjEaPuxsF_U=w1280" alt="Two therapists performing four hands massage">
+      </div>
+      <div class="project-meta">
+        <span class="project-number">005</span>
+        <span class="project-name">four hands massage</span>
+      </div>
+      <p class="project-description">Four Hands Massage is a luxurious experience where two therapists work simultaneously with synchronized movements. The harmony of four hands helps your mind completely let go, offering a deeper level of relaxation than a standard massage. It is designed to disconnect you from stress and provide double the relief.</p>
+    </div>
+  </div>
+</section>
+
+<!-- About Hong Kong Massage Studio -->
+<section class="inquiry" id="about">
+  <div class="inquiry-inner">
+    <h2 class="inquiry-heading">About Hong Kong<br>Massage Studio</h2>
+    <div class="inquiry-body">
+      <p>We are a dedicated team of licensed massage therapists committed to helping you relieve stress, manage pain, and restore your energy. Located conveniently in Pflugerville, we provide a clean, safe, and tranquil environment where your wellness is our only priority.</p>
+      <p>Whether you need deep work to release chronic muscle tension or a gentle session to unwind after a long week, we tailor every appointment to your specific needs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Our Commitment to Professionalism -->
+<section class="inquiry" id="commitment">
+  <div class="inquiry-inner">
+    <h2 class="inquiry-heading">Our Commitment to<br>Professionalism</h2>
+    <div class="inquiry-body">
+      <p>We proudly stand with Respect Massage and do NOT accept any inappropriate requests. Clients will be properly draped at all times. Thank you for respecting our therapists and maintaining a safe environment for everyone.</p>
+    </div>
+  </div>
+</section>
+
+<!-- What is Respect Massage? -->
+<section class="inquiry" id="respect-massage">
+  <div class="inquiry-inner">
+    <h2 class="inquiry-heading">What is<br>Respect Massage?</h2>
+    <div class="inquiry-body">
+      <p>Respect Massage promotes professionalism and clear boundaries. Members uphold strict ethical standards and maintain a zero-tolerance policy for inappropriate behavior.</p>
+      <div class="respect-block">
+        <a class="respect-link" href="https://respectmassage.com/" target="_blank" rel="noopener">Click here to learn more about Respect Massage!</a>
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/aGrNRlbQ0BQ" title="Welcome to Respect Massage | ABMP | Associated Bodywork & Massage Professionals" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-left">
+    <a href="https://sites.google.com/view/hong-kong-massage/home">
+      <img class="footer-logo" src="https://lh3.googleusercontent.com/sitesv/AA5AbUBoBzZ6_Pwb_0v4zbJrmT_vAZ1cn3KT1UL1RsB-Yefss4Zle-RA7gpLhms9S7Q5MhXyr_g8e4XscEke0XOceqfwsd-EG9Ip7f-_SQioSPt-2fLHSM2Lt2hBoYXKaALwzmMbAPSR2iNiIkR6SCUSicV-i8RwMERTYZLvEJ_RzvOISpkPJihGRcD1ot-TQBiRRLkr9ES44nXw7qt4OWK101muzQpLqt0waJ07=w1280" alt="Hong Kong Massage Logo">
+    </a>
+    <div>© 2025 Hong Kong Massage Studio (U Quality Spa)</div>
+    <div>Contact us: <a href="tel:+15128840865">(512) 884-0865</a> | Location: 1202 FM 685 #B4, Pflugerville, TX 78660.</div>
+    <div>
+      <a href="/privacy-policy">Privacy Policy</a> | <a href="/credits">Image Credits</a>
+    </div>
+  </div>
+  <div class="footer-right">
+    <a class="footer-badge" href="https://respectmassage.com/" target="_blank" rel="noopener">
+      <img src="https://lh3.googleusercontent.com/sitesv/AA5AbUCnDXzG65aNwaqney5cv1CP44e4FAZpMH0Uqj3CaWxATvtWV_8lM_SUHO8LovjNhYiH76CDMMRhagDe42-kyWyqIwS3QSLHKkRfYil0aUJQwH1rm4T2wxPnpTjP0fBvP-EddtA-wnU6kSmyAJpV6VWlBa8hhNbY5uUlJ4IfsjY1gQKRGqV02WZ2Pojc7Zu9-tQBxHtsG8lkZ0aH0KJvyI3lCsZzD3guOYcDdvs=w1280" alt="Respect Massage Zero Tolerance logo">
+    </a>
+  </div>
+</footer>
+
+</body>
+</html>
