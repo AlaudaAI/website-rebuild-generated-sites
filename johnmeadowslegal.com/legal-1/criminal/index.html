@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Criminal Defense</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #a9a9a9;
+  --primary-dark: #6b6b6b;
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.6);
+  --text-dim: rgba(255, 255, 255, 0.4);
+  --border-color: rgba(255, 255, 255, 0.12);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body { background-color: var(--bg-primary); color: var(--text-primary); font-family: var(--font-sans); line-height: 1.6; overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; height: auto; display: block; }
+
+/* Header */
+.site-header { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: var(--space-md) var(--space-lg); background: var(--bg-primary); border-bottom: 1px solid var(--border-color); flex-wrap: wrap; gap: var(--space-md); }
+.site-brand { display: flex; flex-direction: column; }
+.site-brand .brand-name { font-family: var(--font-serif); font-size: 22px; color: var(--text-primary); }
+.site-brand .brand-tagline { font-family: var(--font-sans); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); }
+.site-nav { display: none; flex: 1; }
+.site-nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: var(--space-md) var(--space-lg); justify-content: center; }
+.site-nav a { font-family: var(--font-sans); font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); transition: color .3s ease; }
+.site-nav a:hover { color: var(--text-primary); }
+.site-header-phone { font-family: var(--font-sans); font-size: 13px; letter-spacing: 0.12em; padding: 10px 18px; border: 1px solid var(--text-primary); border-radius: 999px; color: var(--text-primary); min-height: 44px; display: inline-flex; align-items: center; }
+.site-header-phone:hover { background: var(--text-primary); color: var(--bg-primary); }
+.hamburger { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; padding: var(--space-sm); min-width: 44px; min-height: 44px; align-items: center; justify-content: center; }
+.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--text-primary); transition: all .3s ease; }
+.site-nav.open { display: flex; }
+.site-nav.open ul { flex-direction: column; align-items: flex-start; padding: var(--space-md) 0; width: 100%; }
+@media (min-width: 1024px) { .hamburger { display: none; } .site-nav { display: flex; } .site-nav ul { justify-content: flex-end; } }
+
+/* Subpage hero */
+.sub-hero { padding: var(--space-2xl) var(--space-lg); border-bottom: 1px solid var(--border-color); display: flex; flex-direction: column; gap: var(--space-md); }
+.sub-hero .label { font-family: var(--font-sans); font-size: 10px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); }
+.sub-hero h1 { font-family: var(--font-serif); font-size: clamp(36px, 7vw, 56px); font-weight: 400; line-height: 1.05; letter-spacing: -0.01em; text-transform: capitalize; }
+.sub-hero .subtitle { font-family: var(--font-serif); font-style: italic; font-size: clamp(16px, 2.4vw, 22px); color: var(--text-muted); max-width: 640px; }
+.sub-hero .hero-phone { font-family: var(--font-serif); font-size: 22px; color: var(--text-primary); margin-top: var(--space-sm); }
+@media (min-width: 1024px) { .sub-hero { padding: var(--space-3xl) var(--space-2xl); } }
+
+/* Generic content block */
+.content-block { padding: var(--space-xl) var(--space-lg); border-bottom: 1px solid var(--border-color); }
+.content-block:last-of-type { border-bottom: none; }
+.content-block h2 { font-family: var(--font-serif); font-size: clamp(28px, 4vw, 40px); font-weight: 400; margin-bottom: var(--space-lg); text-transform: capitalize; line-height: 1.15; }
+.content-block h3 { font-family: var(--font-serif); font-size: clamp(20px, 2.6vw, 26px); font-weight: 400; margin: var(--space-lg) 0 var(--space-md); }
+.content-block p { font-family: var(--font-sans); font-size: 16px; line-height: 1.8; color: var(--text-muted); max-width: 720px; margin-bottom: var(--space-md); }
+.content-block ul { font-family: var(--font-sans); font-size: 15px; line-height: 1.8; color: var(--text-muted); padding-left: 1.4rem; max-width: 720px; margin-bottom: var(--space-md); }
+.content-block ul li { margin-bottom: var(--space-xs); }
+.content-block a { color: var(--text-primary); border-bottom: 1px solid var(--text-primary); }
+.content-block .lead-image { margin: var(--space-lg) 0; max-width: 480px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); }
+@media (min-width: 1024px) { .content-block { padding: var(--space-2xl) var(--space-2xl); } }
+
+/* Two column */
+.two-col { display: grid; grid-template-columns: 1fr; gap: var(--space-2xl); padding: var(--space-xl) var(--space-lg); border-bottom: 1px solid var(--border-color); }
+.two-col h2 { font-family: var(--font-serif); font-size: clamp(28px, 4vw, 40px); font-weight: 400; margin-bottom: var(--space-md); text-transform: capitalize; }
+.two-col h3 { font-family: var(--font-serif); font-size: 22px; margin: var(--space-md) 0 var(--space-sm); }
+.two-col p { font-family: var(--font-sans); font-size: 15px; line-height: 1.8; color: var(--text-muted); margin-bottom: var(--space-md); }
+.two-col ul { font-family: var(--font-sans); font-size: 14px; line-height: 1.8; color: var(--text-muted); padding-left: 1.2rem; margin-bottom: var(--space-md); }
+.two-col img { border-radius: 12px; max-width: 360px; }
+@media (min-width: 1024px) { .two-col { grid-template-columns: 1.4fr 1fr; padding: var(--space-2xl) var(--space-2xl); } }
+
+/* Avvo card */
+.avvo-card { display: inline-flex; flex-direction: column; align-items: center; gap: var(--space-sm); padding: var(--space-md); border: 1px solid var(--border-color); border-radius: 12px; background: var(--bg-card); margin-right: var(--space-md); margin-bottom: var(--space-md); text-align: center; max-width: 220px; }
+.avvo-card img { max-width: 100%; height: auto; }
+.avvo-card .label { font-family: var(--font-sans); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); }
+.avvo-row { display: flex; flex-wrap: wrap; }
+
+/* Quote */
+.quote { padding: var(--space-xl) var(--space-lg); border-bottom: 1px solid var(--border-color); }
+.quote blockquote { font-family: var(--font-serif); font-style: italic; font-size: clamp(18px, 2.4vw, 22px); line-height: 1.55; color: var(--text-primary); max-width: 880px; margin-bottom: var(--space-md); }
+.quote cite { font-family: var(--font-sans); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); font-style: normal; }
+@media (min-width: 1024px) { .quote { padding: var(--space-2xl) var(--space-2xl); } }
+
+/* Testimonial grid */
+.testimonials { padding: var(--space-xl) var(--space-lg); border-bottom: 1px solid var(--border-color); }
+.testimonials h2 { font-family: var(--font-serif); font-size: clamp(28px, 4vw, 40px); margin-bottom: var(--space-xl); text-transform: capitalize; }
+.testimonial-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-lg); }
+.testimonial { padding: var(--space-lg); border: 1px solid var(--border-color); border-radius: 12px; background: var(--bg-card); }
+.testimonial p { font-family: var(--font-serif); font-style: italic; font-size: 16px; line-height: 1.7; color: var(--text-primary); }
+.testimonial p strong { color: var(--text-primary); font-style: normal; font-weight: 600; }
+@media (min-width: 768px) { .testimonial-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1024px) { .testimonials { padding: var(--space-2xl) var(--space-2xl); } .testimonial-grid { grid-template-columns: 1fr 1fr 1fr; } }
+
+/* Contact form */
+.contact-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-2xl); padding: var(--space-xl) var(--space-lg); border-bottom: 1px solid var(--border-color); }
+.contact-info p { font-family: var(--font-sans); font-size: 15px; color: var(--text-muted); margin-bottom: var(--space-xs); }
+.contact-info h3 { font-family: var(--font-serif); font-size: 26px; margin-bottom: var(--space-md); margin-top: var(--space-lg); }
+.contact-form label { display: block; font-family: var(--font-sans); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--space-xs); margin-top: var(--space-md); }
+.contact-form input, .contact-form textarea { width: 100%; padding: 12px 14px; background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: 8px; font-family: var(--font-sans); font-size: 15px; min-height: 44px; }
+.contact-form textarea { min-height: 120px; resize: vertical; }
+.contact-form .checkbox-row { display: flex; align-items: flex-start; gap: var(--space-sm); margin-top: var(--space-md); font-family: var(--font-sans); font-size: 13px; color: var(--text-muted); }
+.contact-form button { margin-top: var(--space-lg); padding: 14px 32px; border: 1px solid var(--text-primary); border-radius: 999px; background: transparent; color: var(--text-primary); font-family: var(--font-sans); font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; min-height: 44px; }
+.contact-form button:hover { background: var(--text-primary); color: var(--bg-primary); }
+.map-embed { border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); aspect-ratio: 16/10; background: var(--bg-card); }
+.map-embed iframe { width: 100%; height: 100%; border: 0; }
+@media (min-width: 1024px) { .contact-grid { grid-template-columns: 1fr 1fr; padding: var(--space-2xl) var(--space-2xl); } }
+
+/* Footer */
+.site-footer { padding: var(--space-2xl) var(--space-lg); display: flex; flex-direction: column; gap: var(--space-lg); }
+.footer-brand { display: flex; flex-direction: column; gap: var(--space-xs); }
+.footer-brand-name { font-family: var(--font-sans); font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-primary); }
+.footer-tagline { font-family: var(--font-serif); font-size: 14px; color: var(--text-muted); }
+.footer-contact p { font-family: var(--font-sans); font-size: 13px; color: var(--text-muted); margin-bottom: var(--space-xs); }
+.footer-contact a { color: var(--text-primary); }
+.footer-nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: var(--space-md) var(--space-lg); }
+.footer-nav a { font-family: var(--font-sans); font-size: 11px; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); }
+.footer-nav a:hover { color: var(--text-primary); }
+.footer-disclaimer { font-family: var(--font-sans); font-size: 12px; color: var(--text-dim); max-width: 800px; line-height: 1.6; }
+.footer-copyright { font-family: var(--font-sans); font-size: 12px; color: var(--text-dim); }
+@media (min-width: 768px) { .site-footer { flex-direction: row; justify-content: space-between; flex-wrap: wrap; align-items: flex-start; gap: var(--space-2xl); } .footer-disclaimer, .footer-copyright { flex-basis: 100%; } }
+</style>
+<style>
+@media (max-width: 768px) {
+  .site-header { padding: var(--space-sm) var(--space-md); }
+  .site-brand .brand-name { font-size: 18px; }
+  .site-brand .brand-tagline { font-size: 10px; }
+  .sub-hero, .hero { padding: var(--space-xl) var(--space-md); }
+  .content-block { padding: var(--space-lg) var(--space-md); }
+  .practice-areas { grid-template-columns: 1fr; }
+  .testimonial-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; padding: var(--space-lg) var(--space-md); }
+  .two-col { grid-template-columns: 1fr; padding: var(--space-lg) var(--space-md); }
+  .site-footer { padding: var(--space-xl) var(--space-md); }
+  .footer-nav ul { gap: var(--space-sm) var(--space-md); }
+  .hero-headline, .sub-hero h1 { font-size: 32px; }
+  .practice-card { padding: var(--space-lg) var(--space-md); }
+  .testimonials { padding: var(--space-lg) var(--space-md); }
+}
+</style>
+
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/" class="site-brand" aria-label="John Meadows Legal home">
+    <span class="brand-name">John Meadows Legal</span>
+    <span class="brand-tagline">trial lawyer - Lebanon, Tennessee</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <nav class="site-nav" id="siteNav" aria-label="Primary">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/about-john">About John</a></li>
+      <li><a href="/practice-areas">Practice Areas</a></li>
+      <li><a href="/criminal">Criminal</a></li>
+      <li><a href="/family-law">Family Law</a></li>
+      <li><a href="/personal-injury">Personal Injury</a></li>
+      <li><a href="/probate-disputes">Probate Disputes</a></li>
+      <li><a href="/results">Results</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+  </nav>
+  <a href="tel:+16157844848" class="site-header-phone">615.784.4848</a>
+</header>
+
+<main class="main-content">
+
+  <section class="sub-hero">
+    <span class="label">john meadows, trial lawyer</span>
+    <h1>Criminal DEFENSE</h1>
+    <p class="subtitle">trial lawyer - Lebanon, Tennessee</p>
+    <p class="hero-phone">1.615.784.4848</p>
+  </section>
+
+  <section class="content-block">
+    <p>If you are facing criminal charges, then your future may seem uncertain. It is important to hire a <strong>criminal defense attorney</strong> that will advocate for you throughout the criminal justice process. The key advantages of hiring a criminal defense attorney to defend <strong>misdemeanor</strong> or <strong>felony charges</strong> are:</p>
+    <ul>
+      <li>They understand the statutes that govern the charges against you</li>
+      <li>They are experienced at plea negotiations which typically include reducing charges or alternatives such as <strong>diversion</strong>, if applicable</li>
+      <li>They know how to work with investigators to gather evidence for your defense</li>
+      <li>They know how to cross-examine witnesses</li>
+      <li>They are familiar with the rules of evidence and can work to include or exclude evidence</li>
+      <li>They are your voice throughout the process</li>
+    </ul>
+    <p>We recommend hiring a criminal defense attorney before your first court appearance. Criminal charges can affect your future employment opportunities which directly impact your earning potential.</p>
+    <p>John served as Special Assistant Public Defender for approximately two years handling numerous criminal matters. Additionally, he has presided as a special judge for Wilson County General Sessions and Juvenile Courts as well as presided over the Wilson County Teen Court. He has handled numerous criminal cases and is well-versed in plea negotiations.</p>
+    <p><a href="/contact">Contact John Meadows for a confidential consultation</a>. Here's a list of items to bring with you to your consultation:</p>
+    <ul>
+      <li>Any documents stating the charges against you. These documents may include citations and/or warrants.</li>
+      <li>Bond or bail documents</li>
+      <li>Police reports or any other relevant documents</li>
+    </ul>
+  </section>
+
+  <section class="content-block">
+    <h2>Charges We Handle</h2>
+    <ul>
+      <li>Assault</li>
+      <li>Burglary</li>
+      <li>Domestic Assault</li>
+      <li>Drug Offenses</li>
+      <li>DUI</li>
+      <li>Homicide</li>
+      <li>Manslaughter</li>
+      <li>Rape</li>
+      <li>Sex Crimes</li>
+      <li>Simple Possession</li>
+      <li>Theft</li>
+    </ul>
+    <p style="margin-top:24px;"><a href="/results"><strong>RESULTS</strong></a></p>
+  </section>
+
+  <section class="quote">
+    <blockquote>"First off, let me just say I am a convicted felon and have a lengthy criminal background. I had my son and changed my entire life. All odds were against me because of my past and my current situation. John Meadows was able to have both charges DROPPED, one was a felony. Mr. Meadows is very efficient and produces results! He is prepared and he really puts on a good fight!"</blockquote>
+    <cite>— Client review</cite>
+  </section>
+
+  <section class="quote">
+    <blockquote>"John Meadows is an excellent lawyer. I would highly recommend his legal expertise without reservation. John is very knowledgeable and went above and beyond. The outcome exceeded my expectations in every aspect!"</blockquote>
+    <cite>— Client review</cite>
+  </section>
+
+  <section class="content-block">
+    <h2>Recognition</h2>
+    <div class="avvo-row">
+      <div class="avvo-card">
+        <img src="https://images.avvo.com/avvo/cms/images/amos_assets/badges/badge_avvo_rating.png" alt="Lawyer John Meadows — Superb Avvo Rating">
+        <span class="label">Superb · Lawyer John Meadows</span>
+      </div>
+      <div class="avvo-card">
+        <span class="label" style="font-family: var(--font-serif); font-size: 22px; color: var(--text-primary); letter-spacing: 0;">Top Attorney<br>Criminal Defense</span>
+      </div>
+      <div class="avvo-card">
+        <span class="label" style="font-family: var(--font-serif); font-size: 18px; color: var(--text-primary); letter-spacing: 0;">John Lyons Meadows · Reviews · out of 67 reviews</span>
+      </div>
+      <div class="avvo-card">
+        <span class="label" style="font-family: var(--font-serif); font-size: 22px; color: var(--text-primary); letter-spacing: 0;">Clients' Choice Award 2022</span>
+        <span class="label">John Lyons Meadows</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-block" id="firm-overview" aria-label="Practice areas overview">
+    <h2>Practice Overview</h2>
+    <ul>
+      <li><strong>Criminal Defense</strong> — Criminal defense representation for misdemeanor and felony charges including assault, burglary, domestic assault, drug offenses, DUI, homicide, manslaughter, rape, sex crimes, simple possession, and theft.</li>
+      <li><strong>Family Law</strong> — Family and juvenile law representation including divorce, custody, alimony, annulments, appellate representation, father's rights, grandparent's rights, order of protection, paternity/parentage, post-divorce custody, pre-nuptial agreements, and parental relocation.</li>
+      <li><strong>Personal Injury</strong> — Personal injury representation for automobile accidents, catastrophic injuries, falls, motorcycle accidents, pedestrian accidents, premises liability, and tractor trailer accidents.</li>
+      <li><strong>Probate Disputes</strong> — Probate law including conservatorships, probate disputes, property gifts, will contests, and will disputes.</li>
+    </ul>
+  </section>
+
+  <section class="content-block" id="firm-stats" aria-label="By the numbers">
+    <h2>By the Numbers</h2>
+    <ul>
+      <li><strong>67</strong> Avvo reviews</li>
+      <li><strong>10.0</strong> Avvo rating</li>
+      <li><strong>23</strong> years of experience in family and juvenile law</li>
+    </ul>
+    <p style="margin-top:16px;"><a href="https://maps.google.com/maps?v=2&f=q&ie=UTF8&t=m&iwloc=&q=115+East+Main+Street%2c+Lebanon%2c+TN+37087%2c+USA&z=14&source=embed">Find us on Google Maps</a></p>
+  </section>
+
+
+
+  <section class="content-block" id="results-link" aria-label="Results">
+    <h2><a href="https://www.johnmeadowslegal.com/results.html">RESULTS</a></h2>
+    <p>Read more client stories and case outcomes on the <a href="/results">RESULTS</a> page.</p>
+  </section>
+
+<section class="content-block" id="image-gallery" aria-label="Photo gallery">
+  <h2>Gallery</h2>
+  <div class="gallery-grid">
+    <figure class="gallery-item"><img src="https://nebula.wsimg.com/99996aa39d8e44fba889698f2b7b2ab5?AccessKeyId=96F6F4B79A096E185CE9&disposition=0&alloworigin=1" alt="Criminal defense" loading="lazy"></figure>
+    <figure class="gallery-item"><img src="https://nebula.wsimg.com/4c048f9d8cd38808c1a778f8066c3d84?AccessKeyId=96F6F4B79A096E185CE9&disposition=0&alloworigin=1" alt="Criminal defense" loading="lazy"></figure>
+    <figure class="gallery-item"><img src="https://nebula.wsimg.com/5904d2e6e424bbd023f3d4a11fbb8abd?AccessKeyId=531592D248B589D87A56&alloworigin=1" alt="Criminal defense" loading="lazy"></figure>
+  </div>
+</section>
+<style>.gallery-grid { display: grid; grid-template-columns: 1fr; gap: 16px; max-width: 900px; }@media (min-width: 600px) { .gallery-grid { grid-template-columns: 1fr 1fr; } }@media (min-width: 1024px) { .gallery-grid { grid-template-columns: 1fr 1fr 1fr; } }.gallery-item { border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; background: var(--bg-card); aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; }.gallery-item img { width: 100%; height: 100%; object-fit: cover; }</style>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-brand">
+    <span class="footer-brand-name">John Meadows Legal</span>
+    <span class="footer-tagline">john meadows, trial lawyer</span>
+  </div>
+  <div class="footer-contact">
+    <p class="footer-address">115 East Main Street, Suite A1, Lebanon, TN 37087</p>
+    <p class="footer-phone"><a href="tel:+16157844848">615.784.4848</a></p>
+    <p class="footer-fax">Fax: 1.615.784.4850</p>
+    <p class="footer-cta"><a href="/contact">Contact us</a></p>
+  </div>
+  <nav class="footer-nav" aria-label="Footer">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/about-john">About John</a></li>
+      <li><a href="/criminal">Criminal</a></li>
+      <li><a href="/family-law">Family Law</a></li>
+      <li><a href="/personal-injury">Personal Injury</a></li>
+      <li><a href="/results">Results</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+  </nav>
+  <p class="footer-disclaimer"><em>Disclaimer: Attorney Advertising. This web site is designed for general information only. The information presented at this site should not be construed to be neither formal legal advice nor the formation of a lawyer/client relationship.</em></p>
+  <p class="footer-copyright">Copyright © 2025 John Meadows Legal. ALL RIGHTS RESERVED.</p>
+</footer>
+
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const siteNav = document.getElementById('siteNav');
+  hamburgerBtn.addEventListener('click', function() {
+    const open = siteNav.classList.toggle('open');
+    hamburgerBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      siteNav.classList.remove('open');
+      hamburgerBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+</script>
+
+</body>
+</html>
