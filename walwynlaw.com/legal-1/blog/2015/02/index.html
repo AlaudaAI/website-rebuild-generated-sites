@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>February 2015 Archive — Walwyn &amp; Walwyn</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  :root {
+    --color-primary: #4c2906;
+    --color-secondary: #cccccc;
+    --color-bg-primary: #c5cbb8;
+    --color-bg-dark: #1a2418;
+    --color-text-primary: #2a3328;
+    --color-text-light: #f0ece4;
+    --color-accent-line: rgba(42, 51, 40, 0.2);
+    --color-decorative: #b8c4ab;
+    --color-card-hover: #ffffff;
+    --color-bg-nav: rgba(197, 203, 184, 0.85);
+
+    --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    --font-body: 'EB Garamond', Georgia, 'Times New Roman', serif;
+    --font-headings: var(--font-display);
+
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 32px;
+    --space-xl: 64px;
+    --space-2xl: 96px;
+    --space-3xl: 128px;
+
+    --container-max: 1400px;
+    --body-size: 17px;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+  }
+
+  /* Logo */
+  .logo-circle {
+    width: 40px;
+    height: 40px;
+    border: 1.5px solid var(--color-text-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .logo-circle-inner {
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--color-text-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-letter {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    line-height: 1;
+  }
+
+  .logo-name {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  /* Navigation */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--color-bg-nav);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-accent-line);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md);
+    max-width: var(--container-max);
+    margin: 0 auto;
+    gap: var(--space-md);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .nav-links {
+    display: none;
+    list-style: none;
+    gap: var(--space-md);
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .nav-links a {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--color-text-primary);
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .nav-links a:hover {
+    opacity: 0.7;
+  }
+
+  .nav-hamburger {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 8px;
+    background: none;
+    border: none;
+  }
+
+  .nav-hamburger span {
+    width: 24px;
+    height: 1.5px;
+    background: var(--color-text-primary);
+    transition: all 0.3s ease;
+  }
+
+  .nav-mobile {
+    display: none;
+    flex-direction: column;
+    padding: var(--space-lg) var(--space-md);
+    gap: var(--space-sm);
+    border-top: 1px solid var(--color-accent-line);
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+
+  .nav-mobile.active {
+    display: flex;
+  }
+
+  .nav-mobile a {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--color-text-primary);
+    padding: var(--space-sm) 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .nav-mobile a:hover {
+    opacity: 0.7;
+  }
+
+  /* Page Title Area */
+  .page-title-area {
+    padding: calc(96px + 60px) var(--space-lg) var(--space-3xl);
+    background: #1a1a1a;
+    color: #ffffff;
+  }
+
+  .page-title-inner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+
+  .page-title-area h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  /* Hero Banner */
+  .hero-banner {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: var(--space-xl) var(--space-lg) 0;
+  }
+
+  .hero-banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    border: 1px solid var(--color-accent-line);
+  }
+
+  /* Stats */
+  .stats-section {
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+
+  .stats-section h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .stat-card {
+    padding: var(--space-lg);
+    background: var(--color-decorative);
+    border-radius: 12px;
+    border: 1px solid var(--color-accent-line);
+  }
+
+  .stat-value {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-primary);
+    line-height: 1.1;
+    margin-bottom: var(--space-sm);
+    letter-spacing: -0.02em;
+  }
+
+  .stat-label {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text-primary);
+    line-height: 1.4;
+  }
+
+  /* Content Area */
+  .content-area {
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: var(--container-max);
+    margin: 0 auto;
+  }
+
+  .content-area h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .content-area p {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #6b6b6b;
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area a {
+    color: var(--color-text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    font-weight: 500;
+  }
+
+  .content-area a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  /* Archive post card */
+  .archive-post {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    padding: var(--space-lg);
+    background: var(--color-decorative);
+    border-radius: 12px;
+    border: 1px solid var(--color-accent-line);
+    margin-bottom: var(--space-xl);
+  }
+
+  .archive-post-image {
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+  .archive-post-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .archive-post-date {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-sm);
+  }
+
+  .archive-post h3 a {
+    text-decoration: none;
+    color: var(--color-text-primary);
+  }
+
+  .archive-post h3 a:hover {
+    text-decoration: underline;
+  }
+
+  .archive-post-meta {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: #6b6b6b;
+    margin-top: var(--space-md);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-accent-line);
+  }
+
+  .archive-post-meta a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .archive-post-meta a:hover {
+    text-decoration: underline;
+  }
+
+  /* Office contact blocks */
+  .offices-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    margin-top: var(--space-xl);
+  }
+
+  .office-card {
+    padding: var(--space-lg);
+    background: var(--color-decorative);
+    border-radius: 12px;
+    border: 1px solid var(--color-accent-line);
+  }
+
+  .office-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  .office-card p {
+    margin-bottom: var(--space-sm);
+    color: var(--color-text-primary);
+  }
+
+  .office-card a {
+    color: var(--color-primary);
+  }
+
+  /* Footer */
+  .footer {
+    background: var(--color-bg-dark);
+    color: var(--color-text-light);
+    padding: var(--space-2xl) 0 var(--space-xl);
+  }
+
+  .footer .container {
+    padding: 0 var(--space-lg);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+
+  .footer-logo .logo-circle {
+    border-color: var(--color-text-light);
+  }
+
+  .footer-logo .logo-circle-inner {
+    border-color: var(--color-text-light);
+  }
+
+  .footer-logo .logo-letter {
+    color: var(--color-text-light);
+  }
+
+  .footer-logo .logo-name {
+    color: var(--color-text-light);
+  }
+
+  .footer-copyright {
+    font-family: var(--font-body);
+    font-size: 14px;
+    opacity: 0.5;
+    line-height: 1.6;
+    margin-bottom: var(--space-lg);
+  }
+
+  .footer-social ul {
+    list-style: none;
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+  }
+
+  .footer-social a {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--color-text-light);
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+  }
+
+  .footer-social a:hover {
+    opacity: 1;
+  }
+
+  .footer-label {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: var(--color-text-light);
+    opacity: 0.5;
+    margin-bottom: var(--space-md);
+    font-variant: small-caps;
+  }
+
+  .footer-address {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--color-text-light);
+    opacity: 0.7;
+    font-style: normal;
+    margin-bottom: var(--space-lg);
+  }
+
+  .footer-email {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 2.5vw, 26px);
+    font-style: italic;
+    color: var(--color-text-light);
+    opacity: 0.85;
+    margin-bottom: var(--space-md);
+    display: block;
+    overflow-wrap: break-word;
+    text-decoration: none;
+  }
+
+  .footer-email:hover {
+    opacity: 0.6;
+  }
+
+  .footer-phone {
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--color-text-light);
+    opacity: 0.7;
+    text-decoration: none;
+  }
+
+  .footer-phone:hover {
+    opacity: 0.5;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .nav-inner {
+      padding: var(--space-sm) var(--space-md);
+    }
+
+    .nav-links {
+      display: none;
+    }
+
+    .page-title-area {
+      padding: calc(64px + 32px) var(--space-md) var(--space-xl);
+    }
+
+    .page-title-area h1 {
+      font-size: clamp(1.5rem, 6vw, 2rem);
+    }
+
+    .hero-banner {
+      padding: var(--space-lg) var(--space-md) 0;
+    }
+
+    .stats-section {
+      padding: var(--space-xl) var(--space-md);
+    }
+
+    .stats-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+    }
+
+    .stat-card {
+      padding: var(--space-md);
+    }
+
+    .content-area {
+      padding: var(--space-xl) var(--space-md);
+    }
+
+    .archive-post {
+      grid-template-columns: 1fr;
+      padding: var(--space-md);
+      gap: var(--space-md);
+    }
+
+    .offices-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+    }
+
+    .office-card {
+      padding: var(--space-md);
+    }
+
+    .footer {
+      padding: var(--space-xl) 0 var(--space-lg);
+    }
+
+    .footer .container {
+      padding: 0 var(--space-md);
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+    }
+
+    .footer-social ul {
+      gap: var(--space-sm);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .nav-inner {
+      padding: var(--space-md) var(--space-lg);
+    }
+
+    .nav-hamburger {
+      display: none;
+    }
+
+    .nav-links {
+      display: flex;
+    }
+
+    .nav-mobile {
+      display: none !important;
+    }
+
+    .archive-post {
+      grid-template-columns: 5fr 7fr;
+      align-items: center;
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .offices-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .page-title-area { padding: calc(96px + 60px) var(--space-2xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl) var(--space-2xl); }
+    .stats-section { padding: var(--space-3xl) var(--space-2xl); }
+    .hero-banner { padding: var(--space-xl) var(--space-2xl) 0; }
+  }
+
+  @media (min-width: 1024px) {
+    .nav-inner {
+      padding: var(--space-md) var(--space-xl);
+    }
+
+    .nav-links {
+      gap: var(--space-md);
+    }
+
+    .footer {
+      padding: var(--space-3xl) 0 var(--space-2xl);
+    }
+
+    .page-title-area { padding: calc(96px + 80px) var(--space-3xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl); }
+    .stats-section { padding: var(--space-3xl); }
+    .stats-grid { grid-template-columns: repeat(4, 1fr); }
+    .hero-banner { padding: var(--space-xl) var(--space-3xl) 0; }
+  }
+</style>
+</head>
+<body>
+
+<header><nav class="nav" aria-label="Primary"><div class="nav-inner"><a href="/" class="nav-logo" aria-label="Walwyn &amp; Walwyn home"><div class="logo-circle"><div class="logo-circle-inner"><span class="logo-letter">W</span></div></div><span class="logo-name">Walwyn &amp; Walwyn</span></a><ul class="nav-links"><li><a href="/">Home</a></li><li><a href="/about">Firm Background</a></li><li><a href="/walwyn-law-firm">Walwyn Law Firm</a></li><li><a href="/what-we-do">What We Do</a></li><li><a href="/practice-areas">Practice Areas</a></li><li><a href="/services/personal-injury">Personal Injury</a></li><li><a href="/services/auto-truck-accidents">Auto and Truck Accidents</a></li><li><a href="/services/criminal-defense">Criminal Defense</a></li><li><a href="/services/workplace-injuries">Workplace Injuries and Worker's Compensation</a></li><li><a href="/services/nursing-home-negligence">Nursing Home Negligence</a></li><li><a href="/team/paul-walwyn">Paul Walwyn</a></li><li><a href="/team/paul-walwyn-profile">Paul Walwyn Profile</a></li><li><a href="/team/marc-walwyn">Marc Walwyn</a></li><li><a href="/team/about-marc-walwyn">About Marc Walwyn</a></li><li><a href="/team/lloyd-walwyn">Lloyd Walwyn</a></li><li><a href="/contact">Contact Us</a></li><li><a href="/contact-marc">Contact Marc</a></li><li><a href="/contact-paul">Contact Paul</a></li><li><a href="/news">Cases in the News</a></li><li><a href="/blog">News</a></li><li><a href="/blog/legal-advice">Legal Advice</a></li><li><a href="/blog/rules-are-for-children">New Tennessee Laws That Take Effect Jan. 1</a></li><li><a href="/blog/he-made-the-first-step">New Law Allows Gun Owners to Keep Loaded Firearms in Vehicle</a></li><li><a href="/blog/2015/02">February 2015 Archive</a></li><li><a href="/blog/2015/01">January 2015 Archive</a></li><li><a href="/blog/author/admin">Admin Author Archive</a></li><li><a href="/testimonials">Success Stories</a></li><li><a href="/links">Links</a></li><li><a href="/sitemap">Site Map</a></li></ul><button class="nav-hamburger" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span></button></div><div class="nav-mobile" id="mobileMenu" aria-label="Mobile navigation"><a href="/">Home</a><a href="/about">Firm Background</a><a href="/walwyn-law-firm">Walwyn Law Firm</a><a href="/what-we-do">What We Do</a><a href="/practice-areas">Practice Areas</a><a href="/services/personal-injury">Personal Injury</a><a href="/services/auto-truck-accidents">Auto and Truck Accidents</a><a href="/services/criminal-defense">Criminal Defense</a><a href="/services/workplace-injuries">Workplace Injuries and Worker's Compensation</a><a href="/services/nursing-home-negligence">Nursing Home Negligence</a><a href="/team/paul-walwyn">Paul Walwyn</a><a href="/team/paul-walwyn-profile">Paul Walwyn Profile</a><a href="/team/marc-walwyn">Marc Walwyn</a><a href="/team/about-marc-walwyn">About Marc Walwyn</a><a href="/team/lloyd-walwyn">Lloyd Walwyn</a><a href="/contact">Contact Us</a><a href="/contact-marc">Contact Marc</a><a href="/contact-paul">Contact Paul</a><a href="/news">Cases in the News</a><a href="/blog">News</a><a href="/blog/legal-advice">Legal Advice</a><a href="/blog/rules-are-for-children">New Tennessee Laws That Take Effect Jan. 1</a><a href="/blog/he-made-the-first-step">New Law Allows Gun Owners to Keep Loaded Firearms in Vehicle</a><a href="/blog/2015/02">February 2015 Archive</a><a href="/blog/2015/01">January 2015 Archive</a><a href="/blog/author/admin">Admin Author Archive</a><a href="/testimonials">Success Stories</a><a href="/links">Links</a><a href="/sitemap">Site Map</a></div></nav></header>
+
+<!-- Page Title -->
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Monthly Archives: February 2015</h1>
+  </div>
+</section>
+
+<!-- Hero Banner -->
+<section class="hero-banner" aria-label="Walwyn &amp; Walwyn banner">
+  <img src="http://walwynlaw.com/wp-content/uploads/2015/02/Business-Card-for-print-Final-1.png" alt="Walwyn &amp; Walwyn Business Card">
+</section>
+
+<!-- Firm Stats -->
+<section class="stats-section" aria-label="Firm results and milestones">
+  <h2>Results &amp; Milestones</h2>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-value">$1,046,000.00</div>
+      <div class="stat-label">Fall From Two Story Work Site Settlement</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">$1,000,000.00</div>
+      <div class="stat-label">Airplane Crash Settlement</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">$200,000.00</div>
+      <div class="stat-label">Tractor-Trailer Rear-Ender Settlement</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">$100,000.00</div>
+      <div class="stat-label">Motorcycle Accident with Fractures Settlement</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">$247,000.00</div>
+      <div class="stat-label">Machine Amputation of Right Leg Settlement</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">0+</div>
+      <div class="stat-label">Trusted Clients</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">10 Million</div>
+      <div class="stat-label">Recovered for our clients</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">1000+</div>
+      <div class="stat-label">Personal injury cases</div>
+    </div>
+  </div>
+</section>
+
+<!-- Page Content -->
+<div class="content-area">
+
+  <article class="archive-post">
+    <a class="archive-post-image" href="/blog/rules-are-for-children" aria-label="New Tennessee laws that take effect Jan. 1">
+      <img src="http://walwynlaw.com/Marc/wp-content/uploads/2013/09/B9315685229Z.1_20141231104141_000_GPQ9I7T5C.1-0-480x369.jpg" alt="B9315685229Z.1_20141231104141_000_GPQ9I7T5C.1-0">
+    </a>
+    <div class="archive-post-body">
+      <p class="archive-post-date">08 02 '15</p>
+      <h3><a href="/blog/rules-are-for-children">New Tennessee laws that take effect Jan. 1</a></h3>
+      <p>A new Tennessee law will allow trained school personnel to administer insulin. It’s just one of many new laws taking effect on Thursday. Tennessee is now one of more than 20 states and the District of Columbia that have passed laws adding insulin to medications that school staff may volunteer to be trained to administer,…</p>
+      <div class="archive-post-meta">
+        <span><a href="/blog/author/admin">Admin</a></span>
+        <span>Category <a href="/blog/legal-advice">Legal Advice</a></span>
+        <span><a href="/blog/rules-are-for-children">0 Comments</a></span>
+      </div>
+    </div>
+  </article>
+
+  <section>
+    <div class="offices-grid">
+      <div class="office-card">
+        <h3>Nashville Area Office</h3>
+        <p>Phone: 615 859-8668 x110   Fax: (615) 855-2450</p>
+      </div>
+      <div class="office-card">
+        <h3>Chattanooga Office</h3>
+        <p>Phone: (423) 954-7266    Fax: (423) 508-8796</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="footer" id="contact" aria-label="Site footer"><div ><div class="footer-grid"><div><div class="footer-logo"><div class="logo-circle"><div class="logo-circle-inner"><span class="logo-letter">W</span></div></div><span class="logo-name">Walwyn &amp; Walwyn</span></div><p class="footer-copyright">© 2009. All rights reserved. Website designed and maintained by</p><nav class="footer-social" aria-label="Social media"><ul><li><a href="https://www.facebook.com/pages/Law-Offices-of-Marc-Walwyn/160687233962231" aria-label="Walwyn &amp; Walwyn on Facebook" rel="noopener" target="_blank">Facebook</a></li><li><a href="https://twitter.com/walwyn_law" aria-label="Walwyn &amp; Walwyn on Twitter" rel="noopener" target="_blank">Twitter</a></li><li><a href="https://www.linkedin.com/in/marcwalwyn" aria-label="Marc Walwyn on LinkedIn" rel="noopener" target="_blank">LinkedIn</a></li><li><a href="https://www.youtube.com/watch?v=ICj1f4UTvL8" aria-label="Walwyn &amp; Walwyn on YouTube" rel="noopener" target="_blank">YouTube</a></li></ul></nav></div><div><p class="footer-label">Office</p><address class="footer-address">75 to exit 1 in Tennessee and head East. We are located at 5814 Ringgold Road Suite</address></div><div><p class="footer-label">Contact</p><a href="mailto:marc@walwynlaw.com" class="footer-email">marc@walwynlaw.com</a><a href="tel:+16068723396" class="footer-phone">(606) 872-3396</a></div></div></div></footer>
+
+<script>
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  menuToggle.addEventListener('click', function() {
+    mobileMenu.classList.toggle('active');
+  });
+
+  // Close mobile menu when a link is clicked
+  const mobileLinks = mobileMenu.querySelectorAll('a');
+  mobileLinks.forEach(function(link) {
+    link.addEventListener('click', function() {
+      mobileMenu.classList.remove('active');
+    });
+  });
+</script>
+
+</body>
+</html>
