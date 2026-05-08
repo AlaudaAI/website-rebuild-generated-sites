@@ -1,0 +1,459 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roy Wilson</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+  :root {
+    --color-primary: #111115;
+    --color-bg: #111115;
+    --color-text: #ffffff;
+    --color-muted: rgba(255,255,255,0.5);
+    --color-border: rgba(255,255,255,0.1);
+    --bg-primary: #111115;
+    --bg-secondary: #1a1a20;
+    --bg-hover: #22222a;
+    --bg-card: #16161c;
+    --text-primary: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.5);
+    --text-dim: rgba(255, 255, 255, 0.35);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Inter', -apple-system, sans-serif;
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 32px;
+    --space-xl: 48px;
+    --space-2xl: 64px;
+    --space-3xl: 96px;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+  }
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .site-header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md) var(--space-lg);
+    gap: var(--space-md);
+    flex-wrap: wrap;
+  }
+
+  .site-brand { text-decoration: none; color: var(--text-primary); }
+
+  .site-brand-name {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .nav-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--space-sm);
+  }
+
+  .nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--text-primary);
+    transition: all 0.3s ease;
+  }
+
+  .site-nav {
+    display: none;
+    width: 100%;
+    border-top: 1px solid var(--border-color);
+    padding-top: var(--space-md);
+    margin-top: var(--space-md);
+  }
+
+  .site-nav.open { display: block; }
+
+  .site-nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    padding: 0;
+  }
+
+  .site-nav a {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .site-nav a:hover { color: var(--text-primary); }
+
+  /* Main content wrapper */
+  .main-content {
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  .page-title-area {
+    padding: var(--space-3xl) var(--space-lg) var(--space-2xl);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .page-title-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-title-area h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  .page-title-role {
+    display: block;
+    margin-top: var(--space-sm);
+    font-family: var(--font-sans);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .content-area {
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .attorney-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .attorney-photo {
+    width: 100%;
+    max-width: 380px;
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+  }
+
+  .attorney-name {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-top: var(--space-md);
+  }
+
+  .content-area p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .content-area .footnote {
+    font-size: 0.875rem;
+    color: var(--text-dim);
+    margin-top: var(--space-lg);
+    font-style: italic;
+  }
+
+  /* Team section */
+  .team-section {
+    margin-top: var(--space-3xl);
+    padding-top: var(--space-2xl);
+    border-top: 1px solid var(--border-color);
+  }
+
+  .team-section h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .team-grid {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .team-grid li {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: var(--space-lg);
+  }
+
+  .team-grid .team-name {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-bottom: var(--space-xs);
+  }
+
+  .team-grid .team-role {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* Contact section */
+  .contact-section {
+    margin-top: var(--space-3xl);
+    padding-top: var(--space-2xl);
+    border-top: 1px solid var(--border-color);
+  }
+
+  .contact-section h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .contact-section a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .site-footer {
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border-color);
+  }
+
+  .site-footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--space-xl) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .site-footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .site-footer-name {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-primary);
+  }
+
+  .site-footer-address {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-style: normal;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .site-footer-address a {
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+
+  .site-footer-address a:hover { color: var(--text-primary); }
+
+  .site-footer-nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md) var(--space-lg);
+    padding: 0;
+  }
+
+  .site-footer-nav a {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .site-footer-nav a:hover { color: var(--text-primary); }
+
+  @media (max-width: 768px) {
+    .site-header-inner { padding: var(--space-sm) var(--space-md); }
+    .page-title-area { padding: var(--space-xl) var(--space-md) var(--space-lg); }
+    .page-title-area h1 { font-size: 1.75rem; }
+    .content-area { padding: var(--space-xl) var(--space-md); }
+    .attorney-photo { max-width: 100%; }
+    .team-grid li { padding: var(--space-md); }
+    .site-footer-inner { padding: var(--space-lg) var(--space-md); }
+  }
+
+  @media (min-width: 768px) {
+    .site-header-inner { padding: var(--space-md) var(--space-2xl); }
+    .page-title-area { padding: var(--space-3xl) var(--space-2xl); }
+    .content-area { padding: var(--space-3xl) var(--space-2xl); }
+    .attorney-layout {
+      grid-template-columns: 320px 1fr;
+      gap: var(--space-2xl);
+    }
+    .team-grid { grid-template-columns: 1fr 1fr; }
+    .site-footer-inner {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: var(--space-xl) var(--space-2xl);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .nav-toggle { display: none; }
+    .site-nav {
+      display: block !important;
+      width: auto;
+      border-top: none;
+      margin-top: 0;
+      padding-top: 0;
+    }
+    .site-nav ul {
+      flex-direction: row;
+      gap: var(--space-lg);
+    }
+    .page-title-area { padding: var(--space-3xl) var(--space-3xl); }
+    .content-area { padding: var(--space-3xl); }
+  }
+</style>
+
+
+
+<header class="site-header"><div class="site-header-inner"><a href="/" class="site-brand"><span class="site-brand-name">Brown and Wilson Attorneys</span></a><button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="site-nav" id="siteNav" aria-label="Primary"><ul><li><a href="/">Home</a></li><li><a href="/bankruptcy">Bankruptcy</a></li><li><a href="/other-practices">Other Practices</a></li><li><a href="/attorney/nathan-brown">Nathan Brown</a></li><li><a href="/attorney/roy-wilson">Roy Wilson</a></li><li><a href="/staff">Staff</a></li><li><a href="/contact">Contact Us</a></li></ul></nav></div></header>
+
+<main class="main-content">
+
+<section class="page-title-area">
+  <div class="page-title-inner">
+    <h1>Roy N. Wilson</h1>
+    <span class="page-title-role">Attorney</span>
+  </div>
+</section>
+
+<div class="content-area">
+  <div class="attorney-layout">
+    <div>
+      <img class="attorney-photo" src="http://www.brownwilsonattorneys.com/images/wilson-small.jpg" alt="Roy N. Wilson">
+      <p class="attorney-name">Roy N. Wilson</p>
+    </div>
+    <div>
+      <p>Roy received a Bachelor of Science degree from Austin Peay State University in 1976, and received a Doctor of Jurisprudence degree from the University of Tennessee College of Law in 1979.</p>
+      <p>Prior to attending college, he enlisted in The United States Marine Corps and served with the 11th Marines in Vietnam.</p>
+      <p>He has been practicing law in Dickson County, Tennessee since 1979, specializing in consumer bankruptcy law since 1989.</p>
+      <p>He is certified as a Consumer Bankruptcy Law Specialist by Tennessee Commission on Continuing Legal Education and Specialization and by the American Board of Certification.</p>
+      <p>He is a member of the American Bankruptcy Institute, the National Association of Consumer Bankruptcy Attorneys and the National Association of Chapter Thirteen Trustees.</p>
+      <p class="footnote">* Statistics as of January 23, 2004</p>
+    </div>
+  </div>
+
+  <section class="team-section">
+    <h2>Attorneys</h2>
+    <ul class="team-grid">
+      <li>
+        <p class="team-name">Nathan Brown</p>
+        <p class="team-role">Attorney</p>
+      </li>
+      <li>
+        <p class="team-name">Roy Wilson</p>
+        <p class="team-role">Attorney</p>
+      </li>
+    </ul>
+  </section>
+
+  <section class="contact-section">
+    <h2>Contact</h2>
+    <p>Brown and Wilson Attorneys</p>
+    <p>40 W toward Memphis</p>
+    <p><a href="tel:6154464027">(615)446-4027</a></p>
+    <p><a href="mailto:nathan@brownwilsonattorneys.com">nathan@brownwilsonattorneys.com</a></p>
+  </section>
+</div>
+
+</main>
+
+<footer class="site-footer"><div class="site-footer-inner"><div class="site-footer-brand"><span class="site-footer-name">Brown and Wilson Attorneys</span><address class="site-footer-address">40 W toward Memphis<br><a href="tel:6154464027">(615)446-4027</a><br><a href="mailto:nathan@brownwilsonattorneys.com">nathan@brownwilsonattorneys.com</a></address></div><nav class="site-footer-nav" aria-label="Footer"><ul><li><a href="/">Home</a></li><li><a href="/bankruptcy">Bankruptcy</a></li><li><a href="/other-practices">Other Practices</a></li><li><a href="/contact">Contact</a></li></ul></nav></div></footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const siteNav = document.getElementById('siteNav');
+
+  if (navToggle && siteNav) {
+    navToggle.addEventListener('click', function() {
+      const isOpen = siteNav.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  }
+
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024 && siteNav) {
+      siteNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+</script>
