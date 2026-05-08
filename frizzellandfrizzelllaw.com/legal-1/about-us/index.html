@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Attorneys - Frizzell & Frizzell, PLLC</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #111115;
+  --bg-secondary: #1a1a20;
+  --bg-hover: #22222a;
+  --bg-card: #16161c;
+  --text-primary: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.5);
+  --text-dim: rgba(255, 255, 255, 0.35);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.06);
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, sans-serif;
+  --sidebar-width: 280px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+  --space-xl: 48px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body { background-color: var(--bg-primary); color: var(--text-primary); font-family: var(--font-sans); font-weight: 400; line-height: 1.6; overflow-x: hidden; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+
+/* Mobile header */
+.mobile-header { display: flex; align-items: center; justify-content: space-between; padding: var(--space-md) var(--space-lg); border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 100; background: var(--bg-primary); }
+.mobile-header .brand { display: flex; align-items: center; gap: var(--space-sm); text-decoration: none; color: var(--text-primary); }
+.mobile-header .brand .globe-icon { width: 32px; height: 32px; border: 1.5px solid var(--text-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+.mobile-header .brand-name { font-family: var(--font-sans); font-size: 14px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; }
+.hamburger { display: flex; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; }
+.hamburger span { width: 24px; height: 2px; background: var(--text-primary); transition: all 0.3s ease; }
+
+/* Sidebar */
+.sidebar { display: none; flex-direction: column; justify-content: space-between; position: fixed; top: 0; left: 0; width: var(--sidebar-width); height: 100vh; padding: var(--space-xl) var(--space-lg); background: var(--bg-primary); border-right: 1px solid var(--border-color); z-index: 200; overflow-y: auto; }
+.sidebar .brand-section { display: flex; flex-direction: column; gap: var(--space-2xl); }
+.sidebar .brand-link { display: flex; align-items: center; gap: var(--space-sm); text-decoration: none; color: var(--text-primary); margin-bottom: var(--space-lg); }
+.sidebar .brand-link .globe-icon { width: 36px; height: 36px; border: 1.5px solid var(--text-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+.sidebar .brand-name { font-family: var(--font-sans); font-size: 14px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; }
+.sidebar nav { display: flex; flex-direction: column; gap: var(--space-md); }
+.sidebar nav a { font-family: var(--font-sans); font-size: 13px; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.3s ease; }
+.sidebar nav a:hover, .sidebar nav a.current { color: var(--text-primary); }
+.sidebar .contact-section { display: flex; flex-direction: column; gap: var(--space-sm); padding-top: var(--space-lg); border-top: 1px solid var(--border-color); }
+.contact-line { font-family: var(--font-sans); font-size: 12px; color: var(--text-muted); text-decoration: none; line-height: 1.6; }
+.contact-line:hover { color: var(--text-primary); }
+
+/* Hero */
+.hero { display: flex; flex-direction: column; gap: var(--space-xl); padding: var(--space-2xl) var(--space-lg); }
+.hero-text { display: flex; flex-direction: column; gap: var(--space-md); }
+.hero-label { font-family: var(--font-sans); font-size: 12px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); }
+.hero-headline { font-family: var(--font-serif); font-size: clamp(36px, 6vw, 56px); font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; }
+.hero-subheading { font-family: var(--font-sans); font-size: 16px; font-weight: 300; color: var(--text-muted); margin-top: var(--space-md); max-width: 60ch; }
+.hero-cta { display: inline-flex; align-items: center; gap: var(--space-sm); font-family: var(--font-sans); font-size: 13px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-primary); text-decoration: none; padding: var(--space-md) var(--space-lg); border: 1px solid var(--text-primary); margin-top: var(--space-lg); align-self: flex-start; transition: all 0.3s ease; }
+.hero-cta:hover { background: var(--text-primary); color: var(--bg-primary); }
+.hero-visual { display: flex; justify-content: center; align-items: center; }
+.hero-image-frame { width: 100%; max-width: 480px; border: 1px solid var(--border-color); padding: var(--space-md); background: var(--bg-secondary); }
+.hero-image-frame img { width: 100%; height: auto; }
+
+/* Sections */
+.section { padding: var(--space-2xl) var(--space-lg); border-top: 1px solid var(--border-color); }
+.section-label { font-family: var(--font-sans); font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--space-md); }
+.section-title { font-family: var(--font-serif); font-size: clamp(28px, 4vw, 40px); font-weight: 400; line-height: 1.2; letter-spacing: -0.01em; margin-bottom: var(--space-lg); }
+.section-body { font-family: var(--font-sans); font-size: 15px; font-weight: 300; line-height: 1.7; color: var(--text-muted); max-width: 70ch; }
+.section-body p + p { margin-top: var(--space-md); }
+.section-image { margin-top: var(--space-xl); border: 1px solid var(--border-color); }
+
+/* Features grid (services) */
+.features { display: grid; grid-template-columns: 1fr; border-top: 1px solid var(--border-color); }
+.feature-card { padding: var(--space-xl) var(--space-lg); border-bottom: 1px solid var(--border-color); display: flex; flex-direction: column; gap: var(--space-md); }
+.feature-protocol { font-family: var(--font-sans); font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); }
+.feature-title { font-family: var(--font-serif); font-size: 22px; font-weight: 400; line-height: 1.3; }
+.feature-description { font-family: var(--font-sans); font-size: 14px; font-weight: 300; color: var(--text-muted); line-height: 1.7; }
+.feature-list { list-style: none; display: flex; flex-direction: column; gap: var(--space-xs); margin-top: var(--space-sm); }
+.feature-list li { font-family: var(--font-sans); font-size: 13px; color: var(--text-muted); padding-left: var(--space-md); position: relative; }
+.feature-list li::before { content: '—'; position: absolute; left: 0; color: var(--text-dim); }
+
+/* Trust / stats */
+.trust-section { display: grid; grid-template-columns: 1fr; border-top: 1px solid var(--border-color); }
+.trust-metrics { padding: var(--space-2xl) var(--space-lg); display: flex; flex-direction: column; gap: var(--space-md); border-bottom: 1px solid var(--border-color); }
+.trust-label { font-family: var(--font-sans); font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); }
+.trust-number { font-family: var(--font-serif); font-size: 80px; font-weight: 400; line-height: 1; }
+.trust-number-suffix { font-family: var(--font-serif); font-size: 36px; color: var(--text-muted); margin-left: var(--space-xs); }
+.trust-description { font-family: var(--font-sans); font-size: 14px; font-weight: 300; color: var(--text-muted); line-height: 1.7; max-width: 50ch; }
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); padding: var(--space-2xl) var(--space-lg); border-bottom: 1px solid var(--border-color); }
+.stat-item { display: flex; flex-direction: column; gap: var(--space-xs); }
+.stat-value { font-family: var(--font-serif); font-size: 48px; font-weight: 400; line-height: 1; }
+.stat-label { font-family: var(--font-sans); font-size: 12px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+
+/* Team */
+.team-grid { display: grid; grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--border-color); }
+.team-card { padding: var(--space-2xl) var(--space-lg); border-bottom: 1px solid var(--border-color); display: flex; flex-direction: column; gap: var(--space-lg); }
+.team-photo { width: 200px; height: 240px; object-fit: cover; border: 1px solid var(--border-color); }
+.team-name { font-family: var(--font-serif); font-size: 28px; font-weight: 400; }
+.team-role { font-family: var(--font-sans); font-size: 12px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); margin-top: var(--space-xs); }
+.team-bio { font-family: var(--font-sans); font-size: 14px; font-weight: 300; color: var(--text-muted); line-height: 1.7; max-width: 70ch; margin-top: var(--space-md); }
+.team-edu { margin-top: var(--space-md); }
+.team-edu-label { font-family: var(--font-sans); font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-dim); margin-bottom: var(--space-xs); }
+.team-edu-list { list-style: none; }
+.team-edu-list li { font-family: var(--font-sans); font-size: 13px; color: var(--text-muted); padding: 2px 0; }
+
+/* Testimonials */
+.testimonial-list { display: grid; grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--border-color); }
+.testimonial-card { padding: var(--space-xl) var(--space-lg); border-bottom: 1px solid var(--border-color); }
+.testimonial-quote { font-family: var(--font-serif); font-size: 18px; font-weight: 400; font-style: italic; line-height: 1.6; color: var(--text-primary); }
+.testimonial-author { font-family: var(--font-sans); font-size: 12px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-top: var(--space-md); }
+
+/* Contact */
+.contact-grid { display: grid; grid-template-columns: 1fr; gap: var(--space-lg); padding: var(--space-2xl) var(--space-lg); border-top: 1px solid var(--border-color); }
+.contact-block { display: flex; flex-direction: column; gap: var(--space-sm); }
+.contact-label { font-family: var(--font-sans); font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); }
+.contact-value { font-family: var(--font-sans); font-size: 15px; color: var(--text-primary); text-decoration: none; }
+.contact-value:hover { color: var(--text-muted); }
+.contact-list { list-style: none; }
+.contact-list li { font-family: var(--font-sans); font-size: 14px; color: var(--text-muted); padding: 2px 0; }
+
+/* Page title for subpages */
+.page-title-area { padding: var(--space-3xl) var(--space-lg) var(--space-xl); border-bottom: 1px solid var(--border-color); }
+.page-title-area h1 { font-family: var(--font-serif); font-size: clamp(36px, 5vw, 56px); font-weight: 400; line-height: 1.15; letter-spacing: -0.02em; }
+.page-title-eyebrow { font-family: var(--font-sans); font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--space-md); }
+
+/* Footer */
+.footer { padding: var(--space-xl) var(--space-lg); display: flex; flex-direction: column; gap: var(--space-lg); border-top: 1px solid var(--border-color); }
+.footer-brand { display: flex; flex-direction: column; gap: var(--space-sm); }
+.footer-brand-name { font-family: var(--font-sans); font-size: 13px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-primary); }
+.footer-address { font-style: normal; font-family: var(--font-sans); font-size: 12px; font-weight: 300; color: var(--text-dim); line-height: 1.7; }
+.footer-address a { color: inherit; text-decoration: none; }
+.footer-copyright { font-family: var(--font-sans); font-size: 12px; font-weight: 300; color: var(--text-dim); line-height: 1.6; max-width: 70ch; }
+.footer-links { display: flex; flex-wrap: wrap; gap: var(--space-md) var(--space-lg); }
+.footer-links a { font-family: var(--font-sans); font-size: 11px; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.3s ease; }
+.footer-links a:hover { color: var(--text-primary); }
+
+.mobile-nav-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 150; }
+.mobile-nav-overlay.active { display: block; }
+.sidebar.active { display: flex; }
+
+@media (min-width: 768px) {
+  .hero { flex-direction: row; align-items: center; padding: var(--space-2xl) var(--space-xl); gap: var(--space-2xl); }
+  .hero-text { flex: 1.2; }
+  .hero-visual { flex: 0.8; max-width: 380px; }
+  .features { grid-template-columns: 1fr 1fr; }
+  .feature-card { border-right: 1px solid var(--border-color); }
+  .feature-card:nth-child(2n) { border-right: none; }
+  .trust-section { grid-template-columns: 1fr 1fr; }
+  .trust-metrics { border-bottom: none; border-right: 1px solid var(--border-color); }
+  .stats-grid { grid-template-columns: repeat(4, 1fr); }
+  .team-card { flex-direction: row; gap: var(--space-2xl); align-items: flex-start; }
+  .team-photo { flex: 0 0 220px; }
+  .contact-grid { grid-template-columns: 1fr 1fr; padding: var(--space-3xl) var(--space-xl); }
+  .footer { flex-direction: row; justify-content: space-between; align-items: flex-end; padding: var(--space-xl) var(--space-xl); }
+  .section { padding: var(--space-3xl) var(--space-xl); }
+  .page-title-area { padding: var(--space-3xl) var(--space-xl); }
+}
+@media (min-width: 1024px) {
+  .mobile-header { display: none; }
+  .sidebar { display: flex !important; }
+  .mobile-nav-overlay { display: none !important; }
+  .main-content { margin-left: var(--sidebar-width); width: calc(100% - var(--sidebar-width)); }
+  .hero { padding: var(--space-3xl) var(--space-2xl); min-height: 80vh; }
+  .features { grid-template-columns: 1fr 1fr 1fr; }
+  .feature-card { border-right: 1px solid var(--border-color); padding: var(--space-2xl) var(--space-xl); }
+  .feature-card:nth-child(3n) { border-right: none; }
+  .feature-card:nth-child(2n) { border-right: 1px solid var(--border-color); }
+  .feature-card:nth-child(3n) { border-right: none; }
+  .section { padding: var(--space-3xl) var(--space-2xl); }
+  .page-title-area { padding: var(--space-3xl) var(--space-2xl); }
+  .footer { padding: var(--space-xl) var(--space-2xl); }
+  .trust-metrics { padding: var(--space-3xl) var(--space-2xl); }
+  .stats-grid { padding: var(--space-3xl) var(--space-2xl); }
+  .contact-grid { padding: var(--space-3xl) var(--space-2xl); }
+  .hero-headline { font-size: clamp(56px, 5vw, 76px); }
+}
+@media (min-width: 1440px) {
+  .hero-headline { font-size: 84px; }
+}
+</style>
+</head>
+<body>
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <a href="/" class="brand">
+    <div class="globe-icon"><i class="fas fa-balance-scale"></i></div>
+    <span class="brand-name">Frizzell & Frizzell, PLLC</span>
+  </a>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+<aside class="sidebar" id="sidebar">
+  <div class="brand-section">
+    <a href="/" class="brand-link">
+      <div class="globe-icon"><i class="fas fa-balance-scale"></i></div>
+      <span class="brand-name">Frizzell & Frizzell, PLLC</span>
+    </a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/criminal-defense">Criminal Defense</a>
+      <a href="/personal-injury">Personal Injury</a>
+      <a href="/divorcefamily-law">Divorce / Family Law</a>
+      <a href="/mediation">Mediation</a>
+      <a href="/expert-witness">Expert Witness</a>
+      <a href="/about-us" class="current">Our Attorneys</a>
+      <a href="/our-attorneys">Testimonials</a>
+      <a href="/contact-us">Contact Us</a>
+    </nav>
+  </div>
+  <div class="contact-section">
+    <a href="tel:615-824-7163" class="contact-line">615-824-7163</a>
+    <span class="contact-line">131 Maple Row Blvd., Building C Suite 301<br>Hendersonville, TN 37075</span>
+  </div>
+</aside>
+<main class="main-content">
+  <section class="page-title-area">
+    <p class="page-title-eyebrow">Our Team</p>
+    <h1>Licensed Attorneys Protecting Your Rights</h1>
+  </section>
+  
+
+<section class="section">
+  
+  <h2 class="section-title">Three Licensed Attorneys</h2>
+  <div class="section-body"><p>Frizzell & Frizzell, PLLC is comprised of three licensed attorneys committed to protecting your legal rights.</p></div>
+</section>
+
+<section class="team-grid">
+  <div class="team-card">
+    <img class="team-photo" src="https://lirp.cdn-website.com/97f89525/dms3rep/multi/opt/Image20240308102733-97dd2c92-1920w.jpg" alt="Attorney Debrah K. Frizzell — Hendersonville, TN — Frizzell & Frizzell, PLLC">
+    <div>
+      <h3 class="team-name">Debrah K. Frizzell</h3>
+      <p class="team-role">Attorney</p>
+      <p class="team-bio">Ms. Frizzell began her education in both the United States and Europe, as a result of her father's career in the United States Army. In 1975, she graduated from Union University, and began her career as a teacher. Ms. Frizzell earned her J.D. from the Nashville School of Law (formerly the YMCA Law Night School) in 1986, while operating her own business.</p>
+      <p class="team-bio">Ms. Frizzell's over 30 years of law practice has included plaintiff litigation, workers' compensation, criminal defense, and every aspect of family law. She has also served as a "Special Judge" in the Sumner County Juvenile Court on several occasions.</p>
+      <p class="team-bio">Ms. Frizzell frequently serves as an expert witness, both for plaintiffs and defendants, in civil rights claims against government agents/agencies, individual offenders, and others, both in State and Federal courts.</p>
+      <p class="team-bio">Ms. Frizzell is a Rule 31 Mediator in family law, with an extremely high success rate in mediating very difficult family controversies and over 21 years of experience.</p>
+      <p class="team-bio">Today, her practice focuses on mediation, divorce, child custody, support matters, adoption, parenting matters, and individual and family estate planning. Ms. Frizzell also taught Conflict Resolution as an Associate Professor at Union University in Hendersonville, TN.</p>
+      <div class="team-edu">
+        <p class="team-edu-label">Education</p>
+        <ul class="team-edu-list">
+          <li>Union University (1975)</li>
+          <li>J.D., Nashville School of Law (1986)</li>
+        </ul>
+      </div>
+      <div class="team-edu">
+        <p class="team-edu-label">Awards and Recognition</p>
+        <ul class="team-edu-list">
+          <li>2011: Recognized for her many years of service to the Teen Court of Sumner County, TN, as a member of its Board of Directors.</li>
+          <li>2007: Pro Bono Award from the Legal Aid Society of Sumner County, TN.</li>
+          <li>2000-2001: President of the Sumner County Bar Association</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="team-card">
+    <img class="team-photo" src="https://lirp.cdn-website.com/97f89525/dms3rep/multi/opt/Image20240308102836-640w-683c5c52-1920w.jpg" alt="Attorney Terry S. Frizzell — Hendersonville, TN — Frizzell & Frizzell, PLLC">
+    <div>
+      <h3 class="team-name">Terry S. Frizzell</h3>
+      <p class="team-role">Attorney</p>
+      <p class="team-bio">Terry Frizzell graduated Summa Cum Laude from Liberty University with a degree in Justice Administration and Business Administration. Mr. Frizzell served the State of Tennessee for 35 years, serving 3 years in the TN Department of Correction, and 32 years in the Hendersonville Police Department, including 28 years as a Police Investigator, Detective, and Police Administrator. In 2010 Mr. Frizzell retired as the Chief of Police.</p>
+      <p class="team-bio">Mr. Frizzell graduated from the FBI National Academy in 1990 and earned his J.D. from the Nashville School of Law in 2002. He has practiced law since 2003.</p>
+      <p class="team-bio">Mr. Frizzell utilizes a lifetime of law enforcement training and experience to represent clients who are wrongly or improperly charged with criminal offenses, in both the State and Local courts. He also represents clients in civil rights claims in Federal courts. He has had successes for Plaintiffs in Civil Rights suits. Mr. Frizzell also handles those who are seriously injured in automobile, truck, bus and motorcycle crashes, or in other personal injury situations. He has had successes in Auto, Truck, and Bus cases for Plaintiffs.</p>
+      <p class="team-bio">Mr. Frizzell frequently serves as an expert witness, both for plaintiffs and defendants, in civil rights claims against government agents/agencies, individual offenders, and others, both in State and Federal courts.</p>
+      <div class="team-edu">
+        <p class="team-edu-label">Education</p>
+        <ul class="team-edu-list">
+          <li>Liberty University (Summa Cum Laude), Justice Administration and Business Administration</li>
+          <li>FBI National Academy (1990)</li>
+          <li>J.D., Nashville School of Law (2002)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="team-card">
+    <img class="team-photo" src="https://lirp.cdn-website.com/97f89525/dms3rep/multi/opt/Samantha-Picture_edited-1920w-1920w.jpg" alt="Attorney Samantha Grosland — Hendersonville, TN — Frizzell & Frizzell, PLLC">
+    <div>
+      <h3 class="team-name">Samantha K. Grosland</h3>
+      <p class="team-role">Attorney</p>
+      <p class="team-bio">Samantha K. Grosland joined the firm in 2008. Ms. Grosland received her undergraduate degree from Middle Tennessee State University in 2003, and her law degree from the Nashville School of Law in 2007.</p>
+      <p class="team-bio">Ms. Grosland is additionally, a Rule 31 Mediator in Family Law.</p>
+      <div class="team-edu">
+        <p class="team-edu-label">Practice Areas</p>
+        <ul class="team-edu-list">
+          <li>Probate and Wills</li>
+          <li>Juvenile Law</li>
+          <li>Divorce</li>
+          <li>Child custody</li>
+          <li>Support matters</li>
+          <li>Adoption</li>
+          <li>Parenting matters</li>
+          <li>Individual and Family Estate Planning</li>
+        </ul>
+      </div>
+      <div class="team-edu">
+        <p class="team-edu-label">Education</p>
+        <ul class="team-edu-list">
+          <li>Middle Tennessee State University (2003)</li>
+          <li>J.D., Nashville School of Law (2007)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+  
+<section class="section">
+  <p class="section-label">More From Our Firm</p>
+  <h2 class="section-title">Our Practice Areas</h2>
+  <div class="section-body"><p>Frizzell & Frizzell, PLLC handles a wide range of legal matters across Sumner County, Hendersonville, Gallatin, White House, and Westmoreland.</p></div>
+  <ul class="feature-list" style="margin-top: var(--space-lg);">
+    <li><a href="/criminal-defense" style="color:var(--text-muted); text-decoration: none;">Criminal Defense</a></li>
+    <li><a href="/duidrug-crimes" style="color:var(--text-muted); text-decoration: none;">DUI & Drug Crime Defense</a></li>
+    <li><a href="/domestic-violence-probation-violations" style="color:var(--text-muted); text-decoration: none;">Domestic Violence & Probation Defense</a></li>
+    <li><a href="/personal-injury" style="color:var(--text-muted); text-decoration: none;">Personal Injury & Civil Rights</a></li>
+    <li><a href="/divorcefamily-law" style="color:var(--text-muted); text-decoration: none;">Divorce/Family Law</a></li>
+    <li><a href="/divorce" style="color:var(--text-muted); text-decoration: none;">Divorce</a></li>
+    <li><a href="/child-custodysupport" style="color:var(--text-muted); text-decoration: none;">Child Custody & Child Support</a></li>
+    <li><a href="/conservatorship" style="color:var(--text-muted); text-decoration: none;">Conservatorship & Guardianship</a></li>
+    <li><a href="/mediation" style="color:var(--text-muted); text-decoration: none;">Mediation</a></li>
+    <li><a href="/expert-witness" style="color:var(--text-muted); text-decoration: none;">Expert Witness</a></li>
+  </ul>
+</section>
+  
+<footer class="footer" id="contact">
+  <div class="footer-brand">
+    <span class="footer-brand-name">Frizzell & Frizzell, PLLC</span>
+    <address class="footer-address">
+      131 Maple Row Blvd., Building C Suite 301<br>
+      Hendersonville, TN 37075<br>
+      <a href="tel:615-824-7163">615-824-7163</a> &middot; Fax: 615-826-4014
+    </address>
+    <span class="footer-copyright">Content, including images, displayed on this website is protected by copyright laws. Downloading, republication, retransmission or reproduction of content on this website is strictly prohibited.</span>
+  </div>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/criminal-defense">Criminal Defense</a>
+    <a href="/personal-injury">Personal Injury</a>
+    <a href="/divorcefamily-law">Family Law</a>
+    <a href="/about-us">Our Attorneys</a>
+    <a href="/contact-us">Contact</a>
+    <a href="https://facebook.com/Frizzell-Frizzell-PLLC-194746091100958">Facebook</a>
+  </div>
+</footer>
+</main>
+<script>
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const sidebar = document.getElementById('sidebar');
+const navOverlay = document.getElementById('navOverlay');
+hamburgerBtn.addEventListener('click', function() {
+  sidebar.classList.toggle('active');
+  navOverlay.classList.toggle('active');
+});
+navOverlay.addEventListener('click', function() {
+  sidebar.classList.remove('active');
+  navOverlay.classList.remove('active');
+});
+window.addEventListener('resize', function() {
+  if (window.innerWidth >= 1024) {
+    sidebar.classList.remove('active');
+    navOverlay.classList.remove('active');
+  }
+});
+</script>
+</body>
+</html>
